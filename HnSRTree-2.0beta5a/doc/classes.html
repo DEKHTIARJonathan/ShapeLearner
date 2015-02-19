@@ -1,0 +1,803 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<head>
+<title>Classes used in this Library</title>
+</head>
+
+<body bgcolor=white>
+
+<h1>Classes used in this Library</h1>
+
+<hr>
+
+<ul>
+<li><a href="#HnProperties">HnProperties</a></li>
+<li><a href="#HnPoint">HnPoint</a></li>
+<li><a href="#HnDataItem">HnDataItem</a></li>
+<li><a href="#HnPointVector">HnPointVector</a></li>
+<li><a href="#HnDataItemVector">HnDataItemVector</a></li>
+<li><a href="#HnSphere">HnSphere</a></li>
+<li><a href="#HnRange">HnRange</a></li>
+<li><a href="#HnRect">HnRect</a></li>
+<li><a href="#HnSRTreeProfileSt">HnSRTreeProfileSt</a></li>
+</ul>
+
+<hr>
+
+<a name="HnProperties"></a><h2>HnProperties</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnProperties
+
+    Constructor:
+            HnProperties new_HnProperties(void);
+
+    Methods:
+            HnString setProperty(const HnString &amp;key, const HnString &amp;value);
+            void load(const char *buffer);
+
+(C  )
+    Structure:
+            HnPropertiesSt
+
+    Allocation:
+            HnProperties *HnPropertiesSt_allocate(void);
+
+    Deletion:
+            void HnPropertiesSt_free(HnPropertiesSt *properties);
+
+    Methods:
+            void HnPropertiesSt_setProperty(HnPropertiesSt *properties,
+                                            const char *key,
+                                            const char *value);
+            void HnPropertiesSt_load(HnPropertiesSt *properties,
+                                     const char *buffer);
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+An object of the class `<code>HnProperties</code>' is a set of
+label-value pairs. Both labels and values are given in the form of a
+character string. For example, the following code allocates an object
+of the class `<code>HnProperties</code>' and then sets the property
+whose label and value are `HnSRTreeBlockSize' and `16384'
+respectively.
+
+<blockquote>
+<pre>
+(C++)
+        HnProperties properties;
+
+        properties = new_HnProperties();
+        properties.setProperty("HnSRTreeBlockSize", "16384");
+
+(C  )
+        HnPropertiesSt *properties;
+
+        properties = HnPropertiesSt_allocate();
+        HnPropertiesSt_setProperty(properties, "HnSRTreeBlockSize", "16384");
+</pre>
+</blockquote>
+<p>
+In the C++ language interface, the arguments of the method
+`<code>setProperties</code>' has the type `<code>HnString</code>'.
+`<code>HnString</code>' is the class defined for a character
+string. Because this class has the type converter from a character
+string to itself, you can set character strings directly to the
+arguments of `<code>setProperties</code>'.
+</p>
+<p>
+Alternatively, properties can be loaded from a character string.  The
+character string should consist of one or more lines and each line
+should be a label-value pair connected by the equal sign. For example,
+the following code loads two properties, `<code>A=B</code>' and
+`<code>P=Q</code>' from the character string <code>"A=B\nP=Q\n"</code>.
+</p>
+<blockquote>
+<pre>
+(C++)
+        properties.load("A=B\nP=Q\n");
+
+(C  )
+        HnPropertiesSt_load(properties, "A=B\nP=Q\n");
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="HnPoint"></a><h2>HnPoint</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnPoint
+
+    Constructor:
+            HnPoint new_HnPoint(int dimension);
+
+    Methods:
+            int getDimension(void) const;
+            void setCoordAt(double coord, int index);
+            double &amp;getCoordAt(int index) const;
+            double *getCoords(void) const;
+
+            HnBool equals(const HnPoint &amp;point) const;
+            double getDistance(const HnPoint &amp;point) const;
+            HnString toString(void) const;
+
+(C  )
+    Structure:
+            HnPointSt
+
+    Allocation:
+            HnPoint *HnPointSt_allocate(int dimension);
+
+    Deletion:
+            void HnPointSt_free(HnPointSt *point);
+
+    Member variables:
+            int dimension;
+            double *coords;
+
+    Methods:
+            HnBool HnPointSt_equals(const HnPointSt *point1,
+                                    const HnPointSt *point2);
+            HnPointSt_getDistance(const HnPointSt *point1,
+                                  const HnPointSt *point2);
+            const char *HnPointSt_toString(const HnPointSt *point);
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+The class `<code>HnPoint</code>' is used for allocating an object
+representing a point. A point whose coordinates are (0.2, 0.4, 0.6)
+can be allocated in the following way:
+
+<blockquote>
+<pre>
+(C++)
+        HnPoint point;
+
+        point = new_HnPoint(3);
+        point.setCoordAt(0.2, 0);
+        point.setCoordAt(0.4, 1);
+        point.setCoordAt(0.6, 2);
+
+(C  )
+        HnPointSt *point;
+
+        point = HnPointSt_allocate(3);
+        point-&gt;coords[0] = 0.2;
+        point-&gt;coords[1] = 0.4;
+        point-&gt;coords[2] = 0.6;
+</pre>
+</blockquote>
+
+The dimensionality and the coordinates of an object can be accessed in
+the following way:
+
+<blockquote>
+<pre>
+(C++)
+        for ( i=0; i&lt;point.getDimension(); i++ ) {
+            printf("%g\n", point.getCoordAt(i));
+        }
+
+(C  )
+        for ( i=0; i&lt;point-&gt;dimension; i++ ) {
+            printf("%g\n", point-&gt;coords[i]);
+        }
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="HnDataItem"></a><h2>HnDataItem</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnDataItem
+
+    Constructor:
+            HnDataItem new_HnDataItem(const void *bytes, int length);
+
+    Methods:
+            int length(void) const;
+            char *toCharArray(void) const;
+
+(C  )
+    Structure:
+            HnDataItemSt
+
+    Allocation:
+            HnDataItemSt *HnDataItemSt_allocate(const char *bytes, int length);
+
+    Deletion:
+            void HnDataItemSt_free(HnDataItemSt *dataItem);
+
+    Member variables:
+            int length;
+            unsigned char *buffer;
+
+    Methods:
+            HnDataItemSt_equals(const HnDataItemSt *dataItem1,
+                                const HnDataItemSt *dataItem2);         
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+The class `<code>HnDataItem</code>' is used for allocating an object
+which contains a piece of data in the form of a byte string. A data
+item whose content is the character string <code>"Hello world!"</code>
+can be allocated in the following way:
+
+<blockquote>
+<pre>
+(C++)
+        char *s = "Hello world!";
+        HnDataItem dataItem;
+
+        dataItem = new_HnDataItem(s, strlen(s) + 1);
+
+(C  )
+        char *s = "Hello world!";
+        HnDataItemSt *dataItem;
+
+        dataItem = HnDataItemSt_allocate(s, strlen(s) + 1);
+</pre>
+</blockquote>
+
+<p>
+The content of an object can be accessed in the following way:
+</p>
+
+<blockquote>
+<pre>
+(C++)
+        printf("%s\n", dataItem.toCharArray());
+
+(C  )
+        printf("%s\n", dataItem-&gt;buffer);
+</pre>
+</blockquote>
+
+<p>
+In the following example, an integer value <code>1234</code> is stored
+in an object of the class `<code>HnDataItem</code>':
+</p>
+
+<blockquote>
+<pre>
+(C++)
+        int n = 1234;
+        HnDataItem dataItem;
+
+        dataItem = new_HnDataItem(&amp;n, sizeof(n));
+
+        printf("%d\n", *((int *)dataItem.toCharArray()));
+
+(C  )
+        int n = 1234;
+        HnDataItemSt *dataItem;
+
+        dataItem = HnDataItemSt_allocate(&amp;n, sizeof(n));
+
+        printf("%d\n", *((int *)dataItem-&gt;buffer));
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="HnPointVector"></a><h2>HnPointVector</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnPointVector
+
+    Constructor:
+            HnPointVector new_HnPointVector(void);
+
+    Methods:
+            /* access to elements */
+            int size(void) const;
+            HnPoint &amp;elementAt(int index);
+            HnPoint &amp;operator[](int index); // abbreviation of elementAt()
+
+            /* editing */
+            void addElement(const HnPoint &amp;element);
+            void insertElementAt(const HnPoint &amp;element, int index);
+            HnPoint removeElementAt(int index);
+            void setElementAt(const HnPoint &amp;element, int index);
+
+(C  )
+    Structure:
+            HnPointVectorSt
+
+    Allocation:
+            HnPointVectorSt *HnPointVectorSt_allocate();
+
+    Deletion:
+            void HnPointVectorSt_free(HnPointVectorSt *vector);
+
+    Member variables:
+            int size;
+            HnPointSt **elements;
+
+    Methods:
+            /* editing */          
+            void HnPointVectorSt_addElement(HnPointVectorSt *vector,
+                                            HnPointSt *element);
+            void HnPointVectorSt_insertElementAt(HnPointVectorSt *vector,
+                                                 HnPointSt *element, int index);
+            void HnPointVectorSt_removeElementAt(HnPointVectorSt *vector,
+                                                 int index);
+            void HnPointVectorSt_setElementAt(HnPointVectorSt *vector,
+                                              HnPoint *element, int index);
+
+            /* utility */
+            void HnPointVectorSt_freeElements(const HnPointVectorSt *vector);
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+An object of the class `<code>HnPointVector</code>' is a
+variable-length array of <a href="#HnPoint"><code>HnPoint</code></a>
+objects.  You can access the elements of an array in the following
+way:
+
+<blockquote>
+<pre>
+(C++)
+        for ( i=0; i&lt;vector.size(); i++ ) {
+            HnPoint element = vector.elementAt(i);
+
+            . . .
+        }
+
+(C  )
+        for ( i=0; i&lt;vector-&gt;size; i++ ) {
+            HnPointSt *element = vector-&gt;elements[i];
+
+            . . .
+        }
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="HnDataItemVector"></a><h2>HnDataItemVector</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnDataItemVector
+
+    Constructor:
+            HnDataItemVector new_HnDataItemVector(void);
+
+    Methods:
+            /* access to elements */
+            int size(void) const;
+            HnDataItem &amp;elementAt(int index);
+            HnDataItem &amp;operator[](int index); // abbreviation of elementAt()
+
+            /* editing */
+            void addElement(const HnDataItem &amp;element);
+            void insertElementAt(const HnDataItem &amp;element, int index);
+            HnDataItem removeElementAt(int index);
+            void setElementAt(const HnDataItem &amp;element, int index);
+
+(C  )
+    Structure:
+            HnDataItemVectorSt
+
+    Allocation:
+            HnDataItemVectorSt *HnDataItemVectorSt_allocate();
+
+    Deletion:
+            void HnDataItemVectorSt_free(HnDataItemVectorSt *vector);
+
+    Member variables:
+            int size;
+            HnDataItemSt **elements;
+
+    Methods:
+            /* editing */
+            void HnDataItemVectorSt_addElement(HnDataItemVectorSt *vector,
+                                               HnDataItemSt *element);
+            void HnDataItemVectorSt_insertElementAt(HnDataItemVectorSt *vector,
+                                                    HnDataItemSt *element, int index);
+            void HnDataItemVectorSt_removeElementAt(HnDataItemVectorSt *vector,
+                                                    int index);
+            void HnDataItemVectorSt_setElementAt(HnDataItemVectorSt *vector,
+                                                 HnDataItem *element, int index);
+
+            /* utility */
+            void HnDataItemVectorSt_freeElements(const HnDataItemVectorSt *vector);
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+An object of the class `<code>HnDataItemVector</code>' is a
+variable-length array of <a href="#HnDataItem"><code>HnDataItem</code></a>
+objects. You can access the elements of the array as follows:
+
+<blockquote>
+<pre>
+(C++)
+        for ( i=0; i&lt;vector.size(); i++ ) {
+            HnDataItem element = vector.elementAt(i);
+
+            . . .
+        }
+
+(C  )
+        for ( i=0; i&lt;vector-&gt;size; i++ ) {
+            HnDataItemSt *element = vector-&gt;elements[i];
+
+            . . .
+        }
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="HnSphere"></a><h2>HnSphere</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnSphere
+
+    Constructor:
+            HnSphere new_HnSphere(const HnPoint &amp;center, double radius);
+
+    Methods:
+            HnPoint &amp;getCenter(void) const;
+            double getRadius(void) const;
+            int getDimension(void) const;
+
+(C  )
+    Structure:
+            HnSphereSt
+
+    Allocation:
+            HnSphereSt *HnSphereSt_allocate(int dimension);
+
+    Deletion:
+            void HnSphereSt_free(HnSphereSt *sphere);
+
+    Member variables:
+            HnPoint *center;
+            double *radius;
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnPoint">HnPoint</a>.
+</blockquote>
+
+The class `<code>HnSphere</code>' is used for allocating an object
+representing a sphere. For example, the following
+code allocates a 3-dimensional sphere whose center is (0.2, 0.4, 0.6)
+and whose radius is 0.8:
+
+<blockquote>
+<pre>
+(C++)
+        HnPoint center;
+        HnSphere sphere;
+
+        center = new_HnPoint(3);
+        center.setCoordAt(0.2, 0);
+        center.setCoordAt(0.4, 1);
+        center.setCoordAt(0.6, 2);
+
+        sphere = new_HnSphere(center, 0.8);
+
+(C  )
+        HnSphereSt *sphere;
+
+        sphere = HnSphereSt_allocate(3);
+        sphere-&gt;center-&gt;coords[0] = 0.2;
+        sphere-&gt;center-&gt;coords[1] = 0.4;
+        sphere-&gt;center-&gt;coords[2] = 0.6;
+        sphere-&gt;radius = 0.8;
+</pre>
+</blockquote>
+
+The dimensionality, coordinates, and radius of a sphere can be
+obtained in the following way:
+
+<blockquote>
+<pre>
+(C++)
+        for ( i=0; i&lt;sphere.getDimension(); i++ ) {
+            printf("coords[%d]=%g\n",
+                   i, sphere.getCenter().getCoordAt(i));
+        }
+        printf("radius=%g\n", sphere.getRadius());
+
+(C  )
+        for ( i=0; i&lt;sphere-&gt;center->dimension; i++ ) {
+            printf("coords[%d]=%g\n",
+                   i, sphere-&gt;center-&gt;coords[i]);
+        }
+        printf("radius=%g\n", sphere->radius);
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="HnRange"></a><h2>HnRange</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnRange
+
+    Constructor:
+            Not applicable (this class is prepared only for `HnRect').
+
+    Methods:
+            void set(double minValue, double maxValue);
+            double getMin(void) const;
+            double getMax(void) const;
+
+(C  )
+    Structure:
+            HnRangeSt
+
+    Allocation:
+    Deletion:
+            Not applicable (this class is prepared only for `HnRectSt').
+
+    Member variables:
+            double min;
+            double max;
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnRect">HnRect</a>.
+</blockquote>
+
+The class `<code>HnRange</code>' is used for allocating an object
+representing a range which is specified by two numerical values: the
+minimum and the maximum. This class is prepared for the class
+`<code>HnRect</code>' that represents a rectangle.
+
+</blockquote>
+
+<hr>
+
+<a name="HnRect"></a><h2>HnRect</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) 
+    Class:
+            HnRect
+
+    Constructor:
+            HnRect new_HnRect(int dimension);
+
+    Methods:
+            int getDimension(void) const;
+            HnRange &amp;getRangeAt(int index) const;
+            void setRangeAt(double min, double max, int index);
+
+(C  )
+    Structure:
+            HnRectSt
+
+    Allocation:
+            HnRectSt *HnRectSt_allocate(int dimension);
+
+    Deletion:
+            void HnRectSt_free(HnRectSt *rect);
+
+    Member variables:
+            int dimension;
+            HnRangeSt *ranges;
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnRange">HnRange</a>.
+</blockquote>
+
+The class `<code>HnRect</code>' is used for allocating an object
+representing a (axis-aligned) rectangle. For example, the following
+code allocates a 3-dimensional rectangle whose ranges are 0.2 to 0.3
+in the first dimension, 0.4 to 0.5 in the second, and 0.6 to 0.7 in
+the third:
+
+<blockquote>
+<pre>
+(C++)
+        HnRect rect;
+
+        rect = new_HnRect(3);
+        rect.setRangeAt(0.2, 0.3, 0);
+        rect.setRangeAt(0.4, 0.5, 1);
+        rect.setRangeAt(0.6, 0.7, 2);
+
+(C  )
+        HnRectSt *rect;
+
+        rect = HnRectSt_allocate(3);
+        rect-&gt;ranges[0].min = 0.2;
+        rect-&gt;ranges[0].max = 0.3;
+        rect-&gt;ranges[1].min = 0.4;
+        rect-&gt;ranges[1].max = 0.5;
+        rect-&gt;ranges[2].min = 0.6;
+        rect-&gt;ranges[2].max = 0.7;
+</pre>
+</blockquote>
+
+The dimensionality and the coordinates of a rectangle can be obtained
+in the following way:
+
+<blockquote>
+<pre>
+(C++)
+        for ( i=0; i&lt;rect.getDimension(); i++ ) {
+            printf("min=%g, max=%g\n",
+                   rect.getRangeAt(i).getMin(), rect.getRangeAt(i).getMax());
+        }
+
+(C  )
+        for ( i=0; i&lt;rect-&gt;dimension; i++ ) {
+            printf("min=%g, max=%g\n",
+                   rect-&gt;ranges[i].min, rect-&gt;ranges[i].max);
+        }
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="HnSRTreeProfileSt"></a><h2>HnSRTreeProfileSt</h2>
+
+<blockquote>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++ and C) 
+    Structure:
+            HnSRTreeProfileSt
+
+    Allocation:
+            HnSRTreeProfileSt *HnSRTreeProfileSt_allocate(void);
+
+    Deletion:
+            void HnSRTreeProfileSt_free(HnSRTreeProfileSt *profile);
+
+    Member variables:
+            /* block I/O */
+            int numSuperBlockReads;
+            int numSuperBlockWrites;
+            int numNodeBlockReads;
+            int numNodeBlockWrites;
+            int numLeafBlockReads;
+            int numLeafBlockWrites;
+
+            /* split */
+            int numNodeSplits;
+            int numLeafSplits;
+
+            /* search */
+            int numVisitedNodes;
+            int numVisitedLeaves;
+            int numComparedNodeEntries;
+            int numComparedLeafEntries;
+
+            /* nearest neighbor search */
+            int numEqualDistances;
+            int numFartherSpheres;
+            int numFartherRects;
+
+    Methods:
+            void HnSRTreeProfileSt_print(const HnSRTreeProfileSt *profile);
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+<p>
+The structure `<code>HnSRTreeProfileSt</code>' is used to keep the
+profile information of an index file.
+</p>
+<p>
+The member variables, `<code>numEqualDistances</code>',
+`<code>numFartherSpheres</code>', and `<code>numFartherRects</code>',
+store the characteristics on the distance measurement in nearest
+neighbor search. The variable `<code>numEqualDistances</code>' stores
+the count of the case that the bounding sphere and the bounding
+rectangle of a region has the same distance to the query point. The
+variable `<code>numFartherSpheres</code>' stores the count of the case
+that the distance from the query point to the bounding sphere is
+longer than the one to the bounding rectangle, while
+`<code>numFartherRects</code>' stores the count of the opposite case.
+</p>
+
+</blockquote>
+
+<hr>
+[<a href="index.html">TOC</a>]
+[<a href="library.html">Library</a>]
+[<a href="classes.html">Classes</a>]
+[<a href="commands.html">Commands</a>]
+[<a href="examples.html">Examples</a>]
+[<a href="references.html">References</a>]
+
+<p>
+<i>Any feedback is appreciated (corrections, suggestions, etc.).</i>
+</p>
+<address>
+Norio KATAYAMA
+&lt;<a href="mailto:katayama@nii.ac.jp">katayama@nii.ac.jp</a>&gt;
+</address>
+
+</body>

@@ -1,0 +1,180 @@
+<html><head><title>Fast Connected Components on Images</title></head>
+
+<body bgcolor="#ffffff">
+<center>
+<h1>Fast Connected Components on Images</h1>
+
+<i> <a href="http://www.media.mit.edu/%7Erahimi">Ali Rahimi</a> (<img src="Fast%20Connected%20Components%20on%20Images_files/name.png">) (last modified Jul 22, 2001)</i><p>
+</p></center>
+<p></p><p><br>
+</p><p>
+
+</p><h2>1.0 Introduction</h2>
+
+In image processing, a connected components algorithm finds regions of
+connected pixels which have the same value. For example, the image
+below contains 4 components: there are 2 red components, one blue
+component, and the white, background component. The label image to the
+right colors each pixel according to the ID of its blob, identifying
+blob membership. The goal of connected components is to compute this
+label image.
+<p>
+<table border="1">
+<tbody><tr><td><img src="Fast%20Connected%20Components%20on%20Images_files/diagram.gif"></td><td><img src="Fast%20Connected%20Components%20on%20Images_files/diagram-labels.gif"></td>
+</tr>
+</tbody></table>
+</p><p>
+The are good and bad ways of finding connected components. A bad way
+is to start a flood-fill (like the paint bucket in a painting program)
+at every pixel. This runs an expensive process for every pixel. In
+fact, calling a recursive function for each pixel is bad because
+recursion doesn't take advantage of the compiler's loop optimizations.
+In addition, recursive methods typically touch the image in an
+incoherent way, producing lots of cache faults.
+</p><p>
+A good method would be to process the image one image line at a time,
+or two lines at a time, maintaining cache locality. A bad
+line-at-a-time method is one that continuously makes forward and
+backward passes on the image. A better one is one that does one
+forward pass then one backward pass.
+</p><p>
+The correct algorithm is one that does one forward pass and then
+labels the target image according to information gathered during its
+pass. This method uses the union-find data structure to build an
+internal representation of the connectedness of the image during the
+pass. Its running time is approximately O(N), where N is the number of
+pixels.
+
+</p><p>
+</p><h2>2.0 The Algorithm</h2>
+<p>
+For each pixel on the line, this implementation first checks to see if
+the pixel to the left has the same pixel value. If so, we know for
+sure that we're in the same blob, and the current pixel is so
+labeled. If the pixel at the top has the same value as the pixel to
+the left but not the same blob ID, we know at once that the pixels to
+the left and to the top are in the same region and that these regions
+should be merged.
+</p><p>
+If a pixel is found with left and top neighbor having different pixel
+values, a new blob id is created and assigned to this pixel.
+</p><p>
+The algorithm continues this way, creating new blobs and merging them
+whenever they are discovered to be the same. The key to a fast
+algorithm, however, is how this merging is done. This algorithm uses
+the union-find data structure which provides excellent performance for
+keeping track of equivalence relationships (see <em>Introduction to
+Algorithms by Cormen, Leiserson, and Rivest</em> for a description).
+Union-find essentially stores labels which correspond to the same blob
+in a tree, making it easy to remember the equivalence of two labels.
+
+
+
+</p><p>
+</p><h2>3.0 Examples</h2>
+<p>
+The following images show the result of running the algorithm on a
+screendump. The left image is the original image. The right one is the
+label image.
+</p><p>
+<table border="1">
+<tbody><tr><td><img src="Fast%20Connected%20Components%20on%20Images_files/screendump.gif"></td>
+<td><img src="Fast%20Connected%20Components%20on%20Images_files/screen-blobs.gif"></td>
+</tr>
+</tbody></table>
+Notice that letter that are not touching are correctly segmented with
+differenti IDs.
+</p><p>
+Here's another example run on a hand-drawn image:
+</p><p>
+<table border="1">
+<tbody><tr><td><img src="Fast%20Connected%20Components%20on%20Images_files/snoopy.gif"></td>
+<td><img src="Fast%20Connected%20Components%20on%20Images_files/snoopy-labels.gif"></td>
+</tr>
+</tbody></table>
+</p><p>
+</p><h2>4.0 Using</h2>
+<p>
+There are only two functions that you need to worry about when using
+this algorithm. It is implemented in C++ and the class
+<code>ConnectedComponents</code> exports all the functionality.
+</p><p>
+First, create a <code>ConnectedComponents</code> by calling the
+constructor.  Specify a soft maximum number of labels you expect in
+the image. This number is used to allocate some arrays which are resized
+while the algorithm runs, so don't worry about an exact value.
+
+</p><p>
+Then call <code>ConnectedComponents::connected()</code>. The signature
+of this function is:
+</p><p>
+<table border="1" width="90%"><tbody><tr><td>
+<code></code><pre>template&lt;class Tin, class Tlabel, class Comparator, class Boolean&gt;
+int ConnectedComponents::connected(const Tin *img, Tlabel *out,
+ 		     int width, int height, Comparator,
+		  Boolean K8_connectivity);
+</pre></td></tr></tbody></table>
+</p><p>
+<code>img</code> and <code>out</code> are arrays pointing to the
+grayscale image an the resulting label image
+respectively. <code>width</code> and <code>height</code> are the
+dimensions of both of these images. The pitch of both images must be
+0. The algorithm doesn't depend on this, but I used the simplest image
+format possible to avoid requiring a specific image
+class. <code>Comparator</code> is an STL compare object. It is an
+object which defines <code>operator()</code> to take two
+<code>Tin</code>'s and returns true if these values are equivalent.
+The example code in the library uses STL's <code>equal</code> function
+object, but you can use anything you like. The final argument
+specifies whether the algorithm looks at all 8 neighbors of a pixel or
+just 4 neighbors (sideways and up-down). It is a template argument,
+but you can pass a bool if you like. I pass a <code>constant</code>
+template, which i describe in <a href="http://www.media.mit.edu/%7Erahimi/compile-time-flags/">Compile
+Time Flags</a>.
+</p><p>
+Here is an example of how you would use this class:
+
+
+</p><p>
+<table border="1" width="90%"><tbody><tr><td>
+<code></code><pre>   <b>// using a bool.</b>
+    ConnectedComponents cc(30);
+    cc.connected(img, out_uc, width, height,
+		 std::equal_to&lt;unsigned char&gt;(),
+		 false);
+   <b>// using a template constant.</b>
+    ConnectedComponents cc(30);
+    cc.connected(img, out, width, height,
+		 std::equal_to&lt;unsigned char&gt;(),
+		 constant&lt;bool,true&gt;());
+</pre></td></tr></tbody></table>
+</p><p>
+</p><p>
+Finally, the source is in this <a href="http://people.csail.mit.edu/rahimi/connected/connected.h">header file</a>.
+A test stub is in this <a href="http://people.csail.mit.edu/rahimi/connected/connected.cc">C++ file</a>.
+
+</p><p>
+</p><h2>5.0 Other Resources</h2>
+<p>
+Here are a few other sites which have connected component code (or
+helpful descriptions of the algorithm). I found these off of
+google. You might want to take a look at these if you don't like
+coding in C++.
+<list>
+<li><a href="http://www-sop.inria.fr/epidaure/personnel/Gregoire.Malandain/segment/connexe.html">Connected
+Components Extraction</a> by Grégoire Malandain has a page similar to
+this.
+
+</li><li><a href="http://www.dai.ed.ac.uk/HIPR2/label.htm">A tutorial</a> on
+connected components. I'm guessing this is part of some larger image
+processing system.
+
+</li><li><a href="http://math.ucsd.edu/%7Esbuss/Math176/ProgHomework3/ProgHomework3.html">A
+homework assignment</a> from a math class in UCSD. In case you want
+hints for how to write one on your own.
+
+</li><li><a href="http://isl.ee.washington.edu/IAPR/ICPR00/vehicle_detection/docs/PGMSUP-readme.txt">Programs</a>
+for image processing. The take PPM images as input. Useful if you
+don't have matlab, for example. Source code is available <a href="http://isl.ee.washington.edu/IAPR/ICPR00/vehicle_detection/packages/">here</a>.
+
+</li></list></p></body></html>

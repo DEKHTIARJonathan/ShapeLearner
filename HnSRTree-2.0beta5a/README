@@ -1,0 +1,243 @@
+=========================================================================
+
+    HnSRTree: the SR-tree library
+    Version 2.0 (beta 5) Sep.14, 2002 Norio KATAYAMA <katayama@nii.ac.jp>
+
+    Copyright (C) 1997,1998,1999,2000,2002 Norio Katayama
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Library General Public
+    License as published by the Free Software Foundation; either
+    version 2 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Library General Public License for more details.
+
+    You should have received a copy of the GNU Library General Public
+    License along with this library; if not, write to the Free
+    Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+    MA 02111-1307, USA
+
+    $Id: README,v 1.15 2003/04/30 05:39:10 katayama Exp $
+
+=========================================================================
+
+Introduction:
+
+    This is an implementation of the SR-tree. The SR-tree is a
+    multidimensional index structure designed for the acceleration of
+    the nearest-neighbor search of high-dimensional points in the
+    Euclidean space. The SR-tree is a disk-based index structure and
+    applicable to large data sets, say, a database containing more
+    than 10,000 points.
+
+    The efficiency of the SR-tree depends on multiple factors, i.e.,
+    data distribution, dimensionality of points, etc. According to our
+    experimental evaluation, the SR-tree provides satisfactory
+    performance for the data sets containing more than 40,000 points
+    in 24 to 48 dimensional space which are feature vectors (color
+    histograms) of natural photo images.
+
+    The major part of this library is written in C++. However, the
+    interface for the C language programs is also provided.
+
+    This library provides the following features:
+
+        1. Dynamic construction methods:
+
+            * creating an empty index file.
+            * opening an existing index file.
+            * closing an index file.
+	    * storing a data point into an index file.
+	    * removing a data point from an index file.
+
+        2. Static construction methods:
+
+            * building an index for a given data set.
+
+        3. Search methods:
+
+            * running nearest-neighbor search with an index.
+            * running colored nearest-neighbor search with an index.
+            * running range search (window search) with an index.
+
+	4. Miscellaneous methods:
+
+	    * obtaining profile information of an index manipulation.
+
+    The usage of the library is described in the HTML files contained
+    in the `doc' directory. Please, refer to `doc/index.html' for
+    details.
+
+
+Tested platforms:
+
+    (1) Hardware         : Sun Ultra 60
+        Operating System : SunOS 5.6
+        Compiler         : GCC 2.95.2, Sun WorkShop 5.0
+
+    (2) Hardware         : IBM Netfinity 3000
+        Operating System : Vine Linux 2.1 (Linux kernel 2.2.17)
+        Compiler         : GCC 2.91.66 (EGCS-1.1.2)
+
+    (3) Hardware         : IBM Netfinity 3000
+        Operating System : FreeBSD 4.6.2
+        Compiler         : GCC 2.95.3
+
+    (4) Hardware         : SONY VAIO RX75
+        Operating System : Windows XP
+        Compiler         : Visual C++ 6.0
+
+    (5) Hardware         : IBM Netfinity 3000
+        Operating System : Windows 2000
+        Compiler         : Visual C++ 6.0
+
+    (6) Hardware         : Fujitsu FM PenNote model S1
+        Operating System : Windows 98
+        Compiler         : Visual C++ 6.0
+
+
+How to compile:
+
+  A. UNIX
+
+    (1) run `configure' in this directory.
+
+	% ./configure
+
+	You can specify the initial values for variables by setting
+	them in the environment. For example, you can specify the name
+	of the C and C++ compilers by setting them to the variable
+	`CC' and `CXX' respectively.
+
+	    (sh)
+		$ CC=cc CXX=CC ./configure
+
+	    (csh)
+		% env CC=cc CXX=CC ./configure
+
+    (2) run `make' as follows:
+
+	% make includes
+	% make all
+
+        On FreeBSD, please use gmake (GNU make) instead of make.
+
+  B. Windows
+
+        Run `nmake' in this directory.
+
+
+How to install:
+
+  A. UNIX
+
+	% make install
+
+    The destination of the header files and the object code library
+    can be specified by setting options to the command `configure'.
+    Usage of `configure' will be shown by running `configure --help'.
+
+    By default, the header files will be copied into
+    `/usr/local/include/HnSRTree' and the object code library will be
+    copied into `/usr/local/lib'.
+
+  B. Windows
+
+    The header file directory (`include/HnSRTree') and the library file
+    `lib/libHnSRTree.lib' should be placed in a directory which is
+    included in the search paths of the C/C++ compiler.  Generally,
+    the search paths are specified by the `INCLUDE' and `LIB'
+    environment variables.  On execution, the dynamic link library
+    'lib/libHnSRTree.dll' should be placed in a directory which is
+    included in the command search path.
+
+
+How to test:
+
+   (0) compile source files by following the above instructions.
+
+   (1) change the working directory to the `test' directory.
+
+	% cd test
+
+   (2) run the `doTest' script (`doTest.bat' on Windows).
+
+	% doTest
+
+
+How to use:
+
+    Please refer to the HTML file `doc/index.html'.
+
+
+History:
+
+    10/15/1996
+	Version 1.0 is released.
+
+    11/22/1996
+	The range query functions, HnSRTreeGetFirst() and
+	HnSRTreeGetNext(), is added to the C language interface.
+
+    11/22/1996
+	Version 1.1 is released.
+
+    12/09/1996
+	The access mode is permitted and the diagnosis is returned on
+	opening files.
+
+    12/09/1996
+	Version 1.2 is released.
+
+    06/02/1997
+	The GNU Library General Public License is applied.
+
+    06/02/1997
+	Version 1.3 is released.
+
+    12/02/1997
+	The file `README' is slightly modified.
+	Version 1.3.1 is released.
+
+    06/10/2000
+	Version 2.0 (beta 1) is released.
+	    * The source code is refined with respect to CPU time.
+	    * The breadth-first NN-search is implemented.
+	    * The profiling capability is implemented.
+	    * The colored NN-search is implemented.
+	    * The static construction method based on the VAMSplit is
+	      implemented.
+
+    09/29/2000
+	Version 2.0 (beta 2) is released.
+	    * The description on the static construction method is
+	      added.
+
+    12/01/2000
+	Version 2.0 (beta 3) is released.
+	    * Minor bugs are fixed:
+		- The library crashes when an index file is empty and
+		  the query rectangle of the method ``getFirst()'' is
+		  ``NULL''.
+		- The library crashes when the argument ``properties''
+		  of the index construction methods (e.g.,
+                  ``HnSRTreeFileSt_create()'' and
+                  ``HnSRTreeFileSt_build()'') is ``NULL''.
+
+    12/15/2000
+	Version 2.0 (beta 4) is released.
+	    * A minor bug is fixed. `checkIndex' might have crashed
+	      when the library is compiled by GCC on x86 due to the
+	      side effect of round-off error.
+
+    09/14/2002
+	Version 2.0 (beta 5) is released.
+	    * The source code is adapted to FreeBSD and Windows.
+	    * The spherical range search is implemented.
+
+    04/30/2003
+	Version 2.0 (beta 5a) is released.
+	    * The memory initialization of HnStringBuffer is corrected.
