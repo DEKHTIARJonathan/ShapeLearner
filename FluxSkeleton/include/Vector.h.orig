@@ -1,0 +1,84 @@
+/**************************************************************************
+
+   File:                Vector.h
+
+   Author(s):           Pavel Dimitrov
+
+   Created:             11 Jun 2002
+
+   Last Revision:       $Date: 2002/06/27 14:14:40 $
+
+   Description: A simple 2D vector with dot and cross products.
+
+   $Revision: 1.2 $
+
+   $Log: Vector.h,v $
+   Revision 1.2  2002/06/27 14:14:40  pdimit
+   Just updated the descriptions in the header files.
+
+   Revision 1.1.1.1  2002/06/23 05:42:08  pdimit
+   Initial import
+
+
+	
+   Copyright (c) 2002 by Pavel Dimitrov, Centre for Intelligent Machines,
+   McGill University, Montreal, QC.  Please see the copyright notice
+   included in this distribution for full details.
+
+ **************************************************************************/
+
+#ifndef VECTOR_H
+#  define VECTOR_H
+
+/**********************
+     Include Files
+ **********************/
+
+/**********************
+     Public Defines
+ **********************/
+
+/**********************
+      Public Types
+ **********************/
+
+/********************
+   Public Variables 
+ ********************/
+#include "defines.h"
+#include <math.h>
+
+namespace sg{
+  
+  // concrete class
+  class Vector{
+  public:
+    double x, y;
+
+    // constructors
+    Vector() : x(0.0), y(0.0) {}
+    Vector(double xx, double yy) { x=xx, y=yy;}
+
+    int operator==(const Vector &p) const {
+      return x==p.x && y==p.y;
+    }
+    
+    bool isClose(Vector p, double epsilon) {
+      return (EUCSQDIST(x,y, p.x,p.y) < (epsilon));
+    }
+
+    double norm() { return sqrt(x*x+y*y);}
+    double dot(const Vector &v) { return x*v.x + y*v.y;}
+
+    Vector getPerp() { return Vector(y, -x); }
+
+    friend std::ostream &operator<< (std::ostream &Out, Vector &p){
+      Out << "Vector(" << p.x << ", " << p.y << ")";
+      return Out;
+    }
+
+  }; //end of class Vector
+  
+}
+
+#endif  /* VECTOR_H */

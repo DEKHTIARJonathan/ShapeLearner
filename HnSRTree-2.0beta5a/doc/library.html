@@ -1,0 +1,814 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<head>
+<title>Usage of this Library</title>
+</head>
+
+<body bgcolor=white>
+
+<h1>Usage of this Library</h1>
+
+<hr>
+
+<ul>
+<li><a href="#preliminaries">Preliminaries</a></li>
+<li><a href="#features">Features</a>
+
+<ol>
+<li><a href="#dynamic">Dynamic construction methods</a>
+<ul>
+<li>Creating an empty index file.</li>
+<li>Opening an existing index file.</li>
+<li>Closing an index file.</li>
+<li>Storing a data point into an index file.</li>
+<li>Removing a data point from an index file.</li>
+</ul>
+</li>
+
+<li><a href="#static">Static construction method</a>
+<ul>
+<li>Building an index for a given data set.</li>
+</ul>
+</li>
+
+<li><a href="#search">Search methods</a>
+<ul>
+<li>Running nearest-neighbor search with an index.</li>
+<li>Running colored nearest-neighbor search with an index.</li>
+<li>Running range search with an index.</li>
+</ul>
+</li>
+
+<li><a href="#misc">Miscellaneous methods</a>
+<ul>
+<li>Obtaining profile information of an index manipulation.</li>
+</ul>
+</li>
+
+</ol>
+</li>
+
+</ul>
+
+<hr>
+
+<a name="preliminaries"></a><h2>Preliminaries</h2>
+
+<ul>
+<li><b>C++ and C language interfaces are provided.</b>
+
+<blockquote>
+The major part of this library is written in C++. In addition, the
+interface for the C language programs is also provided.
+</blockquote>
+
+<li><b>Java-like convention is used.</b>
+
+<blockquote>
+In order to enhance the readability and maintainability of the source
+code, this library is written in Java-like convention. For example,
+when we allocate an object of the class `<code>Foo</code>' and invoke
+its method `<code>bar</code>', then we write the following code:
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++)
+        {
+	    /* variable declaration
+	     *
+	     * NOTE:
+	     *     Variables are allocated only for referencing objects.
+	     */
+            Foo foo;
+
+	    /*
+	     * object allocation
+	     *
+	     * NOTE:
+	     *     An object is instantiated by the special function
+	     *	   whose name is the concatenation of the prefix `new_'
+	     *     and the class name `Foo'.
+	     *     The standard operator `new' is not used here.
+	     */
+	    foo = new_Foo();
+
+	    /* method invocation */
+	    foo.bar();
+
+	    /*
+	     * NOTE:
+	     *     The allocated object will be deleted automatically based on
+	     *     the reference count.
+	     */
+        }
+
+(C  )
+        {
+	    /*
+	     * variable declaration
+	     *
+	     * NOTE:
+	     *     When using the C language interface, the class `Foo' is
+	     *     represented by the structure whose name is the
+	     *     concatenation of the class name `Foo' and the suffix `St'.
+	     */
+            FooSt *foo;
+
+	    /* object allocation */
+            foo = FooSt_allocate();
+
+	    /* method invocation */
+	    FooSt_bar(foo);
+
+	    /*
+             * NOTE:
+	     *     When using the C language interface, allocated objects
+	     *     must be deleted explicitly.
+	     */
+            FooSt_free(foo);    
+        }
+</pre>
+</td></tr></table>
+</blockquote>
+<p>
+When using the C++ language interface, the object is allocated through
+`<code>new_Foo()</code>'. This expression is not equivalent to
+`<code>new Foo()</code>' which invokes the operator
+`<code>new</code>'. The function `<code>new_Foo()</code>' is a special
+function which instantiates an object of the class `<code>Foo</code>'.
+This special constructor enables us to have the Java semantics for the
+object instantiation, i.e., variables are allocated only for
+referencing objects and instantiated objects are automatically
+reclaimed on losing references to themselves.
+</p>
+</blockquote>
+</li>
+
+<li><b>Header files</b>
+
+<blockquote>
+<blockquote>
+<pre>
+(C++) HnSRTree/HnSRTreeFile.hh
+(C  ) HnSRTree/HnSRTreeFileSt.h
+</pre>
+</blockquote>
+This library has two language interfaces:
+the C++ language interface and the C language interface.
+The header file `HnSRTreeFile.hh' is provided for the C++
+users and `HnSRTreeFileSt.h' is for the C users.
+</blockquote>
+
+</li>
+
+<li><b>Libraries</b>
+
+<blockquote>
+<blockquote>
+<pre>
+(C++ and C) libHnSRTree.a
+</pre>
+</blockquote>
+Although this library has the C language interface, the body of this
+library is written in C++. Therefore, a C++ linker is required to link
+your object files with this library even if your object files are
+compiled only with the C compiler.
+</blockquote>
+</ul>
+
+<hr>
+
+<a name="features"></a><h2>Features</h2>
+
+<a name="dynamic"></a><h3>1. Dynamic construction methods</h3>
+
+<ul>
+<li><a name="create"></a><b>Creating an empty index.</b>
+	
+<blockquote>
+The following functions create an index file and return the pointer to
+a data structure associated with that file.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) HnSRTreeFile new_HnSRTreeFile(const char *path,
+                                    int dimension,
+                                    int attributeSize,
+                                    const HnProperties &amp;properties);
+
+(C  ) HnSRTreeFileSt *HnSRTreeFileSt_create(const char *path,
+                                            int dimension,
+                                            int attributeSize,
+                                            const HnPropertiesSt *properties);
+
+        path          : the name of an index file.
+        dimension     : the dimensionality of the search space.
+        attributeSize : the size of an attribute associated with each data
+                        point (in bytes).
+        properties    : properties of the index.
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnProperties">HnProperties</a>.
+</blockquote>
+
+<p>
+The argument `<code>attributeSize</code>' determines the size of an
+attribute associated with each data point. The current implementation
+allocates a fixed-size attribute for each data point stored in an
+index file. The attribute can be used to store additional information
+on each data point, e.g., the identifier, the label, etc. Thus, the
+value of the argument `<code>attributeSize</code>' needs to be large
+enough to contain the information to be stored along with data points. 
+For example, if you want to store 4-byte integers in the attribute
+field, the value of the argument `<code>attributeSize</code>' must be
+4 at least; if you want to store character strings whose length is up
+to 128 bytes (including the null terminator), the value of the
+argument `<code>attributeSize</code>' must be equal to or greater than
+128. The smaller attribute size makes the index file more
+compact. Therefore, it is recommended to make the attribute size as
+small as possible.
+</p>
+<p>
+The last argument `<code>properties</code>' is the set of label-value
+pairs, whose data type is the class <a
+href="classes.html#HnProperties">HnProperties</a>. This argument is
+used to override the default properties of the index file. If you want
+to use the default properties, the following null values can be set to
+the argument `<code>properties</code>':
+</p>
+<blockquote>
+<pre>
+(C++) HnProperties::null
+(C  ) NULL
+</pre>
+</blockquote>
+<p>
+The following properties can be specified through the argument
+`<code>properties</code>'.
+</p>
+
+<blockquote>
+<pre>
+HnSRTreeBlockSize      : the size of a block (or bucket).
+                         (8192 by default)
+HnSRTreeSplitFactor    : the minimum utilization factor of a block.
+                         (specified in percent)
+			 (40 by default)
+HnSRTreeReinsertFactor : the percentage of entries to be reinserted on
+                         a forced reinsertion.
+			 (30 by default)
+</pre>
+</blockquote>
+
+<p>
+For convenience, the labels of the above properties are defined as
+macros in the header file as follows:
+</p>
+<blockquote>
+<pre>
+#define HnSRTreeBlockSize       "HnSRTreeBlockSize"
+#define HnSRTreeSplitFactor     "HnSRTreeSplitFactor"
+#define HnSRTreeReinsertFactor  "HnSRTreeReinsertFactor"
+</pre>
+</blockquote>
+
+<p>
+You can use the above macros instead of the character string
+constants.
+</p>
+</blockquote>
+</li>
+
+<li><b>Opening an existing index file for reading or updating.</b>
+
+<blockquote>
+
+The following functions open an existing index file for reading or
+updating.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) HnSRTreeFile new_HnSRTreeFile(const char *path, const char *mode);
+
+(C  ) HnSRTreeFileSt *HnSRTreeFileSt_open(const char *path, const char *mode);
+
+        path : the name of an index file.
+        mode : the access mode for opening an index file.
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+<p>
+The argument `<code>mode</code>' specifies the access mode for opening
+an index file. Mode <code>"r"</code> is for reading and mode <code>"rw"</code>
+is for updating.
+
+Upon successful completion, the function returns an object of the
+class `<code>HnSRTreeFile</code>' (or `<code>HnSRTreeFileSt *</code>')
+which is associated with the opened index file. Otherwise, the
+following constants are returned and the global variable
+`<code>errno</code>' is set to indicate the error.
+
+<blockquote>
+<pre>
+(C++ ) HnSRTreeFile::null
+(C   ) NULL
+</pre>
+</blockquote>
+
+</blockquote>
+</li>
+
+<li><b>Closing an index file.</b>
+
+<blockquote>
+
+The following functions close an index file.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) void file.close(void);
+
+(C  ) void HnSRTreeFileSt_close(HnSRTreeFileSt *file);
+
+        file : the pointer to a data structure associated with an index file.
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+</blockquote>
+</li>
+
+<li><b>Storing a data point into an index file.</b>
+
+<blockquote>
+The following functions store a point into an index file. 
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) void file.store(const HnPoint &amp;point,
+		      const HnDataItem &amp;dataItem);
+
+(C  ) void HnSRTreeFileSt_store(HnSRTreeFileSt *file,
+		                const HnPointSt *point,
+                                const HnDataItemSt *dataItem);
+
+        file     : the pointer to a data structure associated with
+	           an index file.
+        point    : a point being stored.
+        dataItem : an attribute being stored with the point.
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnPoint">HnPoint</a>,
+<a href="classes.html#HnDataItem">HnDataItem</a>.
+</blockquote>
+
+The current implementation imposes no restriction on the duplication
+of points and attributes. This reduces the overhead of insertion since
+the duplication test is avoided. The same point-attribute pairs can be
+stored in an index file. The duplication of point-attribute pairs does
+not harm the functionality of this library.
+
+</blockquote>
+</li>
+
+<li><b>Removing a data point from an index file.</b>
+
+<blockquote>
+
+The following functions remove a point from an index file.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) void file.remove(const HnPoint &amp;point,
+                       const HnDataItem &amp;dataItem);
+
+(C  ) void HnSRTreeFileSt_remove(HnSRTreeFileSt *file,
+                                 const HnPointSt *point,
+				 const HnDataItemSt *dataItem);
+
+    file     : the pointer to a data structure associated with an index file.
+    point    : a point being removed.
+    dataItem : an attribute being removed.
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnPoint">HnPoint</a>,
+<a href="classes.html#HnDataItem">HnDataItem</a>.
+</blockquote>
+
+Only the point having the same coordinates and the same attribute
+value is removed from the index file. Points with different attributes
+are intact.
+
+</blockquote>
+</li>
+
+</ul>
+
+<hr>
+
+<a name="static"></a><h3>2. Static construction method</h3>
+
+<blockquote>
+The following functions build an index file for a given data set and
+return the pointer to a data structure associated with that file. You
+can apply the insertion and the deletion methods described above to
+the index file built by these functions.
+
+The static construction method is not covered by the original paper of
+the SR-tree [<a href="references.html#KS97">KS97</a>]. The following
+functions employ the static construction method proposed for the
+VAMSplit R-tree [<a href="references.html#WJ96-1">WJ96-1</a>]. Since
+the SR-tree is a variant of the R-tree, it is straightforward to apply
+the static construction method of the VAMSplit R-tree to the
+SR-tree. The difference between the VAMSplit R-tree and the SR-tree
+built with these functions lies in the internal structure of non-leaf
+nodes. While the R-tree employs a minimum bounding rectangle in order
+to specify the region of a node, the SR-tree employs not only a
+minimum bounding rectangle but also a bounding sphere whose center is
+the centroid of the points in the subtree. The bounding sphere plays
+an important role in the dynamic construction method. Its
+effectiveness was originally presented in the paper of the SS-tree [<a
+href="references.html#WJ96-2">WJ96-2</a>]. Thus, a non-leaf node of
+the SR-tree contains the information on bounding spheres of child
+nodes in addition to the information on bounding rectangles of
+them. This reduces the number of children to be accommodated in a
+non-leaf node, i.e., this reduces the fanout of a non-leaf node. The
+reduction of the fanout could increase the search cost. However, by
+virtue of bounding spheres, the SR-tree supports both the dynamic and
+the static construction methods efficiently, while the VAMSplit R-tree
+supports only the static construction method.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) HnSRTreeFile new_HnSRTreeFile(const char *path,
+                                    int dimension,
+                                    int attributeSize,
+                                    HnPointVector &amp;points,
+                                    HnDataItemVector &amp;dataItems,
+                                    const HnProperties &amp;properties);
+
+(C  ) HnSRTreeFileSt *HnSRTreeFileSt_build(const char *path,
+					   int dimension,
+                                           int attributeSize,
+                                           const HnPointVectorSt *points,
+                                           const HnDataItemVectorSt *dataItems,
+			     	           const HnPropertiesSt *properties);
+
+        path          : the name of an index file.
+        dimension     : the dimensionality of the search space.
+        attributeSize : the size of an attribute associated with each data
+                        point (in bytes).
+        points        : points being stored.
+        dataItems     : attributes being stored with each point.
+        properties    : properties of the index.
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnPointVector">HnPointVector</a>,
+<a href="classes.html#HnDataItemVector">HnDataItemVector</a>,
+<a href="classes.html#HnProperties">HnProperties</a>.
+</blockquote>
+
+The details of the arguments, `attributeSize' and `properties', can be
+found in the description of
+``<a href="#create">Creating an empty index</a>''.
+
+</blockquote>
+
+<hr>
+
+<a name="search"></a><h3>3. Search methods</h3>
+
+<ul>
+<li><b>Running nearest-neighbor search with an index.</b>
+
+<blockquote>
+These functions run nearest neighbor search with an index, i.e., these
+functions search an index file for a given number of points that are
+the nearest to the query point. The returned points are sorted in
+ascending order of the distance to the query point.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) void file.getNeighbors(const HnPoint &amp;queryPoint,
+			     int numNeighbors,
+			     HnPointVector *points_return,
+			     HnDataItemVector *dataItems_return);
+
+(C  ) void HnSRTreeFileSt_getNeighbors(HnSRTreeFileSt *file,
+                                       const HnPointSt *queryPoint,
+				       int numNeighbors,
+			               HnPointVectorSt **points_return,
+			               HnDataItemVectorSt **dataItems_return);
+
+	file             : the pointer to a data structure associated with
+                           an index file.
+	queryPoint       : the query point.
+        numNeighbors     : the number of points to be found.
+	points_return    : the nearest points to the query point.
+	dataItems_return : the attributes of the nearest points.
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnPoint">HnPoint</a>,
+<a href="classes.html#HnDataItem">HnDataItem</a>,
+<a href="classes.html#HnPointVector">HnPointVector</a>,
+<a href="classes.html#HnDataItemVector">HnDataItemVector</a>,
+<a href="examples.html#fetchNN">Example</a>.
+</blockquote>
+
+<p>
+The `<code>numNeighbors</code>' is not necessarily the maximum number
+of points to be obtained. If the farthest point of a result set has
+multiple points at the same rank, they are also included in the result
+set.
+</p>
+
+<p>
+When using the C language interface, the data objects returned through
+the arguments `<code>points_return</code>' and
+`<code>dataItems_return</code>' need to be deleted by the caller as
+follows:
+</p>
+
+<blockquote>
+<pre>
+HnPointVectorSt *points;
+HnDataItemVectorSt *dataItems;
+
+ . . .
+
+HnSRTreeFileSt_getNeighbors(file, queryPoint, numNeighbors,
+			    &amp;points, &amp;dataItems);
+
+ . . .
+
+/* work with `points' and `dataItems' */
+
+ . . .
+
+HnPointVectorSt_freeElements(points);
+HnPointVectorSt_free(points);
+HnDataItemVectorSt_freeElements(dataItems);
+HnDataItemVectorSt_free(dataItems);
+</pre>
+</blockquote>
+
+</blockquote>
+</li>
+
+<li><b>Running colored nearest-neighbor search with an index.</b>
+
+<blockquote>
+(in preparation as of version 2.0 beta 1).
+</blockquote>
+
+<li><b>Running range search with an index.</b>
+
+<blockquote>
+The following functions run range search, i.e., these functions search
+an index file for such points that reside in a given region specified
+by a (hyper)rectangle or a (hyper)sphere.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) void file.getFirst(const HnRect &amp;queryRect,
+      			 HnPoint *point_return,
+                         HnDataItem *dataItem_return);
+      void file.getFirst(const HnSphere &amp;querySphere,
+      			 HnPoint *point_return,
+                         HnDataItem *dataItem_return);
+      void file.getNext(HnPoint *point_return,
+                        HnDataItem *dataItem_return);
+
+(C  ) void HnSRTreeFileSt_getFirstInRect(HnSRTreeFileSt *file,
+			                 const HnRectSt *queryRect,
+			                 HnPointSt **point_return,
+			                 HnDataItemSt **dataItem_return);
+      void HnSRTreeFileSt_getFirstInSphere(HnSRTreeFileSt *file,
+			                   const HnSphereSt *querySphere,
+			                   HnPointSt **point_return,
+			                   HnDataItemSt **dataItem_return);
+      void HnSRTreeFileSt_getNext(HnSRTreeFileSt *file,
+			          HnPointSt **point_return,
+			          HnDataItemSt **dataItem_return);
+
+        file            : the pointer to a data structure associated with
+                          an index file.
+        queryRect       : the query rectangle.
+        querySphere     : the query sphere.
+        point_return    : the obtained point.
+        dataItem_return : the attribute of the obtained point.
+</pre>
+</td></tr>
+</table>
+See also 
+<a href="classes.html#HnRect">HnRect</a>,
+<a href="classes.html#HnSphere">HnSphere</a>,
+<a href="classes.html#HnPoint">HnPoint</a>,
+<a href="classes.html#HnDataItem">HnDataItem</a>,
+<a href="examples.html#fetchInRect">Example</a>.
+</blockquote>
+
+<p>
+Search starts by the invocation of the function
+`<code>getFirst()</code>'.  The query region is specified by the
+argument `<code>queryRect</code>' or `<code>querySphere</code>'.
+The first result will be returned
+through the arguments `<code>point_return</code>' and
+`<code>dataItem_return</code>'. When no point is found in the query
+region, the following null values are returned:
+
+<blockquote>
+<pre>
+(C++) point_return    :  HnPoint::null
+      dataItem_return :  HnDataItem::null
+
+(C  ) point_return    :  NULL
+      dataItem_return :  NULL 
+</pre>
+</blockquote>
+
+<p>
+The second and more result will be returned by the invocation of
+`<code>getNext()</code>'. When every result is returned, the null
+values will be returned in the arguments `<code>point_return</code>'
+and `<code>dataItem_return</code>'.
+</p>
+
+<p>
+When the following null values are assigned to the argument
+`<code>queryRect</code>', every point in an index file will be
+obtained:
+</p>
+
+<blockquote>
+<pre>
+(C++) HnRect::null
+(C  ) NULL
+</pre>
+</blockquote>
+
+<p>
+Similarly, when the following null values are assigned to the argument
+`<code>querySphere</code>', every point in an index file will be
+obtained:
+</p>
+
+<blockquote>
+<pre>
+(C++) HnSphere::null
+(C  ) NULL
+</pre>
+</blockquote>
+
+<p>
+When using the C++ language interface, the following function can be
+used as the abbreviation of setting `<code>HnRect::null</code>' to the
+argument `<code>queryRect</code>'.
+</p>
+<blockquote>
+<pre>
+(C++)
+    void file.getFirst(HnPoint *point_return, HnDataItem *dataItem_return);
+</pre>
+</blockquote>
+
+For convenience, the following functions are also provided.  These
+functions invoke the above functions `<code>getFirst()</code>' and
+`<code>getNext()</code>' internally and return the points and
+attributes through the arguments `<code>points_return</code>' and
+`<code>dataItems_return</code>'. The returned point-attribute pairs
+are sorted in the lexicographical order to preserve the identity of
+the search result.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++)
+    void file.getInRect(const HnRect &amp;queryRect,
+                        HnPointVector *points_return,
+                        HnDataItemVector *dataItems_return);
+    void file.getInSphere(const HnSphere &amp;querySphere,
+                          HnPointVector *points_return,
+                          HnDataItemVector *dataItems_return);
+
+(C  )
+    void HnSRTreeFileSt_getInRect(HnSRTreeFileSt *file,
+                                  const HnRectSt *queryRect,
+                                  HnPointVectorSt **points_return,
+                                  HnDataItemVectorSt **dataItems_return);
+    void HnSRTreeFileSt_getInSphere(HnSRTreeFileSt *file,
+                                    const HnSphereSt *querySphere,
+                                    HnPointVectorSt **points_return,
+                                    HnDataItemVectorSt **dataItems_return);
+
+        file             : the pointer to a data structure associated with
+                           an index file.
+        queryRect        : the query rectangle.
+        querySphere      : the query sphere.
+        points_return    : the obtained points.
+        dataItems_return : the attributes of the obtained points.
+</pre>
+</td></tr>
+</table>
+See also 
+<a href="classes.html#HnRect">HnRect</a>,
+<a href="classes.html#HnSphere">HnSphere</a>,
+<a href="classes.html#HnPointVector">HnPointVector</a>,
+<a href="classes.html#HnDataItemVector">HnDataItemVector</a>.
+</blockquote>
+
+</blockquote>
+</li>
+</ul>
+
+<hr>
+
+<a name="misc"></a><h3>4. Miscellaneous methods</h3>
+
+<ul>
+<li><b>Obtaining profile information of an index manipulation.</b>
+
+<blockquote>
+The following functions take the snapshot of the profile information
+collected by the library.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++) void file.copyProfileInto(HnSRTreeProfileSt *profile);
+
+(C  ) void HnSRTreeFileSt_copyProfileInto(HnSRTreeFileSt *file,
+                                          HnSRTreeProfileSt *profile);
+
+        file    : the pointer to a data structure associated with an
+	          index file.
+        profile : an object of the type `HnSRTreeProfileSt' into which
+	          the current profile is to be written.
+</pre>
+</td></tr>
+</table>
+See also <a href="classes.html#HnSRTreeProfileSt">HnSRTreeProfileSt</a>.
+</blockquote>
+
+<p>
+The profile information is collected for each index file. It is
+accumulative since the file is opened. However, you can initialize it
+by calling the following function:
+</p>
+<blockquote>
+<pre>
+(C++) void file.resetProfile(void);
+
+(C  ) void HnSRTreeFileSt_resetProfile(HnSRTreeFileSt *file);
+</pre>
+</blockquote>
+
+</blockquote>
+</li>
+</ul>
+
+<hr>
+[<a href="index.html">TOC</a>]
+[<a href="library.html">Library</a>]
+[<a href="classes.html">Classes</a>]
+[<a href="commands.html">Commands</a>]
+[<a href="examples.html">Examples</a>]
+[<a href="references.html">References</a>]
+
+<p>
+<i>Any feedback is appreciated (corrections, suggestions, etc.).</i>
+</p>
+<address>
+Norio KATAYAMA
+&lt;<a href="mailto:katayama@nii.ac.jp">katayama@nii.ac.jp</a>&gt;
+</address>
+
+</body>

@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9F1B0DEA-0C33-453A-9A2A-E680987E965C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>DAGMatcherLib</RootNamespace>
+    <ProjectName>DAGMatcherLib</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\FluxSkeleton;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)\..\;$(ProjectDir)\..\glut-3.7.6-bin;$(ProjectDir)\..\FluxSkeleton\include;$(ProjectDir)\..\AFMMSkeleton\include;$(ProjectDir)\..\ann_1.1\include;$(ProjectDir)\..\Newmat;$(ProjectDir)\..\HnSRTree-2.0beta5a\include;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include;$(ProjectDir)\..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
+    </Lib>
+    <Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\FluxSkeleton;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)\..\;$(ProjectDir)\..\glut-3.7.6-bin;$(ProjectDir)\..\FluxSkeleton\include;$(ProjectDir)\..\AFMMSkeleton\include;$(ProjectDir)\..\ann_1.1\include;$(ProjectDir)\..\Newmat;$(ProjectDir)\..\HnSRTree-2.0beta5a\include;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include;$(ProjectDir)\..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)DAGMatcherLib.lib</OutputFile>
+    </Lib>
+    <Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DAGMatcherLib\Headers\BasicTypedefs.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BasicTypes.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BasicUtils.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BGEdge.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BGElement.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BGNode.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BGSimilarityMeasurer.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BipartiteGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BipartiteNodeGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BoneGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BoneGraphConstructor.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BoneGraphView.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BoundaryCorner.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BoundaryInterval.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BoundaryIntervalWithGaps.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BoundaryPointFinder.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BranchSegment.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BranchSegmentList.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\BranchWalkInfo.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\CompareHistogram.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAG.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGDatabase.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGDBFile.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGEdge.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGMatcher.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGMatcherAdaptive.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGMatcherGreedy.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGMatcherOptimal.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGMatcherTopological.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGNode.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGSearchDatabase.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DAGView.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DDSGraphUtils.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DirWalker.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\DMLString.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\Emd.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\EuclideanLineSegment.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\Exceptions.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\GeneralizedSkeletalGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\GestureGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\GGNode.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\HelperFunctions.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\ImageProcessing.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\KDTree.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_graphwin_utils.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_issues.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_utils.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_window_utils.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\LigatureDetection.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\LigatureSegment.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\LigatureSegmentList.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\MatchedNodePair.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\MatchInfoList.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\MathUtils.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\MedialAxisCorner.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\MGShockGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\ModelFit.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\NodeAssignment.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\NodeMatchInfo.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\NodePairInfo.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PartnerBranch.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PiecewiseApprox.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PiecewiseCurves.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PlotView.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PolyBezierApprox.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PolyLineApprox.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PolyLineTLSApprox.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\PolyLineWarper.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SGNode.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SGSimilarityMeasurer.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SharedPtr.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\ShockGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\ShockGraphView.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\ShockPoint.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SimilarityMeasurer.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SimilarityMeasurerT.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SkeletalGraph.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SmartArray.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SmartMatrix.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SmartPtr.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\SolutionSet.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\TSV.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\UnixFuncPrototypes.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\Vector.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\VisualDAG.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\VoteCounter.h" />
+    <ClInclude Include="..\DAGMatcherLib\Headers\XORIntegral.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\DAGMatcherLib\Sources\BasicTypes.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BGEdge.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BGElement.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BGNode.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BGSimilarityMeasurer.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BipartiteNodeGraph.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BoneGraph.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BoneGraphConstructor.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BoneGraphView.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BoundaryCorner.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BoundaryInterval.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BoundaryIntervalWithGaps.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BoundaryPointFinder.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BranchSegment.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BranchSegmentList.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\BranchWalkInfo.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\CompareHistogram.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAG.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGDatabase.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGDBFile.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGMatcher.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGMatcherAdaptive.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGMatcherGreedy.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGMatcherOptimal.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGMatcherTopological.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGNode.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGSearchDatabase.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DAGView.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DDSGraphUtils.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\DirWalker.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\Emd.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\GeneralizedSkeletalGraph.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\GestureGraph.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\GGNode.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\HelperFunctions.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\ImageProcessing.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\KDTree.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\LigatureSegment.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\LigatureSegmentList.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\MatchedNodePair.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\MatchInfoList.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\MedialAxisCorner.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\ModelFit.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\NodeAssignment.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\NodeMatchInfo.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\PlotView.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\PolyBezierApprox.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\PolyLineApprox.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\PolyLineTLSApprox.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\PolyLineWarper.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\SGNode.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\SGSimilarityMeasurer.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\ShockGraph.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\ShockGraphView.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\SkeletalGraph.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\TSV.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\VisualDAG.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\VoteCounter.cpp" />
+    <ClCompile Include="..\DAGMatcherLib\Sources\XORIntegral.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

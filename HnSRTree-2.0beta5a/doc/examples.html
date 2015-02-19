@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<head>
+<title>Source Code Examples</title>
+</head>
+
+<body bgcolor=white>
+
+<h1>Source Code Examples</h1>
+
+<hr>
+
+<p>
+For complete examples, please refer to the source code of <a
+href="commands.html">sample commands</a> contained in the directories
+`<code>c++-samples</code>' and `<code>c-samples</code>'.
+</p>
+
+<ul>
+<li><a href="#fetchNN">Running nearest neighbor search.</a></li>
+<li><a href="#fetchInRect">Running range search.</a></li>
+</ul>
+
+<hr>
+
+<a name="fetchNN"></a><h2>Running nearest neighbor search.</h2>
+
+<p>
+The following is an example of using the function
+`<code>getNeighbors()</code>'.
+</p>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++)
+        HnSRTreeFile file;
+        HnPoint queryPoint;
+        int i, numNeighbors;
+        HnPointVector points;
+        HnDataItemVector dataItems;
+
+        . . .
+
+        /* open an index file and prepare `queryPoint' and `numNeighbors' */
+
+        . . .
+
+        file.getNeighbors(queryPoint, numNeighbors, &amp;points, &amp;dataItems);
+
+        for ( i=0; i&lt;points.size(); i++ ) {
+            HnPoint point = points.elementAt(i);
+            HnDataItem dataItem = dataItems.elementAt(i);
+
+            . . .
+
+            /* work with `point' and `dataItem' */
+
+            . . .
+
+        }
+
+        /* close an index file */
+
+(C  )
+        HnSRTreeFileSt *file;
+        HnPointSt *queryPoint;
+        int i, numNeighbors;
+        HnPointVectorSt *points;
+        HnDataItemVectorSt *dataItems;
+
+        . . .
+
+        /* open an index file and prepare `queryPoint' and `numNeighbors' */
+
+        . . .
+
+        HnSRTreeFileSt_getNeighbors(file, queryPoint, numNeighbors,
+                                    &amp;points, &amp;dataItems);
+
+        for ( i=0; i&lt;points-&gt;size; i++ ) {
+            HnPointSt *point = points-&gt;elements[i];
+            HnDataItemSt *dataItem = dataItems-&gt;elements[i];
+
+            . . .
+
+            /* work with `point' and `dataItem' */
+
+            . . .
+
+        }
+
+        HnPointVectorSt_freeElements(points);
+        HnPointVectorSt_free(points);
+
+        HnDataItemVectorSt_freeElements(dataItems);
+        HnDataItemVectorSt_free(dataItems);
+
+        /* close an index file and delete `queryPoint' */
+</pre>
+</td></tr>
+</table>
+See also 
+<a href="classes.html#HnPoint">HnPoint</a>,
+<a href="classes.html#HnDataItem">HnDataItem</a>,
+<a href="classes.html#HnPointVector">HnPointVector</a>,
+<a href="classes.html#HnDataItemVector">HnDataItemVector</a>.
+</blockquote>
+
+<hr>
+
+<a name="fetchInRect"></a><h2>Running range search.</h2>
+
+<p>
+The following is an example of using the function `<code>getFirst()</code>'
+and `<code>getNext()</code>'.
+</p>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+(C++)
+        HnSRTreeFile file;
+        HnRect queryRect;
+        HnPoint point;
+        HnDataItem dataItem;
+
+        . . .
+
+        /* open an index file and prepare `queryRect' */
+
+        . . .
+
+        file.getFirst(queryRect, &amp;point, &amp;dataItem);
+
+        while ( point != HnPoint::null ) {
+
+            . . .
+
+            /* work with `point' and `dataItem' */
+
+            . . .
+
+            file.getNext(&amp;point, &amp;dataItem);
+        }
+
+        /* close an index file */
+
+(C  )
+        HnSRTreeFileSt *file;
+        HnRectSt *queryRect;
+        HnPointSt *point;
+        HnDataItemSt *dataItem;
+
+        . . .
+
+        /* open an index file and prepare `queryRect' */
+
+        . . .
+
+        HnSRTreeFileSt_getFirstInRect(file, queryRect, &amp;point, &amp;dataItem);
+
+        while ( point != NULL ) {
+
+            . . .
+
+            /* work with `point' and `dataItem' */
+
+            . . .
+
+            HnPointSt_free(point);
+            HnDataItemSt_free(dataItem);
+
+            HnSRTreeFileSt_getNext(file, &amp;point, &amp;dataItem);
+        }
+
+        /* close an index file and delete `queryRect' */
+</pre>
+</td></tr>
+</table>
+See also 
+<a href="classes.html#HnRect">HnRect</a>,
+<a href="classes.html#HnPoint">HnPoint</a>,
+<a href="classes.html#HnDataItem">HnDataItem</a>.
+</blockquote>
+
+<hr>
+[<a href="index.html">TOC</a>]
+[<a href="library.html">Library</a>]
+[<a href="classes.html">Classes</a>]
+[<a href="commands.html">Commands</a>]
+[<a href="examples.html">Examples</a>]
+[<a href="references.html">References</a>]
+
+<p>
+<i>Any feedback is appreciated (corrections, suggestions, etc.).</i>
+</p>
+<address>
+Norio KATAYAMA
+&lt;<a href="mailto:katayama@nii.ac.jp">katayama@nii.ac.jp</a>&gt;
+</address>
+
+</body>

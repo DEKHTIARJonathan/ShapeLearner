@@ -1,0 +1,1 @@
+echo \#ifndef SG_H; echo \#   define SG_H; echo; echo \#include \<math.h\>; for f in `ls *.h`; do echo \#include \"$f\"; done; echo; echo \#endif

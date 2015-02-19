@@ -1,0 +1,159 @@
+#!/bin/sh
+#
+# doTest
+# Copyright (C) 1997 Norio Katayama
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; if not, write to the Free
+# Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# 10/15/96 katayama@rd.nacsis.ac.jp
+# $Id: doTest,v 1.10 2002/09/13 05:20:29 katayama Exp $
+#
+
+commandDir=../c-samples
+
+dynamicBuild=$commandDir/dynamicBuild
+staticBuild=$commandDir/staticBuild
+storeRecords=$commandDir/storeRecords
+removeRecords=$commandDir/removeRecords
+fetchInRect=$commandDir/fetchInRect
+fetchNN=$commandDir/fetchNN
+fetchColoredNN=$commandDir/fetchColoredNN
+checkIndex=$commandDir/checkIndex
+printIndex=$commandDir/printIndex
+
+#
+# The size of an attribute associated with each point
+#
+# NOTE:
+#     Quite a large number is used here in order to impose
+#     heavy workload on the SR-tree even with a small data set.
+#
+attrSize=512
+
+echo "Building an SR-tree dynamically for 1000 points ... "
+$dynamicBuild -s $attrSize sample.rcd sample.idx > dynamicBuild.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Checking the built SR-tree ... "
+$checkIndex sample.idx
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the built SR-tree ... "
+$fetchInRect -v sample.rcd sample.idx > fetchInRect.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Removing all points from the SR-tree ... "
+$removeRecords sample.rcd sample.idx > removeRecords.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Checking the modified SR-tree ... "
+$checkIndex sample.idx
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the modified SR-tree ... "
+$printIndex sample.idx | grep "Number of leaf entries: 0" > /dev/null
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Restoring 1000 points to the SR-tree ... "
+$storeRecords sample.rcd sample.idx > storeRecords.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Checking the restored SR-tree ... "
+$checkIndex sample.idx
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the restored SR-tree ... "
+$fetchInRect -v sample.rcd sample.idx > fetchInRect.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Running nearest neighbor searches ... "
+$fetchNN -v -n 4 sample.rcd sample.idx > fetchNN.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the result of the nearest neighbor searches ... "
+./extans.sed < fetchNN.log > neighbor.tmp
+cmp neighbor.tmp neighbor.ans > /dev/null
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Running range searches ... "
+$fetchInRect -v -w 0.1 sample.rcd sample.idx > fetchInRect.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the result of the range searches ... "
+./extans.sed < fetchInRect.log > range.tmp
+cmp range.tmp range.ans > /dev/null
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Building an SR-tree statically for 1000 points ... "
+$staticBuild -s $attrSize sample.rcd sample.idx > staticBuild.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Checking the built SR-tree ... "
+$checkIndex sample.idx
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the built SR-tree ... "
+$fetchInRect -v sample.rcd sample.idx > fetchInRect.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Removing all points from the SR-tree ... "
+$removeRecords sample.rcd sample.idx > removeRecords.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Checking the modified SR-tree ... "
+$checkIndex sample.idx
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the modified SR-tree ... "
+$printIndex sample.idx | grep "Number of leaf entries: 0" > /dev/null
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Building an SR-tree statically for 1280 colored points ... "
+$staticBuild -s $attrSize colored.rcd colored.idx > staticBuild.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Running colored nearest neighbor searches ... "
+$fetchColoredNN -v -n 4 colored.rcd colored.idx > fetchColoredNN.log
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Verifying the result of the colored nearest neighbor searches ... "
+./extans.sed < fetchColoredNN.log > colored.tmp
+cmp colored.tmp colored.ans > /dev/null
+if [ $? != 0 ]; then echo "******** Test failed. ********"; exit 1; fi
+echo "done"
+
+echo "Congratulations! All tests succeeded."
+

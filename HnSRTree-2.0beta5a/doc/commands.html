@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<head>
+<title>Sample Commands</title>
+</head>
+
+<body bgcolor=white>
+
+<h1>Sample Commands</h1>
+
+<hr>
+
+<blockquote>
+Sample commands are contained in the directories
+`<code>c++-samples</code>' and `<code>c-samples</code>'.  The source
+code of them is intended to be a concrete example of the usage of this
+library.
+
+<ul>
+<li><a href="#dynamicBuild"><code>dynamicBuild</code></a></li>
+<li><a href="#storeRecords"><code>storeRecords</code></a></li>
+<li><a href="#removeRecords"><code>removeRecords</code></a></li>
+<li><a href="#staticBuild"><code>staticBuild</code></a></li>
+<li><a href="#fetchNN"><code>fetchNN</code></a></li>
+<li><a href="#fetchColoredNN"><code>fetchColoredNN</code></a></li>
+<li><a href="#fetchInRect"><code>fetchInRect</code></a></li>
+</ul>
+</blockquote>
+
+<hr>
+
+<a name="dynamicBuild"></a><h2>dynamicBuild</h2>
+
+<blockquote>
+This command creates an index file and then stores given records into
+the index file.  Records to be stored are read from a <a
+href="#RecordFile">record file</a>. When the option `<code>-c</code>'
+is not set, every record in the file will be stored.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+Usage: dynamicBuild [options] recordFile indexFile
+Options
+    -c count     set the number of records to be read from recordFile
+    -d           turn on the debug mode
+    -m           build the tree on memory and finally dump it to the file
+    -p property  set the property of the index
+    -s dataSize  set the size of data attributes (128 by default)
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+The property of an index file can be specified by the option
+`<code>-p</code>'. The label-value pair should be appended after the
+option `<code>-p</code>' with connecting the label and the value by
+the equal sign. For example, the following command will build an index
+whose block size is 16384.
+
+<blockquote>
+<pre>
+% dynamicBuild -p HnSRTreeBlockSize=16384 recordFile indexFile
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="storeRecords"></a><h2>storeRecords</h2>
+
+<blockquote>
+This command opens an existing index file and then stores given
+records into the index file. Records to be stored are read from a <a
+href="#RecordFile">record file</a>. When the option `<code>-c</code>'
+is not set, every record in the file will be stored.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+Usage: storeRecords [options] recordFile indexFile
+Options
+    -c count          set the number of records to be read from recordFile
+    -d                turn on the debug mode
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="removeRecords"></a><h2>removeRecords</h2>
+
+<blockquote>
+This command opens an existing index file and then removes given
+records from the index file. Records to be removed are read from a <a
+href="#RecordFile">record file</a>. When the option `<code>-c</code>'
+is not set, every record in the file will be removed.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+Usage: removeRecords [options] recordFile indexFile
+Options
+    -c count          set the number of records to be read from recordFile
+    -d                turn on the debug mode
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="staticBuild"></a><h2>staticBuild</h2>
+
+<blockquote>
+This command creates an index file for given records with
+<a href="library.html#static">the static construction method</a>.
+Records to be stored are read from a <a
+href="#RecordFile">record file</a>. When the option `<code>-c</code>'
+is not set, every record in the file will be stored.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+Usage: staticBuild [options] recordFile indexFile
+Options
+    -c count     set the number of records to be read from recordFile
+    -d           turn on the debug mode
+    -p property  set the property of the index
+    -s dataSize  set the size of data attributes (128 by default)
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+The property of an index file can be specified by the option
+`<code>-p</code>'. The label-value pair should be appended after the
+option `<code>-p</code>' with connecting the label and the value by
+the equal sign. For example, the following command will build an index
+whose block size is 16384.
+
+<blockquote>
+<pre>
+% staticBuild -p HnSRTreeBlockSize=16384 recordFile indexFile
+</pre>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="fetchNN"></a><h2>fetchNN</h2>
+
+<blockquote>
+This command opens an existing index file and then finds the nearest
+neighbors of a given query point. Query points are read from a <a
+href="#RecordFile">record file</a>. The search will be conducted for
+each point being read from the record file.
+The attribute values of the points contained in the record file
+will be ignored.
+When the option
+`<code>-c</code>' is not set, every record in the file will be used
+as a query point.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+Usage: fetchNN [options] recordFile indexFile
+Options
+    -c count     set the number of records to be read
+    -d           turn on the debug mode
+    -n neighbors set the number of neighbors to be fetched (1 by default)
+    -p property  set the property of the index
+    -v verify    verify record existence
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="fetchColoredNN"></a><h2>fetchColoredNN</h2>
+
+<blockquote>
+(in preparation as of version 2.0 beta 1).
+</blockquote>
+
+<hr>
+
+<a name="fetchInRect"></a><h2>fetchInRect</h2>
+
+<blockquote>
+This command opens an existing index file and then finds such a point
+that resides in a given (hyper)rectangle. A query rectangle is
+specified by the center and the width of the rectangle. The center
+point of a query rectangle is read from a <a href="#RecordFile">record
+file</a>, while the width of the rectangle is specified by the command
+line option. The search will be conducted for each point being read
+from the record file. 
+The attribute values of the points contained in the record file
+will be ignored.
+When the option `<code>-c</code>' is not set,
+every record in the file will be read and used as the center of a
+query rectangle.
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10>
+<tr><td>
+<pre>
+Usage: fetchInRect [options] recordFile indexFile
+Options
+    -c count     set the number of records to be read
+    -d           turn on the debug mode
+    -p property  set the property of the index
+    -v verify    verify record existence
+    -w width     set the width of the query rectangle (0 by default)
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+</blockquote>
+
+<hr>
+
+<a name="RecordFile"></a><h2>Record File</h2>
+
+<blockquote>
+A record file contains point-attribute pairs. The attribute of a point
+is a character string.
+<p>
+The format of a record file is very simple. The first line of the file
+contains the dimensionality of contained points. From the second line
+to the bottom, each line corresponds to one point-attribute pair. A
+line consists of multiple fields, where fields are separated by colon. 
+The coordinates of a point are filled from the beginning of the line.
+The remainder of the line is the attribute of the point.
+</p>
+<p>
+For example, the following file contains four 2-dimensional points.
+The coordinates of them are (11, 12), (21, 22), (31, 32), and (41,
+42), while the attributes of them are ``one'', ``two'', ``three'', and
+``four'', respectively.
+</p>
+
+<blockquote>
+<table border=1 bgcolor=lightyellow cellpadding=10 width="50%">
+<tr><td>
+<pre>
+2        
+11:12:one  
+21:22:two  
+31:32:three
+41:42:four 
+</pre>
+</td></tr>
+</table>
+</blockquote>
+
+</blockquote>
+
+<hr>
+[<a href="index.html">TOC</a>]
+[<a href="library.html">Library</a>]
+[<a href="classes.html">Classes</a>]
+[<a href="commands.html">Commands</a>]
+[<a href="examples.html">Examples</a>]
+[<a href="references.html">References</a>]
+
+<p>
+<i>Any feedback is appreciated (corrections, suggestions, etc.).</i>
+</p>
+<address>
+Norio KATAYAMA
+&lt;<a href="mailto:katayama@nii.ac.jp">katayama@nii.ac.jp</a>&gt;
+</address>
+
+</body>

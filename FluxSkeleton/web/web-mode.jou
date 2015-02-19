@@ -1,0 +1,14 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+USER : Pavel Dimitrov [pdimit@cantor.McRCIM.McGill.EDU]
+FILE : Curve.w
+START TIME : Mon May 27 20:03:19 2002
+FINISH TIME : Mon May 27 22:39:23 2002
+TOTAL TIME IN web-mode : 02:36:04
+-------------------------------------------------------------------------------
+INTERACTIVE FUNCTION USAGE
+   1  web-collect-section-names
+   2  web-insert-index-period
+   1  web-mode-restart
+   1  web-mode-save-buffers-kill-emacs
+  17  web-newline
+   1  web-view-section-names-list
