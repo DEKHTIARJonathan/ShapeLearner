@@ -37,4 +37,5 @@
 const unsigned int		constants::SIZE_MAX_TYPE_DAG = 30;
 const unsigned int		constants::SIZE_MAX_CLASS_NAME = 255;
 const unsigned int		constants::SIZE_MAX_GRAPH_NAME = 255;
+const unsigned int		constants::SIZE_MAX_OBJ_NAME = 255;
 const unsigned int		constants::SIZE_MAX_PATH = 255;

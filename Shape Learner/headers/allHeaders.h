@@ -23,6 +23,9 @@
  */
 
 #include <iostream>
+#include <cstdlib>
+#include <cstring>
+#include <string>
 #include <vector>
 #include <stdexcept>
 #include <sstream>
@@ -32,6 +35,7 @@
 #include <QtSql\qsqlquery.h>
 #include <QtSql\qsqlerror.h>
 #include <QtCore/qvariant.h>
+#include <QtCore\qtextstream.h>
 
 #include "dbManager.h"
 #include "dbexception.h"

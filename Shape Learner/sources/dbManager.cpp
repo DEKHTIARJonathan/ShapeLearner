@@ -25,41 +25,58 @@ using namespace std;
 **                           Constructers                            *
 *********************************************************************/
 
-DatabaseManager::DatabaseManager(const QString &path, const QString &user, const QString &pass) throw(DBException) : database(new QSqlDatabase()), dbpath(path)
+DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, const QString &user, const QString &pass, const QString &hostname) throw(DBException) : database(new QSqlDatabase()), dbPath(dbPath)
 {
-	//set database driver to QSQLITE avec une connection ayant pour nom "ShapeLearner.shape"
-	*database = QSqlDatabase::addDatabase("QSQLITE", "ShapeLearner.shape");
+	/*
+	Driver availables:
+		QDB2		IBM DB2
+		QIBASE		Borland InterBase Driver
+		QMYSQL		MySQL Driver
+		QOCI		Oracle Call Interface Driver
+		QODBC		ODBC Driver (includes Microsoft SQL Server)
+		QPSQL		PostgreSQL Driver
+		QSQLITE		SQLite version 3 or above
+		QSQLITE2	SQLite version 2
+		QTDS		Sybase Adaptive Server
+	*/
 
-	QFile file(dbpath);
+	//set database driver to QSQLITE avec une connection ayant pour nom dbName
+	QString fullpath = dbPath+QDir::separator()+dbName;
+
+	*database = QSqlDatabase::addDatabase("QSQLITE", dbName);
+
+	QFile file(fullpath);
 
 	bool dbIsNew = !file.exists();
 
-	database->setDatabaseName(dbpath);
+	database->setDatabaseName(fullpath);
 
 	//can be removed
-	database->setHostName("localhost");
+	database->setHostName(hostname);
 	database->setUserName(user);
 	database->setPassword(pass);
 
-	if(!database->open())
+	if(!database->open() && !database->isOpen() && !database->isValid() && !file.isOpen())
 	{
-		throw DBException("INITIALISATION Database", "Can not open database. Path = "+file.fileName());
+		throw DBException("INITIALISATION Database", "Can not open database. Path = "+fullpath);
 	}
 	else
 	{
 		if (dbIsNew)
-			initDB();
+			if (!initDB())
+				throw DBException("Erreur lors de l'initialisation de la BDD", database->lastError().databaseText());
 		else
 		{
 			/* ******* AFFICHE TOUTES LES TABLES DE LA DB *********
-			 ********
-			 *******
-			 ******
-			 *****
-			 ****
-			 ***
-			 **
-			 *
+			*********
+			********
+			*******
+			******
+			*****
+			****
+			***
+			**
+			*
 			QStringList list = database->tables(QSql::Tables);
 			QStringList::Iterator it = list.begin();
 			while( it != list.end() )
@@ -70,6 +87,10 @@ DatabaseManager::DatabaseManager(const QString &path, const QString &user, const
 			*/
 		}
 		database->exec("PRAGMA foreign_keys=ON;");
+		#ifdef _DEBUG
+			cout << "Db linked at the following path : " <<fullpath.toStdString() << endl;
+		#endif
+		
 	}
 }
 
@@ -77,64 +98,140 @@ DatabaseManager::DatabaseManager(const QString &path, const QString &user, const
 *                              getters                               *
  ********************************************************************/
 
-const QString DatabaseManager::getpath() const
+const QString DatabaseManager::getPath() const
 {
-	return dbpath;
+	return dbPath;
+}
+
+const QString DatabaseManager::getName() const
+{
+	return database->databaseName();
 }
 
 /* *******************************************************************
 *                            DB Requests                             *
  ********************************************************************/
 
-bool DatabaseManager::query(const QString &query) const
+bool DatabaseManager::query(const QString &query) const throw(DBException)
 {
 	QSqlQuery request(*database);
 
-	bool result = request.exec(query);
+	database->transaction();
 
-	if (result)
-		return true;
-	else
-		throw DBException(query, request.lastError().databaseText());
+	foreach (QString singleQuery, query.split(';'))
+	{
+		if (singleQuery.trimmed().isEmpty())
+			continue;
+
+		if (!request.exec(singleQuery))
+		{
+			database->rollback();
+			throw DBException(query, request.lastError().databaseText());
+			return false;
+		}
+
+		request.finish();
+	}
+
+	database->commit();
+
+	return true;
 }
+
 
 bool DatabaseManager::initDB()
 {
-	QString qry[6];
+	QString script;
 	
-	qry[0] = "CREATE TABLE `GraphClass` (`idGraphClass`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `graphClassName`	varchar("+QString::number(constants::SIZE_MAX_GRAPH_NAME)+") NOT NULL UNIQUE)";
-	//qry[1] = "INSERT INTO `GraphClass` ( `graphClassName` ) VALUES ( 'ShockGraph' );";
-	qry[1] = "CREATE TABLE `ObjectClass` (`idObjectClass` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `objectClassName`	varchar(255) NOT NULL UNIQUE)";
-	qry[2] = "Select 1";
-	qry[3] = "Select 1";
-	qry[4] = "Select 1";
-	qry[5] = "Select 1";
+	script =	"CREATE TABLE `GraphClass`"
+				"("
+					"`graphClassName`	VARCHAR("+QString::number(constants::SIZE_MAX_GRAPH_NAME)+") NOT NULL UNIQUE PRIMARY KEY"
+				");"
 	
-	/*
-	qry[0] = "create table Note (id integer , title varchar(255), typeNote varchar(255), trashed  BOOL DEFAULT '0' NOT NULL, primary key(id))";
-	qry[1] = "create table Article (id integer, txt text, primary key(id), FOREIGN KEY(id) REFERENCES Note(id) ON DELETE CASCADE)";
-	qry[2] = "create table Document (id integer, primary key(id), FOREIGN KEY(id) REFERENCES Note(id) ON DELETE CASCADE)";
-	qry[3] = "create table Multimedia (id integer, description TEXT, path varchar(255), primary key(id), FOREIGN KEY(id) REFERENCES Note(id) ON DELETE CASCADE)";
-	qry[4] = "create table AssocDoc (docMaster integer, note integer, primary key(docMaster, note), FOREIGN KEY(docMaster) REFERENCES Document(id) ON DELETE CASCADE, FOREIGN KEY(note) REFERENCES Note(id) ON DELETE CASCADE)";
-	qry[5] = "create table AssocTag (id integer, name varchar(255), primary key(id, name), FOREIGN KEY(id) REFERENCES Note(id) ON DELETE CASCADE)";
-	*/
+				"CREATE TABLE `ObjectClass`"
+				"("
+					"`objectClassName`	VARCHAR("+QString::number(constants::SIZE_MAX_CLASS_NAME)+") NOT NULL UNIQUE PRIMARY KEY"
+				");"
+
+				"CREATE TABLE `DAGs`"
+				"("
+					"`idDAG` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+					"`graphClass`	VARCHAR("+QString::number(constants::SIZE_MAX_GRAPH_NAME)+") NOT NULL,"
+					"`objectClass`	VARCHAR("+QString::number(constants::SIZE_MAX_CLASS_NAME)+") NOT NULL,"
+					"`objectName`	VARCHAR("+QString::number(constants::SIZE_MAX_OBJ_NAME)+") NOT NULL UNIQUE,"
+					"`viewNumber`	INTEGER DEFAULT '1' NOT NULL,"
+					"FOREIGN KEY(`graphClass`) REFERENCES `GraphClass`(`graphClassName`) ON DELETE CASCADE,"
+					"FOREIGN KEY(`objectClass`) REFERENCES `ObjectClass`(`objectClassName`) ON DELETE CASCADE"
+				");"
+
+				"CREATE INDEX `index_DAGs_objectName` ON `DAGs`(`objectName`);"
+				"CREATE INDEX `index_DAGs_objectClass` ON `DAGs`(`objectClass`);"
+				"CREATE INDEX `index_DAGs_graphClass` ON `DAGs`(`graphClass`);"
+
+				"CREATE TABLE `Nodes`"
+				"("
+					"`idNode`		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+					"`childCount`	INTEGER DEFAULT '1' NOT NULL,"
+					"`parentCount`	INTEGER DEFAULT '1' NOT NULL,"
+					"`index`		INTEGER DEFAULT '1' NOT NULL,"
+					"`level`		INTEGER DEFAULT '1' NOT NULL,"
+					"`mass`			INTEGER DEFAULT '1' NOT NULL,"
+					"`type`			INTEGER DEFAULT '1' NOT NULL,"
+					"`pointCount`	INTEGER DEFAULT '1' NOT NULL,"
+					"`label`		INTEGER DEFAULT '1' NOT NULL,"
+					"`refDAG`		INTEGER NOT NULL,"
+					"FOREIGN KEY(`refDAG`) REFERENCES `DAGs`(`idDAG`) ON DELETE CASCADE"
+				");"
+
+				"CREATE INDEX `index_Node_refDAG` ON `Nodes`(`refDAG`);"
+				"CREATE INDEX `index_Node_parentCount` ON `Nodes`(`parentCount`);"
+
+				"CREATE TABLE `Points`"
+				"("
+					"`idPoint`		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+					"`xCoord`		REAL DEFAULT '1' NOT NULL,"
+					"`yCoord`		REAL DEFAULT '1' NOT NULL,"
+					"`radius`		REAL DEFAULT '1' NOT NULL,"
+					"`refNode`		INTEGER NOT NULL,"
+					"`refDAG`		INTEGER NOT NULL,"
+					"FOREIGN KEY(`refNode`) REFERENCES `Nodes`(`idNode`) ON DELETE CASCADE,"
+					"FOREIGN KEY(`refDAG`) REFERENCES `DAGs`(`idDAG`) ON DELETE CASCADE"
+				");"
+
+				"CREATE INDEX `index_Point_refNode` ON `Points`(`refNode`);"
+				"CREATE INDEX `index_Point_refDAG` ON `Points`(`refDAG`);"
+				"CREATE INDEX `index_Point_region2D` ON `Points` (`xCoord` ASC, `yCoord` ASC);"
+
+				"CREATE TABLE `Edges`"
+				"("
+					"`idEdge`		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+					"`source`		INTEGER NOT NULL,"
+					"`target`		INTEGER NOT NULL,"
+					"`weight`		INTEGER DEFAULT '1' NOT NULL,"
+					"`refDAG`		INTEGER NOT NULL,"
+					"FOREIGN KEY(`source`) REFERENCES `Nodes`(`idNode`) ON DELETE CASCADE,"
+					"FOREIGN KEY(`target`) REFERENCES `Nodes`(`idNode`) ON DELETE CASCADE,"
+					"FOREIGN KEY(`refDAG`) REFERENCES `DAGs`(`idDAG`) ON DELETE CASCADE"
+				");"
+
+				"CREATE INDEX `index_Edges_source` ON `Edges`(`source`);"
+				"CREATE INDEX `index_Edges_target` ON `Edges`(`target`);"
+				"CREATE INDEX `index_Edges_refDAG` ON `Edges`(`refDAG`);"
+	
+				"INSERT INTO `GraphClass` ( `graphClassName` ) VALUES ( 'ShockGraph' );";
+
 	bool b = true;
 	
-	for (int i = 0; i<6; ++i)
+	if (!query(script))
 	{
-		if (!query(qry[i]))
-			b &= false;
+		QFile::remove(dbPath+QDir::separator()+getName());
+		b = false;
 	}
 
-	if (!b)
-	{
-		QFile::remove(dbpath);
-		exit(0);
-	}
 	return b;
 }
 
-unsigned int DatabaseManager::getLastID() const
+unsigned int DatabaseManager::getLastID() const throw(DBException)
 {
 	QSqlQuery query(*database);
 	QString sql = "SELECT last_insert_rowid()";
@@ -188,6 +285,9 @@ QString DatabaseManager::capitalize(QString str) const
 *                            Retrievers                              *
  ********************************************************************/
 
+//                                                                                      list<int> DatabaseManager::getAllidDAGs() const{}
+//																						QString DatabaseManager::getDAGType(const unsigned int idDAG) const{}
+
 /* *******************************************************************
 *                             Fillers                                *
  ********************************************************************/
@@ -202,7 +302,7 @@ DatabaseManager::~DatabaseManager()
 	database->close();
 	delete database;
 	database = NULL;
-	QSqlDatabase::removeDatabase("ShapeLearner.shape");
+	QSqlDatabase::removeDatabase(getName());
 }
 
 /* *******************************************************************
@@ -211,9 +311,9 @@ DatabaseManager::~DatabaseManager()
 
 DatabaseManager* DatabaseManager::s_inst = NULL;
 
-DatabaseManager& DatabaseManager::getInstance(QString path, QString user, QString pass){
+DatabaseManager& DatabaseManager::getInstance(QString dbName, QString dbPath, QString user, QString pass, QString hostname){
 	if( s_inst == NULL )
-		s_inst = new DatabaseManager(path,user,pass);
+		s_inst = new DatabaseManager(dbName, dbPath, user, pass, hostname);
 	return (*s_inst);
 }
 
