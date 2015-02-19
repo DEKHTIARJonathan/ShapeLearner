@@ -25,25 +25,25 @@ using namespace std;
 
 class DBException : public std::exception
 {
-
 	public:
 		// Constructor
-		DBException( const QString & procedure, const QString & msgError );
+		DBException(const QString &procedure, const QString &msgError ) throw();
 
 		// Getter
-		const QString &	getProcedure() const;
-		const QString &	getMsgError() const;
+		const QString &	getProcedure() const throw();
+		const QString &	getMsgError() const throw();
 
 		// Implementation
-		const char*		what() const throw();
+		virtual const char*	what() const throw();
 
 		// Destructor
-		~DBException() throw();
+		virtual ~DBException() throw();
 
 	private:
 		// Member
 		QString			m_procedure;
 		QString			m_msgError;
+		string			m_what;
 
 };
 

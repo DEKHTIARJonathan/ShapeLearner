@@ -23,7 +23,7 @@ using namespace std;
  * \author DEKHTIAR Jonathan
  */
 
-class DBException;
+class DBException; //Forward Declaration of the class contained in dbexception.h
 
 class DatabaseManager
 {
@@ -35,7 +35,8 @@ class DatabaseManager
 		/*!
 		*  \brief Renvoie le path du fichier SQLite de la base de donnée
 		*/
-		const QString getpath() const;
+		const QString getPath() const;
+		const QString getName() const;
 
 		/* ****************** Setters ********************* */
 
@@ -53,7 +54,7 @@ class DatabaseManager
 		*
 		*  \param idDAG : id du DAG
 		*/
-		QString getDAGType(const unsigned int idDAG); // Renvoie le type d'une DAG
+		QString getDAGType(const unsigned int idDAG) const; // Renvoie le type d'une DAG
 
 		/* **************** Deleters *********************** */
 
@@ -79,6 +80,8 @@ class DatabaseManager
 	
 
 		/* ***************  Singleton *********************/
+		
+
 		/*!
 		*  \brief Méthode static renvoyant une référence sur le singleton DatabaseManager
 		*
@@ -88,7 +91,7 @@ class DatabaseManager
 		*  \param user : utilisateur de la base de données
 		*  \param pass : mot de passe de la base de données
 		*/
-		static DatabaseManager&	getInstance(QString path = QDir::currentPath() +"/temp.shape", QString user = "", QString pass = "");
+		static DatabaseManager&	getInstance(QString dbName = "temp.shape", QString dbPath = QDir::currentPath(), QString user = "", QString pass = "", QString hostname = "localhost");
 
 		/*!
 		*  \brief Méthode static détruisant le singleton
@@ -100,7 +103,7 @@ class DatabaseManager
 		/* ****************** Attributs ********************/
 
 		QSqlDatabase *database;
-		QString dbpath;
+		QString dbPath;
 
 		/* **************** DB Requests ********************/
 		/*!
@@ -112,12 +115,12 @@ class DatabaseManager
 		*  \brief Éxécute une query passée en argument, renvoie un bool sur la réussite de l'opération
 		*  \param query : la query que l'on veut éxécuter
 		*/
-		bool query(const QString& query) const; // Execute une query en SQL
+		bool query(const QString& query) const throw(DBException); // Execute une query en SQL
 
 		/*!
 		*  \brief Renvoie le dernier ID inséré dans la table Node.
 		*/
-		unsigned int getLastID() const; // Retourne le rowid du de la derniere requete d'insertion effectuée.
+		unsigned int getLastID() const throw(DBException); // Retourne le rowid du de la derniere requete d'insertion effectuée.
 
 		/* ******************** Escaper ********************/
 		/*!
@@ -165,12 +168,13 @@ class DatabaseManager
 		*  \brief Constructeur
 		*
 		*  Constructeur de la classe DatabaseManager, sa déclaration en privé empêche toute instanciation depuis l'extérieur.
-		*
-		*  \param path : chemin du fichier de la base SQLite
+		*  
+		*  \param dbName : nom de la BDD.
+		*  \param dbPath : chemin du fichier de la base SQLite
 		*  \param user : utilisateur de la base de données
 		*  \param pass : mot de passe de la base de données
 		*/
-		DatabaseManager(const QString &path, const QString &user, const QString &pass) throw(DBException);	// Interdit l'instanciation directe
+		DatabaseManager(const QString &dbName, const QString &dbPath, const QString &user, const QString &pass, const QString &hostname) throw(DBException);	// Interdit l'instanciation directe
 
 		/*!
 		*  \brief Constructeur de recopie

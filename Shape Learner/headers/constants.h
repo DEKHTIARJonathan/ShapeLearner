@@ -24,9 +24,10 @@ namespace constants{
 
 	// Constantes sur les données des Notes
 
- 	extern const unsigned int		SIZE_MAX_TYPE_DAG;
+	extern const unsigned int		SIZE_MAX_TYPE_DAG;
 	extern const unsigned int		SIZE_MAX_CLASS_NAME;
 	extern const unsigned int		SIZE_MAX_GRAPH_NAME;
+	extern const unsigned int		SIZE_MAX_OBJ_NAME;
 	extern const unsigned int		SIZE_MAX_PATH;
 
 }

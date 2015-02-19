@@ -23,8 +23,27 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	QString dbName;
+	QTextStream qtin(stdin); 
 
-	DatabaseManager& db = DatabaseManager::getInstance();
+	cout << "Entrez le nom de votre bdd: ";
+	qtin >> dbName;
+	
+	try {
+		DatabaseManager& db = DatabaseManager::getInstance(dbName);
+		
+	}
+	catch (const std::exception &e ) 
+	{ 
+		cerr << e.what(); 
+		system ("PAUSE");
+		return EXIT_FAILURE;
+	}
+	
+	QString dbPath = QDir::currentPath() + "/" + dbName;
+	
+	
+	system ("PAUSE");
 	
 	return EXIT_SUCCESS;
 }
