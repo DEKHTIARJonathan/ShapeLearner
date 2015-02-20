@@ -10,17 +10,17 @@
 **
 *************************************************************************/
 
-#ifndef _ALL_HEADERS_
-#define _ALL_HEADERS_
-
-#pragma warning( disable : 4290 )
-
 /**
  * \file allHeaders.h
  * \brief Fichier contenant tous les includes à réaliser de manière à simplifier les inclusions et éviter les omissions.
  * \version	1.0
  * \author DEKHTIAR Jonathan
  */
+
+#ifndef _ALL_HEADERS_
+#define _ALL_HEADERS_
+
+#pragma warning( disable : 4290 )
 
 #include <iostream>
 #include <cstdlib>

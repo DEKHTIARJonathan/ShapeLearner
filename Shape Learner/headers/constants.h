@@ -10,15 +10,15 @@
 **
 *************************************************************************/
 
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
-
 /**
  * \file constants.h
  * \brief Ces constantes sont essentiellement des restrictictions de taille de QString nécessaire à l'utilisation de SQLite
  * \version	1.0
  * \author Jonathan Dekhtiar
  */
+
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 namespace constants{
 
