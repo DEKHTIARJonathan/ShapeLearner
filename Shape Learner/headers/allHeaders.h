@@ -11,11 +11,11 @@
 *************************************************************************/
 
 /**
- * \file allHeaders.h
- * \brief Fichier contenant tous les includes à réaliser de manière à simplifier les inclusions et éviter les omissions.
- * \version	1.0
- * \author DEKHTIAR Jonathan
- */
+*	\file allHeaders.h
+*	\brief Fichier contenant tous les includes à réaliser de manière à simplifier les inclusions et éviter les omissions.
+*	\version 1.0
+*	\author DEKHTIAR Jonathan
+*/
 
 #ifndef _ALL_HEADERS_
 #define _ALL_HEADERS_
@@ -40,5 +40,6 @@
 #include "dbManager.h"
 #include "dbexception.h"
 #include "constants.h"
+#include "graphFactory.h"
 
 #endif //_ALL_HEADERS_

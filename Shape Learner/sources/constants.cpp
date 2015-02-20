@@ -11,11 +11,11 @@
 *************************************************************************/
 
 /** 
- * \file constants.cpp
- * \brief Ces constantes sont essentiellement des restrictictions de taille de QString nécessaire à l'utilisation de SQLite
- * \version	1.0
- * \author Jonathan Dekhtiar
- */
+*	\file constants.cpp
+*	\brief Ces constantes sont essentiellement des restrictictions de taille de QString nécessaire à l'utilisation de SQLite
+*	\version 1.0
+*	\author Jonathan Dekhtiar
+*/
 
 #include "allHeaders.h"
 

@@ -11,11 +11,11 @@
 *************************************************************************/
 
 /**
- * \file dbexception.cpp 
- * \brief Classe d'Exception pour l'interface DatabaseManager
- * \version	1.0
- * \author DEKHTIAR Jonathan
- */
+*	\file dbexception.cpp 
+*	\brief Classe d'Exception pour l'interface DatabaseManager
+*	\version 1.0
+*	\author DEKHTIAR Jonathan
+*/
 
 #include "allHeaders.h"
 using namespace std;

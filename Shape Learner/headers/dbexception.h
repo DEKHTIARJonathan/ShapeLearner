@@ -11,11 +11,11 @@
 *************************************************************************/
 
 /**
- * \file dbexception.h
- * \brief Classe d'Exception pour l'interface DatabaseManager
- * \version	1.0
- * \author DEKHTIAR Jonathan
- */
+*	\file dbexception.h
+*	\brief Classe d'Exception pour l'interface DatabaseManager
+*	\version 1.0
+*	\author DEKHTIAR Jonathan
+*/
 
 #ifndef DBEXCEPTION_H
 #define DBEXCEPTION_H
