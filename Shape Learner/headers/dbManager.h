@@ -11,11 +11,11 @@
 *************************************************************************/
 
 /**
- * \file dbManager.h
- * \brief Interface entre le logiciel et la base de données. Elle est la seule à réaliser des accès à la BDD
- * \version	1.0
- * \author DEKHTIAR Jonathan
- */
+*	\file dbManager.h
+*	\brief Interface entre le logiciel et la base de données. Elle est la seule à réaliser des accès à la BDD
+*	\version 1.0
+*	\author DEKHTIAR Jonathan
+*/
 
 #ifndef DatabaseManager_H
 #define DatabaseManager_H

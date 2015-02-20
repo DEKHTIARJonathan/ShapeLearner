@@ -11,11 +11,11 @@
 *************************************************************************/
 
 /**
- * \file main.cpp
- * \brief Fichier contenant la fonction centrale : main()
- * \version	1.0
- * \author DEKHTIAR Jonathan
- */
+*	\file main.cpp
+*	\brief Fichier contenant la fonction centrale : main()
+*	\version 1.0
+*	\author DEKHTIAR Jonathan
+*/
 
 #include "allHeaders.h"
 using namespace std;

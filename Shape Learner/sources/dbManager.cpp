@@ -11,11 +11,11 @@
 *************************************************************************/
 
 /**
- * \file dbManager.cpp
- * \brief Interface entre le logiciel et la base de données. Elle est la seule à réaliser des accès à la BDD
- * \version	1.0
- * \author DEKHTIAR Jonathan
- */
+*	\file dbManager.cpp
+*	\brief Interface entre le logiciel et la base de données. Elle est la seule à réaliser des accès à la BDD
+*	\version 1.0
+*	\author DEKHTIAR Jonathan
+*/
 
 #include "allHeaders.h"
 using namespace std;
