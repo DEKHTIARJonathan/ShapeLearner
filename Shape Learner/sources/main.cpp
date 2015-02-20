@@ -10,15 +10,15 @@
 **
 *************************************************************************/
 
-#include "allHeaders.h"
-using namespace std;
-
 /**
  * \file main.cpp
  * \brief Fichier contenant la fonction centrale : main()
  * \version	1.0
  * \author DEKHTIAR Jonathan
  */
+
+#include "allHeaders.h"
+using namespace std;
 
 
 int main(int argc, char* argv[])

@@ -10,15 +10,16 @@
 **
 *************************************************************************/
 
-#include "allHeaders.h"
-using namespace std;
-
 /**
  * \file dbManager.cpp
  * \brief Interface entre le logiciel et la base de données. Elle est la seule à réaliser des accès à la BDD
  * \version	1.0
  * \author DEKHTIAR Jonathan
  */
+
+#include "allHeaders.h"
+using namespace std;
+
 
 
 /* *******************************************************************
@@ -138,14 +139,15 @@ bool DatabaseManager::query(const QString &query) const throw(DBException)
 	return true;
 }
 
-
 bool DatabaseManager::initDB()
 {
 	QString script;
 	
 	script =	"CREATE TABLE `GraphClass`"
 				"("
-					"`graphClassName`	VARCHAR("+QString::number(constants::SIZE_MAX_GRAPH_NAME)+") NOT NULL UNIQUE PRIMARY KEY"
+					"`graphClassName`	VARCHAR("+QString::number(constants::SIZE_MAX_GRAPH_NAME)+") NOT NULL UNIQUE PRIMARY KEY,"
+					"`directGraph`		BOOLEAN DEFAULT '0',"
+					"`acyclicGraph`		BOOLEAN DEFAULT '0'"
 				");"
 	
 				"CREATE TABLE `ObjectClass`"
@@ -153,9 +155,9 @@ bool DatabaseManager::initDB()
 					"`objectClassName`	VARCHAR("+QString::number(constants::SIZE_MAX_CLASS_NAME)+") NOT NULL UNIQUE PRIMARY KEY"
 				");"
 
-				"CREATE TABLE `DAGs`"
+				"CREATE TABLE `Graphs`"
 				"("
-					"`idDAG` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+					"`idGraph` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
 					"`graphClass`	VARCHAR("+QString::number(constants::SIZE_MAX_GRAPH_NAME)+") NOT NULL,"
 					"`objectClass`	VARCHAR("+QString::number(constants::SIZE_MAX_CLASS_NAME)+") NOT NULL,"
 					"`objectName`	VARCHAR("+QString::number(constants::SIZE_MAX_OBJ_NAME)+") NOT NULL UNIQUE,"
@@ -164,27 +166,24 @@ bool DatabaseManager::initDB()
 					"FOREIGN KEY(`objectClass`) REFERENCES `ObjectClass`(`objectClassName`) ON DELETE CASCADE"
 				");"
 
-				"CREATE INDEX `index_DAGs_objectName` ON `DAGs`(`objectName`);"
-				"CREATE INDEX `index_DAGs_objectClass` ON `DAGs`(`objectClass`);"
-				"CREATE INDEX `index_DAGs_graphClass` ON `DAGs`(`graphClass`);"
+				"CREATE INDEX `index_Graphs_objectName` ON `Graphs`(`objectName`);"
+				"CREATE INDEX `index_Graphs_objectClass` ON `Graphs`(`objectClass`);"
+				"CREATE INDEX `index_Graphs_graphClass` ON `Graphs`(`graphClass`);"
 
 				"CREATE TABLE `Nodes`"
 				"("
 					"`idNode`		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
-					"`childCount`	INTEGER DEFAULT '1' NOT NULL,"
-					"`parentCount`	INTEGER DEFAULT '1' NOT NULL,"
 					"`index`		INTEGER DEFAULT '1' NOT NULL,"
 					"`level`		INTEGER DEFAULT '1' NOT NULL,"
 					"`mass`			INTEGER DEFAULT '1' NOT NULL,"
 					"`type`			INTEGER DEFAULT '1' NOT NULL,"
 					"`pointCount`	INTEGER DEFAULT '1' NOT NULL,"
 					"`label`		INTEGER DEFAULT '1' NOT NULL,"
-					"`refDAG`		INTEGER NOT NULL,"
-					"FOREIGN KEY(`refDAG`) REFERENCES `DAGs`(`idDAG`) ON DELETE CASCADE"
+					"`refGraph`		INTEGER NOT NULL,"
+					"FOREIGN KEY(`refGraph`) REFERENCES `Graphs`(`idGraph`) ON DELETE CASCADE"
 				");"
 
-				"CREATE INDEX `index_Node_refDAG` ON `Nodes`(`refDAG`);"
-				"CREATE INDEX `index_Node_parentCount` ON `Nodes`(`parentCount`);"
+				"CREATE INDEX `index_Node_refGraph` ON `Nodes`(`refGraph`);"
 
 				"CREATE TABLE `Points`"
 				"("
@@ -193,13 +192,13 @@ bool DatabaseManager::initDB()
 					"`yCoord`		REAL DEFAULT '1' NOT NULL,"
 					"`radius`		REAL DEFAULT '1' NOT NULL,"
 					"`refNode`		INTEGER NOT NULL,"
-					"`refDAG`		INTEGER NOT NULL,"
+					"`refGraph`		INTEGER NOT NULL,"
 					"FOREIGN KEY(`refNode`) REFERENCES `Nodes`(`idNode`) ON DELETE CASCADE,"
-					"FOREIGN KEY(`refDAG`) REFERENCES `DAGs`(`idDAG`) ON DELETE CASCADE"
+					"FOREIGN KEY(`refGraph`) REFERENCES `Graphs`(`idGraph`) ON DELETE CASCADE"
 				");"
 
 				"CREATE INDEX `index_Point_refNode` ON `Points`(`refNode`);"
-				"CREATE INDEX `index_Point_refDAG` ON `Points`(`refDAG`);"
+				"CREATE INDEX `index_Point_refGraph` ON `Points`(`refGraph`);"
 				"CREATE INDEX `index_Point_region2D` ON `Points` (`xCoord` ASC, `yCoord` ASC);"
 
 				"CREATE TABLE `Edges`"
@@ -208,15 +207,15 @@ bool DatabaseManager::initDB()
 					"`source`		INTEGER NOT NULL,"
 					"`target`		INTEGER NOT NULL,"
 					"`weight`		INTEGER DEFAULT '1' NOT NULL,"
-					"`refDAG`		INTEGER NOT NULL,"
+					"`refGraph`		INTEGER NOT NULL,"
 					"FOREIGN KEY(`source`) REFERENCES `Nodes`(`idNode`) ON DELETE CASCADE,"
 					"FOREIGN KEY(`target`) REFERENCES `Nodes`(`idNode`) ON DELETE CASCADE,"
-					"FOREIGN KEY(`refDAG`) REFERENCES `DAGs`(`idDAG`) ON DELETE CASCADE"
+					"FOREIGN KEY(`refGraph`) REFERENCES `Graphs`(`idGraph`) ON DELETE CASCADE"
 				");"
 
 				"CREATE INDEX `index_Edges_source` ON `Edges`(`source`);"
 				"CREATE INDEX `index_Edges_target` ON `Edges`(`target`);"
-				"CREATE INDEX `index_Edges_refDAG` ON `Edges`(`refDAG`);"
+				"CREATE INDEX `index_Edges_refGraph` ON `Edges`(`refGraph`);"
 	
 				"INSERT INTO `GraphClass` ( `graphClassName` ) VALUES ( 'ShockGraph' );";
 
@@ -248,12 +247,7 @@ unsigned int DatabaseManager::getLastID() const throw(DBException)
 *                              Deleters                              *
  ********************************************************************/
 
-
-bool DatabaseManager::flushDB () const
-{
-	//return deleteNodes() && deleteDAGs();
-	return true;
-}
+// bool DatabaseManager::flushDB () const {return true;}
 
 /* *******************************************************************
 *                     Escapers / Capitalizers                        *
@@ -284,9 +278,6 @@ QString DatabaseManager::capitalize(QString str) const
 /* *******************************************************************
 *                            Retrievers                              *
  ********************************************************************/
-
-//                                                                                      list<int> DatabaseManager::getAllidDAGs() const{}
-//																						QString DatabaseManager::getDAGType(const unsigned int idDAG) const{}
 
 /* *******************************************************************
 *                             Fillers                                *

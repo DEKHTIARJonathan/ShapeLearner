@@ -34,3 +34,5 @@
 *.ipch
 *.tlog
 *.zargo~
+*~
+*.opensdf

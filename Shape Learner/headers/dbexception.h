@@ -1,4 +1,4 @@
-/* ************* Begin file dbexception.cpp ***************************************/
+/* ************* Begin file dbexception.h ***************************************/
 /*
 ** 2015 February 18
 **
@@ -10,18 +10,18 @@
 **
 *************************************************************************/
 
-#ifndef DBEXCEPTION_H
-#define DBEXCEPTION_H
-
-#include "allHeaders.h"
-using namespace std;
-
 /**
  * \file dbexception.h
  * \brief Classe d'Exception pour l'interface DatabaseManager
  * \version	1.0
  * \author DEKHTIAR Jonathan
  */
+
+#ifndef DBEXCEPTION_H
+#define DBEXCEPTION_H
+
+#include "allHeaders.h"
+using namespace std;
 
 class DBException : public std::exception
 {
