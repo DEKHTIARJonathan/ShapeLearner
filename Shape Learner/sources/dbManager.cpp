@@ -302,16 +302,16 @@ DatabaseManager::~DatabaseManager()
 
 DatabaseManager* DatabaseManager::s_inst = NULL;
 
-DatabaseManager& DatabaseManager::getInstance(QString dbName, QString dbPath, QString user, QString pass, QString hostname){
-	if( s_inst == NULL )
-		s_inst = new DatabaseManager(dbName, dbPath, user, pass, hostname);
-	return (*s_inst);
+DatabaseManager& DatabaseManager::Key::getInstance(QString &dbName, QString &dbPath, QString &user, QString &pass, QString &hostname){
+	if( DatabaseManager::s_inst == NULL )
+		DatabaseManager::s_inst =  new DatabaseManager(dbName, dbPath, user, pass, hostname);
+	return (*DatabaseManager::s_inst);
 }
 
-void DatabaseManager::destroy()
+void DatabaseManager::Key::destroy()
 {
-	if( s_inst != NULL ){
-		delete s_inst;
-		s_inst = NULL;
+	if( DatabaseManager::s_inst != NULL ){
+		delete DatabaseManager::s_inst;
+		DatabaseManager::s_inst = NULL;
 	}
 }

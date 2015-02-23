@@ -14,7 +14,8 @@
     <ClCompile Include="sources\constants.cpp" />
     <ClCompile Include="sources\dbexception.cpp" />
     <ClCompile Include="sources\dbManager.cpp" />
-    <ClCompile Include="sources\graphFactory.cpp" />
+    <ClCompile Include="sources\graphManager.cpp" />
+    <ClCompile Include="sources\graphManagerException.cpp" />
     <ClCompile Include="sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -22,7 +23,8 @@
     <ClInclude Include="headers\constants.h" />
     <ClInclude Include="headers\dbexception.h" />
     <ClInclude Include="headers\dbManager.h" />
-    <ClInclude Include="headers\graphFactory.h" />
+    <ClInclude Include="headers\graphManager.h" />
+    <ClInclude Include="headers\graphManagerException.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}</ProjectGuid>

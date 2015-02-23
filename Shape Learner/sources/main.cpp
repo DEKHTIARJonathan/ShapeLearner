@@ -23,11 +23,20 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	QString dbName;
-	QTextStream qtin(stdin); 
+	
+	try{
+		GraphManager::setDbName();
+	}
+	catch (const std::exception &e ) 
+	{ 
+		cerr << e.what(); 
+		system ("PAUSE");
+		return EXIT_FAILURE;
+	}
 
-	cout << "Entrez le nom de votre bdd: ";
-	qtin >> dbName;
+	//GraphManager& software = GraphManager::openManager();
+
+	/*
 	
 	try {
 		DatabaseManager& db = DatabaseManager::getInstance(dbName);
@@ -42,6 +51,7 @@ int main(int argc, char* argv[])
 	
 	QString dbPath = QDir::currentPath() + "/" + dbName;
 	
+	*/
 	
 	system ("PAUSE");
 	

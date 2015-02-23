@@ -40,6 +40,7 @@
 #include "dbManager.h"
 #include "dbexception.h"
 #include "constants.h"
-#include "graphFactory.h"
+#include "graphManager.h"
+#include "graphManagerException.h"
 
 #endif //_ALL_HEADERS_
