@@ -29,6 +29,9 @@
 
 #Junk & DB
 *.log
+*.1.tlog
+*.*.1.tlog
+*.tlog
 *.shape
 *.idb
 *.ipch

@@ -24,11 +24,44 @@
 using namespace std;
 
 class DBException; //Forward Declaration of the class contained in dbexception.h
+class GraphManager; //Forward Declaration of the class contained in graphManager.h
 
 class DatabaseManager
 {
-
 	public:
+
+		/* **************************************** Access Restricted to Graph Manager *************************** */
+		/*!
+		*	\brief Sous classe permettant l'accès à DatabaseManager uniquement à la classe GraphManager.
+		*/
+		class Key{
+			friend class GraphManager;
+			private :
+				
+				/*!
+				*	\brief Constructeur de la sous classe DatabaseManager::Key rendu inutilisable. On cherche à empecher l'instanciation de cet objet.
+				*/
+				Key(); //On empèche l'instanciation de cet objet qui n'est pas voué à être instancié.
+
+				// Dans C++11
+				// Key() = delete; // Pour empecher la génération du constructeur.
+
+				
+				/*!
+				*	\brief Méthode static renvoyant une référence sur le singleton DatabaseManager (la classe mère).
+				*	\param dbName : Nom de la Base de Données.
+				*	\param dbPath : Chemin du dossier contenant la base SQLite
+				*	\param user : Utilisateur de la base de données
+				*	\param pass : Mot de passe de la base de données
+				*	\param hostname : Adresse du serveur de BDD (localhost d'office pour SQLite).
+				*/
+				static DatabaseManager& getInstance(QString &dbName, QString &dbPath, QString &user, QString &pass , QString &hostname);
+
+				/*!
+				*  \brief Méthode static détruisant le singleton
+				*/
+				static void	destroy();
+		};  
 
 		/* **************** Getters *********************** */
 
@@ -197,22 +230,8 @@ class DatabaseManager
 	
 
 		/* ***************  Singleton *********************/
-		
 
-		/*!
-		*	\brief Méthode static renvoyant une référence sur le singleton DatabaseManager.
-		*	\param dbName : Nom de la Base de Données.
-		*	\param dbPath : Chemin du dossier contenant la base SQLite
-		*	\param user : Utilisateur de la base de données
-		*	\param pass : Mot de passe de la base de données
-		*	\param hostname : Adresse du serveur de BDD (localhost d'office pour SQLite).
-		*/
-		static DatabaseManager&	getInstance(QString dbName = "temp.shape", QString dbPath = QDir::currentPath(), QString user = "", QString pass = "", QString hostname = "localhost");
 
-		/*!
-		*  \brief Méthode static détruisant le singleton
-		*/
-		static void	destroy();
 
 	private:
 
@@ -262,6 +281,8 @@ class DatabaseManager
 
 
 		/* **************  Singleton *********************/
+
+
 		/*!
 		*	\brief Constructeur de la classe DatabaseManager, sa déclaration en privé empêche toute instanciation depuis l'extérieur.
 		*	\param dbName : Nom de la Base de Données.
