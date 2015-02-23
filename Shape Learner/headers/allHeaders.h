@@ -36,6 +36,7 @@
 #include <QtSql\qsqlerror.h>
 #include <QtCore/qvariant.h>
 #include <QtCore\qtextstream.h>
+#include <ppl.h>
 
 #include "dbManager.h"
 #include "dbexception.h"

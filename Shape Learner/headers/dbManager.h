@@ -42,6 +42,11 @@ class DatabaseManager
 				*	\brief Constructeur de la sous classe DatabaseManager::Key rendu inutilisable. On cherche à empecher l'instanciation de cet objet.
 				*/
 				Key(); //On empèche l'instanciation de cet objet qui n'est pas voué à être instancié.
+				
+				/*!
+				*	\brief Destructeur de la sous classe DatabaseManager::Key rendu inutilisable. On cherche à empecher l'instanciation de cet objet.
+				*/
+				~Key(); //On empèche la destruction de cet objet qui n'est pas voué à être instancié.
 
 				// Dans C++11
 				// Key() = delete; // Pour empecher la génération du constructeur.
