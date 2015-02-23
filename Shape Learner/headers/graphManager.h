@@ -81,12 +81,12 @@ class GraphManager
 		/*!
 		*	\brief Constructeur de recopie => La recopie est interdite
 		*/
-		GraphManager(const GraphManager& nm);
+		GraphManager(const GraphManager& gm);
 
 		/*!
 		*  \brief Opérateur =  =>> La recopie est interdite
 		*/
-		GraphManager& operator=(const GraphManager& n);
+		GraphManager& operator=(const GraphManager& gm);
 
 		/*!
 		*  \brief La destruction est interdite
