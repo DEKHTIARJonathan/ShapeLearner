@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\CmdLine.cpp" />
+    <ClCompile Include="sources\CmdLineException.cpp" />
     <ClCompile Include="sources\constants.cpp" />
     <ClCompile Include="sources\dbexception.cpp" />
     <ClCompile Include="sources\dbManager.cpp" />
@@ -20,14 +22,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\allHeaders.h" />
+    <ClInclude Include="headers\CmdLine.h" />
+    <ClInclude Include="headers\CmdLineException.h" />
     <ClInclude Include="headers\constants.h" />
     <ClInclude Include="headers\dbexception.h" />
     <ClInclude Include="headers\dbManager.h" />
     <ClInclude Include="headers\graphManager.h" />
     <ClInclude Include="headers\graphManagerException.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}</ProjectGuid>

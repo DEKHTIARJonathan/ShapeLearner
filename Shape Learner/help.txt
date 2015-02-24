@@ -1,0 +1,279 @@
+
+                             Shape Matcher 6.0 Beta Help
+
+
+Contents
+--------
+
+0. Installation
+
+1. Creating a Database of DAGs
+
+2. Viewing the Database Contents
+
+3. Matching DAGs
+
+4. Need further help or have comments?
+
+5. Clustering using NCuts and MATLAB
+
+6. New Features in version 6.0
+
+7. Frequently Asked Questions
+
+_______________________________________________________________________
+
+0. Installation
+
+  If you are running under Windows (any version) and don't have Visual C++ 2008
+installed, you'll need to install the "Microsoft Visual C++ 2008 Redistributable Package".
+Normally, the installer program would do that but since I haven't included such a installer, 
+you need to do it yourself. You can get this package from:
+
+http://www.microsoft.com/downloads/details.aspx?FamilyID=9b2da534-3e03-4391-8a4d-074b9f2bc1bf&displaylang=en
+
+1. Creating a Database of DAGs
+
+  A database of DAGs (only shockgraphs so far) is created from a set of 
+.ppm images. DAGMatcher will process all the images in a directory and 
+will extract from the image file name and path the corresponding object 
+name and view number.
+
+The input directory is expected to be composed by one subdirectory per 
+object model. Each of these directories must contain all the views of 
+the object. E.g.
+
++ ImgDir
+	+ Dolphin
+		view001.ppm
+		view002.ppm
+		...
+	+ Shark
+		view001.ppm
+		view002.ppm
+		...
+
+  As it can be seen in the example, the name of an object's view must 
+be compose by a prefix and the view number. 
+
+To create a database from all the images in /ImgDir, call: 
+
+   sm -c objs.db /ImgDir
+
+  Later, new images can be added by the 'add' command in a similar 
+fashion. For example, to add all the views of a new object, call: 
+
+   sm -a objs.db /ImgDir/Monkey
+
+To add two new views to an object, type:
+
+   sm -a objs.db /ImgDir/Shark/view020.ppm /ImgDir/Shark/view021.ppm
+_______________________________________________________________________
+
+2. Viewing the Database Contents
+
+  A list of all the objects in the database can be obtained with the 
+command line option '-l'.
+
+ This list provides the object ID that is required as a parameter for 
+the '-match' option and some other commands. For example, you can see 
+and play around with a DAG by calling: 
+
+   sm -v objs.db obj-id1 obj-id2 ...
+
+  This command will open a window containing the requested DAG (one at 
+a time). Right-click on one node, and select any of the several options 
+that will be displayed. In particular, the 'add node' and 'delete node' 
+options will update all the nodes' TSVs, and the set of new values will 
+be shown in your xterm window.
+
+  Once you are done, click 'Done' at the window's top right. A new 
+window will be opened with the skeleton of the object (in this 
+implementation, you'll see the skeleton repeated twice, for some 
+technical reasons or laziness if you prefer.)
+_______________________________________________________________________
+
+3. Matching DAGs
+
+DAGMatcher allows you to match a set of DAGs against a subset of the 
+database. The matching results will display the DAGs of the query and 
+the matched views along with their skeletons and matching lines between 
+these skeletons (press any key when seen the skeleton window to display 
+the matching lines.)
+
+The simplest matching case is to compare one DAG with an entire 
+database. E.g.
+
+   sm -m 15 objs.db
+
+where 15 is the DAG id in the database (use '-l' to look up id's). 
+It is also possible to use all the models in a database as matching 
+queries. E.g.
+
+   sm -m fish.db animals.db
+
+Optionally, a subset of the query database can be defined for matching.
+
+   sm -m fish.db -from 500 -to 1200 animals.db
+   
+A similarity (MATLAB) matrix for all objects can be created by
+
+   sm -matrix simmat.m models.db
+
+this may be slow if the database is big, since indexing is not used. Options 
+-to and -from can be used to fill in only a submatrix.
+
+   sm -matrix simmat.m -from 15 -to 50 models.db
+   
+where the "missing" entries of the matrix are set to zero (see below for and
+example for clustering based on the similarity matrix using NCuts for MATLAB).
+
+3.1 Matching parameters
+
+You can control a number of things in the matching process. For example, 
+it is possible to avoid being ask about whether to display the results 
+or not (-showResults 0). This is useful when computing large experiments. 
+Other parameters are -saveResults, -stats, -matchTau, idxTau, etc.
+
+3.1. Results
+
+  The results for indexing and matching processes are saved in a file 
+named resultsNNN.txt. Where NNN is a correlative number generated 
+each time a matching is requested.
+
+_______________________________________________________________________
+
+4. Need further help or have comments?
+
+Do not hesitate to email me at dmac@cs.toronto.edu
+
+_______________________________________________________________________
+
+5. Example for clustering based on the similarity matrix returned by dm,
+   using NCuts (i.e., graph-theoretical min-cut algorithm) for MATLAB.
+   
+The MATLAB NCuts code can be downloaded from:
+
+    http://www.cis.upenn.edu/~jshi/software/ 
+
+	
+Then, the matrix 'm' returned in the file 'simmat.m' by 
+
+	sm -matrix simmat.m models.db
+	
+can be used directly for clustering in MATLAB.
+
+In MATLAB, do
+
+simmat;                  % to load matrix m
+ncutClustering(m, 5);    % to find 5 clusters
+
+
+The function ncutClustering() is an example that calls the appropriate 
+function from the NCuts code to get a nice coloured figure.
+
+function ncutClustering(W, nbCluster)
+
+% clustering graph in
+[NcutDiscrete,NcutEigenvectors,NcutEigenvalues] = ncutW(W,nbCluster);
+
+% display clustering result
+cluster_color = ['rgbmyc'];
+figure(2);clf;
+for j=1:nbCluster,
+    id = find(NcutDiscrete(:,j));
+	plot(1,id,[cluster_color(j),'s'], 'MarkerFaceColor',cluster_color(j),'MarkerSize',5); hold on;
+end
+hold off; axis ij;
+disp('This is the clustering result');
+
+_______________________________________________________________________
+
+6. New Features in version 6.0
+
+A. Escape key
+	When ShowResults=1, the matching results for each query 
+	shape and each "matched" model shape are shown in a new window. In verions 6, 
+	depending on how the window is closed, either the current query and its next matched 
+	model are shown, or the next query and its first matched model are shown. The former
+	correspons to closing the window by pressing the scape bar, while that later correpons
+	to closing the window by pressing the 'esc' key.
+
+B. XML output
+	The new "toXML" command line option prints the DAGs (eg, shock graph)
+	to an xml file. A file name must be given as a parameter to this option. If the file name
+	is the empty string (ie, ""), the name of the database is used. If the file name exists,
+	a number is added to make it unique. The additional "to" and "from" options can be used to 
+	select a range of DAGs to print. By default, all DAGs in the database are printed.
+
+		Example:
+
+		sm -toXML "" -from 5 -to 10 objects.db
+
+	will create a objects.xml file with DAGs 5 to 10.
+
+C. Visualization
+	The are many changes to the shape visualization window. Press 'h' when the focus
+	is on this window to get a list of the options printed on the terminal window. For
+	example, now pressing 'g' when visualizing two shapes (ie, after matching) shows
+	both DAGs associated with the shapes in the same window.
+
+_______________________________________________________________________
+
+7. Frequently Asked Questions
+
+A. What are the Indexed Results? I assume the Matching Results are the 
+   ones I actually want, right?
+
+	That's right, you just want the matching results. The indexing step is
+	a fast screening of the database that tries to select a small number
+	of candidates that seem to have a chance to end up with the best
+	scores at matching time. It is useful when you have really big
+	databases and want to avoid a linear search through all models. The
+	important thing to consider is that the indexing step only sees a
+	small portion of the data related to each shape, and so sometimes it
+	may make mistakes, which will ultimately end up "hiding" the true best
+	answer from the matcher. By default the indexing selects the best 200
+	candidates and passes them to the matcher. You can change this number.
+	Also by default, only the shapes with "indexing" similarity higher
+	that 0.3 are passed to the matcher (so the actual number of candidates
+	may be smaller than 200... even zero). So, if you have more than 200
+	shapes in your database and you find that the matching results do not
+	include a shape that you think should be included, check how that
+	shape was ranked in the indexing results list. The default 20
+	candidates may be too small for large databases or for cases in which
+	there are too many similar shapes.
+
+B. For my application with SM, I would like to extract the original database to
+   save a clean copy, then delete one image from the first copy and match the
+   first copy (with the newly deleted image) to the image that was just
+   deleted.  I would then do this for each image in the database.
+   
+	There are two ways of doing this. The first, is to avoid
+	removing anything, and just do matching with the full database. Then,
+	since the shape you used as the query is in the database, it would be
+	ranked first by the matcher. If you ignore it, you know that the
+	second best match would have been the first if you had removed the
+	query from the database. So, when you analyze the marking, just need
+	to adjust the number assuming to reflect this (ie, subtract one from
+	the ranking position of each shape ranked bellow the query shape).
+	This is the easiest and fasted approach.
+
+	The other way is to actually remove each shape from the database. The
+	delete command is a bit counter intuitive. The idea is that, in order
+	to avoid accidents in which you remove something and then realized
+	that you made a mistake, instead of deleting a shape from the
+	database, I create a new one that doesn't include the deleted shapes.
+	Then, the command is
+
+	sm -delete original.db newdatabase.db ID0 ID1 ... IDN
+
+	where the ID's and the indices of the objects that you want to delete.
+	The original.db database won't be modified. Instead, a new
+	newdatabase.db will be created.
+
+	the extract command is the opposite, so it'll only copy the given IDs
+	to the new database.
+
+	To get the ID of each shape, you can run sm -l original.db to list all
+	the elements in the database.
