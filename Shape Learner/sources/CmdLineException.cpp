@@ -1,6 +1,6 @@
-/* ************* Begin file dbexception.cpp ***************************************/
-/*
-** 2015 February 18
+/* ************* Begin file CmdLineException.h ****************************
+**
+** 2015 February 24
 **
 ** In place of a legal notice, here is a blessing:
 **
@@ -11,22 +11,22 @@
 *************************************************************************/
 
 /**
-*	\file dbexception.cpp 
-*	\brief Classe d'Exception pour l'interface DatabaseManager
+*	\file CmdLineException.cpp
+*	\brief Classe d'Exception pour la classe CCmdLine
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */
-
 #include "allHeaders.h"
+//#include "CmdLineException.h"
 using namespace std;
 
 
-/* *******************************************************************
-*                             Constructor                            *
-*********************************************************************/
+/* ********************************************************************
+*                              Constructor                            *
+**********************************************************************/
 
 // Generic DBException constructor
-DBException::DBException( const QString &procedure, const QString &msgError ) throw() : std::exception()
+CCmdLineException::CCmdLineException( const QString &procedure, const QString &msgError ) throw() : std::exception()
 {
 	m_procedure	= procedure;
 	m_msgError	= msgError;
@@ -39,25 +39,25 @@ DBException::DBException( const QString &procedure, const QString &msgError ) th
 	ss << "----------------------------------------" << endl;
 
 	m_what = ss.str().data();
+
 }
 
 /* *******************************************************************
-*                              Getter                                *
+*                                Getter                              *
 *********************************************************************/
 
-const QString &	DBException::getProcedure() const throw() {	return m_procedure;	}
-const QString &	DBException::getMsgError() const throw() {	return m_msgError;	}
+const QString &	CCmdLineException::getProcedure() const throw() {return m_procedure;}
+const QString &	CCmdLineException::getMsgError() const throw() {return m_msgError;}
 
 /* *******************************************************************
-*                           Implementation                           *
-*********************************************************************/
+*                          Implementation                           *
+********************************************************************/
 
-const char* DBException::what() const throw(){
+const char* CCmdLineException::what() const throw(){
 	return m_what.c_str();
 }
 /* *******************************************************************
-*                             Destructor                             *
+*                            Destructor                              *
 *********************************************************************/
 
-DBException::~DBException() throw(){}
-
+CCmdLineException::~CCmdLineException() throw(){}

@@ -20,6 +20,8 @@
 #ifndef _ALL_HEADERS_
 #define _ALL_HEADERS_
 
+// tell the compiler to shut up
+//#pragma warning(disable:4786)
 #pragma warning( disable : 4290 )
 
 #include <iostream>
@@ -27,8 +29,10 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <map>
 #include <stdexcept>
 #include <sstream>
+#include <fstream>
 #include <QtCore\qstring.h>
 #include <QtCore\qdir.h>
 #include <QtSql\qsqldatabase.h>
@@ -37,11 +41,15 @@
 #include <QtCore/qvariant.h>
 #include <QtCore\qtextstream.h>
 #include <ppl.h>
+//#define NDEBUG // => Disable all assert() if uncommented.
+#include <assert.h> 
 
 #include "dbManager.h"
 #include "dbexception.h"
 #include "constants.h"
 #include "graphManager.h"
 #include "graphManagerException.h"
+#include "CmdLine.h"
+#include "CmdLineException.h"
 
 #endif //_ALL_HEADERS_
