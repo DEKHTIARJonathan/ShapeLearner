@@ -24,9 +24,6 @@
     <ClCompile Include="sources\dbexception.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\constants.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="sources\graphManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>

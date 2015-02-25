@@ -26,7 +26,7 @@ using namespace std;
 **                           Constructers                            *
 *********************************************************************/
 
-DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, const QString &user, const QString &pass, const QString &hostname) throw(DBException) : database(new QSqlDatabase()), dbPath(dbPath)
+DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, const QString &dbUser, const QString &dbPass, const QString &dbHost,  const QString &dbPort , const unsigned int& dbType) throw(DBException) : database(new QSqlDatabase()), dbPath(dbPath)
 {
 	/*
 	Driver availables:
@@ -44,8 +44,11 @@ DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, c
 	//set database driver to QSQLITE avec une connection ayant pour nom dbName
 	QString fullpath = dbPath+QDir::separator()+dbName;
 
-	*database = QSqlDatabase::addDatabase("QSQLITE", dbName);
-
+	//*database = QSqlDatabase::addDatabase("QSQLITE", dbName);
+	*database = QSqlDatabase::addDatabase("QPSQL");
+	*database = QSqlDatabase::addDatabase("QOCI");
+	*database = QSqlDatabase::addDatabase("QMYSQL");
+	
 	QFile file(fullpath);
 
 	bool dbIsNew = !file.exists();
@@ -53,9 +56,12 @@ DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, c
 	database->setDatabaseName(fullpath);
 
 	//can be removed
-	database->setHostName(hostname);
-	database->setUserName(user);
-	database->setPassword(pass);
+	database->setHostName(dbHost);
+	database->setDatabaseName("postgres");
+	database->setUserName(dbUser);
+	database->setPassword(dbPass);
+	//database->setPort(5432);
+	//database->port();
 
 	if(!database->open() && !database->isOpen() && !database->isValid() && !file.isOpen())
 	{
@@ -302,9 +308,9 @@ DatabaseManager::~DatabaseManager()
 
 DatabaseManager* DatabaseManager::s_inst = NULL;
 
-DatabaseManager& DatabaseManager::Key::getInstance(QString &dbName, QString &dbPath, QString &user, QString &pass, QString &hostname){
+DatabaseManager& DatabaseManager::Key::getInstance(QString const &dbName, QString const &dbPath, QString const &dbUser, QString const &dbPass , QString const &dbHost, QString const &dbPort, unsigned int const &dbType){
 	if( DatabaseManager::s_inst == NULL )
-		DatabaseManager::s_inst =  new DatabaseManager(dbName, dbPath, user, pass, hostname);
+		DatabaseManager::s_inst =  new DatabaseManager(dbName, dbPath, dbUser, dbPass, dbHost, dbPort, dbType);
 	return (*DatabaseManager::s_inst);
 }
 

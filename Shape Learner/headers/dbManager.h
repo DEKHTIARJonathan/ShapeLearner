@@ -56,11 +56,13 @@ class DatabaseManager
 				*	\brief Méthode static renvoyant une référence sur le singleton DatabaseManager (la classe mère).
 				*	\param dbName : Nom de la Base de Données.
 				*	\param dbPath : Chemin du dossier contenant la base SQLite
-				*	\param user : Utilisateur de la base de données
-				*	\param pass : Mot de passe de la base de données
-				*	\param hostname : Adresse du serveur de BDD (localhost d'office pour SQLite).
+				*	\param dbUser : Utilisateur de la base de données
+				*	\param dbPass : Mot de passe de la base de données
+				*	\param dbHost : Adresse du serveur de BDD.
+				*	\param dbPort : Port du serveur de BDD.
+				*	\param dbType : Type de base de données (voir constants.h)
 				*/
-				static DatabaseManager& getInstance(QString &dbName, QString &dbPath, QString &user, QString &pass , QString &hostname);
+				static DatabaseManager& getInstance(QString const &dbName, QString const &dbPath, QString const &dbUser, QString const &dbPass , QString const &dbHost, QString const &dbPort, unsigned int const &dbType);
 
 				/*!
 				*  \brief Méthode static détruisant le singleton
@@ -79,6 +81,11 @@ class DatabaseManager
 		/* ****************** Setters ********************* */
 
 		/* **************** DB REQUESTS ******************* */
+
+		/*!
+		*  \brief Initialise les tables de la DB et la structure complète du modèle relationnel de la BDD.
+		*/
+		bool initDB();
 
 		/* **************** Retrievers ******************** */
 
@@ -247,10 +254,6 @@ class DatabaseManager
 		static DatabaseManager *s_inst;	// Contient le singleton s'il est instancié
 
 		/* **************** DB Requests ********************/
-		/*!
-		*  \brief Initialise les tables de la DB et la structure complète du modèle relationnel de la BDD.
-		*/
-		bool initDB();
 
 		/*!
 		*  \brief Éxécute une query passée en argument, renvoie un bool sur la réussite de l'opération
@@ -292,11 +295,13 @@ class DatabaseManager
 		*	\brief Constructeur de la classe DatabaseManager, sa déclaration en privé empêche toute instanciation depuis l'extérieur.
 		*	\param dbName : Nom de la Base de Données.
 		*	\param dbPath : Chemin du dossier contenant la base SQLite
-		*	\param user : Utilisateur de la base de données
-		*	\param pass : Mot de passe de la base de données
-		*	\param hostname : Adresse du serveur de BDD (localhost d'office pour SQLite).
+		*	\param dbUser : Utilisateur de la base de données
+		*	\param dbPass : Mot de passe de la base de données
+		*	\param dbHost : Adresse du serveur de BDD.
+		*	\param dbPort : Port du serveur de BDD.
+		*	\param dbType : Type de base de données (voir constants.h)
 		*/
-		DatabaseManager(const QString &dbName, const QString &dbPath, const QString &user, const QString &pass, const QString &hostname) throw(DBException);
+		DatabaseManager(const QString &dbName, const QString &dbPath, const QString &dbUser, const QString &dbPass, const QString &dbHost, const QString &dbPort, const unsigned int& dbType) throw(DBException);
 
 		/*!
 		*	\brief Constructeur de recopie => La recopie est interdite
@@ -306,7 +311,7 @@ class DatabaseManager
 		/*!
 		*  \brief Opérateur =  =>> La recopie est interdite
 		*/
-		DatabaseManager& operator=(const DatabaseManager& n);
+		DatabaseManager& operator=(const DatabaseManager& nm);
 
 		/*!
 		*  \brief La destruction est interdite
