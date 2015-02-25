@@ -1,9 +1,11 @@
 
-                             Shape Learner 1.0 Beta Help
+                             Shape Matcher 6.0 Beta Help
 
 
 Contents
 --------
+
+0. Installation
 
 1. Creating a Database of DAGs
 
@@ -21,7 +23,38 @@ Contents
 
 _______________________________________________________________________
 
-1. Installation
+0. Installation
+
+  If you are running under Windows (any version) and don't have Visual C++ 2008
+installed, you'll need to install the "Microsoft Visual C++ 2008 Redistributable Package".
+Normally, the installer program would do that but since I haven't included such a installer, 
+you need to do it yourself. You can get this package from:
+
+http://www.microsoft.com/downloads/details.aspx?FamilyID=9b2da534-3e03-4391-8a4d-074b9f2bc1bf&displaylang=en
+
+1. Creating a Database of DAGs
+
+  A database of DAGs (only shockgraphs so far) is created from a set of 
+.ppm images. DAGMatcher will process all the images in a directory and 
+will extract from the image file name and path the corresponding object 
+name and view number.
+
+The input directory is expected to be composed by one subdirectory per 
+object model. Each of these directories must contain all the views of 
+the object. E.g.
+
++ ImgDir
+	+ Dolphin
+		view001.ppm
+		view002.ppm
+		...
+	+ Shark
+		view001.ppm
+		view002.ppm
+		...
+
+  As it can be seen in the example, the name of an object's view must 
+be compose by a prefix and the view number. 
 
 To create a database from all the images in /ImgDir, call: 
 

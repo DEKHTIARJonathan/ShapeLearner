@@ -36,13 +36,15 @@
 #include <QtCore\qstring.h>
 #include <QtCore\qdir.h>
 #include <QtSql\qsqldatabase.h>
+
+#include <QtSql\qsqldriver.h>
+#include <QtSql\qsql.h>
+
 #include <QtSql\qsqlquery.h>
 #include <QtSql\qsqlerror.h>
 #include <QtCore/qvariant.h>
 #include <QtCore\qtextstream.h>
-#include <ppl.h>
-//#define NDEBUG // => Disable all assert() if uncommented.
-#include <assert.h> 
+//#include <ppl.h>
 
 #include "dbManager.h"
 #include "dbexception.h"

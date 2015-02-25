@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClCompile Include="sources\CmdLine.cpp" />
     <ClCompile Include="sources\CmdLineException.cpp" />
-    <ClCompile Include="sources\constants.cpp" />
     <ClCompile Include="sources\dbexception.cpp" />
     <ClCompile Include="sources\dbManager.cpp" />
     <ClCompile Include="sources\graphManager.cpp" />

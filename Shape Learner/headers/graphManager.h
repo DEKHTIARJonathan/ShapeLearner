@@ -29,26 +29,44 @@ class DatabaseManager; //Forward Declaration of the class contained in dbManager
 class GraphManager
 {
 	public:
+
+		// Setters pour les paramètres de la BDD.
+
+		static void getDbCredentials() throw(GraphManagerExcept);
+
+		/* **************  Singleton *********************/
+
+		/**
+		*	\brief Méthode static détruisant le singleton et détruisant en cascade tous les objets en dessous de lui.
+		*/
+		static void	destroy();
+
+		
+		/**
+		*	\brief Méthode static initialisant le singleton et instanciant la Base de Données selon les paramètres qui lui sont fournis.
+		*/
+		static GraphManager& openManager();
+
+		/* **************  Command Line Parsing *********************/
+
+		/**
+		*	\brief Méthode static réalisant l'analyse des arguments fournis en ligne de commande.
+		*	\return argc : Argument fourni par la fonction main().
+		*	\return argv : Argument fourni par la fonction main().
+		*/
+		static void parseCommandLine(int argc, char **argv) throw(GraphManagerExcept);
+
+	
+	private:
+
 		// Setters pour les paramètres de la BDD.
 		static void setDbName() throw(GraphManagerExcept);
 		static void setDbPath() throw(GraphManagerExcept);
 		static void setDbUser() throw(GraphManagerExcept);
 		static void setDbPass() throw(GraphManagerExcept);
 		static void setDbHost() throw(GraphManagerExcept);
-
-		/* **************  Singleton *********************/
-
-		/**
-		*  \brief Méthode static détruisant le singleton et détruisant en cascade tous les objets en dessous de lui.
-		*/
-		static void	destroy();
-
-		/**
-		*  \brief Méthode static initialisant le singleton et instanciant la Base de Données selon les paramètres qui lui sont fournis.
-		*/
-		static GraphManager& openManager();
-	
-	private:
+		static void setDbType() throw(GraphManagerExcept);
+		static void setDbPort() throw(GraphManagerExcept);
 
 		/*! \brief dBManager : Référence vers l'unique instance du DatabaseManager en mémoire. */
 		DatabaseManager& dBManager;
@@ -59,14 +77,20 @@ class GraphManager
 		/*! \brief dbPath : Chemin du dossier contenant la base SQLite */
 		static QString dbPath;
 
-		/*! \brief user : Utilisateur de la base de données */
-		static QString user;
+		/*! \brief dbUser : Utilisateur de la base de données */
+		static QString dbUser;
 
-		/*! \brief pass : Mot de passe de la base de données */
-		static QString pass;
+		/*! \brief dbPass : Mot de passe de la base de données */
+		static QString dbPass;
 
-		/*! \brief hostname : Adresse du serveur de BDD (localhost d'office pour SQLite). */
-		static QString hostname;
+		/*! \brief dbPort : Port de la base de données */
+		static QString dbPort;
+
+		/*! \brief dbHost : Adresse IP ou Hostname du serveur de BDD (localhost d'office pour SQLite). */
+		static QString dbHost;
+
+		/*! \brief dbType : Type de la base de données. Valeur de 1 à 4 => Voir constants.cpp */
+		static unsigned int dbType;
 
 		/*! \brief s_inst : Unique instance du GraphManager en mémoire.*/
 		static GraphManager* s_inst;
