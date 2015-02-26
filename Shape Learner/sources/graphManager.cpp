@@ -30,6 +30,7 @@ QString GraphManager::dbUser = "";
 QString GraphManager::dbPass = "";
 QString GraphManager::dbPort = 0;
 QString GraphManager::dbHost = "localhost";
+bool GraphManager::dbInit = false;
 unsigned int GraphManager::dbType = constants::DB_SQLITE;
 
 /* *******************************************************************
@@ -54,7 +55,7 @@ void GraphManager::destroy(){
 	}
 }
 
-GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbName, dbPath, dbUser, dbPass, dbHost, dbPort, dbType)){}
+GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbName, dbPath, dbUser, dbPass, dbHost, dbPort, dbType, dbInit)){}
 
 /* *******************************************************************
 *                        Command Line Parsing                        *
@@ -67,10 +68,12 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
 	
 	try{
 		//We parse the arguments given by command line.
-		if (cmdLine.SplitLine(argc,argv) < 1){ // If not enough arguments are given, we show the help.
-			cmdLine.ShowHelp("help.txt");
-			system ("PAUSE");
-			exit(EXIT_FAILURE);
+		if (cmdLine.SplitLine(argc,argv) < 2){ // If not enough arguments are given, we show the help.
+			#ifndef _DEBUG
+				cmdLine.ShowHelp("help.txt");
+				system ("PAUSE");
+				exit(EXIT_FAILURE);
+			#endif
 		}
 
 
@@ -81,17 +84,19 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
 			exit(EXIT_SUCCESS);
 		}
 
-		// On récupère les identifiants de connexion à la BDD
-		getDbCredentials();
-
 		// Did the user asked to use a previously created database ?
 		if (cmdLine.HasSwitch("--init")){
-			dbName = QString::fromStdString(cmdLine.GetArgument("-a", 0));
-			cout << "db Name = " << dbName.toStdString() << endl;
+			dbInit = true;
 		}
 
+		// On récupère les identifiants de connexion à la BDD
+		getDbCredentials();
+		
+		openManager();
+		/*
 		dbName = QString::fromStdString(cmdLine.GetArgument("-c", 0));
-			cout << "db Name = " << dbName.toStdString() << endl;
+		cout << "db Name = " << dbName.toStdString() << endl;
+		*/
 		
 	}
 	catch (const std::exception &e ) 
@@ -214,16 +219,21 @@ void GraphManager::setDbPath() throw(GraphManagerExcept){
 void GraphManager::setDbUser() throw(GraphManagerExcept){
 	if (GraphManager::s_inst != NULL)
 		throw GraphManagerExcept("GraphManager::setDbUser", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
+	
+	if (dbType != constants::DB_SQLITE)
+	{
 
-	string tmp;
+		string tmp;
 
-	do{
-		cout << "Please enter your username : ";
-		getline( std::cin, tmp );
-	}while (tmp.empty());
+		do{
+			cout << "Please enter your username : ";
+			getline( std::cin, tmp );
+		}while (tmp.empty());
 
-	if(!tmp.empty())
-			dbUser = QString::fromStdString(tmp);
+		if(!tmp.empty())
+				dbUser = QString::fromStdString(tmp);
+
+	}
 
 }
 
@@ -231,15 +241,16 @@ void GraphManager::setDbPass() throw(GraphManagerExcept){
 	if (GraphManager::s_inst != NULL)
 		throw GraphManagerExcept("GraphManager::setDbPass", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
-	string tmp;
+	if (dbType != constants::DB_SQLITE)
+	{
+		string tmp;
 
-	do{
 		cout << "Please enter your password : ";
 		getline( std::cin, tmp );
-	}while (tmp.empty());
 
-	if(!tmp.empty())
-			dbUser = QString::fromStdString(tmp);
+		if(!tmp.empty())
+				dbUser = QString::fromStdString(tmp);
+	}
 }
 
 void GraphManager::setDbHost() throw(GraphManagerExcept){
@@ -252,7 +263,7 @@ void GraphManager::setDbHost() throw(GraphManagerExcept){
 		
 		string tmp;
 
-		cout << "Please enter the address of your database server [DEFAULT = "+dbHost.toStdString()+"] : ";
+		cout << "Please enter the IP address of your database server [DEFAULT = "+dbHost.toStdString()+"] : ";
 		getline( std::cin, tmp );
 		
 		if (!tmp.empty())
