@@ -47,8 +47,10 @@ int CCmdLine::SplitLine(int argc, char **argv) throw(CCmdLineException)
 	clear();
 	pair<CCmdLine::iterator, bool> res;
 
+	#ifndef _DEBUG
 	if (argc == 1)
 		throw CCmdLineException("CCmdLine::SplitLine", "Error : No argument has been given by command line.");
+	#endif
 
 	// skip the exe name (start with i = 1)
 	for (int i = 1; i < argc; i++)

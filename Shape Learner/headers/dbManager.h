@@ -62,7 +62,7 @@ class DatabaseManager
 				*	\param dbPort : Port du serveur de BDD.
 				*	\param dbType : Type de base de données (voir constants.h)
 				*/
-				static DatabaseManager& getInstance(QString const &dbName, QString const &dbPath, QString const &dbUser, QString const &dbPass , QString const &dbHost, QString const &dbPort, unsigned int const &dbType);
+				static DatabaseManager& getInstance(QString const &dbName, QString const &dbPath, QString const &dbUser, QString const &dbPass , QString const &dbHost, QString const &dbPort, unsigned int const &dbType, bool const &dbInit);
 
 				/*!
 				*  \brief Méthode static détruisant le singleton
@@ -86,6 +86,11 @@ class DatabaseManager
 		*  \brief Initialise les tables de la DB et la structure complète du modèle relationnel de la BDD.
 		*/
 		bool initDB();
+
+		/*!
+		*  \brief Renvoie la dernière erreur générée par la BDD.
+		*/
+		QSqlError lastError();
 
 		/* **************** Retrievers ******************** */
 
@@ -252,6 +257,7 @@ class DatabaseManager
 		QSqlDatabase *database;
 		QString dbPath;
 		static DatabaseManager *s_inst;	// Contient le singleton s'il est instancié
+		const unsigned int dbType; // Contient le type de BDD => Voir constants.h
 
 		/* **************** DB Requests ********************/
 
@@ -301,7 +307,7 @@ class DatabaseManager
 		*	\param dbPort : Port du serveur de BDD.
 		*	\param dbType : Type de base de données (voir constants.h)
 		*/
-		DatabaseManager(const QString &dbName, const QString &dbPath, const QString &dbUser, const QString &dbPass, const QString &dbHost, const QString &dbPort, const unsigned int& dbType) throw(DBException);
+		DatabaseManager(const QString &dbName, const QString &dbPath, const QString &dbUser, const QString &dbPass, const QString &dbHost, const QString &dbPort, const unsigned int& dbType, const bool &dbInit) throw(DBException);
 
 		/*!
 		*	\brief Constructeur de recopie => La recopie est interdite

@@ -26,7 +26,7 @@ using namespace std;
 **                           Constructers                            *
 *********************************************************************/
 
-DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, const QString &dbUser, const QString &dbPass, const QString &dbHost,  const QString &dbPort , const unsigned int& dbType) throw(DBException) : database(new QSqlDatabase()), dbPath(dbPath)
+DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, const QString &dbUser, const QString &dbPass, const QString &dbHost, const QString &dbPort , const unsigned int& dbType, const bool &dbInit) throw(DBException) : database(new QSqlDatabase()), dbPath(dbPath), dbType(dbType)
 {
 	/*
 	Driver availables:
@@ -40,38 +40,52 @@ DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, c
 		QSQLITE2	SQLite version 2
 		QTDS		Sybase Adaptive Server
 	*/
-
-	//set database driver to QSQLITE avec une connection ayant pour nom dbName
-	QString fullpath = dbPath+QDir::separator()+dbName;
-
-	//*database = QSqlDatabase::addDatabase("QSQLITE", dbName);
-	*database = QSqlDatabase::addDatabase("QPSQL");
-	*database = QSqlDatabase::addDatabase("QOCI");
-	*database = QSqlDatabase::addDatabase("QMYSQL");
-	
-	QFile file(fullpath);
-
-	bool dbIsNew = !file.exists();
-
-	database->setDatabaseName(fullpath);
-
-	//can be removed
-	database->setHostName(dbHost);
-	database->setDatabaseName("postgres");
-	database->setUserName(dbUser);
-	database->setPassword(dbPass);
-	//database->setPort(5432);
-	//database->port();
-
-	if(!database->open() && !database->isOpen() && !database->isValid() && !file.isOpen())
+	switch(dbType)
 	{
-		throw DBException("INITIALISATION Database", "Can not open database. Path = "+fullpath);
+		case constants::DB_SQLITE :
+			*database = QSqlDatabase::addDatabase("QSQLITE", dbName);
+			break;
+		case constants::DB_MYSQL :
+			*database = QSqlDatabase::addDatabase("QMYSQL", dbName);
+			break;
+		case constants::DB_PGSQL :
+			*database = QSqlDatabase::addDatabase("QPSQL", dbName);
+			break;
+		case constants::DB_ORACLE :
+			*database = QSqlDatabase::addDatabase("QOCI", dbName);
+			break;
+	}
+
+
+	if (dbType != constants::DB_SQLITE){
+		database->setDatabaseName(dbName);
+		database->setHostName(dbHost);
+		database->setUserName(dbUser);
+		database->setPassword(dbPass);
+		database->setPort(dbPort.toInt());
 	}
 	else
 	{
-		if (dbIsNew)
+		QString fullpath = dbPath+QDir::separator()+dbName;
+		QFile file(fullpath);
+		bool dbIsNew = !file.exists();
+		if (dbIsNew && !dbInit)
+			throw DBException("Error : Unable to acces the database requested.", "The database doesn't exist : " + fullpath);
+		if (!dbIsNew && dbInit)
+			throw DBException("Can't initialize the database.", "The database already exist : " + fullpath);
+		database->setDatabaseName(fullpath);
+	}
+		
+
+	if(!database->open() && !database->isOpen() && !database->isValid())
+	{
+		throw DBException("Can't open database.", lastError().databaseText());
+	}
+	else
+	{
+		if (dbInit)
 			if (!initDB())
-				throw DBException("Erreur lors de l'initialisation de la BDD", database->lastError().databaseText());
+				throw DBException("Erreur lors de l'initialisation de la BDD", lastError().databaseText());
 		else
 		{
 			/* ******* AFFICHE TOUTES LES TABLES DE LA DB *********
@@ -94,9 +108,6 @@ DatabaseManager::DatabaseManager(const QString &dbName, const QString &dbPath, c
 			*/
 		}
 		database->exec("PRAGMA foreign_keys=ON;");
-		#ifdef _DEBUG
-			cout << "Db linked at the following path : " <<fullpath.toStdString() << endl;
-		#endif
 		
 	}
 }
@@ -236,6 +247,13 @@ bool DatabaseManager::initDB()
 	return b;
 }
 
+QSqlError DatabaseManager::lastError()
+{
+	// If opening database has failed user can ask 
+	// error description by QSqlError::text()
+	return database->lastError();
+}
+
 unsigned int DatabaseManager::getLastID() const throw(DBException)
 {
 	QSqlQuery query(*database);
@@ -308,9 +326,9 @@ DatabaseManager::~DatabaseManager()
 
 DatabaseManager* DatabaseManager::s_inst = NULL;
 
-DatabaseManager& DatabaseManager::Key::getInstance(QString const &dbName, QString const &dbPath, QString const &dbUser, QString const &dbPass , QString const &dbHost, QString const &dbPort, unsigned int const &dbType){
+DatabaseManager& DatabaseManager::Key::getInstance(QString const &dbName, QString const &dbPath, QString const &dbUser, QString const &dbPass , QString const &dbHost, QString const &dbPort, unsigned int const &dbType, bool const &dbInit){
 	if( DatabaseManager::s_inst == NULL )
-		DatabaseManager::s_inst =  new DatabaseManager(dbName, dbPath, dbUser, dbPass, dbHost, dbPort, dbType);
+		DatabaseManager::s_inst =  new DatabaseManager(dbName, dbPath, dbUser, dbPass, dbHost, dbPort, dbType, dbInit);
 	return (*DatabaseManager::s_inst);
 }
 

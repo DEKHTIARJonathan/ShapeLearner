@@ -40,6 +40,11 @@
 #include <QtSql\qsqldriver.h>
 #include <QtSql\qsql.h>
 
+#include <QtCore\qcoreapplication.h>
+#include <QtCore\qobject.h>
+#include <QtWidgets\qapplication.h>
+#include <QtGui/qguiapplication.h>
+
 #include <QtSql\qsqlquery.h>
 #include <QtSql\qsqlerror.h>
 #include <QtCore/qvariant.h>

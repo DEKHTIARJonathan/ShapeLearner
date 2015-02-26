@@ -92,8 +92,13 @@ class GraphManager
 		/*! \brief dbType : Type de la base de données. Valeur de 1 à 4 => Voir constants.cpp */
 		static unsigned int dbType;
 
+		/*! \brief dbInit : Doit on initialiser la base de données ? */
+		static bool dbInit;
+
 		/*! \brief s_inst : Unique instance du GraphManager en mémoire.*/
 		static GraphManager* s_inst;
+
+		
 
 		/* **************  Singleton *********************/
 

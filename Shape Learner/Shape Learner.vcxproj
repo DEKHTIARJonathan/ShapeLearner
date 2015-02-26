@@ -58,9 +58,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -69,15 +71,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;$(ProjectDir)\..\sqlite3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\tools\libodb-pgsql-2.4.0;C:\tools\libodb-2.4.0;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <DelayLoadDLLs>
       </DelayLoadDLLs>
-      <AdditionalDependencies>$(ProjectDir)..\sqlite3\$(Configuration)\sqlite3.lib;$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Cored.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Sqld.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\sqlite3\sqlite3.dll</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)..\sqlite3\$(Configuration)\sqlite3.lib;$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Cored.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Sqld.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Guid.lib;C:\tools\libodb-2.4.0\lib\odb-d.lib;C:\tools\libodb-pgsql-2.4.0\lib\odb-pgsql-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Qt\Qt5.4.0\5.4\Src\qtbase\plugins\sqldrivers;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,7 +91,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;$(ProjectDir)\..\sqlite3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\tools\libodb-pgsql-2.4.0;C:\tools\libodb-2.4.0;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,8 +100,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <DelayLoadDLLs>
       </DelayLoadDLLs>
-      <AdditionalDependencies>$(ProjectDir)..\sqlite3\$(Configuration)\sqlite3.lib;$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Core.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Sql.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\sqlite3\sqlite3.dll</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)..\sqlite3\$(Configuration)\sqlite3.lib;$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib;C:\Qt\Qt5.4.0\5.4\Src\qtbase\plugins\sqldrivers\qsqlmysql.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Core.lib;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Sql.lib;C:\tools\libodb-2.4.0\lib\odb.lib;C:\tools\libodb-pgsql-2.4.0\lib\odb-pgsql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
