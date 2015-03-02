@@ -26,16 +26,16 @@ using namespace std;
 *********************************************************************/
 
 // Generic DBException constructor
-DBException::DBException( const QString &procedure, const QString &msgError ) throw() : std::exception()
+DBException::DBException( const string &procedure, const string &msgError ) throw() : std::exception()
 {
 	m_procedure	= procedure;
 	m_msgError	= msgError;
 
 	stringstream ss;
 
-	ss << "An error occured on '" << m_procedure.toStdString() << "' procedure :" << endl;
+	ss << "An error occured on '" << m_procedure << "' procedure :" << endl;
 	ss << "-----------------Error-----------------" << endl;
-	ss << m_msgError.toStdString() << endl;
+	ss << m_msgError << endl;
 	ss << "----------------------------------------" << endl;
 
 	m_what = ss.str().data();
@@ -45,8 +45,8 @@ DBException::DBException( const QString &procedure, const QString &msgError ) th
 *                              Getter                                *
 *********************************************************************/
 
-const QString &	DBException::getProcedure() const throw() {	return m_procedure;	}
-const QString &	DBException::getMsgError() const throw() {	return m_msgError;	}
+const string &	DBException::getProcedure() const throw() {	return m_procedure;	}
+const string &	DBException::getMsgError() const throw() {	return m_msgError;	}
 
 /* *******************************************************************
 *                           Implementation                           *

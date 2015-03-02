@@ -13,9 +13,77 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\ODB">
+      <UniqueIdentifier>{96a19c8d-36b4-419d-b98a-b306df1608da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SQL">
+      <UniqueIdentifier>{1c257bb7-5f0b-408a-b5bf-ad84d0d65042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object-relational mapping">
+      <UniqueIdentifier>{320b2c26-528c-443f-abfa-5eda9b6bff20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\ODB">
+      <UniqueIdentifier>{f8b8c3c3-1159-4102-beab-c9b66b9e4af8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="sources\allHeaders.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\CmdLine.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\CmdLineException.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\constants.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\GraphClass.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\GraphClass-odb.hxx">
+      <Filter>Fichiers d%27en-tête\ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\graphManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\graphManagerException.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\dbManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\dbexception.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\ObjectClass.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\ObjectClass-odb.hxx">
+      <Filter>Fichiers d%27en-tête\ODB</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\CmdLine.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\CmdLineException.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\GraphClass.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="sources\main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\GraphClass-odb.cxx">
+      <Filter>Fichiers sources\ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\graphManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\graphManagerException.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="sources\dbManager.cpp">
@@ -24,43 +92,28 @@
     <ClCompile Include="sources\dbexception.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\graphManager.cpp">
+    <ClCompile Include="sources\ObjectClass.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\graphManagerException.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\CmdLine.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\CmdLineException.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="sources\ObjectClass-odb.cxx">
+      <Filter>Fichiers sources\ODB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\allHeaders.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\dbManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\dbexception.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\constants.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\graphManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\graphManagerException.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\CmdLine.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\CmdLineException.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
+    <None Include="sources\GraphClass-odb.ixx">
+      <Filter>object-relational mapping</Filter>
+    </None>
+    <None Include="sources\GraphClass.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\structure.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\ObjectClass.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\ObjectClass-odb.ixx">
+      <Filter>object-relational mapping</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -23,18 +23,18 @@
 #include "allHeaders.h"
 //#include <stdexcept>
 //#include <sstream>
-//#include <QtCore\qstring.h>
+//#include <QtCore\string.h>
 using namespace std;
 
 class CCmdLineException : public std::exception
 {
 	public:
 		// Constructor
-		CCmdLineException(const QString &procedure, const QString &msgError ) throw();
+		CCmdLineException(const string &procedure, const string &msgError ) throw();
 
 		// Getter
-		const QString &	getProcedure() const throw();
-		const QString &	getMsgError() const throw();
+		const string &	getProcedure() const throw();
+		const string &	getMsgError() const throw();
 
 		// Implementation
 		virtual const char*	what() const throw();
@@ -44,8 +44,8 @@ class CCmdLineException : public std::exception
 
 	private:
 		// Member
-		QString			m_procedure;
-		QString			m_msgError;
+		string			m_procedure;
+		string			m_msgError;
 		string			m_what;
 
 };

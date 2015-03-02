@@ -13,7 +13,7 @@
 /**
 *	\file dbManager.h
 *	\brief Interface entre le logiciel et la base de données. Elle est la seule à réaliser des accès à la BDD
-*	\version 1.0
+*	\version 1.1
 *	\author DEKHTIAR Jonathan
 */
 
@@ -22,6 +22,7 @@
 
 #include "allHeaders.h"
 using namespace std;
+using namespace odb::core;
 
 class DBException; //Forward Declaration of the class contained in dbexception.h
 class GraphManager; //Forward Declaration of the class contained in graphManager.h
@@ -62,7 +63,7 @@ class DatabaseManager
 				*	\param dbPort : Port du serveur de BDD.
 				*	\param dbType : Type de base de données (voir constants.h)
 				*/
-				static DatabaseManager& getInstance(QString const &dbName, QString const &dbPath, QString const &dbUser, QString const &dbPass , QString const &dbHost, QString const &dbPort, unsigned int const &dbType, bool const &dbInit);
+				static DatabaseManager& getInstance(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort , const unsigned int& dbType, const bool &dbInit);
 
 				/*!
 				*  \brief Méthode static détruisant le singleton
@@ -75,8 +76,8 @@ class DatabaseManager
 		/*!
 		*  \brief Renvoie le path du fichier SQLite de la base de donnée
 		*/
-		const QString getPath() const;
-		const QString getName() const;
+		const string getPath() const;
+		const string getName() const;
 
 		/* ****************** Setters ********************* */
 
@@ -85,12 +86,12 @@ class DatabaseManager
 		/*!
 		*  \brief Initialise les tables de la DB et la structure complète du modèle relationnel de la BDD.
 		*/
-		bool initDB();
+		bool initDB(const string& filename);
 
 		/*!
 		*  \brief Renvoie la dernière erreur générée par la BDD.
 		*/
-		QSqlError lastError();
+		string lastError();
 
 		/* **************** Retrievers ******************** */
 
@@ -98,14 +99,14 @@ class DatabaseManager
 		*	\brief Renvoie la liste de tous les idGraphs de la BDD.
 		*	\return Renvoie une liste d'entier => std::list<unsigned int>.
 		*/
-		list<unsigned int> getAllidGraphs() const;  /* ==================================== à implémenter ===================================== */
+		vector<unsigned int> getAllidGraphs() const;  /* ==================================== à implémenter ===================================== */
 
 		/*!
 		*	\brief Renvoie le type du Graph dont l'id est passé en argument
-		*	\return Renvoie une QString contenant le type du graph.
+		*	\return Renvoie une string contenant le type du graph.
 		*	\param idGraph : id du graph dont on veut connaitre le type.
 		*/
-		QString getGraphType(const unsigned int idGraph) const; /* ==================================== à implémenter ===================================== */
+		string getGraphType(const unsigned int idGraph) const; /* ==================================== à implémenter ===================================== */
 
 		/* **************** Inserters ********************** */
 		
@@ -253,9 +254,7 @@ class DatabaseManager
 	private:
 
 		/* ****************** Attributs ********************/
-
-		QSqlDatabase *database;
-		QString dbPath;
+		unique_ptr<odb::database> database;
 		static DatabaseManager *s_inst;	// Contient le singleton s'il est instancié
 		const unsigned int dbType; // Contient le type de BDD => Voir constants.h
 
@@ -265,7 +264,7 @@ class DatabaseManager
 		*  \brief Éxécute une query passée en argument, renvoie un bool sur la réussite de l'opération
 		*  \param query : la query que l'on veut éxécuter
 		*/
-		bool query(const QString& query) const throw(DBException);
+		bool query(const string& query) const throw(DBException);
 
 		/*!
 		*  \brief Renvoie le dernier ID inséré dans la BDD sur toutes les Tables.
@@ -277,13 +276,13 @@ class DatabaseManager
 		*  \brief Escape une query de manière à limiter les injections SQL
 		*  \param s : la query que l'on cherche à escape
 		*/
-		QString escape(QString s) const;
+		void escape(string& str) const;
 
 		/*!
-		*  \brief Renvoie une QString avec la première lettre en majuscule et les autres en minuscule : "Exemple"
+		*  \brief Renvoie une string avec la première lettre en majuscule et les autres en minuscule : "Exemple"
 		*  \param str : la string que l'on veut capitalize
 		*/
-		QString capitalize(QString str) const;
+		void capitalize(string& str) const;
 
 		/* **************** Deleters ***********************/
 
@@ -293,6 +292,10 @@ class DatabaseManager
 
 		/* **************** Retrievers **********************/
 
+
+		/* ****************** Readers **********************/
+
+		string get_file_contents(const string& filename) throw(DBException);
 
 		/* **************  Singleton *********************/
 
@@ -307,7 +310,7 @@ class DatabaseManager
 		*	\param dbPort : Port du serveur de BDD.
 		*	\param dbType : Type de base de données (voir constants.h)
 		*/
-		DatabaseManager(const QString &dbName, const QString &dbPath, const QString &dbUser, const QString &dbPass, const QString &dbHost, const QString &dbPort, const unsigned int& dbType, const bool &dbInit) throw(DBException);
+		DatabaseManager(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort , const unsigned int& dbType, const bool &dbInit);
 
 		/*!
 		*	\brief Constructeur de recopie => La recopie est interdite

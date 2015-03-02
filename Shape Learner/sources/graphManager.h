@@ -13,7 +13,7 @@
 /**
 *	\file graphManager.h
 *	\brief Interface publique d'accès au logiciel. Elle concentre les accès à la BDD, le Génarateur de Graph et le Graph Matcher.
-*	\version 1.0
+*	\version 1.1
 *	\author DEKHTIAR Jonathan
 */
 
@@ -31,7 +31,6 @@ class GraphManager
 	public:
 
 		// Setters pour les paramètres de la BDD.
-
 		static void getDbCredentials() throw(GraphManagerExcept);
 
 		/* **************  Singleton *********************/
@@ -56,12 +55,13 @@ class GraphManager
 		*/
 		static void parseCommandLine(int argc, char **argv) throw(GraphManagerExcept);
 
+		
+
 	
 	private:
 
 		// Setters pour les paramètres de la BDD.
 		static void setDbName() throw(GraphManagerExcept);
-		static void setDbPath() throw(GraphManagerExcept);
 		static void setDbUser() throw(GraphManagerExcept);
 		static void setDbPass() throw(GraphManagerExcept);
 		static void setDbHost() throw(GraphManagerExcept);
@@ -72,24 +72,21 @@ class GraphManager
 		DatabaseManager& dBManager;
 
 		/*! \brief dbName : Nom de la Base de Données. */
-		static QString dbName;
-
-		/*! \brief dbPath : Chemin du dossier contenant la base SQLite */
-		static QString dbPath;
+		static string dbName;
 
 		/*! \brief dbUser : Utilisateur de la base de données */
-		static QString dbUser;
+		static string dbUser;
 
 		/*! \brief dbPass : Mot de passe de la base de données */
-		static QString dbPass;
+		static string dbPass;
 
 		/*! \brief dbPort : Port de la base de données */
-		static QString dbPort;
+		static unsigned int dbPort;
 
-		/*! \brief dbHost : Adresse IP ou Hostname du serveur de BDD (localhost d'office pour SQLite). */
-		static QString dbHost;
+		/*! \brief dbHost : Adresse IP ou Hostname du serveur de BDD (localhost par défaut). */
+		static string dbHost;
 
-		/*! \brief dbType : Type de la base de données. Valeur de 1 à 4 => Voir constants.cpp */
+		/*! \brief dbType : Type de la base de données. Valeur de 1 à 3 => Voir constants.cpp */
 		static unsigned int dbType;
 
 		/*! \brief dbInit : Doit on initialiser la base de données ? */

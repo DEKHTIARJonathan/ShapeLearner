@@ -12,7 +12,7 @@
 
 /**
 *	\file constants.h
-*	\brief Ces constantes sont essentiellement des restrictictions de taille de QString nécessaire à l'utilisation de SQLite
+*	\brief Ces constantes sont essentiellement des restrictictions de taille de string nécessaire à l'utilisation de SQLite
 *	\version 1.0
 *	\author Jonathan Dekhtiar
 */
@@ -29,10 +29,10 @@ namespace constants{
 	const unsigned int		SIZE_MAX_GRAPH_NAME = 255;
 	const unsigned int		SIZE_MAX_OBJ_NAME = 255;
 	const unsigned int		SIZE_MAX_PATH = 255;
-	const unsigned int		DB_SQLITE = 1;
-	const unsigned int		DB_PGSQL = 2;
-	const unsigned int		DB_MYSQL = 3;
-	const unsigned int		DB_ORACLE = 4;
+	const unsigned int		MAX_DB_RETRY = 4;
+	const unsigned int		DB_PGSQL = 1;
+	const unsigned int		DB_MYSQL = 2;
+	const unsigned int		DB_ORACLE = 3;
 
 }
 

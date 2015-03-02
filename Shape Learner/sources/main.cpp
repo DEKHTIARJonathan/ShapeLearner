@@ -19,15 +19,54 @@
 
 #include "allHeaders.h"
 using namespace std;
-
-
+using namespace odb::core;
 
 int main(int argc, char **argv)
 {
 	
-	GraphManager::parseCommandLine(argc,argv);
+	try
+	{
+		
+		GraphManager::parseCommandLine(argc,argv);
+		
+		/*
+		auto_ptr<database> db (new odb::pgsql::database ("postgres","postgres","postgres","127.0.0.1", 5433));
 
-/*
+		// Create a few persistent person objects.
+		//
+		{
+			GraphClass graphType1 ("testGraph1", true, true);
+			GraphClass graphType2 ("testGraph2", true, true);
+			GraphClass graphType3 ("testGraph3", true, true);
+			GraphClass graphType4 ("testGraph4", true, true);
+			GraphClass graphType5 ("testGraph5", true, true);
+
+			transaction t (db->begin ());
+
+			t.tracer (stderr_tracer);
+
+			// Make objects persistent and save their ids for later use.
+			//
+			db->persist (graphType1);
+			db->persist (graphType2);
+			db->persist (graphType3);
+			db->persist (graphType4);
+			db->persist (graphType5);
+
+			t.commit ();
+		}
+		*/
+	}
+	catch (const odb::exception& e)
+	{
+		cerr << e.what () << endl;
+		system ("PAUSE");
+		return 1;
+	}
+
+	//
+
+	/*
 	try{
 		GraphManager::setDbName();
 	}
@@ -39,7 +78,7 @@ int main(int argc, char **argv)
 	}
 
 	GraphManager& software = GraphManager::openManager();
-*/
+	*/
 	
 	system ("PAUSE");
 	

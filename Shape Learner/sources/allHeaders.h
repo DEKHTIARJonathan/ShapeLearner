@@ -22,41 +22,54 @@
 
 // tell the compiler to shut up
 //#pragma warning(disable:4786)
+
+#ifdef _MSC_VER
 #pragma warning( disable : 4290 )
+#pragma warning( disable : 4244 )
+#pragma warning( disable : 4068 )
+#endif //_MSC_VER
 
 #include <iostream>
-#include <cstdlib>
-#include <cstring>
 #include <string>
 #include <vector>
 #include <map>
+#include <list>
+#include <vector>
 #include <stdexcept>
 #include <sstream>
 #include <fstream>
-#include <QtCore\qstring.h>
-#include <QtCore\qdir.h>
-#include <QtSql\qsqldatabase.h>
+#include <direct.h>
+#include <memory>
+#include <cerrno>
 
-#include <QtSql\qsqldriver.h>
-#include <QtSql\qsql.h>
+#include <odb/core.hxx>
 
-#include <QtCore\qcoreapplication.h>
-#include <QtCore\qobject.h>
-#include <QtWidgets\qapplication.h>
-#include <QtGui/qguiapplication.h>
+#ifdef _MSC_VER
+#include <odb/database.hxx>
+#include <odb/transaction.hxx>
+#include <odb/pgsql/database.hxx>
+#endif //_MSC_VER
 
-#include <QtSql\qsqlquery.h>
-#include <QtSql\qsqlerror.h>
-#include <QtCore/qvariant.h>
-#include <QtCore\qtextstream.h>
 //#include <ppl.h>
 
-#include "dbManager.h"
-#include "dbexception.h"
 #include "constants.h"
-#include "graphManager.h"
-#include "graphManagerException.h"
+
+/* Class for ODB */
+#include "GraphClass.h"
+#include "ObjectClass.h"
+/* Class for ODB */
+
+#ifdef _MSC_VER // Prevent access from ODB compiler.
 #include "CmdLine.h"
 #include "CmdLineException.h"
+#include "GraphClass-odb.hxx"
+#include "graphManager.h"
+#include "graphManagerException.h"
+#include "dbManager.h"
+#include "dbexception.h"
+#endif //_MSC_VER
+
+#define GetCurrentDir _getcwd
+
 
 #endif //_ALL_HEADERS_

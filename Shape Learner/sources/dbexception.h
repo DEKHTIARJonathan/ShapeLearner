@@ -27,11 +27,11 @@ class DBException : public std::exception
 {
 	public:
 		// Constructor
-		DBException(const QString &procedure, const QString &msgError ) throw();
+		DBException(const string &procedure, const string &msgError ) throw();
 
 		// Getter
-		const QString &	getProcedure() const throw();
-		const QString &	getMsgError() const throw();
+		const string &	getProcedure() const throw();
+		const string &	getMsgError() const throw();
 
 		// Implementation
 		virtual const char*	what() const throw();
@@ -41,8 +41,8 @@ class DBException : public std::exception
 
 	private:
 		// Member
-		QString			m_procedure;
-		QString			m_msgError;
+		string			m_procedure;
+		string			m_msgError;
 		string			m_what;
 
 };

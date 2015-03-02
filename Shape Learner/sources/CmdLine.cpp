@@ -64,7 +64,7 @@ int CCmdLine::SplitLine(int argc, char **argv) throw(CCmdLineException)
 			res = insert(CCmdLine::value_type( argv[i], cmd));
 
 			if (!res.second)
-				throw CCmdLineException("CCmdLine::SplitLine", QString("%1; %2").arg("Error while parsing the switch : ").arg(argv[i]));
+				throw CCmdLineException("CCmdLine::SplitLine", "Error while parsing the switch : " + (string)argv[i]);
 		}
 		else
 		// it's not a switch, it's a parameter for the last switch => let's add it
@@ -82,7 +82,7 @@ bool CCmdLine::IsSwitch(const char *pParam) throw(CCmdLineException)
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pParam) <= 1)
-	  throw CCmdLineException("CCmdLine::IsSwitch", QString("%1; %2, %3").arg("Error : The parameter pParam (").arg(pParam).arg(") must have at least one character after the '-'."));
+	  throw CCmdLineException("CCmdLine::IsSwitch", "Error : The parameter pParam (" + (string)pParam + ") must have at least one character after the '-'.");
 
    // switches always start with '-'
    if (pParam[0]=='-')
@@ -105,7 +105,7 @@ bool CCmdLine::HasSwitch(const char *pSwitch) throw(CCmdLineException)
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
-	  throw CCmdLineException("CCmdLine::HasSwitch", QString("%1; %2, %3").arg("Error : The parameter pSwitch (").arg(pSwitch).arg(") must have at least one character after the '-'"));
+	  throw CCmdLineException("CCmdLine::HasSwitch", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
 	
 	CCmdLine::iterator theIterator;
 	theIterator = find(pSwitch);
@@ -120,7 +120,7 @@ string CCmdLine::GetSafeArgument(const char *pSwitch,unsigned int iIdx, const ch
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
-	  throw CCmdLineException("CCmdLine::GetSafeArgument", QString("%1 %2 %3").arg("Error : The parameter pSwitch (").arg(pSwitch).arg(") must have at least one character after the '-'"));
+	  throw CCmdLineException("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
 
 	string sRet;
 
@@ -150,7 +150,7 @@ string CCmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(CCmdL
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
-	  throw CCmdLineException("CCmdLine::GetSafeArgument", QString("%1 %2 %3").arg("Error : The parameter pSwitch (").arg(pSwitch).arg(") must have at least one character after the '-'"));
+	  throw CCmdLineException("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
 	
 	CCmdLine::iterator theIterator;
 
@@ -160,10 +160,10 @@ string CCmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(CCmdL
 		if ((*theIterator).second.m_strings.size() > iIdx)
 			return (*theIterator).second.m_strings[iIdx];
 		else
-			throw CCmdLineException("CCmdLine::GetArgument", QString("%1, %2, %3, %4").arg("Error : The argument number ").arg(iIdx).arg(" doesn't exist for the pSwitch given : ").arg(pSwitch));
+			throw CCmdLineException("CCmdLine::GetArgument", "Error : The argument number " + std::to_string((_ULonglong)iIdx) + " doesn't exist for the pSwitch given : " + (string)pSwitch);
 	}
 	else
-		throw CCmdLineException("CCmdLine::GetArgument", QString("%1 %2 %3").arg("Error : The parameter pSwitch (").arg(pSwitch).arg(") does not exist."));
+		throw CCmdLineException("CCmdLine::GetArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
 	
 }
 
@@ -175,7 +175,7 @@ int CCmdLine::GetArgumentCount(const char *pSwitch) throw(CCmdLineException)
 	// switches must non-empty
 	// must have at least one character after the '-'
 	if (strlen(pSwitch) <= 1)
-		throw CCmdLineException("CCmdLine::GetArgumentCount", QString("%1 %2 %3").arg("Error : The parameter pSwitch (").arg(pSwitch).arg(") must have at least one character after the '-'"));
+		throw CCmdLineException("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch (" + (string) pSwitch + ") must have at least one character after the '-'");
 
 	int iArgumentCount = -1;
 
@@ -184,7 +184,7 @@ int CCmdLine::GetArgumentCount(const char *pSwitch) throw(CCmdLineException)
 	theIterator = find(pSwitch);
 	
 	if (theIterator==end())
-		throw CCmdLineException("CCmdLine::GetArgumentCount", QString("%1 %2 %3").arg("Error : The parameter pSwitch (").arg(pSwitch).arg(") does not exist."));
+		throw CCmdLineException("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
 		
 	iArgumentCount = (*theIterator).second.m_strings.size();
 	return iArgumentCount;
@@ -197,7 +197,7 @@ void CCmdLine::ShowHelp(const char* filepath)
 	ifstream myfile(filepath, std::ifstream::in);
 
 	if (!myfile)
-		throw CCmdLineException("CCmdLine::ShowHelp", QString("%1 %2 %3").arg("Error : The Help File ( ").arg(filepath).arg(") doesn't exist."));
+		throw CCmdLineException("CCmdLine::ShowHelp", "Error : The Help File ( " + (string) filepath + ") doesn't exist.");
 
 	if (myfile.is_open())
 	{
@@ -208,5 +208,5 @@ void CCmdLine::ShowHelp(const char* filepath)
 		myfile.close();
 	}
 	else
-		throw CCmdLineException("CCmdLine::ShowHelp", QString("%1 %2").arg("Error : Unable to open the file : ").arg(filepath));
+		throw CCmdLineException("CCmdLine::ShowHelp", "Error : Unable to open the file : " + (string)filepath);
 }
