@@ -13,7 +13,7 @@
 /**
 *	\file graphManager.cpp
 *	\brief Interface publique d'accès au logiciel. Elle concentre les accès à la BDD, le Génarateur de Graph et le Graph Matcher.
-*	\version 1.0
+*	\version 1.1
 *	\author DEKHTIAR Jonathan
 */
 
@@ -24,14 +24,13 @@ using namespace std;
 *                        Static DB Parameters                        *
  ********************************************************************/
 
-QString GraphManager::dbName = "temp.shape";
-QString GraphManager::dbPath = QDir::currentPath();
-QString GraphManager::dbUser = "";
-QString GraphManager::dbPass = "";
-QString GraphManager::dbPort = 0;
-QString GraphManager::dbHost = "localhost";
+string GraphManager::dbName = "postgres";
+string GraphManager::dbUser = "postgres";
+string GraphManager::dbPass = "postgres";
+unsigned int GraphManager::dbPort = 5433;
+string GraphManager::dbHost = "localhost";
 bool GraphManager::dbInit = false;
-unsigned int GraphManager::dbType = constants::DB_SQLITE;
+unsigned int GraphManager::dbType = constants::DB_PGSQL;
 
 /* *******************************************************************
 *                            Singleton                               *
@@ -55,7 +54,7 @@ void GraphManager::destroy(){
 	}
 }
 
-GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbName, dbPath, dbUser, dbPass, dbHost, dbPort, dbType, dbInit)){}
+GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbUser, dbPass, dbName, dbHost, dbPort, dbType, dbInit)){}
 
 /* *******************************************************************
 *                        Command Line Parsing                        *
@@ -90,13 +89,12 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
 		}
 
 		// On récupère les identifiants de connexion à la BDD
-		getDbCredentials();
+		#ifndef _DEBUG
+			getDbCredentials(); // En Debug les identifiants sont HardCoded.
+		#endif
+		
 		
 		openManager();
-		/*
-		dbName = QString::fromStdString(cmdLine.GetArgument("-c", 0));
-		cout << "db Name = " << dbName.toStdString() << endl;
-		*/
 		
 	}
 	catch (const std::exception &e ) 
@@ -112,45 +110,41 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
  ********************************************************************/
 
 void GraphManager::getDbCredentials() throw(GraphManagerExcept){
-			setDbType();
-			setDbHost();
-			setDbPort();
-			setDbPath();
-			setDbName();
-			setDbUser();
-			setDbPass();
+	setDbType();
+	setDbHost();
+	setDbPort();
+	setDbName();
+	setDbUser();
+	setDbPass();
 }
 
 void GraphManager::setDbType() throw(GraphManagerExcept){
 	if (GraphManager::s_inst != NULL)
 		throw GraphManagerExcept("GraphManager::setDbType", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
-	QString tmp = "0";
-	QTextStream qtin(stdin); 
+	string tmp;
 
-	while ( tmp.toInt() < 1 ||  tmp.toInt() > 4)
-	{
-		
-		cout << "SQLite : 1 // PostgreSQL : 2 // MySQL : 3 // Oracle : 4"<<endl;
+	do{
+		cout << "PostgreSQL : 1 // MySQL : 2 // Oracle : 3"<<endl;
 		cout << "What type of database would you like to use : ";
-		qtin >> tmp;
+		
+		getline( std::cin, tmp );
 
-		dbType = tmp.toUInt();
-	}
+	}while (stoul(tmp) < 1 ||  stoul(tmp) > 3);
+
+	dbType = stoul(tmp);
+
 
 	switch(dbType)
 	{
-		case constants::DB_SQLITE :
-			dbPort = "0";
-			break;
 		case constants::DB_MYSQL :
-			dbPort = "3306";
+			dbPort = 3306;
 			break;
 		case constants::DB_PGSQL :
-			dbPort = "5432";
+			dbPort = 5432;
 			break;
 		case constants::DB_ORACLE :
-			dbPort = "1521";
+			dbPort = 1521;
 			break;
 	}
 }
@@ -159,18 +153,15 @@ void GraphManager::setDbPort() throw(GraphManagerExcept){
 	if (GraphManager::s_inst != NULL)
 		throw GraphManagerExcept("GraphManager::setDbPort", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
-	if (dbType != constants::DB_SQLITE)
-	{
-		string tmp;
+	string tmp;
 
-		do{
-			cout << "Please enter the listening port of your database server [DEFAULT = "+ dbPort.toStdString() +"] : ";
-			getline( std::cin, tmp );
-		}while (!tmp.empty() && atoi(tmp.c_str()) <=0);
+	do{
+		cout << "Please enter the listening port of your database server [DEFAULT = "+ std::to_string((_ULonglong)dbPort) +"] : ";
+		getline( std::cin, tmp );
+	}while (!tmp.empty() && stoul(tmp) <=0);
 
-		if (!tmp.empty()){
-			dbPort =  QString::fromStdString(tmp);
-		}
+	if (!tmp.empty()){
+		dbPort =  stoul(tmp);
 	}
 
 	
@@ -188,52 +179,23 @@ void GraphManager::setDbName() throw(GraphManagerExcept){
 	}while (tmp.empty());
 
 	if(!tmp.empty())
-			dbName = QString::fromStdString(tmp);
+			dbName = tmp;
 
-}
-
-void GraphManager::setDbPath() throw(GraphManagerExcept){
-	if (GraphManager::s_inst != NULL)
-		throw GraphManagerExcept("GraphManager::setDbPath", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
-
-	if (dbType == constants::DB_SQLITE)
-	{
-		string tmp;
-
-		cout << "Entrez le path de votre bdd: [Default = "+ dbPath.toStdString() +"] : ";
-		getline( std::cin, tmp );
-
-		if(!tmp.empty())
-			dbPath = QString::fromStdString(tmp);
-
-	}
-	
-	QString tmp;
-	QTextStream qtin(stdin); 
-	
-
-	if (tmp.compare(""))
-		dbPath = tmp;
 }
 
 void GraphManager::setDbUser() throw(GraphManagerExcept){
 	if (GraphManager::s_inst != NULL)
 		throw GraphManagerExcept("GraphManager::setDbUser", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
-	if (dbType != constants::DB_SQLITE)
-	{
+	string tmp;
 
-		string tmp;
+	do{
+		cout << "Please enter your username : ";
+		getline( std::cin, tmp );
+	}while (tmp.empty());
 
-		do{
-			cout << "Please enter your username : ";
-			getline( std::cin, tmp );
-		}while (tmp.empty());
-
-		if(!tmp.empty())
-				dbUser = QString::fromStdString(tmp);
-
-	}
+	if(!tmp.empty())
+			dbUser = tmp;
 
 }
 
@@ -241,34 +203,26 @@ void GraphManager::setDbPass() throw(GraphManagerExcept){
 	if (GraphManager::s_inst != NULL)
 		throw GraphManagerExcept("GraphManager::setDbPass", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
-	if (dbType != constants::DB_SQLITE)
-	{
-		string tmp;
+	string tmp;
 
-		cout << "Please enter your password : ";
-		getline( std::cin, tmp );
+	cout << "Please enter your password : ";
+	getline( std::cin, tmp );
 
-		if(!tmp.empty())
-				dbUser = QString::fromStdString(tmp);
-	}
+	if(!tmp.empty())
+			dbPass = tmp;
 }
 
 void GraphManager::setDbHost() throw(GraphManagerExcept){
 	if (GraphManager::s_inst != NULL)
 		throw GraphManagerExcept("GraphManager::setDbHost", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
-	
-	if (dbType != constants::DB_SQLITE)
-	{
-		dbHost = "127.0.0.1";
 		
-		string tmp;
+	string tmp;
 
-		cout << "Please enter the IP address of your database server [DEFAULT = "+dbHost.toStdString()+"] : ";
-		getline( std::cin, tmp );
+	cout << "Please enter the IP address of your database server [DEFAULT = "+ dbHost +"] : ";
+	getline( std::cin, tmp );
 		
-		if (!tmp.empty())
-			dbHost = QString::fromStdString(tmp);
-	}
+	if (!tmp.empty())
+		dbHost = tmp;
 }
 
 
