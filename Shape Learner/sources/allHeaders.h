@@ -41,33 +41,39 @@
 #include <direct.h>
 #include <memory>
 #include <cerrno>
+//#include <ppl.h>
+
 
 #include <odb/core.hxx>
-
 #ifdef _MSC_VER
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 #include <odb/pgsql/database.hxx>
 #endif //_MSC_VER
 
-//#include <ppl.h>
+
+#ifdef _MSC_VER // Prevent access from ODB compiler.
+#include "CmdLine.h"
+#include "CmdLineException.h"
+#include "graphManager.h"
+#include "graphManagerException.h"
+#include "dbManager.h"
+#include "dbexception.h"
+#endif //_MSC_VER
 
 #include "constants.h"
 
 /* Class for ODB */
 #include "GraphClass.h"
 #include "ObjectClass.h"
+#include "Graph.h"
 /* Class for ODB */
 
-#ifdef _MSC_VER // Prevent access from ODB compiler.
-#include "CmdLine.h"
-#include "CmdLineException.h"
+#ifdef _MSC_VER // ODB Generated
 #include "GraphClass-odb.hxx"
-#include "graphManager.h"
-#include "graphManagerException.h"
-#include "dbManager.h"
-#include "dbexception.h"
-#endif //_MSC_VER
+#include "ObjectClass-odb.hxx"
+#endif // _MSC_VER
+
 
 #define GetCurrentDir _getcwd
 

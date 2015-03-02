@@ -29,6 +29,7 @@ public:
 	ObjectClass(const string& name);
 
 private:
+	ObjectClass();
 	string objectClassName;
 
 	friend class odb::access;

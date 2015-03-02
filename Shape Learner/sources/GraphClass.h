@@ -27,9 +27,11 @@ using namespace std;
 class GraphClass
 {
 public:
+
 	GraphClass(const string& name, bool isDirect, bool isAcyclic);
 
 private:
+	GraphClass();
 	string graphClassName;
 	bool directGraph;
 	bool acyclicGraph;
