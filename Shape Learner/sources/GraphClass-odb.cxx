@@ -490,6 +490,62 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
+  access::object_traits_impl< ::GraphClass, id_pgsql >::pointer_type
+  access::object_traits_impl< ::GraphClass, id_pgsql >::
+  find (database& db, const id_type& id)
+  {
+    using namespace pgsql;
+
+    {
+      pointer_type p (pointer_cache_traits::find (db, id));
+
+      if (!pointer_traits::null_ptr (p))
+        return p;
+    }
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    statements_type::auto_lock l (sts);
+
+    if (l.locked ())
+    {
+      if (!find_ (sts, &id))
+        return pointer_type ();
+    }
+
+    pointer_type p (
+      access::object_factory<object_type, pointer_type>::create ());
+    pointer_traits::guard pg (p);
+
+    pointer_cache_traits::insert_guard ig (
+      pointer_cache_traits::insert (db, id, p));
+
+    object_type& obj (pointer_traits::get_ref (p));
+
+    if (l.locked ())
+    {
+      select_statement& st (sts.find_statement ());
+      ODB_POTENTIALLY_UNUSED (st);
+
+      callback (db, obj, callback_event::pre_load);
+      init (obj, sts.image (), &db);
+      load_ (sts, obj, false);
+      sts.load_delayed (0);
+      l.unlock ();
+      callback (db, obj, callback_event::post_load);
+      pointer_cache_traits::load (ig.position ());
+    }
+    else
+      sts.delay_load (id, obj, ig.position ());
+
+    ig.release ();
+    pg.release ();
+    return p;
+  }
+
   bool access::object_traits_impl< ::GraphClass, id_pgsql >::
   find (database& db, const id_type& id, object_type& obj)
   {

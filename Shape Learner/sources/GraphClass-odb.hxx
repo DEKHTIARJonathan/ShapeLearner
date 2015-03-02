@@ -15,6 +15,7 @@
 
 #include "GraphClass.h"
 
+#include "Graph-odb.hxx"
 #include "ObjectClass-odb.hxx"
 
 #include <memory>
@@ -244,6 +245,9 @@ namespace odb
 
     static void
     persist (database&, const object_type&);
+
+    static pointer_type
+    find (database&, const id_type&);
 
     static bool
     find (database&, const id_type&, object_type&);
