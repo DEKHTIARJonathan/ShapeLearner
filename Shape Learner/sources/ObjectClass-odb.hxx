@@ -17,6 +17,7 @@
 
 #include "Graph-odb.hxx"
 #include "GraphClass-odb.hxx"
+#include "Node-odb.hxx"
 
 #include <memory>
 #include <cstddef>

@@ -42,6 +42,8 @@ private:
 #pragma db value(std::string) type("VARCHAR(255)")
 #pragma db object(GraphClass)
 #pragma db member(GraphClass::graphClassName) id
+#pragma db member(GraphClass::directGraph) default("0")
+#pragma db member(GraphClass::acyclicGraph) default("0")
 
 #endif //_GRAPH_CLASS_
 

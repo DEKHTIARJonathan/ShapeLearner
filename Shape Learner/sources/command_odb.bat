@@ -1,6 +1,7 @@
 odb -I C:\tools\libodb-pgsql-2.4.0 -d pgsql --generate-query --generate-schema GraphClass.h
 odb -I C:\tools\libodb-pgsql-2.4.0 -d pgsql --generate-query --generate-schema ObjectClass.h
 odb -I C:\tools\libodb-pgsql-2.4.0 -d pgsql --generate-query --generate-schema Graph.h
+odb -I C:\tools\libodb-pgsql-2.4.0 -d pgsql --generate-query --generate-schema Node.h
 
 del structure.sql
 copy *.sql structure.sql /b

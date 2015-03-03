@@ -69,6 +69,9 @@
     <ClInclude Include="sources\Graph-odb.hxx">
       <Filter>Fichiers d%27en-tête\ODB</Filter>
     </ClInclude>
+    <ClInclude Include="sources\Node.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\CmdLine.cpp">
@@ -109,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="sources\Graph-odb.cxx">
       <Filter>Fichiers sources\ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Node.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

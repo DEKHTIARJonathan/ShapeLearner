@@ -47,7 +47,6 @@ namespace odb
   const unsigned int access::object_traits_impl< ::Graph, id_pgsql >::
   persist_statement_types[] =
   {
-    pgsql::int8_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
@@ -93,6 +92,26 @@ namespace odb
     {
     }
   };
+
+  access::object_traits_impl< ::Graph, id_pgsql >::id_type
+  access::object_traits_impl< ::Graph, id_pgsql >::
+  id (const id_image_type& i)
+  {
+    pgsql::database* db (0);
+    ODB_POTENTIALLY_UNUSED (db);
+
+    id_type id;
+    {
+      pgsql::value_traits<
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
+        id,
+        i.id_value,
+        i.id_null);
+    }
+
+    return id;
+  }
 
   access::object_traits_impl< ::Graph, id_pgsql >::id_type
   access::object_traits_impl< ::Graph, id_pgsql >::
@@ -171,7 +190,7 @@ namespace odb
 
     // idGraph
     //
-    if (sk != statement_update)
+    if (sk != statement_insert && sk != statement_update)
     {
       b[n].type = pgsql::bind::bigint;
       b[n].buffer = &i.idGraph_value;
@@ -235,21 +254,6 @@ namespace odb
     using namespace pgsql;
 
     bool grew (false);
-
-    // idGraph
-    //
-    if (sk == statement_insert)
-    {
-      long unsigned int const& v =
-        o.idGraph;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
-        i.idGraph_value, is_null, v);
-      i.idGraph_null = is_null;
-    }
 
     // graphClass
     //
@@ -491,7 +495,8 @@ namespace odb
   "\"objectName\", "
   "\"viewNumber\") "
   "VALUES "
-  "($1, $2, $3, $4, $5)";
+  "(DEFAULT, $1, $2, $3, $4) "
+  "RETURNING \"idGraph\"";
 
   const char access::object_traits_impl< ::Graph, id_pgsql >::find_statement[] =
   "SELECT "
@@ -534,7 +539,7 @@ namespace odb
   "\"Graph\"";
 
   void access::object_traits_impl< ::Graph, id_pgsql >::
-  persist (database& db, const object_type& obj)
+  persist (database& db, object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
 
@@ -546,7 +551,7 @@ namespace odb
       conn.statement_cache ().find_object<object_type> ());
 
     callback (db,
-              obj,
+              static_cast<const object_type&> (obj),
               callback_event::pre_persist);
 
     image_type& im (sts.image ());
@@ -563,12 +568,25 @@ namespace odb
       imb.version++;
     }
 
+    {
+      id_image_type& i (sts.id_image ());
+      binding& b (sts.id_image_binding ());
+      if (i.version != sts.id_image_version () || b.version == 0)
+      {
+        bind (b.bind, i);
+        sts.id_image_version (i.version);
+        b.version++;
+      }
+    }
+
     insert_statement& st (sts.persist_statement ());
     if (!st.execute ())
       throw object_already_persistent ();
 
+    obj.idGraph = id (sts.id_image ());
+
     callback (db,
-              obj,
+              static_cast<const object_type&> (obj),
               callback_event::post_persist);
   }
 
@@ -660,6 +678,62 @@ namespace odb
       throw object_not_persistent ();
 
     pointer_cache_traits::erase (db, id);
+  }
+
+  access::object_traits_impl< ::Graph, id_pgsql >::pointer_type
+  access::object_traits_impl< ::Graph, id_pgsql >::
+  find (database& db, const id_type& id)
+  {
+    using namespace pgsql;
+
+    {
+      pointer_type p (pointer_cache_traits::find (db, id));
+
+      if (!pointer_traits::null_ptr (p))
+        return p;
+    }
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    statements_type::auto_lock l (sts);
+
+    if (l.locked ())
+    {
+      if (!find_ (sts, &id))
+        return pointer_type ();
+    }
+
+    pointer_type p (
+      access::object_factory<object_type, pointer_type>::create ());
+    pointer_traits::guard pg (p);
+
+    pointer_cache_traits::insert_guard ig (
+      pointer_cache_traits::insert (db, id, p));
+
+    object_type& obj (pointer_traits::get_ref (p));
+
+    if (l.locked ())
+    {
+      select_statement& st (sts.find_statement ());
+      ODB_POTENTIALLY_UNUSED (st);
+
+      callback (db, obj, callback_event::pre_load);
+      init (obj, sts.image (), &db);
+      load_ (sts, obj, false);
+      sts.load_delayed (0);
+      l.unlock ();
+      callback (db, obj, callback_event::post_load);
+      pointer_cache_traits::load (ig.position ());
+    }
+    else
+      sts.delay_load (id, obj, ig.position ());
+
+    ig.release ();
+    pg.release ();
+    return p;
   }
 
   bool access::object_traits_impl< ::Graph, id_pgsql >::

@@ -16,6 +16,7 @@
 #include "Graph.h"
 
 #include "GraphClass-odb.hxx"
+#include "Node-odb.hxx"
 #include "ObjectClass-odb.hxx"
 
 #include <memory>
@@ -56,7 +57,7 @@ namespace odb
 
     typedef long unsigned int id_type;
 
-    static const bool auto_id = false;
+    static const bool auto_id = true;
 
     static const bool abstract = false;
 
@@ -234,6 +235,9 @@ namespace odb
     using object_traits<object_type>::id;
 
     static id_type
+    id (const id_image_type&);
+
+    static id_type
     id (const image_type&);
 
     static bool
@@ -286,7 +290,10 @@ namespace odb
     static const char table_name[];
 
     static void
-    persist (database&, const object_type&);
+    persist (database&, object_type&);
+
+    static pointer_type
+    find (database&, const id_type&);
 
     static bool
     find (database&, const id_type&, object_type&);
