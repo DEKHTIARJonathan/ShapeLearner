@@ -72,6 +72,7 @@
 #ifdef _MSC_VER // ODB Generated
 #include "GraphClass-odb.hxx"
 #include "ObjectClass-odb.hxx"
+#include "Graph-odb.hxx"
 #endif // _MSC_VER
 
 

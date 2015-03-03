@@ -5,7 +5,7 @@
 DROP TABLE IF EXISTS "GraphClass" CASCADE;
 
 CREATE TABLE "GraphClass" (
-  "graphClassName" TEXT NOT NULL PRIMARY KEY,
+  "graphClassName" VARCHAR(255) NOT NULL PRIMARY KEY,
   "directGraph" BOOLEAN NOT NULL,
   "acyclicGraph" BOOLEAN NOT NULL);
 

@@ -24,11 +24,7 @@ namespace constants{
 
 	// Constantes sur les données des Notes
 
-	const unsigned int		SIZE_MAX_TYPE_DAG = 30;
-	const unsigned int		SIZE_MAX_CLASS_NAME = 255;
-	const unsigned int		SIZE_MAX_GRAPH_NAME = 255;
-	const unsigned int		SIZE_MAX_OBJ_NAME = 255;
-	const unsigned int		SIZE_MAX_PATH = 255;
+	const unsigned int		SIZE_MAX_STRING = 255;
 	const unsigned int		MAX_DB_RETRY = 4;
 	const unsigned int		DB_PGSQL = 1;
 	const unsigned int		DB_MYSQL = 2;

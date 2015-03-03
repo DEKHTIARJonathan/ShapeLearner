@@ -6,10 +6,19 @@ DROP TABLE IF EXISTS "Graph" CASCADE;
 
 CREATE TABLE "Graph" (
   "idGraph" BIGINT NOT NULL PRIMARY KEY,
-  "graphClass" TEXT NOT NULL,
-  "objectClass" TEXT NOT NULL,
-  "objectName" TEXT NOT NULL,
+  "graphClass" VARCHAR(255) NOT NULL,
+  "objectClass" VARCHAR(255) NOT NULL,
+  "objectName" VARCHAR(255) NOT NULL,
   "viewNumber" INTEGER NOT NULL);
+
+CREATE INDEX "graph_index"
+  ON "Graph" USING BTREE ("graphClass");
+
+CREATE INDEX "object_index"
+  ON "Graph" USING BTREE ("objectClass");
+
+CREATE UNIQUE INDEX "name_index"
+  ON "Graph" USING BTREE ("objectName");
 
 ALTER TABLE "Graph"
   ADD CONSTRAINT "graphClass_fk"
@@ -30,7 +39,7 @@ ALTER TABLE "Graph"
 DROP TABLE IF EXISTS "GraphClass" CASCADE;
 
 CREATE TABLE "GraphClass" (
-  "graphClassName" TEXT NOT NULL PRIMARY KEY,
+  "graphClassName" VARCHAR(255) NOT NULL PRIMARY KEY,
   "directGraph" BOOLEAN NOT NULL,
   "acyclicGraph" BOOLEAN NOT NULL);
 
@@ -41,5 +50,5 @@ CREATE TABLE "GraphClass" (
 DROP TABLE IF EXISTS "ObjectClass" CASCADE;
 
 CREATE TABLE "ObjectClass" (
-  "objectClassName" TEXT NOT NULL PRIMARY KEY);
+  "objectClassName" VARCHAR(255) NOT NULL PRIMARY KEY);
 
