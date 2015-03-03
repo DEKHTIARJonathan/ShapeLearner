@@ -54,7 +54,15 @@ void GraphManager::destroy(){
 	}
 }
 
-GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbUser, dbPass, dbName, dbHost, dbPort, dbType, dbInit)){}
+GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbUser, dbPass, dbName, dbHost, dbPort, dbType, dbInit)){
+		GraphClass shockGraph ("Shock Graph", true, true);
+		ObjectClass rod ("Rod");
+		Graph shock1(&shockGraph, &rod, 1, "Rod001.ppm");
+		
+		dBManager.saveObject(shockGraph);
+		dBManager.saveObject(rod);
+		dBManager.saveObject(shock1);
+}
 
 /* *******************************************************************
 *                        Command Line Parsing                        *
@@ -93,9 +101,7 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
 			getDbCredentials(); // En Debug les identifiants sont HardCoded.
 		#endif
 		
-		
-		openManager();
-		
+		openManager();		
 	}
 	catch (const std::exception &e ) 
 	{ 
@@ -224,7 +230,6 @@ void GraphManager::setDbHost() throw(GraphManagerExcept){
 	if (!tmp.empty())
 		dbHost = tmp;
 }
-
 
 /* *******************************************************************
 *                            Destructor                              *

@@ -11,13 +11,13 @@ CREATE TABLE "Graph" (
   "objectName" VARCHAR(255) NOT NULL,
   "viewNumber" INTEGER NOT NULL DEFAULT '1');
 
-CREATE INDEX "graph_index"
+CREATE INDEX "index_Graph_graphClass"
   ON "Graph" USING BTREE ("graphClass");
 
-CREATE INDEX "object_index"
+CREATE INDEX "index_Graph_objectClass"
   ON "Graph" USING BTREE ("objectClass");
 
-CREATE UNIQUE INDEX "name_index"
+CREATE UNIQUE INDEX "index_Graph_objectName"
   ON "Graph" USING BTREE ("objectName");
 
 ALTER TABLE "Graph"

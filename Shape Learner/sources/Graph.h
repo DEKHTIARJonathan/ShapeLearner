@@ -56,8 +56,8 @@ private:
 #pragma db member(Graph::objectClass) not_null on_delete(cascade)
 #pragma db member(Graph::objectName) not_null
 #pragma db member(Graph::viewNumber)  default("1") not_null
-#pragma db index(Graph::"graph_index") method("BTREE") member(graphClass)
-#pragma db index(Graph::"object_index") method("BTREE") member(objectClass)
-#pragma db index(Graph::"name_index") unique method("BTREE") member(objectName)
+#pragma db index(Graph::"index_Graph_graphClass") method("BTREE") member(graphClass)
+#pragma db index(Graph::"index_Graph_objectClass") method("BTREE") member(objectClass)
+#pragma db index(Graph::"index_Graph_objectName") unique method("BTREE") member(objectName)
 
 #endif // _GRAPH_

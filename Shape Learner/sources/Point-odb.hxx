@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef NODE_ODB_HXX
-#define NODE_ODB_HXX
+#ifndef POINT_ODB_HXX
+#define POINT_ODB_HXX
 
 #include <odb/version.hxx>
 
@@ -13,13 +13,13 @@
 
 #include <odb/pre.hxx>
 
-#include "Node.h"
+#include "Point.h"
 
 #include "Edge-odb.hxx"
 #include "Graph-odb.hxx"
 #include "GraphClass-odb.hxx"
+#include "Node-odb.hxx"
 #include "ObjectClass-odb.hxx"
-#include "Point-odb.hxx"
 
 #include <memory>
 #include <cstddef>
@@ -39,20 +39,20 @@
 
 namespace odb
 {
-  // Node
+  // Point
   //
   template <>
-  struct class_traits< ::Node >
+  struct class_traits< ::Point >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::Node >
+  class access::object_traits< ::Point >
   {
     public:
-    typedef ::Node object_type;
-    typedef ::Node* pointer_type;
+    typedef ::Point object_type;
+    typedef ::Point* pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -92,12 +92,12 @@ namespace odb
 
 namespace odb
 {
-  // Node
+  // Point
   //
   template <typename A>
-  struct pointer_query_columns< ::Node, id_pgsql, A >
+  struct pointer_query_columns< ::Point, id_pgsql, A >
   {
-    // idNode
+    // idPoint
     //
     typedef
     pgsql::query_column<
@@ -105,81 +105,45 @@ namespace odb
         long unsigned int,
         pgsql::id_bigint >::query_type,
       pgsql::id_bigint >
-    idNode_type_;
+    idPoint_type_;
 
-    static const idNode_type_ idNode;
+    static const idPoint_type_ idPoint;
 
-    // index
+    // xCoord
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    index_type_;
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    xCoord_type_;
 
-    static const index_type_ index;
+    static const xCoord_type_ xCoord;
 
-    // level
+    // yCoord
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    level_type_;
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    yCoord_type_;
 
-    static const level_type_ level;
+    static const yCoord_type_ yCoord;
 
-    // mass
+    // radius
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    mass_type_;
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    radius_type_;
 
-    static const mass_type_ mass;
-
-    // type
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    type_type_;
-
-    static const type_type_ type;
-
-    // pointCount
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    pointCount_type_;
-
-    static const pointCount_type_ pointCount;
-
-    // label
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    label_type_;
-
-    static const label_type_ label;
+    static const radius_type_ radius;
 
     // refGraph
     //
@@ -192,51 +156,53 @@ namespace odb
     refGraph_type_;
 
     static const refGraph_type_ refGraph;
+
+    // refNode
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
+    refNode_type_;
+
+    static const refNode_type_ refNode;
   };
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::idNode_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
-  idNode (A::table_name, "\"idNode\"", 0);
+  const typename pointer_query_columns< ::Point, id_pgsql, A >::idPoint_type_
+  pointer_query_columns< ::Point, id_pgsql, A >::
+  idPoint (A::table_name, "\"idPoint\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::index_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
-  index (A::table_name, "\"index\"", 0);
+  const typename pointer_query_columns< ::Point, id_pgsql, A >::xCoord_type_
+  pointer_query_columns< ::Point, id_pgsql, A >::
+  xCoord (A::table_name, "\"xCoord\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::level_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
-  level (A::table_name, "\"level\"", 0);
+  const typename pointer_query_columns< ::Point, id_pgsql, A >::yCoord_type_
+  pointer_query_columns< ::Point, id_pgsql, A >::
+  yCoord (A::table_name, "\"yCoord\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::mass_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
-  mass (A::table_name, "\"mass\"", 0);
+  const typename pointer_query_columns< ::Point, id_pgsql, A >::radius_type_
+  pointer_query_columns< ::Point, id_pgsql, A >::
+  radius (A::table_name, "\"radius\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::type_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
-  type (A::table_name, "\"type\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::pointCount_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
-  pointCount (A::table_name, "\"pointCount\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::label_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
-  label (A::table_name, "\"label\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::refGraph_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::Point, id_pgsql, A >::refGraph_type_
+  pointer_query_columns< ::Point, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
 
+  template <typename A>
+  const typename pointer_query_columns< ::Point, id_pgsql, A >::refNode_type_
+  pointer_query_columns< ::Point, id_pgsql, A >::
+  refNode (A::table_name, "\"refNode\"", 0);
+
   template <>
-  class access::object_traits_impl< ::Node, id_pgsql >:
-    public access::object_traits< ::Node >
+  class access::object_traits_impl< ::Point, id_pgsql >:
+    public access::object_traits< ::Point >
   {
     public:
     struct id_image_type
@@ -249,45 +215,35 @@ namespace odb
 
     struct image_type
     {
-      // idNode
+      // idPoint
       //
-      long long idNode_value;
-      bool idNode_null;
+      long long idPoint_value;
+      bool idPoint_null;
 
-      // index
+      // xCoord
       //
-      int index_value;
-      bool index_null;
+      double xCoord_value;
+      bool xCoord_null;
 
-      // level
+      // yCoord
       //
-      int level_value;
-      bool level_null;
+      double yCoord_value;
+      bool yCoord_null;
 
-      // mass
+      // radius
       //
-      int mass_value;
-      bool mass_null;
-
-      // type
-      //
-      int type_value;
-      bool type_null;
-
-      // pointCount
-      //
-      int pointCount_value;
-      bool pointCount_null;
-
-      // label
-      //
-      int label_value;
-      bool label_null;
+      double radius_value;
+      bool radius_null;
 
       // refGraph
       //
       long long refGraph_value;
       bool refGraph_null;
+
+      // refNode
+      //
+      long long refNode_value;
+      bool refNode_null;
 
       std::size_t version;
     };
@@ -295,6 +251,7 @@ namespace odb
     struct extra_statement_cache_type;
 
     struct refGraph_tag;
+    struct refNode_tag;
 
     using object_traits<object_type>::id;
 
@@ -333,7 +290,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 8UL;
+    static const std::size_t column_count = 6UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -403,24 +360,33 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::Node, id_common >:
-    public access::object_traits_impl< ::Node, id_pgsql >
+  class access::object_traits_impl< ::Point, id_common >:
+    public access::object_traits_impl< ::Point, id_pgsql >
   {
   };
 
-  // Node
+  // Point
   //
   template <>
   struct alias_traits<
     ::Graph,
     id_pgsql,
-    access::object_traits_impl< ::Node, id_pgsql >::refGraph_tag>
+    access::object_traits_impl< ::Point, id_pgsql >::refGraph_tag>
   {
     static const char table_name[];
   };
 
   template <>
-  struct query_columns_base< ::Node, id_pgsql >
+  struct alias_traits<
+    ::Node,
+    id_pgsql,
+    access::object_traits_impl< ::Point, id_pgsql >::refNode_tag>
+  {
+    static const char table_name[];
+  };
+
+  template <>
+  struct query_columns_base< ::Point, id_pgsql >
   {
     // refGraph
     //
@@ -428,15 +394,24 @@ namespace odb
     odb::alias_traits<
       ::Graph,
       id_pgsql,
-      access::object_traits_impl< ::Node, id_pgsql >::refGraph_tag>
+      access::object_traits_impl< ::Point, id_pgsql >::refGraph_tag>
     refGraph_alias_;
+
+    // refNode
+    //
+    typedef
+    odb::alias_traits<
+      ::Node,
+      id_pgsql,
+      access::object_traits_impl< ::Point, id_pgsql >::refNode_tag>
+    refNode_alias_;
   };
 
   template <typename A>
-  struct query_columns< ::Node, id_pgsql, A >:
-    query_columns_base< ::Node, id_pgsql >
+  struct query_columns< ::Point, id_pgsql, A >:
+    query_columns_base< ::Point, id_pgsql >
   {
-    // idNode
+    // idPoint
     //
     typedef
     pgsql::query_column<
@@ -444,81 +419,45 @@ namespace odb
         long unsigned int,
         pgsql::id_bigint >::query_type,
       pgsql::id_bigint >
-    idNode_type_;
+    idPoint_type_;
 
-    static const idNode_type_ idNode;
+    static const idPoint_type_ idPoint;
 
-    // index
+    // xCoord
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    index_type_;
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    xCoord_type_;
 
-    static const index_type_ index;
+    static const xCoord_type_ xCoord;
 
-    // level
+    // yCoord
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    level_type_;
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    yCoord_type_;
 
-    static const level_type_ level;
+    static const yCoord_type_ yCoord;
 
-    // mass
+    // radius
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    mass_type_;
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    radius_type_;
 
-    static const mass_type_ mass;
-
-    // type
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    type_type_;
-
-    static const type_type_ type;
-
-    // pointCount
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    pointCount_type_;
-
-    static const pointCount_type_ pointCount;
-
-    // label
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    label_type_;
-
-    static const label_type_ label;
+    static const radius_type_ radius;
 
     // refGraph
     //
@@ -547,51 +486,69 @@ namespace odb
     };
 
     static const refGraph_type_ refGraph;
+
+    // refNode
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
+    refNode_column_type_;
+
+    typedef
+    odb::query_pointer<
+      odb::pointer_query_columns<
+        ::Node,
+        id_pgsql,
+        refNode_alias_ > >
+    refNode_pointer_type_;
+
+    struct refNode_type_: refNode_pointer_type_, refNode_column_type_
+    {
+      refNode_type_ (const char* t, const char* c, const char* conv)
+        : refNode_column_type_ (t, c, conv)
+      {
+      }
+    };
+
+    static const refNode_type_ refNode;
   };
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::idNode_type_
-  query_columns< ::Node, id_pgsql, A >::
-  idNode (A::table_name, "\"idNode\"", 0);
+  const typename query_columns< ::Point, id_pgsql, A >::idPoint_type_
+  query_columns< ::Point, id_pgsql, A >::
+  idPoint (A::table_name, "\"idPoint\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::index_type_
-  query_columns< ::Node, id_pgsql, A >::
-  index (A::table_name, "\"index\"", 0);
+  const typename query_columns< ::Point, id_pgsql, A >::xCoord_type_
+  query_columns< ::Point, id_pgsql, A >::
+  xCoord (A::table_name, "\"xCoord\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::level_type_
-  query_columns< ::Node, id_pgsql, A >::
-  level (A::table_name, "\"level\"", 0);
+  const typename query_columns< ::Point, id_pgsql, A >::yCoord_type_
+  query_columns< ::Point, id_pgsql, A >::
+  yCoord (A::table_name, "\"yCoord\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::mass_type_
-  query_columns< ::Node, id_pgsql, A >::
-  mass (A::table_name, "\"mass\"", 0);
+  const typename query_columns< ::Point, id_pgsql, A >::radius_type_
+  query_columns< ::Point, id_pgsql, A >::
+  radius (A::table_name, "\"radius\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::type_type_
-  query_columns< ::Node, id_pgsql, A >::
-  type (A::table_name, "\"type\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::pointCount_type_
-  query_columns< ::Node, id_pgsql, A >::
-  pointCount (A::table_name, "\"pointCount\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::label_type_
-  query_columns< ::Node, id_pgsql, A >::
-  label (A::table_name, "\"label\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::refGraph_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::Point, id_pgsql, A >::refGraph_type_
+  query_columns< ::Point, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::Point, id_pgsql, A >::refNode_type_
+  query_columns< ::Point, id_pgsql, A >::
+  refNode (A::table_name, "\"refNode\"", 0);
 }
 
-#include "Node-odb.ixx"
+#include "Point-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // NODE_ODB_HXX
+#endif // POINT_ODB_HXX
