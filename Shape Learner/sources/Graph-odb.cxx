@@ -65,6 +65,8 @@ namespace odb
   {
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::int4_oid,
     pgsql::int8_oid
   };
 
@@ -197,25 +199,19 @@ namespace odb
 
     // objectName
     //
-    if (sk != statement_update)
-    {
-      b[n].type = pgsql::bind::text;
-      b[n].buffer = i.objectName_value.data ();
-      b[n].capacity = i.objectName_value.capacity ();
-      b[n].size = &i.objectName_size;
-      b[n].is_null = &i.objectName_null;
-      n++;
-    }
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.objectName_value.data ();
+    b[n].capacity = i.objectName_value.capacity ();
+    b[n].size = &i.objectName_size;
+    b[n].is_null = &i.objectName_null;
+    n++;
 
     // viewNumber
     //
-    if (sk != statement_update)
-    {
-      b[n].type = pgsql::bind::integer;
-      b[n].buffer = &i.viewNumber_value;
-      b[n].is_null = &i.viewNumber_null;
-      n++;
-    }
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.viewNumber_value;
+    b[n].is_null = &i.viewNumber_null;
+    n++;
   }
 
   void access::object_traits_impl< ::Graph, id_pgsql >::
@@ -321,7 +317,6 @@ namespace odb
 
     // objectName
     //
-    if (sk == statement_insert)
     {
       ::std::string const& v =
         o.objectName;
@@ -343,7 +338,6 @@ namespace odb
 
     // viewNumber
     //
-    if (sk == statement_insert)
     {
       unsigned int const& v =
         o.viewNumber;
@@ -450,8 +444,7 @@ namespace odb
     //
     {
       ::std::string& v =
-        const_cast< ::std::string& > (
-        o.objectName);
+        o.objectName;
 
       pgsql::value_traits<
           ::std::string,
@@ -466,8 +459,7 @@ namespace odb
     //
     {
       unsigned int& v =
-        const_cast< unsigned int& > (
-        o.viewNumber);
+        o.viewNumber;
 
       pgsql::value_traits<
           unsigned int,
@@ -515,8 +507,10 @@ namespace odb
   "UPDATE \"Graph\" "
   "SET "
   "\"graphClass\"=$1, "
-  "\"objectClass\"=$2 "
-  "WHERE \"idGraph\"=$3";
+  "\"objectClass\"=$2, "
+  "\"objectName\"=$3, "
+  "\"viewNumber\"=$4 "
+  "WHERE \"idGraph\"=$5";
 
   const char access::object_traits_impl< ::Graph, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Graph\" "

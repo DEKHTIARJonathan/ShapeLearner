@@ -27,7 +27,7 @@ using namespace std;
 string GraphManager::dbName = "postgres";
 string GraphManager::dbUser = "postgres";
 string GraphManager::dbPass = "postgres";
-unsigned int GraphManager::dbPort = 5433;
+unsigned int GraphManager::dbPort = 5432;
 string GraphManager::dbHost = "localhost";
 bool GraphManager::dbInit = false;
 unsigned int GraphManager::dbType = constants::DB_PGSQL;

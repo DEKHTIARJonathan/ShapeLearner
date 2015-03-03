@@ -29,12 +29,13 @@ public:
 	ObjectClass(const string& name);
 
 private:
-	ObjectClass();
+	ObjectClass() {}
 	string objectClassName;
 
 	friend class odb::access;
 };
 
+#pragma db value(std::string) type("VARCHAR(255)")
 #pragma db object(ObjectClass)
 #pragma db member(ObjectClass::objectClassName) id
 

@@ -17,6 +17,7 @@
     <ClInclude Include="sources\constants.h" />
     <ClInclude Include="sources\dbexception.h" />
     <ClInclude Include="sources\dbManager.h" />
+    <ClInclude Include="sources\Graph-odb.hxx" />
     <ClInclude Include="sources\Graph.h" />
     <ClInclude Include="sources\GraphClass-odb.hxx" />
     <ClInclude Include="sources\GraphClass.h" />
@@ -30,6 +31,7 @@
     <ClCompile Include="sources\CmdLineException.cpp" />
     <ClCompile Include="sources\dbexception.cpp" />
     <ClCompile Include="sources\dbManager.cpp" />
+    <ClCompile Include="sources\Graph-odb.cxx" />
     <ClCompile Include="sources\Graph.cpp" />
     <ClCompile Include="sources\GraphClass-odb.cxx" />
     <ClCompile Include="sources\GraphClass.cpp" />
@@ -40,6 +42,8 @@
     <ClCompile Include="sources\ObjectClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="sources\Graph-odb.ixx" />
+    <None Include="sources\Graph.sql" />
     <None Include="sources\GraphClass-odb.ixx" />
     <None Include="sources\GraphClass.sql" />
     <None Include="sources\ObjectClass-odb.ixx" />

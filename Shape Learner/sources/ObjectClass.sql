@@ -5,5 +5,5 @@
 DROP TABLE IF EXISTS "ObjectClass" CASCADE;
 
 CREATE TABLE "ObjectClass" (
-  "objectClassName" TEXT NOT NULL PRIMARY KEY);
+  "objectClassName" VARCHAR(255) NOT NULL PRIMARY KEY);
 

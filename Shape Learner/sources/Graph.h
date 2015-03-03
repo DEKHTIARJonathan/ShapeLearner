@@ -42,23 +42,21 @@ private:
 	GraphClass* graphClass;
 	ObjectClass* objectClass;
 
-	const string objectName; // The name of the image file.
-	const unsigned int viewNumber;
+	string objectName; // The name of the image file.
+	unsigned int viewNumber;
 
 	friend class odb::access;
 };
 
+#pragma db value(std::string) type("VARCHAR(255)")
 #pragma db object(Graph)
 #pragma db member(Graph::idGraph) id
 #pragma db member(Graph::graphClass) not_null on_delete(cascade)
 #pragma db member(Graph::objectClass) not_null on_delete(cascade)
 #pragma db member(Graph::objectName) not_null
 #pragma db member(Graph::viewNumber) not_null
-
-
-
-//#pragma db index(Graph::"graph_index") method("BTREE") member(Graph::graphClass) not_null
-//#pragma db index(Graph::"object_index") method("BTREE") member(Graph::objectClass) not_null
-//#pragma db index(Graph::"name_index") unique method("BTREE") member(Graph::objectName) not_null
+#pragma db index(Graph::"graph_index") method("BTREE") member(graphClass)
+#pragma db index(Graph::"object_index") method("BTREE") member(objectClass)
+#pragma db index(Graph::"name_index") unique method("BTREE") member(objectName)
 
 #endif // _GRAPH_

@@ -31,7 +31,7 @@ public:
 	GraphClass(const string& name, bool isDirect, bool isAcyclic);
 
 private:
-	GraphClass();
+	GraphClass() {}
 	string graphClassName;
 	bool directGraph;
 	bool acyclicGraph;
@@ -39,6 +39,7 @@ private:
 	friend class odb::access;
 };
 
+#pragma db value(std::string) type("VARCHAR(255)")
 #pragma db object(GraphClass)
 #pragma db member(GraphClass::graphClassName) id
 
