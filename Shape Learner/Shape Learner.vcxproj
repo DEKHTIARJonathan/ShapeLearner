@@ -23,6 +23,7 @@
     <ClInclude Include="sources\GraphClass.h" />
     <ClInclude Include="sources\graphManager.h" />
     <ClInclude Include="sources\graphManagerException.h" />
+    <ClInclude Include="sources\Node.h" />
     <ClInclude Include="sources\ObjectClass-odb.hxx" />
     <ClInclude Include="sources\ObjectClass.h" />
   </ItemGroup>
@@ -38,6 +39,7 @@
     <ClCompile Include="sources\graphManager.cpp" />
     <ClCompile Include="sources\graphManagerException.cpp" />
     <ClCompile Include="sources\main.cpp" />
+    <ClCompile Include="sources\Node.cpp" />
     <ClCompile Include="sources\ObjectClass-odb.cxx" />
     <ClCompile Include="sources\ObjectClass.cpp" />
   </ItemGroup>

@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "Graph-odb.hxx"
+#include "Node-odb.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy
@@ -23,63 +23,64 @@
 
 namespace odb
 {
-  // Graph
+  // Node
   //
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::
-  persist_statement_name[] = "persist_Graph";
+  const char access::object_traits_impl< ::Node, id_pgsql >::
+  persist_statement_name[] = "persist_Node";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::
-  find_statement_name[] = "find_Graph";
+  const char access::object_traits_impl< ::Node, id_pgsql >::
+  find_statement_name[] = "find_Node";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::
-  update_statement_name[] = "update_Graph";
+  const char access::object_traits_impl< ::Node, id_pgsql >::
+  update_statement_name[] = "update_Node";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::
-  erase_statement_name[] = "erase_Graph";
+  const char access::object_traits_impl< ::Node, id_pgsql >::
+  erase_statement_name[] = "erase_Node";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::
-  query_statement_name[] = "query_Graph";
+  const char access::object_traits_impl< ::Node, id_pgsql >::
+  query_statement_name[] = "query_Node";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::
-  erase_query_statement_name[] = "erase_query_Graph";
+  const char access::object_traits_impl< ::Node, id_pgsql >::
+  erase_query_statement_name[] = "erase_query_Node";
 
-  const unsigned int access::object_traits_impl< ::Graph, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::Node, id_pgsql >::
   persist_statement_types[] =
   {
-    pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::int4_oid
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int8_oid
   };
 
-  const unsigned int access::object_traits_impl< ::Graph, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::Node, id_pgsql >::
   find_statement_types[] =
   {
     pgsql::int8_oid
   };
 
-  const unsigned int access::object_traits_impl< ::Graph, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::Node, id_pgsql >::
   update_statement_types[] =
   {
-    pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::text_oid,
     pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int8_oid,
     pgsql::int8_oid
   };
 
-  const char alias_traits<  ::GraphClass,
+  const char alias_traits<  ::Graph,
     id_pgsql,
-    access::object_traits_impl< ::Graph, id_pgsql >::graphClass_tag>::
-  table_name[] = "\"graphClass\"";
+    access::object_traits_impl< ::Node, id_pgsql >::refGraph_tag>::
+  table_name[] = "\"refGraph\"";
 
-  const char alias_traits<  ::ObjectClass,
-    id_pgsql,
-    access::object_traits_impl< ::Graph, id_pgsql >::objectClass_tag>::
-  table_name[] = "\"objectClass\"";
-
-  struct access::object_traits_impl< ::Graph, id_pgsql >::extra_statement_cache_type
+  struct access::object_traits_impl< ::Node, id_pgsql >::extra_statement_cache_type
   {
     extra_statement_cache_type (
       pgsql::connection&,
@@ -93,8 +94,8 @@ namespace odb
     }
   };
 
-  access::object_traits_impl< ::Graph, id_pgsql >::id_type
-  access::object_traits_impl< ::Graph, id_pgsql >::
+  access::object_traits_impl< ::Node, id_pgsql >::id_type
+  access::object_traits_impl< ::Node, id_pgsql >::
   id (const id_image_type& i)
   {
     pgsql::database* db (0);
@@ -113,8 +114,8 @@ namespace odb
     return id;
   }
 
-  access::object_traits_impl< ::Graph, id_pgsql >::id_type
-  access::object_traits_impl< ::Graph, id_pgsql >::
+  access::object_traits_impl< ::Node, id_pgsql >::id_type
+  access::object_traits_impl< ::Node, id_pgsql >::
   id (const image_type& i)
   {
     pgsql::database* db (0);
@@ -126,14 +127,14 @@ namespace odb
           long unsigned int,
           pgsql::id_bigint >::set_value (
         id,
-        i.idGraph_value,
-        i.idGraph_null);
+        i.idNode_value,
+        i.idNode_null);
     }
 
     return id;
   }
 
-  bool access::object_traits_impl< ::Graph, id_pgsql >::
+  bool access::object_traits_impl< ::Node, id_pgsql >::
   grow (image_type& i,
         bool* t)
   {
@@ -142,42 +143,42 @@ namespace odb
 
     bool grew (false);
 
-    // idGraph
+    // idNode
     //
     t[0UL] = 0;
 
-    // graphClass
+    // index
     //
-    if (t[1UL])
-    {
-      i.graphClass_value.capacity (i.graphClass_size);
-      grew = true;
-    }
+    t[1UL] = 0;
 
-    // objectClass
+    // level
     //
-    if (t[2UL])
-    {
-      i.objectClass_value.capacity (i.objectClass_size);
-      grew = true;
-    }
+    t[2UL] = 0;
 
-    // objectName
+    // mass
     //
-    if (t[3UL])
-    {
-      i.objectName_value.capacity (i.objectName_size);
-      grew = true;
-    }
+    t[3UL] = 0;
 
-    // viewNumber
+    // type
     //
     t[4UL] = 0;
+
+    // pointCount
+    //
+    t[5UL] = 0;
+
+    // label
+    //
+    t[6UL] = 0;
+
+    // refGraph
+    //
+    t[7UL] = 0;
 
     return grew;
   }
 
-  void access::object_traits_impl< ::Graph, id_pgsql >::
+  void access::object_traits_impl< ::Node, id_pgsql >::
   bind (pgsql::bind* b,
         image_type& i,
         pgsql::statement_kind sk)
@@ -188,52 +189,67 @@ namespace odb
 
     std::size_t n (0);
 
-    // idGraph
+    // idNode
     //
     if (sk != statement_insert && sk != statement_update)
     {
       b[n].type = pgsql::bind::bigint;
-      b[n].buffer = &i.idGraph_value;
-      b[n].is_null = &i.idGraph_null;
+      b[n].buffer = &i.idNode_value;
+      b[n].is_null = &i.idNode_null;
       n++;
     }
 
-    // graphClass
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.graphClass_value.data ();
-    b[n].capacity = i.graphClass_value.capacity ();
-    b[n].size = &i.graphClass_size;
-    b[n].is_null = &i.graphClass_null;
-    n++;
-
-    // objectClass
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.objectClass_value.data ();
-    b[n].capacity = i.objectClass_value.capacity ();
-    b[n].size = &i.objectClass_size;
-    b[n].is_null = &i.objectClass_null;
-    n++;
-
-    // objectName
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.objectName_value.data ();
-    b[n].capacity = i.objectName_value.capacity ();
-    b[n].size = &i.objectName_size;
-    b[n].is_null = &i.objectName_null;
-    n++;
-
-    // viewNumber
+    // index
     //
     b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.viewNumber_value;
-    b[n].is_null = &i.viewNumber_null;
+    b[n].buffer = &i.index_value;
+    b[n].is_null = &i.index_null;
+    n++;
+
+    // level
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.level_value;
+    b[n].is_null = &i.level_null;
+    n++;
+
+    // mass
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.mass_value;
+    b[n].is_null = &i.mass_null;
+    n++;
+
+    // type
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.type_value;
+    b[n].is_null = &i.type_null;
+    n++;
+
+    // pointCount
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.pointCount_value;
+    b[n].is_null = &i.pointCount_null;
+    n++;
+
+    // label
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.label_value;
+    b[n].is_null = &i.label_null;
+    n++;
+
+    // refGraph
+    //
+    b[n].type = pgsql::bind::bigint;
+    b[n].buffer = &i.refGraph_value;
+    b[n].is_null = &i.refGraph_null;
     n++;
   }
 
-  void access::object_traits_impl< ::Graph, id_pgsql >::
+  void access::object_traits_impl< ::Node, id_pgsql >::
   bind (pgsql::bind* b, id_image_type& i)
   {
     std::size_t n (0);
@@ -242,7 +258,7 @@ namespace odb
     b[n].is_null = &i.id_null;
   }
 
-  bool access::object_traits_impl< ::Graph, id_pgsql >::
+  bool access::object_traits_impl< ::Node, id_pgsql >::
   init (image_type& i,
         const object_type& o,
         pgsql::statement_kind sk)
@@ -255,109 +271,119 @@ namespace odb
 
     bool grew (false);
 
-    // graphClass
-    //
-    {
-      ::GraphClass* const& v =
-        o.graphClass;
-
-      typedef object_traits< ::GraphClass > obj_traits;
-      typedef odb::pointer_traits< ::GraphClass* > ptr_traits;
-
-      bool is_null (ptr_traits::null_ptr (v));
-      if (!is_null)
-      {
-        const obj_traits::id_type& id (
-          obj_traits::id (ptr_traits::get_ref (v)));
-
-        std::size_t size (0);
-        std::size_t cap (i.graphClass_value.capacity ());
-        pgsql::value_traits<
-            obj_traits::id_type,
-            pgsql::id_string >::set_image (
-          i.graphClass_value,
-          size,
-          is_null,
-          id);
-        i.graphClass_null = is_null;
-        i.graphClass_size = size;
-        grew = grew || (cap != i.graphClass_value.capacity ());
-      }
-      else
-        throw null_pointer ();
-    }
-
-    // objectClass
-    //
-    {
-      ::ObjectClass* const& v =
-        o.objectClass;
-
-      typedef object_traits< ::ObjectClass > obj_traits;
-      typedef odb::pointer_traits< ::ObjectClass* > ptr_traits;
-
-      bool is_null (ptr_traits::null_ptr (v));
-      if (!is_null)
-      {
-        const obj_traits::id_type& id (
-          obj_traits::id (ptr_traits::get_ref (v)));
-
-        std::size_t size (0);
-        std::size_t cap (i.objectClass_value.capacity ());
-        pgsql::value_traits<
-            obj_traits::id_type,
-            pgsql::id_string >::set_image (
-          i.objectClass_value,
-          size,
-          is_null,
-          id);
-        i.objectClass_null = is_null;
-        i.objectClass_size = size;
-        grew = grew || (cap != i.objectClass_value.capacity ());
-      }
-      else
-        throw null_pointer ();
-    }
-
-    // objectName
-    //
-    {
-      ::std::string const& v =
-        o.objectName;
-
-      bool is_null (false);
-      std::size_t size (0);
-      std::size_t cap (i.objectName_value.capacity ());
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.objectName_value,
-        size,
-        is_null,
-        v);
-      i.objectName_null = is_null;
-      i.objectName_size = size;
-      grew = grew || (cap != i.objectName_value.capacity ());
-    }
-
-    // viewNumber
+    // index
     //
     {
       unsigned int const& v =
-        o.viewNumber;
+        o.index;
 
       bool is_null (false);
       pgsql::value_traits<
           unsigned int,
           pgsql::id_integer >::set_image (
-        i.viewNumber_value, is_null, v);
-      i.viewNumber_null = is_null;
+        i.index_value, is_null, v);
+      i.index_null = is_null;
+    }
+
+    // level
+    //
+    {
+      unsigned int const& v =
+        o.level;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_image (
+        i.level_value, is_null, v);
+      i.level_null = is_null;
+    }
+
+    // mass
+    //
+    {
+      unsigned int const& v =
+        o.mass;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_image (
+        i.mass_value, is_null, v);
+      i.mass_null = is_null;
+    }
+
+    // type
+    //
+    {
+      unsigned int const& v =
+        o.type;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_image (
+        i.type_value, is_null, v);
+      i.type_null = is_null;
+    }
+
+    // pointCount
+    //
+    {
+      unsigned int const& v =
+        o.pointCount;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_image (
+        i.pointCount_value, is_null, v);
+      i.pointCount_null = is_null;
+    }
+
+    // label
+    //
+    {
+      unsigned int const& v =
+        o.label;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_image (
+        i.label_value, is_null, v);
+      i.label_null = is_null;
+    }
+
+    // refGraph
+    //
+    {
+      ::Graph* const& v =
+        o.refGraph;
+
+      typedef object_traits< ::Graph > obj_traits;
+      typedef odb::pointer_traits< ::Graph* > ptr_traits;
+
+      bool is_null (ptr_traits::null_ptr (v));
+      if (!is_null)
+      {
+        const obj_traits::id_type& id (
+          obj_traits::id (ptr_traits::get_ref (v)));
+
+        pgsql::value_traits<
+            obj_traits::id_type,
+            pgsql::id_bigint >::set_image (
+          i.refGraph_value, is_null, id);
+        i.refGraph_null = is_null;
+      }
+      else
+        throw null_pointer ();
     }
 
     return grew;
   }
 
-  void access::object_traits_impl< ::Graph, id_pgsql >::
+  void access::object_traits_impl< ::Node, id_pgsql >::
   init (object_type& o,
         const image_type& i,
         database* db)
@@ -366,115 +392,137 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (i);
     ODB_POTENTIALLY_UNUSED (db);
 
-    // idGraph
+    // idNode
     //
     {
       long unsigned int& v =
-        o.idGraph;
+        o.idNode;
 
       pgsql::value_traits<
           long unsigned int,
           pgsql::id_bigint >::set_value (
         v,
-        i.idGraph_value,
-        i.idGraph_null);
+        i.idNode_value,
+        i.idNode_null);
     }
 
-    // graphClass
-    //
-    {
-      ::GraphClass*& v =
-        o.graphClass;
-
-      typedef object_traits< ::GraphClass > obj_traits;
-      typedef odb::pointer_traits< ::GraphClass* > ptr_traits;
-
-      if (i.graphClass_null)
-        v = ptr_traits::pointer_type ();
-      else
-      {
-        obj_traits::id_type id;
-        pgsql::value_traits<
-            obj_traits::id_type,
-            pgsql::id_string >::set_value (
-          id,
-          i.graphClass_value,
-          i.graphClass_size,
-          i.graphClass_null);
-
-        // If a compiler error points to the line below, then
-        // it most likely means that a pointer used in a member
-        // cannot be initialized from an object pointer.
-        //
-        v = ptr_traits::pointer_type (
-          static_cast<pgsql::database*> (db)->load<
-            obj_traits::object_type > (id));
-      }
-    }
-
-    // objectClass
-    //
-    {
-      ::ObjectClass*& v =
-        o.objectClass;
-
-      typedef object_traits< ::ObjectClass > obj_traits;
-      typedef odb::pointer_traits< ::ObjectClass* > ptr_traits;
-
-      if (i.objectClass_null)
-        v = ptr_traits::pointer_type ();
-      else
-      {
-        obj_traits::id_type id;
-        pgsql::value_traits<
-            obj_traits::id_type,
-            pgsql::id_string >::set_value (
-          id,
-          i.objectClass_value,
-          i.objectClass_size,
-          i.objectClass_null);
-
-        // If a compiler error points to the line below, then
-        // it most likely means that a pointer used in a member
-        // cannot be initialized from an object pointer.
-        //
-        v = ptr_traits::pointer_type (
-          static_cast<pgsql::database*> (db)->load<
-            obj_traits::object_type > (id));
-      }
-    }
-
-    // objectName
-    //
-    {
-      ::std::string& v =
-        o.objectName;
-
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
-        v,
-        i.objectName_value,
-        i.objectName_size,
-        i.objectName_null);
-    }
-
-    // viewNumber
+    // index
     //
     {
       unsigned int& v =
-        o.viewNumber;
+        o.index;
 
       pgsql::value_traits<
           unsigned int,
           pgsql::id_integer >::set_value (
         v,
-        i.viewNumber_value,
-        i.viewNumber_null);
+        i.index_value,
+        i.index_null);
+    }
+
+    // level
+    //
+    {
+      unsigned int& v =
+        o.level;
+
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.level_value,
+        i.level_null);
+    }
+
+    // mass
+    //
+    {
+      unsigned int& v =
+        o.mass;
+
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.mass_value,
+        i.mass_null);
+    }
+
+    // type
+    //
+    {
+      unsigned int& v =
+        o.type;
+
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.type_value,
+        i.type_null);
+    }
+
+    // pointCount
+    //
+    {
+      unsigned int& v =
+        o.pointCount;
+
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.pointCount_value,
+        i.pointCount_null);
+    }
+
+    // label
+    //
+    {
+      unsigned int& v =
+        o.label;
+
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.label_value,
+        i.label_null);
+    }
+
+    // refGraph
+    //
+    {
+      ::Graph*& v =
+        o.refGraph;
+
+      typedef object_traits< ::Graph > obj_traits;
+      typedef odb::pointer_traits< ::Graph* > ptr_traits;
+
+      if (i.refGraph_null)
+        v = ptr_traits::pointer_type ();
+      else
+      {
+        obj_traits::id_type id;
+        pgsql::value_traits<
+            obj_traits::id_type,
+            pgsql::id_bigint >::set_value (
+          id,
+          i.refGraph_value,
+          i.refGraph_null);
+
+        // If a compiler error points to the line below, then
+        // it most likely means that a pointer used in a member
+        // cannot be initialized from an object pointer.
+        //
+        v = ptr_traits::pointer_type (
+          static_cast<pgsql::database*> (db)->load<
+            obj_traits::object_type > (id));
+      }
     }
   }
 
-  void access::object_traits_impl< ::Graph, id_pgsql >::
+  void access::object_traits_impl< ::Node, id_pgsql >::
   init (id_image_type& i, const id_type& id)
   {
     {
@@ -487,58 +535,69 @@ namespace odb
     }
   }
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::persist_statement[] =
-  "INSERT INTO \"Graph\" "
-  "(\"idGraph\", "
-  "\"graphClass\", "
-  "\"objectClass\", "
-  "\"objectName\", "
-  "\"viewNumber\") "
+  const char access::object_traits_impl< ::Node, id_pgsql >::persist_statement[] =
+  "INSERT INTO \"Node\" "
+  "(\"idNode\", "
+  "\"index\", "
+  "\"level\", "
+  "\"mass\", "
+  "\"type\", "
+  "\"pointCount\", "
+  "\"label\", "
+  "\"refGraph\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4) "
-  "RETURNING \"idGraph\"";
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7) "
+  "RETURNING \"idNode\"";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::find_statement[] =
+  const char access::object_traits_impl< ::Node, id_pgsql >::find_statement[] =
   "SELECT "
-  "\"Graph\".\"idGraph\", "
-  "\"Graph\".\"graphClass\", "
-  "\"Graph\".\"objectClass\", "
-  "\"Graph\".\"objectName\", "
-  "\"Graph\".\"viewNumber\" "
-  "FROM \"Graph\" "
-  "WHERE \"Graph\".\"idGraph\"=$1";
+  "\"Node\".\"idNode\", "
+  "\"Node\".\"index\", "
+  "\"Node\".\"level\", "
+  "\"Node\".\"mass\", "
+  "\"Node\".\"type\", "
+  "\"Node\".\"pointCount\", "
+  "\"Node\".\"label\", "
+  "\"Node\".\"refGraph\" "
+  "FROM \"Node\" "
+  "WHERE \"Node\".\"idNode\"=$1";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::update_statement[] =
-  "UPDATE \"Graph\" "
+  const char access::object_traits_impl< ::Node, id_pgsql >::update_statement[] =
+  "UPDATE \"Node\" "
   "SET "
-  "\"graphClass\"=$1, "
-  "\"objectClass\"=$2, "
-  "\"objectName\"=$3, "
-  "\"viewNumber\"=$4 "
-  "WHERE \"idGraph\"=$5";
+  "\"index\"=$1, "
+  "\"level\"=$2, "
+  "\"mass\"=$3, "
+  "\"type\"=$4, "
+  "\"pointCount\"=$5, "
+  "\"label\"=$6, "
+  "\"refGraph\"=$7 "
+  "WHERE \"idNode\"=$8";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::erase_statement[] =
-  "DELETE FROM \"Graph\" "
-  "WHERE \"idGraph\"=$1";
+  const char access::object_traits_impl< ::Node, id_pgsql >::erase_statement[] =
+  "DELETE FROM \"Node\" "
+  "WHERE \"idNode\"=$1";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::query_statement[] =
+  const char access::object_traits_impl< ::Node, id_pgsql >::query_statement[] =
   "SELECT\n"
-  "\"Graph\".\"idGraph\",\n"
-  "\"Graph\".\"graphClass\",\n"
-  "\"Graph\".\"objectClass\",\n"
-  "\"Graph\".\"objectName\",\n"
-  "\"Graph\".\"viewNumber\"\n"
-  "FROM \"Graph\"\n"
-  "LEFT JOIN \"GraphClass\" AS \"graphClass\" ON \"graphClass\".\"graphClassName\"=\"Graph\".\"graphClass\"\n"
-  "LEFT JOIN \"ObjectClass\" AS \"objectClass\" ON \"objectClass\".\"objectClassName\"=\"Graph\".\"objectClass\"";
+  "\"Node\".\"idNode\",\n"
+  "\"Node\".\"index\",\n"
+  "\"Node\".\"level\",\n"
+  "\"Node\".\"mass\",\n"
+  "\"Node\".\"type\",\n"
+  "\"Node\".\"pointCount\",\n"
+  "\"Node\".\"label\",\n"
+  "\"Node\".\"refGraph\"\n"
+  "FROM \"Node\"\n"
+  "LEFT JOIN \"Graph\" AS \"refGraph\" ON \"refGraph\".\"idGraph\"=\"Node\".\"refGraph\"";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::erase_query_statement[] =
-  "DELETE FROM \"Graph\"";
+  const char access::object_traits_impl< ::Node, id_pgsql >::erase_query_statement[] =
+  "DELETE FROM \"Node\"";
 
-  const char access::object_traits_impl< ::Graph, id_pgsql >::table_name[] =
-  "\"Graph\"";
+  const char access::object_traits_impl< ::Node, id_pgsql >::table_name[] =
+  "\"Node\"";
 
-  void access::object_traits_impl< ::Graph, id_pgsql >::
+  void access::object_traits_impl< ::Node, id_pgsql >::
   persist (database& db, object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -583,14 +642,14 @@ namespace odb
     if (!st.execute ())
       throw object_already_persistent ();
 
-    obj.idGraph = id (sts.id_image ());
+    obj.idNode = id (sts.id_image ());
 
     callback (db,
               static_cast<const object_type&> (obj),
               callback_event::post_persist);
   }
 
-  void access::object_traits_impl< ::Graph, id_pgsql >::
+  void access::object_traits_impl< ::Node, id_pgsql >::
   update (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -606,7 +665,7 @@ namespace odb
       conn.statement_cache ().find_object<object_type> ());
 
     const id_type& id (
-      obj.idGraph);
+      obj.idNode);
     id_image_type& idi (sts.id_image ());
     init (idi, id);
 
@@ -651,7 +710,7 @@ namespace odb
     pointer_cache_traits::update (db, obj);
   }
 
-  void access::object_traits_impl< ::Graph, id_pgsql >::
+  void access::object_traits_impl< ::Node, id_pgsql >::
   erase (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -680,8 +739,8 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
-  access::object_traits_impl< ::Graph, id_pgsql >::pointer_type
-  access::object_traits_impl< ::Graph, id_pgsql >::
+  access::object_traits_impl< ::Node, id_pgsql >::pointer_type
+  access::object_traits_impl< ::Node, id_pgsql >::
   find (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -736,7 +795,7 @@ namespace odb
     return p;
   }
 
-  bool access::object_traits_impl< ::Graph, id_pgsql >::
+  bool access::object_traits_impl< ::Node, id_pgsql >::
   find (database& db, const id_type& id, object_type& obj)
   {
     using namespace pgsql;
@@ -769,7 +828,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::Graph, id_pgsql >::
+  bool access::object_traits_impl< ::Node, id_pgsql >::
   reload (database& db, object_type& obj)
   {
     using namespace pgsql;
@@ -782,7 +841,7 @@ namespace odb
     statements_type::auto_lock l (sts);
 
     const id_type& id  (
-      obj.idGraph);
+      obj.idNode);
 
     if (!find_ (sts, &id))
       return false;
@@ -799,7 +858,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::Graph, id_pgsql >::
+  bool access::object_traits_impl< ::Node, id_pgsql >::
   find_ (statements_type& sts,
          const id_type* id)
   {
@@ -833,25 +892,11 @@ namespace odb
     auto_result ar (st);
     select_statement::result r (st.fetch ());
 
-    if (r == select_statement::truncated)
-    {
-      if (grow (im, sts.select_image_truncated ()))
-        im.version++;
-
-      if (im.version != sts.select_image_version ())
-      {
-        bind (imb.bind, im, statement_select);
-        sts.select_image_version (im.version);
-        imb.version++;
-        st.refetch ();
-      }
-    }
-
     return r != select_statement::no_data;
   }
 
-  result< access::object_traits_impl< ::Graph, id_pgsql >::object_type >
-  access::object_traits_impl< ::Graph, id_pgsql >::
+  result< access::object_traits_impl< ::Node, id_pgsql >::object_type >
+  access::object_traits_impl< ::Node, id_pgsql >::
   query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -905,7 +950,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits_impl< ::Graph, id_pgsql >::
+  unsigned long long access::object_traits_impl< ::Node, id_pgsql >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace pgsql;
