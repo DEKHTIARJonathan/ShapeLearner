@@ -171,6 +171,103 @@ void DatabaseManager::capitalize(string& str) const
  ********************************************************************/
 
 /* *******************************************************************
+*                             Savers                                 *
+ ********************************************************************/
+/*
+bool DatabaseManager::saveObject(ObjectClass& obj){
+	
+	transaction t (database->begin());
+	#ifdef _DEBUG
+		t.tracer (stderr_tracer);
+	#endif
+
+	// Make objects persistent and save their ids for later use.
+	//
+	database->persist (obj);
+
+	t.commit ();
+
+	return true;
+}
+bool DatabaseManager::saveObject(GraphClass& obj){
+	
+	transaction t (database->begin());
+	#ifdef _DEBUG
+		t.tracer (stderr_tracer);
+	#endif
+
+	// Make objects persistent and save their ids for later use.
+	//
+	database->persist (obj);
+
+	t.commit ();
+
+	return true;
+}
+bool DatabaseManager::saveObject(Graph& obj){
+	
+	transaction t (database->begin());
+	#ifdef _DEBUG
+		t.tracer (stderr_tracer);
+	#endif
+
+	// Make objects persistent and save their ids for later use.
+	//
+	database->persist (obj);
+
+	t.commit ();
+
+	return true;
+}
+bool DatabaseManager::saveObject(Node& obj){
+	
+	transaction t (database->begin());
+	#ifdef _DEBUG
+		t.tracer (stderr_tracer);
+	#endif
+
+	// Make objects persistent and save their ids for later use.
+	//
+	database->persist (obj);
+
+	t.commit ();
+
+	return true;
+}
+bool DatabaseManager::saveObject(Point& obj){
+	
+	transaction t (database->begin());
+	#ifdef _DEBUG
+		t.tracer (stderr_tracer);
+	#endif
+
+	// Make objects persistent and save their ids for later use.
+	//
+	database->persist (obj);
+
+	t.commit ();
+
+	return true;
+}
+bool DatabaseManager::saveObject(Edge& obj){
+	
+	transaction t (database->begin());
+	#ifdef _DEBUG
+		t.tracer (stderr_tracer);
+	#endif
+
+	// Make objects persistent and save their ids for later use.
+	//
+	database->persist (obj);
+
+	t.commit ();
+
+	return true;
+}
+
+*/
+
+/* *******************************************************************
 *                             Readers                                *
  ********************************************************************/
 

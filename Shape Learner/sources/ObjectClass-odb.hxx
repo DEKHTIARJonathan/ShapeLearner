@@ -15,9 +15,11 @@
 
 #include "ObjectClass.h"
 
+#include "Edge-odb.hxx"
 #include "Graph-odb.hxx"
 #include "GraphClass-odb.hxx"
 #include "Node-odb.hxx"
+#include "Point-odb.hxx"
 
 #include <memory>
 #include <cstddef>

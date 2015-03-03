@@ -72,6 +72,21 @@
     <ClInclude Include="sources\Node.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="sources\Point.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Edge.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Edge-odb.hxx">
+      <Filter>Fichiers d%27en-tête\ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Node-odb.hxx">
+      <Filter>Fichiers d%27en-tête\ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Point-odb.hxx">
+      <Filter>Fichiers d%27en-tête\ODB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\CmdLine.cpp">
@@ -116,6 +131,21 @@
     <ClCompile Include="sources\Node.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="sources\Point.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Edge.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Point-odb.cxx">
+      <Filter>Fichiers sources\ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Edge-odb.cxx">
+      <Filter>Fichiers sources\ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Node-odb.cxx">
+      <Filter>Fichiers sources\ODB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sources\GraphClass-odb.ixx">
@@ -138,6 +168,24 @@
     </None>
     <None Include="sources\Graph-odb.ixx">
       <Filter>object-relational mapping</Filter>
+    </None>
+    <None Include="sources\Edge-odb.ixx">
+      <Filter>object-relational mapping</Filter>
+    </None>
+    <None Include="sources\Node-odb.ixx">
+      <Filter>object-relational mapping</Filter>
+    </None>
+    <None Include="sources\Point-odb.ixx">
+      <Filter>object-relational mapping</Filter>
+    </None>
+    <None Include="sources\Point.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\Edge.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\Node.sql">
+      <Filter>SQL</Filter>
     </None>
   </ItemGroup>
 </Project>

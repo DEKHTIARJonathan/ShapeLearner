@@ -26,6 +26,12 @@ using namespace odb::core;
 
 class DBException; //Forward Declaration of the class contained in dbexception.h
 class GraphManager; //Forward Declaration of the class contained in graphManager.h
+class ObjectClass;
+class GraphClass;
+class Graph;
+class Node;
+class Point;
+class Edge;
 
 class DatabaseManager
 {
@@ -245,7 +251,24 @@ class DatabaseManager
 
 
 		/* *************** Fillers ********************/
-	
+
+		/* *************** Savers ********************/
+
+		template<class T>
+		bool saveObject(T& obj){
+			transaction t (database->begin());
+			#ifdef _DEBUG
+				t.tracer (stderr_tracer);
+			#endif
+
+			// Make objects persistent and save their ids for later use.
+			//
+			database->persist (obj);
+
+			t.commit ();
+
+			return true;
+		}
 
 		/* ***************  Singleton *********************/
 

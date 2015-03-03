@@ -25,6 +25,12 @@ using namespace std;
 
 class GraphManagerExcept; //Forward Declaration of the class contained in graphManagerException.h
 class DatabaseManager; //Forward Declaration of the class contained in dbManager.h
+class ObjectClass;
+class GraphClass;
+class Graph;
+class Node;
+class Point;
+class Edge;
 
 class GraphManager
 {
@@ -54,9 +60,6 @@ class GraphManager
 		*	\return argv : Argument fourni par la fonction main().
 		*/
 		static void parseCommandLine(int argc, char **argv) throw(GraphManagerExcept);
-
-		
-
 	
 	private:
 

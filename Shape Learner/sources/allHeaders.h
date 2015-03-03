@@ -68,6 +68,8 @@
 #include "ObjectClass.h"
 #include "Graph.h"
 #include "Node.h"
+#include "Point.h"
+#include "Edge.h"
 /* Class for ODB */
 
 #ifdef _MSC_VER // ODB Generated
