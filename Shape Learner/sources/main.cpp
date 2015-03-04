@@ -28,6 +28,7 @@ int main(int argc, char **argv)
 	{
 		
 		GraphManager::parseCommandLine(argc,argv);
+		GraphManager::openManager().test();
 		
 		/*
 		auto_ptr<database> db (new odb::pgsql::database ("postgres","postgres","postgres","127.0.0.1", 5433));
@@ -57,7 +58,7 @@ int main(int argc, char **argv)
 		}
 		*/
 	}
-	catch (const odb::exception& e)
+	catch (const std::exception& e)
 	{
 		cerr << e.what () << endl;
 		system ("PAUSE");

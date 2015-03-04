@@ -39,6 +39,27 @@ class GraphManager
 		// Setters pour les paramètres de la BDD.
 		static void getDbCredentials() throw(GraphManagerExcept);
 
+		/* ************** DB I/O Ops *********************/
+
+		string saveObject(ObjectClass& obj) throw(GraphManagerExcept) {return saveObjectString(obj);}
+		string saveObject(GraphClass& obj) throw(GraphManagerExcept) {return saveObjectString(obj);}
+
+		template<class T>
+		unsigned long saveObject(T& obj) throw(GraphManagerExcept){ 
+			unsigned long rslt = dBManager.saveObject(obj); 
+			if (rslt != 0)
+				return rslt;
+			else 
+				throw GraphManagerExcept("GraphManager::saveObject // ID", "Error : Saving operation Failed.");
+		}		
+		
+		template <class T>
+		bool updateObject(T& obj) throw (GraphManagerExcept){ return dBManager.updateObject(obj); }
+
+		template <class T>
+		bool deleteObject(T& obj) throw (GraphManagerExcept){ return dBManager.deleteObject(obj); }
+
+
 		/* **************  Singleton *********************/
 
 		/**
@@ -60,6 +81,8 @@ class GraphManager
 		*	\return argv : Argument fourni par la fonction main().
 		*/
 		static void parseCommandLine(int argc, char **argv) throw(GraphManagerExcept);
+
+		void test () throw(GraphManagerExcept);
 	
 	private:
 
@@ -97,6 +120,18 @@ class GraphManager
 
 		/*! \brief s_inst : Unique instance du GraphManager en mémoire.*/
 		static GraphManager* s_inst;
+
+		/* ************** DB I/O Ops *********************/
+
+		template<class T>
+		string saveObjectString(T& obj) throw(GraphManagerExcept) {
+			string rslt = dBManager.saveObject(obj);
+			if(!rslt.compare("")){ // Is Equal
+				throw DBException("GraphManager::saveObjectString // String", "Error : Saving operation Failed.");
+			}
+			else
+				return rslt;
+		}
 
 		
 

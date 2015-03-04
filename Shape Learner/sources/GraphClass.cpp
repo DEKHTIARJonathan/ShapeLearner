@@ -20,4 +20,6 @@
 #include "allHeaders.h"
 using namespace std;
 
-GraphClass::GraphClass(const string& name, bool isDirect, bool isAcyclic) : graphClassName(name), directGraph(isDirect), acyclicGraph(isAcyclic) {}
+GraphClass::GraphClass(const string& name, bool isDirect, bool isAcyclic) : graphClassName(name), directGraph(isDirect), acyclicGraph(isAcyclic) {
+	GraphManager::openManager().saveObject(*this);
+}

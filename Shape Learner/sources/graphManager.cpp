@@ -54,14 +54,39 @@ void GraphManager::destroy(){
 	}
 }
 
-GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbUser, dbPass, dbName, dbHost, dbPort, dbType, dbInit)){
+GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbUser, dbPass, dbName, dbHost, dbPort, dbType, dbInit)){}
+
+
+void GraphManager::test() throw(GraphManagerExcept){
+	
 		GraphClass shockGraph ("Shock Graph", true, true);
 		ObjectClass rod ("Rod");
 		Graph shock1(&shockGraph, &rod, 1, "Rod001.ppm");
+		Node n1 (1,2,3,4,5,6,&shock1);
+		Node n2 (6,5,4,3,2,1,&shock1);
+		/*
+		Point p1(1,2,3,&shock1,&n1);
+		Point p2(1,2,3,&shock1,&n2);
+		Edge e1(&n1, &n2, &shock1, 1);
+		Edge e2(&n2, &n1, &shock1, 1);
+		*/
+		system ("PAUSE");
+
+		cout << "Before update : shock1 name : "+ shock1.getObjectName() <<endl;
+		shock1.setObjectName("Rod002.ppm");		
+		cout << "After update : shock1 name : "+ shock1.getObjectName() << endl;
 		
-		dBManager.saveObject(shockGraph);
-		dBManager.saveObject(rod);
-		dBManager.saveObject(shock1);
+		system ("PAUSE");
+
+		cout << "Before update : shock1 view : "+ to_string((_ULonglong)shock1.getView()) <<endl;
+		shock1.setView(2);
+		cout << "After update : shock1 view : "+ to_string((_ULonglong)shock1.getView()) << endl;
+		
+		system ("PAUSE");
+		
+		cout << "Before update : shock1 key : "+ to_string((_ULonglong)shock1.getKey()) <<endl;
+		shock1.setKey(3);
+		cout << "After update : shock1 key : "+ to_string((_ULonglong)shock1.getKey()) << endl;
 }
 
 /* *******************************************************************
@@ -76,6 +101,7 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
 	try{
 		//We parse the arguments given by command line.
 		if (cmdLine.SplitLine(argc,argv) < 2){ // If not enough arguments are given, we show the help.
+
 			#ifndef _DEBUG
 				cmdLine.ShowHelp("help.txt");
 				system ("PAUSE");
@@ -106,6 +132,7 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
 	catch (const std::exception &e ) 
 	{ 
 		cerr << e.what(); 
+
 		system ("PAUSE");
 		exit(EXIT_FAILURE);
 	}

@@ -57,12 +57,13 @@ DatabaseManager::DatabaseManager(const string &dbUser, const string &dbPass, con
 
 bool DatabaseManager::query(const string &query) const throw(DBException)
 {
+	bool rslt = false;
 	for (unsigned short retry_count (0); ; retry_count++)
 	{
+		transaction t (database->begin ());
 		try
 		{
-			transaction t (database->begin ());
-			#ifdef _DEBUG
+			#ifdef _TRACER_
 				t.tracer (stderr_tracer);
 			#endif
 
@@ -70,30 +71,44 @@ bool DatabaseManager::query(const string &query) const throw(DBException)
 			{
 				t.rollback();
 				throw DBException("DatabaseManager::query", query);
-				return false; // Execution failed.
+				break;
 			}
 			else
 			{
 				t.commit();
-				return true; // Execution successful.
+				rslt = true;
+				break;
 			}
-			break;
+			
 		}
 		catch (const odb::recoverable& e)
 		{
-			if (retry_count > constants::MAX_DB_RETRY)
+			if (retry_count > constants::MAX_DB_RETRY){
+				t.rollback();
 				throw DBException("DatabaseManager::query", "Retry Limit exceeded" + (string)e.what());
+			}
 			else
 				continue;
 		}
 	}
+	return rslt; // Execution successful.
 }
 
 
 bool DatabaseManager::initDB(const string& filename)
 {
+	
 	string script = get_file_contents(filename);
 	return query(script);
+	/*
+	odb::transaction t (database->begin ());
+	#ifdef _TRACER_
+		t.tracer (stderr_tracer);
+	#endif
+	odb::schema_catalog::create_schema (*database);
+	t.commit ();
+	return true;
+	*/
 }
 
 /*
@@ -173,99 +188,6 @@ void DatabaseManager::capitalize(string& str) const
 /* *******************************************************************
 *                             Savers                                 *
  ********************************************************************/
-/*
-bool DatabaseManager::saveObject(ObjectClass& obj){
-	
-	transaction t (database->begin());
-	#ifdef _DEBUG
-		t.tracer (stderr_tracer);
-	#endif
-
-	// Make objects persistent and save their ids for later use.
-	//
-	database->persist (obj);
-
-	t.commit ();
-
-	return true;
-}
-bool DatabaseManager::saveObject(GraphClass& obj){
-	
-	transaction t (database->begin());
-	#ifdef _DEBUG
-		t.tracer (stderr_tracer);
-	#endif
-
-	// Make objects persistent and save their ids for later use.
-	//
-	database->persist (obj);
-
-	t.commit ();
-
-	return true;
-}
-bool DatabaseManager::saveObject(Graph& obj){
-	
-	transaction t (database->begin());
-	#ifdef _DEBUG
-		t.tracer (stderr_tracer);
-	#endif
-
-	// Make objects persistent and save their ids for later use.
-	//
-	database->persist (obj);
-
-	t.commit ();
-
-	return true;
-}
-bool DatabaseManager::saveObject(Node& obj){
-	
-	transaction t (database->begin());
-	#ifdef _DEBUG
-		t.tracer (stderr_tracer);
-	#endif
-
-	// Make objects persistent and save their ids for later use.
-	//
-	database->persist (obj);
-
-	t.commit ();
-
-	return true;
-}
-bool DatabaseManager::saveObject(Point& obj){
-	
-	transaction t (database->begin());
-	#ifdef _DEBUG
-		t.tracer (stderr_tracer);
-	#endif
-
-	// Make objects persistent and save their ids for later use.
-	//
-	database->persist (obj);
-
-	t.commit ();
-
-	return true;
-}
-bool DatabaseManager::saveObject(Edge& obj){
-	
-	transaction t (database->begin());
-	#ifdef _DEBUG
-		t.tracer (stderr_tracer);
-	#endif
-
-	// Make objects persistent and save their ids for later use.
-	//
-	database->persist (obj);
-
-	t.commit ();
-
-	return true;
-}
-
-*/
 
 /* *******************************************************************
 *                             Readers                                *

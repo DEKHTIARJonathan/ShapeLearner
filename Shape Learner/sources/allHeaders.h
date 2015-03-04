@@ -20,6 +20,8 @@
 #ifndef _ALL_HEADERS_
 #define _ALL_HEADERS_
 
+#define _TRACER_ // Print all DB Requests
+
 // tell the compiler to shut up
 //#pragma warning(disable:4786)
 
@@ -49,6 +51,7 @@
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 #include <odb/pgsql/database.hxx>
+#include <odb/schema-catalog.hxx>
 #endif //_MSC_VER
 
 

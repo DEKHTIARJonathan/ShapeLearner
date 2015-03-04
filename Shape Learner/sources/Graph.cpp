@@ -20,10 +20,13 @@
 #include "allHeaders.h"
 using namespace std;
 
-Graph::Graph(GraphClass* grClass, ObjectClass* objClass, unsigned int const view, string const name) : 
-	graphClass(grClass), 
-	objectClass(objClass), 
-	viewNumber(view), 
-	objectName(name), 
+Graph::Graph(GraphClass* _graphClass, ObjectClass* _objectClass, unsigned int const _viewNumber, string const _objectName) : 
+	graphClass(_graphClass), 
+	objectClass(_objectClass), 
+	viewNumber(_viewNumber), 
+	objectName(_objectName), 
 	idGraph(0) 
-	{}
+	{
+		GraphManager::openManager().saveObject(*this);
+		cout << "Graph key : "+ to_string((_ULonglong)this->getKey()) <<endl;
+	}

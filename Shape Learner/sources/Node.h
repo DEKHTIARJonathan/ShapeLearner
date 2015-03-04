@@ -28,9 +28,21 @@ class Graph; //Forward Declaration of the class contained in Graph.h//
 class Node
 {
 public:
+	Node(unsigned int _index, unsigned int _level, unsigned int _mass, unsigned int _type, unsigned int _pointCount, unsigned int _label, Graph* _refGraph);
+	unsigned long getKey() const {return idNode;}
+	void setKey(const unsigned int key) {
+		GraphManager::openManager().deleteObject(*this);
+		idNode = key;
+		GraphManager::openManager().saveObject(*this);
+	}
+
+	/* =========== Template function =========== */
+	string getClassName() { return "Node"; }
+	/* =========== Template function =========== */
 
 private:
 	Node() {}
+	
 	unsigned long	idNode;
 	unsigned int	index;
 	unsigned int	level;
@@ -38,7 +50,7 @@ private:
 	unsigned int	type;
 	unsigned int	pointCount;
 	unsigned int	label;
-	Graph*	refGraph;
+	Graph*			refGraph;
 
 	friend class odb::access;
 };

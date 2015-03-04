@@ -30,6 +30,17 @@ public:
 
 	GraphClass(const string& name, bool isDirect, bool isAcyclic);
 
+	string getKey() const {return graphClassName;}
+	void setKey(const string& key) {
+		GraphManager::openManager().deleteObject(*this);
+		graphClassName = key;
+		GraphManager::openManager().updateObject(*this);
+	}
+
+	/* =========== Template function =========== */
+	string getClassName() { return "GraphClass"; }
+	/* =========== Template function =========== */
+
 private:
 	GraphClass() {}
 	string graphClassName;
