@@ -33,6 +33,7 @@ class Node;
 class Point;
 class Edge;
 
+
 class DatabaseManager
 {
 	public:
@@ -144,24 +145,10 @@ class DatabaseManager
 		bool deleteAllGraphs() const; /* ==================================== à implémenter ===================================== */
 
 		/*!
-		*	\brief On supprime de la BDD le Graph identifié. Tous les Nodes, les Points et les Edges associés à ce Graph sont supprimés en cascade.
-		*	\return Renvoie un bool sur la réussite de l'opération.
-		*	\param idGraph : id du Graph à supprimer
-		*/
-		bool deleteGraph(unsigned int const idGraph) const; /* ==================================== à implémenter ===================================== */
-
-		/*!
 		*	\brief On supprime de la BDD tous les Nodes existants. Tous les Points et Edges sont supprimés en cascade.
 		*	\return Renvoie un bool sur la réussite de l'opération.
 		*/
 		bool deleteAllNodes() const; /* ==================================== à implémenter ===================================== */
-
-		/*!
-		*	\brief On supprime de la BDD le Node identifié. Les points et Edges associés à ce Node sont supprimés en cascade.
-		*	\return Renvoie un bool sur la réussite de l'opération.
-		*	\param idNode : id du Node à supprimer
-		*/
-		bool deleteNode(unsigned int const idNode) const; /* ==================================== à implémenter ===================================== */
 
 		/*!
 		*	\brief On supprime de la BDD tous les Nodes du Graph identifié. Tous les Points et Edges associés à ce Node sont supprimés en cascade.
@@ -169,13 +156,6 @@ class DatabaseManager
 		*	\param idGraph : id du Graph dans lequel on veut supprimer tous les noeuds.
 		*/
 		bool deleteAllNodeInGraph(unsigned int const idGraph) const; /* ==================================== à implémenter ===================================== */
-		
-		/*!
-		*	\brief On supprime de la BDD le Point identifié.
-		*	\return Renvoie un bool sur la réussite de l'opération.
-		*	\param idPoint : id du Point à supprimer
-		*/
-		bool deletePoint (unsigned int const idPoint) const; /* ==================================== à implémenter ===================================== */
 
 		/*!
 		*	\brief On supprime de la BDD tous les points.
@@ -202,13 +182,6 @@ class DatabaseManager
 		*	\return Renvoie un bool sur la réussite de l'opération.
 		*/
 		bool deleteAllEdges () const; /* ==================================== à implémenter ===================================== */
-		
-		/*!
-		*	\brief On supprime de la BDD l'Edge identifiée.
-		*	\return Renvoie un bool sur la réussite de l'opération.
-		*	\param idEdge : id de l'Edge à supprimer
-		*/
-		bool deleteEdge (unsigned int const idEdge) const; /* ==================================== à implémenter ===================================== */
 
 		/*!
 		*	\brief On supprime de la BDD toutes les Edges associées au Graph identifié.
@@ -238,14 +211,21 @@ class DatabaseManager
 		*/
 		bool deleteAllEdgeToNode (unsigned int const idNode) const; /* ==================================== à implémenter ===================================== */
 
-		/* *************** Updaters ********************/
+		template <class T>
+		bool deleteObject(T& obj) throw (DBException){
+			try
+			{
+				transaction t (database->begin ());
+				database->erase (obj);
+				t.commit ();
+			}
+			catch (const std::exception& e)
+			{
+				throw DBException ("DatabaseManager::deleteObject", "Unable to delete object of class : "+ obj.getClassName() +". // Error = "+ e.what());
+			}
+			return true;
+		}
 
-		/*!
-		*	\brief Update (=sauvegarde les modifications) dans la BDD d'un Node.
-		*	\return Renvoie un bool sur la réussite de l'opération.
-		*	\param idNode : Le Node que l'on veut modifier dans la BDD
-		*/
-		bool updateNode (const unsigned int idNode)  const; /* ==================================== à implémenter ===================================== */
 
 		/* ********* AssocBuilders // AssocRemovers **********/
 
@@ -255,18 +235,49 @@ class DatabaseManager
 		/* *************** Savers ********************/
 
 		template<class T>
-		bool saveObject(T& obj){
+		unsigned long saveObject(T& obj) throw(DBException){
+			unsigned long rslt = 0;
+
 			transaction t (database->begin());
-			#ifdef _DEBUG
+			#ifdef _TRACER_
 				t.tracer (stderr_tracer);
 			#endif
 
 			// Make objects persistent and save their ids for later use.
 			//
-			database->persist (obj);
+			rslt = database->persist (obj);
+			if(!rslt){
+				t.rollback();
+				throw DBException("DatabaseManager::saveObject // ID", "Unable to save object id = "+  std::to_string((_ULonglong)rslt) +" // Class : "+obj.getClassName());
+			}
+			else
+				t.commit ();
 
-			t.commit ();
+			return rslt;
+		}
 
+		string saveObject(ObjectClass& obj) throw(DBException) {return saveObjectString(obj);}
+		string saveObject(GraphClass& obj) throw(DBException) {return saveObjectString(obj);}
+
+		/* *************** Updaters ***********************/
+
+		template <class T>
+		bool updateObject(T& obj) throw (DBException){
+			try
+			{
+				transaction t (database->begin ());
+				database->update (obj);
+				t.commit ();
+			}
+			catch (const std::exception& e)
+			{
+				transaction t (database->begin ());
+				database->load (obj.getKey(), obj);
+				t.commit ();
+				throw DBException ("DatabaseManager::updateObject", "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = "+ e.what());
+				
+			}
+			
 			return true;
 		}
 
@@ -313,8 +324,29 @@ class DatabaseManager
 		/* **************** Inserters **********************/
 
 
-		/* **************** Retrievers **********************/
+		/* **************** Retrievers *********************/
 
+		/* **************** Savers *************************/
+
+		template<class T> string saveObjectString(T& obj){
+			string rslt = "";
+			transaction t (database->begin());
+			#ifdef _TRACER_
+				t.tracer (stderr_tracer);
+			#endif
+
+			// Make objects persistent and save their ids for later use.
+			//
+			rslt = database->persist(obj);
+			if(!rslt.compare("")){ // Is Equal
+				t.rollback();
+				throw DBException("DatabaseManager::saveObjectString // String", "Unable to save object : "+rslt+" // Class : "+obj.getClassName());
+			}
+			else
+				t.commit ();
+
+			return rslt;
+		}
 
 		/* ****************** Readers **********************/
 
@@ -350,5 +382,6 @@ class DatabaseManager
 		*/
 		~DatabaseManager();
 };
+
 
 #endif // DatabaseManager_H

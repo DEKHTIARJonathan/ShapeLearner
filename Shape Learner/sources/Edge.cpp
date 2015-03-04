@@ -19,3 +19,11 @@
 
 #include "allHeaders.h"
 using namespace std;
+
+
+Edge::Edge(Node* _source, Node* _target, Graph* _refGraph, unsigned int _weight) : 
+	source(_source), 
+	target(_target), 
+	refGraph(_refGraph), 
+	idEdge(0) 
+	{idEdge = GraphManager::openManager().saveObject(*this);}

@@ -29,11 +29,30 @@ class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
 class Graph
 {
 public:
-	Graph(GraphClass* grClass, ObjectClass* objClass, unsigned int const view, string const name);
+	Graph(GraphClass* _graphClass, ObjectClass* _objectClass, unsigned int const _viewNumber, string const _objectName);
 	
-	void setID(const unsigned long id){
-		idGraph = id;
+	unsigned long getKey() const {return idGraph;}
+	void setKey(const unsigned int key) {
+		GraphManager::openManager().deleteObject(*this);
+		idGraph = key;
+		GraphManager::openManager().saveObject(*this);
 	}
+
+	string getObjectName() const {return objectName;}
+	void setObjectName(const string& name) {
+		objectName = name;
+		GraphManager::openManager().updateObject(*this);
+	}
+
+	unsigned long getView() const {return viewNumber;}
+	void setView(const unsigned int viewNum) {
+		viewNumber = viewNum;
+		GraphManager::openManager().updateObject(*this);
+	}
+
+	/* =========== Template function =========== */
+	string getClassName() { return "Graph"; }
+	/* =========== Template function =========== */
 
 private:
 	Graph() {}

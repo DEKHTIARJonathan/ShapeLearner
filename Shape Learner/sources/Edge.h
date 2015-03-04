@@ -30,6 +30,19 @@ class Edge
 {
 public:
 
+	Edge(Node* _source, Node* _target, Graph* _refGraph, unsigned int _weight);
+
+	unsigned long getKey() const {return idEdge;}
+	void setKey(const unsigned int key) {
+		GraphManager::openManager().deleteObject(*this);
+		idEdge = key;
+		GraphManager::openManager().updateObject(*this);
+	}
+
+	/* =========== Template function =========== */
+	string getClassName() { return "Edge"; }
+	/* =========== Template function =========== */
+	
 private:
 	Edge() {}
 

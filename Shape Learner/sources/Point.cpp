@@ -19,3 +19,12 @@
 
 #include "allHeaders.h"
 using namespace std;
+
+Point::Point(double _xCoord, double _yCoord, double _radius, Graph* _refGraph, Node* _refNode) : 
+	xCoord(_xCoord),
+	yCoord(_yCoord),
+	radius(_radius),
+	refGraph(_refGraph),
+	refNode(_refNode),
+	idPoint(0)
+	{idPoint = GraphManager::openManager().saveObject(*this);}

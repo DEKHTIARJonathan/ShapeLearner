@@ -28,6 +28,17 @@ class ObjectClass
 public:
 	ObjectClass(const string& name);
 
+	string getKey() const {return objectClassName;}
+	void setKey(const string& key) {
+		GraphManager::openManager().deleteObject(*this);
+		objectClassName = key;
+		GraphManager::openManager().updateObject(*this);
+	}
+
+	/* =========== Template function =========== */
+	string getClassName() { return "ObjectClass"; }
+	/* =========== Template function =========== */
+
 private:
 	ObjectClass() {}
 	string objectClassName;

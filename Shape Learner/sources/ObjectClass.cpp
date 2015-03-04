@@ -20,4 +20,6 @@
 #include "allHeaders.h"
 using namespace std;
 
-ObjectClass::ObjectClass(const string& name) : objectClassName(name) {}
+ObjectClass::ObjectClass(const string& name) : objectClassName(name) {
+	GraphManager::openManager().saveObject(*this);
+}

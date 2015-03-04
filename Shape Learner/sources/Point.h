@@ -29,6 +29,17 @@ class Node; //Forward Declaration of the class contained in Node.h
 class Point
 {
 public:
+	Point(double _xCoord, double _yCoord, double _radius, Graph* _refGraph, Node* _refNode);
+	unsigned long getKey() const {return idPoint;}
+	void setKey(const unsigned int key) {
+		GraphManager::openManager().deleteObject(*this);
+		idPoint = key;
+		GraphManager::openManager().saveObject(*this);
+	}
+
+	/* =========== Template function =========== */
+	string getClassName() { return "Point"; }
+	/* =========== Template function =========== */
 
 private:
 	Point() {}
