@@ -42,14 +42,14 @@
 
 using namespace std;
 
-int CCmdLine::SplitLine(int argc, char **argv) throw(CCmdLineException)
+int CCmdLine::SplitLine(int argc, char **argv) throw(ShapeLearnerExcept)
 {
 	clear();
 	pair<CCmdLine::iterator, bool> res;
 
 	#ifndef _DEBUG
 	if (argc == 1)
-		throw CCmdLineException("CCmdLine::SplitLine", "Error : No argument has been given by command line.");
+		throw ShapeLearnerExcept("CCmdLine::SplitLine", "Error : No argument has been given by command line.");
 	#endif
 
 	// skip the exe name (start with i = 1)
@@ -64,7 +64,7 @@ int CCmdLine::SplitLine(int argc, char **argv) throw(CCmdLineException)
 			res = insert(CCmdLine::value_type( argv[i], cmd));
 
 			if (!res.second)
-				throw CCmdLineException("CCmdLine::SplitLine", "Error while parsing the switch : " + (string)argv[i]);
+				throw ShapeLearnerExcept("CCmdLine::SplitLine", "Error while parsing the switch : " + (string)argv[i]);
 		}
 		else
 		// it's not a switch, it's a parameter for the last switch => let's add it
@@ -74,15 +74,15 @@ int CCmdLine::SplitLine(int argc, char **argv) throw(CCmdLineException)
 	return size();
 }
 
-bool CCmdLine::IsSwitch(const char *pParam) throw(CCmdLineException)
+bool CCmdLine::IsSwitch(const char *pParam) throw(ShapeLearnerExcept)
 {
    if (pParam==NULL)
-	  throw CCmdLineException("CCmdLine::IsSwitch", "Error : The parameter pParam given is NULL.");
+	  throw ShapeLearnerExcept("CCmdLine::IsSwitch", "Error : The parameter pParam given is NULL.");
 
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pParam) <= 1)
-	  throw CCmdLineException("CCmdLine::IsSwitch", "Error : The parameter pParam (" + (string)pParam + ") must have at least one character after the '-'.");
+	  throw ShapeLearnerExcept("CCmdLine::IsSwitch", "Error : The parameter pParam (" + (string)pParam + ") must have at least one character after the '-'.");
 
    // switches always start with '-'
    if (pParam[0]=='-')
@@ -97,37 +97,37 @@ bool CCmdLine::IsSwitch(const char *pParam) throw(CCmdLineException)
    }
 }
 
-bool CCmdLine::HasSwitch(const char *pSwitch) throw(CCmdLineException)
+bool CCmdLine::HasSwitch(const char *pSwitch) throw(ShapeLearnerExcept)
 {
 	if (pSwitch==NULL)
-	  throw CCmdLineException("CCmdLine::HasSwitch", "Error : The parameter pSwitch given is NULL.");
+	  throw ShapeLearnerExcept("CCmdLine::HasSwitch", "Error : The parameter pSwitch given is NULL.");
 
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
-	  throw CCmdLineException("CCmdLine::HasSwitch", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
+	  throw ShapeLearnerExcept("CCmdLine::HasSwitch", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
 	
 	CCmdLine::iterator theIterator;
 	theIterator = find(pSwitch);
 	return (theIterator!=end());
 }
 
-string CCmdLine::GetSafeArgument(const char *pSwitch,unsigned int iIdx, const char *pDefault) throw(CCmdLineException)
+string CCmdLine::GetSafeArgument(const char *pSwitch,unsigned int iIdx, const char *pDefault) throw(ShapeLearnerExcept)
 {
 	if (pSwitch==NULL)
-	  throw CCmdLineException("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch given is NULL.");
+	  throw ShapeLearnerExcept("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch given is NULL.");
 
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
-	  throw CCmdLineException("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
+	  throw ShapeLearnerExcept("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
 
 	string sRet;
 
    if (pDefault!=NULL)
 	  sRet = pDefault;
    else
-	   throw CCmdLineException("CCmdLine::GetSafeArgument", "Error : The parameter pDefault = NULL.");
+	   throw ShapeLearnerExcept("CCmdLine::GetSafeArgument", "Error : The parameter pDefault = NULL.");
 
    try
    {
@@ -141,16 +141,16 @@ string CCmdLine::GetSafeArgument(const char *pSwitch,unsigned int iIdx, const ch
    return sRet;
 }
 
-string CCmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(CCmdLineException)
+string CCmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(ShapeLearnerExcept)
 {
 	
 	if (pSwitch==NULL)
-	  throw CCmdLineException("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch given is NULL.");
+	  throw ShapeLearnerExcept("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch given is NULL.");
 
    // switches must non-empty
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
-	  throw CCmdLineException("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
+	  throw ShapeLearnerExcept("CCmdLine::GetSafeArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
 	
 	CCmdLine::iterator theIterator;
 
@@ -160,22 +160,22 @@ string CCmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(CCmdL
 		if ((*theIterator).second.m_strings.size() > iIdx)
 			return (*theIterator).second.m_strings[iIdx];
 		else
-			throw CCmdLineException("CCmdLine::GetArgument", "Error : The argument number " + std::to_string((_ULonglong)iIdx) + " doesn't exist for the pSwitch given : " + (string)pSwitch);
+			throw ShapeLearnerExcept("CCmdLine::GetArgument", "Error : The argument number " + std::to_string((_ULonglong)iIdx) + " doesn't exist for the pSwitch given : " + (string)pSwitch);
 	}
 	else
-		throw CCmdLineException("CCmdLine::GetArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
+		throw ShapeLearnerExcept("CCmdLine::GetArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
 	
 }
 
-int CCmdLine::GetArgumentCount(const char *pSwitch) throw(CCmdLineException)
+int CCmdLine::GetArgumentCount(const char *pSwitch) throw(ShapeLearnerExcept)
 {
 	if (pSwitch==NULL)
-	  throw CCmdLineException("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch given is NULL.");
+	  throw ShapeLearnerExcept("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch given is NULL.");
 
 	// switches must non-empty
 	// must have at least one character after the '-'
 	if (strlen(pSwitch) <= 1)
-		throw CCmdLineException("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch (" + (string) pSwitch + ") must have at least one character after the '-'");
+		throw ShapeLearnerExcept("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch (" + (string) pSwitch + ") must have at least one character after the '-'");
 
 	int iArgumentCount = -1;
 
@@ -184,7 +184,7 @@ int CCmdLine::GetArgumentCount(const char *pSwitch) throw(CCmdLineException)
 	theIterator = find(pSwitch);
 	
 	if (theIterator==end())
-		throw CCmdLineException("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
+		throw ShapeLearnerExcept("CCmdLine::GetArgumentCount", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
 		
 	iArgumentCount = (*theIterator).second.m_strings.size();
 	return iArgumentCount;
@@ -197,7 +197,7 @@ void CCmdLine::ShowHelp(const char* filepath)
 	ifstream myfile(filepath, std::ifstream::in);
 
 	if (!myfile)
-		throw CCmdLineException("CCmdLine::ShowHelp", "Error : The Help File ( " + (string) filepath + ") doesn't exist.");
+		throw ShapeLearnerExcept("CCmdLine::ShowHelp", "Error : The Help File ( " + (string) filepath + ") doesn't exist.");
 
 	if (myfile.is_open())
 	{
@@ -208,5 +208,5 @@ void CCmdLine::ShowHelp(const char* filepath)
 		myfile.close();
 	}
 	else
-		throw CCmdLineException("CCmdLine::ShowHelp", "Error : Unable to open the file : " + (string)filepath);
+		throw ShapeLearnerExcept("CCmdLine::ShowHelp", "Error : Unable to open the file : " + (string)filepath);
 }

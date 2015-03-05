@@ -22,4 +22,7 @@ using namespace std;
 
 ObjectClass::ObjectClass(const string& name) : objectClassName(name) {
 	GraphManager::openManager().saveObject(*this);
+	#ifdef _VERBOSE_
+		cout << "ObjectClass key : "+ getKey() <<endl;
+	#endif
 }

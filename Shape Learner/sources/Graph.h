@@ -25,6 +25,7 @@ using namespace std;
 
 class GraphClass; //Forward Declaration of the class contained in GraphClass.h
 class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
+class GraphManager; // Forward Declaration of the class contained in graphManager.h
 
 class Graph
 {
@@ -32,26 +33,16 @@ public:
 	Graph(GraphClass* _graphClass, ObjectClass* _objectClass, unsigned int const _viewNumber, string const _objectName);
 	
 	unsigned long getKey() const {return idGraph;}
-	void setKey(const unsigned int key) {
-		GraphManager::openManager().deleteObject(*this);
-		idGraph = key;
-		GraphManager::openManager().saveObject(*this);
-	}
+	void setKey(const unsigned int key);
 
 	string getObjectName() const {return objectName;}
-	void setObjectName(const string& name) {
-		objectName = name;
-		GraphManager::openManager().updateObject(*this);
-	}
+	void setObjectName(const string& _objectName);
 
 	unsigned long getView() const {return viewNumber;}
-	void setView(const unsigned int viewNum) {
-		viewNumber = viewNum;
-		GraphManager::openManager().updateObject(*this);
-	}
+	void setView(const unsigned int _viewNumber);
 
 	/* =========== Template function =========== */
-	string getClassName() { return "Graph"; }
+	string getClassName() const { return "Graph"; }
 	/* =========== Template function =========== */
 
 private:

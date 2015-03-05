@@ -25,6 +25,7 @@ using namespace std;
 
 class Graph; //Forward Declaration of the class contained in Graph.h
 class Node; //Forward Declaration of the class contained in Node.h
+class GraphManager; // Forward Declaration of the class contained in graphManager.h
 
 class Point
 {
@@ -32,13 +33,17 @@ public:
 	Point(double _xCoord, double _yCoord, double _radius, Graph* _refGraph, Node* _refNode);
 	unsigned long getKey() const {return idPoint;}
 	void setKey(const unsigned int key) {
-		GraphManager::openManager().deleteObject(*this);
+		#ifdef _MSC_VER
+			GraphManager::openManager().deleteObject(*this);
+		#endif //_MSC_VER
 		idPoint = key;
-		GraphManager::openManager().saveObject(*this);
+		#ifdef _MSC_VER
+			GraphManager::openManager().saveObject(*this);
+		#endif //_MSC_VER
 	}
 
 	/* =========== Template function =========== */
-	string getClassName() { return "Point"; }
+	string getClassName() const { return "Point"; }
 	/* =========== Template function =========== */
 
 private:

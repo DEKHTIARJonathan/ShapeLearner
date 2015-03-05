@@ -17,6 +17,11 @@ CREATE INDEX "index_Edge_source"
 CREATE INDEX "index_Edge_target"
   ON "Edge" USING BTREE ("target");
 
+CREATE UNIQUE INDEX "index_Edge_link"
+  ON "Edge" USING BTREE (
+    "source",
+    "target");
+
 CREATE INDEX "index_Edge_refGraph"
   ON "Edge" USING BTREE ("refGraph");
 

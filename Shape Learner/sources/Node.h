@@ -24,20 +24,32 @@
 using namespace std;
 
 class Graph; //Forward Declaration of the class contained in Graph.h//
+class GraphManager; // Forward Declaration of the class contained in graphManager.h
 
 class Node
 {
 public:
 	Node(unsigned int _index, unsigned int _level, unsigned int _mass, unsigned int _type, unsigned int _pointCount, unsigned int _label, Graph* _refGraph);
+
 	unsigned long getKey() const {return idNode;}
-	void setKey(const unsigned int key) {
-		GraphManager::openManager().deleteObject(*this);
-		idNode = key;
-		GraphManager::openManager().saveObject(*this);
-	}
+	void setKey(const unsigned int key);
+
+	unsigned long getIndex() const {return index;}
+	void setIndex(const unsigned int _index);
+
+	unsigned long getLevel() const {return level;}
+	void setLevel(const unsigned int _level);
+
+	unsigned long getMass() const {return mass;}
+	void setMass(const unsigned int _mass);
+
+	unsigned long getType() const {return type;}
+	void setType(const unsigned int _type);
+
+	unsigned long getPointCount() const;
 
 	/* =========== Template function =========== */
-	string getClassName() { return "Node"; }
+	string getClassName() const { return "Node"; }
 	/* =========== Template function =========== */
 
 private:
@@ -48,7 +60,7 @@ private:
 	unsigned int	level;
 	unsigned int	mass;
 	unsigned int	type;
-	unsigned int	pointCount;
+	unsigned int	pointCount; // à créer en fonction SQL
 	unsigned int	label;
 	Graph*			refGraph;
 

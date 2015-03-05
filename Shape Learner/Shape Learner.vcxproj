@@ -13,9 +13,7 @@
   <ItemGroup>
     <ClInclude Include="sources\allHeaders.h" />
     <ClInclude Include="sources\CmdLine.h" />
-    <ClInclude Include="sources\CmdLineException.h" />
     <ClInclude Include="sources\constants.h" />
-    <ClInclude Include="sources\dbexception.h" />
     <ClInclude Include="sources\dbManager.h" />
     <ClInclude Include="sources\Edge-odb.hxx" />
     <ClInclude Include="sources\Edge.h" />
@@ -24,18 +22,17 @@
     <ClInclude Include="sources\GraphClass-odb.hxx" />
     <ClInclude Include="sources\GraphClass.h" />
     <ClInclude Include="sources\graphManager.h" />
-    <ClInclude Include="sources\graphManagerException.h" />
     <ClInclude Include="sources\Node-odb.hxx" />
     <ClInclude Include="sources\Node.h" />
     <ClInclude Include="sources\ObjectClass-odb.hxx" />
     <ClInclude Include="sources\ObjectClass.h" />
     <ClInclude Include="sources\Point-odb.hxx" />
     <ClInclude Include="sources\Point.h" />
+    <ClInclude Include="sources\shapeLearner.h" />
+    <ClInclude Include="sources\shapeLearnerException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\CmdLine.cpp" />
-    <ClCompile Include="sources\CmdLineException.cpp" />
-    <ClCompile Include="sources\dbexception.cpp" />
     <ClCompile Include="sources\dbManager.cpp" />
     <ClCompile Include="sources\Edge-odb.cxx" />
     <ClCompile Include="sources\Edge.cpp" />
@@ -44,7 +41,6 @@
     <ClCompile Include="sources\GraphClass-odb.cxx" />
     <ClCompile Include="sources\GraphClass.cpp" />
     <ClCompile Include="sources\graphManager.cpp" />
-    <ClCompile Include="sources\graphManagerException.cpp" />
     <ClCompile Include="sources\main.cpp" />
     <ClCompile Include="sources\Node-odb.cxx" />
     <ClCompile Include="sources\Node.cpp" />
@@ -52,10 +48,13 @@
     <ClCompile Include="sources\ObjectClass.cpp" />
     <ClCompile Include="sources\Point-odb.cxx" />
     <ClCompile Include="sources\Point.cpp" />
+    <ClCompile Include="sources\shapeLearner.cpp" />
+    <ClCompile Include="sources\shapeLearnerException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sources\Edge-odb.ixx" />
     <None Include="sources\Edge.sql" />
+    <None Include="sources\functions.sql" />
     <None Include="sources\Graph-odb.ixx" />
     <None Include="sources\Graph.sql" />
     <None Include="sources\GraphClass-odb.ixx" />

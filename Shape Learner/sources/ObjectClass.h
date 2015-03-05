@@ -23,6 +23,8 @@
 #include "allHeaders.h"
 using namespace std;
 
+class GraphManager; // Forward Declaration of the class contained in graphManager.h
+
 class ObjectClass
 {
 public:
@@ -30,13 +32,17 @@ public:
 
 	string getKey() const {return objectClassName;}
 	void setKey(const string& key) {
-		GraphManager::openManager().deleteObject(*this);
+		#ifdef _MSC_VER
+			GraphManager::openManager().deleteObject(*this);
+		#endif //_MSC_VER
 		objectClassName = key;
-		GraphManager::openManager().updateObject(*this);
+		#ifdef _MSC_VER
+			GraphManager::openManager().saveObject(*this);
+		#endif //_MSC_VER
 	}
 
 	/* =========== Template function =========== */
-	string getClassName() { return "ObjectClass"; }
+	string getClassName() const { return "ObjectClass"; }
 	/* =========== Template function =========== */
 
 private:

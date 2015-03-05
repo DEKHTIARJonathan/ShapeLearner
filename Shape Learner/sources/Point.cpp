@@ -27,4 +27,9 @@ Point::Point(double _xCoord, double _yCoord, double _radius, Graph* _refGraph, N
 	refGraph(_refGraph),
 	refNode(_refNode),
 	idPoint(0)
-	{idPoint = GraphManager::openManager().saveObject(*this);}
+	{
+		idPoint = GraphManager::openManager().saveObject(*this);
+		#ifdef _VERBOSE_
+			cout << "Point key : "+ to_string((_ULonglong)getKey()) <<endl;
+		#endif
+	}
