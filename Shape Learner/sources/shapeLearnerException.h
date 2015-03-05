@@ -1,6 +1,6 @@
-/* ************* Begin file dbexception.h ***************************************/
+/* ************* Begin file graphManagerException.h ***************************************/
 /*
-** 2015 February 18
+** 2015 February 23
 **
 ** In place of a legal notice, here is a blessing:
 **
@@ -11,23 +11,23 @@
 *************************************************************************/
 
 /**
-*	\file dbexception.h
-*	\brief Classe d'Exception pour l'interface DatabaseManager
+*	\file shapeLearnerException.h
+*	\brief Classe d'Exception pour la classe Façade GraphManager
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */
 
-#ifndef DBEXCEPTION_H
-#define DBEXCEPTION_H
+#ifndef _SHAPE_LEARNER_EXCEPTION_
+#define _SHAPE_LEARNER_EXCEPTION_
 
 #include "allHeaders.h"
 using namespace std;
 
-class DBException : public std::exception
+class ShapeLearnerExcept : public std::exception
 {
 	public:
 		// Constructor
-		DBException(const string &procedure, const string &msgError ) throw();
+		ShapeLearnerExcept(const string &procedure, const string &msgError ) throw();
 
 		// Getter
 		const string &	getProcedure() const throw();
@@ -37,14 +37,14 @@ class DBException : public std::exception
 		virtual const char*	what() const throw();
 
 		// Destructor
-		virtual ~DBException() throw();
+		virtual ~ShapeLearnerExcept() throw();
 
 	private:
-		// Member
+		// Members
 		string			m_procedure;
 		string			m_msgError;
 		string			m_what;
 
 };
 
-#endif
+#endif //_SHAPE_LEARNER_EXCEPTION_

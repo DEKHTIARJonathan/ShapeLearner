@@ -1,6 +1,6 @@
-/* ************* Begin file graphManagerException.h ***************************************/
+/* ************* Begin file shapeLearnerException.h ***************************************/
 /*
-** 2015 February 23
+** 2015 March 05
 **
 ** In place of a legal notice, here is a blessing:
 **
@@ -11,8 +11,8 @@
 *************************************************************************/
 
 /**
-*	\file graphManagerException.cpp
-*	\brief Classe d'Exception pour la classe Façade GraphManager
+*	\file shapeLearnerException.cpp
+*	\brief Classe d'Exception pour le projet Shape Learner
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */
@@ -26,7 +26,7 @@ using namespace std;
  ********************************************************************/
 
 // Generic DBException constructor
-GraphManagerExcept::GraphManagerExcept( const string &procedure, const string &msgError ) throw() : std::exception()
+ShapeLearnerExcept::ShapeLearnerExcept( const string &procedure, const string &msgError ) throw() : std::exception()
 {
 	m_procedure	= procedure;
 	m_msgError	= msgError;
@@ -46,19 +46,19 @@ GraphManagerExcept::GraphManagerExcept( const string &procedure, const string &m
  *                              Getter                              *
  ********************************************************************/
 
-const string &	GraphManagerExcept::getProcedure() const throw() {	return m_procedure;	}
-const string &	GraphManagerExcept::getMsgError() const throw() {	return m_msgError;	}
+const string &	ShapeLearnerExcept::getProcedure() const throw() {	return m_procedure;	}
+const string &	ShapeLearnerExcept::getMsgError() const throw() {	return m_msgError;	}
 
 /********************************************************************
  *                          Implementation                          *
  ********************************************************************/
 
-const char* GraphManagerExcept::what() const throw(){
+const char* ShapeLearnerExcept::what() const throw(){
 	return m_what.c_str();
 }
 /********************************************************************
  *                            Destructor                            *
  ********************************************************************/
 
-GraphManagerExcept::~GraphManagerExcept() throw(){}
+ShapeLearnerExcept::~ShapeLearnerExcept() throw(){}
 

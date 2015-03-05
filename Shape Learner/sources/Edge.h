@@ -25,6 +25,7 @@ using namespace std;
 
 class Graph; //Forward Declaration of the class contained in Graph.h
 class Node; //Forward Declaration of the class contained in Node.h
+class GraphManager; // Forward Declaration of the class contained in graphManager.h
 
 class Edge
 {
@@ -33,14 +34,13 @@ public:
 	Edge(Node* _source, Node* _target, Graph* _refGraph, unsigned int _weight);
 
 	unsigned long getKey() const {return idEdge;}
-	void setKey(const unsigned int key) {
-		GraphManager::openManager().deleteObject(*this);
-		idEdge = key;
-		GraphManager::openManager().updateObject(*this);
-	}
+	void setKey(const unsigned int key);
+
+	unsigned long getWeight() const {return weight;}
+	void setWeight(const unsigned int _weight);
 
 	/* =========== Template function =========== */
-	string getClassName() { return "Edge"; }
+	string getClassName() const { return "Edge"; }
 	/* =========== Template function =========== */
 	
 private:
@@ -64,6 +64,7 @@ private:
 #pragma db member(Edge::weight) default("1") not_null
 #pragma db index(Edge::"index_Edge_source") method("BTREE") member(source)
 #pragma db index(Edge::"index_Edge_target") method("BTREE") member(target)
-#pragma db index(Edge::"index_Edge_refGraph") method("BTREE") members(refGraph)
+#pragma db index(Edge::"index_Edge_link") unique method("BTREE") members(source, target)
+#pragma db index(Edge::"index_Edge_refGraph") method("BTREE") member(refGraph)
 
 #endif // _EDGE_

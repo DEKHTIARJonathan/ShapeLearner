@@ -57,21 +57,26 @@ void GraphManager::destroy(){
 GraphManager::GraphManager() : dBManager(DatabaseManager::Key::getInstance(dbUser, dbPass, dbName, dbHost, dbPort, dbType, dbInit)){}
 
 
-void GraphManager::test() throw(GraphManagerExcept){
+void GraphManager::test() throw(ShapeLearnerExcept){
 	
 		GraphClass shockGraph ("Shock Graph", true, true);
+		
 		ObjectClass rod ("Rod");
-		Graph shock1(&shockGraph, &rod, 1, "Rod001.ppm");
-		Node n1 (1,2,3,4,5,6,&shock1);
-		Node n2 (6,5,4,3,2,1,&shock1);
-		/*
+		
+		Graph shock1 (&shockGraph, &rod, 1, "Rod001.ppm");
+		
+		Node n1 (1,2,3,4,5,6, &shock1);
+		Node n2 (6,5,4,3,2,1, &shock1);
+		
 		Point p1(1,2,3,&shock1,&n1);
 		Point p2(1,2,3,&shock1,&n2);
+		
 		Edge e1(&n1, &n2, &shock1, 1);
 		Edge e2(&n2, &n1, &shock1, 1);
-		*/
-		system ("PAUSE");
+		
+		//system ("PAUSE");
 
+		/*
 		cout << "Before update : shock1 name : "+ shock1.getObjectName() <<endl;
 		shock1.setObjectName("Rod002.ppm");		
 		cout << "After update : shock1 name : "+ shock1.getObjectName() << endl;
@@ -87,13 +92,46 @@ void GraphManager::test() throw(GraphManagerExcept){
 		cout << "Before update : shock1 key : "+ to_string((_ULonglong)shock1.getKey()) <<endl;
 		shock1.setKey(3);
 		cout << "After update : shock1 key : "+ to_string((_ULonglong)shock1.getKey()) << endl;
+		*/
+		
+		/*
+		cout << "Before update : node key : "+ to_string((_ULonglong)n1.getKey()) <<endl;
+		n1.setKey(3);
+		cout << "After update : node key : "+ to_string((_ULonglong)n1.getKey()) << endl;
+		*/
+
+		/*
+		cout << "Before update : edge key : "+ to_string((_ULonglong)e1.getKey()) <<endl;
+		e1.setKey(3);
+		cout << "After update : edge key : "+ to_string((_ULonglong)e1.getKey()) << endl;
+		*/
+
+		/*
+		cout << "Before update : point key : "+ to_string((_ULonglong)p1.getKey()) <<endl;
+		p1.setKey(3);
+		cout << "After update : point key : "+ to_string((_ULonglong)p1.getKey()) << endl;
+		*/
+
+		/*
+		cout << "Before update : GraphClass key : "+ shockGraph.getKey() <<endl;
+		shockGraph.setKey("Shock Graph2");		
+		cout << "After update : GraphClass name : "+ shockGraph.getKey() << endl;
+		*/
+
+		/*
+		cout << "Before update : ObjectClass key : "+ rod.getKey() <<endl;
+		rod.setKey("Rod2");		
+		cout << "After update : ObjectClass name : "+ rod.getKey() << endl;
+		*/
+
+
 }
 
 /* *******************************************************************
 *                        Command Line Parsing                        *
  ********************************************************************/
 
-void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExcept){
+void GraphManager::parseCommandLine(int argc, char **argv) throw(ShapeLearnerExcept){
 	
 	//We initialize the command Line Parser.
 	CCmdLine cmdLine;
@@ -142,7 +180,7 @@ void GraphManager::parseCommandLine(int argc, char **argv) throw(GraphManagerExc
 *                              Setters                               *
  ********************************************************************/
 
-void GraphManager::getDbCredentials() throw(GraphManagerExcept){
+void GraphManager::getDbCredentials() throw(ShapeLearnerExcept){
 	setDbType();
 	setDbHost();
 	setDbPort();
@@ -151,9 +189,9 @@ void GraphManager::getDbCredentials() throw(GraphManagerExcept){
 	setDbPass();
 }
 
-void GraphManager::setDbType() throw(GraphManagerExcept){
+void GraphManager::setDbType() throw(ShapeLearnerExcept){
 	if (GraphManager::s_inst != NULL)
-		throw GraphManagerExcept("GraphManager::setDbType", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
+		throw ShapeLearnerExcept("GraphManager::setDbType", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
 	string tmp;
 
@@ -182,9 +220,9 @@ void GraphManager::setDbType() throw(GraphManagerExcept){
 	}
 }
 
-void GraphManager::setDbPort() throw(GraphManagerExcept){
+void GraphManager::setDbPort() throw(ShapeLearnerExcept){
 	if (GraphManager::s_inst != NULL)
-		throw GraphManagerExcept("GraphManager::setDbPort", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
+		throw ShapeLearnerExcept("GraphManager::setDbPort", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
 	string tmp;
 
@@ -200,9 +238,9 @@ void GraphManager::setDbPort() throw(GraphManagerExcept){
 	
 }
 
-void GraphManager::setDbName() throw(GraphManagerExcept){
+void GraphManager::setDbName() throw(ShapeLearnerExcept){
 	if (GraphManager::s_inst != NULL)
-		throw GraphManagerExcept("GraphManager::setDbName", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
+		throw ShapeLearnerExcept("GraphManager::setDbName", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
 	string tmp;
 
@@ -216,9 +254,9 @@ void GraphManager::setDbName() throw(GraphManagerExcept){
 
 }
 
-void GraphManager::setDbUser() throw(GraphManagerExcept){
+void GraphManager::setDbUser() throw(ShapeLearnerExcept){
 	if (GraphManager::s_inst != NULL)
-		throw GraphManagerExcept("GraphManager::setDbUser", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
+		throw ShapeLearnerExcept("GraphManager::setDbUser", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
 	string tmp;
 
@@ -232,9 +270,9 @@ void GraphManager::setDbUser() throw(GraphManagerExcept){
 
 }
 
-void GraphManager::setDbPass() throw(GraphManagerExcept){
+void GraphManager::setDbPass() throw(ShapeLearnerExcept){
 	if (GraphManager::s_inst != NULL)
-		throw GraphManagerExcept("GraphManager::setDbPass", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
+		throw ShapeLearnerExcept("GraphManager::setDbPass", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 	
 	string tmp;
 
@@ -245,9 +283,9 @@ void GraphManager::setDbPass() throw(GraphManagerExcept){
 			dbPass = tmp;
 }
 
-void GraphManager::setDbHost() throw(GraphManagerExcept){
+void GraphManager::setDbHost() throw(ShapeLearnerExcept){
 	if (GraphManager::s_inst != NULL)
-		throw GraphManagerExcept("GraphManager::setDbHost", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
+		throw ShapeLearnerExcept("GraphManager::setDbHost", "Error : The GraphManager has already been instantiated. It's impossible to modify the Database's parameters");
 		
 	string tmp;
 

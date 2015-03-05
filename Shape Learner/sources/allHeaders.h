@@ -21,6 +21,7 @@
 #define _ALL_HEADERS_
 
 #define _TRACER_ // Print all DB Requests
+#define _VERBOSE_ // Print all instanciations with Key
 
 // tell the compiler to shut up
 //#pragma warning(disable:4786)
@@ -48,25 +49,24 @@
 
 #include <odb/core.hxx>
 #ifdef _MSC_VER
+// ODB Classes
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 #include <odb/pgsql/database.hxx>
 #include <odb/schema-catalog.hxx>
-#endif //_MSC_VER
 
-
-#ifdef _MSC_VER // Prevent access from ODB compiler.
+// Software's architecture
+#include "shapeLearner.h"
+#include "shapeLearnerException.h"
 #include "CmdLine.h"
-#include "CmdLineException.h"
 #include "graphManager.h"
-#include "graphManagerException.h"
 #include "dbManager.h"
-#include "dbexception.h"
 #endif //_MSC_VER
+
 
 #include "constants.h"
 
-/* Class for ODB */
+/* Object Classes for ODB */
 #include "GraphClass.h"
 #include "ObjectClass.h"
 #include "Graph.h"
@@ -79,10 +79,9 @@
 #include "GraphClass-odb.hxx"
 #include "ObjectClass-odb.hxx"
 #include "Graph-odb.hxx"
+#include "Node-odb.hxx"
+#include "Edge-odb.hxx"
+#include "Point-odb.hxx"
 #endif // _MSC_VER
-
-
-#define GetCurrentDir _getcwd
-
 
 #endif //_ALL_HEADERS_

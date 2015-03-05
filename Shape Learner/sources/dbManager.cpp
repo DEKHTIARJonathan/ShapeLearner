@@ -1,4 +1,4 @@
-/* ************* Begin file dbManager.cpp ***************************************/
+/////* ************* Begin file dbManager.cpp ***************************************/
 /*
 ** 2015 February 18
 **
@@ -28,7 +28,7 @@ using namespace odb::core;
 **                           Constructers                            *
 *********************************************************************/
 
-DatabaseManager::DatabaseManager(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort , const unsigned int& dbType, const bool &dbInit) throw(DBException) : dbType(dbType)
+DatabaseManager::DatabaseManager(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort , const unsigned int& dbType, const bool &dbInit) throw(ShapeLearnerExcept) : dbType(dbType)
 {
 	switch(dbType)
 	{
@@ -44,7 +44,7 @@ DatabaseManager::DatabaseManager(const string &dbUser, const string &dbPass, con
 	}
 	
 	if (dbInit && !initDB("sources/structure.sql"))
-		throw DBException("DatabaseManager::DatabaseManager","Erreur lors de l'initialisation de la BDD");
+		throw ShapeLearnerExcept("DatabaseManager::DatabaseManager","Erreur lors de l'initialisation de la BDD");
 }
 
 /* *******************************************************************
@@ -55,7 +55,7 @@ DatabaseManager::DatabaseManager(const string &dbUser, const string &dbPass, con
 *                            DB Requests                             *
  ********************************************************************/
 
-bool DatabaseManager::query(const string &query) const throw(DBException)
+bool DatabaseManager::query(const string &query) const throw(ShapeLearnerExcept)
 {
 	bool rslt = false;
 	for (unsigned short retry_count (0); ; retry_count++)
@@ -70,7 +70,7 @@ bool DatabaseManager::query(const string &query) const throw(DBException)
 			if (database->execute(query) != 0 ) // == 0 Successful.
 			{
 				t.rollback();
-				throw DBException("DatabaseManager::query", query);
+				throw ShapeLearnerExcept("DatabaseManager::query", query);
 				break;
 			}
 			else
@@ -85,7 +85,7 @@ bool DatabaseManager::query(const string &query) const throw(DBException)
 		{
 			if (retry_count > constants::MAX_DB_RETRY){
 				t.rollback();
-				throw DBException("DatabaseManager::query", "Retry Limit exceeded" + (string)e.what());
+				throw ShapeLearnerExcept("DatabaseManager::query", "Retry Limit exceeded" + (string)e.what());
 			}
 			else
 				continue;
@@ -122,13 +122,13 @@ QSqlError DatabaseManager::lastError()
 */
 
 /*
-unsigned int DatabaseManager::getLastID() const throw(DBException)
+unsigned int DatabaseManager::getLastID() const throw(ShapeLearnerExcept)
 {
 
 	
 	string sql = "SELECT last_insert_rowid()";
 	if(!query.exec(sql))
-		//throw DBException(sql, query.lastError().databaseText());
+		//throw ShapeLearnerExcept(sql, query.lastError().databaseText());
 
 	query.next();// Only one result no need of the while loop
 
@@ -194,7 +194,7 @@ void DatabaseManager::capitalize(string& str) const
  ********************************************************************/
 
 
-string DatabaseManager::get_file_contents(const string& filename) throw(DBException){
+string DatabaseManager::get_file_contents(const string& filename) throw(ShapeLearnerExcept){
 	std::ifstream in(filename, std::ios::in | std::ios::binary);
 	if (in)
 	{
@@ -210,7 +210,7 @@ string DatabaseManager::get_file_contents(const string& filename) throw(DBExcept
 		unsigned int maxSizeError = 1500;
 		char error[1500];
 		strerror_s(error, maxSizeError, errno);
-		throw DBException("DatabaseManager::get_file_contents", error);
+		throw ShapeLearnerExcept("DatabaseManager::get_file_contents", error);
 	}
 	
 }

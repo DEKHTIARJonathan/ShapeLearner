@@ -17,13 +17,13 @@
 *	\author DEKHTIAR Jonathan
 */
 
-#ifndef _GRAPH_FACTORY_H_
-#define _GRAPH_FACTORY_H_
+#ifndef _GRAPH_MANAGER_H_
+#define _GRAPH_MANAGER_H_
 
 #include "allHeaders.h"
 using namespace std;
 
-class GraphManagerExcept; //Forward Declaration of the class contained in graphManagerException.h
+class ShapeLearnerExcept; //Forward Declaration of the class contained in shapeLearnerException.h
 class DatabaseManager; //Forward Declaration of the class contained in dbManager.h
 class ObjectClass;
 class GraphClass;
@@ -37,27 +37,27 @@ class GraphManager
 	public:
 
 		// Setters pour les paramètres de la BDD.
-		static void getDbCredentials() throw(GraphManagerExcept);
+		static void getDbCredentials() throw(ShapeLearnerExcept);
 
 		/* ************** DB I/O Ops *********************/
 
-		string saveObject(ObjectClass& obj) throw(GraphManagerExcept) {return saveObjectString(obj);}
-		string saveObject(GraphClass& obj) throw(GraphManagerExcept) {return saveObjectString(obj);}
+		string saveObject(ObjectClass& obj) throw(ShapeLearnerExcept) {return saveObjectString(obj);}
+		string saveObject(GraphClass& obj) throw(ShapeLearnerExcept) {return saveObjectString(obj);}
 
 		template<class T>
-		unsigned long saveObject(T& obj) throw(GraphManagerExcept){ 
+		unsigned long saveObject(T& obj) throw(ShapeLearnerExcept){ 
 			unsigned long rslt = dBManager.saveObject(obj); 
 			if (rslt != 0)
 				return rslt;
 			else 
-				throw GraphManagerExcept("GraphManager::saveObject // ID", "Error : Saving operation Failed.");
+				throw ShapeLearnerExcept("GraphManager::saveObject // ID", "Error : Saving operation Failed.");
 		}		
 		
 		template <class T>
-		bool updateObject(T& obj) throw (GraphManagerExcept){ return dBManager.updateObject(obj); }
+		bool updateObject(T& obj) throw (ShapeLearnerExcept){ return dBManager.updateObject(obj); }
 
 		template <class T>
-		bool deleteObject(T& obj) throw (GraphManagerExcept){ return dBManager.deleteObject(obj); }
+		bool deleteObject(T& obj) throw (ShapeLearnerExcept){ return dBManager.deleteObject(obj); }
 
 
 		/* **************  Singleton *********************/
@@ -80,19 +80,19 @@ class GraphManager
 		*	\return argc : Argument fourni par la fonction main().
 		*	\return argv : Argument fourni par la fonction main().
 		*/
-		static void parseCommandLine(int argc, char **argv) throw(GraphManagerExcept);
+		static void parseCommandLine(int argc, char **argv) throw(ShapeLearnerExcept);
 
-		void test () throw(GraphManagerExcept);
+		void test () throw(ShapeLearnerExcept);
 	
 	private:
 
 		// Setters pour les paramètres de la BDD.
-		static void setDbName() throw(GraphManagerExcept);
-		static void setDbUser() throw(GraphManagerExcept);
-		static void setDbPass() throw(GraphManagerExcept);
-		static void setDbHost() throw(GraphManagerExcept);
-		static void setDbType() throw(GraphManagerExcept);
-		static void setDbPort() throw(GraphManagerExcept);
+		static void setDbName() throw(ShapeLearnerExcept);
+		static void setDbUser() throw(ShapeLearnerExcept);
+		static void setDbPass() throw(ShapeLearnerExcept);
+		static void setDbHost() throw(ShapeLearnerExcept);
+		static void setDbType() throw(ShapeLearnerExcept);
+		static void setDbPort() throw(ShapeLearnerExcept);
 
 		/*! \brief dBManager : Référence vers l'unique instance du DatabaseManager en mémoire. */
 		DatabaseManager& dBManager;
@@ -124,10 +124,10 @@ class GraphManager
 		/* ************** DB I/O Ops *********************/
 
 		template<class T>
-		string saveObjectString(T& obj) throw(GraphManagerExcept) {
+		string saveObjectString(T& obj) throw(ShapeLearnerExcept) {
 			string rslt = dBManager.saveObject(obj);
 			if(!rslt.compare("")){ // Is Equal
-				throw DBException("GraphManager::saveObjectString // String", "Error : Saving operation Failed.");
+				throw ShapeLearnerExcept("GraphManager::saveObjectString // String", "Error : Saving operation Failed.");
 			}
 			else
 				return rslt;
@@ -140,7 +140,7 @@ class GraphManager
 		/*!
 		* \brief Constructeur de le class GraphManager.  Il instancie également la classe DatabaseManager.
 		*/
-		GraphManager() throw(GraphManagerExcept);
+		GraphManager() throw(ShapeLearnerExcept);
 
 		/*!
 		*	\brief Constructeur de recopie => La recopie est interdite
@@ -159,4 +159,4 @@ class GraphManager
 };
 
 
-#endif //_GRAPH_FACTORY_H_
+#endif //_GRAPH_MANAGER_H_

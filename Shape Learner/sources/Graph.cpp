@@ -27,6 +27,32 @@ Graph::Graph(GraphClass* _graphClass, ObjectClass* _objectClass, unsigned int co
 	objectName(_objectName), 
 	idGraph(0) 
 	{
-		GraphManager::openManager().saveObject(*this);
-		cout << "Graph key : "+ to_string((_ULonglong)this->getKey()) <<endl;
+		idGraph = GraphManager::openManager().saveObject(*this);
+		#ifdef _VERBOSE_
+			cout << "Graph key : "+ to_string((_ULonglong)getKey()) <<endl;
+		#endif
 	}
+
+inline void Graph::setKey(const unsigned int key) {
+	#ifdef _MSC_VER
+		GraphManager::openManager().deleteObject(*this);
+	#endif //_MSC_VER
+	idGraph = key;
+	#ifdef _MSC_VER
+		GraphManager::openManager().saveObject(*this);
+	#endif //_MSC_VER
+}
+
+inline void Graph::setObjectName(const string& _objectName) {
+	objectName = _objectName;
+	#ifdef _MSC_VER
+		GraphManager::openManager().updateObject(*this);
+	#endif //_MSC_VER
+}
+
+inline void Graph::setView(const unsigned int _viewNumber) {
+	viewNumber = _viewNumber;
+	#ifdef _MSC_VER
+		GraphManager::openManager().updateObject(*this);
+	#endif //_MSC_VER
+}
