@@ -66,7 +66,7 @@ class DatabaseManager
 				*/
 				static void	closeDatabase() throw(ShapeLearnerExcept);
 
-				static bool isDbOpen() { return !(database == NULL); }
+				static bool isDbOpen();
 
 				/* *************** Updaters ***********************/
 

@@ -48,16 +48,17 @@ void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(Shap
 	if (DatabaseManager::Interface::isDbOpen())
 		throw ShapeLearnerExcept("GraphManager::UserInterface::getDbCredentials", "Error : The Database has already been instantiated. It's impossible to modify the Database's parameters");
 	else{
-		#ifndef _DEBUG
+		if (dbInit)
+			setDBInitFile();
+		//#ifndef _DEBUG
 			setDbType();
 			setDbHost();
 			setDbPort();
 			setDbName();
 			setDbUser();
 			setDbPass();
-		#endif
-		if (dbInit)
-			setDBInitFile();
+		//#endif
+		
 	}
 }
 

@@ -169,3 +169,10 @@ void DatabaseManager::Interface::closeDatabase() throw(ShapeLearnerExcept){
 	else
 		throw ShapeLearnerExcept("DatabaseManager::Interface::disconnectDB", "Database already closed");
 }
+
+bool DatabaseManager::Interface::isDbOpen() { 
+	if(database == NULL)
+		return false;
+	else
+		return true;
+}

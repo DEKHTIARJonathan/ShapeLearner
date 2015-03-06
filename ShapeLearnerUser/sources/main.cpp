@@ -70,7 +70,6 @@ int main(int argc, char **argv)
 		catch (const std::exception &e ) 
 		{ 
 			cerr << e.what(); 
-
 			system ("PAUSE");
 			exit(EXIT_FAILURE);
 		}
