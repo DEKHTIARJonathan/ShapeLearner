@@ -71,6 +71,7 @@
     <ProjectGuid>{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ShapeLearner</RootNamespace>
+    <ProjectName>ShapeLearnerLib</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
