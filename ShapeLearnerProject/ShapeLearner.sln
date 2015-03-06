@@ -3,9 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DAGMatcherLib", "..\DAGMatcherLib\DAGMatcherLib.vcxproj", "{9F1B0DEA-0C33-453A-9A2A-E680987E965C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerLib", "..\ShapeLeanerLib\ShapeLearnerLib.vcxproj", "{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerUser", "..\ShapeLearnerUser\ShapeLearnerUser.vcxproj", "{7AA676E5-64C1-4F14-A979-B11B986CCEA7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C} = {AEEB1341-A0D6-4B46-A0D5-41B861095A6C}
+		{9F1B0DEA-0C33-453A-9A2A-E680987E965C} = {9F1B0DEA-0C33-453A-9A2A-E680987E965C}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerUser", "..\ShapeLearnerUser\ShapeLearnerUser\ShapeLearnerUser.vcxproj", "{7AA676E5-64C1-4F14-A979-B11B986CCEA7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerLib", "..\ShapeLearnerLib\ShapeLearnerLib.vcxproj", "{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F1B0DEA-0C33-453A-9A2A-E680987E965C} = {9F1B0DEA-0C33-453A-9A2A-E680987E965C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +24,14 @@ Global
 		{9F1B0DEA-0C33-453A-9A2A-E680987E965C}.Debug|Win32.Build.0 = Debug|Win32
 		{9F1B0DEA-0C33-453A-9A2A-E680987E965C}.Release|Win32.ActiveCfg = Release|Win32
 		{9F1B0DEA-0C33-453A-9A2A-E680987E965C}.Release|Win32.Build.0 = Release|Win32
-		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Debug|Win32.Build.0 = Debug|Win32
-		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Release|Win32.ActiveCfg = Release|Win32
-		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Release|Win32.Build.0 = Release|Win32
 		{7AA676E5-64C1-4F14-A979-B11B986CCEA7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{7AA676E5-64C1-4F14-A979-B11B986CCEA7}.Debug|Win32.Build.0 = Debug|Win32
 		{7AA676E5-64C1-4F14-A979-B11B986CCEA7}.Release|Win32.ActiveCfg = Release|Win32
 		{7AA676E5-64C1-4F14-A979-B11B986CCEA7}.Release|Win32.Build.0 = Release|Win32
+		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Debug|Win32.Build.0 = Debug|Win32
+		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Release|Win32.ActiveCfg = Release|Win32
+		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
