@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DBException">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAACAgAAgQAAAAIAAAAAQAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>headers\dbexception.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseManager">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DatabaseManager::Key" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>headers\dbManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>DEIAAAEEAwgIBADQABABIAJAADiEBACAgAAsQBQACAA=</HashCode>
+      <FileName>headers\dbManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphManager">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAoAAAAUAAAAAEAAAAECAQSACAAgQAAAAQQ=</HashCode>
+      <FileName>headers\graphManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphManagerExcept">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAACAgIAgQAAAAIAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>headers\graphManagerException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
