@@ -55,6 +55,10 @@ public:
 	string getClassName() const { return "Node"; }
 	/* =========== Template function =========== */
 
+	void removeFromDB();
+	void updateInDB();
+	unsigned long saveInDB();
+
 private:
 	Node() {}
 	unsigned long	idNode;

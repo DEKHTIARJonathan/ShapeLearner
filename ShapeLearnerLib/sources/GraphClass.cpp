@@ -21,34 +21,42 @@
 using namespace std;
 
 GraphClass::GraphClass(const string& name, bool isDirect, bool isAcyclic) : graphClassName(name), directGraph(isDirect), acyclicGraph(isAcyclic) {
-	GraphManager::ObjectInterface::saveObject(*this);
+	saveInDB();
 	#ifdef _VERBOSE_
 		cout << "GraphClass key : "+ getKey() <<endl;
 	#endif
 }
 
-inline void GraphClass::setKey(const string& key) {	
+void GraphClass::setKey(const string& key) {	
+	removeFromDB();		
+	graphClassName = key;
+	saveInDB();
+}
+
+void GraphClass::setIsDirect(const bool _directGraph){
+	directGraph = _directGraph;
+	updateInDB();
+}
+
+void GraphClass::setIsAcyclicGraph(const bool _acyclicGraph){
+	acyclicGraph = _acyclicGraph;
+	updateInDB();
+}
+
+void GraphClass::removeFromDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::deleteObject(*this);
 	#endif //_MSC_VER
-		
-		graphClassName = key;
-
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
 }
 
-inline void GraphClass::setIsDirect(const bool _directGraph){
-	directGraph = _directGraph;
+void GraphClass::updateInDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
-inline void GraphClass::setIsAcyclicGraph(const bool _acyclicGraph){
-	acyclicGraph = _acyclicGraph;
+string GraphClass::saveInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }

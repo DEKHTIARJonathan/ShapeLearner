@@ -40,11 +40,13 @@ public:
 	bool getIsAcyclicGraph() const {return acyclicGraph;}
 	void setIsAcyclicGraph(const bool _acyclicGraph);
 
-
-
 	/* =========== Template function =========== */
 	string getClassName() const { return "GraphClass"; }
 	/* =========== Template function =========== */
+
+	void removeFromDB();
+	void updateInDB();
+	string saveInDB();
 
 private:
 	GraphClass() {}

@@ -27,34 +27,42 @@ Graph::Graph(GraphClass* _graphClass, ObjectClass* _objectClass, string const _o
 	objectName(_objectName), 
 	idGraph(0) 
 	{
-		idGraph = GraphManager::ObjectInterface::saveObject(*this);
+		idGraph = saveInDB();
 		#ifdef _VERBOSE_
 			cout << "Graph key : "+ to_string((_ULonglong)getKey()) <<endl;
 		#endif
 	}
 
-inline void Graph::setKey(const unsigned int key) {
+void Graph::setKey(const unsigned int key) {
+	removeFromDB();
+	idGraph = key;
+	saveInDB();
+}
+
+void Graph::setObjectName(const string& _objectName) {
+	objectName = _objectName;
+	updateInDB();
+}
+
+void Graph::setView(const unsigned int _viewNumber) {
+	viewNumber = _viewNumber;
+	updateInDB();
+}
+
+void Graph::removeFromDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::deleteObject(*this);
 	#endif //_MSC_VER
-
-	idGraph = key;
-
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
 }
 
-inline void Graph::setObjectName(const string& _objectName) {
-	objectName = _objectName;
+void Graph::updateInDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
-inline void Graph::setView(const unsigned int _viewNumber) {
-	viewNumber = _viewNumber;
+unsigned long Graph::saveInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }

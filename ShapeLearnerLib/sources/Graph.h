@@ -45,6 +45,10 @@ public:
 	string getClassName() const { return "Graph"; }
 	/* =========== Template function =========== */
 
+	void removeFromDB();
+	void updateInDB();
+	unsigned long saveInDB();
+
 private:
 	Graph() {}
 

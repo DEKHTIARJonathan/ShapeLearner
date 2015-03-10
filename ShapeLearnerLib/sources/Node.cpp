@@ -29,60 +29,62 @@ Node::Node(Graph* _refGraph, unsigned int _index, unsigned int _level, unsigned 
 	label(_label),
 	idNode(0)
 	{
-		idNode = GraphManager::ObjectInterface::saveObject(*this);
+		idNode = saveInDB();
 		#ifdef _VERBOSE_
 			cout << "Node key : "+ to_string((_ULonglong)getKey()) <<endl;
 		#endif
 	}
 
-
-inline void Node::setKey(const unsigned int key) {
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
+void Node::setKey(const unsigned int key) {
+	removeFromDB();
 	idNode = key;
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
+	saveInDB();
 }
 
-inline void Node::setIndex(const unsigned int _index) {
+void Node::setIndex(const unsigned int _index) {
 	index = _index;
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	updateInDB();
 }
 
-inline void Node::setLevel(const unsigned int _level) {
+void Node::setLevel(const unsigned int _level) {
 	level = _level;
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	updateInDB();
 }
 
-inline void Node::setMass(const unsigned int _mass) {
+void Node::setMass(const unsigned int _mass) {
 	mass = _mass;
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	updateInDB();
 }
 
-inline void Node::setType(const unsigned int _type) {
+void Node::setType(const unsigned int _type) {
 	type = _type;
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	updateInDB();
 }
 
-inline void Node::setLabel(const string& _label) {
+void Node::setLabel(const string& _label) {
 	label = _label;
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	updateInDB();
 }
 
-
-inline unsigned long Node::getPointCount() const {
+unsigned long Node::getPointCount() const {
 	string query = "SELECT count(1) FROM \"Point\" WHERE \"refNode\" = '" + to_string(_ULonglong(idNode)) + "'";
 	return 1;
 } // à créer en fonction SQL
+
+void Node::removeFromDB(){
+	#ifdef _MSC_VER
+		GraphManager::ObjectInterface::deleteObject(*this);
+	#endif //_MSC_VER
+}
+
+void Node::updateInDB(){
+	#ifdef _MSC_VER
+		GraphManager::ObjectInterface::updateObject(*this);
+	#endif //_MSC_VER
+}
+
+unsigned long Node::saveInDB(){
+	#ifdef _MSC_VER
+		return GraphManager::ObjectInterface::saveObject(*this);
+	#endif //_MSC_VER
+}

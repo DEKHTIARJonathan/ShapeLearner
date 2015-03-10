@@ -37,6 +37,10 @@ public:
 	string getClassName() const { return "ObjectClass"; }
 	/* =========== Template function =========== */
 
+	void removeFromDB();
+	void updateInDB();
+	string saveInDB();
+
 private:
 	ObjectClass() {}
 	string objectClassName;

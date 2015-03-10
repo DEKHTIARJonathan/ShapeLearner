@@ -25,27 +25,40 @@ Edge::Edge(Node* _source, Node* _target, Graph* _refGraph, unsigned int _weight)
 	source(_source), 
 	target(_target), 
 	refGraph(_refGraph), 
+	weight(_weight),
 	idEdge(0) 
 	{
-		idEdge = GraphManager::ObjectInterface::saveObject(*this);
+		idEdge = saveInDB();
 		#ifdef _VERBOSE_
 			cout << "Edge key : "+ to_string((_ULonglong)getKey()) <<endl;
 		#endif;
 	}
 
-inline void Edge::setKey(const unsigned int key) {
-		#ifdef _MSC_VER
-			GraphManager::ObjectInterface::deleteObject(*this);
-		#endif //_MSC_VER
+void Edge::setKey(const unsigned int key) {
+		removeFromDB();
 		idEdge = key;
-		#ifdef _MSC_VER
-			GraphManager::ObjectInterface::saveObject(*this);
-		#endif //_MSC_VER
+		saveInDB();
 	}
 
-inline void Edge::setWeight(const unsigned int _weight) {
+void Edge::setWeight(const unsigned int _weight) {
 	weight = _weight;
+	updateInDB();
+}
+
+void Edge::removeFromDB(){
+	#ifdef _MSC_VER
+		GraphManager::ObjectInterface::deleteObject(*this);
+	#endif //_MSC_VER
+}
+
+void Edge::updateInDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::updateObject(*this);
+	#endif //_MSC_VER
+}
+
+unsigned long Edge::saveInDB(){
+	#ifdef _MSC_VER
+		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }

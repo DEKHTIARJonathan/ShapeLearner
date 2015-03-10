@@ -42,6 +42,10 @@ public:
 	/* =========== Template function =========== */
 	string getClassName() const { return "Edge"; }
 	/* =========== Template function =========== */
+
+	void removeFromDB();
+	void updateInDB();
+	unsigned long saveInDB();
 	
 private:
 	Edge() {}

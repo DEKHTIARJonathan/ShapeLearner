@@ -28,43 +28,47 @@ refGraph(_refGraph),
 refNode(_refNode),
 idPoint(0)
 {
-	idPoint = GraphManager::ObjectInterface::saveObject(*this);
+	idPoint = saveInDB();
 	#ifdef _VERBOSE_
 		cout << "Point key : "+ to_string((_ULonglong)getKey()) <<endl;
 	#endif
 }
 
-inline void Point::setKey(const unsigned int key) {
+void Point::setKey(const unsigned int key) {
+	removeFromDB();
+	idPoint = key;
+	saveInDB();
+}
 
+void Point::setxCoord(const unsigned int _xCoord){
+	xCoord = _xCoord;
+	updateInDB();
+}
+
+void Point::setyCoord(const unsigned int _yCoord){
+	yCoord = _yCoord;
+	updateInDB();
+}
+
+void Point::setRadius(const unsigned int _radius){
+	radius = _radius;
+	updateInDB();
+}
+
+void Point::removeFromDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::deleteObject(*this);
 	#endif //_MSC_VER
-
-	idPoint = key;
-
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
-
 }
 
-inline void Point::setxCoord(const unsigned int _xCoord){
-	xCoord = _xCoord;
+void Point::updateInDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
-inline void Point::setyCoord(const unsigned int _yCoord){
-	yCoord = _yCoord;
+unsigned long Point::saveInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
-}
-
-inline void Point::setRadius(const unsigned int _radius){
-	radius = _radius;
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }
