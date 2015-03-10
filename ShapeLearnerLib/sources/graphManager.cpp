@@ -29,7 +29,7 @@ string GraphManager::dbUser = "postgres";
 string GraphManager::dbPass = "postgres";
 unsigned int GraphManager::dbPort = 5432;
 string GraphManager::dbHost = "localhost";
-string GraphManager::dbInitFile = "";
+string GraphManager::dbInitFile = "sources/structure.sql";
 unsigned int GraphManager::dbType = constants::DB_PGSQL;
 
 /* *******************************************************************
@@ -45,19 +45,26 @@ void GraphManager::UserInterface::closeDatabase() throw(ShapeLearnerExcept) {
 } 
 
 void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(ShapeLearnerExcept){
-	if (DatabaseManager::Interface::isDbOpen())
+	//cout << "Hello";
+	//cout << " Brotherhuhu";
+	//bool a = true;
+	//a &= false;
+
+	if (DatabaseManager::Interface::isDbOpen()){
 		throw ShapeLearnerExcept("GraphManager::UserInterface::getDbCredentials", "Error : The Database has already been instantiated. It's impossible to modify the Database's parameters");
+	}	
 	else{
-		if (dbInit)
+		if (dbInit){
 			setDBInitFile();
-		//#ifndef _DEBUG
-			setDbType();
-			setDbHost();
-			setDbPort();
-			setDbName();
-			setDbUser();
-			setDbPass();
-		//#endif
+		}
+		#ifndef _DEBUG
+		setDbType();
+		setDbHost();
+		setDbPort();
+		setDbName();
+		setDbUser();
+		setDbPass();
+		#endif
 		
 	}
 }
@@ -229,8 +236,12 @@ void GraphManager::setDbHost() throw(ShapeLearnerExcept){
 void GraphManager::setDBInitFile() throw(ShapeLearnerExcept){	
 	string tmp = "sources/structure.sql";
 
-	cout << "Please enter the relative path to the file [DEFAULT = "+ tmp +"] : ";
-	getline( std::cin, tmp );
+	#ifdef _DEBUG
+		dbInitFile = "sources/structure.sql";
+	#else 
+		cout << "Please enter the relative path to the file [DEFAULT = "+ tmp +"] : ";
+		getline( std::cin, tmp );
+	#endif
 		
 	dbInitFile = tmp;
 }

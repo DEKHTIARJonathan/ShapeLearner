@@ -21,7 +21,7 @@
 using namespace std;
 
 void ShapeLearner::getDbCredentials(const bool dbInit) throw(ShapeLearnerExcept) { 
-	GraphManager::UserInterface::getDbCredentials(); 
+	GraphManager::UserInterface::getDbCredentials(dbInit); 
 }
 
 void ShapeLearner::openDatabase() throw(ShapeLearnerExcept) { 
