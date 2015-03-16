@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-Node::Node(Graph* _refGraph, unsigned int _index, unsigned int _level, unsigned int _mass, unsigned int _type, string _label) : 
+Node::Node(boost::shared_ptr<Graph> _refGraph, unsigned int _index, unsigned int _level, unsigned int _mass, unsigned int _type, string _label) : 
 	refGraph(_refGraph),	
 	index(_index),
 	level(_level),

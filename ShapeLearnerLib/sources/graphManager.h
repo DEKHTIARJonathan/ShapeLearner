@@ -122,6 +122,8 @@ class GraphManager
 				return rslt;
 		}
 
+		template <class T, class Y> static boost::shared_ptr<T> loadObject(Y keyDB) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::loadObject<T>(keyDB); }
+
 		/* **************  No instanciation *********************/
 
 		/*!

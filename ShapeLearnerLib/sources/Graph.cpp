@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-Graph::Graph(GraphClass* _graphClass, ObjectClass* _objectClass, string const _objectName, unsigned int const _viewNumber) : 
+Graph::Graph(boost::shared_ptr<GraphClass> _graphClass, boost::shared_ptr<ObjectClass> _objectClass, string const _objectName, unsigned int const _viewNumber) : 
 	graphClass(_graphClass), 
 	objectClass(_objectClass), 
 	viewNumber(_viewNumber), 

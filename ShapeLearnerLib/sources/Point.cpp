@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-Point::Point(Node* _refNode, Graph* _refGraph, double _xCoord, double _yCoord, double _radius) : 
+Point::Point(boost::shared_ptr<Node> _refNode, boost::shared_ptr<Graph> _refGraph, double _xCoord, double _yCoord, double _radius) : 
 xCoord(_xCoord),
 yCoord(_yCoord),
 radius(_radius),

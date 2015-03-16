@@ -82,11 +82,28 @@ class DatabaseManager
 						transaction t (database->begin ());
 						database->load (obj.getKey(), obj);
 						t.commit ();
-						throw ShapeLearnerExcept ("DatabaseManager::Interface::updateObject", "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = "+ e.what());
+						throw ShapeLearnerExcept ("DatabaseManager::Interface::updateObject", "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = " + e.what());
 				
 					}
 			
 					return true;
+				}
+
+				template <class T, class Y> static boost::shared_ptr<T> loadObject(Y keyDB) throw (ShapeLearnerExcept){
+					try
+					{
+						transaction t (database->begin ());
+						boost::shared_ptr<T> rslt (database->load<T> (keyDB));
+						t.commit ();
+
+						return rslt;
+					}
+					catch (const std::exception& e)
+					{
+						throw ShapeLearnerExcept ("DatabaseManager::Interface::loadObject", "Unable to load object // Error = "+ string(e.what()));
+						return NULL;
+					}
+				
 				}
 
 				/* *************** Savers ***********************/

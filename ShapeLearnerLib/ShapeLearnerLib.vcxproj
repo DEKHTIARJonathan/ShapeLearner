@@ -106,7 +106,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\tools\libodb-pgsql-2.4.0;C:\tools\libodb-2.4.0;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;C:\tools\libodb-pgsql-2.4.0;C:\tools\libodb-boost-2.4.0;C:\tools\libodb-2.4.0;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -129,7 +129,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\tools\libodb-pgsql-2.4.0;C:\tools\libodb-2.4.0;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;C:\tools\libodb-pgsql-2.4.0;C:\tools\libodb-boost-2.4.0;C:\tools\libodb-2.4.0;C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include;$(ProjectDir)headers;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>

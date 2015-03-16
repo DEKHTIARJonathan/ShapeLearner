@@ -31,6 +31,7 @@
 #include <odb/pointer-traits.hxx>
 #include <odb/container-traits.hxx>
 #include <odb/no-op-cache-traits.hxx>
+#include <odb/prepared-query.hxx>
 #include <odb/result.hxx>
 #include <odb/simple-object-result.hxx>
 
@@ -315,6 +316,12 @@ namespace odb
 
     static unsigned long long
     erase_query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
 
     static const char persist_statement_name[];
     static const char find_statement_name[];

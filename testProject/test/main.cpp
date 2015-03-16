@@ -1,3 +1,4 @@
+
 // weak_ptr constructor example
 #include <iostream>
 #include <memory>

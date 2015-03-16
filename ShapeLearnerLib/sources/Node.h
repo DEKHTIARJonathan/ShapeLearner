@@ -30,7 +30,7 @@ class Point;
 class Node
 {
 public:
-	Node(Graph* _refGraph, unsigned int _index = 1, unsigned int _level = 1, unsigned int _mass = 1, unsigned int _type = 1, string _label = "1");
+	Node(boost::shared_ptr<Graph> _refGraph, unsigned int _index = 1, unsigned int _level = 1, unsigned int _mass = 1, unsigned int _type = 1, string _label = "1");
 
 	unsigned long getKey() const {return idNode;}
 	void setKey(const unsigned int key);
@@ -62,13 +62,13 @@ public:
 
 private:
 	Node() {}
-	unsigned long	idNode;
-	unsigned int	index;
-	unsigned int	level;
-	unsigned int	mass;
-	unsigned int	type;
-	string			label;
-	Graph*			refGraph;
+	unsigned long						idNode;
+	unsigned int						index;
+	unsigned int						level;
+	unsigned int						mass;
+	unsigned int						type;
+	string								label;
+	odb::boost::lazy_weak_ptr<Graph>	refGraph;
 
 	friend class odb::access;
 };

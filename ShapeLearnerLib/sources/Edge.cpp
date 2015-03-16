@@ -21,7 +21,7 @@
 using namespace std;
 
 
-Edge::Edge(Node* _source, Node* _target, Graph* _refGraph, unsigned int _weight) : 
+Edge::Edge(odb::boost::lazy_weak_ptr<Node> _source, odb::boost::lazy_weak_ptr<Node> _target, odb::boost::lazy_weak_ptr<Graph> _refGraph, unsigned int _weight) : 
 	source(_source), 
 	target(_target), 
 	refGraph(_refGraph), 

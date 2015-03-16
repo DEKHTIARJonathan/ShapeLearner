@@ -19,6 +19,7 @@
 #include <odb/pgsql/simple-object-statements.hxx>
 #include <odb/pgsql/container-statements.hxx>
 #include <odb/pgsql/exceptions.hxx>
+#include <odb/pgsql/prepared-query.hxx>
 #include <odb/pgsql/simple-object-result.hxx>
 
 namespace odb
@@ -258,17 +259,19 @@ namespace odb
     // graphClass
     //
     {
-      ::GraphClass* const& v =
+      ::odb::boost::lazy_weak_ptr< ::GraphClass > const& v =
         o.graphClass;
 
       typedef object_traits< ::GraphClass > obj_traits;
-      typedef odb::pointer_traits< ::GraphClass* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::GraphClass > > wptr_traits;
+      typedef odb::pointer_traits< wptr_traits::strong_pointer_type > ptr_traits;
 
-      bool is_null (ptr_traits::null_ptr (v));
+      wptr_traits::strong_pointer_type sp (wptr_traits::lock (v));
+      bool is_null (ptr_traits::null_ptr (sp));
       if (!is_null)
       {
         const obj_traits::id_type& id (
-          obj_traits::id (ptr_traits::get_ref (v)));
+          ptr_traits::object_id< ptr_traits::element_type  > (sp));
 
         std::size_t size (0);
         std::size_t cap (i.graphClass_value.capacity ());
@@ -290,17 +293,19 @@ namespace odb
     // objectClass
     //
     {
-      ::ObjectClass* const& v =
+      ::odb::boost::lazy_weak_ptr< ::ObjectClass > const& v =
         o.objectClass;
 
       typedef object_traits< ::ObjectClass > obj_traits;
-      typedef odb::pointer_traits< ::ObjectClass* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::ObjectClass > > wptr_traits;
+      typedef odb::pointer_traits< wptr_traits::strong_pointer_type > ptr_traits;
 
-      bool is_null (ptr_traits::null_ptr (v));
+      wptr_traits::strong_pointer_type sp (wptr_traits::lock (v));
+      bool is_null (ptr_traits::null_ptr (sp));
       if (!is_null)
       {
         const obj_traits::id_type& id (
-          obj_traits::id (ptr_traits::get_ref (v)));
+          ptr_traits::object_id< ptr_traits::element_type  > (sp));
 
         std::size_t size (0);
         std::size_t cap (i.objectClass_value.capacity ());
@@ -383,11 +388,11 @@ namespace odb
     // graphClass
     //
     {
-      ::GraphClass*& v =
+      ::odb::boost::lazy_weak_ptr< ::GraphClass >& v =
         o.graphClass;
 
       typedef object_traits< ::GraphClass > obj_traits;
-      typedef odb::pointer_traits< ::GraphClass* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::GraphClass > > ptr_traits;
 
       if (i.graphClass_null)
         v = ptr_traits::pointer_type ();
@@ -402,24 +407,19 @@ namespace odb
           i.graphClass_size,
           i.graphClass_null);
 
-        // If a compiler error points to the line below, then
-        // it most likely means that a pointer used in a member
-        // cannot be initialized from an object pointer.
-        //
         v = ptr_traits::pointer_type (
-          static_cast<pgsql::database*> (db)->load<
-            obj_traits::object_type > (id));
+          *static_cast<pgsql::database*> (db), id);
       }
     }
 
     // objectClass
     //
     {
-      ::ObjectClass*& v =
+      ::odb::boost::lazy_weak_ptr< ::ObjectClass >& v =
         o.objectClass;
 
       typedef object_traits< ::ObjectClass > obj_traits;
-      typedef odb::pointer_traits< ::ObjectClass* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::ObjectClass > > ptr_traits;
 
       if (i.objectClass_null)
         v = ptr_traits::pointer_type ();
@@ -434,13 +434,8 @@ namespace odb
           i.objectClass_size,
           i.objectClass_null);
 
-        // If a compiler error points to the line below, then
-        // it most likely means that a pointer used in a member
-        // cannot be initialized from an object pointer.
-        //
         v = ptr_traits::pointer_type (
-          static_cast<pgsql::database*> (db)->load<
-            obj_traits::object_type > (id));
+          *static_cast<pgsql::database*> (db), id);
       }
     }
 
@@ -930,6 +925,102 @@ namespace odb
       q.parameters_binding ());
 
     return st.execute ();
+  }
+
+  odb::details::shared_ptr<prepared_query_impl>
+  access::object_traits_impl< ::Graph, id_pgsql >::
+  prepare_query (connection& c, const char* n, const query_base_type& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::connection& conn (
+      static_cast<pgsql::connection&> (c));
+
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.select_image_binding ());
+
+    if (im.version != sts.select_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_select);
+      sts.select_image_version (im.version);
+      imb.version++;
+    }
+
+    std::string text (query_statement);
+    if (!q.empty ())
+    {
+      text += "\n";
+      text += q.clause ();
+    }
+
+    shared_ptr<pgsql::prepared_query_impl> r (
+      new (shared) pgsql::prepared_query_impl (conn));
+    r->name = n;
+    r->execute = &execute_query;
+    r->query = q;
+    r->stmt.reset (
+      new (shared) select_statement (
+        sts.connection (),
+        n,
+        text,
+        true,
+        true,
+        r->query.parameter_types (),
+        r->query.parameter_count (),
+        r->query.parameters_binding (),
+        imb));
+
+    return r;
+  }
+
+  odb::details::shared_ptr<result_impl>
+  access::object_traits_impl< ::Graph, id_pgsql >::
+  execute_query (prepared_query_impl& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::prepared_query_impl& pq (
+      static_cast<pgsql::prepared_query_impl&> (q));
+    shared_ptr<select_statement> st (
+      odb::details::inc_ref (
+        static_cast<select_statement*> (pq.stmt.get ())));
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+
+    // The connection used by the current transaction and the
+    // one used to prepare this statement must be the same.
+    //
+    assert (&conn == &st->connection ());
+
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.select_image_binding ());
+
+    if (im.version != sts.select_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_select);
+      sts.select_image_version (im.version);
+      imb.version++;
+    }
+
+    pq.query.init_parameters ();
+    st->execute ();
+
+    return shared_ptr<result_impl> (
+      new (shared) pgsql::object_result_impl<object_type> (
+        pq.query, st, sts, 0));
   }
 }
 

@@ -30,7 +30,7 @@ class GraphManager; // Forward Declaration of the class contained in graphManage
 class Graph
 {
 public:
-	Graph(GraphClass* _graphClass, ObjectClass* _objectClass, string const _objectName, unsigned int const _viewNumber = 1);
+	Graph(boost::shared_ptr<GraphClass> _graphClass, boost::shared_ptr<ObjectClass> _objectClass, string const _objectName, unsigned int const _viewNumber = 1);
 	
 	unsigned long getKey() const {return idGraph;}
 	void setKey(const unsigned int key);
@@ -54,8 +54,8 @@ private:
 
 	unsigned long idGraph;
 
-	GraphClass* graphClass;
-	ObjectClass* objectClass;
+	odb::boost::lazy_weak_ptr<GraphClass> graphClass;
+	odb::boost::lazy_weak_ptr<ObjectClass> objectClass;
 
 	string objectName; // The name of the image file.
 	unsigned int viewNumber;

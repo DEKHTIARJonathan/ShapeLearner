@@ -30,7 +30,7 @@ class GraphManager; // Forward Declaration of the class contained in graphManage
 class Point
 {
 public:
-	Point(Node* _refNode, Graph* _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
+	Point(boost::shared_ptr<Node> _refNode, boost::shared_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
 	
 	unsigned long getKey() const {return idPoint;}
 	void setKey(const unsigned int key);
@@ -60,8 +60,8 @@ private:
 	double yCoord;
 	double radius;
 
-	Graph* refGraph;
-	Node* refNode;
+	odb::boost::lazy_weak_ptr<Graph> refGraph;
+	odb::boost::lazy_weak_ptr<Node> refNode;
 
 	friend class odb::access;
 };

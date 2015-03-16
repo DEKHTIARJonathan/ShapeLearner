@@ -45,18 +45,15 @@ void GraphManager::UserInterface::closeDatabase() throw(ShapeLearnerExcept) {
 } 
 
 void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(ShapeLearnerExcept){
-	//cout << "Hello";
-	//cout << " Brotherhuhu";
-	//bool a = true;
-	//a &= false;
 
 	if (DatabaseManager::Interface::isDbOpen()){
 		throw ShapeLearnerExcept("GraphManager::UserInterface::getDbCredentials", "Error : The Database has already been instantiated. It's impossible to modify the Database's parameters");
 	}	
 	else{
-		if (dbInit){
+		if (dbInit)
 			setDBInitFile();
-		}
+		else
+			dbInitFile = "";
 		#ifndef _DEBUG
 		setDbType();
 		setDbHost();
@@ -70,21 +67,24 @@ void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(Shap
 }
 
 void GraphManager::UserInterface::test() throw(ShapeLearnerExcept){
-	
-		GraphClass shockGraph ("Shock Graph", true, true);
+		/*
+		boost::shared_ptr<GraphClass> shockGraph (new GraphClass("Shock Graph", true, true));
 		
-		ObjectClass rod ("Rod");
+		boost::shared_ptr<ObjectClass> rod (new ObjectClass("Rod"));
 		
-		Graph shock1( &shockGraph, &rod, "Rod001.ppm", 1);
+		boost::shared_ptr<Graph> shock1 (new Graph(shockGraph, rod, "Rod001.ppm", 1));
 		
-		Node n1 (&shock1, 1,2,3,4,"#");
-		Node n2 (&shock1, 5,4,3,2,"A");
+		boost::shared_ptr<Node> n1 (new Node(shock1, 1,2,3,4,"#"));
+		boost::shared_ptr<Node> n2 (new Node(shock1, 5,4,3,2,"A"));
 		
-		Point p1(&n1,&shock1,1,2,3);
-		Point p2(&n1,&shock1,1,2,3);
+		boost::shared_ptr<Point> p1 (new Point(n1,shock1,1,2,3));
+		boost::shared_ptr<Point> p2 (new Point(n1,shock1,2,3,4));
 		
-		Edge e1(&n1, &n2, &shock1, 1);
-		Edge e2(&n2, &n1, &shock1, 1);
+		boost::shared_ptr<Edge> e1 (new Edge(n1, n2, shock1, 1));
+		boost::shared_ptr<Edge> e2 (new Edge(n2, n1, shock1, 1));
+		*/
+
+		boost::shared_ptr<Point> p1 = loadObject<Point>(3);
 		
 		system ("PAUSE");
 
@@ -195,30 +195,32 @@ void GraphManager::UserInterface::test() throw(ShapeLearnerExcept){
 
 		// ================= END EDGE TEST ================= */
 
-		/* // ================= START POINT TEST  =================
+		// ================= START POINT TEST  =================
 
+		//p1 = loadObject<Point>(1);
 
-		cout << "Before update : point xCoord : "+ to_string((_ULonglong)p1.getxCoord()) <<endl;
-		p1.setxCoord(13);
-		cout << "After update : point xCoord : "+ to_string((_ULonglong)p1.getxCoord()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : point yCoord : "+ to_string((_ULonglong)p1.getyCoord()) <<endl;
-		p1.setyCoord(13);
-		cout << "After update : point yCoord : "+ to_string((_ULonglong)p1.getyCoord()) << endl;
+		cout << "Before update : point xCoord : "+ to_string((_ULonglong)p1->getxCoord()) <<endl;
+		p1->setxCoord(13);
+		cout << "After update : point xCoord : "+ to_string((_ULonglong)p1->getxCoord()) << endl;
 
 		system ("PAUSE");
 
-		cout << "Before update : point radius : "+ to_string((_ULonglong)p1.getRadius()) <<endl;
-		p1.setRadius(13);
-		cout << "After update : point radius : "+ to_string((_ULonglong)p1.getRadius()) << endl;
+		cout << "Before update : point yCoord : "+ to_string((_ULonglong)p1->getyCoord()) <<endl;
+		p1->setyCoord(13);
+		cout << "After update : point yCoord : "+ to_string((_ULonglong)p1->getyCoord()) << endl;
 
 		system ("PAUSE");
 
-		cout << "Before update : point key : "+ to_string((_ULonglong)p1.getKey()) <<endl;
-		p1.setKey(3);
-		cout << "After update : point key : "+ to_string((_ULonglong)p1.getKey()) << endl;
+		cout << "Before update : point radius : "+ to_string((_ULonglong)p1->getRadius()) <<endl;
+		p1->setRadius(13);
+		cout << "After update : point radius : "+ to_string((_ULonglong)p1->getRadius()) << endl;
+
+		system ("PAUSE");
+
+		cout << "Before update : point key : "+ to_string((_ULonglong)p1->getKey()) <<endl;
+		p1->setKey(3);
+		cout << "After update : point key : "+ to_string((_ULonglong)p1->getKey()) << endl;
+
 
 
 		// ================= END EDGE TEST ================= */
@@ -321,14 +323,14 @@ void GraphManager::setDbHost() throw(ShapeLearnerExcept){
 }
 
 void GraphManager::setDBInitFile() throw(ShapeLearnerExcept){	
-	string tmp = "sources/structure.sql";
 
-	#ifdef _DEBUG
-		dbInitFile = "sources/structure.sql";
-	#else 
-		cout << "Please enter the relative path to the file [DEFAULT = "+ tmp +"] : ";
+	#ifndef _DEBUG 
+		string tmp;
+		cout << "Please enter the relative path to the file [DEFAULT = "+ dbInitFile +"] : ";
 		getline( std::cin, tmp );
-	#endif
 		
-	dbInitFile = tmp;
+		if (!tmp.empty())
+			dbInitFile = tmp;
+	#endif
+	
 }

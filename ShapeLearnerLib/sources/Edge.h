@@ -31,7 +31,7 @@ class Edge
 {
 public:
 
-	Edge(Node* _source, Node* _target, Graph* _refGraph, unsigned int _weight = 1);
+	Edge(odb::boost::lazy_weak_ptr<Node> _source, odb::boost::lazy_weak_ptr<Node> _target, odb::boost::lazy_weak_ptr<Graph> _refGraph, unsigned int _weight = 1);
 
 	unsigned long getKey() const {return idEdge;}
 	void setKey(const unsigned int key);
@@ -51,9 +51,9 @@ private:
 	Edge() {}
 
 	unsigned long idEdge;
-	Node* source;
-	Node* target;
-	Graph* refGraph;
+	odb::boost::lazy_weak_ptr<Node> source;
+	odb::boost::lazy_weak_ptr<Node> target;
+	odb::boost::lazy_weak_ptr<Graph> refGraph;
 	unsigned int weight;
 
 	friend class odb::access;

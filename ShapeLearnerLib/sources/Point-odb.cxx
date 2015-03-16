@@ -20,6 +20,7 @@
 #include <odb/pgsql/view-statements.hxx>
 #include <odb/pgsql/container-statements.hxx>
 #include <odb/pgsql/exceptions.hxx>
+#include <odb/pgsql/prepared-query.hxx>
 #include <odb/pgsql/simple-object-result.hxx>
 #include <odb/pgsql/view-result.hxx>
 
@@ -297,17 +298,19 @@ namespace odb
     // refGraph
     //
     {
-      ::Graph* const& v =
+      ::odb::boost::lazy_weak_ptr< ::Graph > const& v =
         o.refGraph;
 
       typedef object_traits< ::Graph > obj_traits;
-      typedef odb::pointer_traits< ::Graph* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::Graph > > wptr_traits;
+      typedef odb::pointer_traits< wptr_traits::strong_pointer_type > ptr_traits;
 
-      bool is_null (ptr_traits::null_ptr (v));
+      wptr_traits::strong_pointer_type sp (wptr_traits::lock (v));
+      bool is_null (ptr_traits::null_ptr (sp));
       if (!is_null)
       {
         const obj_traits::id_type& id (
-          obj_traits::id (ptr_traits::get_ref (v)));
+          ptr_traits::object_id< ptr_traits::element_type  > (sp));
 
         pgsql::value_traits<
             obj_traits::id_type,
@@ -322,17 +325,19 @@ namespace odb
     // refNode
     //
     {
-      ::Node* const& v =
+      ::odb::boost::lazy_weak_ptr< ::Node > const& v =
         o.refNode;
 
       typedef object_traits< ::Node > obj_traits;
-      typedef odb::pointer_traits< ::Node* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::Node > > wptr_traits;
+      typedef odb::pointer_traits< wptr_traits::strong_pointer_type > ptr_traits;
 
-      bool is_null (ptr_traits::null_ptr (v));
+      wptr_traits::strong_pointer_type sp (wptr_traits::lock (v));
+      bool is_null (ptr_traits::null_ptr (sp));
       if (!is_null)
       {
         const obj_traits::id_type& id (
-          obj_traits::id (ptr_traits::get_ref (v)));
+          ptr_traits::object_id< ptr_traits::element_type  > (sp));
 
         pgsql::value_traits<
             obj_traits::id_type,
@@ -415,11 +420,11 @@ namespace odb
     // refGraph
     //
     {
-      ::Graph*& v =
+      ::odb::boost::lazy_weak_ptr< ::Graph >& v =
         o.refGraph;
 
       typedef object_traits< ::Graph > obj_traits;
-      typedef odb::pointer_traits< ::Graph* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::Graph > > ptr_traits;
 
       if (i.refGraph_null)
         v = ptr_traits::pointer_type ();
@@ -433,24 +438,19 @@ namespace odb
           i.refGraph_value,
           i.refGraph_null);
 
-        // If a compiler error points to the line below, then
-        // it most likely means that a pointer used in a member
-        // cannot be initialized from an object pointer.
-        //
         v = ptr_traits::pointer_type (
-          static_cast<pgsql::database*> (db)->load<
-            obj_traits::object_type > (id));
+          *static_cast<pgsql::database*> (db), id);
       }
     }
 
     // refNode
     //
     {
-      ::Node*& v =
+      ::odb::boost::lazy_weak_ptr< ::Node >& v =
         o.refNode;
 
       typedef object_traits< ::Node > obj_traits;
-      typedef odb::pointer_traits< ::Node* > ptr_traits;
+      typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::Node > > ptr_traits;
 
       if (i.refNode_null)
         v = ptr_traits::pointer_type ();
@@ -464,13 +464,8 @@ namespace odb
           i.refNode_value,
           i.refNode_null);
 
-        // If a compiler error points to the line below, then
-        // it most likely means that a pointer used in a member
-        // cannot be initialized from an object pointer.
-        //
         v = ptr_traits::pointer_type (
-          static_cast<pgsql::database*> (db)->load<
-            obj_traits::object_type > (id));
+          *static_cast<pgsql::database*> (db), id);
       }
     }
   }
@@ -923,6 +918,102 @@ namespace odb
     return st.execute ();
   }
 
+  odb::details::shared_ptr<prepared_query_impl>
+  access::object_traits_impl< ::Point, id_pgsql >::
+  prepare_query (connection& c, const char* n, const query_base_type& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::connection& conn (
+      static_cast<pgsql::connection&> (c));
+
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.select_image_binding ());
+
+    if (im.version != sts.select_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_select);
+      sts.select_image_version (im.version);
+      imb.version++;
+    }
+
+    std::string text (query_statement);
+    if (!q.empty ())
+    {
+      text += "\n";
+      text += q.clause ();
+    }
+
+    shared_ptr<pgsql::prepared_query_impl> r (
+      new (shared) pgsql::prepared_query_impl (conn));
+    r->name = n;
+    r->execute = &execute_query;
+    r->query = q;
+    r->stmt.reset (
+      new (shared) select_statement (
+        sts.connection (),
+        n,
+        text,
+        true,
+        true,
+        r->query.parameter_types (),
+        r->query.parameter_count (),
+        r->query.parameters_binding (),
+        imb));
+
+    return r;
+  }
+
+  odb::details::shared_ptr<result_impl>
+  access::object_traits_impl< ::Point, id_pgsql >::
+  execute_query (prepared_query_impl& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::prepared_query_impl& pq (
+      static_cast<pgsql::prepared_query_impl&> (q));
+    shared_ptr<select_statement> st (
+      odb::details::inc_ref (
+        static_cast<select_statement*> (pq.stmt.get ())));
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+
+    // The connection used by the current transaction and the
+    // one used to prepare this statement must be the same.
+    //
+    assert (&conn == &st->connection ());
+
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.select_image_binding ());
+
+    if (im.version != sts.select_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_select);
+      sts.select_image_version (im.version);
+      imb.version++;
+    }
+
+    pq.query.init_parameters ();
+    st->execute ();
+
+    return shared_ptr<result_impl> (
+      new (shared) pgsql::object_result_impl<object_type> (
+        pq.query, st, sts, 0));
+  }
+
   // pointsInNode
   //
 
@@ -1053,6 +1144,92 @@ namespace odb
         qs, st, sts, 0));
 
     return result<view_type> (r);
+  }
+
+  odb::details::shared_ptr<prepared_query_impl>
+  access::view_traits_impl< ::pointsInNode, id_pgsql >::
+  prepare_query (connection& c, const char* n, const query_base_type& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::connection& conn (
+      static_cast<pgsql::connection&> (c));
+    statements_type& sts (
+      conn.statement_cache ().find_view<view_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.image_binding ());
+
+    if (im.version != sts.image_version () || imb.version == 0)
+    {
+      bind (imb.bind, im);
+      sts.image_version (im.version);
+      imb.version++;
+    }
+
+    shared_ptr<pgsql::prepared_query_impl> r (
+      new (shared) pgsql::prepared_query_impl (conn));
+    r->name = n;
+    r->execute = &execute_query;
+    r->query = query_statement (q);
+    r->stmt.reset (
+      new (shared) select_statement (
+        sts.connection (),
+        n,
+        r->query.clause (),
+        false,
+        true,
+        r->query.parameter_types (),
+        r->query.parameter_count (),
+        r->query.parameters_binding (),
+        imb));
+
+    return r;
+  }
+
+  odb::details::shared_ptr<result_impl>
+  access::view_traits_impl< ::pointsInNode, id_pgsql >::
+  execute_query (prepared_query_impl& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::prepared_query_impl& pq (
+      static_cast<pgsql::prepared_query_impl&> (q));
+    shared_ptr<select_statement> st (
+      odb::details::inc_ref (
+        static_cast<select_statement*> (pq.stmt.get ())));
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+
+    // The connection used by the current transaction and the
+    // one used to prepare this statement must be the same.
+    //
+    assert (&conn == &st->connection ());
+
+    statements_type& sts (
+      conn.statement_cache ().find_view<view_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.image_binding ());
+
+    if (im.version != sts.image_version () || imb.version == 0)
+    {
+      bind (imb.bind, im);
+      sts.image_version (im.version);
+      imb.version++;
+    }
+
+    pq.query.init_parameters ();
+    st->execute ();
+
+    return shared_ptr<result_impl> (
+      new (shared) pgsql::view_result_impl<view_type> (
+        pq.query, st, sts, 0));
   }
 }
 

@@ -27,9 +27,9 @@
 //#pragma warning(disable:4786)
 
 #ifdef _MSC_VER
-#pragma warning( disable : 4290 )
-#pragma warning( disable : 4244 )
-#pragma warning( disable : 4068 )
+	#pragma warning( disable : 4290 )
+	#pragma warning( disable : 4244 )
+	#pragma warning( disable : 4068 )
 #endif //_MSC_VER
 
 #include <iostream>
@@ -42,26 +42,31 @@
 #include <sstream>
 #include <fstream>
 #include <direct.h>
-#include <memory>
 #include <cerrno>
+#include <memory>
+#include <boost/shared_ptr.hpp>
+
+
 //#include <ppl.h>
 
 
 #include <odb/core.hxx>
+#include <odb/boost/lazy-ptr.hxx>
+
 #ifdef _MSC_VER
-// ODB Classes
-#include <odb/database.hxx>
-#include <odb/transaction.hxx>
-#include <odb/pgsql/database.hxx>
-#include <odb/schema-catalog.hxx>
+	// ODB Classes
+	
+	#include <odb/database.hxx>
+	#include <odb/transaction.hxx>
+	#include <odb/pgsql/database.hxx>
+	#include <odb/schema-catalog.hxx>
 
-// Software's architecture
-#include "shapeLearner.h"
-#include "shapeLearnerException.h"
-#include "graphManager.h"
-#include "dbManager.h"
+	// Software's architecture
+	#include "shapeLearner.h"
+	#include "shapeLearnerException.h"
+	#include "graphManager.h"
+	#include "dbManager.h"
 #endif //_MSC_VER
-
 
 #include "constants.h"
 
@@ -75,12 +80,12 @@
 /* Class for ODB */
 
 #ifdef _MSC_VER // ODB Generated
-#include "GraphClass-odb.hxx"
-#include "ObjectClass-odb.hxx"
-#include "Graph-odb.hxx"
-#include "Node-odb.hxx"
-#include "Edge-odb.hxx"
-#include "Point-odb.hxx"
+	#include "GraphClass-odb.hxx"
+	#include "ObjectClass-odb.hxx"
+	#include "Graph-odb.hxx"
+	#include "Node-odb.hxx"
+	#include "Edge-odb.hxx"
+	#include "Point-odb.hxx"
 #endif // _MSC_VER
 
 #endif //_ALL_HEADERS_

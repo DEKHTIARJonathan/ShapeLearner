@@ -19,6 +19,7 @@
 #include <odb/pgsql/simple-object-statements.hxx>
 #include <odb/pgsql/container-statements.hxx>
 #include <odb/pgsql/exceptions.hxx>
+#include <odb/pgsql/prepared-query.hxx>
 #include <odb/pgsql/simple-object-result.hxx>
 
 namespace odb
@@ -589,6 +590,102 @@ namespace odb
       q.parameters_binding ());
 
     return st.execute ();
+  }
+
+  odb::details::shared_ptr<prepared_query_impl>
+  access::object_traits_impl< ::ObjectClass, id_pgsql >::
+  prepare_query (connection& c, const char* n, const query_base_type& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::connection& conn (
+      static_cast<pgsql::connection&> (c));
+
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.select_image_binding ());
+
+    if (im.version != sts.select_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_select);
+      sts.select_image_version (im.version);
+      imb.version++;
+    }
+
+    std::string text (query_statement);
+    if (!q.empty ())
+    {
+      text += " ";
+      text += q.clause ();
+    }
+
+    shared_ptr<pgsql::prepared_query_impl> r (
+      new (shared) pgsql::prepared_query_impl (conn));
+    r->name = n;
+    r->execute = &execute_query;
+    r->query = q;
+    r->stmt.reset (
+      new (shared) select_statement (
+        sts.connection (),
+        n,
+        text,
+        false,
+        true,
+        r->query.parameter_types (),
+        r->query.parameter_count (),
+        r->query.parameters_binding (),
+        imb));
+
+    return r;
+  }
+
+  odb::details::shared_ptr<result_impl>
+  access::object_traits_impl< ::ObjectClass, id_pgsql >::
+  execute_query (prepared_query_impl& q)
+  {
+    using namespace pgsql;
+    using odb::details::shared;
+    using odb::details::shared_ptr;
+
+    pgsql::prepared_query_impl& pq (
+      static_cast<pgsql::prepared_query_impl&> (q));
+    shared_ptr<select_statement> st (
+      odb::details::inc_ref (
+        static_cast<select_statement*> (pq.stmt.get ())));
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+
+    // The connection used by the current transaction and the
+    // one used to prepare this statement must be the same.
+    //
+    assert (&conn == &st->connection ());
+
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    image_type& im (sts.image ());
+    binding& imb (sts.select_image_binding ());
+
+    if (im.version != sts.select_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_select);
+      sts.select_image_version (im.version);
+      imb.version++;
+    }
+
+    pq.query.init_parameters ();
+    st->execute ();
+
+    return shared_ptr<result_impl> (
+      new (shared) pgsql::object_result_impl<object_type> (
+        pq.query, st, sts, 0));
   }
 }
 
