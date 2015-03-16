@@ -132,8 +132,9 @@ class DatabaseManager
 				}
 
 				/* *************** Query DB **********************/
+				static int getPointCountInNode (const int idNode) throw (ShapeLearnerExcept);
 
-				static unsigned int execCountRequest(const string& query) {return 1;}
+				static void test () throw (ShapeLearnerExcept);
 		};
 
 	private:

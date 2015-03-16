@@ -81,12 +81,14 @@ void GraphManager::UserInterface::test() throw(ShapeLearnerExcept){
 		Node n2 (&shock1, 5,4,3,2,"A");
 		
 		Point p1(&n1,&shock1,1,2,3);
-		Point p2(&n2,&shock1,1,2,3);
+		Point p2(&n1,&shock1,1,2,3);
 		
 		Edge e1(&n1, &n2, &shock1, 1);
 		Edge e2(&n2, &n1, &shock1, 1);
 		
 		system ("PAUSE");
+
+		DatabaseManager::Interface::test();
 
 		/* // ================= START GRAPH TEST =================
 	
@@ -145,8 +147,12 @@ void GraphManager::UserInterface::test() throw(ShapeLearnerExcept){
 		n1.setKey(3);
 		cout << "After update : node key : "+ to_string((_ULonglong)n1.getKey()) << endl;
 
+		cout << "Number of points in Node 1 : "+ to_string((_ULonglong)n1.getPointCount()) <<endl;
+		cout << "Number of points in Node 2 : "+ to_string((_ULonglong)n2.getPointCount()) <<endl;
+		 
 		// ================= END NODE TEST ================= */
 
+		
 		/* // ================= START GRAPHCLASS TEST  =================
 
 		cout << "Before update : shockGraph IsDirect : "+ shockGraph.getIsDirect() << endl;

@@ -74,7 +74,9 @@ class GraphManager
 
 			template <class T> static bool deleteObject(T& obj) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::deleteObject(obj); }
 
-			static unsigned int execCountRequest( const string& query ) { return DatabaseManager::Interface::execCountRequest(query); }
+			static int getPointCountInNode (const int idNode) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getPointCountInNode (idNode); }
+
+			//static unsigned int execCountRequest( const string& query ) { return DatabaseManager::Interface::execCountRequest(query); }
 		};	
 	
 	private:

@@ -62,7 +62,6 @@
     <None Include="sources\ObjectClass.sql" />
     <None Include="sources\Point-odb.ixx" />
     <None Include="sources\Point.sql" />
-    <None Include="sources\structure.sql" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}</ProjectGuid>

@@ -176,3 +176,24 @@ bool DatabaseManager::Interface::isDbOpen() {
 	else
 		return true;
 }
+
+void DatabaseManager::Interface::test () throw (ShapeLearnerExcept){
+	
+	
+}
+
+int DatabaseManager::Interface::getPointCountInNode (const int idNode) throw (ShapeLearnerExcept){
+	typedef odb::query<pointsInNode> query;
+
+	transaction t (database->begin());
+
+	#ifdef _TRACER_
+		t.tracer (stderr_tracer);
+	#endif
+
+	pointsInNode rslt (database->query_value<pointsInNode> (query::refNode == idNode));
+
+	t.commit ();
+
+	return rslt.value;
+}

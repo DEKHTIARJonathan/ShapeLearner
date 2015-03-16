@@ -78,4 +78,12 @@ private:
 #pragma db index(Point::"index_Point_refGraph") method("BTREE") member(refGraph)
 #pragma db index(Point::"index_Point_region2D") method("BTREE") members(xCoord, yCoord)
 
+#pragma db view object(Point)
+struct pointsInNode
+{
+  #pragma db column("count(1)")
+  int value;
+};
+
+
 #endif // _POINT_

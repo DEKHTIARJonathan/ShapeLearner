@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerLib", "..\Shape
 		{9F1B0DEA-0C33-453A-9A2A-E680987E965C} = {9F1B0DEA-0C33-453A-9A2A-E680987E965C}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "..\testProject\test\test.vcxproj", "{B668DEA6-CACD-43C4-98E0-D1B32F35515C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -32,6 +34,10 @@ Global
 		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Debug|Win32.Build.0 = Debug|Win32
 		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Release|Win32.ActiveCfg = Release|Win32
 		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}.Release|Win32.Build.0 = Release|Win32
+		{B668DEA6-CACD-43C4-98E0-D1B32F35515C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B668DEA6-CACD-43C4-98E0-D1B32F35515C}.Debug|Win32.Build.0 = Debug|Win32
+		{B668DEA6-CACD-43C4-98E0-D1B32F35515C}.Release|Win32.ActiveCfg = Release|Win32
+		{B668DEA6-CACD-43C4-98E0-D1B32F35515C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,8 +23,9 @@
 #include "allHeaders.h"
 using namespace std;
 
-class Graph; //Forward Declaration of the class contained in Graph.h//
+class Graph; //Forward Declaration of the class contained in Graph.h
 class GraphManager; // Forward Declaration of the class contained in graphManager.h
+class Point;
 
 class Node
 {
@@ -82,6 +83,16 @@ private:
 #pragma db member(Node::label) not_null default("1")
 #pragma db member(Node::refGraph) not_null on_delete(cascade)
 #pragma db index(Node::"Node_RefGraph") method("BTREE") member(refGraph)
+
+/*
+#pragma db view object(Point) object(Node)
+struct pointsInNode
+{
+  #pragma db column("count(Point::idPoint) where \"refNode\" = '"+ Node::idNode +"';")
+  int value;
+};
+*/
+
 
 
 #endif // _NODE_

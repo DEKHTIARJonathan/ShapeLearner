@@ -5,7 +5,7 @@ odb -I C:\tools\libodb-pgsql-2.4.0 -d pgsql --generate-query --generate-schema N
 odb -I C:\tools\libodb-pgsql-2.4.0 -d pgsql --generate-query --generate-schema Edge.h
 odb -I C:\tools\libodb-pgsql-2.4.0 -d pgsql --generate-query --generate-schema Point.h
 
-del structure.sql
+del "../../ShapeLearnerUser/sources/structure.sql"
 copy /b GraphClass.sql+ObjectClass.sql+Graph.sql+Node.sql+Edge.sql+Point.sql "../../ShapeLearnerUser/sources/structure.sql"
 
 set /p DUMMY=Hit ENTER to continue...

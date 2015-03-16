@@ -154,9 +154,6 @@
     <None Include="sources\GraphClass.sql">
       <Filter>SQL</Filter>
     </None>
-    <None Include="sources\structure.sql">
-      <Filter>SQL</Filter>
-    </None>
     <None Include="sources\ObjectClass.sql">
       <Filter>SQL</Filter>
     </None>

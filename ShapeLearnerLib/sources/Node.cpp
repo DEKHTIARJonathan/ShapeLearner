@@ -67,9 +67,8 @@ void Node::setLabel(const string& _label) {
 }
 
 unsigned long Node::getPointCount() const {
-	string query = "SELECT count(1) FROM \"Point\" WHERE \"refNode\" = '" + to_string(_ULonglong(idNode)) + "'";
-	return 1;
-} // à créer en fonction SQL
+	return GraphManager::ObjectInterface::getPointCountInNode(idNode);
+}
 
 void Node::removeFromDB(){
 	#ifdef _MSC_VER
