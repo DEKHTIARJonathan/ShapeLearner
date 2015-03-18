@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-ObjectClass::ObjectClass(const string& name) : objectClassName(name) {
+ObjectClass::ObjectClass(string name) : objectClassName(name) {
 	GraphManager::ObjectInterface::saveObject(*this);
 	#ifdef _VERBOSE_
 		cout << "ObjectClass key : "+ getKey() <<endl;

@@ -110,7 +110,7 @@ namespace odb
 
     static const idGraph_type_ idGraph;
 
-    // graphClass
+    // refGraphClass
     //
     typedef
     pgsql::query_column<
@@ -118,11 +118,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    graphClass_type_;
+    refGraphClass_type_;
 
-    static const graphClass_type_ graphClass;
+    static const refGraphClass_type_ refGraphClass;
 
-    // objectClass
+    // refObjectClass
     //
     typedef
     pgsql::query_column<
@@ -130,9 +130,9 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    objectClass_type_;
+    refObjectClass_type_;
 
-    static const objectClass_type_ objectClass;
+    static const refObjectClass_type_ refObjectClass;
 
     // objectName
     //
@@ -165,14 +165,14 @@ namespace odb
   idGraph (A::table_name, "\"idGraph\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Graph, id_pgsql, A >::graphClass_type_
+  const typename pointer_query_columns< ::Graph, id_pgsql, A >::refGraphClass_type_
   pointer_query_columns< ::Graph, id_pgsql, A >::
-  graphClass (A::table_name, "\"graphClass\"", 0);
+  refGraphClass (A::table_name, "\"refGraphClass\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Graph, id_pgsql, A >::objectClass_type_
+  const typename pointer_query_columns< ::Graph, id_pgsql, A >::refObjectClass_type_
   pointer_query_columns< ::Graph, id_pgsql, A >::
-  objectClass (A::table_name, "\"objectClass\"", 0);
+  refObjectClass (A::table_name, "\"refObjectClass\"", 0);
 
   template <typename A>
   const typename pointer_query_columns< ::Graph, id_pgsql, A >::objectName_type_
@@ -204,17 +204,17 @@ namespace odb
       long long idGraph_value;
       bool idGraph_null;
 
-      // graphClass
+      // refGraphClass
       //
-      details::buffer graphClass_value;
-      std::size_t graphClass_size;
-      bool graphClass_null;
+      details::buffer refGraphClass_value;
+      std::size_t refGraphClass_size;
+      bool refGraphClass_null;
 
-      // objectClass
+      // refObjectClass
       //
-      details::buffer objectClass_value;
-      std::size_t objectClass_size;
-      bool objectClass_null;
+      details::buffer refObjectClass_value;
+      std::size_t refObjectClass_size;
+      bool refObjectClass_null;
 
       // objectName
       //
@@ -232,8 +232,8 @@ namespace odb
 
     struct extra_statement_cache_type;
 
-    struct graphClass_tag;
-    struct objectClass_tag;
+    struct refGraphClass_tag;
+    struct refObjectClass_tag;
 
     using object_traits<object_type>::id;
 
@@ -359,7 +359,7 @@ namespace odb
   struct alias_traits<
     ::GraphClass,
     id_pgsql,
-    access::object_traits_impl< ::Graph, id_pgsql >::graphClass_tag>
+    access::object_traits_impl< ::Graph, id_pgsql >::refGraphClass_tag>
   {
     static const char table_name[];
   };
@@ -368,7 +368,7 @@ namespace odb
   struct alias_traits<
     ::ObjectClass,
     id_pgsql,
-    access::object_traits_impl< ::Graph, id_pgsql >::objectClass_tag>
+    access::object_traits_impl< ::Graph, id_pgsql >::refObjectClass_tag>
   {
     static const char table_name[];
   };
@@ -376,23 +376,23 @@ namespace odb
   template <>
   struct query_columns_base< ::Graph, id_pgsql >
   {
-    // graphClass
+    // refGraphClass
     //
     typedef
     odb::alias_traits<
       ::GraphClass,
       id_pgsql,
-      access::object_traits_impl< ::Graph, id_pgsql >::graphClass_tag>
-    graphClass_alias_;
+      access::object_traits_impl< ::Graph, id_pgsql >::refGraphClass_tag>
+    refGraphClass_alias_;
 
-    // objectClass
+    // refObjectClass
     //
     typedef
     odb::alias_traits<
       ::ObjectClass,
       id_pgsql,
-      access::object_traits_impl< ::Graph, id_pgsql >::objectClass_tag>
-    objectClass_alias_;
+      access::object_traits_impl< ::Graph, id_pgsql >::refObjectClass_tag>
+    refObjectClass_alias_;
   };
 
   template <typename A>
@@ -411,7 +411,7 @@ namespace odb
 
     static const idGraph_type_ idGraph;
 
-    // graphClass
+    // refGraphClass
     //
     typedef
     pgsql::query_column<
@@ -419,27 +419,27 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    graphClass_column_type_;
+    refGraphClass_column_type_;
 
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
         ::GraphClass,
         id_pgsql,
-        graphClass_alias_ > >
-    graphClass_pointer_type_;
+        refGraphClass_alias_ > >
+    refGraphClass_pointer_type_;
 
-    struct graphClass_type_: graphClass_pointer_type_, graphClass_column_type_
+    struct refGraphClass_type_: refGraphClass_pointer_type_, refGraphClass_column_type_
     {
-      graphClass_type_ (const char* t, const char* c, const char* conv)
-        : graphClass_column_type_ (t, c, conv)
+      refGraphClass_type_ (const char* t, const char* c, const char* conv)
+        : refGraphClass_column_type_ (t, c, conv)
       {
       }
     };
 
-    static const graphClass_type_ graphClass;
+    static const refGraphClass_type_ refGraphClass;
 
-    // objectClass
+    // refObjectClass
     //
     typedef
     pgsql::query_column<
@@ -447,25 +447,25 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    objectClass_column_type_;
+    refObjectClass_column_type_;
 
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
         ::ObjectClass,
         id_pgsql,
-        objectClass_alias_ > >
-    objectClass_pointer_type_;
+        refObjectClass_alias_ > >
+    refObjectClass_pointer_type_;
 
-    struct objectClass_type_: objectClass_pointer_type_, objectClass_column_type_
+    struct refObjectClass_type_: refObjectClass_pointer_type_, refObjectClass_column_type_
     {
-      objectClass_type_ (const char* t, const char* c, const char* conv)
-        : objectClass_column_type_ (t, c, conv)
+      refObjectClass_type_ (const char* t, const char* c, const char* conv)
+        : refObjectClass_column_type_ (t, c, conv)
       {
       }
     };
 
-    static const objectClass_type_ objectClass;
+    static const refObjectClass_type_ refObjectClass;
 
     // objectName
     //
@@ -498,14 +498,14 @@ namespace odb
   idGraph (A::table_name, "\"idGraph\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Graph, id_pgsql, A >::graphClass_type_
+  const typename query_columns< ::Graph, id_pgsql, A >::refGraphClass_type_
   query_columns< ::Graph, id_pgsql, A >::
-  graphClass (A::table_name, "\"graphClass\"", 0);
+  refGraphClass (A::table_name, "\"refGraphClass\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Graph, id_pgsql, A >::objectClass_type_
+  const typename query_columns< ::Graph, id_pgsql, A >::refObjectClass_type_
   query_columns< ::Graph, id_pgsql, A >::
-  objectClass (A::table_name, "\"objectClass\"", 0);
+  refObjectClass (A::table_name, "\"refObjectClass\"", 0);
 
   template <typename A>
   const typename query_columns< ::Graph, id_pgsql, A >::objectName_type_

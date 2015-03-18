@@ -20,7 +20,6 @@
 #include "CmdLineException.h"
 using namespace std;
 
-
 /* ********************************************************************
 *                              Constructor                            *
 **********************************************************************/
@@ -39,7 +38,6 @@ CmdLineException::CmdLineException( const string &procedure, const string &msgEr
 	ss << "----------------------------------------" << endl;
 
 	m_what = ss.str().data();
-
 }
 
 /* *******************************************************************

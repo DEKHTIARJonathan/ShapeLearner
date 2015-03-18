@@ -28,8 +28,12 @@ class GraphManager; // Forward Declaration of the class contained in graphManage
 class GraphClass
 {
 public:
-
-	GraphClass(const string& name, bool isDirect = false, bool isAcyclic = false);
+	class Access {
+		friend class GraphManager;
+		static  boost::shared_ptr<GraphClass> createGraphClass(string name, bool isDirect = false, bool isAcyclic = false){
+			return  boost::shared_ptr<GraphClass>(new GraphClass(name, isDirect, isAcyclic));
+		}
+	};
 
 	string getKey() const {return graphClassName;}
 	void setKey(const string& key);
@@ -50,6 +54,8 @@ public:
 
 private:
 	GraphClass() {}
+	GraphClass(string name, bool isDirect = false, bool isAcyclic = false);
+
 	string graphClassName;
 	bool directGraph;
 	bool acyclicGraph;
@@ -64,4 +70,3 @@ private:
 #pragma db member(GraphClass::acyclicGraph) default("0")
 
 #endif //_GRAPH_CLASS_
-

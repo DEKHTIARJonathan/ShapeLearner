@@ -20,7 +20,6 @@
 #include "allHeaders.h"
 using namespace std;
 
-
 /********************************************************************
  *                            Constructor                           *
  ********************************************************************/
@@ -39,7 +38,6 @@ ShapeLearnerExcept::ShapeLearnerExcept( const string &procedure, const string &m
 	ss << "----------------------------------------" << endl;
 
 	m_what = ss.str().data();
-
 }
 
 /********************************************************************
@@ -61,4 +59,3 @@ const char* ShapeLearnerExcept::what() const throw(){
  ********************************************************************/
 
 ShapeLearnerExcept::~ShapeLearnerExcept() throw(){}
-

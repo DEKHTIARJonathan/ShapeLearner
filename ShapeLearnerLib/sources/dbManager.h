@@ -33,7 +33,6 @@ class Node;
 class Point;
 class Edge;
 
-
 class DatabaseManager
 {
 	public:
@@ -47,7 +46,6 @@ class DatabaseManager
 			private :
 
 				/* *************** DB Handlers ***********************/
-
 
 				/*!
 				*	\brief Méthode static établissant la connection à la base de données.
@@ -83,13 +81,25 @@ class DatabaseManager
 						database->load (obj.getKey(), obj);
 						t.commit ();
 						throw ShapeLearnerExcept ("DatabaseManager::Interface::updateObject", "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = " + e.what());
-				
 					}
-			
+
 					return true;
 				}
 
-				template <class T, class Y> static boost::shared_ptr<T> loadObject(Y keyDB) throw (ShapeLearnerExcept){
+				template <class T> static boost::shared_ptr<T> loadObject(string keyDB) throw (ShapeLearnerExcept){
+					try{
+						transaction t (database->begin ());
+						boost::shared_ptr<T> rslt (database->load<T>(keyDB));
+						t.commit ();
+
+						return rslt;
+					}
+					catch (...){
+						return boost::shared_ptr<T>();
+					}
+				}
+
+				template <class T> static boost::shared_ptr<T> loadObject(int keyDB) throw (ShapeLearnerExcept){
 					try
 					{
 						transaction t (database->begin ());
@@ -103,9 +113,28 @@ class DatabaseManager
 						throw ShapeLearnerExcept ("DatabaseManager::Interface::loadObject", "Unable to load object // Error = "+ string(e.what()));
 						return NULL;
 					}
-				
 				}
+					
+				/*
+				template <> static boost::shared_ptr<GraphClass> loadObject<GraphClass,string>(string keyDB) throw (ShapeLearnerExcept){
+					/*
+					try{
+						transaction t (database->begin ());
+						boost::shared_ptr<GraphClass> rslt (database->load<GraphClass> (keyDB));
+						t.commit ();
 
+						return rslt;
+					}
+					catch (const std::exception& e){
+						return boost::shared_ptr<GraphClass>();
+					}
+					catch (...){
+						return boost::shared_ptr<GraphClass>();
+					}
+					
+					return boost::shared_ptr<GraphClass>();
+				}
+				*/
 				/* *************** Savers ***********************/
 
 				template<class T> static unsigned long saveObject(T& obj) throw(ShapeLearnerExcept){
@@ -195,7 +224,7 @@ class DatabaseManager
 
 		/* **************** Savers *************************/
 
-		template<class T> 
+		template<class T>
 		static string saveObjectString(T& obj){
 			string rslt = "";
 			transaction t (database->begin());
@@ -238,14 +267,9 @@ class DatabaseManager
 		*  \brief La destruction est interdite
 		*/
 		~DatabaseManager();
-
 };
 
-
 #endif // DatabaseManager_H
-
-
-
 
 /* **************** Retrievers ******************** */
 
@@ -253,23 +277,23 @@ class DatabaseManager
 	*	\brief Renvoie la liste de tous les idGraphs de la BDD.
 	*	\return Renvoie une liste d'entier => std::list<unsigned int>.
 	*/
-//	vector<unsigned int> getAllidGraphs() const;  
+//	vector<unsigned int> getAllidGraphs() const;
 
 	/*!
 	*	\brief Renvoie le type du Graph dont l'id est passé en argument
 	*	\return Renvoie une string contenant le type du graph.
 	*	\param idGraph : id du graph dont on veut connaitre le type.
 	*/
-//	string getGraphType(const unsigned int idGraph) const; 
+//	string getGraphType(const unsigned int idGraph) const;
 
 	/* **************** Inserters ********************** */
-		
+
 	/*!
 	*	\brief Insère un noeud dans la BDD.
 	*	\return Renvoie un Unsigned Int représentant l'ID du Node.
 	*	\param idGraph : id du Graph dans lequel on l'insère.
 	*/
-//	unsigned int insertNode(const unsigned int idGraph) const; 
+//	unsigned int insertNode(const unsigned int idGraph) const;
 
 	/* **************** Deleters *********************** */
 
@@ -277,83 +301,83 @@ class DatabaseManager
 	*	\brief On réinitialise la DB à l'état initial, on la vide complètement : Nodes + Graphs + Edges + Points + ObjectClass
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*/
-//	bool flushDB () const; 
+//	bool flushDB () const;
 
 	/*!
 	*	\brief On supprime de la BDD toutes les entrées de la table ObjectClass.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*/
-//	bool deleteAllObjectClass() const; 
+//	bool deleteAllObjectClass() const;
 
 	/*!
 	*	\brief On supprime de la BDD tous les Graphs. Tous les Nodes, les Points et les Edges de la BDD sont supprimés en cascade. Les tables Nodes, Graphs, Edges, et Points sont donc entièrement vidées.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*/
-//	bool deleteAllGraphs() const; 
+//	bool deleteAllGraphs() const;
 
 	/*!
 	*	\brief On supprime de la BDD tous les Nodes existants. Tous les Points et Edges sont supprimés en cascade.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*/
-//	bool deleteAllNodes() const; 
+//	bool deleteAllNodes() const;
 
 	/*!
 	*	\brief On supprime de la BDD tous les Nodes du Graph identifié. Tous les Points et Edges associés à ce Node sont supprimés en cascade.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*	\param idGraph : id du Graph dans lequel on veut supprimer tous les noeuds.
 	*/
-//	bool deleteAllNodeInGraph(unsigned int const idGraph) const; 
+//	bool deleteAllNodeInGraph(unsigned int const idGraph) const;
 
 	/*!
 	*	\brief On supprime de la BDD tous les points.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*/
-//	bool deleteAllPoints () const; 
+//	bool deleteAllPoints () const;
 
 	/*!
 	*	\brief On supprime de la BDD tous les points associés au Node identifié.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*	\param idNode : id du Node dans lequel on veut supprimer tous les Points.
 	*/
-//	bool deleteAllPointsInNode (unsigned int const idNode) const; 
+//	bool deleteAllPointsInNode (unsigned int const idNode) const;
 
 	/*!
 	*	\brief On supprime de la BDD tous les points associés au Graph identifié.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*	\param idGraph : id du Node à supprimer
 	*/
-//	bool deleteAllPointsInGraph (unsigned int const idGraph) const; 
+//	bool deleteAllPointsInGraph (unsigned int const idGraph) const;
 
 	/*!
 	*	\brief On supprime de la BDD toutes les Edges.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*/
-//	bool deleteAllEdges () const; 
+//	bool deleteAllEdges () const;
 
 	/*!
 	*	\brief On supprime de la BDD toutes les Edges associées au Graph identifié.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*	\param idGraph : id du Graph dans lequel on veut supprimer toutes les Edges.
 	*/
-//	bool deleteAllEdgesInGraph (unsigned int const idGraph) const; 
+//	bool deleteAllEdgesInGraph (unsigned int const idGraph) const;
 
 	/*!
 	*	\brief On supprime de la BDD toutes les Edges connectées en entrée ou en sortie vers un Node spécifique.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*	\param idNode : id du Node que l'on veut isoler.
 	*/
-//	bool deleteAllEdgesConnected2Node (unsigned int const idNode) const; 
+//	bool deleteAllEdgesConnected2Node (unsigned int const idNode) const;
 
 	/*!
 	*	\brief On supprime de la BDD toutes les Edges connectées où source = Node identifié.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*	\param idNode : id du Node dont on veut couper tous les Edges sortantes.
 	*/
-//	bool deleteAllEdgeFromNode (unsigned int const idNode) const; 
+//	bool deleteAllEdgeFromNode (unsigned int const idNode) const;
 
 	/*!
 	*	\brief  On supprime de la BDD toutes les Edges connectées où target = Node identifié.
 	*	\return Renvoie un bool sur la réussite de l'opération.
 	*	\param idNode : id du Node dont on veut couper tous les Edges entrantes.
 	*/
-//	bool deleteAllEdgeToNode (unsigned int const idNode) const; 
+//	bool deleteAllEdgeToNode (unsigned int const idNode) const;

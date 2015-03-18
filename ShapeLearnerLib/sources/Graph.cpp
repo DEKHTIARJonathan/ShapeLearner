@@ -20,12 +20,12 @@
 #include "allHeaders.h"
 using namespace std;
 
-Graph::Graph(boost::shared_ptr<GraphClass> _graphClass, boost::shared_ptr<ObjectClass> _objectClass, string const _objectName, unsigned int const _viewNumber) : 
-	graphClass(_graphClass), 
-	objectClass(_objectClass), 
-	viewNumber(_viewNumber), 
-	objectName(_objectName), 
-	idGraph(0) 
+Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectClass> _refObjectClass, string const _objectName, unsigned int const _viewNumber) :
+	refGraphClass(_refGraphClass),
+	refObjectClass(_refObjectClass),
+	viewNumber(_viewNumber),
+	objectName(_objectName),
+	idGraph(0)
 	{
 		idGraph = saveInDB();
 		#ifdef _VERBOSE_
@@ -65,4 +65,16 @@ unsigned long Graph::saveInDB(){
 	#ifdef _MSC_VER
 		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
+}
+
+boost::weak_ptr<GraphClass> Graph::getParentGraphClass(){
+	if(refGraphClass.expired())
+		refGraphClass.swap(odb::boost::lazy_weak_ptr<GraphClass>(GraphManager::CommonInterface::getGraphClass(refGraphClass.object_id<GraphClass>())));
+	return refGraphClass.get_eager();	
+}
+
+boost::weak_ptr<ObjectClass> Graph::getParentObjectClass(){
+	if(refObjectClass.expired())
+		refObjectClass.swap(odb::boost::lazy_weak_ptr<ObjectClass>(GraphManager::CommonInterface::getObjectClass((string)refObjectClass.object_id<ObjectClass>())));
+	return refObjectClass.get_eager();	
 }

@@ -7,23 +7,23 @@
    http://www.smalleranimals.com
 
    This software is provided 'as-is', without any express
-   or implied warranty.  In no event will the authors be 
+   or implied warranty.  In no event will the authors be
    held liable for any damages arising from the use of this software.
 
-   Permission is granted to anyone to use this software 
-   for any purpose, including commercial applications, and 
-   to alter it and redistribute it freely, subject to the 
+   Permission is granted to anyone to use this software
+   for any purpose, including commercial applications, and
+   to alter it and redistribute it freely, subject to the
    following restrictions:
 
-	 1. The origin of this software must not be misrepresented; 
-   you must not claim that you wrote the original software. 
-   If you use this software in a product, an acknowledgment 
+	 1. The origin of this software must not be misrepresented;
+   you must not claim that you wrote the original software.
+   If you use this software in a product, an acknowledgment
    in the product documentation would be appreciated but is not required.
-   
-	 2. Altered source versions must be plainly marked as such, 
+
+	 2. Altered source versions must be plainly marked as such,
    and must not be misrepresented as being the original software.
-   
-	 3. This notice may not be removed or altered from any source 
+
+	 3. This notice may not be removed or altered from any source
    distribution.
 
 ------------------------------------------------------*/
@@ -66,7 +66,6 @@ typedef map<string, CmdParam> _CmdLine;
 // the command line parser class
 class CmdLine : public _CmdLine
 {
-
 public:
 	/*!
 	*	\brief Parse the command line into switches and arguments.
@@ -80,7 +79,7 @@ public:
 	*	\brief Was the switch found on the command line ?
 	*	\param pSwitch : The Switch we are looking for.
 	*	\return True // False => Found // Not Found.
-	*	\example 
+	*	\example
 		if the command line is : app.exe -a p1 p2 p3 -b p4 -c -d p5
 
 		call                          return
@@ -96,7 +95,7 @@ public:
 	*	\param iIdx : The index of the parameter for a given switch
 	*	\param pDefault : The default value returned if the parameter at for the given switch at the given index is not found.
 	*	\return Return the parameter found or the default value given in 3rd argument if not found.
-	*	\example 
+	*	\example
 		command line is : app.exe -a p1 p2 p3 -b p4 -c -d p5
 
 		call                                      return
@@ -113,7 +112,7 @@ public:
 	*	\param pSwitch : The Switch we are looking for.
 	*	\param iIdx : The index of the parameter for a given switch
 	*	\return Return the parameter found or the default value given in 3rd argument if not found.
-	*	\example 
+	*	\example
 		command line is : app.exe -a p1 p2 p3 -b p4 -c -d p5
 
 		call                             return
@@ -121,7 +120,7 @@ public:
 		cmdLine.GetArgument("-a", 0)     p1
 		cmdLine.GetArgument("-b", 1)     throws (int)0, returns an empty string
 	*/
-	string GetArgument(const char *pSwitch, unsigned int iIdx) throw(CmdLineException); 
+	string GetArgument(const char *pSwitch, unsigned int iIdx) throw(CmdLineException);
 
 	/*!
 	*	\brief Count the number of arguments available for a given switch.

@@ -46,16 +46,14 @@
 #include <memory>
 #include <boost/shared_ptr.hpp>
 
-
 //#include <ppl.h>
-
 
 #include <odb/core.hxx>
 #include <odb/boost/lazy-ptr.hxx>
 
 #ifdef _MSC_VER
 	// ODB Classes
-	
+
 	#include <odb/database.hxx>
 	#include <odb/transaction.hxx>
 	#include <odb/pgsql/database.hxx>

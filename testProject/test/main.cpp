@@ -1,4 +1,3 @@
-
 // weak_ptr constructor example
 #include <iostream>
 #include <memory>
@@ -20,7 +19,6 @@ int main () {
 		std::cout << it->first << " => " << *(it->second) << '\n';
 	cout << endl;
 
-	
 	std::weak_ptr<string> weak(index[2]);
 
 	std::cout << "1. weak " << (weak.expired()?"is":"is not") << " expired\n";
@@ -28,7 +26,7 @@ int main () {
 	index[2].reset();
 
 	std::cout << "2. weak " << (weak.expired()?"is":"is not") << " expired\n";
-	 
+
 	cout << " ============================== 2nd PART =============================" << endl ;
 
 	map <string, strPtr> indexStr;
@@ -49,7 +47,7 @@ int main () {
 	indexStr["2nd"].reset();
 
 	std::cout << "2. weak " << (weakStr.expired()?"is":"is not") << " expired\n";
-	
+
   system("pause");
 
   return 0;

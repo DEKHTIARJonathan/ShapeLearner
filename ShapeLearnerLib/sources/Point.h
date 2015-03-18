@@ -30,8 +30,13 @@ class GraphManager; // Forward Declaration of the class contained in graphManage
 class Point
 {
 public:
-	Point(boost::shared_ptr<Node> _refNode, boost::shared_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
-	
+	class Access {
+		friend class GraphManager;
+		static boost::shared_ptr<Point> createPoint(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1){
+			return boost::shared_ptr<Point>(new Point(_refNode, _refGraph, _xCoord, _yCoord , _radius));
+		}
+	};	
+
 	unsigned long getKey() const {return idPoint;}
 	void setKey(const unsigned int key);
 
@@ -44,6 +49,9 @@ public:
 	double getRadius() const {return radius;}
 	void setRadius(const unsigned int _radius);
 
+	boost::weak_ptr<Node> getParentNode();
+	boost::weak_ptr<Graph> getParentGraph();
+
 	/* =========== Template function =========== */
 	string getClassName() const { return "Point"; }
 	/* =========== Template function =========== */
@@ -54,6 +62,7 @@ public:
 
 private:
 	Point() {}
+	Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
 
 	unsigned long idPoint;
 	double xCoord;
@@ -84,6 +93,5 @@ struct pointsInNode
   #pragma db column("count(1)")
   int value;
 };
-
 
 #endif // _POINT_

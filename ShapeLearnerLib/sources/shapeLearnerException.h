@@ -44,7 +44,6 @@ class ShapeLearnerExcept : public std::exception
 		string			m_procedure;
 		string			m_msgError;
 		string			m_what;
-
 };
 
 #endif //_SHAPE_LEARNER_EXCEPTION_

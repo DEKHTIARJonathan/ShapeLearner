@@ -28,7 +28,12 @@ class GraphManager; // Forward Declaration of the class contained in graphManage
 class ObjectClass
 {
 public:
-	ObjectClass(const string& name);
+	class Access {
+		friend class GraphManager;
+		static boost::shared_ptr<ObjectClass> createObjectClass(string name){
+			return boost::shared_ptr<ObjectClass> (new ObjectClass(name));
+		}
+	};
 
 	string getKey() const {return objectClassName;}
 	void setKey(const string& key);
@@ -43,6 +48,8 @@ public:
 
 private:
 	ObjectClass() {}
+	ObjectClass(string name);
+
 	string objectClassName;
 
 	friend class odb::access;
@@ -51,6 +58,5 @@ private:
 #pragma db value(std::string) type("VARCHAR(255)")
 #pragma db object(ObjectClass)
 #pragma db member(ObjectClass::objectClassName) id
-
 
 #endif // _OBJECT_CLASS_

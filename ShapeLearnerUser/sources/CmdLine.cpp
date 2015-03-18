@@ -106,7 +106,7 @@ bool CmdLine::HasSwitch(const char *pSwitch) throw(CmdLineException)
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
 	  throw CmdLineException("CmdLine::HasSwitch", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
-	
+
 	CmdLine::iterator theIterator;
 	theIterator = find(pSwitch);
 	return (theIterator!=end());
@@ -143,7 +143,6 @@ string CmdLine::GetSafeArgument(const char *pSwitch,unsigned int iIdx, const cha
 
 string CmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(CmdLineException)
 {
-	
 	if (pSwitch==NULL)
 	  throw CmdLineException("CmdLine::GetSafeArgument", "Error : The parameter pSwitch given is NULL.");
 
@@ -151,7 +150,7 @@ string CmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(CmdLin
    // must have at least one character after the '-'
    if (strlen(pSwitch) <= 1)
 	  throw CmdLineException("CmdLine::GetSafeArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") must have at least one character after the '-'");
-	
+
 	CmdLine::iterator theIterator;
 
 	theIterator = find(pSwitch);
@@ -164,7 +163,6 @@ string CmdLine::GetArgument(const char *pSwitch, unsigned int iIdx) throw(CmdLin
 	}
 	else
 		throw CmdLineException("CmdLine::GetArgument", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
-	
 }
 
 int CmdLine::GetArgumentCount(const char *pSwitch) throw(CmdLineException)
@@ -182,10 +180,10 @@ int CmdLine::GetArgumentCount(const char *pSwitch) throw(CmdLineException)
 	CmdLine::iterator theIterator;
 
 	theIterator = find(pSwitch);
-	
+
 	if (theIterator==end())
 		throw CmdLineException("CmdLine::GetArgumentCount", "Error : The parameter pSwitch (" + (string)pSwitch + ") does not exist.");
-		
+
 	iArgumentCount = (*theIterator).second.m_strings.size();
 	return iArgumentCount;
 }

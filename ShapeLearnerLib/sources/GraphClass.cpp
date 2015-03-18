@@ -20,15 +20,15 @@
 #include "allHeaders.h"
 using namespace std;
 
-GraphClass::GraphClass(const string& name, bool isDirect, bool isAcyclic) : graphClassName(name), directGraph(isDirect), acyclicGraph(isAcyclic) {
+GraphClass::GraphClass(string name, bool isDirect, bool isAcyclic) : graphClassName(name), directGraph(isDirect), acyclicGraph(isAcyclic) {
 	saveInDB();
 	#ifdef _VERBOSE_
 		cout << "GraphClass key : "+ getKey() <<endl;
 	#endif
 }
 
-void GraphClass::setKey(const string& key) {	
-	removeFromDB();		
+void GraphClass::setKey(const string& key) {
+	removeFromDB();
 	graphClassName = key;
 	saveInDB();
 }

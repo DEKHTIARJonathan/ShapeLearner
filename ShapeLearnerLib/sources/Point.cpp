@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-Point::Point(boost::shared_ptr<Node> _refNode, boost::shared_ptr<Graph> _refGraph, double _xCoord, double _yCoord, double _radius) : 
+Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord, double _yCoord, double _radius) :
 xCoord(_xCoord),
 yCoord(_yCoord),
 radius(_radius),
@@ -71,4 +71,16 @@ unsigned long Point::saveInDB(){
 	#ifdef _MSC_VER
 		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
+}
+
+boost::weak_ptr<Node> Point::getParentNode(){
+	if(refNode.expired())
+		refNode.swap(odb::boost::lazy_weak_ptr<Node>(GraphManager::CommonInterface::getNode(refNode.object_id<Node>())));
+	return refNode.get_eager();	
+}
+
+boost::weak_ptr<Graph> Point::getParentGraph(){
+	if(refGraph.expired())
+		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(GraphManager::CommonInterface::getGraph(refGraph.object_id<Graph>())));
+	return refGraph.get_eager();	
 }

@@ -30,8 +30,12 @@ class GraphManager; // Forward Declaration of the class contained in graphManage
 class Edge
 {
 public:
-
-	Edge(odb::boost::lazy_weak_ptr<Node> _source, odb::boost::lazy_weak_ptr<Node> _target, odb::boost::lazy_weak_ptr<Graph> _refGraph, unsigned int _weight = 1);
+	class Access {
+		friend class GraphManager;
+		static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned int _weight = 1){
+			return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph, _weight));
+		}
+	};		
 
 	unsigned long getKey() const {return idEdge;}
 	void setKey(const unsigned int key);
@@ -46,9 +50,10 @@ public:
 	void removeFromDB();
 	void updateInDB();
 	unsigned long saveInDB();
-	
+
 private:
 	Edge() {}
+	Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned int _weight = 1);
 
 	unsigned long idEdge;
 	odb::boost::lazy_weak_ptr<Node> source;

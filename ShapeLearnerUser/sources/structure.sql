@@ -26,28 +26,28 @@ DROP TABLE IF EXISTS "Graph" CASCADE;
 
 CREATE TABLE "Graph" (
   "idGraph" BIGSERIAL NOT NULL PRIMARY KEY,
-  "graphClass" VARCHAR(255) NOT NULL,
-  "objectClass" VARCHAR(255) NOT NULL,
+  "refGraphClass" VARCHAR(255) NOT NULL,
+  "refObjectClass" VARCHAR(255) NOT NULL,
   "objectName" VARCHAR(255) NOT NULL,
   "viewNumber" INTEGER NOT NULL DEFAULT '1');
 
 CREATE INDEX "index_Graph_graphClass"
-  ON "Graph" USING BTREE ("graphClass");
+  ON "Graph" USING BTREE ("refGraphClass");
 
 CREATE INDEX "index_Graph_objectClass"
-  ON "Graph" USING BTREE ("objectClass");
+  ON "Graph" USING BTREE ("refObjectClass");
 
 CREATE UNIQUE INDEX "index_Graph_objectName"
   ON "Graph" USING BTREE ("objectName");
 
 ALTER TABLE "Graph"
-  ADD CONSTRAINT "graphClass_fk"
-    FOREIGN KEY ("graphClass")
+  ADD CONSTRAINT "refGraphClass_fk"
+    FOREIGN KEY ("refGraphClass")
     REFERENCES "GraphClass" ("graphClassName")
     ON DELETE CASCADE
     INITIALLY DEFERRED,
-  ADD CONSTRAINT "objectClass_fk"
-    FOREIGN KEY ("objectClass")
+  ADD CONSTRAINT "refObjectClass_fk"
+    FOREIGN KEY ("refObjectClass")
     REFERENCES "ObjectClass" ("objectClassName")
     ON DELETE CASCADE
     INITIALLY DEFERRED;

@@ -30,7 +30,12 @@ class Point;
 class Node
 {
 public:
-	Node(boost::shared_ptr<Graph> _refGraph, unsigned int _index = 1, unsigned int _level = 1, unsigned int _mass = 1, unsigned int _type = 1, string _label = "1");
+	class Access {
+		friend class GraphManager;
+		static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph, unsigned int _index = 1, unsigned int _level = 1, unsigned int _mass = 1, unsigned int _type = 1, string _label = "1"){
+			return boost::shared_ptr<Node>(new Node(_refGraph, _index, _level, _mass, _type, _label));
+		}
+	};	
 
 	unsigned long getKey() const {return idNode;}
 	void setKey(const unsigned int key);
@@ -52,6 +57,8 @@ public:
 
 	unsigned long getPointCount() const;
 
+	boost::weak_ptr<Graph> getParentGraph();
+
 	/* =========== Template function =========== */
 	string getClassName() const { return "Node"; }
 	/* =========== Template function =========== */
@@ -62,6 +69,8 @@ public:
 
 private:
 	Node() {}
+	Node(boost::weak_ptr<Graph> _refGraph, unsigned int _index = 1, unsigned int _level = 1, unsigned int _mass = 1, unsigned int _type = 1, string _label = "1");
+
 	unsigned long						idNode;
 	unsigned int						index;
 	unsigned int						level;
@@ -92,7 +101,5 @@ struct pointsInNode
   int value;
 };
 */
-
-
 
 #endif // _NODE_

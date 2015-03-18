@@ -39,7 +39,7 @@ class GraphManager
 
 		class UserInterface {
 			friend class ShapeLearner;
-			
+
 		private:
 				// Setters pour les paramètres de la BDD.
 				static void getDbCredentials(const bool dbInit = false) throw(ShapeLearnerExcept);
@@ -55,20 +55,20 @@ class GraphManager
 			friend class Node;
 			friend class Edge;
 			friend class Point;
-			
+
 		private:
 
 			/* ************** DB I/O Ops *********************/
 			static string saveObject(ObjectClass& obj) throw(ShapeLearnerExcept) {return saveObjectString(obj);}
 			static string saveObject(GraphClass& obj) throw(ShapeLearnerExcept) {return saveObjectString(obj);}
 
-			template<class T> static unsigned long saveObject(T& obj) throw(ShapeLearnerExcept){ 
-				unsigned long rslt = DatabaseManager::Interface::saveObject(obj); 
+			template<class T> static unsigned long saveObject(T& obj) throw(ShapeLearnerExcept){
+				unsigned long rslt = DatabaseManager::Interface::saveObject(obj);
 				if (rslt != 0)
 					return rslt;
-				else 
+				else
 					throw ShapeLearnerExcept("GraphManager::saveObject // ID", "Error : Saving operation Failed.");
-			}	
+			}
 
 			template <class T> static bool updateObject(T& obj) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::updateObject(obj); }
 
@@ -77,8 +77,36 @@ class GraphManager
 			static int getPointCountInNode (const int idNode) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getPointCountInNode (idNode); }
 
 			//static unsigned int execCountRequest( const string& query ) { return DatabaseManager::Interface::execCountRequest(query); }
-		};	
-	
+		};
+
+		class CommonInterface {
+			friend class ObjectClass;
+			friend class GraphClass;
+			friend class Graph;
+			friend class Node;
+			friend class Edge;
+			friend class Point;
+			friend class GraphManager;
+
+		private:
+
+			/* ************** Getters *********************/
+			static boost::weak_ptr<Point>			getPoint(const unsigned long keyDB) throw(ShapeLearnerExcept);
+			static boost::weak_ptr<Node>			getNode(const unsigned long keyDB) throw(ShapeLearnerExcept);
+			static boost::weak_ptr<Edge>			getEdge(const unsigned long keyDB) throw(ShapeLearnerExcept);
+			static boost::weak_ptr<Graph>			getGraph(const unsigned long keyDB) throw(ShapeLearnerExcept);
+
+			/* ************** Getters & Setters ***********/
+			static boost::weak_ptr<GraphClass>		getGraphClass(const string& name, const bool isDirect = false, const bool isAcyclic = false) throw(ShapeLearnerExcept);
+			static boost::weak_ptr<ObjectClass>		getObjectClass(const string& name) throw(ShapeLearnerExcept);
+
+			/* ************** Setters *********************/
+			static boost::weak_ptr<Point>			getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph, const double _xCoord = 0, const double _yCoord = 0, const double _radius = 1);
+			static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned int _index = 1, const unsigned int _level = 1, const unsigned int _mass = 1, const unsigned int _type = 1, const string _label = "1");
+			static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned int _weight = 1);
+			static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned int _viewNumber = 1);
+		};
+
 	private:
 
 		// Setters pour les paramètres de la BDD.
@@ -110,6 +138,15 @@ class GraphManager
 
 		/*! \brief dbInit : Doit on initialiser la base de données ? */
 		static string dbInitFile;
+
+		/* ************** Les Maps de stockage ***********/
+
+		static map<unsigned long, boost::shared_ptr<Node>>		NodeMap;
+		static map<unsigned long, boost::shared_ptr<Point>>		PointMap;
+		static map<unsigned long, boost::shared_ptr<Edge>>		EdgeMap;
+		static map<unsigned long, boost::shared_ptr<Graph>>		GraphMap;
+		static map<string, boost::shared_ptr<ObjectClass>>		ObjectClassMap;
+		static map<string, boost::shared_ptr<GraphClass>>		GraphClassMap;
 
 		/* ************** DB I/O Ops *********************/
 
@@ -146,6 +183,5 @@ class GraphManager
 		*/
 		~GraphManager();
 };
-
 
 #endif //_GRAPH_MANAGER_H_

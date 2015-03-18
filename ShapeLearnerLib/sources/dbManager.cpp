@@ -22,7 +22,6 @@
 using namespace std;
 using namespace odb::core;
 
-
 /* *******************************************************************
 *                            DB Requests                             *
  ********************************************************************/
@@ -51,7 +50,6 @@ bool DatabaseManager::query(const string &query) throw(ShapeLearnerExcept)
 				rslt = true;
 				break;
 			}
-			
 		}
 		catch (const odb::recoverable& e)
 		{
@@ -65,7 +63,6 @@ bool DatabaseManager::query(const string &query) throw(ShapeLearnerExcept)
 	}
 	return rslt; // Execution successful.
 }
-
 
 bool DatabaseManager::initDB(const string& filename)
 {
@@ -95,17 +92,13 @@ void DatabaseManager::escape(string& str)
 			str[i] = "''";
 	}
 	*/
-
 }
 
 void DatabaseManager::capitalize(string& str)
 {
-
 	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
 	std::transform(str.begin(), str.begin()+1, str.begin(), ::toupper);
-
 }
-
 
 /* *******************************************************************
 *                             Readers                                *
@@ -129,7 +122,6 @@ string DatabaseManager::get_file_contents(const string& filename) throw(ShapeLea
 		strerror_s(error, maxSizeError, errno);
 		throw ShapeLearnerExcept("DatabaseManager::get_file_contents", error);
 	}
-	
 }
 
 /* *******************************************************************
@@ -140,7 +132,6 @@ odb::database* DatabaseManager::database = NULL;
 
 void DatabaseManager::Interface::openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort , const unsigned int& dbType, const string& dbInit) throw(ShapeLearnerExcept){
 	if( database == NULL ){
-
 		switch(dbType)
 		{
 			case constants::DB_MYSQL :
@@ -153,7 +144,7 @@ void DatabaseManager::Interface::openDatabase(const string &dbUser, const string
 				database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
 				break;
 		}
-	
+
 		if (dbInit.compare("") && !initDB(dbInit))
 			throw ShapeLearnerExcept("DatabaseManager::DatabaseManager","Erreur lors de l'initialisation de la BDD");
 	}
@@ -170,7 +161,7 @@ void DatabaseManager::Interface::closeDatabase() throw(ShapeLearnerExcept){
 		throw ShapeLearnerExcept("DatabaseManager::Interface::disconnectDB", "Database already closed");
 }
 
-bool DatabaseManager::Interface::isDbOpen() { 
+bool DatabaseManager::Interface::isDbOpen() {
 	if(database == NULL)
 		return false;
 	else
@@ -178,8 +169,6 @@ bool DatabaseManager::Interface::isDbOpen() {
 }
 
 void DatabaseManager::Interface::test () throw (ShapeLearnerExcept){
-	
-	
 }
 
 int DatabaseManager::Interface::getPointCountInNode (const int idNode) throw (ShapeLearnerExcept){

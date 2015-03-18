@@ -21,7 +21,6 @@
 #define CONSTANTS_H
 
 namespace constants{
-
 	// Constantes sur les données des Notes
 
 	const unsigned int		SIZE_MAX_STRING = 255;
@@ -29,7 +28,6 @@ namespace constants{
 	const unsigned int		DB_PGSQL = 1;
 	const unsigned int		DB_MYSQL = 2;
 	const unsigned int		DB_ORACLE = 3;
-
 }
 
 #endif // CONSTANTS_H

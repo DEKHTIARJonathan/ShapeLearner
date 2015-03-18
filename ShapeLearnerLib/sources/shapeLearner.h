@@ -33,7 +33,7 @@ class ShapeLearner
 		static void openDatabase() throw(ShapeLearnerExcept);
 		static void closeDatabase() throw(ShapeLearnerExcept);
 		static void test () throw(ShapeLearnerExcept);
-	
+
 	private:
 
 		/* **************  No instanciation *********************/
@@ -58,6 +58,5 @@ class ShapeLearner
 		*/
 		~ShapeLearner();
 };
-
 
 #endif //_SHAPE_LEARNER_H_

@@ -72,13 +72,13 @@ namespace odb
 
   const char alias_traits<  ::GraphClass,
     id_pgsql,
-    access::object_traits_impl< ::Graph, id_pgsql >::graphClass_tag>::
-  table_name[] = "\"graphClass\"";
+    access::object_traits_impl< ::Graph, id_pgsql >::refGraphClass_tag>::
+  table_name[] = "\"refGraphClass\"";
 
   const char alias_traits<  ::ObjectClass,
     id_pgsql,
-    access::object_traits_impl< ::Graph, id_pgsql >::objectClass_tag>::
-  table_name[] = "\"objectClass\"";
+    access::object_traits_impl< ::Graph, id_pgsql >::refObjectClass_tag>::
+  table_name[] = "\"refObjectClass\"";
 
   struct access::object_traits_impl< ::Graph, id_pgsql >::extra_statement_cache_type
   {
@@ -147,19 +147,19 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // graphClass
+    // refGraphClass
     //
     if (t[1UL])
     {
-      i.graphClass_value.capacity (i.graphClass_size);
+      i.refGraphClass_value.capacity (i.refGraphClass_size);
       grew = true;
     }
 
-    // objectClass
+    // refObjectClass
     //
     if (t[2UL])
     {
-      i.objectClass_value.capacity (i.objectClass_size);
+      i.refObjectClass_value.capacity (i.refObjectClass_size);
       grew = true;
     }
 
@@ -199,22 +199,22 @@ namespace odb
       n++;
     }
 
-    // graphClass
+    // refGraphClass
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.graphClass_value.data ();
-    b[n].capacity = i.graphClass_value.capacity ();
-    b[n].size = &i.graphClass_size;
-    b[n].is_null = &i.graphClass_null;
+    b[n].buffer = i.refGraphClass_value.data ();
+    b[n].capacity = i.refGraphClass_value.capacity ();
+    b[n].size = &i.refGraphClass_size;
+    b[n].is_null = &i.refGraphClass_null;
     n++;
 
-    // objectClass
+    // refObjectClass
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.objectClass_value.data ();
-    b[n].capacity = i.objectClass_value.capacity ();
-    b[n].size = &i.objectClass_size;
-    b[n].is_null = &i.objectClass_null;
+    b[n].buffer = i.refObjectClass_value.data ();
+    b[n].capacity = i.refObjectClass_value.capacity ();
+    b[n].size = &i.refObjectClass_size;
+    b[n].is_null = &i.refObjectClass_null;
     n++;
 
     // objectName
@@ -256,11 +256,11 @@ namespace odb
 
     bool grew (false);
 
-    // graphClass
+    // refGraphClass
     //
     {
       ::odb::boost::lazy_weak_ptr< ::GraphClass > const& v =
-        o.graphClass;
+        o.refGraphClass;
 
       typedef object_traits< ::GraphClass > obj_traits;
       typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::GraphClass > > wptr_traits;
@@ -274,27 +274,27 @@ namespace odb
           ptr_traits::object_id< ptr_traits::element_type  > (sp));
 
         std::size_t size (0);
-        std::size_t cap (i.graphClass_value.capacity ());
+        std::size_t cap (i.refGraphClass_value.capacity ());
         pgsql::value_traits<
             obj_traits::id_type,
             pgsql::id_string >::set_image (
-          i.graphClass_value,
+          i.refGraphClass_value,
           size,
           is_null,
           id);
-        i.graphClass_null = is_null;
-        i.graphClass_size = size;
-        grew = grew || (cap != i.graphClass_value.capacity ());
+        i.refGraphClass_null = is_null;
+        i.refGraphClass_size = size;
+        grew = grew || (cap != i.refGraphClass_value.capacity ());
       }
       else
         throw null_pointer ();
     }
 
-    // objectClass
+    // refObjectClass
     //
     {
       ::odb::boost::lazy_weak_ptr< ::ObjectClass > const& v =
-        o.objectClass;
+        o.refObjectClass;
 
       typedef object_traits< ::ObjectClass > obj_traits;
       typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::ObjectClass > > wptr_traits;
@@ -308,17 +308,17 @@ namespace odb
           ptr_traits::object_id< ptr_traits::element_type  > (sp));
 
         std::size_t size (0);
-        std::size_t cap (i.objectClass_value.capacity ());
+        std::size_t cap (i.refObjectClass_value.capacity ());
         pgsql::value_traits<
             obj_traits::id_type,
             pgsql::id_string >::set_image (
-          i.objectClass_value,
+          i.refObjectClass_value,
           size,
           is_null,
           id);
-        i.objectClass_null = is_null;
-        i.objectClass_size = size;
-        grew = grew || (cap != i.objectClass_value.capacity ());
+        i.refObjectClass_null = is_null;
+        i.refObjectClass_size = size;
+        grew = grew || (cap != i.refObjectClass_value.capacity ());
       }
       else
         throw null_pointer ();
@@ -385,16 +385,16 @@ namespace odb
         i.idGraph_null);
     }
 
-    // graphClass
+    // refGraphClass
     //
     {
       ::odb::boost::lazy_weak_ptr< ::GraphClass >& v =
-        o.graphClass;
+        o.refGraphClass;
 
       typedef object_traits< ::GraphClass > obj_traits;
       typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::GraphClass > > ptr_traits;
 
-      if (i.graphClass_null)
+      if (i.refGraphClass_null)
         v = ptr_traits::pointer_type ();
       else
       {
@@ -403,25 +403,25 @@ namespace odb
             obj_traits::id_type,
             pgsql::id_string >::set_value (
           id,
-          i.graphClass_value,
-          i.graphClass_size,
-          i.graphClass_null);
+          i.refGraphClass_value,
+          i.refGraphClass_size,
+          i.refGraphClass_null);
 
         v = ptr_traits::pointer_type (
           *static_cast<pgsql::database*> (db), id);
       }
     }
 
-    // objectClass
+    // refObjectClass
     //
     {
       ::odb::boost::lazy_weak_ptr< ::ObjectClass >& v =
-        o.objectClass;
+        o.refObjectClass;
 
       typedef object_traits< ::ObjectClass > obj_traits;
       typedef odb::pointer_traits< ::odb::boost::lazy_weak_ptr< ::ObjectClass > > ptr_traits;
 
-      if (i.objectClass_null)
+      if (i.refObjectClass_null)
         v = ptr_traits::pointer_type ();
       else
       {
@@ -430,9 +430,9 @@ namespace odb
             obj_traits::id_type,
             pgsql::id_string >::set_value (
           id,
-          i.objectClass_value,
-          i.objectClass_size,
-          i.objectClass_null);
+          i.refObjectClass_value,
+          i.refObjectClass_size,
+          i.refObjectClass_null);
 
         v = ptr_traits::pointer_type (
           *static_cast<pgsql::database*> (db), id);
@@ -485,8 +485,8 @@ namespace odb
   const char access::object_traits_impl< ::Graph, id_pgsql >::persist_statement[] =
   "INSERT INTO \"Graph\" "
   "(\"idGraph\", "
-  "\"graphClass\", "
-  "\"objectClass\", "
+  "\"refGraphClass\", "
+  "\"refObjectClass\", "
   "\"objectName\", "
   "\"viewNumber\") "
   "VALUES "
@@ -496,8 +496,8 @@ namespace odb
   const char access::object_traits_impl< ::Graph, id_pgsql >::find_statement[] =
   "SELECT "
   "\"Graph\".\"idGraph\", "
-  "\"Graph\".\"graphClass\", "
-  "\"Graph\".\"objectClass\", "
+  "\"Graph\".\"refGraphClass\", "
+  "\"Graph\".\"refObjectClass\", "
   "\"Graph\".\"objectName\", "
   "\"Graph\".\"viewNumber\" "
   "FROM \"Graph\" "
@@ -506,8 +506,8 @@ namespace odb
   const char access::object_traits_impl< ::Graph, id_pgsql >::update_statement[] =
   "UPDATE \"Graph\" "
   "SET "
-  "\"graphClass\"=$1, "
-  "\"objectClass\"=$2, "
+  "\"refGraphClass\"=$1, "
+  "\"refObjectClass\"=$2, "
   "\"objectName\"=$3, "
   "\"viewNumber\"=$4 "
   "WHERE \"idGraph\"=$5";
@@ -519,13 +519,13 @@ namespace odb
   const char access::object_traits_impl< ::Graph, id_pgsql >::query_statement[] =
   "SELECT\n"
   "\"Graph\".\"idGraph\",\n"
-  "\"Graph\".\"graphClass\",\n"
-  "\"Graph\".\"objectClass\",\n"
+  "\"Graph\".\"refGraphClass\",\n"
+  "\"Graph\".\"refObjectClass\",\n"
   "\"Graph\".\"objectName\",\n"
   "\"Graph\".\"viewNumber\"\n"
   "FROM \"Graph\"\n"
-  "LEFT JOIN \"GraphClass\" AS \"graphClass\" ON \"graphClass\".\"graphClassName\"=\"Graph\".\"graphClass\"\n"
-  "LEFT JOIN \"ObjectClass\" AS \"objectClass\" ON \"objectClass\".\"objectClassName\"=\"Graph\".\"objectClass\"";
+  "LEFT JOIN \"GraphClass\" AS \"refGraphClass\" ON \"refGraphClass\".\"graphClassName\"=\"Graph\".\"refGraphClass\"\n"
+  "LEFT JOIN \"ObjectClass\" AS \"refObjectClass\" ON \"refObjectClass\".\"objectClassName\"=\"Graph\".\"refObjectClass\"";
 
   const char access::object_traits_impl< ::Graph, id_pgsql >::erase_query_statement[] =
   "DELETE FROM \"Graph\"";

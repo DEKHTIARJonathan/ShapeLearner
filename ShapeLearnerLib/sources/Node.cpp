@@ -20,8 +20,8 @@
 #include "allHeaders.h"
 using namespace std;
 
-Node::Node(boost::shared_ptr<Graph> _refGraph, unsigned int _index, unsigned int _level, unsigned int _mass, unsigned int _type, string _label) : 
-	refGraph(_refGraph),	
+Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned int _index, unsigned int _level, unsigned int _mass, unsigned int _type, string _label) :
+	refGraph(_refGraph),
 	index(_index),
 	level(_level),
 	mass(_mass),
@@ -86,4 +86,10 @@ unsigned long Node::saveInDB(){
 	#ifdef _MSC_VER
 		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
+}
+
+boost::weak_ptr<Graph> Node::getParentGraph(){
+	if(refGraph.expired())
+		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(GraphManager::CommonInterface::getGraph(refGraph.object_id<Graph>())));
+	return refGraph.get_eager();	
 }

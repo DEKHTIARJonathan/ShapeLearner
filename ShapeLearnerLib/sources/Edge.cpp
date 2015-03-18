@@ -20,13 +20,12 @@
 #include "allHeaders.h"
 using namespace std;
 
-
-Edge::Edge(odb::boost::lazy_weak_ptr<Node> _source, odb::boost::lazy_weak_ptr<Node> _target, odb::boost::lazy_weak_ptr<Graph> _refGraph, unsigned int _weight) : 
-	source(_source), 
-	target(_target), 
-	refGraph(_refGraph), 
+Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned int _weight) :
+	source(_source),
+	target(_target),
+	refGraph(_refGraph),
 	weight(_weight),
-	idEdge(0) 
+	idEdge(0)
 	{
 		idEdge = saveInDB();
 		#ifdef _VERBOSE_

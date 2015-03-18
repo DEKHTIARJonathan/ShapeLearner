@@ -46,7 +46,6 @@ class CmdLineException : public std::exception
 		string			m_procedure;
 		string			m_msgError;
 		string			m_what;
-
 };
 
 #endif //_CCMDLINEEXCEPTION_
