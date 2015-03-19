@@ -93,3 +93,26 @@ boost::weak_ptr<Graph> Node::getParentGraph(){
 		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(GraphManager::CommonInterface::getGraph(refGraph.object_id<Graph>())));
 	return refGraph.get_eager();	
 }
+
+vector<unsigned long> Node::getEdgesBySource(){
+	return GraphManager::ObjectInterface::getForeignRelations<EdgeIdViewBySource>(idNode);
+}
+
+vector<unsigned long> Node::getEdgesByTarget(){
+	return GraphManager::ObjectInterface::getForeignRelations<EdgeIdViewByTarget>(idNode);
+}
+
+vector<unsigned long> Node::getEdges(){
+	vector <unsigned long> rslt, rslt1, rslt2;
+	rslt1 = getEdgesBySource();
+	rslt2 = getEdgesByTarget();
+	rslt.reserve( rslt1.size() + rslt2.size() );
+	rslt.insert( rslt.end(), rslt1.begin(), rslt1.end() );
+	rslt.insert( rslt.end(), rslt2.begin(), rslt2.end() );
+	
+	return rslt;
+}
+
+vector<unsigned long> Node::getPoints(){
+	return GraphManager::ObjectInterface::getForeignRelations<PointIdViewByNode>(idNode);
+}

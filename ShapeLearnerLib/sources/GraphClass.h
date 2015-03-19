@@ -24,6 +24,7 @@
 using namespace std;
 
 class GraphManager; // Forward Declaration of the class contained in graphManager.h
+class ShapeLearnerExcept;
 
 class GraphClass
 {
@@ -43,6 +44,8 @@ public:
 
 	bool getIsAcyclicGraph() const {return acyclicGraph;}
 	void setIsAcyclicGraph(const bool _acyclicGraph);
+
+	vector<unsigned long> getGraphs();
 
 	/* =========== Template function =========== */
 	string getClassName() const { return "GraphClass"; }

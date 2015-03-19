@@ -69,40 +69,56 @@ class DatabaseManager
 				/* *************** Updaters ***********************/
 
 				template <class T> static bool updateObject(T& obj) throw (ShapeLearnerExcept){
+					transaction t1 (database->begin ());
 					try
 					{
-						transaction t (database->begin ());
+						#ifdef _TRACER_
+							t1.tracer (stderr_tracer);
+						#endif
 						database->update (obj);
-						t.commit ();
+						t1.commit ();
+						return true;
 					}
 					catch (const std::exception& e)
 					{
-						transaction t (database->begin ());
+						t1.rollback();
+						transaction t2 (database->begin ());
+						#ifdef _TRACER_
+							t2.tracer (stderr_tracer);
+						#endif
 						database->load (obj.getKey(), obj);
-						t.commit ();
+						t2.commit ();
 						throw ShapeLearnerExcept ("DatabaseManager::Interface::updateObject", "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = " + e.what());
+						return false;
 					}
-
-					return true;
+					
 				}
 
 				template <class T> static boost::shared_ptr<T> loadObject(string keyDB) throw (ShapeLearnerExcept){
+					transaction t (database->begin ());
 					try{
-						transaction t (database->begin ());
+						#ifdef _TRACER_
+							t.tracer (stderr_tracer);
+						#endif
 						boost::shared_ptr<T> rslt (database->load<T>(keyDB));
 						t.commit ();
 
 						return rslt;
 					}
-					catch (...){
+					catch(const std::exception& e){
+						t.rollback();
+						throw ShapeLearnerExcept("DatabaseManager::Interface::loadObject", "Unable to perform operation // Key Requested : "+ keyDB +" Error = "+ boost::lexical_cast<std::string>(e.what()));
 						return boost::shared_ptr<T>();
 					}
 				}
 
 				template <class T> static boost::shared_ptr<T> loadObject(int keyDB) throw (ShapeLearnerExcept){
+					transaction t (database->begin ());
 					try
 					{
-						transaction t (database->begin ());
+						#ifdef _TRACER_
+							t.tracer (stderr_tracer);
+						#endif
 						boost::shared_ptr<T> rslt (database->load<T> (keyDB));
 						t.commit ();
 
@@ -110,52 +126,61 @@ class DatabaseManager
 					}
 					catch (const std::exception& e)
 					{
+						t.rollback();
 						throw ShapeLearnerExcept ("DatabaseManager::Interface::loadObject", "Unable to load object // Error = "+ string(e.what()));
-						return NULL;
+						return boost::shared_ptr<T>();
 					}
 				}
 					
-				/*
-				template <> static boost::shared_ptr<GraphClass> loadObject<GraphClass,string>(string keyDB) throw (ShapeLearnerExcept){
-					/*
-					try{
-						transaction t (database->begin ());
-						boost::shared_ptr<GraphClass> rslt (database->load<GraphClass> (keyDB));
+				template <class T, class Y> static vector<unsigned long> getForeignRelations(Y foreignKey) throw (ShapeLearnerExcept){
+					transaction t (database->begin());
+					try {
+						typedef odb::query<T> query;
+						typedef odb::result<T> result;
+					
+						#ifdef _TRACER_
+							t.tracer (stderr_tracer);
+						#endif
+
+						result r (database->query<T> ("'"+boost::lexical_cast<std::string>(foreignKey)+"'"));
+
+						vector<unsigned long> rslt;
+
+						for (result::iterator i (r.begin ()); i != r.end (); ++i)
+							rslt.push_back(i->id);
+
+						t.commit ();
+
+						return rslt;
+					}
+					catch(const std::exception& e){
+						t.rollback();
+						throw ShapeLearnerExcept("DatabaseManager::Interface::getForeignRelations", "Unable to perform operation // Error = "+ boost::lexical_cast<std::string>(e.what()));
+						return vector<unsigned long> ();
+					}
+					
+				}
+				/* *************** Savers ***********************/
+
+				template<class T> static unsigned long saveObject(T& obj) throw(ShapeLearnerExcept){
+					transaction t (database->begin());
+					try{	
+						#ifdef _TRACER_
+							t.tracer (stderr_tracer);
+						#endif
+						unsigned long rslt = database->persist (obj);
+											
 						t.commit ();
 
 						return rslt;
 					}
 					catch (const std::exception& e){
-						return boost::shared_ptr<GraphClass>();
-					}
-					catch (...){
-						return boost::shared_ptr<GraphClass>();
-					}
-					
-					return boost::shared_ptr<GraphClass>();
-				}
-				*/
-				/* *************** Savers ***********************/
-
-				template<class T> static unsigned long saveObject(T& obj) throw(ShapeLearnerExcept){
-					unsigned long rslt = 0;
-
-					transaction t (database->begin());
-					#ifdef _TRACER_
-						t.tracer (stderr_tracer);
-					#endif
-
-					// Make objects persistent and save their ids for later use.
-					//
-					rslt = database->persist (obj);
-					if(!rslt){
 						t.rollback();
-						throw ShapeLearnerExcept("DatabaseManager::Interface::saveObject // ID", "Unable to save object id = "+  std::to_string((_ULonglong)rslt) +" // Class : "+obj.getClassName());
+						throw ShapeLearnerExcept("DatabaseManager::Interface::saveObject // ID", "Unable to save object of class : "+obj.getClassName() + " // Error : "+ e.what());
+						return 0;
 					}
-					else
-						t.commit ();
 
-					return rslt;
+					
 				}
 
 				static string saveObject(ObjectClass& obj) throw(ShapeLearnerExcept) {return saveObjectString(obj);}
@@ -164,21 +189,26 @@ class DatabaseManager
 				/* *************** Deleters ***********************/
 
 				template <class T> static bool deleteObject(T& obj) throw (ShapeLearnerExcept){
+					transaction t (database->begin ());
 					try
 					{
-						transaction t (database->begin ());
+						#ifdef _TRACER_
+							t.tracer (stderr_tracer);
+						#endif
 						database->erase (obj);
 						t.commit ();
+						return true;
 					}
 					catch (const std::exception& e)
 					{
+						t.rollback();
 						throw ShapeLearnerExcept ("DatabaseManager::Interface::deleteObject", "Unable to delete object of class : "+ obj.getClassName() +". // Error = "+ e.what());
-					}
-					return true;
+						return false;
+					}	
 				}
 
 				/* *************** Query DB **********************/
-				static int getPointCountInNode (const int idNode) throw (ShapeLearnerExcept);
+				static unsigned long getPointCountInNode (const unsigned long idNode) throw (ShapeLearnerExcept);
 
 				static void test () throw (ShapeLearnerExcept);
 		};
@@ -226,23 +256,22 @@ class DatabaseManager
 
 		template<class T>
 		static string saveObjectString(T& obj){
-			string rslt = "";
 			transaction t (database->begin());
-			#ifdef _TRACER_
-				t.tracer (stderr_tracer);
-			#endif
-
-			// Make objects persistent and save their ids for later use.
-			//
-			rslt = database->persist(obj);
-			if(!rslt.compare("")){ // Is Equal
-				t.rollback();
-				throw ShapeLearnerExcept("DatabaseManager::saveObjectString // String", "Unable to save object : "+rslt+" // Class : "+obj.getClassName());
-			}
-			else
+			try{
+				#ifdef _TRACER_
+					t.tracer (stderr_tracer);
+				#endif
+				string rslt = database->persist(obj);
 				t.commit ();
 
-			return rslt;
+				return rslt;
+			}
+			catch (const std::exception& e){
+				t.rollback();
+				throw ShapeLearnerExcept("DatabaseManager::saveObjectString // String", "Unable to save object : "+obj.getKey()+" // Class : "+obj.getClassName() + "// Error : "+ e.what());
+				return "";
+			}
+			
 		}
 
 		/* ****************** Readers **********************/

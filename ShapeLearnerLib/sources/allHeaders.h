@@ -45,6 +45,7 @@
 #include <cerrno>
 #include <memory>
 #include <boost/shared_ptr.hpp>
+#include <boost/lexical_cast.hpp>
 
 //#include <ppl.h>
 

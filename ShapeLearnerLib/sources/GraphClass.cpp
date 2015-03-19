@@ -60,3 +60,7 @@ string GraphClass::saveInDB(){
 		return GraphManager::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }
+
+vector<unsigned long> GraphClass::getGraphs(){
+	return GraphManager::ObjectInterface::getForeignRelations<GraphIdViewByGraphClass>(graphClassName);
+}

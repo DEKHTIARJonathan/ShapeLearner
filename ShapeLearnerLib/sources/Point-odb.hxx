@@ -102,6 +102,44 @@ namespace odb
     static void
     callback (database&, view_type&, callback_event);
   };
+
+  // PointIdViewByGraph
+  //
+  template <>
+  struct class_traits< ::PointIdViewByGraph >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::PointIdViewByGraph >
+  {
+    public:
+    typedef ::PointIdViewByGraph view_type;
+    typedef ::PointIdViewByGraph* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
+  };
+
+  // PointIdViewByNode
+  //
+  template <>
+  struct class_traits< ::PointIdViewByNode >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::PointIdViewByNode >
+  {
+    public:
+    typedef ::PointIdViewByNode view_type;
+    typedef ::PointIdViewByNode* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
+  };
 }
 
 #include <odb/details/buffer.hxx>
@@ -453,6 +491,126 @@ namespace odb
   {
   };
 
+  // PointIdViewByGraph
+  //
+  template <>
+  class access::view_traits_impl< ::PointIdViewByGraph, id_pgsql >:
+    public access::view_traits< ::PointIdViewByGraph >
+  {
+    public:
+    struct image_type
+    {
+      // id
+      //
+      long long id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns;
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static query_base_type
+    query_statement (const query_base_type&);
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::PointIdViewByGraph, id_common >:
+    public access::view_traits_impl< ::PointIdViewByGraph, id_pgsql >
+  {
+  };
+
+  // PointIdViewByNode
+  //
+  template <>
+  class access::view_traits_impl< ::PointIdViewByNode, id_pgsql >:
+    public access::view_traits< ::PointIdViewByNode >
+  {
+    public:
+    struct image_type
+    {
+      // id
+      //
+      long long id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns;
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static query_base_type
+    query_statement (const query_base_type&);
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::PointIdViewByNode, id_common >:
+    public access::view_traits_impl< ::PointIdViewByNode, id_pgsql >
+  {
+  };
+
   // Point
   //
   template <>
@@ -637,6 +795,26 @@ namespace odb
   // pointsInNode
   //
   struct access::view_traits_impl< ::pointsInNode, id_pgsql >::query_columns:
+    odb::pointer_query_columns<
+      ::Point,
+      id_pgsql,
+      odb::access::object_traits_impl< ::Point, id_pgsql > >
+  {
+  };
+
+  // PointIdViewByGraph
+  //
+  struct access::view_traits_impl< ::PointIdViewByGraph, id_pgsql >::query_columns:
+    odb::pointer_query_columns<
+      ::Point,
+      id_pgsql,
+      odb::access::object_traits_impl< ::Point, id_pgsql > >
+  {
+  };
+
+  // PointIdViewByNode
+  //
+  struct access::view_traits_impl< ::PointIdViewByNode, id_pgsql >::query_columns:
     odb::pointer_query_columns<
       ::Point,
       id_pgsql,

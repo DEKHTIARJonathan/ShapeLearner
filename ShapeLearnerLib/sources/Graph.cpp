@@ -78,3 +78,15 @@ boost::weak_ptr<ObjectClass> Graph::getParentObjectClass(){
 		refObjectClass.swap(odb::boost::lazy_weak_ptr<ObjectClass>(GraphManager::CommonInterface::getObjectClass((string)refObjectClass.object_id<ObjectClass>())));
 	return refObjectClass.get_eager();	
 }
+
+vector<unsigned long> Graph::getNodes(){
+	return GraphManager::ObjectInterface::getForeignRelations<NodeIdViewByGraph>(idGraph);
+}
+
+vector<unsigned long> Graph::getEdges(){
+	return GraphManager::ObjectInterface::getForeignRelations<EdgeIdViewByGraph>(idGraph);
+}
+
+vector<unsigned long> Graph::getPoints(){
+	return GraphManager::ObjectInterface::getForeignRelations<PointIdViewByGraph>(idGraph);
+}

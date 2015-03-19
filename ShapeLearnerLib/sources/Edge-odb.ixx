@@ -32,6 +32,42 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
   }
+
+  // EdgeIdViewBySource
+  //
+
+  inline
+  void access::view_traits< ::EdgeIdViewBySource >::
+  callback (database& db, view_type& x, callback_event e)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (x);
+    ODB_POTENTIALLY_UNUSED (e);
+  }
+
+  // EdgeIdViewByTarget
+  //
+
+  inline
+  void access::view_traits< ::EdgeIdViewByTarget >::
+  callback (database& db, view_type& x, callback_event e)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (x);
+    ODB_POTENTIALLY_UNUSED (e);
+  }
+
+  // EdgeIdViewByGraph
+  //
+
+  inline
+  void access::view_traits< ::EdgeIdViewByGraph >::
+  callback (database& db, view_type& x, callback_event e)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (x);
+    ODB_POTENTIALLY_UNUSED (e);
+  }
 }
 
 namespace odb
@@ -57,5 +93,14 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (sts);
     ODB_POTENTIALLY_UNUSED (obj);
   }
+
+  // EdgeIdViewBySource
+  //
+
+  // EdgeIdViewByTarget
+  //
+
+  // EdgeIdViewByGraph
+  //
 }
 

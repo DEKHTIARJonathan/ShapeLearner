@@ -34,6 +34,8 @@
 #include <odb/prepared-query.hxx>
 #include <odb/result.hxx>
 #include <odb/simple-object-result.hxx>
+#include <odb/view-image.hxx>
+#include <odb/view-result.hxx>
 
 #include <odb/details/unused.hxx>
 #include <odb/details/shared-ptr.hxx>
@@ -80,6 +82,44 @@ namespace odb
 
     static void
     callback (database&, const object_type&, callback_event);
+  };
+
+  // GraphIdViewByGraphClass
+  //
+  template <>
+  struct class_traits< ::GraphIdViewByGraphClass >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::GraphIdViewByGraphClass >
+  {
+    public:
+    typedef ::GraphIdViewByGraphClass view_type;
+    typedef ::GraphIdViewByGraphClass* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
+  };
+
+  // GraphIdViewByObjectClass
+  //
+  template <>
+  struct class_traits< ::GraphIdViewByObjectClass >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::GraphIdViewByObjectClass >
+  {
+    public:
+    typedef ::GraphIdViewByObjectClass view_type;
+    typedef ::GraphIdViewByObjectClass* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
   };
 }
 
@@ -353,6 +393,126 @@ namespace odb
   {
   };
 
+  // GraphIdViewByGraphClass
+  //
+  template <>
+  class access::view_traits_impl< ::GraphIdViewByGraphClass, id_pgsql >:
+    public access::view_traits< ::GraphIdViewByGraphClass >
+  {
+    public:
+    struct image_type
+    {
+      // id
+      //
+      long long id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns;
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static query_base_type
+    query_statement (const query_base_type&);
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::GraphIdViewByGraphClass, id_common >:
+    public access::view_traits_impl< ::GraphIdViewByGraphClass, id_pgsql >
+  {
+  };
+
+  // GraphIdViewByObjectClass
+  //
+  template <>
+  class access::view_traits_impl< ::GraphIdViewByObjectClass, id_pgsql >:
+    public access::view_traits< ::GraphIdViewByObjectClass >
+  {
+    public:
+    struct image_type
+    {
+      // id
+      //
+      long long id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns;
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static query_base_type
+    query_statement (const query_base_type&);
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::GraphIdViewByObjectClass, id_common >:
+    public access::view_traits_impl< ::GraphIdViewByObjectClass, id_pgsql >
+  {
+  };
+
   // Graph
   //
   template <>
@@ -516,6 +676,26 @@ namespace odb
   const typename query_columns< ::Graph, id_pgsql, A >::viewNumber_type_
   query_columns< ::Graph, id_pgsql, A >::
   viewNumber (A::table_name, "\"viewNumber\"", 0);
+
+  // GraphIdViewByGraphClass
+  //
+  struct access::view_traits_impl< ::GraphIdViewByGraphClass, id_pgsql >::query_columns:
+    odb::pointer_query_columns<
+      ::Graph,
+      id_pgsql,
+      odb::access::object_traits_impl< ::Graph, id_pgsql > >
+  {
+  };
+
+  // GraphIdViewByObjectClass
+  //
+  struct access::view_traits_impl< ::GraphIdViewByObjectClass, id_pgsql >::query_columns:
+    odb::pointer_query_columns<
+      ::Graph,
+      id_pgsql,
+      odb::access::object_traits_impl< ::Graph, id_pgsql > >
+  {
+  };
 }
 
 #include "Graph-odb.ixx"

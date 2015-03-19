@@ -94,4 +94,18 @@ struct pointsInNode
   int value;
 };
 
+#pragma db view object(Point) query("\"refGraph\" = ")
+struct PointIdViewByGraph
+{
+  #pragma db column("idPoint")
+  unsigned long id;
+};
+
+#pragma db view object(Point) query("\"refNode\" = ")
+struct PointIdViewByNode
+{
+  #pragma db column("idPoint")
+  unsigned long id;
+};
+
 #endif // _POINT_

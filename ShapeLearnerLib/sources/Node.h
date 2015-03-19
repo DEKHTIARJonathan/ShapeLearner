@@ -59,6 +59,12 @@ public:
 
 	boost::weak_ptr<Graph> getParentGraph();
 
+	vector<unsigned long> getEdgesBySource();
+	vector<unsigned long> getEdgesByTarget();
+	vector<unsigned long> getEdges();
+	vector<unsigned long> getPoints();
+
+
 	/* =========== Template function =========== */
 	string getClassName() const { return "Node"; }
 	/* =========== Template function =========== */
@@ -93,13 +99,11 @@ private:
 #pragma db member(Node::refGraph) not_null on_delete(cascade)
 #pragma db index(Node::"Node_RefGraph") method("BTREE") member(refGraph)
 
-/*
-#pragma db view object(Point) object(Node)
-struct pointsInNode
+#pragma db view object(Node) query("\"refGraph\" = ")
+struct NodeIdViewByGraph
 {
-  #pragma db column("count(Point::idPoint) where \"refNode\" = '"+ Node::idNode +"';")
-  int value;
+  #pragma db column("idNode")
+  unsigned long id;
 };
-*/
 
 #endif // _NODE_

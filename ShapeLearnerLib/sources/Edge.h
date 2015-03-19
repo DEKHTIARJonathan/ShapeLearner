@@ -76,4 +76,25 @@ private:
 #pragma db index(Edge::"index_Edge_link") unique method("BTREE") members(source, target)
 #pragma db index(Edge::"index_Edge_refGraph") method("BTREE") member(refGraph)
 
+#pragma db view object(Edge) query("\"source\" = ")
+struct EdgeIdViewBySource
+{
+  #pragma db column("idEdge")
+  unsigned long id;
+};
+
+#pragma db view object(Edge) query("\"target\" = ")
+struct EdgeIdViewByTarget
+{
+  #pragma db column("idEdge")
+  unsigned long id;
+};
+
+#pragma db view object(Edge) query("\"refGraph\" = ")
+struct EdgeIdViewByGraph
+{
+  #pragma db column("idEdge")
+  unsigned long id;
+};
+
 #endif // _EDGE_

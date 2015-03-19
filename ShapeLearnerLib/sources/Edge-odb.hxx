@@ -34,6 +34,8 @@
 #include <odb/prepared-query.hxx>
 #include <odb/result.hxx>
 #include <odb/simple-object-result.hxx>
+#include <odb/view-image.hxx>
+#include <odb/view-result.hxx>
 
 #include <odb/details/unused.hxx>
 #include <odb/details/shared-ptr.hxx>
@@ -80,6 +82,63 @@ namespace odb
 
     static void
     callback (database&, const object_type&, callback_event);
+  };
+
+  // EdgeIdViewBySource
+  //
+  template <>
+  struct class_traits< ::EdgeIdViewBySource >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::EdgeIdViewBySource >
+  {
+    public:
+    typedef ::EdgeIdViewBySource view_type;
+    typedef ::EdgeIdViewBySource* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
+  };
+
+  // EdgeIdViewByTarget
+  //
+  template <>
+  struct class_traits< ::EdgeIdViewByTarget >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::EdgeIdViewByTarget >
+  {
+    public:
+    typedef ::EdgeIdViewByTarget view_type;
+    typedef ::EdgeIdViewByTarget* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
+  };
+
+  // EdgeIdViewByGraph
+  //
+  template <>
+  struct class_traits< ::EdgeIdViewByGraph >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::EdgeIdViewByGraph >
+  {
+    public:
+    typedef ::EdgeIdViewByGraph view_type;
+    typedef ::EdgeIdViewByGraph* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
   };
 }
 
@@ -351,6 +410,186 @@ namespace odb
   {
   };
 
+  // EdgeIdViewBySource
+  //
+  template <>
+  class access::view_traits_impl< ::EdgeIdViewBySource, id_pgsql >:
+    public access::view_traits< ::EdgeIdViewBySource >
+  {
+    public:
+    struct image_type
+    {
+      // id
+      //
+      long long id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns;
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static query_base_type
+    query_statement (const query_base_type&);
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::EdgeIdViewBySource, id_common >:
+    public access::view_traits_impl< ::EdgeIdViewBySource, id_pgsql >
+  {
+  };
+
+  // EdgeIdViewByTarget
+  //
+  template <>
+  class access::view_traits_impl< ::EdgeIdViewByTarget, id_pgsql >:
+    public access::view_traits< ::EdgeIdViewByTarget >
+  {
+    public:
+    struct image_type
+    {
+      // id
+      //
+      long long id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns;
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static query_base_type
+    query_statement (const query_base_type&);
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::EdgeIdViewByTarget, id_common >:
+    public access::view_traits_impl< ::EdgeIdViewByTarget, id_pgsql >
+  {
+  };
+
+  // EdgeIdViewByGraph
+  //
+  template <>
+  class access::view_traits_impl< ::EdgeIdViewByGraph, id_pgsql >:
+    public access::view_traits< ::EdgeIdViewByGraph >
+  {
+    public:
+    struct image_type
+    {
+      // id
+      //
+      long long id_value;
+      bool id_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns;
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static query_base_type
+    query_statement (const query_base_type&);
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static odb::details::shared_ptr<prepared_query_impl>
+    prepare_query (connection&, const char*, const query_base_type&);
+
+    static odb::details::shared_ptr<result_impl>
+    execute_query (prepared_query_impl&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::EdgeIdViewByGraph, id_common >:
+    public access::view_traits_impl< ::EdgeIdViewByGraph, id_pgsql >
+  {
+  };
+
   // Edge
   //
   template <>
@@ -548,6 +787,36 @@ namespace odb
   const typename query_columns< ::Edge, id_pgsql, A >::weight_type_
   query_columns< ::Edge, id_pgsql, A >::
   weight (A::table_name, "\"weight\"", 0);
+
+  // EdgeIdViewBySource
+  //
+  struct access::view_traits_impl< ::EdgeIdViewBySource, id_pgsql >::query_columns:
+    odb::pointer_query_columns<
+      ::Edge,
+      id_pgsql,
+      odb::access::object_traits_impl< ::Edge, id_pgsql > >
+  {
+  };
+
+  // EdgeIdViewByTarget
+  //
+  struct access::view_traits_impl< ::EdgeIdViewByTarget, id_pgsql >::query_columns:
+    odb::pointer_query_columns<
+      ::Edge,
+      id_pgsql,
+      odb::access::object_traits_impl< ::Edge, id_pgsql > >
+  {
+  };
+
+  // EdgeIdViewByGraph
+  //
+  struct access::view_traits_impl< ::EdgeIdViewByGraph, id_pgsql >::query_columns:
+    odb::pointer_query_columns<
+      ::Edge,
+      id_pgsql,
+      odb::access::object_traits_impl< ::Edge, id_pgsql > >
+  {
+  };
 }
 
 #include "Edge-odb.ixx"

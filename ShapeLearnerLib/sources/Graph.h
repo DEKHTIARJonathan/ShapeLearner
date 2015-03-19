@@ -49,6 +49,10 @@ public:
 	boost::weak_ptr<GraphClass> getParentGraphClass();
 	boost::weak_ptr<ObjectClass> getParentObjectClass();
 
+	vector<unsigned long> getNodes();
+	vector<unsigned long> getEdges();
+	vector<unsigned long> getPoints();
+
 	/* =========== Template function =========== */
 	string getClassName() const { return "Graph"; }
 	/* =========== Template function =========== */
@@ -82,5 +86,19 @@ private:
 #pragma db index(Graph::"index_Graph_graphClass") method("BTREE") member(refGraphClass)
 #pragma db index(Graph::"index_Graph_objectClass") method("BTREE") member(refObjectClass)
 #pragma db index(Graph::"index_Graph_objectName") unique method("BTREE") member(objectName)
+
+#pragma db view object(Graph) query("\"refGraphClass\" = ")
+struct GraphIdViewByGraphClass
+{
+  #pragma db column("idGraph")
+  unsigned long id;
+};
+
+#pragma db view object(Graph) query("\"refObjectClass\" = ")
+struct GraphIdViewByObjectClass
+{
+  #pragma db column("idGraph")
+  unsigned long id;
+};
 
 #endif // _GRAPH_

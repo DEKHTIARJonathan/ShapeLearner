@@ -76,7 +76,7 @@ class GraphManager
 
 			static int getPointCountInNode (const int idNode) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getPointCountInNode (idNode); }
 
-			//static unsigned int execCountRequest( const string& query ) { return DatabaseManager::Interface::execCountRequest(query); }
+			template <class T, class Y> static vector<unsigned long> getForeignRelations(Y foreignKey) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getForeignRelations<T,Y>(foreignKey); }
 		};
 
 		class CommonInterface {

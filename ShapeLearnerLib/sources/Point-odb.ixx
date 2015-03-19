@@ -44,6 +44,30 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
   }
+
+  // PointIdViewByGraph
+  //
+
+  inline
+  void access::view_traits< ::PointIdViewByGraph >::
+  callback (database& db, view_type& x, callback_event e)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (x);
+    ODB_POTENTIALLY_UNUSED (e);
+  }
+
+  // PointIdViewByNode
+  //
+
+  inline
+  void access::view_traits< ::PointIdViewByNode >::
+  callback (database& db, view_type& x, callback_event e)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (x);
+    ODB_POTENTIALLY_UNUSED (e);
+  }
 }
 
 namespace odb
@@ -71,6 +95,12 @@ namespace odb
   }
 
   // pointsInNode
+  //
+
+  // PointIdViewByGraph
+  //
+
+  // PointIdViewByNode
   //
 }
 

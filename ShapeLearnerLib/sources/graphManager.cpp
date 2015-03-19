@@ -76,154 +76,48 @@ void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(Shap
 }
 
 void GraphManager::UserInterface::test() throw(ShapeLearnerExcept){
-		//boost::weak_ptr<ObjectClass> OC1 ( CommonInterface::getObjectClass("Rod"));
+		/*	
+		boost::weak_ptr<ObjectClass> OC1 ( CommonInterface::getObjectClass("Rod"));
 		boost::weak_ptr<ObjectClass> OC2 ( CommonInterface::getObjectClass("Piston"));
 		boost::weak_ptr<ObjectClass> OC3 ( CommonInterface::getObjectClass("Vilebrequin"));
 
-		//boost::weak_ptr<GraphClass> GC1 ( CommonInterface::getGraphClass("Shock Graph", true, false));
+		boost::weak_ptr<GraphClass> GC1 ( CommonInterface::getGraphClass("Shock Graph", true, false));
 		boost::weak_ptr<GraphClass> GC2 ( CommonInterface::getGraphClass("Reeb Graph", true, false));
 		boost::weak_ptr<GraphClass> GC3 ( CommonInterface::getGraphClass("SmoothGraph", false, true));
-
 		
 		boost::weak_ptr<Graph> GR1 (CommonInterface::getGraph(1));
-		boost::weak_ptr<Graph> GR2 ( CommonInterface::getGraph(GC3,OC2,"SmoothPiston", 2));
+		boost::weak_ptr<Graph> GR2 (CommonInterface::getGraph(2));
+
+		boost::weak_ptr<Node> ND1 (CommonInterface::getNode(1));
+		boost::weak_ptr<Node> ND2 (CommonInterface::getNode(2));
+
+		boost::weak_ptr<Edge> ED1 (CommonInterface::getEdge(1));
+		boost::weak_ptr<Edge> ED2 (CommonInterface::getEdge(2));
+
+		boost::weak_ptr<Point> PT1 (CommonInterface::getPoint(3));
+		boost::weak_ptr<Point> PT2 (CommonInterface::getPoint(2));
 		
-		boost::weak_ptr<GraphClass> GC1 = GR1.lock()->getParentGraphClass();
-		boost::weak_ptr<ObjectClass> OC1 = GR1.lock()->getParentObjectClass();
+  		system("pause");
+		*/
+		boost::weak_ptr<GraphClass> GC3 ( CommonInterface::getGraphClass("SmoothGraph", false, true));
+		vector <unsigned long> rslt1 = GC3.lock()->getGraphs();
 
-		system("pause");
-		
+		boost::weak_ptr<ObjectClass> OC1 ( CommonInterface::getObjectClass("Rod"));
+		vector <unsigned long> rslt2 = OC1.lock()->getGraphs();
 
-		/* // ================= START GRAPH TEST =================
+		boost::weak_ptr<Graph> GR1 (CommonInterface::getGraph(1));
+		vector <unsigned long> rslt3 = GR1.lock()->getEdges();
+		vector <unsigned long> rslt4 = GR1.lock()->getNodes();
+		vector <unsigned long> rslt5 = GR1.lock()->getPoints();
 
-		cout << "Before update : shock1 name : "+ shock1.getObjectName() <<endl;
-		shock1.setObjectName("Rod002.ppm");
-		cout << "After update : shock1 name : "+ shock1.getObjectName() << endl;
+		boost::weak_ptr<Node> ND1 (CommonInterface::getNode(1));
+		vector <unsigned long> rslt6 = ND1.lock()->getPoints();
+		vector <unsigned long> rslt7 = ND1.lock()->getEdgesBySource();
+		vector <unsigned long> rslt8 = ND1.lock()->getEdgesByTarget();
+		vector <unsigned long> rslt9 = ND1.lock()->getEdges();
 
-		system ("PAUSE");
+		int a = 2;
 
-		cout << "Before update : shock1 view : "+ to_string((_ULonglong)shock1.getView()) <<endl;
-		shock1.setView(2);
-		cout << "After update : shock1 view : "+ to_string((_ULonglong)shock1.getView()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : shock1 key : "+ to_string((_ULonglong)shock1.getKey()) <<endl;
-		shock1.setKey(3);
-		cout << "After update : shock1 key : "+ to_string((_ULonglong)shock1.getKey()) <<endl;
-
-		// ================= END GRAPH TEST ================= */
-
-		/* // ================= START NODE TEST  =================
-
-		cout << "Before update : n1 index : "+ to_string((_ULonglong)n1.getIndex()) <<endl;
-		n1.setIndex(7);
-		cout << "After update : n1 index : "+ to_string((_ULonglong)n1.getIndex()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : n1 Level : "+ to_string((_ULonglong)n1.getLevel()) <<endl;
-		n1.setLevel(7);
-		cout << "After update : n1 Level : "+ to_string((_ULonglong)n1.getLevel()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : n1 mass : "+ to_string((_ULonglong)n1.getMass()) <<endl;
-		n1.setMass(7);
-		cout << "After update : n1 mass : "+ to_string((_ULonglong)n1.getMass()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : n1 type : "+ to_string((_ULonglong)n1.getType()) <<endl;
-		n1.setType(7);
-		cout << "After update : n1 type : "+ to_string((_ULonglong)n1.getType()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : n1 label : "+ n1.getLabel() <<endl;
-		n1.setLabel("Test");
-		cout << "After update : n1 label : "+ n1.getLabel() << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : node key : "+ to_string((_ULonglong)n1.getKey()) <<endl;
-		n1.setKey(3);
-		cout << "After update : node key : "+ to_string((_ULonglong)n1.getKey()) << endl;
-
-		cout << "Number of points in Node 1 : "+ to_string((_ULonglong)n1.getPointCount()) <<endl;
-		cout << "Number of points in Node 2 : "+ to_string((_ULonglong)n2.getPointCount()) <<endl;
-
-		// ================= END NODE TEST ================= */
-
-		/* // ================= START GRAPHCLASS TEST  =================
-
-		cout << "Before update : shockGraph IsDirect : "+ shockGraph.getIsDirect() << endl;
-		shockGraph.setIsDirect(false);
-		cout << "After update : shockGraph IsDirect : "+ shockGraph.getIsDirect() << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : shockGraph label : "+ shockGraph.getIsAcyclicGraph() <<endl;
-		shockGraph.setIsAcyclicGraph(false);
-		cout << "After update : shockGraph label : "+ shockGraph.getIsAcyclicGraph() << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : shockGraph key : "+  shockGraph.getKey() <<endl;
-		shockGraph.setKey("Shocking Graph");
-		cout << "After update : shockGraph key : "+ shockGraph.getKey() << endl;
-
-		// ================= END NODE TEST ================= */
-
-		/* // ================= START OBJECTCLASS TEST  =================
-
-		cout << "Before update : rod key : "+  rod.getKey() <<endl;
-		rod.setKey("Bielle");
-		cout << "After update : rod key : "+ rod.getKey() << endl;
-
-		// ================= END NODE TEST ================= */
-
-		/* // ================= START EDGE TEST  =================
-
-		cout << "Before update : e1 weight : "+ to_string((_ULonglong)e1.getWeight()) <<endl;
-		e1.setWeight(13);
-		cout << "After update : e1 weight : "+ to_string((_ULonglong)e1.getWeight()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : edge key : "+ to_string((_ULonglong)e1.getKey()) <<endl;
-		e1.setKey(3);
-		cout << "After update : edge key : "+ to_string((_ULonglong)e1.getKey()) << endl;
-
-		// ================= END EDGE TEST ================= */
-
-		// ================= START POINT TEST  =================
-
-		//p1 = loadObject<Point>(1);
-		/*
-		cout << "Before update : point xCoord : "+ to_string((_ULonglong)p1->getxCoord()) <<endl;
-		p1->setxCoord(13);
-		cout << "After update : point xCoord : "+ to_string((_ULonglong)p1->getxCoord()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : point yCoord : "+ to_string((_ULonglong)p1->getyCoord()) <<endl;
-		p1->setyCoord(13);
-		cout << "After update : point yCoord : "+ to_string((_ULonglong)p1->getyCoord()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : point radius : "+ to_string((_ULonglong)p1->getRadius()) <<endl;
-		p1->setRadius(13);
-		cout << "After update : point radius : "+ to_string((_ULonglong)p1->getRadius()) << endl;
-
-		system ("PAUSE");
-
-		cout << "Before update : point key : "+ to_string((_ULonglong)p1->getKey()) <<endl;
-		p1->setKey(3);
-		cout << "After update : point key : "+ to_string((_ULonglong)p1->getKey()) << endl;
-
-		// ================= END EDGE TEST ================= */
 }
 
 /* *******************************************************************

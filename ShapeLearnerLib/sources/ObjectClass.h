@@ -38,6 +38,8 @@ public:
 	string getKey() const {return objectClassName;}
 	void setKey(const string& key);
 
+	vector<unsigned long> getGraphs();
+
 	/* =========== Template function =========== */
 	string getClassName() const { return "ObjectClass"; }
 	/* =========== Template function =========== */

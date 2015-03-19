@@ -68,15 +68,6 @@ bool DatabaseManager::initDB(const string& filename)
 {
 	string script = get_file_contents(filename);
 	return query(script);
-	/*
-	odb::transaction t (database->begin ());
-	#ifdef _TRACER_
-		t.tracer (stderr_tracer);
-	#endif
-	odb::schema_catalog::create_schema (*database);
-	t.commit ();
-	return true;
-	*/
 }
 
 /* *******************************************************************
@@ -171,18 +162,25 @@ bool DatabaseManager::Interface::isDbOpen() {
 void DatabaseManager::Interface::test () throw (ShapeLearnerExcept){
 }
 
-int DatabaseManager::Interface::getPointCountInNode (const int idNode) throw (ShapeLearnerExcept){
-	typedef odb::query<pointsInNode> query;
-
+unsigned long DatabaseManager::Interface::getPointCountInNode (const unsigned long idNode) throw (ShapeLearnerExcept){
 	transaction t (database->begin());
+	try{
+		typedef odb::query<pointsInNode> query;
 
-	#ifdef _TRACER_
-		t.tracer (stderr_tracer);
-	#endif
+		#ifdef _TRACER_
+			t.tracer (stderr_tracer);
+		#endif
 
-	pointsInNode rslt (database->query_value<pointsInNode> (query::refNode == idNode));
+		pointsInNode rslt (database->query_value<pointsInNode> (query::refNode == idNode));
 
-	t.commit ();
+		t.commit ();
 
-	return rslt.value;
+		return rslt.value;
+	}
+	catch (const std::exception& e)
+	{
+		t.rollback();
+		throw ShapeLearnerExcept (" DatabaseManager::Interface::getPointCountInNode", "Unable to count Points in Node // Error = "+ boost::lexical_cast<std::string>(e.what()));
+		return 0;
+	}
 }
