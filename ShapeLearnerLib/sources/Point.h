@@ -38,7 +38,6 @@ public:
 	};	
 
 	unsigned long getKey() const {return idPoint;}
-	void setKey(const unsigned int key);
 
 	double getxCoord() const {return xCoord;}
 	void setxCoord(const unsigned int _xCoord);
@@ -56,7 +55,6 @@ public:
 	string getClassName() const { return "Point"; }
 	/* =========== Template function =========== */
 
-	void removeFromDB();
 	void updateInDB();
 	unsigned long saveInDB();
 

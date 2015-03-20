@@ -34,12 +34,6 @@ idPoint(0)
 	#endif
 }
 
-void Point::setKey(const unsigned int key) {
-	removeFromDB();
-	idPoint = key;
-	saveInDB();
-}
-
 void Point::setxCoord(const unsigned int _xCoord){
 	xCoord = _xCoord;
 	updateInDB();
@@ -53,12 +47,6 @@ void Point::setyCoord(const unsigned int _yCoord){
 void Point::setRadius(const unsigned int _radius){
 	radius = _radius;
 	updateInDB();
-}
-
-void Point::removeFromDB(){
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
 }
 
 void Point::updateInDB(){

@@ -27,12 +27,6 @@ GraphClass::GraphClass(string name, bool isDirect, bool isAcyclic) : graphClassN
 	#endif
 }
 
-void GraphClass::setKey(const string& key) {
-	removeFromDB();
-	graphClassName = key;
-	saveInDB();
-}
-
 void GraphClass::setIsDirect(const bool _directGraph){
 	directGraph = _directGraph;
 	updateInDB();
@@ -41,12 +35,6 @@ void GraphClass::setIsDirect(const bool _directGraph){
 void GraphClass::setIsAcyclicGraph(const bool _acyclicGraph){
 	acyclicGraph = _acyclicGraph;
 	updateInDB();
-}
-
-void GraphClass::removeFromDB(){
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
 }
 
 void GraphClass::updateInDB(){

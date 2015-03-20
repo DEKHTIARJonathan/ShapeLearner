@@ -33,12 +33,6 @@ Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectCl
 		#endif
 	}
 
-void Graph::setKey(const unsigned int key) {
-	removeFromDB();
-	idGraph = key;
-	saveInDB();
-}
-
 void Graph::setObjectName(const string& _objectName) {
 	objectName = _objectName;
 	updateInDB();
@@ -47,12 +41,6 @@ void Graph::setObjectName(const string& _objectName) {
 void Graph::setView(const unsigned int _viewNumber) {
 	viewNumber = _viewNumber;
 	updateInDB();
-}
-
-void Graph::removeFromDB(){
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
 }
 
 void Graph::updateInDB(){

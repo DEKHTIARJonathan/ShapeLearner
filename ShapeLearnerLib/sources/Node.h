@@ -38,7 +38,6 @@ public:
 	};	
 
 	unsigned long getKey() const {return idNode;}
-	void setKey(const unsigned int key);
 
 	unsigned long getIndex() const {return index;}
 	void setIndex(const unsigned int _index);
@@ -69,7 +68,6 @@ public:
 	string getClassName() const { return "Node"; }
 	/* =========== Template function =========== */
 
-	void removeFromDB();
 	void updateInDB();
 	unsigned long saveInDB();
 

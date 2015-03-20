@@ -27,24 +27,6 @@ ObjectClass::ObjectClass(string name) : objectClassName(name) {
 	#endif
 }
 
-void ObjectClass::setKey(const string& key) {
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
-
-	objectClassName = key;
-
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
-}
-
-void ObjectClass::removeFromDB(){
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
-}
-
 void ObjectClass::updateInDB(){
 	#ifdef _MSC_VER
 		GraphManager::ObjectInterface::updateObject(*this);

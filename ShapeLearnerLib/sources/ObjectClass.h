@@ -36,7 +36,6 @@ public:
 	};
 
 	string getKey() const {return objectClassName;}
-	void setKey(const string& key);
 
 	vector<unsigned long> getGraphs();
 
@@ -44,7 +43,6 @@ public:
 	string getClassName() const { return "ObjectClass"; }
 	/* =========== Template function =========== */
 
-	void removeFromDB();
 	void updateInDB();
 	string saveInDB();
 

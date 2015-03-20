@@ -35,11 +35,6 @@ Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned int _index, unsigned int _
 		#endif
 	}
 
-void Node::setKey(const unsigned int key) {
-	removeFromDB();
-	idNode = key;
-	saveInDB();
-}
 
 void Node::setIndex(const unsigned int _index) {
 	index = _index;
@@ -68,12 +63,6 @@ void Node::setLabel(const string& _label) {
 
 unsigned long Node::getPointCount() const {
 	return GraphManager::ObjectInterface::getPointCountInNode(idNode);
-}
-
-void Node::removeFromDB(){
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
 }
 
 void Node::updateInDB(){

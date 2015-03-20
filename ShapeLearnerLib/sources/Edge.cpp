@@ -33,21 +33,9 @@ Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::
 		#endif;
 	}
 
-void Edge::setKey(const unsigned int key) {
-		removeFromDB();
-		idEdge = key;
-		saveInDB();
-	}
-
 void Edge::setWeight(const unsigned int _weight) {
 	weight = _weight;
 	updateInDB();
-}
-
-void Edge::removeFromDB(){
-	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::deleteObject(*this);
-	#endif //_MSC_VER
 }
 
 void Edge::updateInDB(){

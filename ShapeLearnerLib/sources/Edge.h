@@ -38,7 +38,6 @@ public:
 	};		
 
 	unsigned long getKey() const {return idEdge;}
-	void setKey(const unsigned int key);
 
 	unsigned long getWeight() const {return weight;}
 	void setWeight(const unsigned int _weight);
@@ -47,7 +46,6 @@ public:
 	string getClassName() const { return "Edge"; }
 	/* =========== Template function =========== */
 
-	void removeFromDB();
 	void updateInDB();
 	unsigned long saveInDB();
 

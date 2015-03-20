@@ -116,7 +116,7 @@ void GraphManager::UserInterface::test() throw(ShapeLearnerExcept){
 		vector <unsigned long> rslt8 = ND1.lock()->getEdgesByTarget();
 		vector <unsigned long> rslt9 = ND1.lock()->getEdges();
 
-		int a = 2;
+		CommonInterface::deleteObject(OC1,true);
 
 }
 
@@ -318,4 +318,130 @@ void GraphManager::setDBInitFile() throw(ShapeLearnerExcept){
 		if (!tmp.empty())
 			dbInitFile = tmp;
 	#endif
+}
+
+bool GraphManager::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade) throw (ShapeLearnerExcept){
+	bool rslt = true;
+
+	if(rslt &= !!PointMap.erase(obj->getKey()), !rslt)
+		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+
+	return rslt;
+}
+
+bool GraphManager::removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade) throw (ShapeLearnerExcept){
+	bool rslt = true;
+
+	if(rslt &= !!EdgeMap.erase(obj->getKey()), !rslt)
+		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+
+	return rslt;
+}
+
+bool GraphManager::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade) throw (ShapeLearnerExcept){
+	bool rslt = true;
+
+	if(rslt &= !!NodeMap.erase(obj->getKey()), !rslt)
+		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+
+	if(cascade){
+
+		/**************** Edge Cascade Deleting ****************/
+		vector <unsigned long> edgeVect = obj->getEdges();
+		map<unsigned long, boost::shared_ptr<Edge>>::iterator it1;
+
+		for(unsigned int i = 0; i < edgeVect.size(); i++){
+			if(it1 = EdgeMap.find(edgeVect[i]), it1 != EdgeMap.end())
+				rslt &= removeObjectFromMap(it1->second);	// The cascade parameter is useless for this class
+		}
+
+		/**************** Point Cascade Deleting ****************/
+		vector <unsigned long> pointVect = obj->getPoints();
+		map<unsigned long, boost::shared_ptr<Point>>::iterator it2;
+
+		for(unsigned int i = 0; i < pointVect.size(); i++){			
+			if(it2 = PointMap.find(pointVect[i]), it2 != PointMap.end())
+				rslt &= removeObjectFromMap(it2->second);		// The cascade parameter is useless for this class	
+		}
+	}
+
+	return rslt;
+}
+
+bool GraphManager::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade) throw (ShapeLearnerExcept){
+	bool rslt = true;
+
+	if(rslt &= !!GraphMap.erase(obj->getKey()), !rslt)
+		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+
+	if(cascade){
+
+		/**************** Node Cascade Deleting ****************/
+		vector <unsigned long> nodeVect = obj->getNodes();
+		map<unsigned long, boost::shared_ptr<Node>>::iterator it1;
+
+		for(unsigned int i = 0; i < nodeVect.size(); i++){
+			if(it1 = NodeMap.find(nodeVect[i]), it1 != NodeMap.end())
+				rslt &= removeObjectFromMap(it1->second, false); // No need to act on cascade, we will manage it at this level.		
+		}
+
+		/**************** Edge Cascade Deleting ****************/
+		vector <unsigned long> edgeVect = obj->getEdges();
+		map<unsigned long, boost::shared_ptr<Edge>>::iterator it2;
+
+		for(unsigned int i = 0; i < edgeVect.size(); i++){
+			if(it2 = EdgeMap.find(edgeVect[i]), it2 != EdgeMap.end())
+				rslt &= removeObjectFromMap(it2->second);	// The cascade parameter is useless for this class
+		}
+
+		/**************** Point Cascade Deleting ****************/
+		vector <unsigned long> pointVect = obj->getPoints();
+		map<unsigned long, boost::shared_ptr<Point>>::iterator it3;
+
+		for(unsigned int i = 0; i < pointVect.size(); i++){
+			if(it3 = PointMap.find(pointVect[i]), it3 != PointMap.end())
+				rslt &= removeObjectFromMap(it3->second);		// The cascade parameter is useless for this class	
+		}
+	}
+	return rslt;
+}
+
+bool GraphManager::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascade) throw (ShapeLearnerExcept){
+	bool rslt = true;
+
+	if(rslt &= !!GraphClassMap.erase(obj->getKey()), !rslt)
+		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
+
+	if(cascade){
+		/**************** Graph Cascade Deleting ****************/
+		vector <unsigned long> graphVect = obj->getGraphs();
+		map<unsigned long, boost::shared_ptr<Graph>>::iterator it;
+
+		for(unsigned int i = 0; i < graphVect.size(); i++){
+			if(it = GraphMap.find(graphVect[i]), it != GraphMap.end())
+				rslt &= removeObjectFromMap(it->second, true);		
+		}
+	}
+
+	return rslt;
+}
+
+bool GraphManager::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool cascade) throw (ShapeLearnerExcept){
+	bool rslt = true;
+
+	if(rslt &= !!ObjectClassMap.erase(obj->getKey()), !rslt)
+		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
+
+	if(cascade){
+		/**************** Graph Cascade Deleting ****************/
+		vector <unsigned long> graphVect = obj->getGraphs();
+		map<unsigned long, boost::shared_ptr<Graph>>::iterator it;
+
+		for(unsigned int i = 0; i < graphVect.size(); i++){
+			if(it = GraphMap.find(graphVect[i]), it != GraphMap.end())
+				rslt &= removeObjectFromMap(it->second, true);		
+		}
+	}
+
+	return rslt;
 }

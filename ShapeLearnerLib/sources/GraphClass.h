@@ -51,7 +51,6 @@ public:
 	string getClassName() const { return "GraphClass"; }
 	/* =========== Template function =========== */
 
-	void removeFromDB();
 	void updateInDB();
 	string saveInDB();
 

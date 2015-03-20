@@ -38,7 +38,6 @@ public:
 	};	
 
 	unsigned long getKey() const {return idGraph;}
-	void setKey(const unsigned int key);
 
 	string getObjectName() const {return objectName;}
 	void setObjectName(const string& _objectName);
@@ -57,7 +56,6 @@ public:
 	string getClassName() const { return "Graph"; }
 	/* =========== Template function =========== */
 
-	void removeFromDB();
 	void updateInDB();
 	unsigned long saveInDB();
 

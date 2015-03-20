@@ -72,8 +72,6 @@ class GraphManager
 
 			template <class T> static bool updateObject(T& obj) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::updateObject(obj); }
 
-			template <class T> static bool deleteObject(T& obj) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::deleteObject(obj); }
-
 			static int getPointCountInNode (const int idNode) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getPointCountInNode (idNode); }
 
 			template <class T, class Y> static vector<unsigned long> getForeignRelations(Y foreignKey) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getForeignRelations<T,Y>(foreignKey); }
@@ -105,6 +103,24 @@ class GraphManager
 			static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned int _index = 1, const unsigned int _level = 1, const unsigned int _mass = 1, const unsigned int _type = 1, const string _label = "1");
 			static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned int _weight = 1);
 			static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned int _viewNumber = 1);
+
+			/* ************** Deleters ********************/
+			template <class T> static bool deleteObject(boost::weak_ptr<T> obj, bool deleteOnDB) throw (ShapeLearnerExcept){ 
+				bool rslt = true;
+				boost::shared_ptr<T> keepAlive;
+				if(obj.expired())
+					throw ShapeLearnerExcept("GraphManager::CommonInterface::deleteObject", "Error : The object doesn't exist anymore.");
+				else
+					keepAlive.swap(obj.lock()); // We ensure that we keep an alive version of the object.
+
+				if(deleteOnDB)
+					rslt &= DatabaseManager::Interface::deleteObject(keepAlive);
+					//rslt &= deleteDbObject(keepAlive);
+
+				rslt &= removeObjectFromMap(keepAlive, deleteOnDB); // If deletonOnDB == false => Desinstanciate, keep in DBn, no cascade delete // deletonOnDB == true => Delete from DB & Central Memory
+
+				return rslt;
+			}
 		};
 
 	private:
@@ -161,6 +177,14 @@ class GraphManager
 
 		template <class T, class Y> static boost::shared_ptr<T> loadObject(Y keyDB) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::loadObject<T>(keyDB); }
 
+		/* ************* Memory Cleaners ****************/
+		
+		static bool removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade = false) throw (ShapeLearnerExcept);
+		static bool removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade = false) throw (ShapeLearnerExcept);
+		static bool removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade = false) throw (ShapeLearnerExcept);
+		static bool removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade = false) throw (ShapeLearnerExcept);
+		static bool removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascade = false) throw (ShapeLearnerExcept);
+		static bool removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool cascade = false) throw (ShapeLearnerExcept);
 		/* **************  No instanciation *********************/
 
 		/*!
