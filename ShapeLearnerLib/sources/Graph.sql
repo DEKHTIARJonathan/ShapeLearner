@@ -9,7 +9,7 @@ CREATE TABLE "Graph" (
   "refGraphClass" VARCHAR(255) NOT NULL,
   "refObjectClass" VARCHAR(255) NOT NULL,
   "objectName" VARCHAR(255) NOT NULL,
-  "viewNumber" INTEGER NOT NULL DEFAULT '1');
+  "viewNumber" BIGINT NOT NULL DEFAULT '1');
 
 CREATE INDEX "index_Graph_graphClass"
   ON "Graph" USING BTREE ("refGraphClass");

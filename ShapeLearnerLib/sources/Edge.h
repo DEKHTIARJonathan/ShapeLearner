@@ -32,7 +32,7 @@ class Edge
 public:
 	class Access {
 		friend class GraphManager;
-		static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned int _weight = 1){
+		static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1){
 			return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph, _weight));
 		}
 	};		
@@ -40,24 +40,24 @@ public:
 	unsigned long getKey() const {return idEdge;}
 
 	unsigned long getWeight() const {return weight;}
-	void setWeight(const unsigned int _weight);
+	void setWeight(const unsigned long _weight);
 
 	/* =========== Template function =========== */
 	string getClassName() const { return "Edge"; }
 	/* =========== Template function =========== */
 
-	void updateInDB();
-	unsigned long saveInDB();
-
 private:
 	Edge() {}
-	Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned int _weight = 1);
+	Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1);
+
+	void updateInDB();
+	unsigned long saveInDB();
 
 	unsigned long idEdge;
 	odb::boost::lazy_weak_ptr<Node> source;
 	odb::boost::lazy_weak_ptr<Node> target;
 	odb::boost::lazy_weak_ptr<Graph> refGraph;
-	unsigned int weight;
+	unsigned long weight;
 
 	friend class odb::access;
 };

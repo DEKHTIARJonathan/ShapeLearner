@@ -29,7 +29,7 @@ CREATE TABLE "Graph" (
   "refGraphClass" VARCHAR(255) NOT NULL,
   "refObjectClass" VARCHAR(255) NOT NULL,
   "objectName" VARCHAR(255) NOT NULL,
-  "viewNumber" INTEGER NOT NULL DEFAULT '1');
+  "viewNumber" BIGINT NOT NULL DEFAULT '1');
 
 CREATE INDEX "index_Graph_graphClass"
   ON "Graph" USING BTREE ("refGraphClass");
@@ -60,10 +60,10 @@ DROP TABLE IF EXISTS "Node" CASCADE;
 
 CREATE TABLE "Node" (
   "idNode" BIGSERIAL NOT NULL PRIMARY KEY,
-  "index" INTEGER NOT NULL DEFAULT '1',
-  "level" INTEGER NOT NULL DEFAULT '1',
-  "mass" INTEGER NOT NULL DEFAULT '1',
-  "type" INTEGER NOT NULL DEFAULT '1',
+  "index" BIGINT NOT NULL DEFAULT '1',
+  "level" BIGINT NOT NULL DEFAULT '1',
+  "mass" BIGINT NOT NULL DEFAULT '1',
+  "type" BIGINT NOT NULL DEFAULT '1',
   "label" VARCHAR(255) NOT NULL DEFAULT '1',
   "refGraph" BIGINT NOT NULL);
 
@@ -88,7 +88,7 @@ CREATE TABLE "Edge" (
   "source" BIGINT NOT NULL,
   "target" BIGINT NOT NULL,
   "refGraph" BIGINT NOT NULL,
-  "weight" INTEGER NOT NULL DEFAULT '1');
+  "weight" BIGINT NOT NULL DEFAULT '1');
 
 CREATE INDEX "index_Edge_source"
   ON "Edge" USING BTREE ("source");

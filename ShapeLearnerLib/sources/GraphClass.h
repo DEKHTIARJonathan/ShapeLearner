@@ -37,7 +37,6 @@ public:
 	};
 
 	string getKey() const {return graphClassName;}
-	void setKey(const string& key);
 
 	bool getIsDirect() const {return directGraph;}
 	void setIsDirect(const bool _directGraph);
@@ -51,12 +50,12 @@ public:
 	string getClassName() const { return "GraphClass"; }
 	/* =========== Template function =========== */
 
-	void updateInDB();
-	string saveInDB();
-
 private:
 	GraphClass() {}
 	GraphClass(string name, bool isDirect = false, bool isAcyclic = false);
+
+	void updateInDB();
+	string saveInDB();
 
 	string graphClassName;
 	bool directGraph;

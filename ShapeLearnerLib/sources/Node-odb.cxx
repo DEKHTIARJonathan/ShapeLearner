@@ -50,10 +50,10 @@ namespace odb
   const unsigned int access::object_traits_impl< ::Node, id_pgsql >::
   persist_statement_types[] =
   {
-    pgsql::int4_oid,
-    pgsql::int4_oid,
-    pgsql::int4_oid,
-    pgsql::int4_oid,
+    pgsql::int8_oid,
+    pgsql::int8_oid,
+    pgsql::int8_oid,
+    pgsql::int8_oid,
     pgsql::text_oid,
     pgsql::int8_oid
   };
@@ -67,10 +67,10 @@ namespace odb
   const unsigned int access::object_traits_impl< ::Node, id_pgsql >::
   update_statement_types[] =
   {
-    pgsql::int4_oid,
-    pgsql::int4_oid,
-    pgsql::int4_oid,
-    pgsql::int4_oid,
+    pgsql::int8_oid,
+    pgsql::int8_oid,
+    pgsql::int8_oid,
+    pgsql::int8_oid,
     pgsql::text_oid,
     pgsql::int8_oid,
     pgsql::int8_oid
@@ -202,28 +202,28 @@ namespace odb
 
     // index
     //
-    b[n].type = pgsql::bind::integer;
+    b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.index_value;
     b[n].is_null = &i.index_null;
     n++;
 
     // level
     //
-    b[n].type = pgsql::bind::integer;
+    b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.level_value;
     b[n].is_null = &i.level_null;
     n++;
 
     // mass
     //
-    b[n].type = pgsql::bind::integer;
+    b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.mass_value;
     b[n].is_null = &i.mass_null;
     n++;
 
     // type
     //
-    b[n].type = pgsql::bind::integer;
+    b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.type_value;
     b[n].is_null = &i.type_null;
     n++;
@@ -270,13 +270,13 @@ namespace odb
     // index
     //
     {
-      unsigned int const& v =
+      long unsigned int const& v =
         o.index;
 
       bool is_null (false);
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
         i.index_value, is_null, v);
       i.index_null = is_null;
     }
@@ -284,13 +284,13 @@ namespace odb
     // level
     //
     {
-      unsigned int const& v =
+      long unsigned int const& v =
         o.level;
 
       bool is_null (false);
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
         i.level_value, is_null, v);
       i.level_null = is_null;
     }
@@ -298,13 +298,13 @@ namespace odb
     // mass
     //
     {
-      unsigned int const& v =
+      long unsigned int const& v =
         o.mass;
 
       bool is_null (false);
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
         i.mass_value, is_null, v);
       i.mass_null = is_null;
     }
@@ -312,13 +312,13 @@ namespace odb
     // type
     //
     {
-      unsigned int const& v =
+      long unsigned int const& v =
         o.type;
 
       bool is_null (false);
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
         i.type_value, is_null, v);
       i.type_null = is_null;
     }
@@ -400,12 +400,12 @@ namespace odb
     // index
     //
     {
-      unsigned int& v =
+      long unsigned int& v =
         o.index;
 
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
         v,
         i.index_value,
         i.index_null);
@@ -414,12 +414,12 @@ namespace odb
     // level
     //
     {
-      unsigned int& v =
+      long unsigned int& v =
         o.level;
 
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
         v,
         i.level_value,
         i.level_null);
@@ -428,12 +428,12 @@ namespace odb
     // mass
     //
     {
-      unsigned int& v =
+      long unsigned int& v =
         o.mass;
 
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
         v,
         i.mass_value,
         i.mass_null);
@@ -442,12 +442,12 @@ namespace odb
     // type
     //
     {
-      unsigned int& v =
+      long unsigned int& v =
         o.type;
 
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
         v,
         i.type_value,
         i.type_null);

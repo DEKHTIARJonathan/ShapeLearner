@@ -72,7 +72,7 @@ class GraphManager
 
 			template <class T> static bool updateObject(T& obj) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::updateObject(obj); }
 
-			static int getPointCountInNode (const int idNode) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getPointCountInNode (idNode); }
+			static unsigned long getPointCountInNode (const unsigned long idNode) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getPointCountInNode (idNode); }
 
 			template <class T, class Y> static vector<unsigned long> getForeignRelations(Y foreignKey) throw (ShapeLearnerExcept) { return DatabaseManager::Interface::getForeignRelations<T,Y>(foreignKey); }
 		};
@@ -124,16 +124,6 @@ class GraphManager
 		};
 
 	private:
-
-		// Setters pour les paramètres de la BDD.
-		static void setDbName() throw(ShapeLearnerExcept);
-		static void setDbUser() throw(ShapeLearnerExcept);
-		static void setDbPass() throw(ShapeLearnerExcept);
-		static void setDbHost() throw(ShapeLearnerExcept);
-		static void setDbType() throw(ShapeLearnerExcept);
-		static void setDbPort() throw(ShapeLearnerExcept);
-		static void setDBInitFile() throw(ShapeLearnerExcept);
-
 		/*! \brief dbName : Nom de la Base de Données. */
 		static string dbName;
 
@@ -163,6 +153,15 @@ class GraphManager
 		static map<unsigned long, boost::shared_ptr<Graph>>		GraphMap;
 		static map<string, boost::shared_ptr<ObjectClass>>		ObjectClassMap;
 		static map<string, boost::shared_ptr<GraphClass>>		GraphClassMap;
+
+		/* ******** Setters pour les paramètres de la BDD. ********/
+		static void setDbName() throw(ShapeLearnerExcept);
+		static void setDbUser() throw(ShapeLearnerExcept);
+		static void setDbPass() throw(ShapeLearnerExcept);
+		static void setDbHost() throw(ShapeLearnerExcept);
+		static void setDbType() throw(ShapeLearnerExcept);
+		static void setDbPort() throw(ShapeLearnerExcept);
+		static void setDBInitFile() throw(ShapeLearnerExcept);
 
 		/* ************** DB I/O Ops *********************/
 

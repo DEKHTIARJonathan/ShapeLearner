@@ -67,7 +67,6 @@ class DatabaseManager
 				static bool isDbOpen();
 
 				/* *************** Updaters ***********************/
-
 				template <class T> static bool updateObject(T& obj) throw (ShapeLearnerExcept){
 					transaction t1 (database->begin ());
 					try
@@ -227,11 +226,6 @@ class DatabaseManager
 		*  \param query : la query que l'on veut éxécuter
 		*/
 		static bool query(const string& query) throw(ShapeLearnerExcept);
-
-		/*!
-		*  \brief Renvoie le dernier ID inséré dans la BDD sur toutes les Tables.
-		*/
-		static unsigned int getLastID() throw(ShapeLearnerExcept);
 
 		/* ******************** Escaper ********************/
 		/*!

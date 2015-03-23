@@ -32,7 +32,7 @@ class Graph
 public:
 	class Access {
 		friend class GraphManager;
-		static boost::shared_ptr<Graph> createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName, unsigned int const _viewNumber = 1){
+		static boost::shared_ptr<Graph> createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName, unsigned long const _viewNumber = 1){
 			return boost::shared_ptr<Graph>(new Graph(_graphClass, _objectClass, _objectName, _viewNumber));
 		}
 	};	
@@ -43,7 +43,7 @@ public:
 	void setObjectName(const string& _objectName);
 
 	unsigned long getView() const {return viewNumber;}
-	void setView(const unsigned int _viewNumber);
+	void setView(const unsigned long _viewNumber);
 
 	boost::weak_ptr<GraphClass> getParentGraphClass();
 	boost::weak_ptr<ObjectClass> getParentObjectClass();
@@ -56,12 +56,12 @@ public:
 	string getClassName() const { return "Graph"; }
 	/* =========== Template function =========== */
 
-	void updateInDB();
-	unsigned long saveInDB();
-
 private:
 	Graph() {}
-	Graph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName, unsigned int const _viewNumber = 1);
+	Graph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName, unsigned long const _viewNumber = 1);
+
+	void updateInDB();
+	unsigned long saveInDB();
 
 	unsigned long idGraph;
 
@@ -69,7 +69,7 @@ private:
 	odb::boost::lazy_weak_ptr<ObjectClass> refObjectClass;
 
 	string objectName; // The name of the image file.
-	unsigned int viewNumber;
+	unsigned long viewNumber;
 
 	friend class odb::access;
 };

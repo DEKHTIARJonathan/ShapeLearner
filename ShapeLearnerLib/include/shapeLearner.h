@@ -33,30 +33,6 @@ class ShapeLearner
 		static void openDatabase() throw(ShapeLearnerExcept);
 		static void closeDatabase() throw(ShapeLearnerExcept);
 		static void test () throw(ShapeLearnerExcept);
-	
-	private:
-
-		/* **************  No instanciation *********************/
-
-		/**
-		* \brief Constructeur de le class GraphManager.  Il instancie également la classe DatabaseManager.
-		*/
-		ShapeLearner() throw(ShapeLearnerExcept);
-
-		/**
-		*	\brief Constructeur de recopie => La recopie est interdite
-		*/
-		ShapeLearner(const ShapeLearner&);
-
-		/**
-		*  \brief Opérateur =  =>> La recopie est interdite
-		*/
-		ShapeLearner& operator=(const ShapeLearner&);
-
-		/**
-		*  \brief La destruction est interdite
-		*/
-		~ShapeLearner();
 };
 
 

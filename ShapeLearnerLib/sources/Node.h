@@ -32,7 +32,7 @@ class Node
 public:
 	class Access {
 		friend class GraphManager;
-		static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph, unsigned int _index = 1, unsigned int _level = 1, unsigned int _mass = 1, unsigned int _type = 1, string _label = "1"){
+		static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph, unsigned long _index = 1, unsigned long _level = 1, unsigned long _mass = 1, unsigned long _type = 1, string _label = "1"){
 			return boost::shared_ptr<Node>(new Node(_refGraph, _index, _level, _mass, _type, _label));
 		}
 	};	
@@ -40,16 +40,16 @@ public:
 	unsigned long getKey() const {return idNode;}
 
 	unsigned long getIndex() const {return index;}
-	void setIndex(const unsigned int _index);
+	void setIndex(const unsigned long _index);
 
 	unsigned long getLevel() const {return level;}
-	void setLevel(const unsigned int _level);
+	void setLevel(const unsigned long _level);
 
 	unsigned long getMass() const {return mass;}
-	void setMass(const unsigned int _mass);
+	void setMass(const unsigned long _mass);
 
 	unsigned long getType() const {return type;}
-	void setType(const unsigned int _type);
+	void setType(const unsigned long _type);
 
 	string getLabel() const {return label;}
 	void setLabel(const string& _label);
@@ -68,18 +68,18 @@ public:
 	string getClassName() const { return "Node"; }
 	/* =========== Template function =========== */
 
+private:
+	Node() {}
+	Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index = 1, unsigned long _level = 1, unsigned long _mass = 1, unsigned long _type = 1, string _label = "1");
+
 	void updateInDB();
 	unsigned long saveInDB();
 
-private:
-	Node() {}
-	Node(boost::weak_ptr<Graph> _refGraph, unsigned int _index = 1, unsigned int _level = 1, unsigned int _mass = 1, unsigned int _type = 1, string _label = "1");
-
 	unsigned long						idNode;
-	unsigned int						index;
-	unsigned int						level;
-	unsigned int						mass;
-	unsigned int						type;
+	unsigned long						index;
+	unsigned long						level;
+	unsigned long						mass;
+	unsigned long						type;
 	string								label;
 	odb::boost::lazy_weak_ptr<Graph>	refGraph;
 

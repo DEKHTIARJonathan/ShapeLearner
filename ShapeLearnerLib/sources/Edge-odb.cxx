@@ -53,7 +53,7 @@ namespace odb
     pgsql::int8_oid,
     pgsql::int8_oid,
     pgsql::int8_oid,
-    pgsql::int4_oid
+    pgsql::int8_oid
   };
 
   const unsigned int access::object_traits_impl< ::Edge, id_pgsql >::
@@ -68,7 +68,7 @@ namespace odb
     pgsql::int8_oid,
     pgsql::int8_oid,
     pgsql::int8_oid,
-    pgsql::int4_oid,
+    pgsql::int8_oid,
     pgsql::int8_oid
   };
 
@@ -217,7 +217,7 @@ namespace odb
 
     // weight
     //
-    b[n].type = pgsql::bind::integer;
+    b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.weight_value;
     b[n].is_null = &i.weight_null;
     n++;
@@ -329,13 +329,13 @@ namespace odb
     // weight
     //
     {
-      unsigned int const& v =
+      long unsigned int const& v =
         o.weight;
 
       bool is_null (false);
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
         i.weight_value, is_null, v);
       i.weight_null = is_null;
     }
@@ -447,12 +447,12 @@ namespace odb
     // weight
     //
     {
-      unsigned int& v =
+      long unsigned int& v =
         o.weight;
 
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
         v,
         i.weight_value,
         i.weight_null);

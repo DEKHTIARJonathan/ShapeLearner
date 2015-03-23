@@ -43,12 +43,12 @@ public:
 	string getClassName() const { return "ObjectClass"; }
 	/* =========== Template function =========== */
 
-	void updateInDB();
-	string saveInDB();
-
 private:
 	ObjectClass() {}
 	ObjectClass(string name);
+
+	void updateInDB();
+	string saveInDB();
 
 	string objectClassName;
 

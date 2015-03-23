@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned int _weight) :
+Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight) :
 	source(_source),
 	target(_target),
 	refGraph(_refGraph),
@@ -33,7 +33,7 @@ Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::
 		#endif;
 	}
 
-void Edge::setWeight(const unsigned int _weight) {
+void Edge::setWeight(const unsigned long _weight) {
 	weight = _weight;
 	updateInDB();
 }

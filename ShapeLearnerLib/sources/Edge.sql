@@ -9,7 +9,7 @@ CREATE TABLE "Edge" (
   "source" BIGINT NOT NULL,
   "target" BIGINT NOT NULL,
   "refGraph" BIGINT NOT NULL,
-  "weight" INTEGER NOT NULL DEFAULT '1');
+  "weight" BIGINT NOT NULL DEFAULT '1');
 
 CREATE INDEX "index_Edge_source"
   ON "Edge" USING BTREE ("source");

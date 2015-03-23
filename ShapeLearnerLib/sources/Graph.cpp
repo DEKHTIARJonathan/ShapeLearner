@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectClass> _refObjectClass, string const _objectName, unsigned int const _viewNumber) :
+Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectClass> _refObjectClass, string const _objectName, unsigned long const _viewNumber) :
 	refGraphClass(_refGraphClass),
 	refObjectClass(_refObjectClass),
 	viewNumber(_viewNumber),
@@ -38,7 +38,7 @@ void Graph::setObjectName(const string& _objectName) {
 	updateInDB();
 }
 
-void Graph::setView(const unsigned int _viewNumber) {
+void Graph::setView(const unsigned long _viewNumber) {
 	viewNumber = _viewNumber;
 	updateInDB();
 }

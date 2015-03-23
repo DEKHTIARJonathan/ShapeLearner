@@ -55,12 +55,12 @@ public:
 	string getClassName() const { return "Point"; }
 	/* =========== Template function =========== */
 
-	void updateInDB();
-	unsigned long saveInDB();
-
 private:
 	Point() {}
 	Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
+	
+	void updateInDB();
+	unsigned long saveInDB();
 
 	unsigned long idPoint;
 	double xCoord;

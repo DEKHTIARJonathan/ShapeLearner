@@ -136,9 +136,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     index_type_;
 
     static const index_type_ index;
@@ -148,9 +148,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     level_type_;
 
     static const level_type_ level;
@@ -160,9 +160,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     mass_type_;
 
     static const mass_type_ mass;
@@ -172,9 +172,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     type_type_;
 
     static const type_type_ type;
@@ -261,22 +261,22 @@ namespace odb
 
       // index
       //
-      int index_value;
+      long long index_value;
       bool index_null;
 
       // level
       //
-      int level_value;
+      long long level_value;
       bool level_null;
 
       // mass
       //
-      int mass_value;
+      long long mass_value;
       bool mass_null;
 
       // type
       //
-      int type_value;
+      long long type_value;
       bool type_null;
 
       // label
@@ -520,9 +520,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     index_type_;
 
     static const index_type_ index;
@@ -532,9 +532,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     level_type_;
 
     static const level_type_ level;
@@ -544,9 +544,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     mass_type_;
 
     static const mass_type_ mass;
@@ -556,9 +556,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     type_type_;
 
     static const type_type_ type;

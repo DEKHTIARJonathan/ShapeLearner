@@ -20,7 +20,7 @@
 #include "allHeaders.h"
 using namespace std;
 
-Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned int _index, unsigned int _level, unsigned int _mass, unsigned int _type, string _label) :
+Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index, unsigned long _level, unsigned long _mass, unsigned long _type, string _label) :
 	refGraph(_refGraph),
 	index(_index),
 	level(_level),
@@ -36,22 +36,22 @@ Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned int _index, unsigned int _
 	}
 
 
-void Node::setIndex(const unsigned int _index) {
+void Node::setIndex(const unsigned long _index) {
 	index = _index;
 	updateInDB();
 }
 
-void Node::setLevel(const unsigned int _level) {
+void Node::setLevel(const unsigned long _level) {
 	level = _level;
 	updateInDB();
 }
 
-void Node::setMass(const unsigned int _mass) {
+void Node::setMass(const unsigned long _mass) {
 	mass = _mass;
 	updateInDB();
 }
 
-void Node::setType(const unsigned int _type) {
+void Node::setType(const unsigned long _type) {
 	type = _type;
 	updateInDB();
 }

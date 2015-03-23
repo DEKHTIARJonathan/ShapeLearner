@@ -53,7 +53,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::int4_oid
+    pgsql::int8_oid
   };
 
   const unsigned int access::object_traits_impl< ::Graph, id_pgsql >::
@@ -68,7 +68,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::int4_oid,
+    pgsql::int8_oid,
     pgsql::int8_oid
   };
 
@@ -230,7 +230,7 @@ namespace odb
 
     // viewNumber
     //
-    b[n].type = pgsql::bind::integer;
+    b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.viewNumber_value;
     b[n].is_null = &i.viewNumber_null;
     n++;
@@ -350,13 +350,13 @@ namespace odb
     // viewNumber
     //
     {
-      unsigned int const& v =
+      long unsigned int const& v =
         o.viewNumber;
 
       bool is_null (false);
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
         i.viewNumber_value, is_null, v);
       i.viewNumber_null = is_null;
     }
@@ -459,12 +459,12 @@ namespace odb
     // viewNumber
     //
     {
-      unsigned int& v =
+      long unsigned int& v =
         o.viewNumber;
 
       pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
         v,
         i.viewNumber_value,
         i.viewNumber_null);

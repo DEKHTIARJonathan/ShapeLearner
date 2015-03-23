@@ -210,9 +210,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     weight_type_;
 
     static const weight_type_ weight;
@@ -280,7 +280,7 @@ namespace odb
 
       // weight
       //
-      int weight_value;
+      long long weight_value;
       bool weight_null;
 
       std::size_t version;
@@ -755,9 +755,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
     weight_type_;
 
     static const weight_type_ weight;
