@@ -29,99 +29,43 @@ int main(int argc, char **argv)
 	{
 		//We initialize the command Line Parser.
 		CmdLine cmdLine;
-
-		try{
-			//We parse the arguments given by command line.
-			if (cmdLine.SplitLine(argc,argv) < 2){ // If not enough arguments are given, we show the help.
-				#ifndef _DEBUG
-					cmdLine.ShowHelp("help.txt");
-					system ("PAUSE");
-					exit(EXIT_FAILURE);
-				#endif
-			}
-
-			// Did the user requested any 'help' ?
-			if (cmdLine.HasSwitch("-h")|| cmdLine.HasSwitch("-help") || cmdLine.HasSwitch("--help")){
+		//We parse the arguments given by command line.
+		if (cmdLine.SplitLine(argc,argv) < 1){ // If not enough arguments are given, we show the help.
+			#ifndef _DEBUG
 				cmdLine.ShowHelp("help.txt");
 				system ("PAUSE");
-				exit(EXIT_SUCCESS);
-			}
-
-			// Did the user asked to use a previously created database ?
-			if (cmdLine.HasSwitch("--init"))
-				ShapeLearner::getDbCredentials(true); // En Debug les identifiants sont HardCoded.
-			else
-				ShapeLearner::getDbCredentials(); // En Debug les identifiants sont HardCoded.
-
-			// On récupère les identifiants de connexion à la BDD
-
-			ShapeLearner::openDatabase(); // We connect to the DB
-
-			ShapeLearner::test(); // We act on the program
-
-			ShapeLearner::closeDatabase(); // We disconnect to the DB
+				exit(EXIT_FAILURE);
+			#endif
 		}
-		catch (const std::exception &e )
-		{
-			cerr << e.what()<<endl<<endl;
+
+		// Did the user requested any 'help' ?
+		if (cmdLine.HasSwitch("-h")|| cmdLine.HasSwitch("-help") || cmdLine.HasSwitch("--help")){
+			cmdLine.ShowHelp("help.txt");
 			system ("PAUSE");
-			exit(EXIT_FAILURE);
+			exit(EXIT_SUCCESS);
 		}
 
-		//GraphManager::parseCommandLine(argc,argv);
-		//GraphManager::openManager().test();
+		// Did the user asked to use a previously created database ?
+		if (cmdLine.HasSwitch("--init"))
+			ShapeLearner::getDbCredentials(true); // En Debug les identifiants sont HardCoded.
+		else
+			ShapeLearner::getDbCredentials(); // En Debug les identifiants sont HardCoded.
 
-		/*
-		auto_ptr<database> db (new odb::pgsql::database ("postgres","postgres","postgres","127.0.0.1", 5433));
+		// On récupère les identifiants de connexion à la BDD
 
-		// Create a few persistent person objects.
-		//
-		{
-			GraphClass graphType1 ("testGraph1", true, true);
-			GraphClass graphType2 ("testGraph2", true, true);
-			GraphClass graphType3 ("testGraph3", true, true);
-			GraphClass graphType4 ("testGraph4", true, true);
-			GraphClass graphType5 ("testGraph5", true, true);
+		ShapeLearner::openDatabase(); // We connect to the DB
 
-			transaction t (db->begin ());
+		ShapeLearner::closeDatabase(); // We disconnect to the DB
 
-			t.tracer (stderr_tracer);
-
-			// Make objects persistent and save their ids for later use.
-			//
-			db->persist (graphType1);
-			db->persist (graphType2);
-			db->persist (graphType3);
-			db->persist (graphType4);
-			db->persist (graphType5);
-
-			t.commit ();
-		}
-		*/
 	}
 	catch (const std::exception& e)
 	{
-		cerr << e.what () << endl;
+		Logger::Log(e.what (), constants::LogError);
 		system ("PAUSE");
 		return 1;
 	}
 
-	//
-
-	/*
-	try{
-		GraphManager::setDbName();
-	}
-	catch (const std::exception &e )
-	{
-		cerr << e.what();
-		system ("PAUSE");
-		return EXIT_FAILURE;
-	}
-
-	GraphManager& software = GraphManager::openManager();
-	*/
-
+	cout<<endl<<endl;
 	system ("PAUSE");
 
 	return EXIT_SUCCESS;

@@ -28,6 +28,7 @@
 *.app
 
 #Junk & DB
+*.sdf
 *.log
 *.1.tlog
 *.*.1.tlog

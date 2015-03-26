@@ -31,7 +31,3 @@ void ShapeLearner::openDatabase() throw(ShapeLearnerExcept) {
 void ShapeLearner::closeDatabase() throw(ShapeLearnerExcept) {
 	GraphManager::UserInterface::closeDatabase();
 }
-
-void ShapeLearner::test () throw(ShapeLearnerExcept) {
-	GraphManager::UserInterface::test();
-}

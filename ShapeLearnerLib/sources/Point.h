@@ -40,13 +40,13 @@ public:
 	unsigned long getKey() const {return idPoint;}
 
 	double getxCoord() const {return xCoord;}
-	void setxCoord(const unsigned int _xCoord);
+	void setxCoord(const double _xCoord);
 
 	double getyCoord() const {return yCoord;}
-	void setyCoord(const unsigned int _yCoord);
+	void setyCoord(const double _yCoord);
 
 	double getRadius() const {return radius;}
-	void setRadius(const unsigned int _radius);
+	void setRadius(const double _radius);
 
 	boost::weak_ptr<Node> getParentNode();
 	boost::weak_ptr<Graph> getParentGraph();

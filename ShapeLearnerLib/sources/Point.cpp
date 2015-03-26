@@ -29,22 +29,20 @@ refNode(_refNode),
 idPoint(0)
 {
 	idPoint = saveInDB();
-	#ifdef _VERBOSE_
-		cout << "Point key : "+ to_string((_ULonglong)getKey()) <<endl;
-	#endif
+	Logger::Log("New Object Instanciated : Point("+ to_string((_ULonglong)getKey())+")");
 }
 
-void Point::setxCoord(const unsigned int _xCoord){
+void Point::setxCoord(const double _xCoord){
 	xCoord = _xCoord;
 	updateInDB();
 }
 
-void Point::setyCoord(const unsigned int _yCoord){
+void Point::setyCoord(const double _yCoord){
 	yCoord = _yCoord;
 	updateInDB();
 }
 
-void Point::setRadius(const unsigned int _radius){
+void Point::setRadius(const double _radius){
 	radius = _radius;
 	updateInDB();
 }

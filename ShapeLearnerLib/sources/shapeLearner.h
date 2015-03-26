@@ -32,7 +32,6 @@ class ShapeLearner
 		static void getDbCredentials(const bool dbInit = false) throw(ShapeLearnerExcept);
 		static void openDatabase() throw(ShapeLearnerExcept);
 		static void closeDatabase() throw(ShapeLearnerExcept);
-		static void test () throw(ShapeLearnerExcept);
 
 	private:
 

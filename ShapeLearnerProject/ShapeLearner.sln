@@ -2,11 +2,13 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DAGMatcherLib", "..\DAGMatcherLib\DAGMatcherLib.vcxproj", "{9F1B0DEA-0C33-453A-9A2A-E680987E965C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{89F3B40F-D0FF-3276-30F8-094B420403FC} = {89F3B40F-D0FF-3276-30F8-094B420403FC}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerUser", "..\ShapeLearnerUser\ShapeLearnerUser.vcxproj", "{7AA676E5-64C1-4F14-A979-B11B986CCEA7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AEEB1341-A0D6-4B46-A0D5-41B861095A6C} = {AEEB1341-A0D6-4B46-A0D5-41B861095A6C}
-		{9F1B0DEA-0C33-453A-9A2A-E680987E965C} = {9F1B0DEA-0C33-453A-9A2A-E680987E965C}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerLib", "..\ShapeLearnerLib\ShapeLearnerLib.vcxproj", "{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}"
@@ -15,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapeLearnerLib", "..\Shape
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "..\testProject\test\test.vcxproj", "{B668DEA6-CACD-43C4-98E0-D1B32F35515C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CLogger", "..\Logger\logger.vcxproj", "{89F3B40F-D0FF-3276-30F8-094B420403FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +42,10 @@ Global
 		{B668DEA6-CACD-43C4-98E0-D1B32F35515C}.Debug|Win32.Build.0 = Debug|Win32
 		{B668DEA6-CACD-43C4-98E0-D1B32F35515C}.Release|Win32.ActiveCfg = Release|Win32
 		{B668DEA6-CACD-43C4-98E0-D1B32F35515C}.Release|Win32.Build.0 = Release|Win32
+		{89F3B40F-D0FF-3276-30F8-094B420403FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{89F3B40F-D0FF-3276-30F8-094B420403FC}.Debug|Win32.Build.0 = Debug|Win32
+		{89F3B40F-D0FF-3276-30F8-094B420403FC}.Release|Win32.ActiveCfg = Release|Win32
+		{89F3B40F-D0FF-3276-30F8-094B420403FC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

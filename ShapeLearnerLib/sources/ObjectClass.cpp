@@ -22,9 +22,7 @@ using namespace std;
 
 ObjectClass::ObjectClass(string name) : objectClassName(name) {
 	GraphManager::ObjectInterface::saveObject(*this);
-	#ifdef _VERBOSE_
-		cout << "ObjectClass key : "+ getKey() <<endl;
-	#endif
+	Logger::Log("New Object Instanciated : ObjectClass("+ getKey()+")");
 }
 
 void ObjectClass::updateInDB(){

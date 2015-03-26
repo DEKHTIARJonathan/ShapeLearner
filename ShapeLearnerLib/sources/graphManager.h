@@ -45,7 +45,6 @@ class GraphManager
 				static void getDbCredentials(const bool dbInit = false) throw(ShapeLearnerExcept);
 				static void openDatabase() throw(ShapeLearnerExcept);
 				static void closeDatabase() throw(ShapeLearnerExcept);
-				static void test () throw(ShapeLearnerExcept);
 		};
 
 		class ObjectInterface {
@@ -67,7 +66,7 @@ class GraphManager
 				if (rslt != 0)
 					return rslt;
 				else
-					throw ShapeLearnerExcept("GraphManager::saveObject // ID", "Error : Saving operation Failed.");
+					throw ShapeLearnerExcept((string)__FUNCTION__ +" // Key : Unsigned Long", "Error : Saving operation Failed.");
 			}
 
 			template <class T> static bool updateObject(T& obj) throw (ShapeLearnerExcept){ return DatabaseManager::Interface::updateObject(obj); }
@@ -100,22 +99,21 @@ class GraphManager
 
 			/* ************** Setters *********************/
 			static boost::weak_ptr<Point>			getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph, const double _xCoord = 0, const double _yCoord = 0, const double _radius = 1);
-			static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned int _index = 1, const unsigned int _level = 1, const unsigned int _mass = 1, const unsigned int _type = 1, const string _label = "1");
-			static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned int _weight = 1);
-			static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned int _viewNumber = 1);
+			static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned long _index = 1, const unsigned long _level = 1, const unsigned long _mass = 1, const unsigned long _type = 1, const string _label = "1");
+			static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight = 1);
+			static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned long _viewNumber = 1);
 
 			/* ************** Deleters ********************/
 			template <class T> static bool deleteObject(boost::weak_ptr<T> obj, bool deleteOnDB) throw (ShapeLearnerExcept){ 
 				bool rslt = true;
 				boost::shared_ptr<T> keepAlive;
 				if(obj.expired())
-					throw ShapeLearnerExcept("GraphManager::CommonInterface::deleteObject", "Error : The object doesn't exist anymore.");
+					throw ShapeLearnerExcept((string)__FUNCTION__, "Error : The object doesn't exist anymore.");
 				else
 					keepAlive.swap(obj.lock()); // We ensure that we keep an alive version of the object.
 
 				if(deleteOnDB)
 					rslt &= DatabaseManager::Interface::deleteObject(keepAlive);
-					//rslt &= deleteDbObject(keepAlive);
 
 				rslt &= removeObjectFromMap(keepAlive, deleteOnDB); // If deletonOnDB == false => Desinstanciate, keep in DBn, no cascade delete // deletonOnDB == true => Delete from DB & Central Memory
 
@@ -139,9 +137,6 @@ class GraphManager
 		/*! \brief dbHost : Adresse IP ou Hostname du serveur de BDD (localhost par défaut). */
 		static string dbHost;
 
-		/*! \brief dbType : Type de la base de données. Valeur de 1 à 3 => Voir constants.cpp */
-		static unsigned int dbType;
-
 		/*! \brief dbInit : Doit on initialiser la base de données ? */
 		static string dbInitFile;
 
@@ -159,7 +154,6 @@ class GraphManager
 		static void setDbUser() throw(ShapeLearnerExcept);
 		static void setDbPass() throw(ShapeLearnerExcept);
 		static void setDbHost() throw(ShapeLearnerExcept);
-		static void setDbType() throw(ShapeLearnerExcept);
 		static void setDbPort() throw(ShapeLearnerExcept);
 		static void setDBInitFile() throw(ShapeLearnerExcept);
 
@@ -168,7 +162,7 @@ class GraphManager
 		template<class T> static string saveObjectString(T& obj) throw(ShapeLearnerExcept) {
 			string rslt = DatabaseManager::Interface::saveObject(obj);
 			if(!rslt.compare("")){ // Is Equal
-				throw ShapeLearnerExcept("GraphManager::saveObjectString // String", "Error : Saving operation Failed.");
+				throw ShapeLearnerExcept((string)__FUNCTION__, "Error : Saving operation Failed.");
 			}
 			else
 				return rslt;
@@ -184,6 +178,7 @@ class GraphManager
 		static bool removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade = false) throw (ShapeLearnerExcept);
 		static bool removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascade = false) throw (ShapeLearnerExcept);
 		static bool removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool cascade = false) throw (ShapeLearnerExcept);
+		
 		/* **************  No instanciation *********************/
 
 		/*!

@@ -22,9 +22,7 @@ using namespace std;
 
 GraphClass::GraphClass(string name, bool isDirect, bool isAcyclic) : graphClassName(name), directGraph(isDirect), acyclicGraph(isAcyclic) {
 	saveInDB();
-	#ifdef _VERBOSE_
-		cout << "GraphClass key : "+ getKey() <<endl;
-	#endif
+	Logger::Log("New Object Instanciated : GraphClass("+ getKey()+")");
 }
 
 void GraphClass::setIsDirect(const bool _directGraph){

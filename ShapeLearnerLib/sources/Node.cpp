@@ -30,9 +30,7 @@ Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index, unsigned long
 	idNode(0)
 	{
 		idNode = saveInDB();
-		#ifdef _VERBOSE_
-			cout << "Node key : "+ to_string((_ULonglong)getKey()) <<endl;
-		#endif
+		Logger::Log("New Object Instanciated : Node("+ to_string((_ULonglong)getKey())+")");
 	}
 
 

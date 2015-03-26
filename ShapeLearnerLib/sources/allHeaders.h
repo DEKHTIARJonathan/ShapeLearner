@@ -20,9 +20,6 @@
 #ifndef _ALL_HEADERS_
 #define _ALL_HEADERS_
 
-#define _TRACER_ // Print all DB Requests
-#define _VERBOSE_ // Print all instanciations with Key
-
 // tell the compiler to shut up
 //#pragma warning(disable:4786)
 
@@ -46,6 +43,8 @@
 #include <memory>
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/filesystem.hpp>
+#include "CLogger.h"
 
 //#include <ppl.h>
 

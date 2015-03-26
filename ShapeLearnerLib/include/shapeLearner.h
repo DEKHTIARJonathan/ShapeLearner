@@ -20,6 +20,9 @@
 #ifndef _SHAPE_LEARNER_H_
 #define _SHAPE_LEARNER_H_
 
+#include "CLogger.h"
+#include "constants.h"
+
 using namespace std;
 
 class ShapeLearnerExcept; //Forward Declaration of the class contained in shapeLearnerException.h

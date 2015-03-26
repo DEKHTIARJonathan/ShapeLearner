@@ -30,7 +30,6 @@ string GraphManager::dbPass = "postgres";
 unsigned int GraphManager::dbPort = 5432;
 string GraphManager::dbHost = "localhost";
 string GraphManager::dbInitFile = "sources/structure.sql";
-unsigned int GraphManager::dbType = constants::DB_PGSQL;
 
 /* *******************************************************************
 *                             Object MAPS                            *
@@ -48,7 +47,7 @@ map<string, boost::shared_ptr<GraphClass>>		GraphManager::GraphClassMap;
 ******************************************************************* */
 
 void GraphManager::UserInterface::openDatabase() {
-	DatabaseManager::Interface::openDatabase(dbUser, dbPass, dbName, dbHost, dbPort, dbType, dbInitFile);
+	DatabaseManager::Interface::openDatabase(dbUser, dbPass, dbName, dbHost, dbPort, dbInitFile);
 }
 
 void GraphManager::UserInterface::closeDatabase() throw(ShapeLearnerExcept) {
@@ -57,7 +56,7 @@ void GraphManager::UserInterface::closeDatabase() throw(ShapeLearnerExcept) {
 
 void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(ShapeLearnerExcept){
 	if (DatabaseManager::Interface::isDbOpen()){
-		throw ShapeLearnerExcept("GraphManager::UserInterface::getDbCredentials", "Error : The Database has already been instantiated. It's impossible to modify the Database's parameters");
+		throw ShapeLearnerExcept((string)__FUNCTION__, "Error : The Database has already been instantiated. It's impossible to modify the Database's parameters");
 	}
 	else{
 		if (dbInit)
@@ -65,7 +64,6 @@ void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(Shap
 		else
 			dbInitFile = "";
 		#ifndef _DEBUG
-		setDbType();
 		setDbHost();
 		setDbPort();
 		setDbName();
@@ -73,51 +71,6 @@ void GraphManager::UserInterface::getDbCredentials(const bool dbInit) throw(Shap
 		setDbPass();
 		#endif
 	}
-}
-
-void GraphManager::UserInterface::test() throw(ShapeLearnerExcept){
-		/*	
-		boost::weak_ptr<ObjectClass> OC1 ( CommonInterface::getObjectClass("Rod"));
-		boost::weak_ptr<ObjectClass> OC2 ( CommonInterface::getObjectClass("Piston"));
-		boost::weak_ptr<ObjectClass> OC3 ( CommonInterface::getObjectClass("Vilebrequin"));
-
-		boost::weak_ptr<GraphClass> GC1 ( CommonInterface::getGraphClass("Shock Graph", true, false));
-		boost::weak_ptr<GraphClass> GC2 ( CommonInterface::getGraphClass("Reeb Graph", true, false));
-		boost::weak_ptr<GraphClass> GC3 ( CommonInterface::getGraphClass("SmoothGraph", false, true));
-		
-		boost::weak_ptr<Graph> GR1 (CommonInterface::getGraph(1));
-		boost::weak_ptr<Graph> GR2 (CommonInterface::getGraph(2));
-
-		boost::weak_ptr<Node> ND1 (CommonInterface::getNode(1));
-		boost::weak_ptr<Node> ND2 (CommonInterface::getNode(2));
-
-		boost::weak_ptr<Edge> ED1 (CommonInterface::getEdge(1));
-		boost::weak_ptr<Edge> ED2 (CommonInterface::getEdge(2));
-
-		boost::weak_ptr<Point> PT1 (CommonInterface::getPoint(3));
-		boost::weak_ptr<Point> PT2 (CommonInterface::getPoint(2));
-		
-  		system("pause");
-		*/
-		boost::weak_ptr<GraphClass> GC3 ( CommonInterface::getGraphClass("SmoothGraph", false, true));
-		vector <unsigned long> rslt1 = GC3.lock()->getGraphs();
-
-		boost::weak_ptr<ObjectClass> OC1 ( CommonInterface::getObjectClass("Rod"));
-		vector <unsigned long> rslt2 = OC1.lock()->getGraphs();
-
-		boost::weak_ptr<Graph> GR1 (CommonInterface::getGraph(1));
-		vector <unsigned long> rslt3 = GR1.lock()->getEdges();
-		vector <unsigned long> rslt4 = GR1.lock()->getNodes();
-		vector <unsigned long> rslt5 = GR1.lock()->getPoints();
-
-		boost::weak_ptr<Node> ND1 (CommonInterface::getNode(1));
-		vector <unsigned long> rslt6 = ND1.lock()->getPoints();
-		vector <unsigned long> rslt7 = ND1.lock()->getEdgesBySource();
-		vector <unsigned long> rslt8 = ND1.lock()->getEdgesByTarget();
-		vector <unsigned long> rslt9 = ND1.lock()->getEdges();
-
-		CommonInterface::deleteObject(OC1,true);
-
 }
 
 /* *******************************************************************
@@ -131,7 +84,7 @@ boost::weak_ptr<Point> GraphManager::CommonInterface::getPoint(const unsigned lo
 	else{
 		boost::shared_ptr<Point> tmp (loadObject<Point> (keyDB));
 		if (!tmp)
-			throw ShapeLearnerExcept("GraphManager::CommonInterface::getPoint(const unsigned long  keyDB)", "Error : The Point referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+			throw ShapeLearnerExcept((string)__FUNCTION__+"(const unsigned long  keyDB)", "Error : The Point referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
 		PointMap.insert(pair<unsigned long, boost::shared_ptr<Point>>(keyDB,tmp));
 		return boost::weak_ptr<Point>(tmp);
 	}
@@ -149,12 +102,12 @@ boost::weak_ptr<Node> GraphManager::CommonInterface::getNode(const unsigned long
 	else{
 		boost::shared_ptr<Node> tmp (loadObject<Node> (keyDB));
 		if (!tmp)
-			throw ShapeLearnerExcept("GraphManager::CommonInterface::getNode(const unsigned long keyDB)", "Error : The Node referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+			throw ShapeLearnerExcept((string)__FUNCTION__+"(const unsigned long keyDB)", "Error : The Node referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
 		NodeMap.insert(pair<unsigned long , boost::shared_ptr<Node>>(keyDB,tmp));
 		return boost::weak_ptr<Node>(tmp);
 	}
 }
-boost::weak_ptr<Node> GraphManager::CommonInterface::getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned int _index, const unsigned int _level, const unsigned int _mass, const unsigned int _type, const string _label){
+boost::weak_ptr<Node> GraphManager::CommonInterface::getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned long _index, const unsigned long _level, const unsigned long _mass, const unsigned long _type, const string _label){
 	boost::shared_ptr<Node> tmp (Node::Access::createNode(_refGraph, _index, _level, _mass, _type, _label));
 	NodeMap.insert(pair<unsigned long, boost::shared_ptr<Node>>(tmp->getKey(), tmp));
 	return boost::weak_ptr<Node>(tmp);
@@ -167,12 +120,12 @@ boost::weak_ptr<Edge> GraphManager::CommonInterface::getEdge(const unsigned long
 	else{
 		boost::shared_ptr<Edge> tmp (loadObject<Edge> (keyDB));
 		if (!tmp)
-			throw ShapeLearnerExcept("GraphManager::CommonInterface::getEdge(const unsigned long keyDB)", "Error : The Edge referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+			throw ShapeLearnerExcept((string)__FUNCTION__+"(const unsigned long keyDB)", "Error : The Edge referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
 		EdgeMap.insert(pair<unsigned long, boost::shared_ptr<Edge>>(keyDB,tmp));
 		return boost::weak_ptr<Edge>(tmp);
 	}
 }
-boost::weak_ptr<Edge> GraphManager::CommonInterface::getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned int _weight){
+boost::weak_ptr<Edge> GraphManager::CommonInterface::getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight){
 	boost::shared_ptr<Edge> tmp (Edge::Access::createEdge(_source, _target, _refGraph, _weight));
 	EdgeMap.insert(pair<unsigned long, boost::shared_ptr<Edge>>(tmp->getKey(), tmp));
 	return boost::weak_ptr<Edge>(tmp);
@@ -185,12 +138,12 @@ boost::weak_ptr<Graph> GraphManager::CommonInterface::getGraph(const unsigned lo
 	else{
 		boost::shared_ptr<Graph> tmp (loadObject<Graph> (keyDB));
 		if (!tmp)
-			throw ShapeLearnerExcept("GraphManager::CommonInterface::getGraph(const unsigned long keyDB)", "Error : The Graph referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+			throw ShapeLearnerExcept((string)__FUNCTION__+"(const unsigned long keyDB)", "Error : The Graph referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
 		GraphMap.insert(pair<unsigned long, boost::shared_ptr<Graph>>(keyDB,tmp));
 		return boost::weak_ptr<Graph>(tmp);
 	}
 }
-boost::weak_ptr<Graph> GraphManager::CommonInterface::getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned int _viewNumber){
+boost::weak_ptr<Graph> GraphManager::CommonInterface::getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned long _viewNumber){
 	boost::shared_ptr<Graph> tmp (Graph::Access::createGraph(_graphClass, _objectClass, _objectName, _viewNumber));
 	GraphMap.insert(pair<unsigned long, boost::shared_ptr<Graph>>(tmp->getKey(), tmp));
 	return boost::weak_ptr<Graph>(tmp);
@@ -226,35 +179,8 @@ boost::weak_ptr<ObjectClass> GraphManager::CommonInterface::getObjectClass(const
 *                          Private FUNCTIONS                         *
  ********************************************************************/
 
-void GraphManager::setDbType() throw(ShapeLearnerExcept){
-	string tmp;
-
-	do{
-		cout << "PostgreSQL : 1 // MySQL : 2 // Oracle : 3"<<endl;
-		cout << "What type of database would you like to use : ";
-
-		getline( std::cin, tmp );
-	}while (stoul(tmp) < 1 ||  stoul(tmp) > 3);
-
-	dbType = stoul(tmp);
-
-	switch(dbType)
-	{
-		case constants::DB_MYSQL :
-			dbPort = 3306;
-			break;
-		case constants::DB_PGSQL :
-			dbPort = 5432;
-			break;
-		case constants::DB_ORACLE :
-			dbPort = 1521;
-			break;
-	}
-}
-
 void GraphManager::setDbPort() throw(ShapeLearnerExcept){
 	string tmp;
-
 	do{
 		cout << "Please enter the listening port of your database server [DEFAULT = "+ std::to_string((_ULonglong)dbPort) +"] : ";
 		getline( std::cin, tmp );
@@ -267,10 +193,9 @@ void GraphManager::setDbPort() throw(ShapeLearnerExcept){
 
 void GraphManager::setDbName() throw(ShapeLearnerExcept){
 	string tmp;
-
 	do{
-			cout << "Please enter the name of your database : ";
-			getline( std::cin, tmp );
+		cout << "Please enter the name of your database : ";
+		getline( std::cin, tmp );
 	}while (tmp.empty());
 
 	if(!tmp.empty())
@@ -279,7 +204,6 @@ void GraphManager::setDbName() throw(ShapeLearnerExcept){
 
 void GraphManager::setDbUser() throw(ShapeLearnerExcept){
 	string tmp;
-
 	do{
 		cout << "Please enter your username : ";
 		getline( std::cin, tmp );
@@ -291,7 +215,6 @@ void GraphManager::setDbUser() throw(ShapeLearnerExcept){
 
 void GraphManager::setDbPass() throw(ShapeLearnerExcept){
 	string tmp;
-
 	cout << "Please enter your password : ";
 	getline( std::cin, tmp );
 
@@ -301,7 +224,6 @@ void GraphManager::setDbPass() throw(ShapeLearnerExcept){
 
 void GraphManager::setDbHost() throw(ShapeLearnerExcept){
 	string tmp;
-
 	cout << "Please enter the IP address of your database server [DEFAULT = "+ dbHost +"] : ";
 	getline( std::cin, tmp );
 
@@ -324,7 +246,7 @@ bool GraphManager::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascad
 	bool rslt = true;
 
 	if(rslt &= !!PointMap.erase(obj->getKey()), !rslt)
-		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+		throw ShapeLearnerExcept((string)__FUNCTION__+"(boost::shared_ptr<Point> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
 
 	return rslt;
 }
@@ -333,7 +255,7 @@ bool GraphManager::removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade
 	bool rslt = true;
 
 	if(rslt &= !!EdgeMap.erase(obj->getKey()), !rslt)
-		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+		throw ShapeLearnerExcept((string)__FUNCTION__+"(boost::shared_ptr<Edge> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
 
 	return rslt;
 }
@@ -342,7 +264,7 @@ bool GraphManager::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade
 	bool rslt = true;
 
 	if(rslt &= !!NodeMap.erase(obj->getKey()), !rslt)
-		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+		throw ShapeLearnerExcept((string)__FUNCTION__+"(boost::shared_ptr<Node> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
 
 	if(cascade){
 
@@ -372,7 +294,7 @@ bool GraphManager::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascad
 	bool rslt = true;
 
 	if(rslt &= !!GraphMap.erase(obj->getKey()), !rslt)
-		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+		throw ShapeLearnerExcept((string)__FUNCTION__+"(boost::shared_ptr<Graph> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
 
 	if(cascade){
 
@@ -410,7 +332,7 @@ bool GraphManager::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool c
 	bool rslt = true;
 
 	if(rslt &= !!GraphClassMap.erase(obj->getKey()), !rslt)
-		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
+		throw ShapeLearnerExcept((string)__FUNCTION__+"(boost::shared_ptr<GraphClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
 
 	if(cascade){
 		/**************** Graph Cascade Deleting ****************/
@@ -430,7 +352,7 @@ bool GraphManager::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool 
 	bool rslt = true;
 
 	if(rslt &= !!ObjectClassMap.erase(obj->getKey()), !rslt)
-		throw ShapeLearnerExcept("GraphManager::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
+		throw ShapeLearnerExcept((string)__FUNCTION__+"(boost::shared_ptr<ObjectClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
 
 	if(cascade){
 		/**************** Graph Cascade Deleting ****************/

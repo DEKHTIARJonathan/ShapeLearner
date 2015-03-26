@@ -20,7 +20,10 @@
 #ifndef _SHAPE_LEARNER_EXCEPTION_
 #define _SHAPE_LEARNER_EXCEPTION_
 
-#include "allHeaders.h"
+#include <string>
+#include <iostream>
+#include <exception>
+
 using namespace std;
 
 class ShapeLearnerExcept : public std::exception

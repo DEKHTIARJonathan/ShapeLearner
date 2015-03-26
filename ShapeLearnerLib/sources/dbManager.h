@@ -55,9 +55,8 @@ class DatabaseManager
 				*	\param dbPass : Mot de passe de la base de données
 				*	\param dbHost : Adresse du serveur de BDD.
 				*	\param dbPort : Port du serveur de BDD.
-				*	\param dbType : Type de base de données (voir constants.h)
 				*/
-				static void openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort , const unsigned int& dbType, const string& dbInit = "") throw(ShapeLearnerExcept);
+				static void openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int& dbPort, const string& dbInit = "") throw(ShapeLearnerExcept);
 
 				/*!
 				*  \brief Méthode static détruisant la base de données
@@ -71,9 +70,6 @@ class DatabaseManager
 					transaction t1 (database->begin ());
 					try
 					{
-						#ifdef _TRACER_
-							t1.tracer (stderr_tracer);
-						#endif
 						database->update (obj);
 						t1.commit ();
 						return true;
@@ -82,12 +78,9 @@ class DatabaseManager
 					{
 						t1.rollback();
 						transaction t2 (database->begin ());
-						#ifdef _TRACER_
-							t2.tracer (stderr_tracer);
-						#endif
 						database->load (obj.getKey(), obj);
 						t2.commit ();
-						throw ShapeLearnerExcept ("DatabaseManager::Interface::updateObject", "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = " + e.what());
+						throw ShapeLearnerExcept ((string)__FUNCTION__, "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = " + e.what());
 						return false;
 					}
 					
@@ -96,37 +89,29 @@ class DatabaseManager
 				template <class T> static boost::shared_ptr<T> loadObject(string keyDB) throw (ShapeLearnerExcept){
 					transaction t (database->begin ());
 					try{
-						#ifdef _TRACER_
-							t.tracer (stderr_tracer);
-						#endif
 						boost::shared_ptr<T> rslt (database->load<T>(keyDB));
 						t.commit ();
 
 						return rslt;
 					}
-					catch(const std::exception& e){
+					catch(...){
 						t.rollback();
-						throw ShapeLearnerExcept("DatabaseManager::Interface::loadObject", "Unable to perform operation // Key Requested : "+ keyDB +" Error = "+ boost::lexical_cast<std::string>(e.what()));
 						return boost::shared_ptr<T>();
 					}
 				}
 
-				template <class T> static boost::shared_ptr<T> loadObject(int keyDB) throw (ShapeLearnerExcept){
+				template <class T> static boost::shared_ptr<T> loadObject(unsigned long keyDB) throw (ShapeLearnerExcept){
 					transaction t (database->begin ());
 					try
 					{
-						#ifdef _TRACER_
-							t.tracer (stderr_tracer);
-						#endif
 						boost::shared_ptr<T> rslt (database->load<T> (keyDB));
 						t.commit ();
 
 						return rslt;
 					}
-					catch (const std::exception& e)
+					catch (...)
 					{
 						t.rollback();
-						throw ShapeLearnerExcept ("DatabaseManager::Interface::loadObject", "Unable to load object // Error = "+ string(e.what()));
 						return boost::shared_ptr<T>();
 					}
 				}
@@ -136,10 +121,6 @@ class DatabaseManager
 					try {
 						typedef odb::query<T> query;
 						typedef odb::result<T> result;
-					
-						#ifdef _TRACER_
-							t.tracer (stderr_tracer);
-						#endif
 
 						result r (database->query<T> ("'"+boost::lexical_cast<std::string>(foreignKey)+"'"));
 
@@ -154,7 +135,7 @@ class DatabaseManager
 					}
 					catch(const std::exception& e){
 						t.rollback();
-						throw ShapeLearnerExcept("DatabaseManager::Interface::getForeignRelations", "Unable to perform operation // Error = "+ boost::lexical_cast<std::string>(e.what()));
+						throw ShapeLearnerExcept((string)__FUNCTION__, "Unable to perform operation // Error = "+ boost::lexical_cast<std::string>(e.what()));
 						return vector<unsigned long> ();
 					}
 					
@@ -164,9 +145,6 @@ class DatabaseManager
 				template<class T> static unsigned long saveObject(T& obj) throw(ShapeLearnerExcept){
 					transaction t (database->begin());
 					try{	
-						#ifdef _TRACER_
-							t.tracer (stderr_tracer);
-						#endif
 						unsigned long rslt = database->persist (obj);
 											
 						t.commit ();
@@ -175,7 +153,7 @@ class DatabaseManager
 					}
 					catch (const std::exception& e){
 						t.rollback();
-						throw ShapeLearnerExcept("DatabaseManager::Interface::saveObject // ID", "Unable to save object of class : "+obj.getClassName() + " // Error : "+ e.what());
+						throw ShapeLearnerExcept((string)__FUNCTION__ + " // Key : unsigned Long", "Unable to save object of class : "+obj.getClassName() + " // Error : "+ e.what());
 						return 0;
 					}
 
@@ -191,9 +169,6 @@ class DatabaseManager
 					transaction t (database->begin ());
 					try
 					{
-						#ifdef _TRACER_
-							t.tracer (stderr_tracer);
-						#endif
 						T* ptr = obj.get();
 						database->erase (ptr);
 						t.commit ();
@@ -202,22 +177,20 @@ class DatabaseManager
 					catch (const std::exception& e)
 					{
 						t.rollback();
-						throw ShapeLearnerExcept ("DatabaseManager::Interface::deleteObject", "Unable to delete object of class : "+ obj->getClassName() +". // Error = "+ e.what());
+						throw ShapeLearnerExcept ((string)__FUNCTION__, "Unable to delete object of class : "+ obj->getClassName() +". // Error = "+ e.what());
 						return false;
 					}	
 				}
 
 				/* *************** Query DB **********************/
 				static unsigned long getPointCountInNode (const unsigned long idNode) throw (ShapeLearnerExcept);
-
-				static void test () throw (ShapeLearnerExcept);
 		};
 
 	private:
 
 		/* ****************** Attributs ********************/
-		static odb::database* database;
-		static const unsigned int dbType; // Contient le type de BDD => Voir constants.h
+		static odb::pgsql::database* database;
+		static appTracer appliTracer;
 
 		/* **************** DB Requests ********************/
 
@@ -253,9 +226,6 @@ class DatabaseManager
 		static string saveObjectString(T& obj){
 			transaction t (database->begin());
 			try{
-				#ifdef _TRACER_
-					t.tracer (stderr_tracer);
-				#endif
 				string rslt = database->persist(obj);
 				t.commit ();
 
@@ -263,7 +233,7 @@ class DatabaseManager
 			}
 			catch (const std::exception& e){
 				t.rollback();
-				throw ShapeLearnerExcept("DatabaseManager::saveObjectString // String", "Unable to save object : "+obj.getKey()+" // Class : "+obj.getClassName() + "// Error : "+ e.what());
+				throw ShapeLearnerExcept((string)__FUNCTION__, "Unable to save object : "+obj.getKey()+" // Class : "+obj.getClassName() + "// Error : "+ e.what());
 				return "";
 			}
 			

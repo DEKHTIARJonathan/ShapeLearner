@@ -34,14 +34,10 @@ bool DatabaseManager::query(const string &query) throw(ShapeLearnerExcept)
 		transaction t (database->begin ());
 		try
 		{
-			#ifdef _TRACER_
-				t.tracer (stderr_tracer);
-			#endif
-
 			if (database->execute(query) != 0 ) // == 0 Successful.
 			{
 				t.rollback();
-				throw ShapeLearnerExcept("DatabaseManager::query", query);
+				throw ShapeLearnerExcept((string)__FUNCTION__, query);
 				break;
 			}
 			else
@@ -55,7 +51,7 @@ bool DatabaseManager::query(const string &query) throw(ShapeLearnerExcept)
 		{
 			if (retry_count > constants::MAX_DB_RETRY){
 				t.rollback();
-				throw ShapeLearnerExcept("DatabaseManager::query", "Retry Limit exceeded" + (string)e.what());
+				throw ShapeLearnerExcept((string)__FUNCTION__, "Retry Limit exceeded" + (string)e.what());
 			}
 			else
 				continue;
@@ -111,7 +107,7 @@ string DatabaseManager::get_file_contents(const string& filename) throw(ShapeLea
 		unsigned int maxSizeError = 1500;
 		char error[1500];
 		strerror_s(error, maxSizeError, errno);
-		throw ShapeLearnerExcept("DatabaseManager::get_file_contents", error);
+		throw ShapeLearnerExcept((string)__FUNCTION__, error);
 	}
 }
 
@@ -119,28 +115,19 @@ string DatabaseManager::get_file_contents(const string& filename) throw(ShapeLea
 *                         Database Handling                          *
  ********************************************************************/
 
-odb::database* DatabaseManager::database = NULL;
+odb::pgsql::database* DatabaseManager::database = NULL;
+appTracer DatabaseManager::appliTracer;
 
-void DatabaseManager::Interface::openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort , const unsigned int& dbType, const string& dbInit) throw(ShapeLearnerExcept){
+void DatabaseManager::Interface::openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort, const string& dbInit) throw(ShapeLearnerExcept){
 	if( database == NULL ){
-		switch(dbType)
-		{
-			case constants::DB_MYSQL :
-				database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
-				break;
-			case constants::DB_PGSQL :
-				database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
-				break;
-			case constants::DB_ORACLE :
-				database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
-				break;
-		}
-
+		database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
+		database->tracer(appliTracer);
+		
 		if (dbInit.compare("") && !initDB(dbInit))
-			throw ShapeLearnerExcept("DatabaseManager::DatabaseManager","Erreur lors de l'initialisation de la BDD");
+			throw ShapeLearnerExcept((string)__FUNCTION__,"Erreur lors de l'initialisation de la BDD");
 	}
 	else
-		throw ShapeLearnerExcept("DatabaseManager::Interface::openDatabase", "Database already opened");
+		throw ShapeLearnerExcept((string)__FUNCTION__, "Database already opened");
 }
 
 void DatabaseManager::Interface::closeDatabase() throw(ShapeLearnerExcept){
@@ -149,7 +136,7 @@ void DatabaseManager::Interface::closeDatabase() throw(ShapeLearnerExcept){
 		database = NULL;
 	}
 	else
-		throw ShapeLearnerExcept("DatabaseManager::Interface::disconnectDB", "Database already closed");
+		throw ShapeLearnerExcept((string)__FUNCTION__, "Database already closed");
 }
 
 bool DatabaseManager::Interface::isDbOpen() {
@@ -159,17 +146,10 @@ bool DatabaseManager::Interface::isDbOpen() {
 		return true;
 }
 
-void DatabaseManager::Interface::test () throw (ShapeLearnerExcept){
-}
-
 unsigned long DatabaseManager::Interface::getPointCountInNode (const unsigned long idNode) throw (ShapeLearnerExcept){
 	transaction t (database->begin());
 	try{
 		typedef odb::query<pointsInNode> query;
-
-		#ifdef _TRACER_
-			t.tracer (stderr_tracer);
-		#endif
 
 		pointsInNode rslt (database->query_value<pointsInNode> (query::refNode == idNode));
 
@@ -180,7 +160,7 @@ unsigned long DatabaseManager::Interface::getPointCountInNode (const unsigned lo
 	catch (const std::exception& e)
 	{
 		t.rollback();
-		throw ShapeLearnerExcept (" DatabaseManager::Interface::getPointCountInNode", "Unable to count Points in Node // Error = "+ boost::lexical_cast<std::string>(e.what()));
+		throw ShapeLearnerExcept ((string)__FUNCTION__, "Unable to count Points in Node // Error = "+ boost::lexical_cast<std::string>(e.what()));
 		return 0;
 	}
 }

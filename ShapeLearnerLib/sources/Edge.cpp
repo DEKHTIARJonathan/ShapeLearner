@@ -28,9 +28,7 @@ Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::
 	idEdge(0)
 	{
 		idEdge = saveInDB();
-		#ifdef _VERBOSE_
-			cout << "Edge key : "+ to_string((_ULonglong)getKey()) <<endl;
-		#endif;
+		Logger::Log("New Object Instanciated : Edge("+ to_string((_ULonglong)getKey())+")");
 	}
 
 void Edge::setWeight(const unsigned long _weight) {

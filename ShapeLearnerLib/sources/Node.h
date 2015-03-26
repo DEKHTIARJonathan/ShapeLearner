@@ -25,7 +25,7 @@ using namespace std;
 
 class Graph; //Forward Declaration of the class contained in Graph.h
 class GraphManager; // Forward Declaration of the class contained in graphManager.h
-class Point;
+class Point; //Forward Declaration of the class contained in Point.h
 
 class Node
 {

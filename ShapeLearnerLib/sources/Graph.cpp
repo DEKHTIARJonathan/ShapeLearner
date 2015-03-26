@@ -28,9 +28,7 @@ Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectCl
 	idGraph(0)
 	{
 		idGraph = saveInDB();
-		#ifdef _VERBOSE_
-			cout << "Graph key : "+ to_string((_ULonglong)getKey()) <<endl;
-		#endif
+		Logger::Log("New Object Instanciated : Graph key("+ to_string((_ULonglong)getKey())+")");
 	}
 
 void Graph::setObjectName(const string& _objectName) {

@@ -74,11 +74,11 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>"$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib";"$(ProjectDir)..\ShapeLearnerLib\$(Configuration)\ShapeLearnerLib.lib";"C:\tools\libodb-2.4.0\lib\odb-d.lib";"C:\tools\libodb-pgsql-2.4.0\lib\odb-pgsql-d.lib";%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\Logger\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\DAGMatcherLib\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\boost;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\odb</AdditionalLibraryDirectories>
       <LinkStatus>true</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>DAGMatcherLib-d.lib;ShapeLearnerLib-d.lib;odb-d.lib;odb-pgsql-d.lib;CLogger-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -101,11 +101,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>"$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib";"$(ProjectDir)..\ShapeLearnerLib\$(Configuration)\ShapeLearnerLib.lib";"C:\tools\libodb-2.4.0\lib\odb.lib";"C:\tools\libodb-pgsql-2.4.0\lib\odb-pgsql.lib";%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\Logger\Release;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\DAGMatcherLib\Release;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Release;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\odb;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\boost;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkStatus>true</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>CLogger.lib;DAGMatcherLib.lib;ShapeLearnerLib.lib;odb.lib;odb-pgsql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

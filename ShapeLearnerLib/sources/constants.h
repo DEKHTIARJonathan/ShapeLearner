@@ -25,9 +25,11 @@ namespace constants{
 
 	const unsigned int		SIZE_MAX_STRING = 255;
 	const unsigned int		MAX_DB_RETRY = 4;
-	const unsigned int		DB_PGSQL = 1;
-	const unsigned int		DB_MYSQL = 2;
-	const unsigned int		DB_ORACLE = 3;
+	const unsigned int		LogDB = 1;
+	const unsigned int		LogCore = 2;
+	const unsigned int		LogApp = 3;
+	const unsigned int		LogError = 4;
+
 }
 
 #endif // CONSTANTS_H
