@@ -49,24 +49,24 @@ void Point::setRadius(const double _radius){
 
 void Point::updateInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		ShapeLearner::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
 unsigned long Point::saveInDB(){
 	#ifdef _MSC_VER
-		return GraphManager::ObjectInterface::saveObject(*this);
+		return ShapeLearner::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }
 
 boost::weak_ptr<Node> Point::getParentNode(){
 	if(refNode.expired())
-		refNode.swap(odb::boost::lazy_weak_ptr<Node>(GraphManager::CommonInterface::getNode(refNode.object_id<Node>())));
+		refNode.swap(odb::boost::lazy_weak_ptr<Node>(ShapeLearner::CommonInterface::getNode(refNode.object_id<Node>())));
 	return refNode.get_eager();	
 }
 
 boost::weak_ptr<Graph> Point::getParentGraph(){
 	if(refGraph.expired())
-		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(GraphManager::CommonInterface::getGraph(refGraph.object_id<Graph>())));
+		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(ShapeLearner::CommonInterface::getGraph(refGraph.object_id<Graph>())));
 	return refGraph.get_eager();	
 }

@@ -37,16 +37,16 @@ void GraphClass::setIsAcyclicGraph(const bool _acyclicGraph){
 
 void GraphClass::updateInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		ShapeLearner::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
 string GraphClass::saveInDB(){
 	#ifdef _MSC_VER
-		return GraphManager::ObjectInterface::saveObject(*this);
+		return ShapeLearner::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }
 
 vector<unsigned long> GraphClass::getGraphs(){
-	return GraphManager::ObjectInterface::getForeignRelations<GraphIdViewByGraphClass>(graphClassName);
+	return ShapeLearner::ObjectInterface::getForeignRelations<GraphIdViewByGraphClass>(graphClassName);
 }

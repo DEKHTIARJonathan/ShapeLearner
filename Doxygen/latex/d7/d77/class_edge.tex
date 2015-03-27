@@ -1,0 +1,146 @@
+\hypertarget{class_edge}{}\section{Edge Class Reference}
+\label{class_edge}\index{Edge@{Edge}}
+
+
+{\ttfamily \#include $<$Edge.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_edge_1_1_access}{Access}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long \hyperlink{class_edge_ab8c30be0af32c0f5860f6fce10d00aa0}{get\+Key} () const 
+\item 
+unsigned long \hyperlink{class_edge_a547927a1b370ba92c588739878007387}{get\+Weight} () const 
+\item 
+void \hyperlink{class_edge_a5cf0bdf3dd6145b94b338a488b2a8862}{set\+Weight} (const unsigned long \+\_\+weight)
+\item 
+string \hyperlink{class_edge_afe354a2942189ee2341f1cf5c09da99d}{get\+Class\+Name} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_edge_a3106b11d60125009dbf7a738ce540fdf}{Edge} ()
+\item 
+\hyperlink{class_edge_a99e32803227c038106639106980435ec}{Edge} (boost\+::weak\+\_\+ptr$<$ \hyperlink{class_node}{Node} $>$ \+\_\+source, boost\+::weak\+\_\+ptr$<$ \hyperlink{class_node}{Node} $>$ \+\_\+target, boost\+::weak\+\_\+ptr$<$ \hyperlink{class_graph}{Graph} $>$ \+\_\+ref\+Graph, unsigned long \+\_\+weight=1)
+\item 
+void \hyperlink{class_edge_a22f735344e146d1db9c4207fdf31235d}{update\+In\+D\+B} ()
+\item 
+unsigned long \hyperlink{class_edge_a64b3d45f279438077d5af17051ddf799}{save\+In\+D\+B} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long \hyperlink{class_edge_a9bf17b3e7e85c981e1eebf7d11d165cf}{id\+Edge}
+\item 
+odb\+::boost\+::lazy\+\_\+weak\+\_\+ptr$<$ \hyperlink{class_node}{Node} $>$ \hyperlink{class_edge_a2f063b6ab27e23afd106e5d706023392}{source}
+\item 
+odb\+::boost\+::lazy\+\_\+weak\+\_\+ptr$<$ \hyperlink{class_node}{Node} $>$ \hyperlink{class_edge_a93b220a32293b3140f0f51c6cbd5ecc2}{target}
+\item 
+odb\+::boost\+::lazy\+\_\+weak\+\_\+ptr$<$ \hyperlink{class_graph}{Graph} $>$ \hyperlink{class_edge_a3413adc0974742c6e82419c538361fc4}{ref\+Graph}
+\item 
+unsigned long \hyperlink{class_edge_adb8d89100ecda64789056b98809e0324}{weight}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_edge_acb4d953abf85ae525f1d06a0c3a86a55}{odb\+::access}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_edge_a3106b11d60125009dbf7a738ce540fdf}{}\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\subsubsection[{Edge}]{\setlength{\rightskip}{0pt plus 5cm}Edge\+::\+Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_edge_a3106b11d60125009dbf7a738ce540fdf}
+\hypertarget{class_edge_a99e32803227c038106639106980435ec}{}\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\subsubsection[{Edge}]{\setlength{\rightskip}{0pt plus 5cm}Edge\+::\+Edge (
+\begin{DoxyParamCaption}
+\item[{boost\+::weak\+\_\+ptr$<$ {\bf Node} $>$}]{\+\_\+source, }
+\item[{boost\+::weak\+\_\+ptr$<$ {\bf Node} $>$}]{\+\_\+target, }
+\item[{boost\+::weak\+\_\+ptr$<$ {\bf Graph} $>$}]{\+\_\+ref\+Graph, }
+\item[{unsigned long}]{\+\_\+weight = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_a99e32803227c038106639106980435ec}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_edge_afe354a2942189ee2341f1cf5c09da99d}{}\index{Edge@{Edge}!get\+Class\+Name@{get\+Class\+Name}}
+\index{get\+Class\+Name@{get\+Class\+Name}!Edge@{Edge}}
+\subsubsection[{get\+Class\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string Edge\+::get\+Class\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_edge_afe354a2942189ee2341f1cf5c09da99d}
+\hypertarget{class_edge_ab8c30be0af32c0f5860f6fce10d00aa0}{}\index{Edge@{Edge}!get\+Key@{get\+Key}}
+\index{get\+Key@{get\+Key}!Edge@{Edge}}
+\subsubsection[{get\+Key}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Edge\+::get\+Key (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_edge_ab8c30be0af32c0f5860f6fce10d00aa0}
+\hypertarget{class_edge_a547927a1b370ba92c588739878007387}{}\index{Edge@{Edge}!get\+Weight@{get\+Weight}}
+\index{get\+Weight@{get\+Weight}!Edge@{Edge}}
+\subsubsection[{get\+Weight}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Edge\+::get\+Weight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_edge_a547927a1b370ba92c588739878007387}
+\hypertarget{class_edge_a64b3d45f279438077d5af17051ddf799}{}\index{Edge@{Edge}!save\+In\+D\+B@{save\+In\+D\+B}}
+\index{save\+In\+D\+B@{save\+In\+D\+B}!Edge@{Edge}}
+\subsubsection[{save\+In\+D\+B}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Edge\+::save\+In\+D\+B (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_a64b3d45f279438077d5af17051ddf799}
+\hypertarget{class_edge_a5cf0bdf3dd6145b94b338a488b2a8862}{}\index{Edge@{Edge}!set\+Weight@{set\+Weight}}
+\index{set\+Weight@{set\+Weight}!Edge@{Edge}}
+\subsubsection[{set\+Weight}]{\setlength{\rightskip}{0pt plus 5cm}void Edge\+::set\+Weight (
+\begin{DoxyParamCaption}
+\item[{const unsigned long}]{\+\_\+weight}
+\end{DoxyParamCaption}
+)}\label{class_edge_a5cf0bdf3dd6145b94b338a488b2a8862}
+\hypertarget{class_edge_a22f735344e146d1db9c4207fdf31235d}{}\index{Edge@{Edge}!update\+In\+D\+B@{update\+In\+D\+B}}
+\index{update\+In\+D\+B@{update\+In\+D\+B}!Edge@{Edge}}
+\subsubsection[{update\+In\+D\+B}]{\setlength{\rightskip}{0pt plus 5cm}void Edge\+::update\+In\+D\+B (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_a22f735344e146d1db9c4207fdf31235d}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_edge_acb4d953abf85ae525f1d06a0c3a86a55}{}\index{Edge@{Edge}!odb\+::access@{odb\+::access}}
+\index{odb\+::access@{odb\+::access}!Edge@{Edge}}
+\subsubsection[{odb\+::access}]{\setlength{\rightskip}{0pt plus 5cm}friend class odb\+::access\hspace{0.3cm}{\ttfamily [friend]}}\label{class_edge_acb4d953abf85ae525f1d06a0c3a86a55}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_edge_a9bf17b3e7e85c981e1eebf7d11d165cf}{}\index{Edge@{Edge}!id\+Edge@{id\+Edge}}
+\index{id\+Edge@{id\+Edge}!Edge@{Edge}}
+\subsubsection[{id\+Edge}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Edge\+::id\+Edge\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_a9bf17b3e7e85c981e1eebf7d11d165cf}
+\hypertarget{class_edge_a3413adc0974742c6e82419c538361fc4}{}\index{Edge@{Edge}!ref\+Graph@{ref\+Graph}}
+\index{ref\+Graph@{ref\+Graph}!Edge@{Edge}}
+\subsubsection[{ref\+Graph}]{\setlength{\rightskip}{0pt plus 5cm}odb\+::boost\+::lazy\+\_\+weak\+\_\+ptr$<${\bf Graph}$>$ Edge\+::ref\+Graph\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_a3413adc0974742c6e82419c538361fc4}
+\hypertarget{class_edge_a2f063b6ab27e23afd106e5d706023392}{}\index{Edge@{Edge}!source@{source}}
+\index{source@{source}!Edge@{Edge}}
+\subsubsection[{source}]{\setlength{\rightskip}{0pt plus 5cm}odb\+::boost\+::lazy\+\_\+weak\+\_\+ptr$<${\bf Node}$>$ Edge\+::source\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_a2f063b6ab27e23afd106e5d706023392}
+\hypertarget{class_edge_a93b220a32293b3140f0f51c6cbd5ecc2}{}\index{Edge@{Edge}!target@{target}}
+\index{target@{target}!Edge@{Edge}}
+\subsubsection[{target}]{\setlength{\rightskip}{0pt plus 5cm}odb\+::boost\+::lazy\+\_\+weak\+\_\+ptr$<${\bf Node}$>$ Edge\+::target\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_a93b220a32293b3140f0f51c6cbd5ecc2}
+\hypertarget{class_edge_adb8d89100ecda64789056b98809e0324}{}\index{Edge@{Edge}!weight@{weight}}
+\index{weight@{weight}!Edge@{Edge}}
+\subsubsection[{weight}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Edge\+::weight\hspace{0.3cm}{\ttfamily [private]}}\label{class_edge_adb8d89100ecda64789056b98809e0324}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Shape\+Learner\+Lib/sources/\hyperlink{_edge_8h}{Edge.\+h}\item 
+Shape\+Learner\+Lib/sources/\hyperlink{_edge_8cpp}{Edge.\+cpp}\end{DoxyCompactItemize}

@@ -12,7 +12,7 @@
 
 /**
 *	\file CLogger.cpp
-*	\brief CLogger Source File
+*	\brief Logger Source File
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */

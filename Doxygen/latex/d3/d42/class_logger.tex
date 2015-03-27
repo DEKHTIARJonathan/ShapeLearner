@@ -1,0 +1,229 @@
+\hypertarget{class_logger}{}\section{Logger Class Reference}
+\label{class_logger}\index{Logger@{Logger}}
+
+
+Class allowing us to log every actions performed in the program. In D\+E\+B\+U\+G \+: Everything is redirected to the 4 log files + standard output. In R\+E\+L\+E\+A\+S\+E \+: Everything is redirected to the 4 log files + Errors only to the standard output.  
+
+
+
+
+{\ttfamily \#include $<$C\+Logger.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static volatile void \hyperlink{class_logger_aff5ed1580283bcdac191d9ace376b977}{Log} (string text, unsigned int log\+File=\hyperlink{namespaceconstants_afe40c5b2a1c35d5502687c6e68c62872}{constants\+::\+Log\+App})
+\begin{DoxyCompactList}\small\item\em Static method called to perform logging, it is \char`\"{}thread safe\char`\"{} and automaticly redirect to the correct log file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_logger_a3d8c044818fd8f182f378f36f42cb015}{write\+D\+B} (string text)
+\begin{DoxyCompactList}\small\item\em Private method called to perform logging into the D\+B log file. \end{DoxyCompactList}\item 
+void \hyperlink{class_logger_aa2590f8c5678cec98b097635063fb406}{write\+App} (string text)
+\begin{DoxyCompactList}\small\item\em Private method called to perform logging into the App log file. \end{DoxyCompactList}\item 
+void \hyperlink{class_logger_a194d35113db4da008024513e9b0ed2ee}{write\+Core} (string text)
+\begin{DoxyCompactList}\small\item\em Private method called to perform logging into the Core log file. \end{DoxyCompactList}\item 
+void \hyperlink{class_logger_a4959160a3f836d723641b94fa512309e}{write\+Error} (string text)
+\begin{DoxyCompactList}\small\item\em Private method called to perform logging into the Error log file. \end{DoxyCompactList}\item 
+string \hyperlink{class_logger_a2d5e0070bc8c198aebaa272c9c1ca086}{get\+Time} () const 
+\begin{DoxyCompactList}\small\item\em Private method called to get the actual time well formated. \end{DoxyCompactList}\item 
+\hyperlink{class_logger_abc41bfb031d896170c7675fa96a6b30c}{Logger} ()
+\begin{DoxyCompactList}\small\item\em Private constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_logger_acb668a9e186a25fbaad2e4af6d1ed00a}{$\sim$\+Logger} ()
+\begin{DoxyCompactList}\small\item\em Private Destructor, automaticly called at the end of the program (object instanciated on stack). Close all ofstreams. \end{DoxyCompactList}\item 
+\hyperlink{class_logger_ad1dc4093a3d8c26802357fe2bdb1dabf}{Logger} (const \hyperlink{class_logger}{Logger} \&)
+\begin{DoxyCompactList}\small\item\em Singleton Pattern, forbid copy. \end{DoxyCompactList}\item 
+void \hyperlink{class_logger_a5c87941ccde39bcd5ce51496987d822f}{operator=} (const \hyperlink{class_logger}{Logger} \&)
+\begin{DoxyCompactList}\small\item\em Singleton Pattern, forbid copy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ofstream \hyperlink{class_logger_a17c9760c7e2905943827e9bd39184234}{outstream\+D\+B}
+\item 
+ofstream \hyperlink{class_logger_a0f77a112075ae81cfc89f79225967486}{outstream\+Error}
+\item 
+ofstream \hyperlink{class_logger_aa072491e9f6b7208344fb26b79225c26}{outstream\+App}
+\item 
+ofstream \hyperlink{class_logger_a2a107070a319d033978c6af26dd733fd}{outstream\+Core}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static volatile \hyperlink{class_logger}{Logger} \hyperlink{class_logger_a39df000f4fac08812f2d0d86aac1d515}{\+\_\+inst}
+\item 
+static boost\+::mutex \hyperlink{class_logger_a24ccccd925d3a0f19a7f1ad04f112fd9}{mutex\+Logger}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class allowing us to log every actions performed in the program. In D\+E\+B\+U\+G \+: Everything is redirected to the 4 log files + standard output. In R\+E\+L\+E\+A\+S\+E \+: Everything is redirected to the 4 log files + Errors only to the standard output. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_logger_abc41bfb031d896170c7675fa96a6b30c}{}\index{Logger@{Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!Logger@{Logger}}
+\subsubsection[{Logger}]{\setlength{\rightskip}{0pt plus 5cm}Logger\+::\+Logger (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_abc41bfb031d896170c7675fa96a6b30c}
+
+
+Private constructor. 
+
+\hypertarget{class_logger_acb668a9e186a25fbaad2e4af6d1ed00a}{}\index{Logger@{Logger}!````~Logger@{$\sim$\+Logger}}
+\index{````~Logger@{$\sim$\+Logger}!Logger@{Logger}}
+\subsubsection[{$\sim$\+Logger}]{\setlength{\rightskip}{0pt plus 5cm}Logger\+::$\sim$\+Logger (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_acb668a9e186a25fbaad2e4af6d1ed00a}
+
+
+Private Destructor, automaticly called at the end of the program (object instanciated on stack). Close all ofstreams. 
+
+\hypertarget{class_logger_ad1dc4093a3d8c26802357fe2bdb1dabf}{}\index{Logger@{Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!Logger@{Logger}}
+\subsubsection[{Logger}]{\setlength{\rightskip}{0pt plus 5cm}Logger\+::\+Logger (
+\begin{DoxyParamCaption}
+\item[{const {\bf Logger} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_ad1dc4093a3d8c26802357fe2bdb1dabf}
+
+
+Singleton Pattern, forbid copy. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_logger_a2d5e0070bc8c198aebaa272c9c1ca086}{}\index{Logger@{Logger}!get\+Time@{get\+Time}}
+\index{get\+Time@{get\+Time}!Logger@{Logger}}
+\subsubsection[{get\+Time}]{\setlength{\rightskip}{0pt plus 5cm}string Logger\+::get\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a2d5e0070bc8c198aebaa272c9c1ca086}
+
+
+Private method called to get the actual time well formated. 
+
+\hypertarget{class_logger_aff5ed1580283bcdac191d9ace376b977}{}\index{Logger@{Logger}!Log@{Log}}
+\index{Log@{Log}!Logger@{Logger}}
+\subsubsection[{Log}]{\setlength{\rightskip}{0pt plus 5cm}static volatile void Logger\+::\+Log (
+\begin{DoxyParamCaption}
+\item[{string}]{text, }
+\item[{unsigned int}]{log\+File = {\ttfamily {\bf constants\+::\+Log\+App}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_logger_aff5ed1580283bcdac191d9ace376b977}
+
+
+Static method called to perform logging, it is \char`\"{}thread safe\char`\"{} and automaticly redirect to the correct log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & \+: What do we want to log. \\
+\hline
+{\em log\+File} & \+: What log file do you aim ? See \hyperlink{constants_8h}{constants.\+h} for values \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_logger_a5c87941ccde39bcd5ce51496987d822f}{}\index{Logger@{Logger}!operator=@{operator=}}
+\index{operator=@{operator=}!Logger@{Logger}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}void Logger\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Logger} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a5c87941ccde39bcd5ce51496987d822f}
+
+
+Singleton Pattern, forbid copy. 
+
+\hypertarget{class_logger_aa2590f8c5678cec98b097635063fb406}{}\index{Logger@{Logger}!write\+App@{write\+App}}
+\index{write\+App@{write\+App}!Logger@{Logger}}
+\subsubsection[{write\+App}]{\setlength{\rightskip}{0pt plus 5cm}void Logger\+::write\+App (
+\begin{DoxyParamCaption}
+\item[{string}]{text}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_aa2590f8c5678cec98b097635063fb406}
+
+
+Private method called to perform logging into the App log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & \+: What do we want to log. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_logger_a194d35113db4da008024513e9b0ed2ee}{}\index{Logger@{Logger}!write\+Core@{write\+Core}}
+\index{write\+Core@{write\+Core}!Logger@{Logger}}
+\subsubsection[{write\+Core}]{\setlength{\rightskip}{0pt plus 5cm}void Logger\+::write\+Core (
+\begin{DoxyParamCaption}
+\item[{string}]{text}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a194d35113db4da008024513e9b0ed2ee}
+
+
+Private method called to perform logging into the Core log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & \+: What do we want to log. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_logger_a3d8c044818fd8f182f378f36f42cb015}{}\index{Logger@{Logger}!write\+D\+B@{write\+D\+B}}
+\index{write\+D\+B@{write\+D\+B}!Logger@{Logger}}
+\subsubsection[{write\+D\+B}]{\setlength{\rightskip}{0pt plus 5cm}void Logger\+::write\+D\+B (
+\begin{DoxyParamCaption}
+\item[{string}]{text}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a3d8c044818fd8f182f378f36f42cb015}
+
+
+Private method called to perform logging into the D\+B log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & \+: What do we want to log. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_logger_a4959160a3f836d723641b94fa512309e}{}\index{Logger@{Logger}!write\+Error@{write\+Error}}
+\index{write\+Error@{write\+Error}!Logger@{Logger}}
+\subsubsection[{write\+Error}]{\setlength{\rightskip}{0pt plus 5cm}void Logger\+::write\+Error (
+\begin{DoxyParamCaption}
+\item[{string}]{text}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a4959160a3f836d723641b94fa512309e}
+
+
+Private method called to perform logging into the Error log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & \+: What do we want to log. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_logger_a39df000f4fac08812f2d0d86aac1d515}{}\index{Logger@{Logger}!\+\_\+inst@{\+\_\+inst}}
+\index{\+\_\+inst@{\+\_\+inst}!Logger@{Logger}}
+\subsubsection[{\+\_\+inst}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf Logger} Logger\+::\+\_\+inst\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_logger_a39df000f4fac08812f2d0d86aac1d515}
+Unique instance of the singleton. Static and Volatile var. Volatile var in order to garantee the thread safety of the class. \hypertarget{class_logger_a24ccccd925d3a0f19a7f1ad04f112fd9}{}\index{Logger@{Logger}!mutex\+Logger@{mutex\+Logger}}
+\index{mutex\+Logger@{mutex\+Logger}!Logger@{Logger}}
+\subsubsection[{mutex\+Logger}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::mutex Logger\+::mutex\+Logger\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_logger_a24ccccd925d3a0f19a7f1ad04f112fd9}
+Mutex in order to prevent multiple access to critical sections. \hypertarget{class_logger_aa072491e9f6b7208344fb26b79225c26}{}\index{Logger@{Logger}!outstream\+App@{outstream\+App}}
+\index{outstream\+App@{outstream\+App}!Logger@{Logger}}
+\subsubsection[{outstream\+App}]{\setlength{\rightskip}{0pt plus 5cm}ofstream Logger\+::outstream\+App\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_aa072491e9f6b7208344fb26b79225c26}
+File stream for the Exec Log File \hypertarget{class_logger_a2a107070a319d033978c6af26dd733fd}{}\index{Logger@{Logger}!outstream\+Core@{outstream\+Core}}
+\index{outstream\+Core@{outstream\+Core}!Logger@{Logger}}
+\subsubsection[{outstream\+Core}]{\setlength{\rightskip}{0pt plus 5cm}ofstream Logger\+::outstream\+Core\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a2a107070a319d033978c6af26dd733fd}
+File stream for the Core Log File \hypertarget{class_logger_a17c9760c7e2905943827e9bd39184234}{}\index{Logger@{Logger}!outstream\+D\+B@{outstream\+D\+B}}
+\index{outstream\+D\+B@{outstream\+D\+B}!Logger@{Logger}}
+\subsubsection[{outstream\+D\+B}]{\setlength{\rightskip}{0pt plus 5cm}ofstream Logger\+::outstream\+D\+B\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a17c9760c7e2905943827e9bd39184234}
+File stream for the D\+B Log File \hypertarget{class_logger_a0f77a112075ae81cfc89f79225967486}{}\index{Logger@{Logger}!outstream\+Error@{outstream\+Error}}
+\index{outstream\+Error@{outstream\+Error}!Logger@{Logger}}
+\subsubsection[{outstream\+Error}]{\setlength{\rightskip}{0pt plus 5cm}ofstream Logger\+::outstream\+Error\hspace{0.3cm}{\ttfamily [private]}}\label{class_logger_a0f77a112075ae81cfc89f79225967486}
+File stream for the Error Log File 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logger/sources/\hyperlink{_c_logger_8h}{C\+Logger.\+h}\item 
+Logger/sources/\hyperlink{_c_logger_8cpp}{C\+Logger.\+cpp}\end{DoxyCompactItemize}

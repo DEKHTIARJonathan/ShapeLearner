@@ -23,14 +23,14 @@
 #include "allHeaders.h"
 using namespace std;
 
-class GraphManager; // Forward Declaration of the class contained in graphManager.h
+class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 class ShapeLearnerExcept;
 
 class GraphClass
 {
 public:
 	class Access {
-		friend class GraphManager;
+		friend class ShapeLearner;
 		static  boost::shared_ptr<GraphClass> createGraphClass(string name, bool isDirect = false, bool isAcyclic = false){
 			return  boost::shared_ptr<GraphClass>(new GraphClass(name, isDirect, isAcyclic));
 		}

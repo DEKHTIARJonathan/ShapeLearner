@@ -25,13 +25,13 @@ using namespace std;
 
 class Graph; //Forward Declaration of the class contained in Graph.h
 class Node; //Forward Declaration of the class contained in Node.h
-class GraphManager; // Forward Declaration of the class contained in graphManager.h
+class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 
 class Edge
 {
 public:
 	class Access {
-		friend class GraphManager;
+		friend class ShapeLearner;
 		static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1){
 			return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph, _weight));
 		}

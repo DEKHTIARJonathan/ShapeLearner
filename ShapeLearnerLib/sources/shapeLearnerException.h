@@ -1,4 +1,4 @@
-/* ************* Begin file graphManagerException.h ***************************************/
+/* ************* Begin file shapeLearnerException.h ***************************************/
 /*
 ** 2015 February 23
 **
@@ -12,7 +12,7 @@
 
 /**
 *	\file shapeLearnerException.h
-*	\brief Classe d'Exception pour la classe Façade GraphManager
+*	\brief Classe d'Exception pour la classe Façade ShapeLearner
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */

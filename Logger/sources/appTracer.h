@@ -1,4 +1,4 @@
-/* ************* Begin file appTracer.h ***************************************/
+/* ************* Begin file AppTracer.h ***************************************/
 /*
 ** 2015 March 24
 **
@@ -11,8 +11,8 @@
 *************************************************************************/
 
 /**
-*	\file appTracer.h
-*	\brief appTracer ODB Overload Header
+*	\file AppTracer.h
+*	\brief AppTracer ODB Overload Header
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */
@@ -24,11 +24,10 @@
 using namespace std;
 
 /*!	
-*	\class appTracer
-*	\brief Class derivated from public odb::pgsql::tracer, it allows us to log every actions performed by ODB.
+*	\class AppTracer
+*	\brief Class derivated from public odb::pgsql::tracer, it allows us to log every actions performed by ODB by calling Logger::Log
 */
-
-class appTracer: public odb::pgsql::tracer
+class AppTracer: public odb::pgsql::tracer
 {
 	/*!
 	*	\fn virtual void prepare (odb::pgsql::connection& c, const odb::pgsql::statement& s)

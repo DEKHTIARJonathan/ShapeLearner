@@ -44,7 +44,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/filesystem.hpp>
-#include "CLogger.h"
+
 
 //#include <ppl.h>
 
@@ -60,9 +60,9 @@
 	#include <odb/schema-catalog.hxx>
 
 	// Software's architecture
+	#include "CLogger.h"
 	#include "shapeLearner.h"
 	#include "shapeLearnerException.h"
-	#include "graphManager.h"
 	#include "dbManager.h"
 #endif //_MSC_VER
 

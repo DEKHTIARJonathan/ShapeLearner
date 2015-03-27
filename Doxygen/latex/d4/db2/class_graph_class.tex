@@ -1,0 +1,162 @@
+\hypertarget{class_graph_class}{}\section{Graph\+Class Class Reference}
+\label{class_graph_class}\index{Graph\+Class@{Graph\+Class}}
+
+
+{\ttfamily \#include $<$Graph\+Class.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_graph_class_1_1_access}{Access}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_graph_class_a6db9defb88a0810757b027a157ae08be}{get\+Key} () const 
+\item 
+bool \hyperlink{class_graph_class_a1e4be5a74964e66e8305156fdec586d0}{get\+Is\+Direct} () const 
+\item 
+void \hyperlink{class_graph_class_a1cd203739e4a86b9ce105218416f1ffb}{set\+Is\+Direct} (const bool \+\_\+direct\+Graph)
+\item 
+bool \hyperlink{class_graph_class_a5329cb65c74cab88562559ae9982730b}{get\+Is\+Acyclic\+Graph} () const 
+\item 
+void \hyperlink{class_graph_class_aa18b6207298d575a56927aa71cd001f5}{set\+Is\+Acyclic\+Graph} (const bool \+\_\+acyclic\+Graph)
+\item 
+vector$<$ unsigned long $>$ \hyperlink{class_graph_class_ab6823493e22ab73786bb19ee29a59cda}{get\+Graphs} ()
+\item 
+string \hyperlink{class_graph_class_aaec204cc25ab18def2baf8394184ccdd}{get\+Class\+Name} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_graph_class_a39d78244b77de2351494de80b28e7dbe}{Graph\+Class} ()
+\item 
+\hyperlink{class_graph_class_a8eea1081ee50465f3b12d45f8559a1b1}{Graph\+Class} (string name, bool is\+Direct=false, bool is\+Acyclic=false)
+\item 
+void \hyperlink{class_graph_class_ab0cb35508a11b51d565cbf3ac26c309c}{update\+In\+D\+B} ()
+\item 
+string \hyperlink{class_graph_class_a067c49d5933ac4eecb19609bdf4d2a5c}{save\+In\+D\+B} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_graph_class_a81face40eb784b7b0535c096839d4285}{graph\+Class\+Name}
+\item 
+bool \hyperlink{class_graph_class_a0a7139786cbd721f044f72d94b72f908}{direct\+Graph}
+\item 
+bool \hyperlink{class_graph_class_adf280eb3cf18f052fef6b30d01542609}{acyclic\+Graph}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_graph_class_acb4d953abf85ae525f1d06a0c3a86a55}{odb\+::access}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_graph_class_a39d78244b77de2351494de80b28e7dbe}{}\index{Graph\+Class@{Graph\+Class}!Graph\+Class@{Graph\+Class}}
+\index{Graph\+Class@{Graph\+Class}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{Graph\+Class}]{\setlength{\rightskip}{0pt plus 5cm}Graph\+Class\+::\+Graph\+Class (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_graph_class_a39d78244b77de2351494de80b28e7dbe}
+\hypertarget{class_graph_class_a8eea1081ee50465f3b12d45f8559a1b1}{}\index{Graph\+Class@{Graph\+Class}!Graph\+Class@{Graph\+Class}}
+\index{Graph\+Class@{Graph\+Class}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{Graph\+Class}]{\setlength{\rightskip}{0pt plus 5cm}Graph\+Class\+::\+Graph\+Class (
+\begin{DoxyParamCaption}
+\item[{string}]{name, }
+\item[{bool}]{is\+Direct = {\ttfamily false}, }
+\item[{bool}]{is\+Acyclic = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_class_a8eea1081ee50465f3b12d45f8559a1b1}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_graph_class_aaec204cc25ab18def2baf8394184ccdd}{}\index{Graph\+Class@{Graph\+Class}!get\+Class\+Name@{get\+Class\+Name}}
+\index{get\+Class\+Name@{get\+Class\+Name}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{get\+Class\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Class\+::get\+Class\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_graph_class_aaec204cc25ab18def2baf8394184ccdd}
+\hypertarget{class_graph_class_ab6823493e22ab73786bb19ee29a59cda}{}\index{Graph\+Class@{Graph\+Class}!get\+Graphs@{get\+Graphs}}
+\index{get\+Graphs@{get\+Graphs}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{get\+Graphs}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ unsigned long $>$ Graph\+Class\+::get\+Graphs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_graph_class_ab6823493e22ab73786bb19ee29a59cda}
+\hypertarget{class_graph_class_a5329cb65c74cab88562559ae9982730b}{}\index{Graph\+Class@{Graph\+Class}!get\+Is\+Acyclic\+Graph@{get\+Is\+Acyclic\+Graph}}
+\index{get\+Is\+Acyclic\+Graph@{get\+Is\+Acyclic\+Graph}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{get\+Is\+Acyclic\+Graph}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Class\+::get\+Is\+Acyclic\+Graph (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_graph_class_a5329cb65c74cab88562559ae9982730b}
+\hypertarget{class_graph_class_a1e4be5a74964e66e8305156fdec586d0}{}\index{Graph\+Class@{Graph\+Class}!get\+Is\+Direct@{get\+Is\+Direct}}
+\index{get\+Is\+Direct@{get\+Is\+Direct}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{get\+Is\+Direct}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Class\+::get\+Is\+Direct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_graph_class_a1e4be5a74964e66e8305156fdec586d0}
+\hypertarget{class_graph_class_a6db9defb88a0810757b027a157ae08be}{}\index{Graph\+Class@{Graph\+Class}!get\+Key@{get\+Key}}
+\index{get\+Key@{get\+Key}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{get\+Key}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Class\+::get\+Key (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_graph_class_a6db9defb88a0810757b027a157ae08be}
+\hypertarget{class_graph_class_a067c49d5933ac4eecb19609bdf4d2a5c}{}\index{Graph\+Class@{Graph\+Class}!save\+In\+D\+B@{save\+In\+D\+B}}
+\index{save\+In\+D\+B@{save\+In\+D\+B}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{save\+In\+D\+B}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Class\+::save\+In\+D\+B (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_class_a067c49d5933ac4eecb19609bdf4d2a5c}
+\hypertarget{class_graph_class_aa18b6207298d575a56927aa71cd001f5}{}\index{Graph\+Class@{Graph\+Class}!set\+Is\+Acyclic\+Graph@{set\+Is\+Acyclic\+Graph}}
+\index{set\+Is\+Acyclic\+Graph@{set\+Is\+Acyclic\+Graph}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{set\+Is\+Acyclic\+Graph}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Class\+::set\+Is\+Acyclic\+Graph (
+\begin{DoxyParamCaption}
+\item[{const bool}]{\+\_\+acyclic\+Graph}
+\end{DoxyParamCaption}
+)}\label{class_graph_class_aa18b6207298d575a56927aa71cd001f5}
+\hypertarget{class_graph_class_a1cd203739e4a86b9ce105218416f1ffb}{}\index{Graph\+Class@{Graph\+Class}!set\+Is\+Direct@{set\+Is\+Direct}}
+\index{set\+Is\+Direct@{set\+Is\+Direct}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{set\+Is\+Direct}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Class\+::set\+Is\+Direct (
+\begin{DoxyParamCaption}
+\item[{const bool}]{\+\_\+direct\+Graph}
+\end{DoxyParamCaption}
+)}\label{class_graph_class_a1cd203739e4a86b9ce105218416f1ffb}
+\hypertarget{class_graph_class_ab0cb35508a11b51d565cbf3ac26c309c}{}\index{Graph\+Class@{Graph\+Class}!update\+In\+D\+B@{update\+In\+D\+B}}
+\index{update\+In\+D\+B@{update\+In\+D\+B}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{update\+In\+D\+B}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Class\+::update\+In\+D\+B (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_class_ab0cb35508a11b51d565cbf3ac26c309c}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_graph_class_acb4d953abf85ae525f1d06a0c3a86a55}{}\index{Graph\+Class@{Graph\+Class}!odb\+::access@{odb\+::access}}
+\index{odb\+::access@{odb\+::access}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{odb\+::access}]{\setlength{\rightskip}{0pt plus 5cm}friend class odb\+::access\hspace{0.3cm}{\ttfamily [friend]}}\label{class_graph_class_acb4d953abf85ae525f1d06a0c3a86a55}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_graph_class_adf280eb3cf18f052fef6b30d01542609}{}\index{Graph\+Class@{Graph\+Class}!acyclic\+Graph@{acyclic\+Graph}}
+\index{acyclic\+Graph@{acyclic\+Graph}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{acyclic\+Graph}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Class\+::acyclic\+Graph\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_class_adf280eb3cf18f052fef6b30d01542609}
+\hypertarget{class_graph_class_a0a7139786cbd721f044f72d94b72f908}{}\index{Graph\+Class@{Graph\+Class}!direct\+Graph@{direct\+Graph}}
+\index{direct\+Graph@{direct\+Graph}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{direct\+Graph}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Class\+::direct\+Graph\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_class_a0a7139786cbd721f044f72d94b72f908}
+\hypertarget{class_graph_class_a81face40eb784b7b0535c096839d4285}{}\index{Graph\+Class@{Graph\+Class}!graph\+Class\+Name@{graph\+Class\+Name}}
+\index{graph\+Class\+Name@{graph\+Class\+Name}!Graph\+Class@{Graph\+Class}}
+\subsubsection[{graph\+Class\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Class\+::graph\+Class\+Name\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_class_a81face40eb784b7b0535c096839d4285}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Shape\+Learner\+Lib/sources/\hyperlink{_graph_class_8h}{Graph\+Class.\+h}\item 
+Shape\+Learner\+Lib/sources/\hyperlink{_graph_class_8cpp}{Graph\+Class.\+cpp}\end{DoxyCompactItemize}

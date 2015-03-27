@@ -20,14 +20,13 @@
     <ClInclude Include="sources\Graph.h" />
     <ClInclude Include="sources\GraphClass-odb.hxx" />
     <ClInclude Include="sources\GraphClass.h" />
-    <ClInclude Include="sources\graphManager.h" />
+    <ClInclude Include="sources\shapeLearner.h" />
     <ClInclude Include="sources\Node-odb.hxx" />
     <ClInclude Include="sources\Node.h" />
     <ClInclude Include="sources\ObjectClass-odb.hxx" />
     <ClInclude Include="sources\ObjectClass.h" />
     <ClInclude Include="sources\Point-odb.hxx" />
     <ClInclude Include="sources\Point.h" />
-    <ClInclude Include="sources\shapeLearner.h" />
     <ClInclude Include="sources\shapeLearnerException.h" />
   </ItemGroup>
   <ItemGroup>
@@ -38,14 +37,13 @@
     <ClCompile Include="sources\Graph.cpp" />
     <ClCompile Include="sources\GraphClass-odb.cxx" />
     <ClCompile Include="sources\GraphClass.cpp" />
-    <ClCompile Include="sources\graphManager.cpp" />
+    <ClCompile Include="sources\shapeLearner.cpp" />
     <ClCompile Include="sources\Node-odb.cxx" />
     <ClCompile Include="sources\Node.cpp" />
     <ClCompile Include="sources\ObjectClass-odb.cxx" />
     <ClCompile Include="sources\ObjectClass.cpp" />
     <ClCompile Include="sources\Point-odb.cxx" />
     <ClCompile Include="sources\Point.cpp" />
-    <ClCompile Include="sources\shapeLearner.cpp" />
     <ClCompile Include="sources\shapeLearnerException.cpp" />
   </ItemGroup>
   <ItemGroup>

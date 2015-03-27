@@ -116,7 +116,7 @@ string DatabaseManager::get_file_contents(const string& filename) throw(ShapeLea
  ********************************************************************/
 
 odb::pgsql::database* DatabaseManager::database = NULL;
-appTracer DatabaseManager::appliTracer;
+AppTracer DatabaseManager::appliTracer;
 
 void DatabaseManager::Interface::openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort, const string& dbInit) throw(ShapeLearnerExcept){
 	if( database == NULL ){

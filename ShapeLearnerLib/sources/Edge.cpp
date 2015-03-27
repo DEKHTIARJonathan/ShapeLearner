@@ -38,12 +38,12 @@ void Edge::setWeight(const unsigned long _weight) {
 
 void Edge::updateInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		ShapeLearner::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
 unsigned long Edge::saveInDB(){
 	#ifdef _MSC_VER
-		return GraphManager::ObjectInterface::saveObject(*this);
+		return ShapeLearner::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }

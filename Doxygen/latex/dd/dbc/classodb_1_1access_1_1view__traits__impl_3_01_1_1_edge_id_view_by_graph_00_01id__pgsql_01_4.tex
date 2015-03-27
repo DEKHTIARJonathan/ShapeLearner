@@ -1,0 +1,137 @@
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4}{}\section{odb\+:\+:access\+:\+:view\+\_\+traits\+\_\+impl$<$ \+:\+:Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$ Class Template Reference}
+\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+
+
+{\ttfamily \#include $<$Edge-\/odb.\+hxx$>$}
+
+Inheritance diagram for odb\+:\+:access\+:\+:view\+\_\+traits\+\_\+impl$<$ \+:\+:Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{dd/dbc/classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_1_1image__type}{image\+\_\+type}
+\item 
+struct \hyperlink{structodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_1_1query__columns}{query\+\_\+columns}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef pgsql\+::view\+\_\+statements$<$ \hyperlink{classodb_1_1access_1_1view__traits_3_01_1_1_edge_id_view_by_graph_01_4_a5c878e1df6ba367e257b6da8fcb92cae}{view\+\_\+type} $>$ \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a0d91393fadacd4a8aee90569df84a193}{statements\+\_\+type}
+\item 
+typedef pgsql\+::query\+\_\+base \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a671b622be60c353f020d89bb3e5b68ed}{query\+\_\+base\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_aec3af555662650b3ec0812c3ab93ead0}{grow} (image\+\_\+type \&, bool $\ast$)
+\item 
+static void \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a35be2469d5145715cb0d90c72ce73281}{bind} (pgsql\+::bind $\ast$, image\+\_\+type \&)
+\item 
+static void \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a5c03f69d87b0888e0a5f1210241a6942}{init} (\hyperlink{classodb_1_1access_1_1view__traits_3_01_1_1_edge_id_view_by_graph_01_4_a5c878e1df6ba367e257b6da8fcb92cae}{view\+\_\+type} \&, const image\+\_\+type \&, database $\ast$)
+\item 
+static \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a671b622be60c353f020d89bb3e5b68ed}{query\+\_\+base\+\_\+type} \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_aa525cdc5ec933241d2b118018194fb00}{query\+\_\+statement} (const \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a671b622be60c353f020d89bb3e5b68ed}{query\+\_\+base\+\_\+type} \&)
+\item 
+static result$<$ \hyperlink{classodb_1_1access_1_1view__traits_3_01_1_1_edge_id_view_by_graph_01_4_a5c878e1df6ba367e257b6da8fcb92cae}{view\+\_\+type} $>$ \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a812c48205372bffdb4cb1e4b4157bbf5}{query} (database \&, const \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a671b622be60c353f020d89bb3e5b68ed}{query\+\_\+base\+\_\+type} \&)
+\item 
+static odb\+::details\+::shared\+\_\+ptr$<$ prepared\+\_\+query\+\_\+impl $>$ \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_adf3e1b476c2db9a2f59e8008482b3dc7}{prepare\+\_\+query} (connection \&, const char $\ast$, const \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a671b622be60c353f020d89bb3e5b68ed}{query\+\_\+base\+\_\+type} \&)
+\item 
+static odb\+::details\+::shared\+\_\+ptr$<$ result\+\_\+impl $>$ \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a4407b18fb5e52a6d338cea49744d7c8c}{execute\+\_\+query} (prepared\+\_\+query\+\_\+impl \&)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const bool \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a04fe6440050eb1e2f892a942416cb436}{versioned} = false
+\item 
+static const std\+::size\+\_\+t \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_ad28fa5ddc43b39e73f58aa4358e9ca18}{column\+\_\+count} = 1\+U\+L
+\item 
+static const char \hyperlink{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a32436fb44381c6c1ff817549849fa1ca}{query\+\_\+statement\+\_\+name} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a671b622be60c353f020d89bb3e5b68ed}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!query\+\_\+base\+\_\+type@{query\+\_\+base\+\_\+type}}
+\index{query\+\_\+base\+\_\+type@{query\+\_\+base\+\_\+type}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{query\+\_\+base\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}typedef pgsql\+::query\+\_\+base odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::{\bf query\+\_\+base\+\_\+type}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a671b622be60c353f020d89bb3e5b68ed}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a0d91393fadacd4a8aee90569df84a193}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!statements\+\_\+type@{statements\+\_\+type}}
+\index{statements\+\_\+type@{statements\+\_\+type}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{statements\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}typedef pgsql\+::view\+\_\+statements$<${\bf view\+\_\+type}$>$ odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::{\bf statements\+\_\+type}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a0d91393fadacd4a8aee90569df84a193}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a35be2469d5145715cb0d90c72ce73281}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!bind@{bind}}
+\index{bind@{bind}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{bind}]{\setlength{\rightskip}{0pt plus 5cm}static void odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::bind (
+\begin{DoxyParamCaption}
+\item[{pgsql\+::bind $\ast$}]{, }
+\item[{image\+\_\+type \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a35be2469d5145715cb0d90c72ce73281}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a4407b18fb5e52a6d338cea49744d7c8c}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!execute\+\_\+query@{execute\+\_\+query}}
+\index{execute\+\_\+query@{execute\+\_\+query}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{execute\+\_\+query}]{\setlength{\rightskip}{0pt plus 5cm}static odb\+::details\+::shared\+\_\+ptr$<$result\+\_\+impl$>$ odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::execute\+\_\+query (
+\begin{DoxyParamCaption}
+\item[{prepared\+\_\+query\+\_\+impl \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a4407b18fb5e52a6d338cea49744d7c8c}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_aec3af555662650b3ec0812c3ab93ead0}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!grow@{grow}}
+\index{grow@{grow}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{grow}]{\setlength{\rightskip}{0pt plus 5cm}static bool odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::grow (
+\begin{DoxyParamCaption}
+\item[{image\+\_\+type \&}]{, }
+\item[{bool $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_aec3af555662650b3ec0812c3ab93ead0}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a5c03f69d87b0888e0a5f1210241a6942}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!init@{init}}
+\index{init@{init}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}static void odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf view\+\_\+type} \&}]{, }
+\item[{const image\+\_\+type \&}]{, }
+\item[{database $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a5c03f69d87b0888e0a5f1210241a6942}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_adf3e1b476c2db9a2f59e8008482b3dc7}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!prepare\+\_\+query@{prepare\+\_\+query}}
+\index{prepare\+\_\+query@{prepare\+\_\+query}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{prepare\+\_\+query}]{\setlength{\rightskip}{0pt plus 5cm}static odb\+::details\+::shared\+\_\+ptr$<$prepared\+\_\+query\+\_\+impl$>$ odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::prepare\+\_\+query (
+\begin{DoxyParamCaption}
+\item[{connection \&}]{, }
+\item[{const char $\ast$}]{, }
+\item[{const {\bf query\+\_\+base\+\_\+type} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_adf3e1b476c2db9a2f59e8008482b3dc7}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a812c48205372bffdb4cb1e4b4157bbf5}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!query@{query}}
+\index{query@{query}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{query}]{\setlength{\rightskip}{0pt plus 5cm}static result$<${\bf view\+\_\+type}$>$ odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::query (
+\begin{DoxyParamCaption}
+\item[{database \&}]{, }
+\item[{const {\bf query\+\_\+base\+\_\+type} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a812c48205372bffdb4cb1e4b4157bbf5}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_aa525cdc5ec933241d2b118018194fb00}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!query\+\_\+statement@{query\+\_\+statement}}
+\index{query\+\_\+statement@{query\+\_\+statement}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{query\+\_\+statement}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf query\+\_\+base\+\_\+type} odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::query\+\_\+statement (
+\begin{DoxyParamCaption}
+\item[{const {\bf query\+\_\+base\+\_\+type} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_aa525cdc5ec933241d2b118018194fb00}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_ad28fa5ddc43b39e73f58aa4358e9ca18}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!column\+\_\+count@{column\+\_\+count}}
+\index{column\+\_\+count@{column\+\_\+count}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{column\+\_\+count}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::size\+\_\+t odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::column\+\_\+count = 1\+U\+L\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_ad28fa5ddc43b39e73f58aa4358e9ca18}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a32436fb44381c6c1ff817549849fa1ca}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!query\+\_\+statement\+\_\+name@{query\+\_\+statement\+\_\+name}}
+\index{query\+\_\+statement\+\_\+name@{query\+\_\+statement\+\_\+name}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{query\+\_\+statement\+\_\+name}]{\setlength{\rightskip}{0pt plus 5cm}const char odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::query\+\_\+statement\+\_\+name\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a32436fb44381c6c1ff817549849fa1ca}
+\hypertarget{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a04fe6440050eb1e2f892a942416cb436}{}\index{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}!versioned@{versioned}}
+\index{versioned@{versioned}!odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$@{odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::\+Edge\+Id\+View\+By\+Graph, id\+\_\+pgsql $>$}}
+\subsubsection[{versioned}]{\setlength{\rightskip}{0pt plus 5cm}const bool odb\+::access\+::view\+\_\+traits\+\_\+impl$<$ \+::{\bf Edge\+Id\+View\+By\+Graph}, id\+\_\+pgsql $>$\+::versioned = false\hspace{0.3cm}{\ttfamily [static]}}\label{classodb_1_1access_1_1view__traits__impl_3_01_1_1_edge_id_view_by_graph_00_01id__pgsql_01_4_a04fe6440050eb1e2f892a942416cb436}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Shape\+Learner\+Lib/sources/\hyperlink{_edge-odb_8hxx}{Edge-\/odb.\+hxx}\end{DoxyCompactItemize}

@@ -25,13 +25,13 @@ using namespace std;
 
 class GraphClass; //Forward Declaration of the class contained in GraphClass.h
 class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
-class GraphManager; // Forward Declaration of the class contained in graphManager.h
+class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 
 class Graph
 {
 public:
 	class Access {
-		friend class GraphManager;
+		friend class ShapeLearner;
 		static boost::shared_ptr<Graph> createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName, unsigned long const _viewNumber = 1){
 			return boost::shared_ptr<Graph>(new Graph(_graphClass, _objectClass, _objectName, _viewNumber));
 		}

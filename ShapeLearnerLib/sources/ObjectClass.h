@@ -23,13 +23,13 @@
 #include "allHeaders.h"
 using namespace std;
 
-class GraphManager; // Forward Declaration of the class contained in graphManager.h
+class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 
 class ObjectClass
 {
 public:
 	class Access {
-		friend class GraphManager;
+		friend class ShapeLearner;
 		static boost::shared_ptr<ObjectClass> createObjectClass(string name){
 			return boost::shared_ptr<ObjectClass> (new ObjectClass(name));
 		}

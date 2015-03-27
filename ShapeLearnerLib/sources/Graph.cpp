@@ -43,36 +43,36 @@ void Graph::setView(const unsigned long _viewNumber) {
 
 void Graph::updateInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		ShapeLearner::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
 unsigned long Graph::saveInDB(){
 	#ifdef _MSC_VER
-		return GraphManager::ObjectInterface::saveObject(*this);
+		return ShapeLearner::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }
 
 boost::weak_ptr<GraphClass> Graph::getParentGraphClass(){
 	if(refGraphClass.expired())
-		refGraphClass.swap(odb::boost::lazy_weak_ptr<GraphClass>(GraphManager::CommonInterface::getGraphClass(refGraphClass.object_id<GraphClass>())));
+		refGraphClass.swap(odb::boost::lazy_weak_ptr<GraphClass>(ShapeLearner::CommonInterface::getGraphClass(refGraphClass.object_id<GraphClass>())));
 	return refGraphClass.get_eager();	
 }
 
 boost::weak_ptr<ObjectClass> Graph::getParentObjectClass(){
 	if(refObjectClass.expired())
-		refObjectClass.swap(odb::boost::lazy_weak_ptr<ObjectClass>(GraphManager::CommonInterface::getObjectClass((string)refObjectClass.object_id<ObjectClass>())));
+		refObjectClass.swap(odb::boost::lazy_weak_ptr<ObjectClass>(ShapeLearner::CommonInterface::getObjectClass((string)refObjectClass.object_id<ObjectClass>())));
 	return refObjectClass.get_eager();	
 }
 
 vector<unsigned long> Graph::getNodes(){
-	return GraphManager::ObjectInterface::getForeignRelations<NodeIdViewByGraph>(idGraph);
+	return ShapeLearner::ObjectInterface::getForeignRelations<NodeIdViewByGraph>(idGraph);
 }
 
 vector<unsigned long> Graph::getEdges(){
-	return GraphManager::ObjectInterface::getForeignRelations<EdgeIdViewByGraph>(idGraph);
+	return ShapeLearner::ObjectInterface::getForeignRelations<EdgeIdViewByGraph>(idGraph);
 }
 
 vector<unsigned long> Graph::getPoints(){
-	return GraphManager::ObjectInterface::getForeignRelations<PointIdViewByGraph>(idGraph);
+	return ShapeLearner::ObjectInterface::getForeignRelations<PointIdViewByGraph>(idGraph);
 }

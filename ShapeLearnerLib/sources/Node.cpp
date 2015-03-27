@@ -60,33 +60,33 @@ void Node::setLabel(const string& _label) {
 }
 
 unsigned long Node::getPointCount() const {
-	return GraphManager::ObjectInterface::getPointCountInNode(idNode);
+	return ShapeLearner::ObjectInterface::getPointCountInNode(idNode);
 }
 
 void Node::updateInDB(){
 	#ifdef _MSC_VER
-		GraphManager::ObjectInterface::updateObject(*this);
+		ShapeLearner::ObjectInterface::updateObject(*this);
 	#endif //_MSC_VER
 }
 
 unsigned long Node::saveInDB(){
 	#ifdef _MSC_VER
-		return GraphManager::ObjectInterface::saveObject(*this);
+		return ShapeLearner::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }
 
 boost::weak_ptr<Graph> Node::getParentGraph(){
 	if(refGraph.expired())
-		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(GraphManager::CommonInterface::getGraph(refGraph.object_id<Graph>())));
+		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(ShapeLearner::CommonInterface::getGraph(refGraph.object_id<Graph>())));
 	return refGraph.get_eager();	
 }
 
 vector<unsigned long> Node::getEdgesBySource(){
-	return GraphManager::ObjectInterface::getForeignRelations<EdgeIdViewBySource>(idNode);
+	return ShapeLearner::ObjectInterface::getForeignRelations<EdgeIdViewBySource>(idNode);
 }
 
 vector<unsigned long> Node::getEdgesByTarget(){
-	return GraphManager::ObjectInterface::getForeignRelations<EdgeIdViewByTarget>(idNode);
+	return ShapeLearner::ObjectInterface::getForeignRelations<EdgeIdViewByTarget>(idNode);
 }
 
 vector<unsigned long> Node::getEdges(){
@@ -101,5 +101,5 @@ vector<unsigned long> Node::getEdges(){
 }
 
 vector<unsigned long> Node::getPoints(){
-	return GraphManager::ObjectInterface::getForeignRelations<PointIdViewByNode>(idNode);
+	return ShapeLearner::ObjectInterface::getForeignRelations<PointIdViewByNode>(idNode);
 }

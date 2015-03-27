@@ -12,11 +12,10 @@
 
 /*!
 *	\file CLogger.h
-*	\brief CLogger Header
+*	\brief Logger Header
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */
-
 #ifndef _CLOGGER_
 #define _CLOGGER_
 
@@ -33,7 +32,7 @@
 #include <odb/pgsql/statement.hxx>
 #include "../../ShapeLearnerLib/sources/constants.h"
 #include "../../ShapeLearnerLib/sources/shapeLearnerException.h"
-#include "appTracer.h"
+#include "AppTracer.h"
 
 using namespace std;
 
@@ -56,11 +55,35 @@ public:
 	static volatile void Log (string text, unsigned int logFile = constants::LogApp);
 
 private:
+	/*!
+    *	File stream for the DB Log File
+    */
 	ofstream outstreamDB;
+
+	/*!
+    *	File stream for the Error Log File
+    */
 	ofstream outstreamError;
+
+	/*!
+    *	File stream for the Exec Log File
+    */
 	ofstream outstreamApp;
+	
+	/*!
+    *	File stream for the Core Log File
+    */
 	ofstream outstreamCore;
+	
+	/*!
+    *	Unique instance of the singleton. Static and Volatile var.
+	*	Volatile var in order to garantee the thread safety of the class.
+    */
 	static volatile Logger _inst;
+
+	/*!
+    *	Mutex in order to prevent multiple access to critical sections.
+    */
 	static boost::mutex mutexLogger;
 
 	/*!

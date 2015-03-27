@@ -1,0 +1,116 @@
+\hypertarget{class_app_tracer}{}\section{App\+Tracer Class Reference}
+\label{class_app_tracer}\index{App\+Tracer@{App\+Tracer}}
+
+
+Class derivated from public odb\+::pgsql\+::tracer, it allows us to log every actions performed by O\+D\+B by calling \hyperlink{class_logger_aff5ed1580283bcdac191d9ace376b977}{Logger\+::\+Log}.  
+
+
+
+
+{\ttfamily \#include $<$app\+Tracer.\+h$>$}
+
+Inheritance diagram for App\+Tracer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d6/df2/class_app_tracer}
+\end{center}
+\end{figure}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_app_tracer_a1e3008d69d12fa709403ee44c0c98266}{prepare} (odb\+::pgsql\+::connection \&c, const odb\+::pgsql\+::statement \&s)
+\begin{DoxyCompactList}\small\item\em Virtual method called for tracing while preparing a D\+B Request. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_app_tracer_a9e608afb7779fc54c0310039eb0a8222}{execute} (odb\+::pgsql\+::connection \&c, const odb\+::pgsql\+::statement \&s)
+\begin{DoxyCompactList}\small\item\em Virtual method called for tracing while executing a D\+B Request which was prepared. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_app_tracer_a550fa2f86cc468517d5ec1bdd654f729}{execute} (odb\+::pgsql\+::connection \&c, const char $\ast$statement)
+\begin{DoxyCompactList}\small\item\em Virtual method called for tracing while executing a D\+B Request not prepared. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_app_tracer_af3b3cf7b883f1c0a1546a9840ea09cda}{deallocate} (odb\+::pgsql\+::connection \&c, const odb\+::pgsql\+::statement \&s)
+\begin{DoxyCompactList}\small\item\em Virtual method called for tracing while deallocating an object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class derivated from public odb\+::pgsql\+::tracer, it allows us to log every actions performed by O\+D\+B by calling \hyperlink{class_logger_aff5ed1580283bcdac191d9ace376b977}{Logger\+::\+Log}. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_app_tracer_af3b3cf7b883f1c0a1546a9840ea09cda}{}\index{App\+Tracer@{App\+Tracer}!deallocate@{deallocate}}
+\index{deallocate@{deallocate}!App\+Tracer@{App\+Tracer}}
+\subsubsection[{deallocate}]{\setlength{\rightskip}{0pt plus 5cm}void App\+Tracer\+::deallocate (
+\begin{DoxyParamCaption}
+\item[{odb\+::pgsql\+::connection \&}]{c, }
+\item[{const odb\+::pgsql\+::statement \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\label{class_app_tracer_af3b3cf7b883f1c0a1546a9840ea09cda}
+
+
+Virtual method called for tracing while deallocating an object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: Opened Connection to the D\+B. \\
+\hline
+{\em s} & \+: Request being prepared. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_app_tracer_a9e608afb7779fc54c0310039eb0a8222}{}\index{App\+Tracer@{App\+Tracer}!execute@{execute}}
+\index{execute@{execute}!App\+Tracer@{App\+Tracer}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}void App\+Tracer\+::execute (
+\begin{DoxyParamCaption}
+\item[{odb\+::pgsql\+::connection \&}]{c, }
+\item[{const odb\+::pgsql\+::statement \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\label{class_app_tracer_a9e608afb7779fc54c0310039eb0a8222}
+
+
+Virtual method called for tracing while executing a D\+B Request which was prepared. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: Opened Connection to the D\+B. \\
+\hline
+{\em s} & \+: Request being executed. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_app_tracer_a550fa2f86cc468517d5ec1bdd654f729}{}\index{App\+Tracer@{App\+Tracer}!execute@{execute}}
+\index{execute@{execute}!App\+Tracer@{App\+Tracer}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}void App\+Tracer\+::execute (
+\begin{DoxyParamCaption}
+\item[{odb\+::pgsql\+::connection \&}]{c, }
+\item[{const char $\ast$}]{statement}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\label{class_app_tracer_a550fa2f86cc468517d5ec1bdd654f729}
+
+
+Virtual method called for tracing while executing a D\+B Request not prepared. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: Opened Connection to the D\+B. \\
+\hline
+{\em s} & \+: Request being executed. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_app_tracer_a1e3008d69d12fa709403ee44c0c98266}{}\index{App\+Tracer@{App\+Tracer}!prepare@{prepare}}
+\index{prepare@{prepare}!App\+Tracer@{App\+Tracer}}
+\subsubsection[{prepare}]{\setlength{\rightskip}{0pt plus 5cm}void App\+Tracer\+::prepare (
+\begin{DoxyParamCaption}
+\item[{odb\+::pgsql\+::connection \&}]{c, }
+\item[{const odb\+::pgsql\+::statement \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\label{class_app_tracer_a1e3008d69d12fa709403ee44c0c98266}
+
+
+Virtual method called for tracing while preparing a D\+B Request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: Opened Connection to the D\+B. \\
+\hline
+{\em s} & \+: Request being prepared. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logger/sources/\hyperlink{app_tracer_8h}{app\+Tracer.\+h}\item 
+Logger/sources/\hyperlink{app_tracer_8cpp}{app\+Tracer.\+cpp}\end{DoxyCompactItemize}

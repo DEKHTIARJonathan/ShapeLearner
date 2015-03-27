@@ -1,0 +1,307 @@
+\hypertarget{class_graph_manager}{}\section{Graph\+Manager Class Reference}
+\label{class_graph_manager}\index{Graph\+Manager@{Graph\+Manager}}
+
+
+{\ttfamily \#include $<$graph\+Manager.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_graph_manager_1_1_common_interface}{Common\+Interface}
+\item 
+class \hyperlink{class_graph_manager_1_1_object_interface}{Object\+Interface}
+\item 
+class \hyperlink{class_graph_manager_1_1_user_interface}{User\+Interface}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_graph_manager_ae19de6f9936bb21d302bb8a023940822}{Graph\+Manager} ()  throw (\+Shape\+Learner\+Except)
+\begin{DoxyCompactList}\small\item\em Constructeur de le class \hyperlink{class_graph_manager}{Graph\+Manager}. Il instancie également la classe \hyperlink{class_database_manager}{Database\+Manager}. \end{DoxyCompactList}\item 
+\hyperlink{class_graph_manager_aa4bd7724500828c916b906d329c18fe1}{Graph\+Manager} (const \hyperlink{class_graph_manager}{Graph\+Manager} \&)
+\begin{DoxyCompactList}\small\item\em Constructeur de recopie =$>$ La recopie est interdite. \end{DoxyCompactList}\item 
+\hyperlink{class_graph_manager}{Graph\+Manager} \& \hyperlink{class_graph_manager_ab8f0f66ceb7ff7a21d17449470895abe}{operator=} (const \hyperlink{class_graph_manager}{Graph\+Manager} \&)
+\begin{DoxyCompactList}\small\item\em Opérateur = =$>$$>$ La recopie est interdite. \end{DoxyCompactList}\item 
+\hyperlink{class_graph_manager_aaef0868babee62d5a3e3d72baf81f8d2}{$\sim$\+Graph\+Manager} ()
+\begin{DoxyCompactList}\small\item\em La destruction est interdite. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_graph_manager_a20195a0c185b4a1d5cef8b2c218a9d9a}{set\+Db\+Name} ()  throw (\+Shape\+Learner\+Except)
+\item 
+static void \hyperlink{class_graph_manager_acf6879db44318a7cc31fd19386388322}{set\+Db\+User} ()  throw (\+Shape\+Learner\+Except)
+\item 
+static void \hyperlink{class_graph_manager_a5c2dc5dab4bc84e5c386f87a23f72259}{set\+Db\+Pass} ()  throw (\+Shape\+Learner\+Except)
+\item 
+static void \hyperlink{class_graph_manager_a08fc85a0071461ed577a18e25153c8a4}{set\+Db\+Host} ()  throw (\+Shape\+Learner\+Except)
+\item 
+static void \hyperlink{class_graph_manager_ab2099d7e2e960c7930d60465bdd781af}{set\+Db\+Port} ()  throw (\+Shape\+Learner\+Except)
+\item 
+static void \hyperlink{class_graph_manager_a11af1e6a0109a7ccd7ec32a1fac4dcd4}{set\+D\+B\+Init\+File} ()  throw (\+Shape\+Learner\+Except)
+\item 
+{\footnotesize template$<$class T $>$ }\\static string \hyperlink{class_graph_manager_ae5a068c6e8b1ccc34ac33da79cec04bc}{save\+Object\+String} (T \&obj)  throw (\+Shape\+Learner\+Except)
+\item 
+{\footnotesize template$<$class T , class Y $>$ }\\static boost\+::shared\+\_\+ptr$<$ T $>$ \hyperlink{class_graph_manager_a544b88b8296ebca0bbee23ed0170312d}{load\+Object} (Y key\+D\+B)  throw (\+Shape\+Learner\+Except)
+\item 
+static bool \hyperlink{class_graph_manager_a4875e397f9e07eba0e0b8f68d36312bc}{remove\+Object\+From\+Map} (boost\+::shared\+\_\+ptr$<$ \hyperlink{class_point}{Point} $>$ obj, bool cascade=false)  throw (\+Shape\+Learner\+Except)
+\item 
+static bool \hyperlink{class_graph_manager_ab319fb41b6fe0f3f7d2be18d09f1c5ed}{remove\+Object\+From\+Map} (boost\+::shared\+\_\+ptr$<$ \hyperlink{class_edge}{Edge} $>$ obj, bool cascade=false)  throw (\+Shape\+Learner\+Except)
+\item 
+static bool \hyperlink{class_graph_manager_abe5ccee4947c0c85e3fa2ebaccc4fd1f}{remove\+Object\+From\+Map} (boost\+::shared\+\_\+ptr$<$ \hyperlink{class_node}{Node} $>$ obj, bool cascade=false)  throw (\+Shape\+Learner\+Except)
+\item 
+static bool \hyperlink{class_graph_manager_a767e3d8f7316db5444a165a960b7b961}{remove\+Object\+From\+Map} (boost\+::shared\+\_\+ptr$<$ \hyperlink{class_graph}{Graph} $>$ obj, bool cascade=false)  throw (\+Shape\+Learner\+Except)
+\item 
+static bool \hyperlink{class_graph_manager_a667b842ef346a38ae0f9fcad0e255dfe}{remove\+Object\+From\+Map} (boost\+::shared\+\_\+ptr$<$ \hyperlink{class_graph_class}{Graph\+Class} $>$ obj, bool cascade=false)  throw (\+Shape\+Learner\+Except)
+\item 
+static bool \hyperlink{class_graph_manager_afa65355cfcb38855ef5eb2bf1d901bef}{remove\+Object\+From\+Map} (boost\+::shared\+\_\+ptr$<$ \hyperlink{class_object_class}{Object\+Class} $>$ obj, bool cascade=false)  throw (\+Shape\+Learner\+Except)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static string \hyperlink{class_graph_manager_aef00b60ada521b7903260b35db6e650e}{db\+Name} = \char`\"{}postgres\char`\"{}
+\begin{DoxyCompactList}\small\item\em db\+Name \+: Nom de la Base de Données. \end{DoxyCompactList}\item 
+static string \hyperlink{class_graph_manager_a7e2eab5a143a5688e95b35b58a849507}{db\+User} = \char`\"{}postgres\char`\"{}
+\begin{DoxyCompactList}\small\item\em db\+User \+: Utilisateur de la base de données \end{DoxyCompactList}\item 
+static string \hyperlink{class_graph_manager_a41b08a94457a516bfe8484c30f93f446}{db\+Pass} = \char`\"{}postgres\char`\"{}
+\begin{DoxyCompactList}\small\item\em db\+Pass \+: Mot de passe de la base de données \end{DoxyCompactList}\item 
+static unsigned int \hyperlink{class_graph_manager_a329e9871f2f99402321c8c4083a55729}{db\+Port} = 5432
+\begin{DoxyCompactList}\small\item\em db\+Port \+: Port de la base de données \end{DoxyCompactList}\item 
+static string \hyperlink{class_graph_manager_abd03ea141c78eaee845aa542239d0653}{db\+Host} = \char`\"{}localhost\char`\"{}
+\begin{DoxyCompactList}\small\item\em db\+Host \+: Adresse I\+P ou Hostname du serveur de B\+D\+D (localhost par défaut). \end{DoxyCompactList}\item 
+static string \hyperlink{class_graph_manager_a7f633567767397ac2908a8f9a7d82924}{db\+Init\+File} = \char`\"{}sources/structure.\+sql\char`\"{}
+\begin{DoxyCompactList}\small\item\em db\+Init \+: Doit on initialiser la base de données ? \end{DoxyCompactList}\item 
+static map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ \hyperlink{class_node}{Node} $>$ $>$ \hyperlink{class_graph_manager_aac9f3f4815c91b9451846a2c9ab58abc}{Node\+Map}
+\item 
+static map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ \hyperlink{class_point}{Point} $>$ $>$ \hyperlink{class_graph_manager_affd253277449255227af6a23ef55f118}{Point\+Map}
+\item 
+static map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ \hyperlink{class_edge}{Edge} $>$ $>$ \hyperlink{class_graph_manager_ae7f9c9e93035e363cdf183e2a2dc1cb0}{Edge\+Map}
+\item 
+static map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ \hyperlink{class_graph}{Graph} $>$ $>$ \hyperlink{class_graph_manager_a04c8ebfde58e6f0660494ff71b6921ca}{Graph\+Map}
+\item 
+static map$<$ string, boost\+::shared\+\_\+ptr$<$ \hyperlink{class_object_class}{Object\+Class} $>$ $>$ \hyperlink{class_graph_manager_a1935ba438d4d66da0e0ab76fdd3d634a}{Object\+Class\+Map}
+\item 
+static map$<$ string, boost\+::shared\+\_\+ptr$<$ \hyperlink{class_graph_class}{Graph\+Class} $>$ $>$ \hyperlink{class_graph_manager_a009bef87a60aa1e7b6b5d8296eabc1e0}{Graph\+Class\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_graph_manager_ae19de6f9936bb21d302bb8a023940822}{}\index{Graph\+Manager@{Graph\+Manager}!Graph\+Manager@{Graph\+Manager}}
+\index{Graph\+Manager@{Graph\+Manager}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Graph\+Manager}]{\setlength{\rightskip}{0pt plus 5cm}Graph\+Manager\+::\+Graph\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_manager_ae19de6f9936bb21d302bb8a023940822}
+
+
+Constructeur de le class \hyperlink{class_graph_manager}{Graph\+Manager}. Il instancie également la classe \hyperlink{class_database_manager}{Database\+Manager}. 
+
+\hypertarget{class_graph_manager_aa4bd7724500828c916b906d329c18fe1}{}\index{Graph\+Manager@{Graph\+Manager}!Graph\+Manager@{Graph\+Manager}}
+\index{Graph\+Manager@{Graph\+Manager}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Graph\+Manager}]{\setlength{\rightskip}{0pt plus 5cm}Graph\+Manager\+::\+Graph\+Manager (
+\begin{DoxyParamCaption}
+\item[{const {\bf Graph\+Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_manager_aa4bd7724500828c916b906d329c18fe1}
+
+
+Constructeur de recopie =$>$ La recopie est interdite. 
+
+\hypertarget{class_graph_manager_aaef0868babee62d5a3e3d72baf81f8d2}{}\index{Graph\+Manager@{Graph\+Manager}!````~Graph\+Manager@{$\sim$\+Graph\+Manager}}
+\index{````~Graph\+Manager@{$\sim$\+Graph\+Manager}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{$\sim$\+Graph\+Manager}]{\setlength{\rightskip}{0pt plus 5cm}Graph\+Manager\+::$\sim$\+Graph\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_manager_aaef0868babee62d5a3e3d72baf81f8d2}
+
+
+La destruction est interdite. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_graph_manager_a544b88b8296ebca0bbee23ed0170312d}{}\index{Graph\+Manager@{Graph\+Manager}!load\+Object@{load\+Object}}
+\index{load\+Object@{load\+Object}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{load\+Object}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , class Y $>$ static boost\+::shared\+\_\+ptr$<$T$>$ Graph\+Manager\+::load\+Object (
+\begin{DoxyParamCaption}
+\item[{Y}]{key\+D\+B}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a544b88b8296ebca0bbee23ed0170312d}
+\hypertarget{class_graph_manager_ab8f0f66ceb7ff7a21d17449470895abe}{}\index{Graph\+Manager@{Graph\+Manager}!operator=@{operator=}}
+\index{operator=@{operator=}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Graph\+Manager}\& Graph\+Manager\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Graph\+Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{class_graph_manager_ab8f0f66ceb7ff7a21d17449470895abe}
+
+
+Opérateur = =$>$$>$ La recopie est interdite. 
+
+\hypertarget{class_graph_manager_a4875e397f9e07eba0e0b8f68d36312bc}{}\index{Graph\+Manager@{Graph\+Manager}!remove\+Object\+From\+Map@{remove\+Object\+From\+Map}}
+\index{remove\+Object\+From\+Map@{remove\+Object\+From\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{remove\+Object\+From\+Map}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Manager\+::remove\+Object\+From\+Map (
+\begin{DoxyParamCaption}
+\item[{boost\+::shared\+\_\+ptr$<$ {\bf Point} $>$}]{obj, }
+\item[{bool}]{cascade = {\ttfamily false}}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a4875e397f9e07eba0e0b8f68d36312bc}
+\hypertarget{class_graph_manager_ab319fb41b6fe0f3f7d2be18d09f1c5ed}{}\index{Graph\+Manager@{Graph\+Manager}!remove\+Object\+From\+Map@{remove\+Object\+From\+Map}}
+\index{remove\+Object\+From\+Map@{remove\+Object\+From\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{remove\+Object\+From\+Map}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Manager\+::remove\+Object\+From\+Map (
+\begin{DoxyParamCaption}
+\item[{boost\+::shared\+\_\+ptr$<$ {\bf Edge} $>$}]{obj, }
+\item[{bool}]{cascade = {\ttfamily false}}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_ab319fb41b6fe0f3f7d2be18d09f1c5ed}
+\hypertarget{class_graph_manager_abe5ccee4947c0c85e3fa2ebaccc4fd1f}{}\index{Graph\+Manager@{Graph\+Manager}!remove\+Object\+From\+Map@{remove\+Object\+From\+Map}}
+\index{remove\+Object\+From\+Map@{remove\+Object\+From\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{remove\+Object\+From\+Map}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Manager\+::remove\+Object\+From\+Map (
+\begin{DoxyParamCaption}
+\item[{boost\+::shared\+\_\+ptr$<$ {\bf Node} $>$}]{obj, }
+\item[{bool}]{cascade = {\ttfamily false}}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_abe5ccee4947c0c85e3fa2ebaccc4fd1f}
+\hypertarget{class_graph_manager_a767e3d8f7316db5444a165a960b7b961}{}\index{Graph\+Manager@{Graph\+Manager}!remove\+Object\+From\+Map@{remove\+Object\+From\+Map}}
+\index{remove\+Object\+From\+Map@{remove\+Object\+From\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{remove\+Object\+From\+Map}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Manager\+::remove\+Object\+From\+Map (
+\begin{DoxyParamCaption}
+\item[{boost\+::shared\+\_\+ptr$<$ {\bf Graph} $>$}]{obj, }
+\item[{bool}]{cascade = {\ttfamily false}}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a767e3d8f7316db5444a165a960b7b961}
+\hypertarget{class_graph_manager_a667b842ef346a38ae0f9fcad0e255dfe}{}\index{Graph\+Manager@{Graph\+Manager}!remove\+Object\+From\+Map@{remove\+Object\+From\+Map}}
+\index{remove\+Object\+From\+Map@{remove\+Object\+From\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{remove\+Object\+From\+Map}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Manager\+::remove\+Object\+From\+Map (
+\begin{DoxyParamCaption}
+\item[{boost\+::shared\+\_\+ptr$<$ {\bf Graph\+Class} $>$}]{obj, }
+\item[{bool}]{cascade = {\ttfamily false}}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a667b842ef346a38ae0f9fcad0e255dfe}
+\hypertarget{class_graph_manager_afa65355cfcb38855ef5eb2bf1d901bef}{}\index{Graph\+Manager@{Graph\+Manager}!remove\+Object\+From\+Map@{remove\+Object\+From\+Map}}
+\index{remove\+Object\+From\+Map@{remove\+Object\+From\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{remove\+Object\+From\+Map}]{\setlength{\rightskip}{0pt plus 5cm}bool Graph\+Manager\+::remove\+Object\+From\+Map (
+\begin{DoxyParamCaption}
+\item[{boost\+::shared\+\_\+ptr$<$ {\bf Object\+Class} $>$}]{obj, }
+\item[{bool}]{cascade = {\ttfamily false}}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_afa65355cfcb38855ef5eb2bf1d901bef}
+\hypertarget{class_graph_manager_ae5a068c6e8b1ccc34ac33da79cec04bc}{}\index{Graph\+Manager@{Graph\+Manager}!save\+Object\+String@{save\+Object\+String}}
+\index{save\+Object\+String@{save\+Object\+String}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{save\+Object\+String}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ static string Graph\+Manager\+::save\+Object\+String (
+\begin{DoxyParamCaption}
+\item[{T \&}]{obj}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_ae5a068c6e8b1ccc34ac33da79cec04bc}
+\hypertarget{class_graph_manager_a08fc85a0071461ed577a18e25153c8a4}{}\index{Graph\+Manager@{Graph\+Manager}!set\+Db\+Host@{set\+Db\+Host}}
+\index{set\+Db\+Host@{set\+Db\+Host}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{set\+Db\+Host}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Manager\+::set\+Db\+Host (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a08fc85a0071461ed577a18e25153c8a4}
+\hypertarget{class_graph_manager_a11af1e6a0109a7ccd7ec32a1fac4dcd4}{}\index{Graph\+Manager@{Graph\+Manager}!set\+D\+B\+Init\+File@{set\+D\+B\+Init\+File}}
+\index{set\+D\+B\+Init\+File@{set\+D\+B\+Init\+File}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{set\+D\+B\+Init\+File}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Manager\+::set\+D\+B\+Init\+File (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a11af1e6a0109a7ccd7ec32a1fac4dcd4}
+\hypertarget{class_graph_manager_a20195a0c185b4a1d5cef8b2c218a9d9a}{}\index{Graph\+Manager@{Graph\+Manager}!set\+Db\+Name@{set\+Db\+Name}}
+\index{set\+Db\+Name@{set\+Db\+Name}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{set\+Db\+Name}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Manager\+::set\+Db\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a20195a0c185b4a1d5cef8b2c218a9d9a}
+\hypertarget{class_graph_manager_a5c2dc5dab4bc84e5c386f87a23f72259}{}\index{Graph\+Manager@{Graph\+Manager}!set\+Db\+Pass@{set\+Db\+Pass}}
+\index{set\+Db\+Pass@{set\+Db\+Pass}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{set\+Db\+Pass}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Manager\+::set\+Db\+Pass (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a5c2dc5dab4bc84e5c386f87a23f72259}
+\hypertarget{class_graph_manager_ab2099d7e2e960c7930d60465bdd781af}{}\index{Graph\+Manager@{Graph\+Manager}!set\+Db\+Port@{set\+Db\+Port}}
+\index{set\+Db\+Port@{set\+Db\+Port}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{set\+Db\+Port}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Manager\+::set\+Db\+Port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_ab2099d7e2e960c7930d60465bdd781af}
+\hypertarget{class_graph_manager_acf6879db44318a7cc31fd19386388322}{}\index{Graph\+Manager@{Graph\+Manager}!set\+Db\+User@{set\+Db\+User}}
+\index{set\+Db\+User@{set\+Db\+User}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{set\+Db\+User}]{\setlength{\rightskip}{0pt plus 5cm}void Graph\+Manager\+::set\+Db\+User (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throw  {\bf Shape\+Learner\+Except}) \hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_acf6879db44318a7cc31fd19386388322}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_graph_manager_abd03ea141c78eaee845aa542239d0653}{}\index{Graph\+Manager@{Graph\+Manager}!db\+Host@{db\+Host}}
+\index{db\+Host@{db\+Host}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{db\+Host}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Manager\+::db\+Host = \char`\"{}localhost\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_abd03ea141c78eaee845aa542239d0653}
+
+
+db\+Host \+: Adresse I\+P ou Hostname du serveur de B\+D\+D (localhost par défaut). 
+
+\hypertarget{class_graph_manager_a7f633567767397ac2908a8f9a7d82924}{}\index{Graph\+Manager@{Graph\+Manager}!db\+Init\+File@{db\+Init\+File}}
+\index{db\+Init\+File@{db\+Init\+File}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{db\+Init\+File}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Manager\+::db\+Init\+File = \char`\"{}sources/structure.\+sql\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a7f633567767397ac2908a8f9a7d82924}
+
+
+db\+Init \+: Doit on initialiser la base de données ? 
+
+\hypertarget{class_graph_manager_aef00b60ada521b7903260b35db6e650e}{}\index{Graph\+Manager@{Graph\+Manager}!db\+Name@{db\+Name}}
+\index{db\+Name@{db\+Name}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{db\+Name}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Manager\+::db\+Name = \char`\"{}postgres\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_aef00b60ada521b7903260b35db6e650e}
+
+
+db\+Name \+: Nom de la Base de Données. 
+
+\hypertarget{class_graph_manager_a41b08a94457a516bfe8484c30f93f446}{}\index{Graph\+Manager@{Graph\+Manager}!db\+Pass@{db\+Pass}}
+\index{db\+Pass@{db\+Pass}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{db\+Pass}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Manager\+::db\+Pass = \char`\"{}postgres\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a41b08a94457a516bfe8484c30f93f446}
+
+
+db\+Pass \+: Mot de passe de la base de données 
+
+\hypertarget{class_graph_manager_a329e9871f2f99402321c8c4083a55729}{}\index{Graph\+Manager@{Graph\+Manager}!db\+Port@{db\+Port}}
+\index{db\+Port@{db\+Port}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{db\+Port}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Graph\+Manager\+::db\+Port = 5432\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a329e9871f2f99402321c8c4083a55729}
+
+
+db\+Port \+: Port de la base de données 
+
+\hypertarget{class_graph_manager_a7e2eab5a143a5688e95b35b58a849507}{}\index{Graph\+Manager@{Graph\+Manager}!db\+User@{db\+User}}
+\index{db\+User@{db\+User}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{db\+User}]{\setlength{\rightskip}{0pt plus 5cm}string Graph\+Manager\+::db\+User = \char`\"{}postgres\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a7e2eab5a143a5688e95b35b58a849507}
+
+
+db\+User \+: Utilisateur de la base de données 
+
+\hypertarget{class_graph_manager_ae7f9c9e93035e363cdf183e2a2dc1cb0}{}\index{Graph\+Manager@{Graph\+Manager}!Edge\+Map@{Edge\+Map}}
+\index{Edge\+Map@{Edge\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Edge\+Map}]{\setlength{\rightskip}{0pt plus 5cm}map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ {\bf Edge} $>$ $>$ Graph\+Manager\+::\+Edge\+Map\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_ae7f9c9e93035e363cdf183e2a2dc1cb0}
+\hypertarget{class_graph_manager_a009bef87a60aa1e7b6b5d8296eabc1e0}{}\index{Graph\+Manager@{Graph\+Manager}!Graph\+Class\+Map@{Graph\+Class\+Map}}
+\index{Graph\+Class\+Map@{Graph\+Class\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Graph\+Class\+Map}]{\setlength{\rightskip}{0pt plus 5cm}map$<$ string, boost\+::shared\+\_\+ptr$<$ {\bf Graph\+Class} $>$ $>$ Graph\+Manager\+::\+Graph\+Class\+Map\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a009bef87a60aa1e7b6b5d8296eabc1e0}
+\hypertarget{class_graph_manager_a04c8ebfde58e6f0660494ff71b6921ca}{}\index{Graph\+Manager@{Graph\+Manager}!Graph\+Map@{Graph\+Map}}
+\index{Graph\+Map@{Graph\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Graph\+Map}]{\setlength{\rightskip}{0pt plus 5cm}map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ {\bf Graph} $>$ $>$ Graph\+Manager\+::\+Graph\+Map\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a04c8ebfde58e6f0660494ff71b6921ca}
+\hypertarget{class_graph_manager_aac9f3f4815c91b9451846a2c9ab58abc}{}\index{Graph\+Manager@{Graph\+Manager}!Node\+Map@{Node\+Map}}
+\index{Node\+Map@{Node\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Node\+Map}]{\setlength{\rightskip}{0pt plus 5cm}map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ {\bf Node} $>$ $>$ Graph\+Manager\+::\+Node\+Map\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_aac9f3f4815c91b9451846a2c9ab58abc}
+\hypertarget{class_graph_manager_a1935ba438d4d66da0e0ab76fdd3d634a}{}\index{Graph\+Manager@{Graph\+Manager}!Object\+Class\+Map@{Object\+Class\+Map}}
+\index{Object\+Class\+Map@{Object\+Class\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Object\+Class\+Map}]{\setlength{\rightskip}{0pt plus 5cm}map$<$ string, boost\+::shared\+\_\+ptr$<$ {\bf Object\+Class} $>$ $>$ Graph\+Manager\+::\+Object\+Class\+Map\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_a1935ba438d4d66da0e0ab76fdd3d634a}
+\hypertarget{class_graph_manager_affd253277449255227af6a23ef55f118}{}\index{Graph\+Manager@{Graph\+Manager}!Point\+Map@{Point\+Map}}
+\index{Point\+Map@{Point\+Map}!Graph\+Manager@{Graph\+Manager}}
+\subsubsection[{Point\+Map}]{\setlength{\rightskip}{0pt plus 5cm}map$<$ unsigned long, boost\+::shared\+\_\+ptr$<$ {\bf Point} $>$ $>$ Graph\+Manager\+::\+Point\+Map\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{class_graph_manager_affd253277449255227af6a23ef55f118}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Shape\+Learner\+Lib/sources/\hyperlink{graph_manager_8h}{graph\+Manager.\+h}\item 
+Shape\+Learner\+Lib/sources/\hyperlink{graph_manager_8cpp}{graph\+Manager.\+cpp}\end{DoxyCompactItemize}

@@ -87,14 +87,11 @@
     <ClInclude Include="sources\dbManager.h">
       <Filter>dbManager</Filter>
     </ClInclude>
-    <ClInclude Include="sources\graphManager.h">
-      <Filter>GraphManager</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\shapeLearner.h">
-      <Filter>ShapeLearner</Filter>
-    </ClInclude>
     <ClInclude Include="sources\shapeLearnerException.h">
       <Filter>ShapeLearner</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\shapeLearner.h">
+      <Filter>GraphManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,9 +116,6 @@
     <ClCompile Include="sources\dbManager.cpp">
       <Filter>dbManager</Filter>
     </ClCompile>
-    <ClCompile Include="sources\graphManager.cpp">
-      <Filter>GraphManager</Filter>
-    </ClCompile>
     <ClCompile Include="sources\Edge.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -144,7 +138,7 @@
       <Filter>ShapeLearner</Filter>
     </ClCompile>
     <ClCompile Include="sources\shapeLearner.cpp">
-      <Filter>ShapeLearner</Filter>
+      <Filter>GraphManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
