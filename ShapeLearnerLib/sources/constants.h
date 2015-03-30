@@ -20,14 +20,18 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+
+/*!	
+*	\namespace constants
+*	\brief Namespace used to save constants values used by the whole the library.
+*/
 namespace constants{
-	// Constantes sur les données des Notes
 
 	const unsigned int		SIZE_MAX_STRING = 255;
 	const unsigned int		MAX_DB_RETRY = 4;
 	const unsigned int		LogDB = 1;
 	const unsigned int		LogCore = 2;
-	const unsigned int		LogApp = 3;
+	const unsigned int		LogExec = 3;
 	const unsigned int		LogError = 4;
 
 }

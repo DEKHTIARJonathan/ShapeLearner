@@ -70,11 +70,13 @@ private:
 	odb::boost::lazy_weak_ptr<Graph> refGraph;
 	odb::boost::lazy_weak_ptr<Node> refNode;
 
+	void checkCorrectness(odb::callback_event e, odb::database&) const throw(ShapeLearnerExcept);
+
 	friend class odb::access;
 };
 
 #pragma db value(std::string) type("VARCHAR(255)")
-#pragma db object(Point)
+#pragma db object(Point) callback(checkCorrectness)
 #pragma db member(Point::idPoint) id auto
 #pragma db member(Point::refGraph) not_null on_delete(cascade)
 #pragma db member(Point::refNode) not_null on_delete(cascade)

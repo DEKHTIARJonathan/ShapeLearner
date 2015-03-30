@@ -20,16 +20,6 @@
 #include "allHeaders.h"
 using namespace std;
 
-/* *******************************************************************
-*                        Static DB Parameters                        *
- ********************************************************************/
-
-string ShapeLearner::dbName = "postgres";
-string ShapeLearner::dbUser = "postgres";
-string ShapeLearner::dbPass = "postgres";
-unsigned int ShapeLearner::dbPort = 5432;
-string ShapeLearner::dbHost = "localhost";
-string ShapeLearner::dbInitFile = "sources/structure.sql";
 
 /* *******************************************************************
 *                             Object MAPS                            *
@@ -46,31 +36,17 @@ map<string, boost::shared_ptr<GraphClass>>		ShapeLearner::GraphClassMap;
 *                           USER INTERFACE                           *
 ******************************************************************* */
 
-void ShapeLearner::openDatabase() {
-	DatabaseManager::Interface::openDatabase(dbUser, dbPass, dbName, dbHost, dbPort, dbInitFile);
-}
-
 void ShapeLearner::closeDatabase() throw(ShapeLearnerExcept) {
+	if (!DatabaseManager::Interface::isDbOpen())
+		throw ShapeLearnerExcept((string)__FUNCTION__, "Error : The database is not opened yet. Impossible to close it.");
 	DatabaseManager::Interface::closeDatabase();
 }
 
-void ShapeLearner::getDbCredentials(const bool dbInit) throw(ShapeLearnerExcept){
-	if (DatabaseManager::Interface::isDbOpen()){
+void ShapeLearner::openDatabase(const string& _dbUser, const string& _dbPass, const string& _dbName, const string& _dbHost, const unsigned int& _dbPort, const string& _dbInit)   throw(ShapeLearnerExcept) {
+	if (DatabaseManager::Interface::isDbOpen())
 		throw ShapeLearnerExcept((string)__FUNCTION__, "Error : The Database has already been instantiated. It's impossible to modify the Database's parameters");
-	}
-	else{
-		if (dbInit)
-			setDBInitFile();
-		else
-			dbInitFile = "";
-		#ifndef _DEBUG
-		setDbHost();
-		setDbPort();
-		setDbName();
-		setDbUser();
-		setDbPass();
-		#endif
-	}
+	else
+		DatabaseManager::Interface::openDatabase(_dbUser, _dbPass, _dbName, _dbHost, _dbPort, _dbInit);
 }
 
 /* *******************************************************************
@@ -178,69 +154,6 @@ boost::weak_ptr<ObjectClass> ShapeLearner::CommonInterface::getObjectClass(const
 /* *******************************************************************
 *                          Private FUNCTIONS                         *
  ********************************************************************/
-
-void ShapeLearner::setDbPort() throw(ShapeLearnerExcept){
-	string tmp;
-	do{
-		cout << "Please enter the listening port of your database server [DEFAULT = "+ std::to_string((_ULonglong)dbPort) +"] : ";
-		getline( std::cin, tmp );
-	}while (!tmp.empty() && stoul(tmp) <=0);
-
-	if (!tmp.empty()){
-		dbPort =  stoul(tmp);
-	}
-}
-
-void ShapeLearner::setDbName() throw(ShapeLearnerExcept){
-	string tmp;
-	do{
-		cout << "Please enter the name of your database : ";
-		getline( std::cin, tmp );
-	}while (tmp.empty());
-
-	if(!tmp.empty())
-			dbName = tmp;
-}
-
-void ShapeLearner::setDbUser() throw(ShapeLearnerExcept){
-	string tmp;
-	do{
-		cout << "Please enter your username : ";
-		getline( std::cin, tmp );
-	}while (tmp.empty());
-
-	if(!tmp.empty())
-			dbUser = tmp;
-}
-
-void ShapeLearner::setDbPass() throw(ShapeLearnerExcept){
-	string tmp;
-	cout << "Please enter your password : ";
-	getline( std::cin, tmp );
-
-	if(!tmp.empty())
-			dbPass = tmp;
-}
-
-void ShapeLearner::setDbHost() throw(ShapeLearnerExcept){
-	string tmp;
-	cout << "Please enter the IP address of your database server [DEFAULT = "+ dbHost +"] : ";
-	getline( std::cin, tmp );
-
-	if (!tmp.empty())
-		dbHost = tmp;
-}
-
-void ShapeLearner::setDBInitFile() throw(ShapeLearnerExcept){
-	#ifndef _DEBUG
-		string tmp;
-		cout << "Please enter the relative path to the file [DEFAULT = "+ dbInitFile +"] : ";
-		getline( std::cin, tmp );
-
-		if (!tmp.empty())
-			dbInitFile = tmp;
-	#endif
-}
 
 bool ShapeLearner::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade) throw (ShapeLearnerExcept){
 	bool rslt = true;

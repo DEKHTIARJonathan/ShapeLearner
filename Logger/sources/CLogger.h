@@ -47,12 +47,12 @@ class Logger{
 public:
 	
 	/*!
-	*	\fn static volatile void Log (string text, unsigned int logFile = constants::LogApp)
+	*	\fn static volatile void Log (string text, unsigned int logFile = constants::LogExec)
 	*	\brief Static method called to perform logging, it is "thread safe" and automaticly redirect to the correct log file.
 	*	\param text : What do we want to log.
 	*	\param logFile : What log file do you aim ? See constants.h for values
 	*/
-	static volatile void Log (string text, unsigned int logFile = constants::LogApp);
+	static volatile void Log (string text, unsigned int logFile = constants::LogExec);
 
 private:
 	/*!

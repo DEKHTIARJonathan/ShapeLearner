@@ -27,7 +27,7 @@ using namespace std;
 
 class Logger{
 public:
-	static volatile void Log (std::string text, unsigned int logFile = constants::LogApp);
+	static volatile void Log (std::string text, unsigned int logFile = constants::LogExec);
 };
 
 class appTracer;

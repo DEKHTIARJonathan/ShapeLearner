@@ -108,12 +108,12 @@ class DatabaseManager
 				}
 
 				/*!
-				*	\fn template <class T> static boost::shared_ptr<T> loadObject(string keyDB) throw (ShapeLearnerExcept);
+				*	\fn template <class T, class Y> static boost::shared_ptr<T> loadObject(Y keyDB) throw (ShapeLearnerExcept);
 				*	\brief Template of a static method returning a shared_ptr to the DBObject just loaded. It only treats objects with primary key as string.
 				*	\param keyDB The object's key of the record we want to retrieve.
 				*/
-				template <class T> 
-				static boost::shared_ptr<T> loadObject(string keyDB) throw (ShapeLearnerExcept){
+				template <class T, class Y>
+				static boost::shared_ptr<T> loadObject(Y keyDB) throw (ShapeLearnerExcept){
 					transaction t (database->begin ());
 					try{
 						boost::shared_ptr<T> rslt (database->load<T>(keyDB));
@@ -126,29 +126,7 @@ class DatabaseManager
 						return boost::shared_ptr<T>();
 					}
 				}
-
-				/*!
-				*	\fn template <class T> static boost::shared_ptr<T> loadObject(unsigned long keyDB) throw (ShapeLearnerExcept);
-				*	\brief Template of a static method returning a shared_ptr to the DBObject just loaded. It only treats objects with primary key as unsigned long.
-				*	\param keyDB The object's key of the record we want to retrieve.
-				*/
-				template <class T> 
-				static boost::shared_ptr<T> loadObject(unsigned long keyDB) throw (ShapeLearnerExcept){
-					transaction t (database->begin ());
-					try
-					{
-						boost::shared_ptr<T> rslt (database->load<T> (keyDB));
-						t.commit ();
-
-						return rslt;
-					}
-					catch (...)
-					{
-						t.rollback();
-						return boost::shared_ptr<T>();
-					}
-				}
-
+				
 				/*!
 				*	\fn template <class T, class Y> static vector<unsigned long> getForeignRelations(Y foreignKey) throw (ShapeLearnerExcept);
 				*	\brief Template of a static method returning a vector of keys in the DB. This gives all the objects of a certain type which have a certain foreign key.
@@ -305,12 +283,12 @@ class DatabaseManager
 		/* **************** Savers *************************/
 
 		/*!
-		*	\fn template<class T> static string saveObjectString(T& obj);
+		*	\fn template<class T> static string saveObjectString(T& obj) throw(ShapeLearnerExcept);
 		*	\brief  Static method to insert an object in the DB which have a primary key as string.
 		*	\param obj : The object we want to insert in the DB.
 		*/
 		template<class T>
-		static string saveObjectString(T& obj){
+		static string saveObjectString(T& obj) throw(ShapeLearnerExcept){
 			transaction t (database->begin());
 			try{
 				string rslt = database->persist(obj);

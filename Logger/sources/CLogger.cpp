@@ -42,7 +42,7 @@ volatile void Logger::Log(string text, unsigned int logFile){
 		case constants::LogCore:
 			Log->writeCore(text);
 			break;
-		case constants::LogApp:
+		case constants::LogExec:
 			Log->writeApp(text);
 			break;
 		case constants::LogError:

@@ -22,6 +22,8 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (db);
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
+
+    static_cast< ::Point&> (x).checkCorrectness (e, db);
   }
 
   inline
@@ -31,6 +33,8 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (db);
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
+
+    static_cast<const ::Point&> (x).checkCorrectness (e, db);
   }
 
   // pointsInNode

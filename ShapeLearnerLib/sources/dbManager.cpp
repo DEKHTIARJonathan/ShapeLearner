@@ -120,6 +120,7 @@ AppTracer DatabaseManager::appliTracer;
 
 void DatabaseManager::Interface::openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort, const string& dbInit) throw(ShapeLearnerExcept){
 	if( database == NULL ){
+		Logger::Log("Opening Connection to the Database.", constants::LogExec);
 		database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
 		database->tracer(appliTracer);
 		
@@ -131,6 +132,7 @@ void DatabaseManager::Interface::openDatabase(const string &dbUser, const string
 }
 
 void DatabaseManager::Interface::closeDatabase() throw(ShapeLearnerExcept){
+	Logger::Log("Closing Connection to the Database.", constants::LogExec);
 	if( database != NULL ){
 		delete database;
 		database = NULL;

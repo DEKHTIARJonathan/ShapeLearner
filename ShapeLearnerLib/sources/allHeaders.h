@@ -45,11 +45,12 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/filesystem.hpp>
 
-
 //#include <ppl.h>
 
 #include <odb/core.hxx>
+#include <odb/callback.hxx>
 #include <odb/boost/lazy-ptr.hxx>
+
 
 #ifdef _MSC_VER
 	// ODB Classes
@@ -58,15 +59,17 @@
 	#include <odb/transaction.hxx>
 	#include <odb/pgsql/database.hxx>
 	#include <odb/schema-catalog.hxx>
+	
 
 	// Software's architecture
 	#include "CLogger.h"
 	#include "shapeLearner.h"
-	#include "shapeLearnerException.h"
+	
 	#include "dbManager.h"
 #endif //_MSC_VER
 
 #include "constants.h"
+#include "shapeLearnerException.h"
 
 /* Object Classes for ODB */
 #include "GraphClass.h"

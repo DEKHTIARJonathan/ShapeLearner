@@ -70,3 +70,25 @@ boost::weak_ptr<Graph> Point::getParentGraph(){
 		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(ShapeLearner::CommonInterface::getGraph(refGraph.object_id<Graph>())));
 	return refGraph.get_eager();	
 }
+
+void Point::checkCorrectness(odb::callback_event e, odb::database&) const throw(ShapeLearnerExcept) {
+	switch (e)
+	{
+		case odb::callback_event::pre_persist:
+		{
+			unsigned long idGraphPoint = refNode.lock()->getParentGraph().lock()->getKey();
+			unsigned long idGraphNode = refGraph.lock()->getKey();
+
+			if (idGraphPoint != idGraphNode)
+				throw ShapeLearnerExcept((string)__FUNCTION__ ,"Impossible to save this Point. The Point is not in the same Graph as the linked Node.");
+			break;
+		}
+		case odb::callback_event::pre_update:
+			unsigned long idGraphPoint = refNode.lock()->getParentGraph().lock()->getKey();
+			unsigned long idGraphNode = refGraph.lock()->getKey();
+
+			if (idGraphPoint != idGraphNode)
+				throw ShapeLearnerExcept((string)__FUNCTION__ ,"Impossible to update this Point. The Point is not in the same Graph as the linked Node.");
+			break;
+	}
+}

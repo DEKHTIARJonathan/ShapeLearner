@@ -47,3 +47,27 @@ unsigned long Edge::saveInDB(){
 		return ShapeLearner::ObjectInterface::saveObject(*this);
 	#endif //_MSC_VER
 }
+
+void Edge::checkCorrectness(odb::callback_event e, odb::database&) const throw(ShapeLearnerExcept) {
+	switch (e)
+	{
+		case odb::callback_event::pre_persist:
+		{
+			unsigned long idGraphSource = source.lock()->getParentGraph().lock()->getKey();
+			unsigned long idGraphTarget = target.lock()->getParentGraph().lock()->getKey();
+			unsigned long idGraphEdge = refGraph.lock()->getKey();
+
+			if (idGraphSource != idGraphTarget || idGraphTarget != idGraphEdge)
+				throw ShapeLearnerExcept((string)__FUNCTION__ ,"Impossible to save this edge. The Nodes connected are not in the same graph or/and is different from Edge's Graph.");
+			break;
+		}
+		case odb::callback_event::pre_update:
+			unsigned long idGraphSource = source.lock()->getParentGraph().lock()->getKey();
+			unsigned long idGraphTarget = target.lock()->getParentGraph().lock()->getKey();
+			unsigned long idGraphEdge = refGraph.lock()->getKey();
+
+			if (idGraphSource != idGraphTarget || idGraphTarget != idGraphEdge)
+				throw ShapeLearnerExcept((string)__FUNCTION__ ,"Impossible to update this edge. The Nodes connected are not in the same graph or/and is different from Edge's Graph.");
+			break;
+	}
+}

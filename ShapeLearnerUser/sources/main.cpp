@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 			#endif
 		}
 
-		// Did the user requested any 'help' ?
+		// Did the user request any 'help' ?
 		if (cmdLine.HasSwitch("-h")|| cmdLine.HasSwitch("-help") || cmdLine.HasSwitch("--help")){
 			cmdLine.ShowHelp("help.txt");
 			system ("PAUSE");
@@ -47,13 +47,9 @@ int main(int argc, char **argv)
 
 		// Did the user asked to use a previously created database ?
 		if (cmdLine.HasSwitch("--init"))
-			ShapeLearner::getDbCredentials(true); // En Debug les identifiants sont HardCoded.
-		else
-			ShapeLearner::getDbCredentials(); // En Debug les identifiants sont HardCoded.
-
-		// On récupère les identifiants de connexion à la BDD
-
-		ShapeLearner::openDatabase(); // We connect to the DB
+			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 5432, "sources/structure.sql");
+		else		
+			ShapeLearner::openDatabase();
 
 		ShapeLearner::closeDatabase(); // We disconnect to the DB
 
@@ -62,11 +58,10 @@ int main(int argc, char **argv)
 	{
 		Logger::Log(e.what (), constants::LogError);
 		system ("PAUSE");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	cout<<endl<<endl;
 	system ("PAUSE");
-
 	return EXIT_SUCCESS;
 }

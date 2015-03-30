@@ -19,9 +19,6 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{cb4334c9-71ae-4edd-a725-65089f7d8da5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GraphManager">
-      <UniqueIdentifier>{611720ad-7e6b-4087-8d42-83042692e475}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ODB">
       <UniqueIdentifier>{3baeecc2-a3f6-43a6-a56d-03d31f54b007}</UniqueIdentifier>
     </Filter>
@@ -91,7 +88,7 @@
       <Filter>ShapeLearner</Filter>
     </ClInclude>
     <ClInclude Include="sources\shapeLearner.h">
-      <Filter>GraphManager</Filter>
+      <Filter>ShapeLearner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +135,7 @@
       <Filter>ShapeLearner</Filter>
     </ClCompile>
     <ClCompile Include="sources\shapeLearner.cpp">
-      <Filter>GraphManager</Filter>
+      <Filter>ShapeLearner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

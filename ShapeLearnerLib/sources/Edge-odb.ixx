@@ -22,6 +22,8 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (db);
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
+
+    static_cast< ::Edge&> (x).checkCorrectness (e, db);
   }
 
   inline
@@ -31,6 +33,8 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (db);
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
+
+    static_cast<const ::Edge&> (x).checkCorrectness (e, db);
   }
 
   // EdgeIdViewBySource
