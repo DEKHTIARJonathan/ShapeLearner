@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['shapelearner',['ShapeLearner',['../dd/d7e/class_database_manager_1_1_interface.html#a3a388a09d33d463cad9a452a65cab784',1,'DatabaseManager::Interface::ShapeLearner()'],['../dc/de6/class_edge_1_1_access.html#a3a388a09d33d463cad9a452a65cab784',1,'Edge::Access::ShapeLearner()'],['../d1/d8d/class_graph_1_1_access.html#a3a388a09d33d463cad9a452a65cab784',1,'Graph::Access::ShapeLearner()'],['../d8/d97/class_graph_class_1_1_access.html#a3a388a09d33d463cad9a452a65cab784',1,'GraphClass::Access::ShapeLearner()'],['../d2/d73/class_node_1_1_access.html#a3a388a09d33d463cad9a452a65cab784',1,'Node::Access::ShapeLearner()'],['../d8/df9/class_object_class_1_1_access.html#a3a388a09d33d463cad9a452a65cab784',1,'ObjectClass::Access::ShapeLearner()'],['../dc/d97/class_point_1_1_access.html#a3a388a09d33d463cad9a452a65cab784',1,'Point::Access::ShapeLearner()']]]
+];
