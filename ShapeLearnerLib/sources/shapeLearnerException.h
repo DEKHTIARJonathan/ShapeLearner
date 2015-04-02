@@ -12,9 +12,9 @@
 
 /**
 *	\file shapeLearnerException.h
-*	\brief Classe d'Exception pour la classe Façade ShapeLearner
+*	\brief Exception class used by the whole library.
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _SHAPE_LEARNER_EXCEPTION_
@@ -37,25 +37,11 @@ class ShapeLearnerExcept : public std::exception
 		// ================== Constructor ========================
 		/*!
 		*	\fn ShapeLearnerExcept(const string &procedure, const string &msgError ) throw();
-		*	\brief Public constructor
+		*	\brief Public constructor, formats and save the exception's message in the attribut m_what.
 		*	\param procedure : Name of the calling function.
 		*	\param msgError : Message explaining the error.
 		*/
 		ShapeLearnerExcept(const string &procedure, const string &msgError ) throw();
-
-		// ================== Getters ========================
-
-		/*!
-		*	\fn const string &	getProcedure() const throw();
-		*	\brief Getter for the attribut : m_procedure;
-		*/
-		const string &	getProcedure() const throw();
-
-		/*!
-		*	\fn const string &	getMsgError() const throw();
-		*	\brief Getter for the attribut : m_msgError;
-		*/
-		const string &	getMsgError() const throw();
 
 		// ================== Implementation ========================
 
@@ -74,9 +60,19 @@ class ShapeLearnerExcept : public std::exception
 		virtual ~ShapeLearnerExcept() throw();
 
 	private:
-		// Members
+		/*!
+		*	The variable containing the name of the procedure.
+		*/
 		string			m_procedure;
+		
+		/*!
+		*	The variable containing the error's message.
+		*/
 		string			m_msgError;
+
+		/*!
+		*	Exception message well formated.
+		*/
 		string			m_what;
 };
 

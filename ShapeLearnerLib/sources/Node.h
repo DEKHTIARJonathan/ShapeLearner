@@ -14,7 +14,7 @@
 *	\file Node.h
 *	\brief Node Header
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _NODE_
@@ -27,9 +27,17 @@ class Graph; //Forward Declaration of the class contained in Graph.h
 class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 class Point; //Forward Declaration of the class contained in Point.h
 
+/*!	
+*	\class Node
+*	\brief Part of the Graph Data Model. A Node is composed of many Points and can be link to many Edges. It is one of the key components of a Graph.
+*/
 class Node
 {
 public:
+	/*!	
+	*	\class Node::Access
+	*	\brief Limit instantiation only to ShapeLearner. Static subclass which role is only to execute its unique static method.
+	*/
 	class Access {
 		friend class ShapeLearner;
 		static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph, unsigned long _index = 1, unsigned long _level = 1, unsigned long _mass = 1, unsigned long _type = 1, string _label = "1"){
@@ -69,12 +77,6 @@ public:
 	/* =========== Template function =========== */
 
 private:
-	Node() {}
-	Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index = 1, unsigned long _level = 1, unsigned long _mass = 1, unsigned long _type = 1, string _label = "1");
-
-	void updateInDB();
-	unsigned long saveInDB();
-
 	unsigned long						idNode;
 	unsigned long						index;
 	unsigned long						level;
@@ -82,7 +84,28 @@ private:
 	unsigned long						type;
 	string								label;
 	odb::boost::lazy_weak_ptr<Graph>	refGraph;
+	
+	/*!
+	*	\brief  Classical constructor needed to let ODB load objects from DB.
+	*/
+	Node() {}
+	Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index = 1, unsigned long _level = 1, unsigned long _mass = 1, unsigned long _type = 1, string _label = "1");
 
+	/*!
+	*	\fn void updateInDB();
+	*	\brief Update the object in the database.
+	*/
+	void updateInDB();
+
+	/*!
+	*	\fn unsigned long saveInDB();
+	*	\brief Persist the object in the database.
+	*/
+	unsigned long saveInDB();
+
+	/*!
+	*	\brief Friendship required in order to let ODB manage the object.
+	*/
 	friend class odb::access;
 };
 

@@ -14,7 +14,7 @@
 *	\file Point.h
 *	\brief Point Header
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _POINT_
@@ -27,11 +27,28 @@ class Graph; //Forward Declaration of the class contained in Graph.h
 class Node; //Forward Declaration of the class contained in Node.h
 class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 
+/*!	
+*	\class Point
+*	\brief Part of the Graph Data Model. A Node is composed of many Points. Only useful in case of using shockGraph, it draws the shape of the Node.
+*/
 class Point
 {
 public:
+	/*!	
+	*	\class Point::Access
+	*	\brief Limit instantiation only to ShapeLearner. Static subclass which role is only to execute its unique static method.
+	*/
 	class Access {
 		friend class ShapeLearner;
+		/*!
+		*	\fn static boost::shared_ptr<Point> createPoint(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
+		*	\brief Return a boost::shared_ptr<Point> on a newly created Point.
+		*	\param _refNode : The Node which contains the new Point.
+		*	\param _refGraph : The Graph which contains the new Point.
+		*	\param _xCoord : The "X" Coordinate of the Point.
+		*	\param _yCoord : The "Y" Coordinate of the Point.
+		*	\param _radius : The "Radius" of the Point.
+		*/
 		static boost::shared_ptr<Point> createPoint(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1){
 			return boost::shared_ptr<Point>(new Point(_refNode, _refGraph, _xCoord, _yCoord , _radius));
 		}
@@ -56,12 +73,6 @@ public:
 	/* =========== Template function =========== */
 
 private:
-	Point() {}
-	Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
-	
-	void updateInDB();
-	unsigned long saveInDB();
-
 	unsigned long idPoint;
 	double xCoord;
 	double yCoord;
@@ -69,9 +80,34 @@ private:
 
 	odb::boost::lazy_weak_ptr<Graph> refGraph;
 	odb::boost::lazy_weak_ptr<Node> refNode;
+	
+	/*!
+	*	\brief  Classical constructor needed to let ODB load objects from DB.
+	*/
+	Point() {}
+	Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
+	
+	/*!
+	*	\fn void updateInDB();
+	*	\brief Update the object in the database.
+	*/
+	void updateInDB();
 
+	/*!
+	*	\fn unsigned long saveInDB();
+	*	\brief Persist the object in the database.
+	*/
+	unsigned long saveInDB();
+
+	/*!
+	*	\fn void checkCorrectness(odb::callback_event e, odb::database&) const throw(ShapeLearnerExcept);
+	*	\brief C++ Trigger Launched on each DB Operation on this object.
+	*/
 	void checkCorrectness(odb::callback_event e, odb::database&) const throw(ShapeLearnerExcept);
 
+	/*!
+	*	\brief Friendship required in order to let ODB manage the object.
+	*/
 	friend class odb::access;
 };
 

@@ -12,9 +12,9 @@
 
 /**
 *	\file allHeaders.h
-*	\brief Fichier contenant tous les includes à réaliser de manière à simplifier les inclusions et éviter les omissions.
+*	\brief File containg every needed headers.
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _ALL_HEADERS_
@@ -54,7 +54,6 @@
 
 #ifdef _MSC_VER
 	// ODB Classes
-
 	#include <odb/database.hxx>
 	#include <odb/transaction.hxx>
 	#include <odb/pgsql/database.hxx>
@@ -64,7 +63,6 @@
 	// Software's architecture
 	#include "CLogger.h"
 	#include "shapeLearner.h"
-	
 	#include "dbManager.h"
 #endif //_MSC_VER
 

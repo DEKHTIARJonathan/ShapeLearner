@@ -12,7 +12,7 @@
 
 /**
 *	\file shapeLearnerException.h
-*	\brief Classe d'Exception pour la classe Façade ShapeLearner
+*	\brief Exception class used by the whole library.
 *	\version 1.0
 *	\author DEKHTIAR Jonathan
 */
@@ -26,27 +26,52 @@
 
 using namespace std;
 
+/*!	
+*	\class ShapeLearnerExcept
+*	\brief The only exception class in the project. It has been developped in order to display as much info as possible.
+*	It derives publicly from the standard exception class : std::exception.
+*/
 class ShapeLearnerExcept : public std::exception
 {
 	public:
-		// Constructor
+		// ================== Constructor ========================
+		/*!
+		*	\fn ShapeLearnerExcept(const string &procedure, const string &msgError ) throw();
+		*	\brief Public constructor
+		*	\param procedure : Name of the calling function.
+		*	\param msgError : Message explaining the error.
+		*/
 		ShapeLearnerExcept(const string &procedure, const string &msgError ) throw();
 
-		// Getter
+		// ================== Getters ========================
+
+		/*!
+		*	\fn const string &	getProcedure() const throw();
+		*	\brief Getter for the attribut : m_procedure;
+		*/
 		const string &	getProcedure() const throw();
+
+		/*!
+		*	\fn const string &	getMsgError() const throw();
+		*	\brief Getter for the attribut : m_msgError;
+		*/
 		const string &	getMsgError() const throw();
 
-		// Implementation
+		// ================== Implementation ========================
+
+		/*!
+		*	\fn virtual const char*	what() const throw();
+		*	\brief Virtual function, format and return the error as a unique string.
+		*/
 		virtual const char*	what() const throw();
 
-		// Destructor
-		virtual ~ShapeLearnerExcept() throw();
+		// ================== Implementation ========================
 
-	private:
-		// Members
-		string			m_procedure;
-		string			m_msgError;
-		string			m_what;
+		/*!
+		*	\fn virtual ~ShapeLearnerExcept() throw();
+		*	\brief virtual destructor.
+		*/
+		virtual ~ShapeLearnerExcept() throw();
 };
 
 #endif //_SHAPE_LEARNER_EXCEPTION_

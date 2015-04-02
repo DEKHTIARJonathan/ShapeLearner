@@ -14,7 +14,7 @@
 *	\file Edge.h
 *	\brief Edge Header
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _EDGE_
@@ -27,9 +27,17 @@ class Graph; //Forward Declaration of the class contained in Graph.h
 class Node; //Forward Declaration of the class contained in Node.h
 class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 
+/*!	
+*	\class GraphClass
+*	\brief Part of the Graph Data Model. One of the main components of the model, it links 2 nodes in the same graph.
+*/
 class Edge
 {
 public:
+	/*!	
+	*	\class Edge::Access
+	*	\brief Limit instantiation only to ShapeLearner. Static subclass which role is only to execute its unique static method.
+	*/
 	class Access {
 		friend class ShapeLearner;
 		static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1){
@@ -47,20 +55,41 @@ public:
 	/* =========== Template function =========== */
 
 private:
-	Edge() {}
-	Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1);
-
-	void updateInDB();
-	unsigned long saveInDB();
-
 	unsigned long idEdge;
+	unsigned long weight;
+
 	odb::boost::lazy_weak_ptr<Node> source;
 	odb::boost::lazy_weak_ptr<Node> target;
 	odb::boost::lazy_weak_ptr<Graph> refGraph;
-	unsigned long weight;
+	
+	/*!
+	*	\brief  Classical constructor needed to let ODB load objects from DB.
+	*/
+	Edge() {}
+	Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1);
 
+	/*!
+	*	\fn void updateInDB();
+	*	\brief Update the object in the database.
+	*/
+	void updateInDB();
+
+	/*!
+	*	\fn unsigned long saveInDB();
+	*	\brief Persist the object in the database.
+	*/
+	unsigned long saveInDB();
+
+
+	/*!
+	*	\fn void checkCorrectness(odb::callback_event e, odb::database&) const throw(ShapeLearnerExcept);
+	*	\brief C++ Trigger Launched on each DB Operation on this object.
+	*/
 	void checkCorrectness(odb::callback_event e, odb::database&) const throw(ShapeLearnerExcept);
 
+	/*!
+	*	\brief Friendship required in order to let ODB manage the object.
+	*/
 	friend class odb::access;
 };
 

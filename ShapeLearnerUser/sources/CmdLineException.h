@@ -12,9 +12,9 @@
 
 /**
 *	\file CmdLineException.h
-*	\brief Classe d'Exception pour la classe CmdLine
+*	\brief Exception class for the class CmdLine - Header file
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _CCMDLINEEXCEPTION_
@@ -25,26 +25,48 @@
 #include <string>
 using namespace std;
 
+/*!	
+*	\class CmdLineException
+*	\brief The exception class working with the class CmdLine. It has been developped in order to display as much info as possible.
+*	It derives publicly from the standard exception class : std::exception.
+*/
 class CmdLineException : public std::exception
 {
 	public:
-		// Constructor
+		/*!
+		*	\fn CmdLineException(const string &procedure, const string &msgError ) throw();
+		*	\brief Public constructor, format automaticly the exception message as wanted.
+		*	\param procedure : The function raising the exception
+		*	\param msgError : The message explaining why an exception has been raised.
+		*/
 		CmdLineException(const string &procedure, const string &msgError ) throw();
 
-		// Getter
-		const string &	getProcedure() const throw();
-		const string &	getMsgError() const throw();
-
-		// Implementation
+		/*!
+		*	\fn virtual const char*	what() const throw();
+		*	\brief Returns the exception's message.
+		*/
 		virtual const char*	what() const throw();
 
-		// Destructor
+		/*!
+		*	\fn virtual ~CmdLineException() throw();
+		*	\brief Public virtual destructor
+		*/
 		virtual ~CmdLineException() throw();
 
 	private:
-		// Member
+		/*!
+		*	The variable containing the name of the procedure.
+		*/
 		string			m_procedure;
+		
+		/*!
+		*	The variable containing the error's message.
+		*/
 		string			m_msgError;
+
+		/*!
+		*	Exception message well formated.
+		*/
 		string			m_what;
 };
 

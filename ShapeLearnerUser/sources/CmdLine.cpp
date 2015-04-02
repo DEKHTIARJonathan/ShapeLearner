@@ -31,10 +31,9 @@
 
 /**
 *	\file CmdLine.cpp
-*	\brief Classe de gestion des argument en ligne de commande.
+*	\brief Command Line Parser source file
 *	\version 1.1
-*	\author Chris Losinger, Smaller Animals Software.
-*	\author Modified by Jonathan DEKHTIAR
+*	\author Chris Losinger, modified by Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #include "CmdLine.h"

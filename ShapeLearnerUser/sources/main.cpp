@@ -12,9 +12,9 @@
 
 /**
 *	\file main.cpp
-*	\brief Fichier contenant la fonction centrale : main()
+*	\brief Program calling the ShapeLearnerLib 
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #include <iostream>

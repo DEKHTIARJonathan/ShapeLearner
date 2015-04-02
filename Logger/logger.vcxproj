@@ -22,6 +22,7 @@
     <SccProjectName />
     <SccLocalPath />
     <ProjectName>CLogger</ProjectName>
+    <ProjectGuid>{89F3B40F-D0FF-3276-30F8-094B420403FC}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

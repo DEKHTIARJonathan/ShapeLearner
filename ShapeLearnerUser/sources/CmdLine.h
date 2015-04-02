@@ -30,10 +30,9 @@
 
 /**
 *	\file CmdLine.h
-*	\brief Classe de gestion des argument en ligne de commande.
+*	\brief Command Line Parser header file
 *	\version 1.1
-*	\author Chris Losinger, Smaller Animals Software.
-*	\author Modified by Jonathan DEKHTIAR
+*	\author Chris Losinger and modified by Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _CMD_LINE_PARSER_
@@ -63,7 +62,11 @@ struct CmdParam
 // this class is actually a map of strings to vectors
 typedef map<string, CmdParam> _CmdLine;
 
-// the command line parser class
+
+/*!	
+*	\class CmdLine
+*	\brief Command Line Parser, publicly derivate from a map of strings : _CmdLine
+*/
 class CmdLine : public _CmdLine
 {
 public:

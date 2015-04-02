@@ -14,7 +14,7 @@
 *	\file ObjectClass.cpp
 *	\brief ObjectClass Cpp File
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #include "allHeaders.h"

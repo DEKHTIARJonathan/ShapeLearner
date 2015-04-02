@@ -14,7 +14,7 @@
 *	\file CLogger.cpp
 *	\brief Logger Source File
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #include "CLogger.h"
@@ -43,7 +43,7 @@ volatile void Logger::Log(string text, unsigned int logFile){
 			Log->writeCore(text);
 			break;
 		case constants::LogExec:
-			Log->writeApp(text);
+			Log->writeExec(text);
 			break;
 		case constants::LogError:
 			Log->writeError(text);
@@ -80,9 +80,9 @@ void Logger::writeCore (string text){
 		cout << text << endl;
 	#endif
 }
-void Logger::writeApp (string text){
+void Logger::writeExec (string text){
 	string localTime = getTime();
-	outstreamApp << localTime<< " # " << text << endl;
+	outstreamExec << localTime<< " # " << text << endl;
 	#ifdef _DEBUG
 		cout << text << endl;
 	#endif
@@ -96,7 +96,6 @@ void Logger::writeError (string text){
 string Logger::getTime() const{
 	std::stringstream stream;
 	boost::posix_time::time_facet* facet = new boost::posix_time::time_facet("%Y-%m-%d %H:%M:%S:%f");
-	//const boost::posix_time::ptime time = boost::date_time::second_clock<boost::posix_time::ptime>::local_time();
 	const boost::posix_time::ptime time = boost::posix_time::microsec_clock::local_time();
 
 	stream.imbue(std::locale(std::locale::classic(), facet));
@@ -107,16 +106,16 @@ string Logger::getTime() const{
 Logger::Logger(){
 	outstreamDB.open("ShapeLearner.DB.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
 	outstreamError.open("ShapeLearner.Error.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
-	outstreamApp.open("ShapeLearner.Exec.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
+	outstreamExec.open("ShapeLearner.Exec.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
 	outstreamCore.open("ShapeLearner.Core.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
-	writeApp("Application has been started successfully");
+	writeExec("Application has been started successfully");
 }
 
 Logger::~Logger(){
-	writeApp("Application has been shut down successfully");
+	writeExec("Application has been shut down successfully");
 	outstreamDB.close();
 	outstreamError.close();
-	outstreamApp.close();
+	outstreamExec.close();
 	outstreamCore.close();
 }
 

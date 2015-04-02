@@ -14,7 +14,7 @@
 *	\file CLogger.h
 *	\brief Logger Header
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 #ifndef _CLOGGER_
 #define _CLOGGER_
@@ -68,7 +68,7 @@ private:
 	/*!
     *	File stream for the Exec Log File
     */
-	ofstream outstreamApp;
+	ofstream outstreamExec;
 	
 	/*!
     *	File stream for the Core Log File
@@ -94,11 +94,11 @@ private:
 	void writeDB (string text);
 
 	/*!
-	*	\fn void writeApp (string text)
+	*	\fn void writeExec (string text)
 	*	\brief  Private method called to perform logging into the App log file.
 	*	\param text : What do we want to log.
 	*/
-	void writeApp (string text);
+	void writeExec (string text);
 	
 	/*!
 	*	\fn void writeCore (string text)

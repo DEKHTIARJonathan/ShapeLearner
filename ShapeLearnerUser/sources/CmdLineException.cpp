@@ -12,9 +12,9 @@
 
 /**
 *	\file CmdLineException.cpp
-*	\brief Classe d'Exception pour la classe CmdLine
+*	\brief Exception class for the class CmdLine - Source file
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #include "CmdLineException.h"
@@ -25,11 +25,8 @@ using namespace std;
 **********************************************************************/
 
 // Generic DBException constructor
-CmdLineException::CmdLineException( const string &procedure, const string &msgError ) throw() : std::exception()
+CmdLineException::CmdLineException( const string &procedure, const string &msgError ) throw() : std::exception(), m_procedure(procedure), m_msgError(msgError)
 {
-	m_procedure	= procedure;
-	m_msgError	= msgError;
-
 	stringstream ss;
 
 	ss << "An error occured on '" << m_procedure << "' procedure :" << endl;
@@ -39,13 +36,6 @@ CmdLineException::CmdLineException( const string &procedure, const string &msgEr
 
 	m_what = ss.str().data();
 }
-
-/* *******************************************************************
-*                                Getter                              *
-*********************************************************************/
-
-const string &	CmdLineException::getProcedure() const throw() {return m_procedure;}
-const string &	CmdLineException::getMsgError() const throw() {return m_msgError;}
 
 /* *******************************************************************
 *                          Implementation                           *

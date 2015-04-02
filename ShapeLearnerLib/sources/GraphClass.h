@@ -14,7 +14,7 @@
 *	\file GraphClass.h
 *	\brief GraphClass Header
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #ifndef _GRAPH_CLASS_
@@ -26,9 +26,17 @@ using namespace std;
 class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
 class ShapeLearnerExcept;
 
+/*!	
+*	\class GraphClass
+*	\brief Part of the Graph Data Model. A GraphClass represents the type of graph being used : ShockGraph, Precedance Graph, Topological Graph.
+*/
 class GraphClass
 {
 public:
+	/*!	
+	*	\class GraphClass::Access
+	*	\brief Limit instantiation only to ShapeLearner. Static subclass which role is only to execute its unique static method.
+	*/
 	class Access {
 		friend class ShapeLearner;
 		static  boost::shared_ptr<GraphClass> createGraphClass(string name, bool isDirect = false, bool isAcyclic = false){
@@ -51,16 +59,31 @@ public:
 	/* =========== Template function =========== */
 
 private:
-	GraphClass() {}
-	GraphClass(string name, bool isDirect = false, bool isAcyclic = false);
-
-	void updateInDB();
-	string saveInDB();
-
 	string graphClassName;
 	bool directGraph;
 	bool acyclicGraph;
+	
+	/*!
+	*	\brief  Classical constructor needed to let ODB load objects from DB.
+	*/
+	GraphClass() {}
+	GraphClass(string name, bool isDirect = false, bool isAcyclic = false);
 
+	/*!
+	*	\fn void updateInDB();
+	*	\brief Update the object in the database.
+	*/
+	void updateInDB();
+
+	/*!
+	*	\fn string saveInDB();
+	*	\brief Persist the object in the database.
+	*/
+	string saveInDB();
+
+	/*!
+	*	\brief Friendship required in order to let ODB manage the object.
+	*/
 	friend class odb::access;
 };
 

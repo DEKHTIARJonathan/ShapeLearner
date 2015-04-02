@@ -14,16 +14,18 @@
 *	\file shapeLearner.h
 *	\brief ShapeLearner header file. Central point in the software. It realizes the task distribution to the different instances of the software and make them communicate without knowing of each other.
 *	\version 1.1
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
-#ifndef _GRAPH_MANAGER_H_
-#define _GRAPH_MANAGER_H_
+#ifndef _SHAPE_LEARNER_H_
+#define _SHAPE_LEARNER_H_
 
 #include "allHeaders.h"
+#include "dbManager.h"
+
 using namespace std;
 
-class ShapeLearner; //Forward Declaration of the class contained in shapeLearnerException.h
+class DatabaseManager; //Forward Declaration of the class contained in shapeLearnerException.h
 class ShapeLearnerExcept; //Forward Declaration of the class contained in shapeLearnerException.h
 class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
 class GraphClass; //Forward Declaration of the class contained in GraphClass.h
@@ -45,7 +47,6 @@ class ShapeLearner
 		/*!
 		*	\fn static void openDatabase(const string& _dbUser, const string& _dbPass, const string& _dbName, const string& _dbHost, const unsigned int& _dbPort, const string& _dbInit = "") throw(ShapeLearnerExcept);
 		*	\brief Open the connection to the PostgreSQL database.
-		*	\brief Static Method setting all the DB Connection's credentials.
 		*	\param _dbUser : The username used to connect to the DB.
 		*	\param _dbPass : The password associated with the username.
 		*	\param _dbName : The database's name.
@@ -137,7 +138,6 @@ class ShapeLearner
 			friend class Node;
 			friend class Edge;
 			friend class Point;
-			friend class ShapeLearner;
 
 		private:
 
@@ -389,4 +389,4 @@ class ShapeLearner
 		~ShapeLearner();
 };
 
-#endif //_GRAPH_MANAGER_H_
+#endif //_SHAPE_LEARNER_H_

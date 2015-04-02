@@ -12,9 +12,9 @@
 
 /**
 *	\file shapeLearnerException.cpp
-*	\brief Classe d'Exception pour le projet Shape Learner
+*	\brief Exception class used by the whole library.
 *	\version 1.0
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
 #include "allHeaders.h"
@@ -25,11 +25,8 @@ using namespace std;
  ********************************************************************/
 
 // Generic DBException constructor
-ShapeLearnerExcept::ShapeLearnerExcept( const string &procedure, const string &msgError ) throw() : std::exception()
-{
-	m_procedure	= procedure;
-	m_msgError	= msgError;
-
+ShapeLearnerExcept::ShapeLearnerExcept( const string &procedure, const string &msgError ) throw() :  std::exception(), m_procedure(procedure), m_msgError(msgError) {
+	
 	stringstream ss;
 
 	ss << "An error occured on '" << m_procedure << "' procedure :" << endl;
@@ -39,13 +36,6 @@ ShapeLearnerExcept::ShapeLearnerExcept( const string &procedure, const string &m
 
 	m_what = ss.str().data();
 }
-
-/********************************************************************
- *                              Getter                              *
- ********************************************************************/
-
-const string &	ShapeLearnerExcept::getProcedure() const throw() {	return m_procedure;	}
-const string &	ShapeLearnerExcept::getMsgError() const throw() {	return m_msgError;	}
 
 /********************************************************************
  *                          Implementation                          *

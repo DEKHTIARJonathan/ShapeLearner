@@ -15,12 +15,13 @@
 *	\brief DatabaseManager header file. Interface between the software and database system.
 *	It is the only access to the Database. The class is more or less specified for postgreSQL, some changes might be necessary in order to change the DBMS.
 *	\version 1.1
-*	\author DEKHTIAR Jonathan
+*	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 #ifndef DatabaseManager_H
 #define DatabaseManager_H
 
 #include "allHeaders.h"
+
 using namespace std;
 using namespace odb::core;
 
