@@ -6,10 +6,10 @@ DROP TABLE IF EXISTS "Graph" CASCADE;
 
 CREATE TABLE "Graph" (
   "idGraph" BIGSERIAL NOT NULL PRIMARY KEY,
-  "refGraphClass" VARCHAR(255) NOT NULL,
-  "refObjectClass" VARCHAR(255) NOT NULL,
   "objectName" VARCHAR(255) NOT NULL,
-  "viewNumber" BIGINT NOT NULL DEFAULT '1');
+  "viewNumber" BIGINT NOT NULL DEFAULT '1',
+  "refGraphClass" VARCHAR(255) NOT NULL,
+  "refObjectClass" VARCHAR(255) NOT NULL);
 
 CREATE INDEX "index_Graph_graphClass"
   ON "Graph" USING BTREE ("refGraphClass");

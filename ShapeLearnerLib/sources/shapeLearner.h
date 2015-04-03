@@ -12,7 +12,7 @@
 
 /**
 *	\file shapeLearner.h
-*	\brief ShapeLearner header file. Central point in the software. It realizes the task distribution to the different instances of the software and make them communicate without knowing of each other.
+*	\brief ShapeLearner header file. Public Interface and Central point in the software. It realizes the task distribution to the different instances of the software and make them communicate without knowing of each other.
 *	\version 1.1
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
@@ -54,7 +54,7 @@ class ShapeLearner
 		*	\param _dbPort : The DB's server's listening port.
 		*	\param _dbInit : A relative path to the DB Init File, this field is not necessary. If empty => DB not initialized and assume it has been already created.
 		*/
-		static void openDatabase(const string& _dbUser = "postgres", const string& _dbPass = "postgres", const string& _dbName = "postgres", const string& _dbHost = "localhost", const unsigned int& _dbPort = 5432, const string& _dbInit = "") throw(ShapeLearnerExcept);
+		static void openDatabase(const string& _dbUser, const string& _dbPass, const string& _dbName, const string& _dbHost, const unsigned int& _dbPort, const string& _dbInit = "") throw(ShapeLearnerExcept);
 		
 		/*!
 		*	\fn static void closeDatabase() throw(ShapeLearnerExcept);

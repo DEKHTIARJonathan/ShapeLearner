@@ -154,19 +154,19 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // source
+    // weight
     //
     t[1UL] = 0;
 
-    // target
+    // source
     //
     t[2UL] = 0;
 
-    // refGraph
+    // target
     //
     t[3UL] = 0;
 
-    // weight
+    // refGraph
     //
     t[4UL] = 0;
 
@@ -194,6 +194,13 @@ namespace odb
       n++;
     }
 
+    // weight
+    //
+    b[n].type = pgsql::bind::bigint;
+    b[n].buffer = &i.weight_value;
+    b[n].is_null = &i.weight_null;
+    n++;
+
     // source
     //
     b[n].type = pgsql::bind::bigint;
@@ -213,13 +220,6 @@ namespace odb
     b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.refGraph_value;
     b[n].is_null = &i.refGraph_null;
-    n++;
-
-    // weight
-    //
-    b[n].type = pgsql::bind::bigint;
-    b[n].buffer = &i.weight_value;
-    b[n].is_null = &i.weight_null;
     n++;
   }
 
@@ -244,6 +244,20 @@ namespace odb
     using namespace pgsql;
 
     bool grew (false);
+
+    // weight
+    //
+    {
+      long unsigned int const& v =
+        o.weight;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
+        i.weight_value, is_null, v);
+      i.weight_null = is_null;
+    }
 
     // source
     //
@@ -326,20 +340,6 @@ namespace odb
         throw null_pointer ();
     }
 
-    // weight
-    //
-    {
-      long unsigned int const& v =
-        o.weight;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
-        i.weight_value, is_null, v);
-      i.weight_null = is_null;
-    }
-
     return grew;
   }
 
@@ -364,6 +364,20 @@ namespace odb
         v,
         i.idEdge_value,
         i.idEdge_null);
+    }
+
+    // weight
+    //
+    {
+      long unsigned int& v =
+        o.weight;
+
+      pgsql::value_traits<
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
+        v,
+        i.weight_value,
+        i.weight_null);
     }
 
     // source
@@ -443,20 +457,6 @@ namespace odb
           *static_cast<pgsql::database*> (db), id);
       }
     }
-
-    // weight
-    //
-    {
-      long unsigned int& v =
-        o.weight;
-
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
-        v,
-        i.weight_value,
-        i.weight_null);
-    }
   }
 
   void access::object_traits_impl< ::Edge, id_pgsql >::
@@ -475,10 +475,10 @@ namespace odb
   const char access::object_traits_impl< ::Edge, id_pgsql >::persist_statement[] =
   "INSERT INTO \"Edge\" "
   "(\"idEdge\", "
+  "\"weight\", "
   "\"source\", "
   "\"target\", "
-  "\"refGraph\", "
-  "\"weight\") "
+  "\"refGraph\") "
   "VALUES "
   "(DEFAULT, $1, $2, $3, $4) "
   "RETURNING \"idEdge\"";
@@ -486,20 +486,20 @@ namespace odb
   const char access::object_traits_impl< ::Edge, id_pgsql >::find_statement[] =
   "SELECT "
   "\"Edge\".\"idEdge\", "
+  "\"Edge\".\"weight\", "
   "\"Edge\".\"source\", "
   "\"Edge\".\"target\", "
-  "\"Edge\".\"refGraph\", "
-  "\"Edge\".\"weight\" "
+  "\"Edge\".\"refGraph\" "
   "FROM \"Edge\" "
   "WHERE \"Edge\".\"idEdge\"=$1";
 
   const char access::object_traits_impl< ::Edge, id_pgsql >::update_statement[] =
   "UPDATE \"Edge\" "
   "SET "
-  "\"source\"=$1, "
-  "\"target\"=$2, "
-  "\"refGraph\"=$3, "
-  "\"weight\"=$4 "
+  "\"weight\"=$1, "
+  "\"source\"=$2, "
+  "\"target\"=$3, "
+  "\"refGraph\"=$4 "
   "WHERE \"idEdge\"=$5";
 
   const char access::object_traits_impl< ::Edge, id_pgsql >::erase_statement[] =
@@ -509,10 +509,10 @@ namespace odb
   const char access::object_traits_impl< ::Edge, id_pgsql >::query_statement[] =
   "SELECT\n"
   "\"Edge\".\"idEdge\",\n"
+  "\"Edge\".\"weight\",\n"
   "\"Edge\".\"source\",\n"
   "\"Edge\".\"target\",\n"
-  "\"Edge\".\"refGraph\",\n"
-  "\"Edge\".\"weight\"\n"
+  "\"Edge\".\"refGraph\"\n"
   "FROM \"Edge\"\n"
   "LEFT JOIN \"Node\" AS \"source\" ON \"source\".\"idNode\"=\"Edge\".\"source\"\n"
   "LEFT JOIN \"Node\" AS \"target\" ON \"target\".\"idNode\"=\"Edge\".\"target\"\n"

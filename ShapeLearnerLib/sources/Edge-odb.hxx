@@ -169,6 +169,18 @@ namespace odb
 
     static const idEdge_type_ idEdge;
 
+    // weight
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
+    weight_type_;
+
+    static const weight_type_ weight;
+
     // source
     //
     typedef
@@ -204,24 +216,17 @@ namespace odb
     refGraph_type_;
 
     static const refGraph_type_ refGraph;
-
-    // weight
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    weight_type_;
-
-    static const weight_type_ weight;
   };
 
   template <typename A>
   const typename pointer_query_columns< ::Edge, id_pgsql, A >::idEdge_type_
   pointer_query_columns< ::Edge, id_pgsql, A >::
   idEdge (A::table_name, "\"idEdge\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::Edge, id_pgsql, A >::weight_type_
+  pointer_query_columns< ::Edge, id_pgsql, A >::
+  weight (A::table_name, "\"weight\"", 0);
 
   template <typename A>
   const typename pointer_query_columns< ::Edge, id_pgsql, A >::source_type_
@@ -237,11 +242,6 @@ namespace odb
   const typename pointer_query_columns< ::Edge, id_pgsql, A >::refGraph_type_
   pointer_query_columns< ::Edge, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::Edge, id_pgsql, A >::weight_type_
-  pointer_query_columns< ::Edge, id_pgsql, A >::
-  weight (A::table_name, "\"weight\"", 0);
 
   template <>
   class access::object_traits_impl< ::Edge, id_pgsql >:
@@ -263,6 +263,11 @@ namespace odb
       long long idEdge_value;
       bool idEdge_null;
 
+      // weight
+      //
+      long long weight_value;
+      bool weight_null;
+
       // source
       //
       long long source_value;
@@ -277,11 +282,6 @@ namespace odb
       //
       long long refGraph_value;
       bool refGraph_null;
-
-      // weight
-      //
-      long long weight_value;
-      bool weight_null;
 
       std::size_t version;
     };
@@ -666,6 +666,18 @@ namespace odb
 
     static const idEdge_type_ idEdge;
 
+    // weight
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
+    weight_type_;
+
+    static const weight_type_ weight;
+
     // source
     //
     typedef
@@ -749,24 +761,17 @@ namespace odb
     };
 
     static const refGraph_type_ refGraph;
-
-    // weight
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    weight_type_;
-
-    static const weight_type_ weight;
   };
 
   template <typename A>
   const typename query_columns< ::Edge, id_pgsql, A >::idEdge_type_
   query_columns< ::Edge, id_pgsql, A >::
   idEdge (A::table_name, "\"idEdge\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::Edge, id_pgsql, A >::weight_type_
+  query_columns< ::Edge, id_pgsql, A >::
+  weight (A::table_name, "\"weight\"", 0);
 
   template <typename A>
   const typename query_columns< ::Edge, id_pgsql, A >::source_type_
@@ -782,11 +787,6 @@ namespace odb
   const typename query_columns< ::Edge, id_pgsql, A >::refGraph_type_
   query_columns< ::Edge, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::Edge, id_pgsql, A >::weight_type_
-  query_columns< ::Edge, id_pgsql, A >::
-  weight (A::table_name, "\"weight\"", 0);
 
   // EdgeIdViewBySource
   //

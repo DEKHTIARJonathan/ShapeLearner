@@ -150,30 +150,6 @@ namespace odb
 
     static const idGraph_type_ idGraph;
 
-    // refGraphClass
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    refGraphClass_type_;
-
-    static const refGraphClass_type_ refGraphClass;
-
-    // refObjectClass
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    refObjectClass_type_;
-
-    static const refObjectClass_type_ refObjectClass;
-
     // objectName
     //
     typedef
@@ -197,22 +173,36 @@ namespace odb
     viewNumber_type_;
 
     static const viewNumber_type_ viewNumber;
+
+    // refGraphClass
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    refGraphClass_type_;
+
+    static const refGraphClass_type_ refGraphClass;
+
+    // refObjectClass
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    refObjectClass_type_;
+
+    static const refObjectClass_type_ refObjectClass;
   };
 
   template <typename A>
   const typename pointer_query_columns< ::Graph, id_pgsql, A >::idGraph_type_
   pointer_query_columns< ::Graph, id_pgsql, A >::
   idGraph (A::table_name, "\"idGraph\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::Graph, id_pgsql, A >::refGraphClass_type_
-  pointer_query_columns< ::Graph, id_pgsql, A >::
-  refGraphClass (A::table_name, "\"refGraphClass\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::Graph, id_pgsql, A >::refObjectClass_type_
-  pointer_query_columns< ::Graph, id_pgsql, A >::
-  refObjectClass (A::table_name, "\"refObjectClass\"", 0);
 
   template <typename A>
   const typename pointer_query_columns< ::Graph, id_pgsql, A >::objectName_type_
@@ -223,6 +213,16 @@ namespace odb
   const typename pointer_query_columns< ::Graph, id_pgsql, A >::viewNumber_type_
   pointer_query_columns< ::Graph, id_pgsql, A >::
   viewNumber (A::table_name, "\"viewNumber\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::Graph, id_pgsql, A >::refGraphClass_type_
+  pointer_query_columns< ::Graph, id_pgsql, A >::
+  refGraphClass (A::table_name, "\"refGraphClass\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::Graph, id_pgsql, A >::refObjectClass_type_
+  pointer_query_columns< ::Graph, id_pgsql, A >::
+  refObjectClass (A::table_name, "\"refObjectClass\"", 0);
 
   template <>
   class access::object_traits_impl< ::Graph, id_pgsql >:
@@ -244,6 +244,17 @@ namespace odb
       long long idGraph_value;
       bool idGraph_null;
 
+      // objectName
+      //
+      details::buffer objectName_value;
+      std::size_t objectName_size;
+      bool objectName_null;
+
+      // viewNumber
+      //
+      long long viewNumber_value;
+      bool viewNumber_null;
+
       // refGraphClass
       //
       details::buffer refGraphClass_value;
@@ -255,17 +266,6 @@ namespace odb
       details::buffer refObjectClass_value;
       std::size_t refObjectClass_size;
       bool refObjectClass_null;
-
-      // objectName
-      //
-      details::buffer objectName_value;
-      std::size_t objectName_size;
-      bool objectName_null;
-
-      // viewNumber
-      //
-      long long viewNumber_value;
-      bool viewNumber_null;
 
       std::size_t version;
     };
@@ -571,6 +571,30 @@ namespace odb
 
     static const idGraph_type_ idGraph;
 
+    // objectName
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    objectName_type_;
+
+    static const objectName_type_ objectName;
+
+    // viewNumber
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        long unsigned int,
+        pgsql::id_bigint >::query_type,
+      pgsql::id_bigint >
+    viewNumber_type_;
+
+    static const viewNumber_type_ viewNumber;
+
     // refGraphClass
     //
     typedef
@@ -626,46 +650,12 @@ namespace odb
     };
 
     static const refObjectClass_type_ refObjectClass;
-
-    // objectName
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    objectName_type_;
-
-    static const objectName_type_ objectName;
-
-    // viewNumber
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    viewNumber_type_;
-
-    static const viewNumber_type_ viewNumber;
   };
 
   template <typename A>
   const typename query_columns< ::Graph, id_pgsql, A >::idGraph_type_
   query_columns< ::Graph, id_pgsql, A >::
   idGraph (A::table_name, "\"idGraph\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::Graph, id_pgsql, A >::refGraphClass_type_
-  query_columns< ::Graph, id_pgsql, A >::
-  refGraphClass (A::table_name, "\"refGraphClass\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::Graph, id_pgsql, A >::refObjectClass_type_
-  query_columns< ::Graph, id_pgsql, A >::
-  refObjectClass (A::table_name, "\"refObjectClass\"", 0);
 
   template <typename A>
   const typename query_columns< ::Graph, id_pgsql, A >::objectName_type_
@@ -676,6 +666,16 @@ namespace odb
   const typename query_columns< ::Graph, id_pgsql, A >::viewNumber_type_
   query_columns< ::Graph, id_pgsql, A >::
   viewNumber (A::table_name, "\"viewNumber\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::Graph, id_pgsql, A >::refGraphClass_type_
+  query_columns< ::Graph, id_pgsql, A >::
+  refGraphClass (A::table_name, "\"refGraphClass\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::Graph, id_pgsql, A >::refObjectClass_type_
+  query_columns< ::Graph, id_pgsql, A >::
+  refObjectClass (A::table_name, "\"refObjectClass\"", 0);
 
   // GraphIdViewByGraphClass
   //

@@ -6,10 +6,10 @@ DROP TABLE IF EXISTS "Edge" CASCADE;
 
 CREATE TABLE "Edge" (
   "idEdge" BIGSERIAL NOT NULL PRIMARY KEY,
+  "weight" BIGINT NOT NULL DEFAULT '1',
   "source" BIGINT NOT NULL,
   "target" BIGINT NOT NULL,
-  "refGraph" BIGINT NOT NULL,
-  "weight" BIGINT NOT NULL DEFAULT '1');
+  "refGraph" BIGINT NOT NULL);
 
 CREATE INDEX "index_Edge_source"
   ON "Edge" USING BTREE ("source");

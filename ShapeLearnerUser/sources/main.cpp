@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 		if (cmdLine.HasSwitch("--init"))
 			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 5432, "sources/structure.sql");
 		else		
-			ShapeLearner::openDatabase();
+			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 5432);
 
 		ShapeLearner::closeDatabase(); // We disconnect to the DB
 

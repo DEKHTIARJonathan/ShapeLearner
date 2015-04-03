@@ -1,6 +1,4 @@
--- Function: public.count_rows(text, text)
-
--- DROP FUNCTION public.count_rows(text, text);
+-- GET TABLE STATE FOR ALL TABLES 
 
 CREATE OR REPLACE FUNCTION public.count_rows(
     _schema text,
@@ -18,12 +16,6 @@ $BODY$
   COST 100;
 ALTER FUNCTION public.count_rows(text, text)
   OWNER TO postgres;
-
-
-
--- Function: public.gettablestate()
-
--- DROP FUNCTION public.gettablestate();
 
 CREATE OR REPLACE FUNCTION public.gettablestate()
   RETURNS TABLE(_schema text, _tname text, _count integer) AS

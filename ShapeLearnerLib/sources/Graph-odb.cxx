@@ -51,9 +51,9 @@ namespace odb
   persist_statement_types[] =
   {
     pgsql::text_oid,
+    pgsql::int8_oid,
     pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::int8_oid
+    pgsql::text_oid
   };
 
   const unsigned int access::object_traits_impl< ::Graph, id_pgsql >::
@@ -66,9 +66,9 @@ namespace odb
   update_statement_types[] =
   {
     pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::text_oid,
     pgsql::int8_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::int8_oid
   };
 
@@ -149,25 +149,9 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // refGraphClass
-    //
-    if (t[1UL])
-    {
-      i.refGraphClass_value.capacity (i.refGraphClass_size);
-      grew = true;
-    }
-
-    // refObjectClass
-    //
-    if (t[2UL])
-    {
-      i.refObjectClass_value.capacity (i.refObjectClass_size);
-      grew = true;
-    }
-
     // objectName
     //
-    if (t[3UL])
+    if (t[1UL])
     {
       i.objectName_value.capacity (i.objectName_size);
       grew = true;
@@ -175,7 +159,23 @@ namespace odb
 
     // viewNumber
     //
-    t[4UL] = 0;
+    t[2UL] = 0;
+
+    // refGraphClass
+    //
+    if (t[3UL])
+    {
+      i.refGraphClass_value.capacity (i.refGraphClass_size);
+      grew = true;
+    }
+
+    // refObjectClass
+    //
+    if (t[4UL])
+    {
+      i.refObjectClass_value.capacity (i.refObjectClass_size);
+      grew = true;
+    }
 
     return grew;
   }
@@ -201,6 +201,22 @@ namespace odb
       n++;
     }
 
+    // objectName
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.objectName_value.data ();
+    b[n].capacity = i.objectName_value.capacity ();
+    b[n].size = &i.objectName_size;
+    b[n].is_null = &i.objectName_null;
+    n++;
+
+    // viewNumber
+    //
+    b[n].type = pgsql::bind::bigint;
+    b[n].buffer = &i.viewNumber_value;
+    b[n].is_null = &i.viewNumber_null;
+    n++;
+
     // refGraphClass
     //
     b[n].type = pgsql::bind::text;
@@ -217,22 +233,6 @@ namespace odb
     b[n].capacity = i.refObjectClass_value.capacity ();
     b[n].size = &i.refObjectClass_size;
     b[n].is_null = &i.refObjectClass_null;
-    n++;
-
-    // objectName
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.objectName_value.data ();
-    b[n].capacity = i.objectName_value.capacity ();
-    b[n].size = &i.objectName_size;
-    b[n].is_null = &i.objectName_null;
-    n++;
-
-    // viewNumber
-    //
-    b[n].type = pgsql::bind::bigint;
-    b[n].buffer = &i.viewNumber_value;
-    b[n].is_null = &i.viewNumber_null;
     n++;
   }
 
@@ -257,6 +257,41 @@ namespace odb
     using namespace pgsql;
 
     bool grew (false);
+
+    // objectName
+    //
+    {
+      ::std::string const& v =
+        o.objectName;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.objectName_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.objectName_value,
+        size,
+        is_null,
+        v);
+      i.objectName_null = is_null;
+      i.objectName_size = size;
+      grew = grew || (cap != i.objectName_value.capacity ());
+    }
+
+    // viewNumber
+    //
+    {
+      long unsigned int const& v =
+        o.viewNumber;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          long unsigned int,
+          pgsql::id_bigint >::set_image (
+        i.viewNumber_value, is_null, v);
+      i.viewNumber_null = is_null;
+    }
 
     // refGraphClass
     //
@@ -326,41 +361,6 @@ namespace odb
         throw null_pointer ();
     }
 
-    // objectName
-    //
-    {
-      ::std::string const& v =
-        o.objectName;
-
-      bool is_null (false);
-      std::size_t size (0);
-      std::size_t cap (i.objectName_value.capacity ());
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.objectName_value,
-        size,
-        is_null,
-        v);
-      i.objectName_null = is_null;
-      i.objectName_size = size;
-      grew = grew || (cap != i.objectName_value.capacity ());
-    }
-
-    // viewNumber
-    //
-    {
-      long unsigned int const& v =
-        o.viewNumber;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
-        i.viewNumber_value, is_null, v);
-      i.viewNumber_null = is_null;
-    }
-
     return grew;
   }
 
@@ -385,6 +385,35 @@ namespace odb
         v,
         i.idGraph_value,
         i.idGraph_null);
+    }
+
+    // objectName
+    //
+    {
+      ::std::string& v =
+        o.objectName;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.objectName_value,
+        i.objectName_size,
+        i.objectName_null);
+    }
+
+    // viewNumber
+    //
+    {
+      long unsigned int& v =
+        o.viewNumber;
+
+      pgsql::value_traits<
+          long unsigned int,
+          pgsql::id_bigint >::set_value (
+        v,
+        i.viewNumber_value,
+        i.viewNumber_null);
     }
 
     // refGraphClass
@@ -440,35 +469,6 @@ namespace odb
           *static_cast<pgsql::database*> (db), id);
       }
     }
-
-    // objectName
-    //
-    {
-      ::std::string& v =
-        o.objectName;
-
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
-        v,
-        i.objectName_value,
-        i.objectName_size,
-        i.objectName_null);
-    }
-
-    // viewNumber
-    //
-    {
-      long unsigned int& v =
-        o.viewNumber;
-
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
-        v,
-        i.viewNumber_value,
-        i.viewNumber_null);
-    }
   }
 
   void access::object_traits_impl< ::Graph, id_pgsql >::
@@ -487,10 +487,10 @@ namespace odb
   const char access::object_traits_impl< ::Graph, id_pgsql >::persist_statement[] =
   "INSERT INTO \"Graph\" "
   "(\"idGraph\", "
-  "\"refGraphClass\", "
-  "\"refObjectClass\", "
   "\"objectName\", "
-  "\"viewNumber\") "
+  "\"viewNumber\", "
+  "\"refGraphClass\", "
+  "\"refObjectClass\") "
   "VALUES "
   "(DEFAULT, $1, $2, $3, $4) "
   "RETURNING \"idGraph\"";
@@ -498,20 +498,20 @@ namespace odb
   const char access::object_traits_impl< ::Graph, id_pgsql >::find_statement[] =
   "SELECT "
   "\"Graph\".\"idGraph\", "
-  "\"Graph\".\"refGraphClass\", "
-  "\"Graph\".\"refObjectClass\", "
   "\"Graph\".\"objectName\", "
-  "\"Graph\".\"viewNumber\" "
+  "\"Graph\".\"viewNumber\", "
+  "\"Graph\".\"refGraphClass\", "
+  "\"Graph\".\"refObjectClass\" "
   "FROM \"Graph\" "
   "WHERE \"Graph\".\"idGraph\"=$1";
 
   const char access::object_traits_impl< ::Graph, id_pgsql >::update_statement[] =
   "UPDATE \"Graph\" "
   "SET "
-  "\"refGraphClass\"=$1, "
-  "\"refObjectClass\"=$2, "
-  "\"objectName\"=$3, "
-  "\"viewNumber\"=$4 "
+  "\"objectName\"=$1, "
+  "\"viewNumber\"=$2, "
+  "\"refGraphClass\"=$3, "
+  "\"refObjectClass\"=$4 "
   "WHERE \"idGraph\"=$5";
 
   const char access::object_traits_impl< ::Graph, id_pgsql >::erase_statement[] =
@@ -521,10 +521,10 @@ namespace odb
   const char access::object_traits_impl< ::Graph, id_pgsql >::query_statement[] =
   "SELECT\n"
   "\"Graph\".\"idGraph\",\n"
-  "\"Graph\".\"refGraphClass\",\n"
-  "\"Graph\".\"refObjectClass\",\n"
   "\"Graph\".\"objectName\",\n"
-  "\"Graph\".\"viewNumber\"\n"
+  "\"Graph\".\"viewNumber\",\n"
+  "\"Graph\".\"refGraphClass\",\n"
+  "\"Graph\".\"refObjectClass\"\n"
   "FROM \"Graph\"\n"
   "LEFT JOIN \"GraphClass\" AS \"refGraphClass\" ON \"refGraphClass\".\"graphClassName\"=\"Graph\".\"refGraphClass\"\n"
   "LEFT JOIN \"ObjectClass\" AS \"refObjectClass\" ON \"refObjectClass\".\"objectClassName\"=\"Graph\".\"refObjectClass\"";

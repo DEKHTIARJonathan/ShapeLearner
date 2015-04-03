@@ -26,10 +26,10 @@ DROP TABLE IF EXISTS "Graph" CASCADE;
 
 CREATE TABLE "Graph" (
   "idGraph" BIGSERIAL NOT NULL PRIMARY KEY,
-  "refGraphClass" VARCHAR(255) NOT NULL,
-  "refObjectClass" VARCHAR(255) NOT NULL,
   "objectName" VARCHAR(255) NOT NULL,
-  "viewNumber" BIGINT NOT NULL DEFAULT '1');
+  "viewNumber" BIGINT NOT NULL DEFAULT '1',
+  "refGraphClass" VARCHAR(255) NOT NULL,
+  "refObjectClass" VARCHAR(255) NOT NULL);
 
 CREATE INDEX "index_Graph_graphClass"
   ON "Graph" USING BTREE ("refGraphClass");
@@ -85,10 +85,10 @@ DROP TABLE IF EXISTS "Edge" CASCADE;
 
 CREATE TABLE "Edge" (
   "idEdge" BIGSERIAL NOT NULL PRIMARY KEY,
+  "weight" BIGINT NOT NULL DEFAULT '1',
   "source" BIGINT NOT NULL,
   "target" BIGINT NOT NULL,
-  "refGraph" BIGINT NOT NULL,
-  "weight" BIGINT NOT NULL DEFAULT '1');
+  "refGraph" BIGINT NOT NULL);
 
 CREATE INDEX "index_Edge_source"
   ON "Edge" USING BTREE ("source");
@@ -158,9 +158,7 @@ ALTER TABLE "Point"
     ON DELETE CASCADE
     INITIALLY DEFERRED;
 
--- Function: public.count_rows(text, text)
-
--- DROP FUNCTION public.count_rows(text, text);
+-- GET TABLE STATE FOR ALL TABLES 
 
 CREATE OR REPLACE FUNCTION public.count_rows(
     _schema text,
@@ -178,12 +176,6 @@ $BODY$
   COST 100;
 ALTER FUNCTION public.count_rows(text, text)
   OWNER TO postgres;
-
-
-
--- Function: public.gettablestate()
-
--- DROP FUNCTION public.gettablestate();
 
 CREATE OR REPLACE FUNCTION public.gettablestate()
   RETURNS TABLE(_schema text, _tname text, _count integer) AS
@@ -204,3 +196,4 @@ $BODY$
   ROWS 1000;
 ALTER FUNCTION public.gettablestate()
   OWNER TO postgres;
+
