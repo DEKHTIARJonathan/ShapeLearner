@@ -281,6 +281,25 @@ bool ShapeLearner::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool 
 	return rslt;
 }
 
-bool ShapeLearner::createShockGraph (const string& imgPath) throw(ShapeLearnerExcept){
+bool ShapeLearner::createShockGraph () throw(ShapeLearnerExcept){
+	// Create fifo thread pool container with two threads.
+	bool rslt = true;
+	pool tp(8);
+	
+	
+	for (int idThread = 1; idThread <= 20; idThread++){
+		rslt &= tp.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, idThread));
+	} 
+  
+	//  Wait until all tasks are finished.
+	tp.wait();
+
+	return rslt;
+}
+
+bool ShapeLearner::createShockGraphWorker (int idThread) throw(ShapeLearnerExcept){
+	shockGraphsGenerator worker(idThread);
+
+	worker.taskExecute();
 	return true;
 }

@@ -18,8 +18,24 @@
 */
 
 #include "allHeaders.h"
-
 using namespace std;
 
-volatile shockGraphsGenerator shockGraphsGenerator::_inst;
-volatile volatile unsigned int shockGraphsGenerator::_nbInst = 0;
+_Longlong fact(_Longlong nbr){
+	_Longlong tmp = nbr;
+	_Longlong rslt = 1;
+	while(tmp > 0)
+	{
+		rslt *= tmp--;
+	}
+
+	return rslt;
+}
+
+bool shockGraphsGenerator::taskExecute()
+{
+	Logger::Log("Debut de la tache numero " + to_string((_Longlong)taskNum));
+	for (int i = 1000000000; i <= 10000000000; i++)
+		fact(i);
+	Logger::Log("Fin de la tache numero " + to_string((_Longlong)taskNum));
+	return true;
+}

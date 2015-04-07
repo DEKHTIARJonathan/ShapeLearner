@@ -21,6 +21,7 @@
 #define _Shock_Graphs_Generator_
 
 #include "allHeaders.h"
+
 using namespace std;
 
 class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
@@ -40,33 +41,13 @@ class Edge; //Forward Declaration of the class contained in Edge.h
 */
 class shockGraphsGenerator{
 public:
+	shockGraphsGenerator(int _taskNum) : taskNum(_taskNum) {}
+	
+	bool taskExecute();
 
 private:
-	static volatile unsigned int _nbActiveThread;;
-	static volatile shockGraphsGenerator _inst;
-	/*!
-	*	\fn shockGraphsGenerator()
-	*	\brief Private constructor
-	*/
-    shockGraphsGenerator();
+	int taskNum;
 	
-	/*!
-	*	\fn ~shockGraphsGenerator()
-	*	\brief Private Destructor, automaticly called at the end of the program (object instanciated on stack). Close all ofstreams.
-	*/
-	~shockGraphsGenerator();
-	
-	/*!
-	*	\fn shockGraphsGenerator(const shockGraphsGenerator&)
-	*	\brief Singleton Pattern, forbid copy
-	*/
-	shockGraphsGenerator(const shockGraphsGenerator);
-	
-	/*!
-	*	\fn void operator=(const shockGraphsGenerator&)
-	*	\brief Singleton Pattern, forbid copy
-	*/
-	void operator=(const shockGraphsGenerator&);
 };
 
 #endif //_Shock_Graphs_Generator_

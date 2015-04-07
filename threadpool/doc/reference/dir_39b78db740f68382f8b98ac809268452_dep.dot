@@ -1,0 +1,13 @@
+digraph "C:/Users/dekhtiar" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_8ceffd4ee35c3518d4e8bdc7e638efe8 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Users" fontname="Helvetica", fontsize="10", URL="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html"]
+  subgraph clusterdir_39b78db740f68382f8b98ac809268452 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_39b78db740f68382f8b98ac809268452.html"];
+    dir_39b78db740f68382f8b98ac809268452 [shape=plaintext label="dekhtiar"];
+    dir_c638e63b661dc03218f23f4bdb932d82 [shape=box label="Downloads" color="red" fillcolor="white" style="filled" URL="dir_c638e63b661dc03218f23f4bdb932d82.html"];
+  }
+  }
+}

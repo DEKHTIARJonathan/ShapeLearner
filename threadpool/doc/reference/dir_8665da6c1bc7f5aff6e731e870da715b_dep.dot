@@ -1,0 +1,13 @@
+digraph "C:/Users/dekhtiar/Downloads/threadpool-0_2_5-src/threadpool-0_2_5-src" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_92e0801082930394843c8db43554a6b2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="threadpool-0_2_5-src" fontname="Helvetica", fontsize="10", URL="dir_92e0801082930394843c8db43554a6b2.html"]
+  subgraph clusterdir_8665da6c1bc7f5aff6e731e870da715b {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_8665da6c1bc7f5aff6e731e870da715b.html"];
+    dir_8665da6c1bc7f5aff6e731e870da715b [shape=plaintext label="threadpool-0_2_5-src"];
+    dir_5fe689c47ef33b814a84e41b25604e45 [shape=box label="threadpool" color="red" fillcolor="white" style="filled" URL="dir_5fe689c47ef33b814a84e41b25604e45.html"];
+  }
+  }
+}

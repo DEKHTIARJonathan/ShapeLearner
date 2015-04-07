@@ -24,6 +24,8 @@
 #include "dbManager.h"
 
 using namespace std;
+using namespace boost::threadpool;
+
 
 class DatabaseManager; //Forward Declaration of the class contained in shapeLearnerException.h
 class ShapeLearnerExcept; //Forward Declaration of the class contained in shapeLearnerException.h
@@ -62,7 +64,7 @@ class ShapeLearner
 		*/
 		static void closeDatabase() throw(ShapeLearnerExcept);
 
-		static bool createShockGraph (const string& imgPath) throw(ShapeLearnerExcept);
+		static bool createShockGraph () throw(ShapeLearnerExcept);
 
 		/*!	
 		*	\class ShapeLearner::ObjectInterface
@@ -367,6 +369,10 @@ class ShapeLearner
 		*	\param cascade : If cascade is set to true, then all the Points, Edges, Nodes and Graphs connected to this ObjectClass are also removed.
 		*/
 		static bool removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool cascade = false) throw (ShapeLearnerExcept);
+
+		/* ************** Multi Threading Workers ***************/
+
+		static bool createShockGraphWorker (int idThread) throw(ShapeLearnerExcept);
 		
 		/* **************  No instanciation *********************/
 

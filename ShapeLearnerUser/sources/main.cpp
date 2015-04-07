@@ -45,6 +45,8 @@ int main(int argc, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 
+		/*
+
 		// Did the user asked to use a previously created database ?
 		if (cmdLine.HasSwitch("--init"))
 			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 5432, "sources/structure.sql");
@@ -57,7 +59,11 @@ int main(int argc, char **argv)
 			cout << "KO" << endl;
 
 		ShapeLearner::closeDatabase(); // We disconnect to the DB
-
+		*/
+		if (ShapeLearner::createShockGraph())
+			cout << "Hell Yeah" <<endl;
+		else
+			cout << "Hell No ..."<< endl;
 	}
 	catch (const std::exception& e)
 	{

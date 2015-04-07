@@ -55,7 +55,7 @@ class ShapeLearner
 		*/
 		static void closeDatabase() throw(ShapeLearnerExcept);
 		
-		static bool createShockGraph (const string& imgPath) throw(ShapeLearnerExcept);
+		static bool createShockGraph () throw(ShapeLearnerExcept);
 };
 
 

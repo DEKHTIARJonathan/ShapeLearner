@@ -40,6 +40,9 @@
     <Filter Include="shockGraphsGenerator">
       <UniqueIdentifier>{eb177ef9-2bdf-406d-a6e1-081b5c734db3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThreadPool">
+      <UniqueIdentifier>{320bcb70-316e-4b9d-a6de-96523f8a5227}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\allHeaders.h">
@@ -95,6 +98,45 @@
     </ClInclude>
     <ClInclude Include="sources\shockGraphsGenerator.h">
       <Filter>shockGraphsGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\future.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\locking_ptr.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\pool_core.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\scope_guard.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\worker_thread.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\future.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\pool.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\pool_adaptors.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\scheduling_policies.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\shutdown_policies.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\size_policies.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\task_adaptors.hpp">
+      <Filter>ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool.hpp">
+      <Filter>ThreadPool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
