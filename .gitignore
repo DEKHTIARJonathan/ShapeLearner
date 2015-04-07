@@ -28,6 +28,7 @@
 *.app
 
 #Junk & DB
+*.vcxproj
 *.sdf
 *.log
 *.1.tlog
