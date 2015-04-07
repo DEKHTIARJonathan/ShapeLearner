@@ -44,6 +44,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/threadpool.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/smart_ptr.hpp>
 
 //#include <ppl.h>
 
