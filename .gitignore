@@ -28,6 +28,11 @@
 *.app
 
 #Junk & DB
+*.vcxproj
+DAGMatcherLib/*.vcxproj
+Logger/*.vcxproj
+ShapeLearnerLib/*.vcxproj
+ShapeLearnerUser/*.vcxproj
 *.sdf
 *.log
 *.1.tlog
