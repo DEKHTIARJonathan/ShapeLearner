@@ -59,7 +59,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\ShapeLearnerLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;C:\ODB\libodb-pgsql-2.4.0;C:\ODB\libodb-2.4.0;$(ProjectDir)..\ShapeLearnerLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -75,7 +75,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\Logger\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\DAGMatcherLib\Debug;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\boost;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\odb</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Jonathan\Desktop\PhD\ShapeLearner\ShapeLearnerLib\Debug;C:\Users\Jonathan\Desktop\PhD\ShapeLearner\Logger\Debug;C:\Users\Jonathan\Desktop\PhD\ShapeLearner\DAGMatcherLib\Debug;C:\ODB\libodb-2.4.0\lib;C:\ODB\libodb-pgsql-2.4.0\lib;C:\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\debug\link-static\threading-multi</AdditionalLibraryDirectories>
       <LinkStatus>true</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>DAGMatcherLib-d.lib;ShapeLearnerLib-d.lib;odb-d.lib;odb-pgsql-d.lib;CLogger-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -95,14 +95,14 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\ShapeLearnerLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;C:\ODB\libodb-pgsql-2.4.0;C:\ODB\libodb-2.4.0;$(ProjectDir)..\ShapeLearnerLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\Logger\Release;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\DAGMatcherLib\Release;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerLib\Release;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\odb;C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\ShapeLearnerUser\Dependencies\boost;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Jonathan\Desktop\PhD\ShapeLearner\Logger\Release;C:\Users\Jonathan\Desktop\PhD\ShapeLearner\DAGMatcherLib\Release;C:\Users\Jonathan\Desktop\PhD\ShapeLearner\ShapeLearnerLib\Release;C:\ODB\libodb-2.4.0\lib;C:\ODB\libodb-boost-2.4.0\lib;C:\ODB\libodb-pgsql-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkStatus>true</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>CLogger.lib;DAGMatcherLib.lib;ShapeLearnerLib.lib;odb.lib;odb-pgsql.lib;%(AdditionalDependencies)</AdditionalDependencies>
