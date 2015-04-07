@@ -54,7 +54,8 @@ class ShapeLearner
 		*	\brief Close the connection to the PostgreSQL database.
 		*/
 		static void closeDatabase() throw(ShapeLearnerExcept);
-	
+		
+		static bool createShockGraph (const string& imgPath) throw(ShapeLearnerExcept);
 };
 
 

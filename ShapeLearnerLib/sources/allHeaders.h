@@ -64,6 +64,7 @@
 	#include "CLogger.h"
 	#include "shapeLearner.h"
 	#include "dbManager.h"
+	#include "shockGraphsGenerator.h"
 #endif //_MSC_VER
 
 #include "constants.h"

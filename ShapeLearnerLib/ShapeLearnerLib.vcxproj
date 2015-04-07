@@ -28,6 +28,7 @@
     <ClInclude Include="sources\Point-odb.hxx" />
     <ClInclude Include="sources\Point.h" />
     <ClInclude Include="sources\shapeLearnerException.h" />
+    <ClInclude Include="sources\shockGraphsGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\dbManager.cpp" />
@@ -45,6 +46,7 @@
     <ClCompile Include="sources\Point-odb.cxx" />
     <ClCompile Include="sources\Point.cpp" />
     <ClCompile Include="sources\shapeLearnerException.cpp" />
+    <ClCompile Include="sources\shockGraphsGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sources\Edge-odb.ixx" />

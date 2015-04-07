@@ -51,6 +51,11 @@ int main(int argc, char **argv)
 		else		
 			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 5432);
 
+		if(ShapeLearner::createShockGraph("img.jpg"))
+			cout << "Ok" <<endl;
+		else
+			cout << "KO" << endl;
+
 		ShapeLearner::closeDatabase(); // We disconnect to the DB
 
 	}

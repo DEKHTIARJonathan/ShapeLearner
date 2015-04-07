@@ -62,6 +62,8 @@ class ShapeLearner
 		*/
 		static void closeDatabase() throw(ShapeLearnerExcept);
 
+		static bool createShockGraph (const string& imgPath) throw(ShapeLearnerExcept);
+
 		/*!	
 		*	\class ShapeLearner::ObjectInterface
 		*	\brief Static subclass, communication interface for all the DBObjects.

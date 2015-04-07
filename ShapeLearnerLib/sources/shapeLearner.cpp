@@ -280,3 +280,7 @@ bool ShapeLearner::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool 
 
 	return rslt;
 }
+
+bool ShapeLearner::createShockGraph (const string& imgPath) throw(ShapeLearnerExcept){
+	return true;
+}

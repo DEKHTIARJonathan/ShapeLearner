@@ -37,6 +37,9 @@
     <Filter Include="dbManager">
       <UniqueIdentifier>{de837f75-842a-4714-96d0-cbb5f54ed985}</UniqueIdentifier>
     </Filter>
+    <Filter Include="shockGraphsGenerator">
+      <UniqueIdentifier>{eb177ef9-2bdf-406d-a6e1-081b5c734db3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\allHeaders.h">
@@ -90,6 +93,9 @@
     <ClInclude Include="sources\shapeLearner.h">
       <Filter>ShapeLearner</Filter>
     </ClInclude>
+    <ClInclude Include="sources\shockGraphsGenerator.h">
+      <Filter>shockGraphsGenerator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\GraphClass-odb.cxx">
@@ -136,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="sources\shapeLearner.cpp">
       <Filter>ShapeLearner</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\shockGraphsGenerator.cpp">
+      <Filter>shockGraphsGenerator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
