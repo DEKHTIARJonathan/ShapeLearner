@@ -20,6 +20,11 @@
 #ifndef _Shock_Graphs_Generator_
 #define _Shock_Graphs_Generator_
 
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::shockGraphGenerator.h  - this should happen just once per project.\n")
+#endif
+
+#include "stdafx.h"
 #include "allHeaders.h"
 
 using namespace std;

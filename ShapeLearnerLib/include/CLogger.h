@@ -20,6 +20,8 @@
 #ifndef _CLOGGER_
 #define _CLOGGER_
 
+#pragma message("Compiling ShapeLearnerLib/Include::cLogger.h  - this should happen just once per project.\n")
+
 #include <string>
 #include "constants.h"
 

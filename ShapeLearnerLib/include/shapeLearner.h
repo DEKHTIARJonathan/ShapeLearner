@@ -20,6 +20,8 @@
 #ifndef _SHAPE_LEARNER_H_
 #define _SHAPE_LEARNER_H_
 
+#pragma message("Compiling ShapeLearnerUser::shapeLearner.h - this should happen just once per project.\n")
+
 #include "CLogger.h"
 #include "constants.h"
 #include "shapeLearnerException.h"

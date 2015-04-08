@@ -19,6 +19,10 @@
 #ifndef _CLOGGER_
 #define _CLOGGER_
 
+#ifdef _MSC_VER
+	#pragma message("Compiling CLogger::Clogger.h - this should happen just once per project.\n")
+#endif
+
 #include <iostream>
 #include <time.h>
 #include <string>
@@ -30,8 +34,8 @@
 #include <odb/pgsql/database.hxx>
 #include <odb/pgsql/connection.hxx>
 #include <odb/pgsql/statement.hxx>
-#include "../../ShapeLearnerLib/sources/constants.h"
-#include "../../ShapeLearnerLib/sources/shapeLearnerException.h"
+#include "../../ShapeLearnerLib/include/constants.h"
+#include "../../ShapeLearnerLib/include/shapeLearnerException.h"
 #include "AppTracer.h"
 
 using namespace std;

@@ -19,7 +19,12 @@
 */
 #ifndef DatabaseManager_H
 #define DatabaseManager_H
-
+ 
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::dbManager.h  - this should happen just once per project.\n")
+#endif
+ 
+#include "stdafx.h"
 #include "allHeaders.h"
 
 using namespace std;

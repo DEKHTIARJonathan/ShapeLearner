@@ -19,76 +19,42 @@
 
 #ifndef _ALL_HEADERS_
 #define _ALL_HEADERS_
-
-// tell the compiler to shut up
-//#pragma warning(disable:4786)
-
+ 
 #ifdef _MSC_VER
-	#pragma warning( disable : 4290 )
-	#pragma warning( disable : 4244 )
-	#pragma warning( disable : 4068 )
-#endif //_MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::allHeaders.h  - this should happen just once per project.\n")
+	#pragma warning(disable : 4290)
+	#pragma warning(disable : 4244)
+	#pragma warning(disable : 4068)
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <list>
-#include <vector>
-#include <stdexcept>
-#include <sstream>
-#include <fstream>
-#include <direct.h>
-#include <cerrno>
-#include <memory>
-#include <boost/shared_ptr.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/threadpool.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/smart_ptr.hpp>
-
-//#include <ppl.h>
-
-#include <odb/core.hxx>
-#include <odb/callback.hxx>
-#include <odb/boost/lazy-ptr.hxx>
-
-
-#ifdef _MSC_VER
-	// ODB Classes
-	#include <odb/database.hxx>
-	#include <odb/transaction.hxx>
-	#include <odb/pgsql/database.hxx>
-	#include <odb/schema-catalog.hxx>
+	#include "stdafx.h"
 	
+	// Software's Common Files
+	
+	#include "../include/CLogger.h"
+	#include "../Logger/sources/appTracer.h"
 
-	// Software's architecture
-	#include "CLogger.h"
-	#include "shapeLearner.h"
-	#include "dbManager.h"
-	#include "shockGraphsGenerator.h"
-#endif //_MSC_VER
+	// Database Objects 
+	#include "GraphClass.h"
+	#include "ObjectClass.h"
+	#include "Graph.h"
+	#include "Node.h"
+	#include "Point.h"
+	#include "Edge.h"
 
-#include "constants.h"
-#include "shapeLearnerException.h"
 
-/* Object Classes for ODB */
-#include "GraphClass.h"
-#include "ObjectClass.h"
-#include "Graph.h"
-#include "Node.h"
-#include "Point.h"
-#include "Edge.h"
-/* Class for ODB */
-
-#ifdef _MSC_VER // ODB Generated
+	/* Class for ODB */
 	#include "GraphClass-odb.hxx"
 	#include "ObjectClass-odb.hxx"
 	#include "Graph-odb.hxx"
 	#include "Node-odb.hxx"
 	#include "Edge-odb.hxx"
 	#include "Point-odb.hxx"
-#endif // _MSC_VER
+	/* Class for ODB */
+	// Software's architecture	
+	// Software's Core Files
+	#include "dbManager.h"
+	#include "shapeLearner.h"
+	#include "shockGraphsGenerator.h"
+#endif //_MSC_VER
 
 #endif //_ALL_HEADERS_

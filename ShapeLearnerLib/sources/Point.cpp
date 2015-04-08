@@ -17,7 +17,10 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
+#include "stdafx.h"
 #include "allHeaders.h"
+
+
 using namespace std;
 
 Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord, double _yCoord, double _radius) :

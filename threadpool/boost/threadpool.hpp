@@ -17,6 +17,10 @@
 #ifndef THREADPOOL_HPP_INCLUDED
 #define THREADPOOL_HPP_INCLUDED
 
+#ifdef _MSC_VER
+	#pragma message("Compiling boost\\threadpool.hpp  - this should happen just once per project.\n")
+#endif
+
 #include "./threadpool/future.hpp"
 #include "./threadpool/pool.hpp"
 

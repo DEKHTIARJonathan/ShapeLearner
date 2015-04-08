@@ -20,7 +20,17 @@
 #ifndef _POINT_
 #define _POINT_
 
-#include "allHeaders.h"
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::Point.h  - this should happen just once per project.\n")
+	#include "stdafx.h"
+	#include "allHeaders.h"
+#else
+	#include "odbHeaders.h"
+#endif
+
+
+
+
 using namespace std;
 
 class Graph; //Forward Declaration of the class contained in Graph.h

@@ -17,7 +17,9 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
-#include "allHeaders.h"
+ 
+#include "stdafx.h"
+
 using namespace std;
 
 /********************************************************************

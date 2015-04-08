@@ -20,6 +20,10 @@
 #ifndef _APPTRACER_
 #define _APPTRACER_
 
+#ifdef _MSC_VER
+	#pragma message("Compiling CLogger::appTracer.h - this should happen just once per project.\n")
+#endif
+
 #include "CLogger.h"
 using namespace std;
 

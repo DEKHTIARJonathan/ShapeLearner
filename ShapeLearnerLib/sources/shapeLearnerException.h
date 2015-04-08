@@ -20,9 +20,11 @@
 #ifndef _SHAPE_LEARNER_EXCEPTION_
 #define _SHAPE_LEARNER_EXCEPTION_
 
-#include <string>
-#include <iostream>
-#include <exception>
+#include "stdafx.h"
+
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::shapeLearnerException.h  - this should happen just once per project.\n")
+#endif
 
 using namespace std;
 

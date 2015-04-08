@@ -20,6 +20,8 @@
 #ifndef _SHAPE_LEARNER_EXCEPTION_
 #define _SHAPE_LEARNER_EXCEPTION_
 
+#pragma message("Compiling ShapeLearnerUser::shapeLearnerException.h - this should happen just once per project.\n")
+
 #include <string>
 #include <iostream>
 #include <exception>

@@ -45,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\allHeaders.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="sources\constants.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -138,6 +135,15 @@
     <ClInclude Include="..\threadpool\boost\threadpool.hpp">
       <Filter>ThreadPool</Filter>
     </ClInclude>
+    <ClInclude Include="sources\odbHeaders.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\allHeaders.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\stdafx.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\GraphClass-odb.cxx">
@@ -187,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="sources\shockGraphsGenerator.cpp">
       <Filter>shockGraphsGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stdafx.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

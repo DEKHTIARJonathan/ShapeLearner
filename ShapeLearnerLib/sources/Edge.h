@@ -20,7 +20,14 @@
 #ifndef _EDGE_
 #define _EDGE_
 
-#include "allHeaders.h"
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::Edge.h  - this should happen just once per project.\n")
+	#include "stdafx.h"
+	#include "allHeaders.h"
+#else
+	#include "odbHeaders.h"
+#endif
+
 using namespace std;
 
 class Graph; //Forward Declaration of the class contained in Graph.h

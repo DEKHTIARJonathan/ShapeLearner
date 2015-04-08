@@ -20,6 +20,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::constants.h  - this should happen just once per project.\n")
+#endif
 /*!	
 *	\namespace constants
 *	\brief Namespace containing the constant variables used by the whole library

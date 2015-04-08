@@ -17,7 +17,9 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
+#include "stdafx.h"
 #include "allHeaders.h"
+
 using namespace std;
 
 Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectClass> _refObjectClass, string const _objectName, unsigned long const _viewNumber) :

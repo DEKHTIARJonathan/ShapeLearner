@@ -20,7 +20,14 @@
 #ifndef _GRAPH_CLASS_
 #define _GRAPH_CLASS_
 
-#include "allHeaders.h"
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::GraphClass.h  - this should happen just once per project.\n")
+	#include "stdafx.h"
+	#include "allHeaders.h"
+#else
+	#include "odbHeaders.h"
+#endif
+
 using namespace std;
 
 class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h

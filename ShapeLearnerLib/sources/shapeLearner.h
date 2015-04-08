@@ -20,8 +20,12 @@
 #ifndef _SHAPE_LEARNER_H_
 #define _SHAPE_LEARNER_H_
 
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::shapeLearner.h  - this should happen just once per project.\n")
+#endif
+ 
+#include "stdafx.h"
 #include "allHeaders.h"
-#include "dbManager.h"
 
 using namespace std;
 using namespace boost::threadpool;

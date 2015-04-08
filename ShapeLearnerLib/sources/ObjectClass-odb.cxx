@@ -2,6 +2,8 @@
 // compiler for C++.
 //
 
+#include "stdafx.h"
+
 #include <odb/pre.hxx>
 
 #include "ObjectClass-odb.hxx"
