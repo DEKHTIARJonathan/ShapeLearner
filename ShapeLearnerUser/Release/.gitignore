@@ -3,8 +3,7 @@
 
 # But not these files...
 !.gitignore
-!script.pl
-!template.latex
+!*.dll
 !*.cpp
 !*.cxx
 !*.ixx

@@ -1,0 +1,9 @@
+# But not these files...
+!.gitignore
+!*.lib
+!*.pdb
+!*.ilk
+
+
+# ...even if they are in subdirectories
+!*/
