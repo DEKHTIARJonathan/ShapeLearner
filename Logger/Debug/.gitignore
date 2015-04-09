@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!script.pl
+!template.latex
+!*.cpp
+!*.cxx
+!*.ixx
+!*.hxx
+!*.h
+!Makefile
+!makefile
+
+# ...even if they are in subdirectories
+!*/

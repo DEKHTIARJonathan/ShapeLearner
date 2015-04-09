@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6D8C47F8-5566-11E0-8D23-00E0812AE2E8}</UniqueIdentifier>
+      <Extensions>cxx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8808F89C-5566-11E0-853E-00E0812AE2E8}</UniqueIdentifier>
+      <Extensions>h;hxx;ixx;txx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+
+    <ClInclude Include="version.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lazy-ptr.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exception.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mssql\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mssql\qbyte-array-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mssql\quuid-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mssql\qstring-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\sqlite\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\sqlite\qbyte-array-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\sqlite\quuid-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\sqlite\qstring-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\pgsql\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\pgsql\qbyte-array-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\pgsql\quuid-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\pgsql\qstring-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mysql\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mysql\qbyte-array-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mysql\quuid-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\mysql\qstring-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\oracle\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\oracle\qbyte-array-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\oracle\quuid-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\oracle\qstring-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="smart-ptr\pointer-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="smart-ptr\lazy-ptr.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="smart-ptr\lazy-pointer-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="smart-ptr\lazy-ptr.ixx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="smart-ptr\wrapper-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="smart-ptr\lazy-ptr.txx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="list-iterator.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\qmap-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\qvector-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\list-iterator.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\list.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\qhash-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\qset-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\list-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\list.ixx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\qlist-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\list-traits.txx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\qlinked-list-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\mutable-list-iterator.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="list.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mssql\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mssql\qtime-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mssql\qdate-time-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mssql\qdate-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\sqlite\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\sqlite\qtime-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\sqlite\qdate-time-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\sqlite\qdate-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\pgsql\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\pgsql\qtime-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\pgsql\qdate-time-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\pgsql\qdate-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mysql\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mysql\qtime-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mysql\qdate-time-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\mysql\qdate-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\oracle\default-mapping.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\oracle\qtime-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\oracle\qdate-time-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\oracle\qdate-traits.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="date-time\exceptions.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="details\export.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="details\config.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mutable-list-iterator.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+
+    <ClCompile Include="date-time\exceptions.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
