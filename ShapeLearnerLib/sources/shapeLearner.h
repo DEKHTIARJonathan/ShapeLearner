@@ -68,7 +68,7 @@ class ShapeLearner
 		*/
 		static void closeDatabase() throw(ShapeLearnerExcept);
 
-		static bool createShockGraph () throw(ShapeLearnerExcept);
+		static void createShockGraph (const vector<const string> &imgVect) throw(ShapeLearnerExcept);
 
 		/*!	
 		*	\class ShapeLearner::ObjectInterface
@@ -303,6 +303,10 @@ class ShapeLearner
 		*/
 		static map<string, boost::shared_ptr<GraphClass>>		GraphClassMap;
 
+		/* ************************* MULTI - THREADING POOL *************************/
+
+		static boost::threadpool::pool							Pool;
+
 		/* ************** DB I/O Ops *********************/
 		/*!
 		*	\fn template<class T> static string saveObjectString(T& obj)  throw(ShapeLearnerExcept);
@@ -376,7 +380,7 @@ class ShapeLearner
 
 		/* ************** Multi Threading Workers ***************/
 
-		static bool createShockGraphWorker (int idThread) throw(ShapeLearnerExcept);
+		static bool createShockGraphWorker (const string& imgPath) throw(ShapeLearnerExcept);
 		
 		/* **************  No instanciation *********************/
 

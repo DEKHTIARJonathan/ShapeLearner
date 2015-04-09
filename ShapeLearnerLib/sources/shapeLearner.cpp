@@ -36,6 +36,23 @@ map<string, boost::shared_ptr<ObjectClass>>		ShapeLearner::ObjectClassMap;
 map<string, boost::shared_ptr<GraphClass>>		ShapeLearner::GraphClassMap;
 
 /* *******************************************************************
+*                             Multi Threading                        *
+ ********************************************************************/
+
+boost::threadpool::pool ShapeLearner::Pool (constants::nbMaxThread);
+
+/*!
+*	\Brief Local Function used to get the ThreadID.
+*/
+
+const unsigned long getThreadId(){
+    std::string threadId = boost::lexical_cast<std::string>(boost::this_thread::get_id());
+    unsigned long threadNumber = 0;
+    sscanf(threadId.c_str(), "%lx", &threadNumber);
+    return threadNumber;
+}
+
+/* *******************************************************************
 *                           USER INTERFACE                           *
 ******************************************************************* */
 
@@ -284,25 +301,22 @@ bool ShapeLearner::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool 
 	return rslt;
 }
 
-bool ShapeLearner::createShockGraph () throw(ShapeLearnerExcept){
+void ShapeLearner::createShockGraph (const vector<const string> &imgVect) throw(ShapeLearnerExcept){
 	// Create fifo thread pool container with two threads.
-	bool rslt = true;
-	pool tp(8);
-	
-	
-	for (int idThread = 1; idThread <= 20; idThread++){
-		rslt &= tp.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, idThread));
-	} 
-  
-	//  Wait until all tasks are finished.
-	tp.wait();
 
-	return rslt;
+	for (vector<const string>::const_iterator it = imgVect.begin(); it != imgVect.end(); it++){
+		Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, *it));
+	} 
+	//  Wait until all tasks are finished
+	Pool.wait();
 }
 
-bool ShapeLearner::createShockGraphWorker (int idThread) throw(ShapeLearnerExcept){
-	shockGraphsGenerator worker(idThread);
-
+bool ShapeLearner::createShockGraphWorker (const string& imgPath) throw(ShapeLearnerExcept){
+	const unsigned long idThread = getThreadId();
+	shockGraphsGenerator worker(imgPath, idThread);
 	worker.taskExecute();
 	return true;
 }
+
+
+

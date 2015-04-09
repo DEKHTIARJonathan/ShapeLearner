@@ -60,10 +60,18 @@ int main(int argc, char **argv)
 
 		ShapeLearner::closeDatabase(); // We disconnect to the DB
 		*/
-		if (ShapeLearner::createShockGraph())
-			cout << "Hell Yeah" <<endl;
-		else
-			cout << "Hell No ..."<< endl;
+		vector<const string> imgVect;
+
+		imgVect.push_back("image1.img");
+		imgVect.push_back("image2.img");
+		imgVect.push_back("image3.img");
+		imgVect.push_back("image4.img");
+		imgVect.push_back("image5.img");
+		imgVect.push_back("image6.img");
+		imgVect.push_back("image7.img");
+		imgVect.push_back("image8.img");
+		imgVect.push_back("image9.img");
+		ShapeLearner::createShockGraph(imgVect);
 	}
 	catch (const std::exception& e)
 	{

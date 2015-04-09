@@ -46,12 +46,13 @@ class Edge; //Forward Declaration of the class contained in Edge.h
 */
 class shockGraphsGenerator{
 public:
-	shockGraphsGenerator(int _taskNum) : taskNum(_taskNum) {}
+	shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum) : imgPath(_imgPath), taskNum(_taskNum) {}
 	
 	bool taskExecute();
 
 private:
-	int taskNum;
+	const string imgPath;
+	const unsigned long taskNum;
 	
 };
 

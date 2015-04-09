@@ -58,6 +58,11 @@ namespace constants{
 	*/
 	const unsigned int		LogError = 4;
 
+	/*!
+	*	Constant referencing to the number of threads used by the ShapeLearner Library.
+	*/
+	const int		nbMaxThread = 1;
+
 }
 
 #endif // CONSTANTS_H

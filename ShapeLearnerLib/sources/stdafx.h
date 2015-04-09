@@ -56,6 +56,7 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/smart_ptr.hpp>
 #include <boost/threadpool.hpp>	
+#include <boost/thread.hpp>
 
 // ODB Classes
 #include <odb/core.hxx>

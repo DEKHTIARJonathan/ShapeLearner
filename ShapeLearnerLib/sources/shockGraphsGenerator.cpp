@@ -23,6 +23,7 @@
 
 using namespace std;
 
+/*
 _Longlong fact(_Longlong nbr){
 	_Longlong tmp = nbr;
 	_Longlong rslt = 1;
@@ -33,12 +34,13 @@ _Longlong fact(_Longlong nbr){
 
 	return rslt;
 }
+*/
 
 bool shockGraphsGenerator::taskExecute()
 {
-	Logger::Log("Debut de la tache numero " + to_string((_Longlong)taskNum));
-	for (int i = 1000000000; i <= 10000000000; i++)
-		fact(i);
-	Logger::Log("Fin de la tache numero " + to_string((_Longlong)taskNum));
+	Logger::Log("Thread id= " + to_string((_Longlong)taskNum) +" is working correctly.");
+	Sleep(500);
+	Logger::Log("Image en cours d'analyse : " + imgPath);
+	Sleep(500);
 	return true;
 }
