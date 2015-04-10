@@ -8,7 +8,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include "io.h"
-#include <GL/glut.h>
+#include "../../glut-3.7.6-bin/GL/glut.h"
 #include <map>
 #include "genrl.h"
 #include "../../dagmatcher/BasicUtils.h"

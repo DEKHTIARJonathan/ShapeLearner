@@ -1,7 +1,7 @@
 #ifndef __SKEL_REPAIR_H__
 #define __SKEL_REPAIR_H__
 
-#include "../AFFMSkeleton/include/field.h"
+#include "../AFMMSkeleton/include/field.h"
 #include "MatrixLite.h"
 
 typedef MatrixLite<char> PATMASK;
