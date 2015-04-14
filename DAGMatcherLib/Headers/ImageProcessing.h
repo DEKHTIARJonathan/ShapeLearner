@@ -34,6 +34,12 @@
 #ifndef _IMAGE_PROCESSING_H_
 #define _IMAGE_PROCESSING_H_
 
+#include <functional>
+#include <tools/connected.h>
+#include "field.h"
+#include <CImg/CImg.h>
+#include "sg.h"
+
 namespace dml {
 int RemoveNonMaxComponents(cimg_library::CImg<float>& img);
 FIELD<float>* CopyImageToField(const cimg_library::CImg<float>& img);

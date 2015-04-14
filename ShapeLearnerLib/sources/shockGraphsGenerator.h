@@ -46,13 +46,27 @@ class Edge; //Forward Declaration of the class contained in Edge.h
 */
 class shockGraphsGenerator{
 public:
-	shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum) : imgPath(_imgPath), taskNum(_taskNum) {}
+	shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum);
 	
 	bool taskExecute();
 
 private:
 	const string imgPath;
 	const unsigned long taskNum;
+	//ShapeMatchingParams m_matchInfo;
+	//ShapeRepresentationParams m_shapeInfo;
+
+	/*
+	@brief Computes a shock graph from the given ppm file.
+
+	@param szFileName PPM file name
+	@info Parameters for the SG computation code
+	@bAsyncProcessing Whether a TIME OUT must be used to control the SG computation
+
+	Since the SG computation used to fail, the async processing was necessary to
+	avoid a batch processing of files getting stuck in a particular file.
+*/
+	//void processFile(const string szFileName, ShapeRepresentationParams& info, bool bAsyncProcessing);
 	
 };
 

@@ -161,7 +161,7 @@ private:
 		const SEGMENT*& pLastSeg, double& dMaxYDiff) const;
 };
 
-#include "PiecewiseApprox.cxx" // Implementation of template functions
+#include "PiecewiseApprox.hxx" // Implementation of template functions
 } //namespace dml
 
 #endif //__PIECEWISE_APROX_H__

@@ -301,9 +301,11 @@ bool ShapeLearner::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool 
 	return rslt;
 }
 
-void ShapeLearner::createShockGraph (const vector<const string> &imgVect) throw(ShapeLearnerExcept){
+void ShapeLearner::createShockGraph (const vector<const string> &imgVect) throw(ShapeLearnerExcept){	
+	//Random Init
+	std::srand(std::time(0));
+	
 	// Create fifo thread pool container with two threads.
-
 	for (vector<const string>::const_iterator it = imgVect.begin(); it != imgVect.end(); it++){
 		Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, *it));
 	} 

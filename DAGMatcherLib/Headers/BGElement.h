@@ -28,8 +28,8 @@
  * Author: Diego Macrini
  *
  *-----------------------------------------------------------------------*/
-#ifndef __BG_ELEMENT_H__
-#define __BG_ELEMENT_H__
+#ifndef _BG_ELEMENT_H_
+#define _BG_ELEMENT_H_
 
 #include "DAGNode.h"
 #include "DAGEdge.h"
@@ -268,6 +268,7 @@ public:
 	double GetMaximumRadius() const;
 	leda::color SaliencyColor() const;
 };
+
 } //namespace dml
 
-#endif //__BG_ELEMENT_H__
+#endif //_BG_ELEMENT_H_

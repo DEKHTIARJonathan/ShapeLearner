@@ -34,68 +34,72 @@
  *
  *-----------------------------------------------------------------------*/
 
-#ifndef __MATCH_INFO_LIST_H__
-#define __MATCH_INFO_LIST_H__
+#ifndef _MATCH_INFO_LIST_H_
+#define _MATCH_INFO_LIST_H_
+
+#include "LEDA/internal/PREAMBLE.h"
+#include "BasicTypedefs.h"
 
 namespace dml {
-class MatchInfo
-{
-public:
-	double distance;
-	int prototype;
-	DAGPtr pDag;
-	double similarity;
 
-	MatchInfo() { distance = 0; prototype = 0; similarity = 0; }
-
-	MatchInfo(int prot, double dist)
+	class MatchInfo
 	{
-		distance = dist;
-		prototype = prot;
-	}
+	public:
+		double distance;
+		int prototype;
+		DAGPtr pDag;
+		double similarity;
 
-	friend bool operator< (const MatchInfo& a, const MatchInfo& b)
+		MatchInfo() { distance = 0; prototype = 0; similarity = 0; }
+
+		MatchInfo(int prot, double dist)
+		{
+			distance = dist;
+			prototype = prot;
+		}
+
+		friend bool operator< (const MatchInfo& a, const MatchInfo& b)
+		{
+			double ap;
+			double bp;
+
+			ap = a.distance;
+			bp = b.distance;
+
+			if(ap < bp)
+				return true;
+			else
+				return false;
+		}
+
+		// The stream operators are implemented only to satisfy LEDA requirements
+		friend ostream& operator<<(ostream &os, const MatchInfo& mi) { return os; }
+		friend istream& operator>>(istream &is, MatchInfo& mi) { return is; }
+	};
+
+	class MatchInfoList : public leda_list<MatchInfo>
 	{
-		double ap;
-		double bp;
+		int m_nMaxMatches;
+		double m_dSimilarityTau;
 
-		ap = a.distance;
-		bp = b.distance;
+		// Stats
+		double m_dMinSimilarity;
+		double m_dMaxSimilarity;
+		int m_nSamplesRead;
 
-		if(ap < bp)
-			return true;
-		else
-			return false;
-	}
+	public:
+		MatchInfoList(int nMaxMatches);
+		MatchInfoList(double dSimilarityTau);
 
-	// The stream operators are implemented only to satisfy LEDA requirements
-	friend ostream& operator<<(ostream &os, const MatchInfo& mi) { return os; }
-	friend istream& operator>>(istream &is, MatchInfo& mi) { return is; }
-};
+		Clear();
 
-class MatchInfoList : public leda_list<MatchInfo>
-{
-	int m_nMaxMatches;
-	double m_dSimilarityTau;
+		Add();
 
-	// Stats
-	double m_dMinSimilarity;
-	double m_dMaxSimilarity;
-	int m_nSamplesRead;
+		GetFirstMatchPos();
+		GetNextMatch(pos);
 
-public:
-	MatchInfoList(int nMaxMatches);
-	MatchInfoList(double dSimilarityTau);
-
-	Clear();
-
-	Add();
-
-	GetFirstMatchPos();
-	GetNextMatch(pos);
-
-	PrintStats(ostream os = cout);
-};
+		PrintStats(ostream os = cout);
+	};
 } //namespace dml;
 
 #endif // __MATCH_INFO_LIST_H__

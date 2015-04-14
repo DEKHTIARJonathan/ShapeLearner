@@ -141,7 +141,9 @@ public:
 	{
 		DirWalker dw;
 		dw.ParseFileName(szFileName);
-		return dw.path + dw.name;
+		std::string tmp = dw.path;
+		//std::string tmp = dw.path + dw.name;
+		return tmp;
 	}
 
 	static std::string GetName(const char* szFileName)

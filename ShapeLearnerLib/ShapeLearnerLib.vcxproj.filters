@@ -144,6 +144,9 @@
     <ClInclude Include="sources\stdafx.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="sources\infoStructures.h">
+      <Filter>shockGraphsGenerator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\GraphClass-odb.cxx">

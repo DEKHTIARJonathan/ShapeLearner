@@ -2,7 +2,7 @@
 #define _BASIC_TYPES_H_
 
 #include "BasicUtils.h"
-#include "FluxSkeleton/include/Point.h"
+#include "FluxSkeleton\include\Point.h"
 
 namespace dml {
 //! Dimensions of an object's silhouette

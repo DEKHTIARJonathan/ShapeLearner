@@ -30,13 +30,8 @@
  * $Log: ImageProcessing.cpp,v $
  *
  *-----------------------------------------------------------------------*/
-#include <functional>
-#include <tools/connected.h>
-#include "field.h"
-#include <CImg/CImg.h>
-#include "ImageProcessing.h"
 
-#include <DDSGraphProject.h>
+#include "ImageProcessing.h"
 
 using namespace dml;
 

@@ -71,17 +71,17 @@
       </UndefinePreprocessorDefinitions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/MP7 %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\ShapeLearnerLib\Debug;$(ProjectDir)..\Logger\Debug;$(ProjectDir)..\DAGMatcherLib\Debug;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\debug\link-static\threading-multi</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton;$(ProjectDir)..\ShapeLearnerUser\Dependencies\LEDA;$(ProjectDir)..\Newmat;$(ProjectDir)..\ann_1.1\lib;$(ProjectDir)..\FluxSkeleton\lib;$(ProjectDir)..\HnSRTree-2.0beta5a\lib;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\ShapeLearnerLib\Debug;$(ProjectDir)..\Logger\Debug;$(ProjectDir)..\DAGMatcherLib\Debug;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\debug\link-static\threading-multi</AdditionalLibraryDirectories>
       <LinkStatus>true</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>DAGMatcherLib-d.lib;ShapeLearnerLib-d.lib;odb-d.lib;odb-pgsql-d.lib;CLogger-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DAGMatcherLib-d.lib;ShapeLearnerLib-d.lib;odb-d.lib;odb-pgsql-d.lib;odb-boost-d.lib;CLogger-d.lib;HnSRTree.lib;FluxSkel.lib;ANN.lib;newmat.lib;glut32.lib;leda_mtd.lib;AFMMSkel.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -100,16 +100,17 @@
       <MinimalRebuild>false</MinimalRebuild>
       <AdditionalIncludeDirectories>$(ProjectDir)..\ShapeLearnerLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/MP7 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\ShapeLearnerLib\Release;$(ProjectDir)..\Logger\Release;$(ProjectDir)..\DAGMatcherLib\Release;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton;$(ProjectDir)..\ShapeLearnerUser\Dependencies\LEDA;$(ProjectDir)..\Newmat;$(ProjectDir)..\ann_1.1\lib;$(ProjectDir)..\FluxSkeleton\lib;$(ProjectDir)..\HnSRTree-2.0beta5a\lib;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\ShapeLearnerLib\Release;$(ProjectDir)..\Logger\Release;$(ProjectDir)..\DAGMatcherLib\Release;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi</AdditionalLibraryDirectories>
       <LinkStatus>true</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>CLogger.lib;DAGMatcherLib.lib;ShapeLearnerLib.lib;odb.lib;odb-pgsql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DAGMatcherLib.lib;ShapeLearnerLib.lib;odb.lib;odb-pgsql.lib;odb-boost.lib;CLogger.lib;HnSRTree.lib;FluxSkel.lib;ANN.lib;newmat.lib;glut32.lib;leda_mt.lib;AFMMSkel.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

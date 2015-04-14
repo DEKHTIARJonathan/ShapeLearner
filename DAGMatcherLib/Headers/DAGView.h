@@ -37,7 +37,6 @@
 #include <LEDA/graphics/window.h>
 #include "LEDA_window_utils.h"
 #include "DAG.h"
-#include "DDSGraphProject.h"
 
 namespace dml {
 /*!

@@ -40,6 +40,8 @@
 // ============================= START ADDING LIBS =============================
 
 #include <iostream>
+#include <iomanip>
+#include <io.h>
 #include <string>
 #include <map>
 #include <list>
@@ -50,6 +52,9 @@
 #include <direct.h>
 #include <cerrno>
 #include <memory>
+#include <random>
+#include <stack>
+#include <functional>
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/filesystem.hpp>
@@ -57,6 +62,13 @@
 #include <boost/smart_ptr.hpp>
 #include <boost/threadpool.hpp>	
 #include <boost/thread.hpp>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <process.h>
+#include <math.h>
+#include <fcntl.h> // for open()
+#include <cstdio> // for perror()
 
 // ODB Classes
 #include <odb/core.hxx>
@@ -67,9 +79,38 @@
 #include <odb/pgsql/database.hxx>
 #include <odb/schema-catalog.hxx>
 
+// DAG Matcher Lib
+#include <BasicTypedefs.h>
+#include <BasicUtils.h>
+#include <SmartMatrix.h>
+#include <ShockGraph.h>
+#include <ShockGraphView.h>
+#include <BoneGraph.h>
+#include <BoneGraphView.h>
+#include <GestureGraph.h>
+#include <DAGDatabase.h>
+#include <DAG.h>
+#include <DirWalker.h>
+#include <ImageProcessing.h>
+#include <Exceptions.h>
+#include <HelperFunctions.h>
+
+//LEDA
+#include <LEDA/core/p_queue.h>
+
+// External Libs
+#include <newmatap.h>
+#include <newmatio.h>
+#include <tools/connected.h>
+#include <CImg/CImg.h>
+#include <FHImgSegment/segment-graph.h>
+
+
+//ShapeLearner Specific Files
 
 #include "constants.h"
 #include "shapeLearnerException.h"
+//#include "infoStructures.h"
 
 // ============================= STOP ADDING LIBS ==============================
 

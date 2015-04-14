@@ -37,13 +37,10 @@
 #ifndef __MG_SHOCKGRAPH_H__
 #define __MG_SHOCKGRAPH_H__
 
-extern "C" {
-#include <Shock.h>
-#include <Branches.h>
-#include <Graphs.h>
-}
+#include <LEDA\internal\PREAMBLE.h>
 
 namespace dml {
+
 struct Pixmap
 {
 	int rows;

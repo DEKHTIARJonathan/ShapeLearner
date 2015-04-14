@@ -72,6 +72,7 @@ int main(int argc, char **argv)
 		imgVect.push_back("image8.img");
 		imgVect.push_back("image9.img");
 		ShapeLearner::createShockGraph(imgVect);
+		ShapeLearner::createShockGraph(imgVect);
 	}
 	catch (const std::exception& e)
 	{

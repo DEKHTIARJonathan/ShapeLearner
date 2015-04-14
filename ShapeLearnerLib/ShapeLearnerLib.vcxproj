@@ -33,6 +33,7 @@
     <ClInclude Include="sources\Graph.h" />
     <ClInclude Include="sources\GraphClass-odb.hxx" />
     <ClInclude Include="sources\GraphClass.h" />
+    <ClInclude Include="sources\infoStructures.h" />
     <ClInclude Include="sources\odbHeaders.h" />
     <ClInclude Include="sources\shapeLearner.h" />
     <ClInclude Include="sources\Node-odb.hxx" />
@@ -125,8 +126,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\DAGMatcherLib\Headers;$(ProjectDir)..\threadpool;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\threadpool;$(LEDAROOT)\incl;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\DAGMatcherLib\Headers;$(ProjectDir)..\DAGMatcherLib\Sources;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include\;$(ProjectDir)..\AFMMSkeleton\include\;$(ProjectDir)..\FluxSkeleton\include\;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -134,7 +135,7 @@
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-      <AdditionalOptions>-Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Zm200  /MDd %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,13 +155,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\DAGMatcherLib\Headers;$(ProjectDir)..\threadpool;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\threadpool;$(LEDAROOT)\incl;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\DAGMatcherLib\Headers;$(ProjectDir)..\DAGMatcherLib\Sources;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include\;$(ProjectDir)..\AFMMSkeleton\include\;$(ProjectDir)..\FluxSkeleton\include\;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AdditionalOptions>-Zm200   /MD %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -176,9 +176,6 @@
     <ClInclude Include="..\DAGMatcherLib\Headers\MedialAxisCorner.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\DAGMatcherLib\Headers\MGShockGraph.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="..\DAGMatcherLib\Headers\ModelFit.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -270,6 +267,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\DAGMatcherLib\Headers\XORIntegral.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\PiecewiseApprox.hxx">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

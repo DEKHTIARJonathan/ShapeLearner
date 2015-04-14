@@ -41,8 +41,9 @@
 #include "DAGEdge.h"
 #include "DMLString.h"
 
-#include <newmatap.h>
-#include <newmatio.h>
+
+#include <Newmat\newmatap.h>
+#include <Newmat\newmatio.h>
 
 #include "SkeletalGraph.h"
 #include "DAGMatcher.h"

@@ -41,6 +41,7 @@
 #define __VECTOR_H__
 
 namespace dml {
+
 class Vector : public RowVector
 {
 public:
