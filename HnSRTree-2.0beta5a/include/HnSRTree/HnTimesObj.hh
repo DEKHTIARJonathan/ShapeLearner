@@ -25,7 +25,7 @@
 #define _HnTimesObj_hh
 
 #ifdef _MSC_VER
-#include <windows.h>	/* for struct timeval */
+#include <Winsock2.h>	/* for struct timeval */
 #else
 #include <sys/time.h>
 #endif

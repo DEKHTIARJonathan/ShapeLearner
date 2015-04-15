@@ -33,7 +33,8 @@
 #endif
 
 #ifdef _MSC_VER
-#include <windows.h>	/* for struct timeval */
+//#include <windows.h>	/* for struct timeval */
+#include <Winsock2.h>
 #else
 #include <sys/time.h>
 #endif
@@ -41,9 +42,8 @@
 /*
  * Structure
  */
-
 typedef struct {
-    struct timeval rtime;
+	struct timeval rtime;
     struct timeval utime;
     struct timeval stime;
 } HnTimesSt;

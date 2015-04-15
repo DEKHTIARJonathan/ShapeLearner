@@ -1,6 +1,6 @@
 BIN = main
 CC = g++ $(FLAGS) -ggdb -DLEDA_PREFIX -D_DEBUG -Wno-deprecated
-HNSRTREE_ROOT = $(DAG_MATCHER_ROOT)/HnSRTree-2.0beta4
+HNSRTREE_ROOT = $(DAG_MATCHER_ROOT)/HnSRTree-2.0beta5a
 
 INCS = -I../include \
        -I$(DAG_MATCHER_ROOT)/dagmatcher \
@@ -24,7 +24,8 @@ LIBS = -L../lib \
        -L$(SHOCKGRAPH_ROOT)/lib \
        -L$(SHOCKGRAPH_ROOT)/interfaces \
        -L$(HNSRTREE_ROOT)/lib \
-       -L/../usr/X11R6/lib/
+       -L/../usr/X11R6/lib/ \
+	   -L../ShapeLearnerUser/Dependencies/external
 
 # INCS =  -I. \
 # 	-I/usr/include \

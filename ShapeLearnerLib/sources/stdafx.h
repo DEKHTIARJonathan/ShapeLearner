@@ -110,7 +110,7 @@
 
 #include "constants.h"
 #include "shapeLearnerException.h"
-//#include "infoStructures.h"
+#include "infoStructures.h"
 
 // ============================= STOP ADDING LIBS ==============================
 

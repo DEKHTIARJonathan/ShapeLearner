@@ -22,6 +22,7 @@
 #include "allHeaders.h"
 
 using namespace std;
+using namespace dml;
 
 /*
 _Longlong fact(_Longlong nbr){
@@ -52,7 +53,6 @@ string genFileName(const unsigned int len = 10)
 
 
  shockGraphsGenerator::shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum) : imgPath(_imgPath), taskNum(_taskNum) {
-	/*
 	m_matchInfo.asyncCompu = 0;
 	m_matchInfo.computeStats = 0;
 	m_matchInfo.firstModelId = -1;
@@ -77,16 +77,11 @@ string genFileName(const unsigned int len = 10)
 	//m_shapeInfo.skelparams
 	//m_shapeInfo.sgparams
 	//m_shapeInfo.bgparams
-	*/
 }
 
 
 bool shockGraphsGenerator::taskExecute()
 {
-	//DirWalker dirDw, fileDw;
-	char fileExt[4];
-	int imgNumber;
-
 	Logger::Log("Adding object ("+imgPath+")to database...", constants::LogCore);
 
 	//ProcessFile(imgPath, m_shapeInfo, m_matchInfo.asyncCompu != 0);
@@ -97,65 +92,41 @@ bool shockGraphsGenerator::taskExecute()
 }
 
 
-//void shockGraphsGenerator::processFile(string szFileName, ShapeRepresentationParams& info, bool bAsyncProcessing)
-//{
-/*
-
-#ifndef WIN32
-	int status;
-
-	if (bAsyncProcessing)
-	{
-		if ((g_pid = fork()) != 0)
-		{
-			signal(SIGALRM, OnAlarm);
-			g_nTimeout = info.timeout;
-			alarm(info.timeout);
-			waitpid(g_pid, &status, 0);
-
-			if (!(WIFEXITED(status)))
-				logFile << "ERROR: Seg. Fault";
-
-			// Parent process is done, function returns normaly
-			return;
-		}
-	}
-#endif // no WIN32
-
-	// Child process executes the following code...
+void shockGraphsGenerator::processFile(bool bAsyncProcessing)
+{
 	DAGPtr pDag;
 	bool bIsRead;
 	const char* szFileExt;
 
-	szFileExt = DirWalker::FindFileExtension(szFileName);
+	szFileExt = DirWalker::FindFileExtension(imgPath.c_str());
 
 	if (!strcmp(szFileExt, "ppm") || !strcmp(szFileExt, "pgm") ||
 		!strcmp(szFileExt, "bmp") || !strcmp(szFileExt, "tif") ||
 		!strcmp(szFileExt, "jpg") || !strcmp(szFileExt, "png"))
 	{
-		ImageInfo imgInfo(szFileName);
+		ImageInfo imgInfo(imgPath.c_str());
 
 		// Add artificial noise if requested
-		if (info.nBumpSize > 0 || info.nNotchSize > 0)
+		if (m_shapeInfo.nBumpSize > 0 || m_shapeInfo.nNotchSize > 0)
 		{
 			ShowMsg("Adding noise to the image...");
-			AddBumpsAndNotches(szFileName, info, &imgInfo);
+			AddBumpsAndNotches(&imgInfo);
 		}
 
 		// Choose the appropriate shape representation
-		if (info.shapeRepType == SGShapeRep)
+		if (m_shapeInfo.shapeRepType == SGShapeRep)
 		{
 			ShockGraph* pSG = new ShockGraph;
 			pDag = pSG;
 
-			bIsRead = pSG->Create(imgInfo, info.sgparams, info.skelparams);
+			bIsRead = pSG->Create(imgInfo, m_shapeInfo.sgparams, m_shapeInfo.skelparams);
 		}
-		else if (info.shapeRepType == BGShapeRep)
+		else if (m_shapeInfo.shapeRepType == BGShapeRep)
 		{
 			BoneGraph* pBG = new BoneGraph;
 			pDag = pBG;
 
-			bIsRead = pBG->Create(imgInfo, info.bgparams, info.skelparams);
+			bIsRead = pBG->Create(imgInfo, m_shapeInfo.bgparams, m_shapeInfo.skelparams);
 		}
 		else
 		{
@@ -168,7 +139,7 @@ bool shockGraphsGenerator::taskExecute()
 		GestureGraph* pGG = new GestureGraph;
 		pDag = pGG;
 
-		bIsRead = pGG->Read(szFileName);
+		bIsRead = pGG->Read(imgPath.c_str());
 	}
 	else
 	{
@@ -178,22 +149,17 @@ bool shockGraphsGenerator::taskExecute()
 
 	if(bIsRead)
 	{
-		logFile << "DONE! (" << pDag->GetNodeCount() << " nodes)... " << flush;
+		Logger::Log("DONE! (" + to_string((_Longlong)pDag->GetNodeCount()) + " nodes)... ", constants::LogCore);
 
-		dagDB.AddDAG(pDag, true);
+		//dagDB.AddDAG(pDag, true);
 
-		logFile << "WRITTEN!" << flush;
+		Logger::Log("WRITTEN TO DB!", constants::LogCore);
 	}
 	else
-		logFile << "ERROR: Can't read dag." << flush;
+		Logger::Log("ERROR: Can't read dag.", constants::LogCore);
+}
 
-#ifndef WIN32
-	// If bAsyncProcessing, the child process must finish
-	if (bAsyncProcessing)
-	{
-		dagDB.Close();
-		_exit(0); // Warning exit() with no '_' flushes the buffer and we don't want that.
-	}
-#endif // no WIN32
-	*/
-//}
+bool shockGraphsGenerator::AddBumpsAndNotches(dml::ImageInfo* pImgInfo)
+{
+	return true;
+}

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00608210-0F6D-4D6B-855C-0B25A1B4C029}</ProjectGuid>
+    <RootNamespace>HnSRTree20beta5a</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)HnSRTree-d$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)HnSRTree$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="HnObject/HnAbort.cpp" />
+	<ClCompile Include="HnObject/HnBinarySearch.cpp" />
+	<ClCompile Include="HnObject/HnBlockFile.cpp" />
+	<ClCompile Include="HnObject/HnBlockFileObj.cpp" />
+	<ClCompile Include="HnObject/HnBlockStream.cpp" />
+	<ClCompile Include="HnObject/HnBlockStreamObj.cpp" />
+	<ClCompile Include="HnObject/HnDataItem.cpp" />
+	<ClCompile Include="HnObject/HnDataItemObj.cpp" />
+	<ClCompile Include="HnObject/HnDataItemSt.cpp" />
+	<ClCompile Include="HnObject/HnFTcharArray.cpp" />
+	<ClCompile Include="HnObject/HnFTdoubleArray.cpp" />
+	<ClCompile Include="HnObject/HnFTfloatArray.cpp" />
+	<ClCompile Include="HnObject/HnFTintArray.cpp" />
+	<ClCompile Include="HnObject/HnFTlongArray.cpp" />
+	<ClCompile Include="HnObject/HnFTucharArray.cpp" />
+	<ClCompile Include="HnObject/HnFTuintArray.cpp" />
+	<ClCompile Include="HnObject/HnFTulongArray.cpp" />
+	<ClCompile Include="HnObject/HnGenericArray.cpp" />
+	<ClCompile Include="HnObject/HnGetOpt.cpp" />
+	<ClCompile Include="HnObject/HnMalloc.cpp" />
+	<ClCompile Include="HnObject/HnObject.cpp" />
+	<ClCompile Include="HnObject/HnPointer.cpp" />
+	<ClCompile Include="HnObject/HnProperties.cpp" />
+	<ClCompile Include="HnObject/HnPropertiesObj.cpp" />
+	<ClCompile Include="HnObject/HnPropertiesSt.cpp" />
+	<ClCompile Include="HnObject/HnQuickSelect.cpp" />
+	<ClCompile Include="HnObject/HnQuickSort.cpp" />
+	<ClCompile Include="HnObject/HnString.cpp" />
+	<ClCompile Include="HnObject/HnStatistics.cpp" />
+	<ClCompile Include="HnObject/HnStatisticsObj.cpp" />
+	<ClCompile Include="HnObject/HnStatisticsSt.cpp" />
+	<ClCompile Include="HnObject/HnStringBuffer.cpp" />
+	<ClCompile Include="HnObject/HnStringBufferObj.cpp" />
+	<ClCompile Include="HnObject/HnStringBufferSt.cpp" />
+	<ClCompile Include="HnObject/HnStringObj.cpp" />
+	<ClCompile Include="HnObject/HnStringSt.cpp" />
+	<ClCompile Include="HnObject/HnTimes.cpp" />
+	<ClCompile Include="HnObject/HnTimesObj.cpp" />
+	<ClCompile Include="HnObject/HnTimesSt.cpp" />
+	<ClCompile Include="HnObject/HnTimesStatsSt.cpp" />
+	<ClCompile Include="HnRect/HnPoint.cpp" />
+	<ClCompile Include="HnRect/HnPointObj.cpp" />
+	<ClCompile Include="HnRect/HnPointSt.cpp" />
+	<ClCompile Include="HnRect/HnRange.cpp" />
+	<ClCompile Include="HnRect/HnRangeSt.cpp" />
+	<ClCompile Include="HnRect/HnRect.cpp" />
+	<ClCompile Include="HnRect/HnRectObj.cpp" />
+	<ClCompile Include="HnRect/HnRectSt.cpp" />
+	<ClCompile Include="HnRect/HnSphere.cpp" />
+	<ClCompile Include="HnRect/HnSphereObj.cpp" />
+	<ClCompile Include="HnRect/HnSphereSt.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeBlock.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeBlockObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeCluster.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeClusterObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeFile.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeFileObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeFileObj1.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeFileObj2.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeFileObj3.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeFileSt.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeInfo.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeInfoObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeLeaf.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeLeafObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeNeighbor.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeNeighborObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeNode.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeNodeObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeProfileSt.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeReinsert.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeReinsertObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeStack.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeStackObj.cpp" />
+	<ClCompile Include="HnSRTree/HnSRTreeStatsSt.cpp" />
+  </ItemGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

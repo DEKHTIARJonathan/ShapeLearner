@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include "HnSRTree/HnMalloc.h"
 #include "HnSRTree/HnTimesStatsSt.h"
+#include <time.h>
 
 HnTimesStatsSt *
 HnTimesStatsSt_allocate(void)

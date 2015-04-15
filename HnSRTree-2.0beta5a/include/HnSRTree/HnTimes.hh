@@ -18,6 +18,7 @@
 #endif
 #endif
 
+#include <time.h>
 #include "HnSRTree/HnPointer.hh"
 
 /*

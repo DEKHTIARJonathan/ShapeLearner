@@ -78,14 +78,22 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton;$(ProjectDir)..\ShapeLearnerUser\Dependencies\LEDA;$(ProjectDir)..\Newmat;$(ProjectDir)..\ann_1.1\lib;$(ProjectDir)..\FluxSkeleton\lib;$(ProjectDir)..\HnSRTree-2.0beta5a\lib;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\ShapeLearnerLib\Debug;$(ProjectDir)..\Logger\Debug;$(ProjectDir)..\DAGMatcherLib\Debug;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\debug\link-static\threading-multi</AdditionalLibraryDirectories>
-      <LinkStatus>true</LinkStatus>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton\Debug;$(ProjectDir)..\ShapeLearnerUser\Dependencies\LEDA;$(ProjectDir)..\Newmat\Debug;$(ProjectDir)..\ann_1.1\Debug;$(ProjectDir)..\FluxSkeleton\Debug;$(ProjectDir)..\HnSRTree-2.0beta5a\lib;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\ShapeLearnerLib\Debug;$(ProjectDir)..\Logger\Debug;$(ProjectDir)..\DAGMatcherLib\Debug;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\debug\link-static\threading-multi</AdditionalLibraryDirectories>
+      <LinkStatus>false</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>DAGMatcherLib-d.lib;ShapeLearnerLib-d.lib;odb-d.lib;odb-pgsql-d.lib;odb-boost-d.lib;CLogger-d.lib;HnSRTree.lib;FluxSkel.lib;ANN.lib;newmat.lib;glut32.lib;leda_mtd.lib;AFMMSkel.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DAGMatcherLib-d.lib;ShapeLearnerLib-d.lib;odb-d.lib;odb-pgsql-d.lib;odb-boost-d.lib;CLogger-d.lib;HnSRTree.lib;FluxSkeleton-d.lib;ann_1.1-d.lib;Newmat-d.lib;glut32.lib;leda_mtd.lib;AFMMSkeleton-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,18 +111,22 @@
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ShowProgress>NotSet</ShowProgress>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton;$(ProjectDir)..\ShapeLearnerUser\Dependencies\LEDA;$(ProjectDir)..\Newmat;$(ProjectDir)..\ann_1.1\lib;$(ProjectDir)..\FluxSkeleton\lib;$(ProjectDir)..\HnSRTree-2.0beta5a\lib;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\ShapeLearnerLib\Release;$(ProjectDir)..\Logger\Release;$(ProjectDir)..\DAGMatcherLib\Release;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi</AdditionalLibraryDirectories>
-      <LinkStatus>true</LinkStatus>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton\Release;$(ProjectDir)..\ShapeLearnerUser\Dependencies\LEDA;$(ProjectDir)..\Newmat\Release;$(ProjectDir)..\ann_1.1\Release;$(ProjectDir)..\FluxSkeleton\Release;$(ProjectDir)..\HnSRTree-2.0beta5a\lib;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\ShapeLearnerLib\Release;$(ProjectDir)..\Logger\Release;$(ProjectDir)..\DAGMatcherLib\Release;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi</AdditionalLibraryDirectories>
+      <LinkStatus>false</LinkStatus>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>DAGMatcherLib.lib;ShapeLearnerLib.lib;odb.lib;odb-pgsql.lib;odb-boost.lib;CLogger.lib;HnSRTree.lib;FluxSkel.lib;ANN.lib;newmat.lib;glut32.lib;leda_mt.lib;AFMMSkel.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DAGMatcherLib.lib;ShapeLearnerLib.lib;odb.lib;odb-pgsql.lib;odb-boost.lib;CLogger.lib;HnSRTree.lib;FluxSkeleton.lib;ann_1.1.lib;Newmat.lib;glut32.lib;leda_mt.lib;AFMMSkeleton.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <SubSystem>Console</SubSystem>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

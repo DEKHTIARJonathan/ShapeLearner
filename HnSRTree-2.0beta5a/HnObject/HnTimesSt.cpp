@@ -27,7 +27,8 @@
 #include "HnSRTree/config.h"
 
 #ifdef _MSC_VER
-#include <windows.h>
+//#include <windows.h>
+#include <time.h>
 #else
 #ifdef HAVE_GETRUSAGE
 #include <sys/resource.h>

@@ -22,8 +22,6 @@
 
 #include "stdafx.h"
 
-/*
-
 struct ShapeMatchingParams
 {
 	double idxtau, matchtau, idxrange, modelSimWeight;
@@ -61,7 +59,5 @@ typedef std::list<TrainingParams> TrainingParamList;
 #define SGShapeRep ShapeRepresentationParams::ShockGraphRep
 #define GGShapeRep ShapeRepresentationParams::GestureGraphRep
 #define BGShapeRep ShapeRepresentationParams::BoneGraphRep
-
-*/
 
 #endif // _INFO_STRUCTURES_H_
