@@ -8,6 +8,7 @@
 !*.ixx
 !*.hxx
 !*.h
+!*.lib
 !Makefile
 !makefile
 
