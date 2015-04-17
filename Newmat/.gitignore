@@ -17,6 +17,22 @@
 !Readme
 !README
 !*.lib
+!*.htm
+!*.html
+!*.css
+!*.txt
+!*.png
+
+#Visual Studio Files 
+!*.sln
+!*.sdf
+!*.vcxproj
+!*.filters
+!*.vcxproj.filters
+!*.vcxproj.user
+!*.suo
+!*.user
+
 !Makefile
 !makefile
 

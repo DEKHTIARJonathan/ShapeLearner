@@ -1,0 +1,42 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!*.cpp
+!*.cxx
+!*.ixx
+!*.hxx
+!*.hpp
+!*.h
+!*.cc
+!*.w
+!*.ppm
+!*.d
+!*.ps
+!*.eps
+!*.pnm
+!*.tex
+!*.idx
+!*.dvi
+!*.dia
+!*.lib
+
+#Visual Studio Files 
+!*.sln
+!*.sdf
+!*.vcxproj
+!*.filters
+!*.vcxproj.filters
+!*.vcxproj.user
+!*.suo
+!*.user
+
+!Makefile
+!makefile
+!README
+!VERSION
+!Common
+
+# ...even if they are in subdirectories
+!*/

@@ -53,30 +53,77 @@ string genFileName(const unsigned int len = 10)
 
 
  shockGraphsGenerator::shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum) : imgPath(_imgPath), taskNum(_taskNum) {
-	m_matchInfo.asyncCompu = 0;
-	m_matchInfo.computeStats = 0;
-	m_matchInfo.firstModelId = -1;
-	m_matchInfo.idxKBest = 101;
-	m_matchInfo.idxrange = 0.40000000000000002;
+	/* =========== m_matchInfo Initialisation ================= */
 	m_matchInfo.idxtau = 0.29999999999999999;
-	m_matchInfo.lastModelId = -1;
 	m_matchInfo.matchtau = 0;
-	m_matchInfo.modelSimWeight = 0.50000000000000000;
-	m_matchInfo.saveNodeSim = 0;
-	m_matchInfo.saveResults = 0;
-	m_matchInfo.selectionMethod = 0;
-	m_matchInfo.statsOutDir = ".";
+	m_matchInfo.idxrange = 0.40000000000000002;
+	m_matchInfo.modelSimWeight = 0.5;
+	m_matchInfo.idxKBest = 101;
+	m_matchInfo.asyncCompu = 0;
 	m_matchInfo.showResults = 1;
-
+	m_matchInfo.saveResults = 0;
+	m_matchInfo.saveNodeSim = 0;
+	m_matchInfo.computeStats = 0;
+	m_matchInfo.selectionMethod = 0;
+	m_matchInfo.firstModelId = -1;
+	m_matchInfo.lastModelId = -1;
+	m_matchInfo.statsOutDir = ".";
+	
+	/* =========== m_shapeInfo Initialisation ================= */
+	m_shapeInfo.shapeRepType = 1;
+	m_shapeInfo.timeout = 800;
 	m_shapeInfo.nBumpSize = 0;
 	m_shapeInfo.nNotchSize = 0;
 	m_shapeInfo.outDir = "./NoisyImgs/";
-	m_shapeInfo.shapeRepType = 1;
-	m_shapeInfo.timeout = 800;
-	
-	//m_shapeInfo.skelparams
-	//m_shapeInfo.sgparams
-	//m_shapeInfo.bgparams
+		
+	m_shapeInfo.skelparams.nSkelAlgorithm = 2;
+	m_shapeInfo.skelparams.fluxStep = 1;
+	m_shapeInfo.skelparams.fluxTau = 2.5;
+	m_shapeInfo.skelparams.fluxResolution = 16;
+	m_shapeInfo.skelparams.afmmTau1 = 0;
+	m_shapeInfo.skelparams.afmmTau2 = 20;
+	m_shapeInfo.skelparams.nBndryRecErrorWeight =	500;
+	m_shapeInfo.skelparams.nStrucRecErrorWeight = 500;
+	m_shapeInfo.skelparams.nSimplifyExternal = 1;
+	m_shapeInfo.skelparams.nSimplifyComplete = 0;
+	m_shapeInfo.skelparams.nSimplifyInternal = 0;
+	m_shapeInfo.skelparams.dMinLinearError = 2;
+	m_shapeInfo.skelparams.dMinBezierError = 8;
+	m_shapeInfo.skelparams.dMaxLineSegments = 8;
+	m_shapeInfo.skelparams.dMaxBezierSegments = 4;
+
+	m_shapeInfo.sgparams.nSlipt3s = 0;
+	m_shapeInfo.sgparams.dMinSlope = 0.050000000000000003;
+	m_shapeInfo.sgparams.dMinError = 2;
+	m_shapeInfo.sgparams.dMaxYDiff = 0.10000000000000001;
+	m_shapeInfo.sgparams.dMaxAccelChg = 0.5;
+
+	m_shapeInfo.bgparams.nTau1 = 0;
+	m_shapeInfo.bgparams.nSmoothIter = 0;
+	m_shapeInfo.bgparams.nSpecializeBones = 0;
+	m_shapeInfo.bgparams.nSubtractLigatureFromJunctions = 0;
+	m_shapeInfo.bgparams.dMinLeafSaliency = 0;
+	m_shapeInfo.bgparams.dMinErrorRate = 2;
+	m_shapeInfo.bgparams.dMinSlope = 0.050000000000000003;
+	m_shapeInfo.bgparams.dMaxYDiff = 0.10000000000000001;
+	m_shapeInfo.bgparams.dMaxAccelChg = 0.5;
+	m_shapeInfo.bgparams.nMaxNumSegments = 8;
+	m_shapeInfo.bgparams.bUseKnownPtsToRestoreBndry = false;
+	m_shapeInfo.bgparams.nIgnoreLigature = 0;
+	m_shapeInfo.bgparams.nSubtractLigatureFromCrossings = 1;
+	m_shapeInfo.bgparams.nShowDependencyGraph = 0;
+	m_shapeInfo.bgparams.nShowGSG = 0;
+
+	m_shapeInfo.bgparams.maxRadiusRatio.loose
+	m_shapeInfo.bgparams.
+	m_shapeInfo.bgparams.
+	m_shapeInfo.bgparams.
+	m_shapeInfo.bgparams.
+	m_shapeInfo.bgparams.
+
+
+
+
 }
 
 

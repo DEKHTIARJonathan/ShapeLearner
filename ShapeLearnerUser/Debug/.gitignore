@@ -4,21 +4,6 @@
 # But not these files...
 !.gitignore
 !*.dll
-!*.cpp
-!*.cxx
-!*.ixx
-!*.hxx
-!*.h
-!*.png
-!*.htm
-!*.html
-!*.css
-!*.txt
-!readme
-!Readme
-!README
-!Makefile
-!makefile
 
 # ...even if they are in subdirectories
 !*/

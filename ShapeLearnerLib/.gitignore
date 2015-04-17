@@ -1,0 +1,24 @@
+# Ignore everything
+*
+
+!.gitignore
+!*.lib
+!*.cpp
+!*.cxx
+!*.sql
+!*.bat
+!*.hxx
+!*.ixx
+!*.h
+#Visual Studio Files 
+!*.sln
+!*.sdf
+!*.vcxproj
+!*.filters
+!*.vcxproj.filters
+!*.vcxproj.user
+!*.suo
+!*.user
+
+# ...even if they are in subdirectories
+!*/

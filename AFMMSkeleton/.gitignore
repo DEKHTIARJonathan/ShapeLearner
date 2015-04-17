@@ -9,6 +9,17 @@
 !*.hxx
 !*.h
 !*.lib
+
+#Visual Studio Files 
+!*.sln
+!*.sdf
+!*.vcxproj
+!*.filters
+!*.vcxproj.filters
+!*.vcxproj.user
+!*.suo
+!*.user
+
 !Makefile
 !makefile
 

@@ -1,23 +1,5 @@
 # Ignore everything
 *
 
-# But not these files...
-!.gitignore
-!*.cpp
-!*.cxx
-!*.ixx
-!*.hxx
-!*.h
-!*.png
-!*.htm
-!*.html
-!*.css
-!*.txt
-!readme
-!Readme
-!README
-!Makefile
-!makefile
-
 # ...even if they are in subdirectories
 !*/
