@@ -17,6 +17,8 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
+//#define _CITUS_
+
 #include <iostream>
 #include "CmdLine.h"
 #include "shapeLearner.h"
@@ -45,21 +47,28 @@ int main(int argc, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 
-		/*
+		
 
 		// Did the user asked to use a previously created database ?
-		if (cmdLine.HasSwitch("--init"))
-			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 5432, "sources/structure.sql");
+		if (cmdLine.HasSwitch("--init")){
+			#ifdef _CITUS_
+				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
+			#else
+				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10024, "sources/structure.sql");
+			#endif
+		}
 		else		
-			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 5432);
-
+			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
+		
+		ShapeLearner::closeDatabase(); // We disconnect to the DB
+		/*
 		if(ShapeLearner::createShockGraph("img.jpg"))
 			cout << "Ok" <<endl;
 		else
 			cout << "KO" << endl;
 
 		ShapeLearner::closeDatabase(); // We disconnect to the DB
-		*/
+		
 		vector<const string> imgVect;
 
 		imgVect.push_back("image1.img");
@@ -73,6 +82,7 @@ int main(int argc, char **argv)
 		imgVect.push_back("image9.img");
 		ShapeLearner::createShockGraph(imgVect);
 		ShapeLearner::createShockGraph(imgVect);
+		*/
 	}
 	catch (const std::exception& e)
 	{

@@ -5,7 +5,6 @@
 #include <string>
 #include <assert.h>
 
-#ifdef WIN32
 #include <float.h>
 #define isnan  _isnan
 #define finite _finite
@@ -13,13 +12,7 @@
 #define round(X) ( ((X) < 0) ? -(int)(0.5 - (X)) : (int)((X) + 0.5) )
 #define strcasecmp(A, B) _stricmp(A, B)
 #define FILE_SEP '\\'
-#else // ie, Linux OS
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#define NORM2(X, Y) std::sqrt((X)*(X) + (Y)*(Y))
-#define FILE_SEP '/'
-#endif //WIN32
+
 
 #ifndef INFINITY
 #define INFINITY	1000000

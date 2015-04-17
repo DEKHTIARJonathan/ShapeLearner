@@ -114,15 +114,7 @@ string genFileName(const unsigned int len = 10)
 	m_shapeInfo.bgparams.nShowDependencyGraph = 0;
 	m_shapeInfo.bgparams.nShowGSG = 0;
 
-	m_shapeInfo.bgparams.maxRadiusRatio.loose
-	m_shapeInfo.bgparams.
-	m_shapeInfo.bgparams.
-	m_shapeInfo.bgparams.
-	m_shapeInfo.bgparams.
-	m_shapeInfo.bgparams.
-
-
-
+	//m_shapeInfo.bgparams.maxRadiusRatio
 
 }
 
