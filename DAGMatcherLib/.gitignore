@@ -7,20 +7,8 @@
 !*.cxx
 !*.ixx
 !*.hxx
-!*.hpp
 !*.h
-!*.cc
-!*.w
-!*.ppm
-!*.d
-!*.ps
-!*.eps
-!*.pnm
-!*.tex
-!*.idx
-!*.dvi
-!*.dia
-!*.lib
+!*.txt
 
 #Visual Studio Files 
 !*.sln
@@ -33,9 +21,6 @@
 
 !Makefile
 !makefile
-!README
-!VERSION
-!Common
 
 # ...even if they are in subdirectories
 !*/

@@ -13,7 +13,6 @@
 
 #Visual Studio Files 
 !*.sln
-!*.sdf
 !*.vcxproj
 !*.filters
 !*.vcxproj.filters
