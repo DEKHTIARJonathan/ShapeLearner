@@ -38,6 +38,8 @@ class Node; //Forward Declaration of the class contained in Node.h
 class Point; //Forward Declaration of the class contained in Point.h
 class Edge; //Forward Declaration of the class contained in Edge.h
 
+using namespace dml;
+
 /*!
 *	\class shockGraphsGenerator
 *	\brief Class allowing us to log every actions performed in the program.
@@ -46,8 +48,13 @@ class Edge; //Forward Declaration of the class contained in Edge.h
 */
 class shockGraphsGenerator{
 public:
+	//typedef bool (ShapeMatcher::*DAG_ACTION)();
+	typedef std::map<std::string, int> StrIntMap;
+	typedef const char* LPCSTR;
+
+	DAGMatcher::MatchParams m_matchParams;
+
 	shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum);
-	
 	bool taskExecute();
 
 private:
@@ -55,6 +62,21 @@ private:
 	const unsigned long taskNum;
 	ShapeMatchingParams m_matchInfo;
 	ShapeRepresentationParams m_shapeInfo;
+
+	double m_maxOcclusionRate, m_dNeigRange;
+	int m_iterations, m_maxdags, m_imgstep, m_from, m_to, m_nNumSplitParts;
+	int m_nVerbose, m_saveSubsamplingInfo, m_nSplitProportion, m_nSplitByObject;
+	int m_xpos, m_ypos, m_sourceDB;
+
+	int m_firstDBId, m_lastDBId;
+
+	int m_experimentId, m_experimentStep, m_experimentFirstParam, m_experimentLastParam;
+	LPCSTR m_szExperimentName;
+
+	LPCSTR m_target, m_objName, m_delobj, m_createObj, m_viewDag, m_szMatrixFileName;
+
+public:
+	
 
 	/*!
 	*	\brief Computes a shock graph from the given ppm file.
@@ -67,6 +89,8 @@ private:
 	*/
 	void processFile(bool bAsyncProcessing);
 	bool AddBumpsAndNotches(dml::ImageInfo* pImgInfo);
+
+	void variableInit ();
 };
 
 #endif //_Shock_Graphs_Generator_

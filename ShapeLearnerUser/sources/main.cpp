@@ -48,8 +48,6 @@ int main(int argc, char **argv)
 		}
 
 		
-
-		// Did the user asked to use a previously created database ?
 		if (cmdLine.HasSwitch("--init")){
 			#ifdef _CITUS_
 				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
@@ -57,32 +55,34 @@ int main(int argc, char **argv)
 				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10024, "sources/structure.sql");
 			#endif
 		}
-		else		
-			ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
-		
-		ShapeLearner::closeDatabase(); // We disconnect to the DB
-		/*
-		if(ShapeLearner::createShockGraph("img.jpg"))
-			cout << "Ok" <<endl;
 		else
-			cout << "KO" << endl;
+		{
+			#ifdef _CITUS_
+				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10026);
+			#else
+				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
+			#endif
+		}
+			
+		if (cmdLine.HasSwitch("--generate")){
+			vector<const string> imgVect;
+
+			imgVect.push_back("image1.img");
+			imgVect.push_back("image2.img");
+			imgVect.push_back("image3.img");
+			imgVect.push_back("image4.img");
+			imgVect.push_back("image5.img");
+			imgVect.push_back("image6.img");
+			imgVect.push_back("image7.img");
+			imgVect.push_back("image8.img");
+			imgVect.push_back("image9.img");
+			ShapeLearner::createShockGraph(imgVect);
+		}
+		else
+			Logger::Log("No action specified", constants::LogError);
 
 		ShapeLearner::closeDatabase(); // We disconnect to the DB
 		
-		vector<const string> imgVect;
-
-		imgVect.push_back("image1.img");
-		imgVect.push_back("image2.img");
-		imgVect.push_back("image3.img");
-		imgVect.push_back("image4.img");
-		imgVect.push_back("image5.img");
-		imgVect.push_back("image6.img");
-		imgVect.push_back("image7.img");
-		imgVect.push_back("image8.img");
-		imgVect.push_back("image9.img");
-		ShapeLearner::createShockGraph(imgVect);
-		ShapeLearner::createShockGraph(imgVect);
-		*/
 	}
 	catch (const std::exception& e)
 	{

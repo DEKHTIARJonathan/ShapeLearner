@@ -37,6 +37,26 @@
 #pragma warning(disable : 4061)
 #pragma warning(disable : 4640)
 
+// ============================= Global Variables =============================
+
+// Version of the ShapeMatcher project
+#define SL_VERSION_NUMBER 1.0
+
+// Subset of default values that are most likely to be changed
+#define DEFAULT_SHAPE_REP 1        // ShockGraph = 1, GestureGraph = 2, BoneGraph = 3
+#define DEFAULT_SKEL_CODE 2        // Voronoi = 1, Flux = 2, AFMM = 3
+#define DEFAULT_COMPUTE_STATS 0
+#define DEFAULT_SHOW_RESULTS 1
+#define DEFAULT_SAVE_RESULTS 0
+#define DEFAULT_SAVE_NODE_SIM 0
+#define DEFAULT_MATCH_ALGORITHM 0 // Greedy = 0, Optimal = 1, Topological = 2, Adaptive = 3
+#define DEFAULT_NODE_SIM_FUNCTION 0
+
+#define DEFAULT_INDEXING_K_BEST 101
+#define DEFAULT_INDEXING_SIM_TAU 0.3
+#define DEFAULT_MATCHING_SIM_TAU 0//0.1
+#define DEFAULT_SIM_MASS_WEIGHT 0.7
+
 // ============================= START ADDING LIBS =============================
 
 #include <iostream>
