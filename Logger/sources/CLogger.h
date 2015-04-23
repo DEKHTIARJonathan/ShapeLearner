@@ -34,8 +34,8 @@
 #include <odb/pgsql/database.hxx>
 #include <odb/pgsql/connection.hxx>
 #include <odb/pgsql/statement.hxx>
-#include "../../ShapeLearnerLib/include/constants.h"
-#include "../../ShapeLearnerLib/include/shapeLearnerException.h"
+#include "constants.h"
+#include "StandardException.h"
 #include "AppTracer.h"
 
 using namespace std;

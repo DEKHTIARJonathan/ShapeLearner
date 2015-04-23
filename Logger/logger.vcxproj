@@ -54,6 +54,7 @@
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)-d</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
@@ -78,8 +79,8 @@
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\ODB\libodb-2.4.0;C:\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\ODB\libodb-2.4.0;C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" "$(SolutionDir)dist"</Command>
@@ -104,9 +105,10 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\Debug\logger.dll</OutputFile>
+      <OutputFile>$(ProjectDir)$(Configuration)\$(ProjectName).dll</OutputFile>
       <ImportLibrary>.\Debug\logger.lib</ImportLibrary>
-      <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>StandardException-d.dll;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi;C:\Program Files (x86)\Visual Leak Detector\lib\Win32;$(ProjectDir)..\StandardException\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,9 +125,10 @@
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\ODB\libodb-2.4.0;C:\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\ODB\libodb-2.4.0;C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <PostBuildEvent>
       <Command>copy "$(TargetPath)" "$(SolutionDir)dist"</Command>
@@ -149,9 +152,10 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\Release\logger.dll</OutputFile>
+      <OutputFile>$(ProjectDir)$(Configuration)\$(ProjectName).dll</OutputFile>
       <ImportLibrary>.\Release\logger.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi;C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

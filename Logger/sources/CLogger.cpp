@@ -22,14 +22,13 @@
 using namespace std;
 using namespace boost::posix_time;
 
-
 volatile Logger Logger::_inst;
 boost::mutex Logger::mutexLogger;
 
 volatile void Logger::Log(string text, unsigned int logFile){
 	if (logFile > 4 || logFile < 1){
 		Log("Call to "+ (string) __FUNCTION__ +" // logFile ("+to_string((_ULonglong)logFile)+") doesn't belong to [1,4]", constants::LogError);
-		throw ShapeLearnerExcept((string)__FUNCTION__, "logFile ("+to_string((_ULonglong)logFile)+") doesn't belong to [1,4]");
+		throw StandardExcept((string)__FUNCTION__, "logFile ("+to_string((_ULonglong)logFile)+") doesn't belong to [1,4]");
 	}
 
 	Logger* Log = const_cast<Logger*>(&_inst);
