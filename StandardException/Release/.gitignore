@@ -1,0 +1,15 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!*.cpp
+!*.cxx
+!*.ixx
+!*.hxx
+!*.h
+!Makefile
+!makefile
+
+# ...even if they are in subdirectories
+!*/
