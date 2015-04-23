@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="sources\dbManager.cpp">
+      <Filter>dbManager</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Edge-odb.cxx">
+      <Filter>ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\GraphClass-odb.cxx">
+      <Filter>ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Graph-odb.cxx">
+      <Filter>ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\ObjectClass-odb.cxx">
+      <Filter>ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Point-odb.cxx">
+      <Filter>ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Node-odb.cxx">
+      <Filter>ODB</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Edge.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Graph.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\GraphClass.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Node.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\ObjectClass.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\Point.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\stdafx.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\graphDB.cpp">
+      <Filter>GraphDB</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\allHeaders.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\dbManager.h">
+      <Filter>dbManager</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Edge-odb.hxx">
+      <Filter>ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\GraphClass-odb.hxx">
+      <Filter>ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Graph-odb.hxx">
+      <Filter>ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\ObjectClass-odb.hxx">
+      <Filter>ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Point-odb.hxx">
+      <Filter>ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Node-odb.hxx">
+      <Filter>ODB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Edge.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Graph.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\GraphClass.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Node.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\ObjectClass.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\Point.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\future.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\future.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\locking_ptr.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\pool_adaptors.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\pool.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\pool_core.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\scheduling_policies.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\scope_guard.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\worker_thread.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\task_adaptors.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\size_policies.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\threadpool\boost\threadpool\shutdown_policies.hpp">
+      <Filter>Threadpool</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\odbHeaders.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\stdafx.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\graphDB.h">
+      <Filter>GraphDB</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sources\Edge-odb.ixx">
+      <Filter>ODB</Filter>
+    </None>
+    <None Include="sources\Graph-odb.ixx">
+      <Filter>ODB</Filter>
+    </None>
+    <None Include="sources\GraphClass-odb.ixx">
+      <Filter>ODB</Filter>
+    </None>
+    <None Include="sources\Node-odb.ixx">
+      <Filter>ODB</Filter>
+    </None>
+    <None Include="sources\ObjectClass-odb.ixx">
+      <Filter>ODB</Filter>
+    </None>
+    <None Include="sources\Point-odb.ixx">
+      <Filter>ODB</Filter>
+    </None>
+    <None Include="sources\Point.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\ObjectClass.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\Node.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\GraphClass.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\Graph.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\functions.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="sources\Edge.sql">
+      <Filter>SQL</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{08960586-e149-47b3-b92b-d5510731a8f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbManager">
+      <UniqueIdentifier>{77b89a3d-7954-4e65-bee8-6abbabcfd341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ODB">
+      <UniqueIdentifier>{043eeac0-c0eb-4822-8644-e93bce2e90f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{50ddcf30-6ec6-4748-83f3-35a79d3ff2c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SQL">
+      <UniqueIdentifier>{d0e493d2-f533-45a6-a09b-5478aed5fdd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threadpool">
+      <UniqueIdentifier>{de37598a-78cc-468a-9c08-ea5930563143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{57d2e3e3-556d-42dc-a221-e52351cee9ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphDB">
+      <UniqueIdentifier>{b8d8f67b-a5ae-450e-90b3-e463665d05d5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+#Visual Studio Files 
+!*.sln
+!.gitignore
+!*.vcxproj
+!*.filters
+!*.vcxproj.filters
+!*.vcxproj.user
+!*.suo
+!*.user
+!*.ppm
+!*.txt
+
+# ...even if they are in subdirectories
+!*/

@@ -1,4 +1,4 @@
-/* ************* Begin file shapeLearner.h ***************************************/
+/* ************* Begin file ShapeLearner.h ***************************************/
 /*
 ** 2015 February 23
 **
@@ -11,8 +11,8 @@
 *************************************************************************/
 
 /**
-*	\file shapeLearner.h
-*	\brief ShapeLearner header file. Central point in the software. It realizes the task distribution to the different instances of the software and make them communicate without knowing of each other.
+*	\file ShapeLearner.h
+*	\brief ShapeLearner header file. Public Interface and Central point in the software. It realizes the task distribution to the different instances of the software and make them communicate without knowing of each other.
 *	\version 1.1
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
@@ -20,14 +20,17 @@
 #ifndef _SHAPE_LEARNER_H_
 #define _SHAPE_LEARNER_H_
 
-#pragma message("Compiling ShapeLearnerUser::shapeLearner.h - this should happen just once per project.\n")
-
-#include "CLogger.h"
-#include "constants.h"
-#include "shapeLearnerException.h"
+#ifdef _MSC_VER
+	#pragma message("Compiling ShapeLearnerLib::ShapeLearner.h  - this should happen just once per project.\n")
+#endif
+ 
+#include "stdafx.h"
+#include "allHeaders.h"
 
 using namespace std;
-class ShapeLearnerExcept; //Forward Declaration of the class contained in shapeLearnerException.h
+using namespace boost::threadpool;
+
+class ShapeLearnerExcept; //Forward Declaration of the class contained in ShapeLearnerException.h
 
 /*!	
 *	\class ShapeLearner
@@ -39,27 +42,38 @@ class ShapeLearner
 {
 	public:
 
-		/*!
-		*	\fn static void openDatabase(const string& _dbUser, const string& _dbPass, const string& _dbName, const string& _dbHost, const unsigned int& _dbPort, const string& _dbInit = "") throw(ShapeLearnerExcept);
-		*	\brief Open the connection to the PostgreSQL database.
-		*	\param _dbUser : The username used to connect to the DB.
-		*	\param _dbPass : The password associated with the username.
-		*	\param _dbName : The database's name.
-		*	\param _dbHost : The DB's server's hostname or IP address.
-		*	\param _dbPort : The DB's server's listening port.
-		*	\param _dbInit : A relative path to the DB Init File, this field is not necessary. If empty => DB not initialized and assume it has been already created.
-		*/
-		static void openDatabase(const string& _dbUser, const string& _dbPass, const string& _dbName, const string& _dbHost, const unsigned int& _dbPort, const string& _dbInit = "") throw(ShapeLearnerExcept);
-		
-		/*!
-		*	\fn static void closeDatabase() throw(ShapeLearnerExcept);
-		*	\brief Close the connection to the PostgreSQL database.
-		*/
-		static void closeDatabase() throw(ShapeLearnerExcept);
-		
 		static void createShockGraph (const vector<const string> &imgVect) throw(ShapeLearnerExcept);
+
+	private:
+
+		static boost::threadpool::pool	Pool;
+
+
+		/* ************** Multi Threading Workers ***************/
+
+		static bool createShockGraphWorker (const string& imgPath) throw(ShapeLearnerExcept);
+		
+		/* **************  No instanciation *********************/
+
+		/*!
+		*	\brief Constructeur de le class ShapeLearner.  Il instancie également la classe DatabaseManager.
+		*/
+		ShapeLearner() throw(ShapeLearnerExcept);
+
+		/*!
+		*	\brief Constructeur de recopie => La recopie est interdite
+		*/
+		ShapeLearner(const ShapeLearner&);
+
+		/*!
+		*	\brief Opérateur =  =>> La recopie est interdite
+		*/
+		ShapeLearner& operator=(const ShapeLearner&);
+
+		/*!
+		*	\brief La destruction est interdite
+		*/
+		~ShapeLearner();
 };
-
-
 
 #endif //_SHAPE_LEARNER_H_

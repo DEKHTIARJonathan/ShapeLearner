@@ -2,6 +2,7 @@
 *
 
 # But not these files...
+!.gitignore
 !*.lib
 
 # ...even if they are in subdirectories

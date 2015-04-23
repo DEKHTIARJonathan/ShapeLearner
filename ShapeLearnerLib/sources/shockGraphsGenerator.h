@@ -29,8 +29,8 @@
 
 using namespace std;
 
-class ShapeLearner; // Forward Declaration of the class contained in shapeLearner.h
-class ShapeLearnerExcept; //Forward Declaration of the class contained in shapeLearnerException.h
+class ShapeLearner; // Forward Declaration of the class contained in ShapeLearner.h
+class StandardExcept; //Forward Declaration of the class contained in StandardException.h
 class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
 class GraphClass; //Forward Declaration of the class contained in GraphClass.h
 class Graph; //Forward Declaration of the class contained in Graph.h

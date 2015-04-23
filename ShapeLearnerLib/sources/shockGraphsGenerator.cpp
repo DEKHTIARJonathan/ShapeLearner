@@ -51,7 +51,6 @@ string genFileName(const unsigned int len = 10)
     return rslt+".ppm";
 }
 
-
  shockGraphsGenerator::shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum) : imgPath(_imgPath), taskNum(_taskNum) {
 	variableInit();
 }

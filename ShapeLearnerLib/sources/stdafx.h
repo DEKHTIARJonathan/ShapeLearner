@@ -17,8 +17,8 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
-#ifndef _STDAFX_
-#define _STDAFX_
+#ifndef _STDAFX_SHAPE_LEARNER_
+#define _STDAFX_SHAPE_LEARNER_
 
 #ifdef _MSC_VER
 	#pragma message("Compiling ShapeLearnerLib::stdafx.h  - this should happen just once per project.\n")
@@ -90,14 +90,12 @@
 #include <fcntl.h> // for open()
 #include <cstdio> // for perror()
 
-// ODB Classes
-#include <odb/core.hxx>
-#include <odb/callback.hxx>
-#include <odb/boost/lazy-ptr.hxx>
-#include <odb/database.hxx>
-#include <odb/transaction.hxx>
-#include <odb/pgsql/database.hxx>
-#include <odb/schema-catalog.hxx>
+// External Libs
+#include <newmatap.h>
+#include <newmatio.h>
+#include <tools/connected.h>
+#include <CImg/CImg.h>
+#include <FHImgSegment/segment-graph.h>
 
 // DAG Matcher Lib
 #include <BasicTypedefs.h>
@@ -118,22 +116,19 @@
 //LEDA
 #include <LEDA/core/p_queue.h>
 
-// External Libs
-#include <newmatap.h>
-#include <newmatio.h>
-#include <tools/connected.h>
-#include <CImg/CImg.h>
-#include <FHImgSegment/segment-graph.h>
+
 
 
 //ShapeLearner Specific Files
 
 #include "constants.h"
-#include "shapeLearnerException.h"
+#include "StandardException.h"	
+#include "CLogger.h"
+#include "graphDB.h"
 #include "infoStructures.h"
 
 // ============================= STOP ADDING LIBS ==============================
 
 #pragma warning(pop) //For /Wall
 
-#endif
+#endif // _STDAFX_SHAPE_LEARNER_

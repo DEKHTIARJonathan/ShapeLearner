@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\threadpool\boost\threadpool.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\future.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\locking_ptr.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\pool_core.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\scope_guard.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\detail\worker_thread.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\future.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\pool.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\pool_adaptors.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\scheduling_policies.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\shutdown_policies.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\size_policies.hpp" />
+    <ClInclude Include="..\threadpool\boost\threadpool\task_adaptors.hpp" />
+    <ClInclude Include="sources\allHeaders.h" />
+    <ClInclude Include="sources\dbManager.h" />
+    <ClInclude Include="sources\Edge-odb.hxx" />
+    <ClInclude Include="sources\Edge.h" />
+    <ClInclude Include="sources\Graph-odb.hxx" />
+    <ClInclude Include="sources\Graph.h" />
+    <ClInclude Include="sources\GraphClass-odb.hxx" />
+    <ClInclude Include="sources\GraphClass.h" />
+    <ClInclude Include="sources\odbHeaders.h" />
+    <ClInclude Include="sources\graphDB.h" />
+    <ClInclude Include="sources\Node-odb.hxx" />
+    <ClInclude Include="sources\Node.h" />
+    <ClInclude Include="sources\ObjectClass-odb.hxx" />
+    <ClInclude Include="sources\ObjectClass.h" />
+    <ClInclude Include="sources\Point-odb.hxx" />
+    <ClInclude Include="sources\Point.h" />
+    <ClInclude Include="sources\stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\dbManager.cpp" />
+    <ClCompile Include="sources\Edge-odb.cxx" />
+    <ClCompile Include="sources\Edge.cpp" />
+    <ClCompile Include="sources\Graph-odb.cxx" />
+    <ClCompile Include="sources\Graph.cpp" />
+    <ClCompile Include="sources\GraphClass-odb.cxx" />
+    <ClCompile Include="sources\GraphClass.cpp" />
+    <ClCompile Include="sources\graphDB.cpp" />
+    <ClCompile Include="sources\Node-odb.cxx" />
+    <ClCompile Include="sources\Node.cpp" />
+    <ClCompile Include="sources\ObjectClass-odb.cxx" />
+    <ClCompile Include="sources\ObjectClass.cpp" />
+    <ClCompile Include="sources\Point-odb.cxx" />
+    <ClCompile Include="sources\Point.cpp" />
+    <ClCompile Include="sources\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sources\Edge-odb.ixx" />
+    <None Include="sources\Edge.sql" />
+    <None Include="sources\functions.sql" />
+    <None Include="sources\Graph-odb.ixx" />
+    <None Include="sources\Graph.sql" />
+    <None Include="sources\GraphClass-odb.ixx" />
+    <None Include="sources\GraphClass.sql" />
+    <None Include="sources\Node-odb.ixx" />
+    <None Include="sources\Node.sql" />
+    <None Include="sources\ObjectClass-odb.ixx" />
+    <None Include="sources\ObjectClass.sql" />
+    <None Include="sources\Point-odb.ixx" />
+    <None Include="sources\Point.sql" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ShapeLearner</RootNamespace>
+    <ProjectName>GraphDBLib</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)-d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ShapeLearnerProject\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AdditionalOptions>-Zm200  /MDd %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+      <AdditionalDependencies>$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib;C:\tools\libodb-2.4.0\lib\odb-d.lib;C:\tools\libodb-pgsql-2.4.0\lib\odb-pgsql-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\debug\link-static\threading-multi;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ShapeLearnerProject\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AdditionalOptions>-Zm200   /MD %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+      <AdditionalDependencies>$(ProjectDir)..\DAGMatcherLib\$(Configuration)\DAGMatcherLib.lib;C:\tools\libodb-2.4.0\lib\odb.lib;C:\tools\libodb-pgsql-2.4.0\lib\odb-pgsql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

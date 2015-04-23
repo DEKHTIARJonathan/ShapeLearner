@@ -13,233 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="SQL">
-      <UniqueIdentifier>{1c257bb7-5f0b-408a-b5bf-ad84d0d65042}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Objects">
-      <UniqueIdentifier>{cb4334c9-71ae-4edd-a725-65089f7d8da5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ODB">
-      <UniqueIdentifier>{3baeecc2-a3f6-43a6-a56d-03d31f54b007}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ODB\Headers">
-      <UniqueIdentifier>{96a19c8d-36b4-419d-b98a-b306df1608da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ODB\Sources">
-      <UniqueIdentifier>{f8b8c3c3-1159-4102-beab-c9b66b9e4af8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ODB\object-relational mapping">
-      <UniqueIdentifier>{320b2c26-528c-443f-abfa-5eda9b6bff20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ShapeLearner">
-      <UniqueIdentifier>{09bb908c-0774-4511-8e1c-db2567f5cc1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="dbManager">
-      <UniqueIdentifier>{de837f75-842a-4714-96d0-cbb5f54ed985}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="shockGraphsGenerator">
-      <UniqueIdentifier>{eb177ef9-2bdf-406d-a6e1-081b5c734db3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThreadPool">
-      <UniqueIdentifier>{320bcb70-316e-4b9d-a6de-96523f8a5227}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\constants.h">
+    <ClInclude Include="sources\infoStructures.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\GraphClass-odb.hxx">
-      <Filter>ODB\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\ObjectClass-odb.hxx">
-      <Filter>ODB\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Graph-odb.hxx">
-      <Filter>ODB\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Edge-odb.hxx">
-      <Filter>ODB\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Node-odb.hxx">
-      <Filter>ODB\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Point-odb.hxx">
-      <Filter>ODB\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Edge.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Graph.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Point.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\ObjectClass.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Node.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\GraphClass.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\dbManager.h">
-      <Filter>dbManager</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\shapeLearnerException.h">
-      <Filter>ShapeLearner</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\shapeLearner.h">
-      <Filter>ShapeLearner</Filter>
     </ClInclude>
     <ClInclude Include="sources\shockGraphsGenerator.h">
-      <Filter>shockGraphsGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\future.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\locking_ptr.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\pool_core.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\scope_guard.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\worker_thread.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\future.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\pool.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\pool_adaptors.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\scheduling_policies.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\shutdown_policies.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\size_policies.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\task_adaptors.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool.hpp">
-      <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\odbHeaders.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\allHeaders.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="sources\stdafx.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="sources\infoStructures.h">
-      <Filter>shockGraphsGenerator</Filter>
+    <ClInclude Include="sources\allHeaders.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\ShapeLearner.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\GraphClass-odb.cxx">
-      <Filter>ODB\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\ObjectClass-odb.cxx">
-      <Filter>ODB\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Graph-odb.cxx">
-      <Filter>ODB\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Point-odb.cxx">
-      <Filter>ODB\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Edge-odb.cxx">
-      <Filter>ODB\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Node-odb.cxx">
-      <Filter>ODB\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\dbManager.cpp">
-      <Filter>dbManager</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Edge.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Point.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Graph.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\GraphClass.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Node.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\ObjectClass.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\shapeLearnerException.cpp">
-      <Filter>ShapeLearner</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\shapeLearner.cpp">
-      <Filter>ShapeLearner</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\shockGraphsGenerator.cpp">
-      <Filter>shockGraphsGenerator</Filter>
-    </ClCompile>
     <ClCompile Include="sources\stdafx.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="sources\GraphClass-odb.ixx">
-      <Filter>ODB\object-relational mapping</Filter>
-    </None>
-    <None Include="sources\GraphClass.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\ObjectClass.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\ObjectClass-odb.ixx">
-      <Filter>ODB\object-relational mapping</Filter>
-    </None>
-    <None Include="sources\Graph.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\Graph-odb.ixx">
-      <Filter>ODB\object-relational mapping</Filter>
-    </None>
-    <None Include="sources\Edge-odb.ixx">
-      <Filter>ODB\object-relational mapping</Filter>
-    </None>
-    <None Include="sources\Node-odb.ixx">
-      <Filter>ODB\object-relational mapping</Filter>
-    </None>
-    <None Include="sources\Point-odb.ixx">
-      <Filter>ODB\object-relational mapping</Filter>
-    </None>
-    <None Include="sources\Point.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\Edge.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\Node.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\functions.sql">
-      <Filter>SQL</Filter>
-    </None>
+    <ClCompile Include="sources\ShapeLearner.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\shockGraphsGenerator.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

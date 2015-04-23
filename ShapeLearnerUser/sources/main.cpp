@@ -12,7 +12,7 @@
 
 /**
 *	\file main.cpp
-*	\brief Program calling the ShapeLearnerLib 
+*	\brief Program calling the GraphDBLib 
 *	\version 1.0
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
@@ -21,7 +21,9 @@
 
 #include <iostream>
 #include "CmdLine.h"
-#include "shapeLearner.h"
+#include "graphDB.h"
+#include "StandardException.h"
+//#include "ShapeLearner.h"
 
 using namespace std;
 
@@ -50,17 +52,17 @@ int main(int argc, char **argv)
 		
 		if (cmdLine.HasSwitch("--init")){
 			#ifdef _CITUS_
-				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
 			#else
-				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10024, "sources/structure.sql");
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024, "sources/structure.sql");
 			#endif
 		}
 		else
 		{
 			#ifdef _CITUS_
-				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10026);
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026);
 			#else
-				ShapeLearner::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
 			#endif
 		}
 			
@@ -76,12 +78,12 @@ int main(int argc, char **argv)
 			imgVect.push_back("image7.img");
 			imgVect.push_back("image8.img");
 			imgVect.push_back("image9.img");
-			ShapeLearner::createShockGraph(imgVect);
+			//ShapeLearner::createShockGraph(imgVect);
 		}
 		else
 			Logger::Log("No action specified", constants::LogError);
 
-		ShapeLearner::closeDatabase(); // We disconnect to the DB
+		GraphDB::closeDatabase(); // We disconnect to the DB
 		
 	}
 	catch (const std::exception& e)
