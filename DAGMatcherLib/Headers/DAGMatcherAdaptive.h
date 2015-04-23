@@ -32,8 +32,7 @@
 #ifndef __DAG_MATCHER_ADAPTIVE_H__
 #define __DAG_MATCHER_ADAPTIVE_H__
 
-#include "DAGMatcher.h"
-#include "NodeAssignment.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

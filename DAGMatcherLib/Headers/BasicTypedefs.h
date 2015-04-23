@@ -1,15 +1,7 @@
 #ifndef _BASIC_TYPEDEFS_H_
 #define _BASIC_TYPEDEFS_H_
 
-#include <LEDA/graph/graph_alg.h>
-
-// Include d_array.h AFTER graph_alg.h!
-#include <LEDA/core/d_array.h>
-
-#include "SmartArray.h"
-#include "SmartMatrix.h"
-#include "SmartPtr.h"
-//#include "SharedPtr.h"
+#include "stdafx.h"
 
 namespace dml {
 // Define a smart pointer type for DAGs

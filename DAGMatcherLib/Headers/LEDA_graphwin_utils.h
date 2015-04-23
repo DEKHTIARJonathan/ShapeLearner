@@ -34,8 +34,7 @@
 #ifndef __LEDA_GRAPHWIN_UTILS_H__
 #define __LEDA_GRAPHWIN_UTILS_H__
 
-#include <vector>
-#include <LEDA/graphics/graphwin.h>
+#include "stdafx.h"
 
 /*!
 	@brief Positions every node of the given draft randomly

@@ -29,10 +29,10 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <DDSGraphProject.h>
-#include <algorithm>
-#include "DDSGraphUtils.h"
-#include "MathUtils.h"
+#include "stdafx.h"
+
+
+
 
 #define SMALL_NUM  0.00000001 // anything that avoids division overflow
 

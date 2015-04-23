@@ -39,7 +39,7 @@
 #ifndef _SHARED_PTR_H_
 #define _SHARED_PTR_H_
 
-#include "SmartPtr.h"
+#include "stdafx.h"
 
 /*!
 	\brief Wrapper class of a pointer to class T. It handles the destruction of T.

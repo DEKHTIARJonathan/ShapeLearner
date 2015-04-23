@@ -1,16 +1,15 @@
 #ifndef _EMD_H_
 #define _EMD_H_
+
+#include "stdafx.h"
+
 /*****************************************************************************/
-#include <stdio.h>
-#include <math.h>
 #define MAX_SIG_SIZE   1000
 #define MAX_ITERATIONS 500
 //#define INFINITY       1e20
 //#define EPSILON        1e-20
 #define EPSILON        1e-10
 /*****************************************************************************/
-
-#include <newmat.h>
 
 #define Matrix NEWMAT::Matrix
 #define ColumnVector NEWMAT::ColumnVector

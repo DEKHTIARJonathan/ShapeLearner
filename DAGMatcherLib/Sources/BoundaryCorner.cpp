@@ -30,9 +30,8 @@
  * $Log: BoundaryCorner.cpp,v $
  *
  *-----------------------------------------------------------------------*/
-#include <list>
-#include "BoundaryCorner.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
 
 /*!
 	To control performance, we restrict the number of points that are visited

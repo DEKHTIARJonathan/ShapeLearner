@@ -31,9 +31,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "DAG.h"
-#include "SimilarityMeasurer.h"
-#include "DirWalker.h"
+#include "stdafx.h"
 
 #ifdef USE_TEMPLATE_BASED_MWBM_FUNCTION
 #include <LEDA/graph/templates/mwb_matching.h>

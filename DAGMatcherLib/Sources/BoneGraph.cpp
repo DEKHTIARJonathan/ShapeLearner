@@ -28,16 +28,8 @@
  * Author: Diego Macrini
  *
  *-----------------------------------------------------------------------*/
-#include "DAGMatcherOptimal.h"
-#include "DAGMatcherGreedy.h"
-#include "DAGMatcherTopological.h"
-#include "DAGMatcherAdaptive.h"
-#include "BGSimilarityMeasurer.h"
 
-#include "BoneGraph.h"
-#include "HelperFunctions.h"
-#include "Exceptions.h"
-//#include "BasicUtils.h"
+#include "stdafx.h"
 
 using namespace dml;
 

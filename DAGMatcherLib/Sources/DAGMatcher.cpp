@@ -29,10 +29,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "DAGMatcher.h"
-#include "DAG.h"
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 using namespace dml;
 

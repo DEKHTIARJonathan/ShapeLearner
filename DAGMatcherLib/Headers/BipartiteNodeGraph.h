@@ -34,11 +34,9 @@
 #ifndef __BIPARTITE_NODE_GRAPH_H__
 #define __BIPARTITE_NODE_GRAPH_H__
 
-#include <LEDA/core/p_queue.h>
+#include "stdafx.h"
 
 #include "DAG.h"
-#include "BipartiteGraph.h"
-#include "NodeMatchInfo.h"
 
 namespace dml {
 /*!

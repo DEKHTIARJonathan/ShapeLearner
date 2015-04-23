@@ -33,14 +33,9 @@
  *
  *
  *-----------------------------------------------------------------------*/
-#include <vector>
 
-#include "DAG.h"
-#include "GestureGraph.h"
-#include "HelperFunctions.h"
-#include "Exceptions.h"
-#include "CompareHistogram.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
+
 
 using namespace std;
 using namespace dml;

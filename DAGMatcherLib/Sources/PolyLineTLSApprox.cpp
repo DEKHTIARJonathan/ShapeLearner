@@ -31,11 +31,8 @@
  *
  *
  *-----------------------------------------------------------------------*/
-#include <stdlib.h>
-#include <iostream>
-#include "PolyLineTLSApprox.h"
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 

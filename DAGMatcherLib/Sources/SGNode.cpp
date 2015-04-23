@@ -40,12 +40,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-//#include <LEDA/graphwin.h> // needed only for the gw_node_shape enum value
-#include "SGNode.h"
-#include "HelperFunctions.h"
-#include "Exceptions.h"
-#include <stdio.h>
-#include <ctype.h>
+#include "stdafx.h"
 
 #define NOT_TO_COMPARE_PERCENTAGE .15
 #define MIN_LIGATURE .7
@@ -259,7 +254,7 @@ NODE_LABEL SGNode::GetLblForGraph(bool bExtraInfo /*= true*/) const
 		return GetNodeLbl();
 }
 
-POINTS SGNode::GetVelocityRadiusArray(int& d0, int& dN, bool bReverseOrder /*=false*/) const
+dml::POINTS SGNode::GetVelocityRadiusArray(int& d0, int& dN, bool bReverseOrder /*=false*/) const
 {
 	int i, nSize = m_shocks.GetSize();
 	double s;

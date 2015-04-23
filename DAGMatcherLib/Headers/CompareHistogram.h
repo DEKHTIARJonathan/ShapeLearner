@@ -30,12 +30,7 @@
  * $Log: CompareHistogram.h,v $
  *-----------------------------------------------------------------------*/
 
-#include <LEDA/core/d_array.h>
-#include <LEDA/graph/graph_alg.h>
-#include "SmartArray.h"
-
-#include <newmatap.h>                // need matrix applications
-#include <newmatio.h>                // need matrix output routines
+#include "stdafx.h"
 
 #define Matrix NEWMAT::Matrix
 #define ColumnVector NEWMAT::ColumnVector

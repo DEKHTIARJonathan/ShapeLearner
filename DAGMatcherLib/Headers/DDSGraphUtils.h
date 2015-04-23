@@ -1,8 +1,7 @@
 #ifndef _DDSGRAPH_UTILS_H_
 #define _DDSGRAPH_UTILS_H_
 
-#include "BasicTypes.h"
-#include "HelperFunctions.h"
+#include "stdafx.h"
 
 #define MAX_NUM_PTS_FOR_TANGENT 3
 

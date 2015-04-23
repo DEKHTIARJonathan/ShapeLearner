@@ -36,7 +36,7 @@
 #ifndef _EXCEPTIONS_H_
 #define _EXCEPTIONS_H_
 
-#include <fstream>
+#include "stdafx.h"
 
 class ExceptionInfo
 {

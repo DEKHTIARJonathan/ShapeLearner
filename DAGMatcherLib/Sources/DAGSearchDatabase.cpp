@@ -37,8 +37,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "DAGSearchDatabase.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 using namespace dml;
 

@@ -32,8 +32,6 @@
 #ifndef __DAG_MATCHER_TOPOLOGICAL_H__
 #define __DAG_MATCHER_TOPOLOGICAL_H__
 
-#include "DAGMatcher.h"
-#include "NodeAssignment.h"
 
 namespace dml {
 /*!

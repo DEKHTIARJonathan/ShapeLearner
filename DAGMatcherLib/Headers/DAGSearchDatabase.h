@@ -40,13 +40,7 @@
 #ifndef _DAG_SEARCH_DATABASE_H_
 #define _DAG_SEARCH_DATABASE_H_
 
-#include <set>
-#include <string>
-#include <list>
-#include <map>
-#include <vector>
-#include <HnSRTree/HnSRTreeFile.hh>
-#include "DAG.h"
+#include "stdafx.h"
 
 namespace dml {
 ///Type used as an identification type through out the system

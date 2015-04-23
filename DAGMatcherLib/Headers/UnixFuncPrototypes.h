@@ -5,14 +5,7 @@
 #ifndef __UNIX_FUNC_PROT__
 #define __UNIX_FUNC_PROT__
 
-#ifndef WIN32
-
-#include <unistd.h>
-#include <getopt.h>
-#include <signal.h>
-#include <sys/wait.h>
-
-#else
+#include "stdafx.h"
 
 // CONSTANTS
 #define SIGALRM 0

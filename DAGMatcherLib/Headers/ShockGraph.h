@@ -43,9 +43,7 @@
 #ifndef __SHOCK_GRAPH_H__
 #define __SHOCK_GRAPH_H__
 
-#include "DAG.h"
-#include "SGNode.h"
-#include "SkeletalGraph.h"
+#include "stdafx.h"
 
 namespace dml {
 //! ShockGraph parameters for construction

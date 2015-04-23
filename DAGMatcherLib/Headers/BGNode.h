@@ -31,7 +31,9 @@
 #ifndef __BG_NODE_H__
 #define __BG_NODE_H__
 
-#include "BGElement.h"
+#include "stdafx.h"
+
+
 
 namespace dml {
 /*!

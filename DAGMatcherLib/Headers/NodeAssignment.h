@@ -32,10 +32,11 @@
 #ifndef __NODE_ASSIGNMENT_H__
 #define __NODE_ASSIGNMENT_H__
 
-#include <vector>
-#include "SharedPtr.h"
-#include "DAGMatcher.h"
-//#include "DAG.h"
+#include "stdafx.h"
+
+#include "BasicTypedefs.h"
+#include "SimilarityMeasurer.h"
+
 
 namespace dml {
 class DAG;

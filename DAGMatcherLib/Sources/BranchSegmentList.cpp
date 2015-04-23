@@ -29,8 +29,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "BranchSegmentList.h"
-#include "HelperFunctions.h"
+#include "stdafx.h"
 
 using namespace dml;
 

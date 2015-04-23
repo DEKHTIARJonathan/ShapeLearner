@@ -34,8 +34,7 @@
 #ifndef __BIPARTITE_GRAPH_H__
 #define __BIPARTITE_GRAPH_H__
 
-#include <LEDA/graph/graph.h>
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 namespace dml {
 typedef leda::list<leda::edge> NodeAssigmentList;

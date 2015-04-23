@@ -30,8 +30,8 @@
  * $Log: BoundaryCorner.cpp,v $
  *
  *-----------------------------------------------------------------------*/
-#include "MedialAxisCorner.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 

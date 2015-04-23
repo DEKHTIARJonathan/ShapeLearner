@@ -32,8 +32,7 @@
 #ifndef __BRANCH_SEGMENT_H__
 #define __BRANCH_SEGMENT_H__
 
-#include <list>
-#include "SkeletalGraph.h"
+#include "stdafx.h"
 
 namespace dml {
 class LigatureSegment;

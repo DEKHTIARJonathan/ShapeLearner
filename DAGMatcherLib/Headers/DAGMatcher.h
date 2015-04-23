@@ -32,8 +32,7 @@
 #ifndef __DAG_MATCHER_H__
 #define __DAG_MATCHER_H__
 
-#include "BasicTypedefs.h"
-#include "NodeMatchInfo.h"
+#include "stdafx.h"
 #include "SimilarityMeasurer.h"
 
 namespace dml {

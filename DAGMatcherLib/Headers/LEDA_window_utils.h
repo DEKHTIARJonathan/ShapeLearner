@@ -34,7 +34,8 @@
 #ifndef __LEDA_WINDOW_UTILS_H__
 #define __LEDA_WINDOW_UTILS_H__
 
-#include <vector>
+#include "stdafx.h"
+
 //#include <LEDA/graphics/window.h>
 
 //! Array of RGB colors

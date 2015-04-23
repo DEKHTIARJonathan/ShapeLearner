@@ -32,6 +32,8 @@
 #ifndef __LEDA_ISSUES_H__
 #define __LEDA_ISSUES_H__
 
+#include "stdafx.h"
+
 /*!
    There is a bug in LEDA 5.1 and earlier up to 4.4 (4.3 is ok). they promised to
    fix it in the next LEDA. By now, define this:

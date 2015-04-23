@@ -31,7 +31,8 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "PlotView.h"
+#include "stdafx.h"
+
 
 using namespace dml;
 

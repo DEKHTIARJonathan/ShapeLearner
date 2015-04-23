@@ -30,11 +30,9 @@
  * $Log: LigatureDetection.cpp,v $
  *
  *-----------------------------------------------------------------------*/
-#include "DAG.h"
-#include "LigatureDetection.h"
-#include "BoundaryPointFinder.h"
-#include "HelperFunctions.h"
-#include "MathUtils.h"
+
+#include "stdafx.h"
+
 
 //! Minimum endpoint disk overlap value for a branch to be considered spurious
 #define MIN_ENDPT_OVERLAP     0.9

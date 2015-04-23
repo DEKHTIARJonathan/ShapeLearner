@@ -32,11 +32,8 @@
 #ifndef __VISUAL_DAG_H__
 #define __VISUAL_DAG_H__
 
-#include <LEDA/graphics/graphwin.h>
+#include "stdafx.h"
 
-#include "LEDA_window_utils.h"
-
-#include "DAGMatcher.h"
 
 namespace dml {
 class VisualDAG : public leda::GraphWin

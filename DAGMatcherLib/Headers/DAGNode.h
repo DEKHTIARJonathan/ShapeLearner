@@ -43,15 +43,7 @@
 #ifndef __DAGNODE_H__
 #define __DAGNODE_H__
 
-#include <LEDA/core/string.h>
-#include <LEDA/graphics/color.h>
-#include "LEDA_utils.h"
-#include "SmartArray.h"
-#include "SmartMatrix.h"
-#include "SmartPtr.h"
-#include "TSV.h"
-#include "DMLString.h"
-#include "BasicTypes.h"
+#include "stdafx.h"
 
 //! Default node label
 #define NODE_LBL_DEFAULT_VAL "DLV"

@@ -34,10 +34,10 @@
 #ifndef _PLOT_VIEW_H_
 #define _PLOT_VIEW_H_
 
+#include "stdafx.h"
+
 //#include <LEDA/graphics/window.h>
 //#include "PiecewiseApprox.h"
-#include "DAGView.h"
-#include "XORIntegral.h"
 
 namespace dml {
 /*!

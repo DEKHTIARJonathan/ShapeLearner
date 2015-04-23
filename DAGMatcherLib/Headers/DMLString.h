@@ -39,9 +39,7 @@
 #ifndef _DML_STRING_H_
 #define _DML_STRING_H_
 
-#include <stdio.h>
-#include <string.h>
-#include "SmartArray.h"
+#include "stdafx.h"
 
 typedef const char* CSTR;
 

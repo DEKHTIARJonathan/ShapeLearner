@@ -29,9 +29,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "DAG.h"
-#include "NodePairInfo.h"
-#include "NodeMatchInfo.h"
+#include "stdafx.h"
 
 using namespace dml;
 

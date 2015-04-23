@@ -37,17 +37,8 @@
  *
  *-----------------------------------------------------------------------*/
 //#include <iostream>
-#include <fstream> // for FileSize()
-#include "DirWalker.h"
-#include "BasicUtils.h"
-
-#ifndef WIN32
-#include <sys/stat.h>
-#include <errno.h>
-#define INVALID_HANDLE_VALUE	0
-#else
+#include "stdafx.h"
 # include <windows.h>
-#endif
 
 DirWalker::DirWalker()
 {

@@ -32,9 +32,7 @@
 #ifndef __EUCLIDEAN_LINE_SEGMENT_H__
 #define __EUCLIDEAN_LINE_SEGMENT_H__
 
-#include "MathUtils.h"
-#include "SmartArray.h"
-#include "BasicTypes.h"
+#include "stdafx.h"
 
 namespace dml {
 struct EuclideanLineSegment

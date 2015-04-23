@@ -32,7 +32,7 @@
 #ifndef __SIMILARITY_MEASURER_T_H__
 #define __SIMILARITY_MEASURER_T_H__
 
-#include "SimilarityMeasurer.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

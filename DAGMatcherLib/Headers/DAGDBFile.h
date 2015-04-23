@@ -40,10 +40,7 @@
 #ifndef _DAG_DB_FILE_H_
 #define _DAG_DB_FILE_H_
 
-#include <fstream>
-#include "DAG.h"
-#include "DMLString.h"
-#include "SmartArray.h"
+#include "stdafx.h"
 
 #define GROW_FACTOR	20
 

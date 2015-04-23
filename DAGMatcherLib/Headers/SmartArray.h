@@ -31,9 +31,7 @@
 #ifndef _SMART_ARRAY_H_
 #define _SMART_ARRAY_H_
 
-#include <memory.h>
-#include <search.h>
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 /*!
 	\brief Wrapper class of an array of objects of class T.

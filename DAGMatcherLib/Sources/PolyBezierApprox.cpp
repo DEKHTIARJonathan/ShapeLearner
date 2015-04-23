@@ -30,11 +30,9 @@
  * $Log: PolyBezierApprox.cpp,v $
  *
  *-----------------------------------------------------------------------*/
-#include <stdlib.h>
-#include <iostream>
-#include "PolyBezierApprox.h"
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
+
 
 using namespace dml;
 

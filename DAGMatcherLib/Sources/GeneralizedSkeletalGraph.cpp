@@ -31,6 +31,8 @@
  *
  *-----------------------------------------------------------------------*/
 
+#include "stdafx.h"
+
 #ifdef _DEBUG
 #define GSG_ENABLE_GRAPH_WIN
 #endif
@@ -38,10 +40,6 @@
 #ifdef GSG_ENABLE_GRAPH_WIN
 #include "LEDA_graphwin_utils.h"
 #endif
-
-#include "GeneralizedSkeletalGraph.h"
-#include "BoundaryInterval.h"
-#include "HelperFunctions.h"
 
 #define UNKNOWN_RADIUS_UPPER_BOUND_FACTOR 2
 //#define PI_OVER_TWO 1.57079632679

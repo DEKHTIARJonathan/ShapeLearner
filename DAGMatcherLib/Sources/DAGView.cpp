@@ -31,9 +31,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <stdio.h>
-#include "VisualDAG.h"
-#include "DAGView.h"
+#include "stdafx.h"
 
 // DAGView window params
 #define SW_LEFT_MARGIN    50

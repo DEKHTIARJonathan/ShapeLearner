@@ -34,10 +34,7 @@
 #ifndef __PIECEWISE_APROX_H__
 #define __PIECEWISE_APROX_H__
 
-#include "MathUtils.h"
-#include "SmartArray.h"
-#include "SmartMatrix.h"
-#include "BasicTypes.h"
+#include "stdafx.h"
 
 namespace dml {
 typedef SmartArray<POINT> POINTS;

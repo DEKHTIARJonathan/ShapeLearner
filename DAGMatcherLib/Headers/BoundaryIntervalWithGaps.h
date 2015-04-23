@@ -31,10 +31,7 @@
 #ifndef __BOUNDARY_INTERVAL_WITH_GAPS_H__
 #define __BOUNDARY_INTERVAL_WITH_GAPS_H__
 
-#include "SkeletalGraph.h"
-#include "BoundaryInterval.h"
-#include "KDTree.h"
-#include "BoundaryPointFinder.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

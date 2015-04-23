@@ -32,8 +32,9 @@
 #ifndef __LEDA_UTILS_H__
 #define __LEDA_UTILS_H__
 
-#include <LEDA/graph/graph.h>
-#include "LEDA_issues.h"
+#include "stdafx.h"
+
+
 
 //! Asserts that the nodes or edges A and B belong to the same graph
 #define ASSERT_SAME_GRAPH(A, B) ASSERT(graph_of(A) == graph_of(B))

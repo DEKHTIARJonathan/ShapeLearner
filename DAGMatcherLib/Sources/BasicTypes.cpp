@@ -1,5 +1,4 @@
-#include "BasicTypes.h"
-#include "MathUtils.h"
+#include "stdafx.h"
 
 using namespace dml;
 

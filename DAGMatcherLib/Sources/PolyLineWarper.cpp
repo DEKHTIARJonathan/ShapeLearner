@@ -31,17 +31,14 @@
  *
  *
  *-----------------------------------------------------------------------*/
-#include <stdlib.h>
-#include <iostream>
-#include "PolyLineWarper.h"
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 
 double PolyLineWarper::Warp(const LineSegmentArray& src,
 							const LineSegmentArray& tgt,
-							const POINTS& tgtPts)
+							const dml::POINTS& tgtPts)
 {
 /*	// Determine global scale paramater
 	m_scale = tgt.GetHead().Y0() / src.GetHead().Y0();

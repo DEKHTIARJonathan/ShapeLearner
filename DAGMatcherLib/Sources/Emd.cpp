@@ -12,10 +12,7 @@
 	E-Mail: rubner@cs.stanford.edu   URL: http://vision.stanford.edu/~rubner
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
+#include "stdafx.h"
 #include "Emd.h"
 
 #define DEBUG_LEVEL 0

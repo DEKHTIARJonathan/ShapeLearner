@@ -32,10 +32,7 @@
 #ifndef __BRANCH_SEGMENT_LIST_H__
 #define __BRANCH_SEGMENT_LIST_H__
 
-#include <list>
-#include <LEDA/graph/graph.h>
-#include "BranchSegment.h"
-#include "LigatureSegment.h" // for SubtractLigatureInterval()
+#include "stdafx.h"
 
 namespace dml {
 /*!

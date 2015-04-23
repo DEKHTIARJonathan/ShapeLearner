@@ -34,11 +34,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "DAGDBFile.h"
-#include "ShockGraph.h"
-#include "GestureGraph.h"
-#include "BoneGraph.h"
-#include "Exceptions.h"
+#include "stdafx.h"
 
 // Graph Ids used in the database
 #define UNK_GRAPH        0

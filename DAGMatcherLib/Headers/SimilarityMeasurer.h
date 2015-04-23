@@ -34,8 +34,7 @@
 #ifndef __SIMILARITY_MEASURER_H__
 #define __SIMILARITY_MEASURER_H__
 
-#include <vector>
-#include "BasicTypedefs.h"
+#include "stdafx.h"
 #include "NodeMatchInfo.h"
 
 namespace dml {

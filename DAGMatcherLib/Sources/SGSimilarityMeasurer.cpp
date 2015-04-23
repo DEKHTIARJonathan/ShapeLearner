@@ -29,16 +29,9 @@
 *
 *-----------------------------------------------------------------------*/
 
-#include "SGSimilarityMeasurer.h"
-#include "ShockGraph.h"
+#include "stdafx.h"
+
 #include "DAG.h"
-#include "HelperFunctions.h"
-#include "SGNode.h"
-#include <float.h>
-#include <stdio.h>
-#include <ctype.h>
-#include "ModelFit.h"
-#include "MathUtils.h"
 
 #define MINDIST 0
 #define MAXDIST 1

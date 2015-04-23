@@ -33,10 +33,8 @@
  *
  *
  *-----------------------------------------------------------------------*/
-#include <iostream>
-#include "MathUtils.h"
-#include "TSV.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 

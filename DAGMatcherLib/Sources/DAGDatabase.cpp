@@ -39,11 +39,9 @@
  *
  *
  *-----------------------------------------------------------------------*/
-//#include <stdio.h>
-#include <time.h>
-#include <LEDA/core/h_array.h>
-#include "VoteCounter.h"
-#include "DAGDatabase.h"
+
+#include "stdafx.h"
+
 
 #ifdef USE_TEMPLATE_BASED_MWBM_FUNCTION
 #include <LEDA/graph/templates/mwb_matching.h>
@@ -51,10 +49,6 @@ using namespace std; // Fixes an error in the next LEDA header scale_weights.h l
 #include <LEDA/graph/scale_weights.h>
 #endif
 
-#include "SmartArray.h"
-#include "Exceptions.h"
-#include "DirWalker.h"
-#include "BasicUtils.h"
 
 /*!
 	Compares the similarity value of each MatchInfo in descending order.
@@ -62,11 +56,9 @@ using namespace std; // Fixes an error in the next LEDA header scale_weights.h l
 	in the database file is used to sort them (in ascending order), so
 	that the results are deterministic and clear.
 */
-#ifdef WIN32
+
 int leda::compare(const dml::MatchInfo& a, const dml::MatchInfo& b)
-#else
-int dml::compare(const dml::MatchInfo& a, const dml::MatchInfo& b)
-#endif
+
 {
 	if (a.dSimilarity > b.dSimilarity)
 		return -1;

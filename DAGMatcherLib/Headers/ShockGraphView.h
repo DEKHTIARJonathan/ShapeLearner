@@ -34,8 +34,9 @@
 #ifndef _SHOCK_GRAPH_VIEW_H_
 #define _SHOCK_GRAPH_VIEW_H_
 
-#include "DAGView.h"
-#include "ShockGraph.h"
+#include "stdafx.h"
+
+
 
 namespace dml {
 /*!

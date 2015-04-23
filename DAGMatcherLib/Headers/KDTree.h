@@ -34,9 +34,8 @@
 #ifndef _KD_TREE_H_
 #define _KD_TREE_H_
 
-//#include <vector>
-#include <ann_1.1/include/ANN/ANN.h>
-#include "BasicUtils.h"
+#include "stdafx.h"
+
 
 namespace dml {
 /*!

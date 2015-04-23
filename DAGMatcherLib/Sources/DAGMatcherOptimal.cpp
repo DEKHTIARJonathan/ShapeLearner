@@ -29,10 +29,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "DAGMatcherOptimal.h"
-#include "BoneGraph.h" // temporary solution
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 using namespace dml;
 

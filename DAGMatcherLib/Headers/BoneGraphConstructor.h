@@ -31,8 +31,7 @@
 #ifndef __BONE_GRAPH_CONSTRUCTOR_H__
 #define __BONE_GRAPH_CONSTRUCTOR_H__
 
-#include "GeneralizedSkeletalGraph.h"
-//#include <LEDA/graph/node_array.h>
+#include "stdafx.h"
 
 namespace dml {
 class BoneGraph;

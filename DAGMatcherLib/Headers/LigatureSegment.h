@@ -32,9 +32,9 @@
 #ifndef __LIGATURE_SEGMENT_H__
 #define __LIGATURE_SEGMENT_H__
 
-#include "BranchSegment.h"
-#include "BranchWalkInfo.h"
-#include "BoundaryCorner.h"
+#include "stdafx.h"
+
+
 
 namespace dml {
 class BoundaryPointFinder;

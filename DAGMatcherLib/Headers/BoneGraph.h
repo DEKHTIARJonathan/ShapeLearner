@@ -34,11 +34,7 @@
 #ifndef __BONE_GRAPH_H__
 #define __BONE_GRAPH_H__
 
-#include "DAG.h"
-#include "BGNode.h"
-#include "BGEdge.h"
-#include "SkeletalGraph.h"
-#include "BoneGraphConstructor.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

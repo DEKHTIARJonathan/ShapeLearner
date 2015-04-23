@@ -31,11 +31,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <LEDA/graphics/graphwin.h>
-#include "VisualDAG.h"
-#include "ShockGraph.h"
-
-#include <stdio.h>
+#include "stdafx.h"
 
 // Graph window params
 #define GW_LEFT_MARGIN    50

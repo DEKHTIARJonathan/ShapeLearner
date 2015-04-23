@@ -34,7 +34,7 @@
 #ifndef __POLY_LINE_WARPER_H__
 #define __POLY_LINE_WARPER_H__
 
-#include "PolyLineApprox.h"
+#include "stdafx.h"
 
 namespace dml {
 typedef SmartArray< SmartMatrix<MEMDATA> > MEMORY1;

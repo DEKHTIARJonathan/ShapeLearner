@@ -34,7 +34,7 @@
 #ifndef __BOUNDARY_CORNER_H__
 #define __BOUNDARY_CORNER_H__
 
-#include "BoundaryIntervalWithGaps.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

@@ -32,7 +32,7 @@
 #ifndef __MATCHED_NODE_PAIR_H__
 #define __MATCHED_NODE_PAIR_H__
 
-#include "DAG.h"
+#include "stdafx.h"
 
 namespace dml {
 typedef SmartMatrix<double> SimMatrix;

@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Precompiled Headers">
+      <UniqueIdentifier>{4cb93c9e-96e4-40a0-a5a5-1128fc2e9342}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DAGMatcherLib\Headers\BasicTypedefs.h">
@@ -155,9 +158,6 @@
     <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_window_utils.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\DAGMatcherLib\Headers\LigatureDetection.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="..\DAGMatcherLib\Headers\LigatureSegment.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -168,9 +168,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\DAGMatcherLib\Headers\MatchInfoList.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DAGMatcherLib\Headers\MathUtils.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\DAGMatcherLib\Headers\MedialAxisCorner.h">
@@ -271,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="Headers\PiecewiseApprox.hxx">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\stdafx.h">
+      <Filter>Precompiled Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -394,9 +394,6 @@
     <ClCompile Include="..\DAGMatcherLib\Sources\MatchedNodePair.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\DAGMatcherLib\Sources\MatchInfoList.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\DAGMatcherLib\Sources\MedialAxisCorner.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     </ClCompile>
     <ClCompile Include="..\DAGMatcherLib\Sources\XORIntegral.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\stdafx.cpp">
+      <Filter>Precompiled Headers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

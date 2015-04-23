@@ -34,10 +34,7 @@
 #ifndef _BOUNDARY_POINTS_FINDER_H_
 #define _BOUNDARY_POINTS_FINDER_H_
 
-#include <vector>
-#include "KDTree.h"
-#include "BoundaryInterval.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

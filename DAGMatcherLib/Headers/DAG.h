@@ -32,8 +32,7 @@
 #ifndef __DAG_H__
 #define __DAG_H__
 
-#include <fstream>
-#include <string>
+#include "stdafx.h"
 
 #include "BasicTypedefs.h"
 
@@ -41,11 +40,6 @@
 #include "DAGEdge.h"
 #include "DMLString.h"
 
-
-#include <Newmat\newmatap.h>
-#include <Newmat\newmatio.h>
-
-#include "SkeletalGraph.h"
 #include "DAGMatcher.h"
 
 namespace dml {

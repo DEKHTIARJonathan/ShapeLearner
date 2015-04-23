@@ -33,9 +33,8 @@
 #ifndef __BG_SIMILARITY_MEASURER_H__
 #define __BG_SIMILARITY_MEASURER_H__
 
-#include "SimilarityMeasurerT.h"
-#include "BoneGraph.h"
-#include "ModelFit.h"
+#include "stdafx.h"
+
 
 namespace dml {
 //typedef SimilarityMeasurerT<BoneGraph> BGSimilarityMeasurer;

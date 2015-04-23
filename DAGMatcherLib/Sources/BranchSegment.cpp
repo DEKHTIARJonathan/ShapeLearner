@@ -28,12 +28,8 @@
  * Author: Diego Macrini
  *
  *-----------------------------------------------------------------------*/
-#include "DAG.h"
-#include "BranchSegment.h"
-#include "LigatureSegment.h"
-#include "BoundaryPointFinder.h"
-#include "HelperFunctions.h"
-#include "MathUtils.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 

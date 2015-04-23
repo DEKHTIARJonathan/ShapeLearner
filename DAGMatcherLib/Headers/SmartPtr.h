@@ -39,7 +39,7 @@
 #ifndef _SMART_PTR_H_
 #define _SMART_PTR_H_
 
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 template<class T> class SmartPtr;
 

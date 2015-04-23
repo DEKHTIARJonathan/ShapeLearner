@@ -29,7 +29,7 @@
 *
 *-----------------------------------------------------------------------*/
 
-#include "XORIntegral.h"
+#include "stdafx.h"
 
 using namespace dml;
 

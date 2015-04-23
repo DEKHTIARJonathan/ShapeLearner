@@ -29,7 +29,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "BoundaryInterval.h"
+#include "stdafx.h"
 
 using namespace dml;
 

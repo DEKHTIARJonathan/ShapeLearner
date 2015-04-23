@@ -34,7 +34,7 @@
 #ifndef __MODEL_FIT_H__
 #define __MODEL_FIT_H__
 
-#include "PolyLineApprox.h"
+#include "stdafx.h"
 
 namespace dml {
 typedef SmartMatrix< SmartMatrix<MEMDATA> > MEMORY2;

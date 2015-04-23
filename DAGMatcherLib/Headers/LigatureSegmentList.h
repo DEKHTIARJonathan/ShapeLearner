@@ -32,8 +32,9 @@
 #ifndef __LIGATURE_SEGMENT_LIST_H__
 #define __LIGATURE_SEGMENT_LIST_H__
 
-#include <list>
-#include "LigatureSegment.h"
+#include "stdafx.h"
+
+
 
 namespace dml {
 class LigatureSegmentList : public std::list<LigatureSegment>

@@ -28,11 +28,8 @@
  * Author: Diego Macrini
  *
  *-----------------------------------------------------------------------*/
-#include <LEDA/graph/graph.h>
-#include "BGElement.h"
-//#include "BoneGraph.h"
-#include "HelperFunctions.h"
-#include "Exceptions.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 

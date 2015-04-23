@@ -34,8 +34,7 @@
 #ifndef __POLY_BEZIER_APROX_H__
 #define __POLY_BEZIER_APROX_H__
 
-#include "PolyLineApprox.h"
-#include "CubicBezier.h"
+#include "stdafx.h"
 
 namespace dml {
 class PolyBezierApprox : public PiecewiseApprox<CubicBezier>

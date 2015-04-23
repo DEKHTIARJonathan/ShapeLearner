@@ -28,9 +28,8 @@
  * Author: Diego Macrini (dmac@cs.toronto.edu)
  *
  *-----------------------------------------------------------------------*/
-#include "DAG.h"
-#include "NodeAssignment.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 

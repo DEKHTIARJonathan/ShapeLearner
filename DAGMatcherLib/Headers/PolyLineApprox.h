@@ -34,8 +34,7 @@
 #ifndef __POLY_LINE_APROX_H__
 #define __POLY_LINE_APROX_H__
 
-#include "PiecewiseApprox.h"
-#include "LineSegment.h"
+#include "stdafx.h"
 
 namespace dml {
 class PolyLineApprox : public PiecewiseApprox<LineSegment>

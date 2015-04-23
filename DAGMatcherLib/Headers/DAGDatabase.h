@@ -40,29 +40,19 @@
 #ifndef _DAG_DATABASE_H_
 #define _DAG_DATABASE_H_
 
-#include <iostream>
-#include <string>
-#include <LEDA/core/list.h>
-#include <LEDA/core/sortseq.h>
-#include <LEDA/core/array.h>
+#include "stdafx.h"
 
-#include "DAGSearchDatabase.h"
-#include "DAGDBFile.h"
+
 
 namespace dml {
 class MatchInfo;
 }
 
-#ifdef WIN32
 namespace leda {
 int compare(const dml::MatchInfo& a, const dml::MatchInfo& b);
 }
-#endif
 
 namespace dml {
-#ifndef WIN32
-int compare(const dml::MatchInfo& a, const dml::MatchInfo& b);
-#endif
 
 class DAGList : public leda_list<DAGPtr>
 {
@@ -148,11 +138,7 @@ public:
 		return ptrDAG->GetDAGLbl();
 	}
 
-#ifdef WIN32
 	friend int leda::compare(const MatchInfo& a, const MatchInfo& b);
-#else
-	friend int compare(const MatchInfo& a, const MatchInfo& b);
-#endif
 
 	// The stream operators are implemented only to satisfy LEDA requirements
 	friend std::ostream& operator<<(std::ostream &os, const MatchInfo& mi) { return os; }

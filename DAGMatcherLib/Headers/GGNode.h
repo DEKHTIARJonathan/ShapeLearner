@@ -42,7 +42,7 @@
 #ifndef __GG_NODE_H__
 #define __GG_NODE_H__
 
-#include "DAGNode.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

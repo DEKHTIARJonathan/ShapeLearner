@@ -32,9 +32,8 @@
 #ifndef __SG_SIMILARITY_MEASURER_H__
 #define __SG_SIMILARITY_MEASURER_H__
 
-#include "SimilarityMeasurerT.h"
-#include "ShockGraph.h"
-#include "ModelFit.h"
+#include "stdafx.h"
+
 
 namespace dml {
 typedef SimilarityMeasurerT<ShockGraph> SGSimilarityMeasurer;

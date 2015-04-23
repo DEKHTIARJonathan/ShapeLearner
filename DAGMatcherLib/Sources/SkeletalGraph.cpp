@@ -31,14 +31,13 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <LEDA/core/d_array.h>
-#include "SkeletalGraph.h"
-#include "BoundaryPointFinder.h"
-#include "skeleton.h"  // AFMM skeleton headers
-#include "BasicUtils.h"
+#include "stdafx.h"
+
+
+#include "AFMMSkeleton\include\skeleton.h"
 
 // VC++6 -> Include CImg before DAG.h
-#include "../CImg/CImg.h"
+#include "CImg/CImg.h"
 #include "ImageProcessing.h"
 
 using namespace std;

@@ -34,12 +34,7 @@
 #ifndef __GENERALIZED_SKELETAL_GRAPH_H__
 #define __GENERALIZED_SKELETAL_GRAPH_H__
 
-#include <list>
-#include <LEDA/graph/graph.h>
-#include "LEDA_utils.h"
-#include "SkeletalGraph.h"
-#include "LigatureDetection.h"
-#include "SharedPtr.h"
+#include "stdafx.h"
 
 namespace dml {
 struct GSGParams

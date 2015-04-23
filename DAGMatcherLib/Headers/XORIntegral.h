@@ -32,9 +32,7 @@
 #ifndef __XOR_INTEGRAL_H__
 #define __XOR_INTEGRAL_H__
 
-#include <list>
-#include <vector>
-#include "LineSegment.h"
+#include "stdafx.h"
 
 namespace dml {
 /*

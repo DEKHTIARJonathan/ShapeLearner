@@ -31,7 +31,7 @@
 #ifndef _SMART_MATRIX_H_
 #define _SMART_MATRIX_H_
 
-#include "SmartArray.h"
+#include "stdafx.h"
 
 /*!
 	\brief Wrapper class of an 2-D array of objects of class T.

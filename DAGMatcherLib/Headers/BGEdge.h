@@ -31,7 +31,7 @@
 #ifndef __BG_EDGE_H__
 #define __BG_EDGE_H__
 
-#include "BGElement.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

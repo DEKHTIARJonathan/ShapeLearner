@@ -34,10 +34,6 @@
 #ifndef __CUBIC_BEZIER_H__
 #define __CUBIC_BEZIER_H__
 
-#include "MathUtils.h"
-#include "SmartArray.h"
-#include "BasicTypes.h"
-
 namespace dml {
 
 /*!

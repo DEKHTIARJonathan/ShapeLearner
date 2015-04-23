@@ -31,6 +31,8 @@
  *
  *-----------------------------------------------------------------------*/
 
+#include "stdafx.h"
+
 #include "ImageProcessing.h"
 
 using namespace dml;

@@ -32,10 +32,6 @@
 #ifndef __LINE_SEGMENT_H__
 #define __LINE_SEGMENT_H__
 
-#include "MathUtils.h"
-#include "SmartArray.h"
-#include "BasicTypes.h"
-
 namespace dml {
 
 struct LineSegment

@@ -29,22 +29,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <float.h>
-#include <stdio.h>
-#include <ctype.h>
-#include <vector>
-
-#include "DAGMatcherOptimal.h"
-#include "DAGMatcherGreedy.h"
-#include "DAGMatcherTopological.h"
-#include "DAGMatcherAdaptive.h"
-#include "SGSimilarityMeasurer.h"
-
-#include "ShockGraph.h"
-#include "HelperFunctions.h"
-#include "Exceptions.h"
-#include "PolyLineApprox.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 #define NSAMPLES	 5
 #define VDIM		 4

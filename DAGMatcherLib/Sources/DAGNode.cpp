@@ -29,12 +29,8 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <iostream>
-#include <stdio.h>
-#include "memory.h"
-#include "DAGNode.h"
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
+
 
 using namespace dml;
 

@@ -28,11 +28,8 @@
  * Author: Diego Macrini
  *
  *-----------------------------------------------------------------------*/
-#include <algorithm>
-#include "BoneGraph.h"
-#include "BoneGraphConstructor.h"
 
-//#include <LEDA/graphics/graphwin.h>
+#include "stdafx.h"
 
 #define MAX_CORNER_BAR 0.8
 

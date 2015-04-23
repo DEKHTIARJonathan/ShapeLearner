@@ -34,10 +34,7 @@
 #ifndef __HELPER_FUNCTIONS_H__
 #define __HELPER_FUNCTIONS_H__
 
-#include "BasicUtils.h"
-#include "BasicTypes.h"
-
-#include <fstream>
+#include "stdafx.h"
 
 namespace dml {
 double SIMILARITY(double x, double y, const double& minVal = .1);

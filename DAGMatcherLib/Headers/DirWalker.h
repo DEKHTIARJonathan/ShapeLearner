@@ -40,20 +40,13 @@
 #ifndef __DIR_WALKER_H__
 #define __DIR_WALKER_H__
 
-#include <string>
-//#include <map>
-#include <list>
+#include "stdafx.h"
 
 #define MAX_PATH_SIZE 260 // ie, MAX_PATH in Windows.h
 
-#ifdef WIN32
 typedef void* HANDLE;
 struct _WIN32_FIND_DATAA;
-#else
-# include <sys/types.h>
-# include <dirent.h>
-typedef DIR* HANDLE;
-#endif
+
 
 /*!
 	DirWalker::iterator it = dw.params.begin();

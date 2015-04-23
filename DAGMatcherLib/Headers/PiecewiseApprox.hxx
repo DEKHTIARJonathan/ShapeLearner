@@ -32,6 +32,9 @@
  *
  *-----------------------------------------------------------------------*/
 
+#ifndef __PIECEWISE_APPROX_HXX_
+#define __PIECEWISE_APPROX_HXX_
+
 template <class SEGMENT>
 double PiecewiseApprox<SEGMENT>::FindMaxYDiff(int seg_num, int s, int e) const
 {
@@ -282,3 +285,5 @@ const SEGMENT& PiecewiseApprox<SEGMENT>::GetPointSegment(int i) const
 	// We must return something in release mode...
 	return m_knots[m_knots.GetSize()-1].seg;
 }
+
+#endif

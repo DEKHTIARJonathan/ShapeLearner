@@ -34,8 +34,7 @@
 #ifndef __PIECEWISE_CURVES_H__
 #define __PIECEWISE_CURVES_H__
 
-#include "SmartArray.h"
-#include "BasicTypes.h"
+#include "stdafx.h"
 
 namespace dml {
 //PiecewiseLinearFunction

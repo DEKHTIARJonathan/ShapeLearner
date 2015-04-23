@@ -32,7 +32,7 @@
 #ifndef __NODE_PAIR_INFO_H__
 #define __NODE_PAIR_INFO_H__
 
-#include "DAG.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

@@ -34,11 +34,7 @@
 #ifndef __SOLUTION_SET_H__
 #define __SOLUTION_SET_H__
 
-#include <LEDA/core/queue.h>
-#include <LEDA/core/sortseq.h>
-
-#include "BipartiteNodeGraph.h"
-#include "NodePairInfo.h" // needed by FillNodeMap
+#include "stdafx.h"
 
 namespace dml {
 class SolutionSet;

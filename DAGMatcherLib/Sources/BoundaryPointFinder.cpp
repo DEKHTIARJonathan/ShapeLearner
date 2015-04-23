@@ -31,12 +31,8 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <algorithm>
-#include "BoundaryPointFinder.h"
-#include "BoundaryIntervalWithGaps.h"
-#include "PolyLineApprox.h"
-#include "MathUtils.h"
-#include "PartnerBranch.h"
+#include "stdafx.h"
+
 
 #define MIN_PTS_RETURNED 4
 #define EPSILON_INC 16

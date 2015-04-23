@@ -34,9 +34,7 @@
 #ifndef _BONE_GRAPH_VIEW_H_
 #define _BONE_GRAPH_VIEW_H_
 
-#include "DAGView.h"
-#include "BoneGraph.h"
-#include "PlotView.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

@@ -31,7 +31,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "BoneGraphView.h"
+#include "stdafx.h"
 
 // matching window parms
 #define Y_OFFSET 10

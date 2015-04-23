@@ -31,11 +31,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "BipartiteNodeGraph.h"
-#include "NodePairInfo.h"
-#include "NodeMatchInfo.h"
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+#include "stdafx.h"
 
 using namespace dml;
 

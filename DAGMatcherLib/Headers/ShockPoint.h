@@ -31,10 +31,7 @@
 #ifndef __SHOCK_POINT_H__
 #define __SHOCK_POINT_H__
 
-#include "DAGNode.h"
-#include "DAGEdge.h"
-#include "PolyBezierApprox.h"
-#include "BoundaryCorner.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

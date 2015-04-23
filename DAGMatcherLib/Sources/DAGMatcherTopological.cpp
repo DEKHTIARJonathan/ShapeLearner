@@ -28,13 +28,8 @@
  * Author: Diego Macrini (dmac@cs.toronto.edu)
  *
  *-----------------------------------------------------------------------*/
-//#include <list>
-#include "DAGMatcherTopological.h"
-#include "DAG.h"
-#include "BipartiteGraph.h"
-#include "BoneGraph.h" // temporary solution
-#include "HelperFunctions.h"
-#include "BasicUtils.h"
+
+#include "stdafx.h"
 
 using namespace dml;
 

@@ -40,8 +40,7 @@
 #ifndef __GESTURE_GRAPH_H__
 #define __GESTURE_GRAPH_H__
 
-#include "DAG.h"
-#include "GGNode.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

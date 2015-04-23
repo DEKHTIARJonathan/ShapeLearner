@@ -40,11 +40,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "GGNode.h"
-#include "HelperFunctions.h"
-#include "Exceptions.h"
-#include <stdio.h>
-#include <ctype.h>
+#include "stdafx.h"
 
 using namespace std;
 using namespace dml;

@@ -28,11 +28,8 @@
 * Author: Diego Macrini
 *
 *-----------------------------------------------------------------------*/
-#include <algorithm>
-#include "BGSimilarityMeasurer.h"
-#include "XORIntegral.h"
-#include "HelperFunctions.h"
-#include "MathUtils.h"
+
+#include "stdafx.h"
 
 #define MINDIST 0
 #define MAXDIST 1

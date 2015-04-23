@@ -31,9 +31,7 @@
 #ifndef __SG_NODE_H__
 #define __SG_NODE_H__
 
-#include "DAGNode.h"
-#include "DMLString.h"
-#include "PolyLineApprox.h"
+#include "stdafx.h"
 
 #define  SHOCK_base 100
 #define  SHOCK_2or3 100

@@ -28,12 +28,8 @@
  * Author: Diego Macrini
  *
  *-----------------------------------------------------------------------*/
-//#include <LEDA/graph/graph.h>
-//#include "BGNode.h"
-#include "BoneGraph.h"
-#include "XORIntegral.h"
-#include "HelperFunctions.h"
-#include "Exceptions.h"
+
+#include "stdafx.h"
 
 #define BACK_BONE_COST 1
 

@@ -37,8 +37,7 @@
 #ifndef _MATCH_INFO_LIST_H_
 #define _MATCH_INFO_LIST_H_
 
-#include "LEDA/internal/PREAMBLE.h"
-#include "BasicTypedefs.h"
+#include "stdafx.h"
 
 namespace dml {
 

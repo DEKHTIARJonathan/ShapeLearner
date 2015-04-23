@@ -34,8 +34,7 @@
 #ifndef _VOTECOUNTER_H_
 #define _VOTECOUNTER_H_
 
-#include <LEDA/core/p_queue.h>
-#include "DAGDatabase.h"
+#include "stdafx.h"
 
 namespace dml {
 typedef SmartArray<double> RealVector;

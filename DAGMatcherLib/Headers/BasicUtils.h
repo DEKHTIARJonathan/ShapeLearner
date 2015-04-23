@@ -1,11 +1,8 @@
 #ifndef _BASIC_UTILS_H_
 #define _BASIC_UTILS_H_
 
-#include <iostream>
-#include <string>
-#include <assert.h>
+#include "stdafx.h"
 
-#include <float.h>
 #define isnan  _isnan
 #define finite _finite
 #define NORM2(X, Y) sqrt((X)*(X) + (Y)*(Y))

@@ -32,8 +32,7 @@
 #ifndef __DAGEDGE_H__
 #define __DAGEDGE_H__
 
-#include "SmartPtr.h"
-#include "DMLString.h"
+#include "stdafx.h"
 
 #define DEFAULT_DAG_EDGE_WEIGHT 1.0
 

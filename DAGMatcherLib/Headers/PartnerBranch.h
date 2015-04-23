@@ -32,7 +32,7 @@
 #ifndef __PARTNER_BRANCH_H__
 #define __PARTNER_BRANCH_H__
 
-#include "DDSGraphUtils.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

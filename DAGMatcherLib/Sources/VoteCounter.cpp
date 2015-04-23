@@ -31,6 +31,8 @@
  *
  *-----------------------------------------------------------------------*/
 
+#include "stdafx.h"
+
 #include <LEDA/core/tuple.h>
 #include <LEDA/graph/graph_alg.h>
 #include <LEDA/graph/node_array.h>

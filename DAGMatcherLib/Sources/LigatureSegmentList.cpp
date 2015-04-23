@@ -29,8 +29,7 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include "LigatureSegmentList.h"
-#include "HelperFunctions.h"
+#include "stdafx.h"
 
 //! Minimum ligature segment size considered
 #define MIN_LIG_SEGMENT_SIZE    2

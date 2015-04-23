@@ -50,7 +50,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -62,6 +62,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,7 +78,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
@@ -89,6 +90,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -152,12 +154,10 @@
     <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_issues.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_utils.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\LEDA_window_utils.h" />
-    <ClInclude Include="..\DAGMatcherLib\Headers\LigatureDetection.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\LigatureSegment.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\LigatureSegmentList.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\MatchedNodePair.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\MatchInfoList.h" />
-    <ClInclude Include="..\DAGMatcherLib\Headers\MathUtils.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\MedialAxisCorner.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\ModelFit.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\NodeAssignment.h" />
@@ -191,6 +191,7 @@
     <ClInclude Include="..\DAGMatcherLib\Headers\VoteCounter.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\XORIntegral.h" />
     <ClInclude Include="Headers\PiecewiseApprox.hxx" />
+    <ClInclude Include="Headers\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DAGMatcherLib\Sources\BasicTypes.cpp" />
@@ -233,7 +234,6 @@
     <ClCompile Include="..\DAGMatcherLib\Sources\LigatureSegment.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\LigatureSegmentList.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\MatchedNodePair.cpp" />
-    <ClCompile Include="..\DAGMatcherLib\Sources\MatchInfoList.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\MedialAxisCorner.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\ModelFit.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\NodeAssignment.cpp" />
@@ -252,6 +252,10 @@
     <ClCompile Include="..\DAGMatcherLib\Sources\VisualDAG.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\VoteCounter.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\XORIntegral.cpp" />
+    <ClCompile Include="Sources\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

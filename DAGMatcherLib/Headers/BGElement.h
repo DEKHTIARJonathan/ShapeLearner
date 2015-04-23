@@ -31,11 +31,7 @@
 #ifndef _BG_ELEMENT_H_
 #define _BG_ELEMENT_H_
 
-#include "DAGNode.h"
-#include "DAGEdge.h"
-#include "PolyBezierApprox.h"
-#include "BoundaryCorner.h"
-#include "ShockPoint.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

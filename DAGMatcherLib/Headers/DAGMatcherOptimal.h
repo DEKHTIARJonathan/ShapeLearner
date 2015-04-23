@@ -32,8 +32,7 @@
 #ifndef __DAG_MATCHER_OPTIMAL_H__
 #define __DAG_MATCHER_OPTIMAL_H__
 
-#include "SolutionSet.h"
-#include "DAGMatcher.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

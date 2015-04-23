@@ -32,8 +32,7 @@
 #ifndef __NODE_MATCH_INFO_H__
 #define __NODE_MATCH_INFO_H__
 
-#include "SharedPtr.h"
-#include "BipartiteGraph.h"
+#include "stdafx.h"
 
 namespace dml {
 class DAG;

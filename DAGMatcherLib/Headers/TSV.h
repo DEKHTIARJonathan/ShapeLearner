@@ -37,7 +37,7 @@
 #ifndef __TSV_H__
 #define __TSV_H__
 
-#include "SmartArray.h"
+#include "stdafx.h"
 
 namespace dml {
 int CompareTSVElement(const void* elem1, const void* elem2);

@@ -40,6 +40,8 @@
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 
+#include "stdafx.h"
+
 namespace dml {
 
 class Vector : public RowVector

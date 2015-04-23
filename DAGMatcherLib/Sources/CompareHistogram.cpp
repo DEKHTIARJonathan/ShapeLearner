@@ -30,9 +30,10 @@
  * $Log: CompareHistogram.cpp,v $
  *-----------------------------------------------------------------------*/
 
+#include "stdafx.h"
+
 #include "CompareHistogram.h"
 #include "Emd.h"
-#include "BasicUtils.h"
 
 /*!
  * @brief ...

@@ -34,7 +34,8 @@
 #ifndef __MEDIAL_AXIS_CORNER_H__
 #define __MEDIAL_AXIS_CORNER_H__
 
-#include "SkeletalGraph.h"
+#include "stdafx.h"
+
 
 namespace dml {
 /*!

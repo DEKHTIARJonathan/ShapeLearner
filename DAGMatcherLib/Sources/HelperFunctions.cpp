@@ -37,14 +37,9 @@
  *
  *-----------------------------------------------------------------------*/
 
-#include <stdio.h>
-#include <stdarg.h>
-#include "MathUtils.h"
-#include "HelperFunctions.h"
+#include "stdafx.h"
 
-#ifdef WIN32
 #define vsnprintf _vsnprintf
-#endif
 
 #define SMALL_NUM  0.00000001 // anything that avoids division overflow
 

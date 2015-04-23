@@ -34,9 +34,7 @@
 #ifndef __POLY_LINE_TLS_APPROX_H__
 #define __POLY_LINE_TLS_APPROX_H__
 
-//#include "PolyLineApprox.h"
-#include "PiecewiseApprox.h"
-#include "EuclideanLineSegment.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

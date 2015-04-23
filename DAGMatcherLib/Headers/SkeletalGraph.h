@@ -34,14 +34,7 @@
 #ifndef __SKELETAL_GRAPH_H__
 #define __SKELETAL_GRAPH_H__
 
-#include "FluxSkeleton\include\DDSGraphProject.h"
-
-#include <fstream>
-
-#include "PolyLineTLSApprox.h"
-#include "PolyBezierApprox.h"
-#include "DMLString.h"
-#include "DDSGraphUtils.h"
+#include "stdafx.h"
 
 template<class T> class FIELD; // for AFMM skeleton in ImageInfo
 

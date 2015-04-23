@@ -34,9 +34,7 @@
 #ifndef _DAG_VIEW_H_
 #define _DAG_VIEW_H_
 
-#include <LEDA/graphics/window.h>
-#include "LEDA_window_utils.h"
-#include "DAG.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

@@ -32,7 +32,7 @@
 #ifndef __BRANCH_WALK_INFO_H__
 #define __BRANCH_WALK_INFO_H__
 
-#include "BranchSegment.h"
+#include "stdafx.h"
 
 namespace dml {
 //! Cumulative boundary-to-axis ratio on each side of a medial axis segment

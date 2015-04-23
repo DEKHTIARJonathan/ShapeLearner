@@ -32,8 +32,7 @@
 #ifndef __DAG_MATCHER_GREEDY_H__
 #define __DAG_MATCHER_GREEDY_H__
 
-#include "DAGMatcher.h"
-#include "MatchedNodePair.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!

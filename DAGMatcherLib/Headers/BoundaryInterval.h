@@ -31,8 +31,7 @@
 #ifndef __BOUNDARY_INTERVAL_H__
 #define __BOUNDARY_INTERVAL_H__
 
-#include <list>
-#include "SkeletalGraph.h"
+#include "stdafx.h"
 
 namespace dml {
 /*!
