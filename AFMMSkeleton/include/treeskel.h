@@ -6,8 +6,8 @@
 #include "genrl.h"
 #include <map>
 #include <vector>
-#include "../../dagmatcher/PolyLineApprox.h"
-#include "../../dagmatcher/SharedPtr.h"
+#include "PolyLineApprox.h"
+#include "SharedPtr.h"
 
 typedef SharedPtr< FIELD<float> > FieldPtr;
 

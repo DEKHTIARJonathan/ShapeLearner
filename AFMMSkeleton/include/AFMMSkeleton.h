@@ -14,8 +14,8 @@
 #include "FluxSkeleton/include/DivergenceSkeletonMaker.h"
 #include "SkelCompParams.h"
 #include "ShapeDiff.h"
-#include "dagmatcher/BasicUtils.h"
-#include "dagmatcher/SharedPtr.h"
+#include "BasicUtils.h"
+#include "SharedPtr.h"
 
 
 //typedef sg::DiscreteDivergenceSkeletonEdge sgDDSEdge;

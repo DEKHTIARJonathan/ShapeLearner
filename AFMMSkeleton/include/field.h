@@ -1,7 +1,6 @@
 #ifndef FIELD_H
 #define FIELD_H
 
-
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
@@ -11,7 +10,7 @@
 #include "../../glut-3.7.6-bin/GL/glut.h"
 #include <map>
 #include "genrl.h"
-#include "../../dagmatcher/BasicUtils.h"
+#include "BasicUtils.h"
 
 template <class T> class FIELD
 	{

@@ -34,7 +34,7 @@
 #define DEFINES_H
 
 #include <vector>
-#include "../../dagmatcher/BasicUtils.h"
+#include "BasicUtils.h"
 
 #define SQR(x) ((x)*(x))
 #define EUCSQDIST(x1,y1,x2,y2) (SQR(x1-x2) + SQR(y1-y2)) 
