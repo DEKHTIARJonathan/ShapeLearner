@@ -72,7 +72,7 @@ included in this distribution for full details.
 
 #include "SplineSmooth.h"
 
-#include "../../dagmatcher/BasicUtils.h"
+#include "BasicUtils.h"
 
 using namespace sg;
 

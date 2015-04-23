@@ -2,7 +2,7 @@
 #include "treeskel.h"
 #include "dqueue.h"
 #include "genrl.h"
-#include "../dagmatcher/BasicUtils.h"
+#include "BasicUtils.h"
 #include <math.h>
 
 using namespace std;

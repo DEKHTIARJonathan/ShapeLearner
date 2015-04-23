@@ -59,7 +59,7 @@ included in this distribution for full details.
 #include <vector>
 #include <algorithm>
 
-#include "../../dagmatcher/BasicUtils.h"
+#include "BasicUtils.h"
 
 using namespace sg;
 #include "NeighborhoodArray.cpp"

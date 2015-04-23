@@ -20,7 +20,7 @@
 
 #include <tools/connected.h>
 #include <CImg/CImg.h>
-#include <dagmatcher/BasicUtils.h>
+#include "BasicUtils.h"
 
 
 #define SKEL_TAU  20
