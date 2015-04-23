@@ -1,0 +1,5 @@
+# DOn't ignore anything
+!*
+
+# ...even if they are in subdirectories
+!*/

@@ -122,7 +122,6 @@
 #include "BasicTypes.h"
 #include "DirWalker.h"
 
-
 #include "HelperFunctions.h"
 #include "Exceptions.h"
 
@@ -145,7 +144,6 @@
 #include "CubicBezier.h"
 #include "PolyLineTLSApprox.h"
 #include "PolyBezierApprox.h"
-
 
 #include "SkeletalGraph.h"
 
