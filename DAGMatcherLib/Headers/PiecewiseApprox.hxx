@@ -225,13 +225,13 @@ double PiecewiseApprox<SEGMENT>::CompAcuteAngle(int seg1, int seg2) const
 
 	double s = (s2.p1.x - s1.p0.x) / (m_ymax - m_ymin);
 
-	std::cout << "disp('scaling: " << m_ymin << "," << m_ymax << "," << s << "');\n";
+	Logger::Log( "disp('scaling: " + m_ymin + "," + m_ymax + "," + s + "');", constants::LogCore);
 
 	//find vectors
 	POINT v1(s1.p0.x - s1.p1.x, (s1.p0.y - s1.p1.y) * s);
 	POINT v2(s2.p1.x - s2.p0.x, (s2.p1.y - s2.p0.y) * s);
 
-	std::cout << "disp('v1: " << v1 << " v2: " << v2 << "');\n";
+	Logger::Log( "disp('v1: " + v1 + " v2: " + v2 << "');", constants::LogCore);
 
 	// compute angle
 	return acos(v1.Dot(v2) / (v1.L2() * v2.L2())) * (180 / 3.14159265);

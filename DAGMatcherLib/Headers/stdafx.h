@@ -98,6 +98,9 @@
 
 /* ================ EXTERNAL LIBS ================ */
 
+#include "constants.h"
+#include "CLogger.h"
+
 #include "FluxSkeleton\include\Point.h"
 #include "FluxSkeleton\include\DDSGraphProject.h"
 #include "FluxSkeleton\include\sg.h"

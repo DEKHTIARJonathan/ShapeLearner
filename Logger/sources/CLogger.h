@@ -27,6 +27,7 @@
 #include <time.h>
 #include <string>
 #include <boost/thread/mutex.hpp>
+#include <boost/thread.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/date_time/posix_time/posix_time_io.hpp>
 #include <fstream>
@@ -56,7 +57,9 @@ public:
 	*	\param text : What do we want to log.
 	*	\param logFile : What log file do you aim ? See constants.h for values
 	*/
-	static volatile void Log (string text, unsigned int logFile = constants::LogExec);
+	static volatile void Log (string text, unsigned int logFile = constants::LogExec, const unsigned long threadID = Logger::getThreadId());
+
+	static const unsigned long getThreadId();
 
 private:
 	/*!
@@ -78,6 +81,8 @@ private:
     *	File stream for the Core Log File
     */
 	ofstream outstreamCore;
+
+	unsigned long mainThreadID;
 	
 	/*!
     *	Unique instance of the singleton. Static and Volatile var.

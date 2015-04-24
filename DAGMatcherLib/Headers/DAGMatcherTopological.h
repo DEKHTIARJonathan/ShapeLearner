@@ -32,7 +32,6 @@
 #ifndef __DAG_MATCHER_TOPOLOGICAL_H__
 #define __DAG_MATCHER_TOPOLOGICAL_H__
 
-
 namespace dml {
 /*!
 	Generic class for matching DAGs.

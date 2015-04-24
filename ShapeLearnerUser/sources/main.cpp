@@ -23,7 +23,7 @@
 #include "CmdLine.h"
 #include "graphDB.h"
 #include "StandardException.h"
-//#include "ShapeLearner.h"
+#include "ShapeLearner.h"
 
 using namespace std;
 
@@ -69,16 +69,28 @@ int main(int argc, char **argv)
 		if (cmdLine.HasSwitch("--generate")){
 			vector<const string> imgVect;
 
-			imgVect.push_back("image1.img");
-			imgVect.push_back("image2.img");
-			imgVect.push_back("image3.img");
-			imgVect.push_back("image4.img");
-			imgVect.push_back("image5.img");
-			imgVect.push_back("image6.img");
-			imgVect.push_back("image7.img");
-			imgVect.push_back("image8.img");
-			imgVect.push_back("image9.img");
-			//ShapeLearner::createShockGraph(imgVect);
+			imgVect.push_back("img/rod1.ppm");
+			imgVect.push_back("img/rod2.ppm");
+			imgVect.push_back("img/rod3.ppm");
+			imgVect.push_back("img/rod4.ppm");
+			imgVect.push_back("img/rod5.ppm");
+			imgVect.push_back("img/rod6.ppm");
+			imgVect.push_back("img/rod7.ppm");
+			imgVect.push_back("img/rod8.ppm");
+			imgVect.push_back("img/rod9.ppm");
+			imgVect.push_back("img/rod10.ppm");
+			imgVect.push_back("img/rod11.ppm");
+			imgVect.push_back("img/rod12.ppm");
+			imgVect.push_back("img/rod13.ppm");
+			imgVect.push_back("img/rod13.ppm");
+			imgVect.push_back("img/rod14.ppm");
+			imgVect.push_back("img/rod15.ppm");
+			imgVect.push_back("img/rod16.ppm");
+			imgVect.push_back("img/rod17.ppm");
+			imgVect.push_back("img/rod18.ppm");
+			imgVect.push_back("img/rod19.ppm");
+			imgVect.push_back("img/rod20.ppm");
+			ShapeLearner::createShockGraph(imgVect);
 		}
 		else
 			Logger::Log("No action specified", constants::LogError);

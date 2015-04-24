@@ -92,13 +92,13 @@ bool SkeletalGraph::CreateFluxSkeleton(const char* szPPMFileName, const Skeletal
 {
 	using namespace sg;
 
-	cout << endl << "Reading " << szPPMFileName << "... " << flush;
+	Logger::Log("Reading " + std::string(szPPMFileName) + "... ", constants::LogCore);
 
 	cimg_library::CImg<unsigned char> image(szPPMFileName);
 
 	if (image.dimx() == 0 && image.dimy() == 0)
 	{
-		cerr << "Can't open " << szPPMFileName << endl;
+		Logger::Log("Can't open " + std::string(szPPMFileName) + "... ", constants::LogError);
 		return NULL;
 	}
 
@@ -111,7 +111,7 @@ bool SkeletalGraph::CreateFluxSkeleton(const char* szPPMFileName, const Skeletal
 		for (x=0; x < image.dimx(); x++)
 			ssm(x,y) = (image(x, y) != 0);
 
-	cout << "Computing flux skeleton..." << flush;
+	Logger::Log("Computing flux skeleton...", constants::LogCore);
 
 	// The shape contour is being made here
 	Shape* pShape = ssm.getShape(); // it's deleted by DivergenceSkeletonMaker

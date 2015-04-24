@@ -34,12 +34,6 @@ boost::threadpool::pool ShapeLearner::Pool (constants::nbMaxThread);
 *	\Brief Local Function used to get the ThreadID.
 */
 
-const unsigned long getThreadId(){
-    std::string threadId = boost::lexical_cast<std::string>(boost::this_thread::get_id());
-    unsigned long threadNumber = 0;
-    sscanf(threadId.c_str(), "%lx", &threadNumber);
-    return threadNumber;
-}
 
 void ShapeLearner::createShockGraph (const vector<const string> &imgVect) throw(StandardExcept){	
 	//Random Init
@@ -54,8 +48,7 @@ void ShapeLearner::createShockGraph (const vector<const string> &imgVect) throw(
 }
 
 bool ShapeLearner::createShockGraphWorker (const string& imgPath) throw(StandardExcept){
-	const unsigned long idThread = getThreadId();
-	shockGraphsGenerator worker(imgPath, idThread);
+	shockGraphsGenerator worker(imgPath);
 	worker.taskExecute();
 	return true;
 }

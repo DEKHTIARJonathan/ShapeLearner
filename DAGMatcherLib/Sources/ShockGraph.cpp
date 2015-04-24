@@ -379,10 +379,7 @@ SGNode* ShockGraph::GroupShockPoints(leda_node u, SGNode* pNode)
 		m_compParams.dMinSlope, 10, m_compParams.dMaxYDiff);
 
 	if (DAG::IsDbgMode())
-	{
-		cout << "disp('Fitting node: " << pNode->GetNodeLbl() << " in " << GetDAGLbl() << "');\n";
-		poly.SetDbgMode(true); // outputs matlab data in dbg mode
-	}
+		Logger::Log("disp('Fitting node: " + (std::string)pNode->GetNodeLbl() + " in " + (std::string)GetDAGLbl() + "');\n", constants::LogCore);
 
 	poly.Fit(data);
 
@@ -417,10 +414,7 @@ SGNode* ShockGraph::GroupShockPoints(leda_node u, SGNode* pNode)
 				double mr = fabs(m1 - m0) / fabs((fabs(m0) >= fabs(m1)) ? m0 : m1);
 
 				if (DAG::IsDbgMode())
-            	{
-            		cout << "disp('Acc change: " << mr << ", Max:"
-						<< m_compParams.dMaxAccelChg << "');\n";
-            	}
+            		Logger::Log("disp('Acc change: " + to_string((long double) mr ) + ", Max:" +  to_string((long double) m_compParams.dMaxAccelChg ) + "');", constants::LogCore);
 
 				if (mr < m_compParams.dMaxAccelChg)
 					continue;
@@ -819,7 +813,7 @@ bool ShockGraph::ComputeSGFromDDSGraph(sg::DDSGraph* sk)
 
 	ComputeDerivedValues();
 
-	cerr << "(" << GetObjName() << ", " << GetViewNumber() << ") done!" << flush;
+	Logger::Log ( "Computation for (" + std::string(GetObjName().c_str()) + " ,  " + to_string((_Longlong) GetViewNumber()) + ") is over!", constants::LogCore);
 
 	return true;
 }

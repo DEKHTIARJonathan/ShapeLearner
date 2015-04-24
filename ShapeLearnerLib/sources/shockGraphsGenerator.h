@@ -54,12 +54,17 @@ public:
 
 	DAGMatcher::MatchParams m_matchParams;
 
-	shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum);
+	shockGraphsGenerator(const string& _imgPath);
 	bool taskExecute();
+
+
+	
+
+	
+
 
 private:
 	const string imgPath;
-	const unsigned long taskNum;
 	ShapeMatchingParams m_matchInfo;
 	ShapeRepresentationParams m_shapeInfo;
 
@@ -75,9 +80,8 @@ private:
 
 	LPCSTR m_target, m_objName, m_delobj, m_createObj, m_viewDag, m_szMatrixFileName;
 
-public:
+	void parametersInit ();
 	
-
 	/*!
 	*	\brief Computes a shock graph from the given ppm file.
 	*	\param szFileName : PPM file name
@@ -90,7 +94,6 @@ public:
 	void processFile(bool bAsyncProcessing);
 	bool AddBumpsAndNotches(dml::ImageInfo* pImgInfo);
 
-	void variableInit ();
 };
 
 #endif //_Shock_Graphs_Generator_

@@ -13,12 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ShapeLearner">
+      <UniqueIdentifier>{130f50cb-6615-4a99-ac81-b727ab9945ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShockGraphsGenerator">
+      <UniqueIdentifier>{3a53e98c-7ae1-4f70-b401-4f25b1ed22e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\infoStructures.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\shockGraphsGenerator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="sources\stdafx.h">
@@ -27,19 +30,22 @@
     <ClInclude Include="sources\allHeaders.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="sources\shockGraphsGenerator.h">
+      <Filter>ShockGraphsGenerator</Filter>
+    </ClInclude>
     <ClInclude Include="sources\ShapeLearner.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>ShapeLearner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\stdafx.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="sources\ShapeLearner.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="sources\shockGraphsGenerator.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>ShockGraphsGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\ShapeLearner.cpp">
+      <Filter>ShapeLearner</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -15,29 +15,24 @@
 #define INFINITY	1000000
 #endif
 
-#define ShowStatus(M) std::cout << std::string(M) << std::endl
+#define ShowStatus(M) Logger::Log(std::string(M), constants::LogCore);
 
-#define ShowStatus1(M,A) std::cout << std::string(M) << \
-	" " << std::string(A) << std::endl
+#define ShowStatus1(M,A) Logger::Log(std::string(M) + " " + std::string(A), constants::LogCore);
 
-#define ShowStatus2(M,N,S) std::cout << std::string(M) << " " \
-	<< N << " " << std::string(S) << std::endl
 
-#define ShowMsg(M) std::cout << std::endl << std::string(M) << std::endl
-#define ShowUsage(M) std::cerr << "Usage: " << std::string(M) << std::endl
+#define ShowStatus2(M,N,S) Logger::Log(std::string(M) + " " + to_string((long double) N) + " " + std::string(S), constants::LogCore);
 
-#define ShowError(M) std::cerr << "Error: " << std::string(M) << std::endl
-#define ShowError1(M,A) std::cerr << "Error: " << std::string(M) \
-	<< " " << std::string(A) << std::endl
+#define ShowMsg(M) Logger::Log(std::string(M), constants::LogCore);
+#define ShowUsage(M) Logger::Log("Usage: " + std::string(M), constants::LogError);
 
-#define ShowErrorAndNumber(M,N) std::cerr << "Error: " << std::string(M) \
-	<< " " << N << std::endl
+#define ShowError(M) Logger::Log("Error: " + std::string(M), constants::LogError);
+#define ShowError1(M,A) Logger::Log("Error: " + std::string(M) + " " + std::string(A), constants::LogError);
 
-#define ShowOpenFileError(F) std::cerr << "Error: Cannot open file '" \
-	<< std::string(F) << "'" << std::endl
+#define ShowErrorAndNumber(M,N) Logger::Log("Error: " + std::string(M) + " " + to_string((long double) N), constants::LogError);
 
-#define ShowCreateFileError(F) std::cerr << "Error: Cannot create file '" \
-	<< std::string(F) << "'" << std::endl
+#define ShowOpenFileError(F) Logger::Log("Error: Cannot open file '" + std::string(F) + "'", constants::LogError);
+
+#define ShowCreateFileError(F) Logger::Log("Error: Cannot create file '" + std::string(F) + "'", constants::LogError);
 
 #define MIN(X, Y) ( (X) <= (Y) ? (X):(Y) )
 #define MAX(X, Y) ( (X) >= (Y) ? (X):(Y) )

@@ -25,27 +25,36 @@ using namespace boost::posix_time;
 volatile Logger Logger::_inst;
 boost::mutex Logger::mutexLogger;
 
-volatile void Logger::Log(string text, unsigned int logFile){
+volatile void Logger::Log(string text, unsigned int logFile, const unsigned long threadID){
 	if (logFile > 4 || logFile < 1){
-		Log("Call to "+ (string) __FUNCTION__ +" // logFile ("+to_string((_ULonglong)logFile)+") doesn't belong to [1,4]", constants::LogError);
+		Log("Call to "+ (string) __FUNCTION__ +" // logFile ("+to_string((_ULonglong)logFile)+") doesn't belong to [1,4]", constants::LogError, threadID);
 		throw StandardExcept((string)__FUNCTION__, "logFile ("+to_string((_ULonglong)logFile)+") doesn't belong to [1,4]");
 	}
 
+	string output;
+
+
 	Logger* Log = const_cast<Logger*>(&_inst);
+
 	mutexLogger.lock();
 	{
+		if (threadID != Log->mainThreadID)
+			output = "Thread " + to_string((_ULonglong) threadID) + " : " + text;
+		else
+			output = "Main Thread : " + text;
+
 		switch(logFile){
 		case constants::LogDB:
-			Log->writeDB(text);
+			Log->writeDB(output);
 			break;
 		case constants::LogCore:
-			Log->writeCore(text);
+			Log->writeCore(output);
 			break;
 		case constants::LogExec:
-			Log->writeExec(text);
+			Log->writeExec(output);
 			break;
 		case constants::LogError:
-			Log->writeError(text);
+			Log->writeError(output);
 			break;
 		}
 		
@@ -103,18 +112,26 @@ string Logger::getTime() const{
 }
 
 Logger::Logger(){
+	mainThreadID = getThreadId();
 	outstreamDB.open("ShapeLearner.DB.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
 	outstreamError.open("ShapeLearner.Error.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
 	outstreamExec.open("ShapeLearner.Exec.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
 	outstreamCore.open("ShapeLearner.Core.log", std::ofstream::out | std::ofstream::app); // Insert at the end of the file.
-	writeExec("Application has been started successfully");
+	writeExec("Main Thread : Application has been started successfully");
 }
 
 Logger::~Logger(){
-	writeExec("Application has been shut down successfully");
+	writeExec("Main Thread : Application has been shut down successfully");
 	outstreamDB.close();
 	outstreamError.close();
 	outstreamExec.close();
 	outstreamCore.close();
+}
+
+const unsigned long Logger::getThreadId(){
+    std::string threadId = boost::lexical_cast<std::string>(boost::this_thread::get_id());
+    unsigned long threadNumber = 0;
+    sscanf(threadId.c_str(), "%lx", &threadNumber);
+    return threadNumber;
 }
 

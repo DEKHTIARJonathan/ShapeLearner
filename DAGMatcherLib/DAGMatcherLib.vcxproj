@@ -54,7 +54,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)..\;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\ShapeLearnerProject\include;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)..\;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <IntrinsicFunctions>false</IntrinsicFunctions>
@@ -83,7 +83,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)..\;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\ShapeLearnerProject\include;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)..\;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>true</WholeProgramOptimization>

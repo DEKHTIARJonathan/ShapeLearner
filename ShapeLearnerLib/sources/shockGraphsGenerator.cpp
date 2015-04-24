@@ -51,11 +51,11 @@ string genFileName(const unsigned int len = 10)
     return rslt+".ppm";
 }
 
- shockGraphsGenerator::shockGraphsGenerator(const string& _imgPath, const unsigned long _taskNum) : imgPath(_imgPath), taskNum(_taskNum) {
-	variableInit();
+ shockGraphsGenerator::shockGraphsGenerator(const string& _imgPath) : imgPath(_imgPath){
+	parametersInit();
 }
 
-void shockGraphsGenerator::variableInit(){
+void shockGraphsGenerator::parametersInit(){
 	
 	// =========== Parameters for Experiment =================== //
 
@@ -112,7 +112,7 @@ void shockGraphsGenerator::variableInit(){
 	m_matchParams.nMaxNumSolSets = 1; //!< Maximum number of solutions sets
 	m_matchParams.nMaxSolSetsPerIter = 1; //!< Maximum number of new solutions sets per iterations
 
-	m_matchParams.dSlopeSigma = 0.14999999999999999; //!< Slope sigma for bone graphs
+	m_matchParams.dSlopeSigma = 0.15; //!< Slope sigma for bone graphs
 	m_matchParams.dBGWrongSidePen = 0.6;  //!< Wrong side penalty for bone graphs
 	m_matchParams.dBGPositionSigma = 0;  //!< Wrong side/position penalty rate for bone graphs (0=linear decay)
 
@@ -240,7 +240,7 @@ bool shockGraphsGenerator::taskExecute()
 {
 	Logger::Log("Adding object ("+imgPath+")to database...", constants::LogCore);
 
-	//processFile(m_matchInfo.asyncCompu != 0);
+	processFile(m_matchInfo.asyncCompu != 0);
 
 	Logger::Log("Object ("+imgPath+") has been added to database...", constants::LogCore);
 
