@@ -21,6 +21,7 @@
 #include "allHeaders.h"
 
 using namespace std;
+using namespace graphDBLib;
 
 GraphClass::GraphClass(string name, bool isDirect, bool isAcyclic) : graphClassName(name), directGraph(isDirect), acyclicGraph(isAcyclic) {
 	saveInDB();

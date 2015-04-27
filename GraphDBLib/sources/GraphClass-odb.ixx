@@ -8,15 +8,15 @@ namespace odb
   //
 
   inline
-  access::object_traits< ::GraphClass >::id_type
-  access::object_traits< ::GraphClass >::
+  access::object_traits< ::graphDBLib::GraphClass >::id_type
+  access::object_traits< ::graphDBLib::GraphClass >::
   id (const object_type& o)
   {
     return o.graphClassName;
   }
 
   inline
-  void access::object_traits< ::GraphClass >::
+  void access::object_traits< ::graphDBLib::GraphClass >::
   callback (database& db, object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -25,7 +25,7 @@ namespace odb
   }
 
   inline
-  void access::object_traits< ::GraphClass >::
+  void access::object_traits< ::graphDBLib::GraphClass >::
   callback (database& db, const object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -40,7 +40,7 @@ namespace odb
   //
 
   inline
-  void access::object_traits_impl< ::GraphClass, id_pgsql >::
+  void access::object_traits_impl< ::graphDBLib::GraphClass, id_pgsql >::
   erase (database& db, const object_type& obj)
   {
     callback (db, obj, callback_event::pre_erase);
@@ -49,7 +49,7 @@ namespace odb
   }
 
   inline
-  void access::object_traits_impl< ::GraphClass, id_pgsql >::
+  void access::object_traits_impl< ::graphDBLib::GraphClass, id_pgsql >::
   load_ (statements_type& sts,
          object_type& obj,
          bool)

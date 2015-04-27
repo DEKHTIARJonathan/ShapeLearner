@@ -17,12 +17,11 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
- 
 #include "stdafx.h"
 #include "allHeaders.h"
 
 using namespace std;
-
+using namespace graphDBLib;
 
 /* *******************************************************************
 *                             Object MAPS                            *
@@ -198,7 +197,6 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade) thr
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<Node> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
 
 	if(cascade){
-
 		/**************** Edge Cascade Deleting ****************/
 		vector <unsigned long> edgeVect = obj->getEdges();
 		map<unsigned long, boost::shared_ptr<Edge>>::iterator it1;
@@ -212,9 +210,9 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade) thr
 		vector <unsigned long> pointVect = obj->getPoints();
 		map<unsigned long, boost::shared_ptr<Point>>::iterator it2;
 
-		for(unsigned int i = 0; i < pointVect.size(); i++){			
+		for(unsigned int i = 0; i < pointVect.size(); i++){
 			if(it2 = PointMap.find(pointVect[i]), it2 != PointMap.end())
-				rslt &= removeObjectFromMap(it2->second);		// The cascade parameter is useless for this class	
+				rslt &= removeObjectFromMap(it2->second);		// The cascade parameter is useless for this class
 		}
 	}
 
@@ -228,14 +226,13 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade) th
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<Graph> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
 
 	if(cascade){
-
 		/**************** Node Cascade Deleting ****************/
 		vector <unsigned long> nodeVect = obj->getNodes();
 		map<unsigned long, boost::shared_ptr<Node>>::iterator it1;
 
 		for(unsigned int i = 0; i < nodeVect.size(); i++){
 			if(it1 = NodeMap.find(nodeVect[i]), it1 != NodeMap.end())
-				rslt &= removeObjectFromMap(it1->second, false); // No need to act on cascade, we will manage it at this level.		
+				rslt &= removeObjectFromMap(it1->second, false); // No need to act on cascade, we will manage it at this level.
 		}
 
 		/**************** Edge Cascade Deleting ****************/
@@ -253,7 +250,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade) th
 
 		for(unsigned int i = 0; i < pointVect.size(); i++){
 			if(it3 = PointMap.find(pointVect[i]), it3 != PointMap.end())
-				rslt &= removeObjectFromMap(it3->second);		// The cascade parameter is useless for this class	
+				rslt &= removeObjectFromMap(it3->second);		// The cascade parameter is useless for this class
 		}
 	}
 	return rslt;
@@ -272,7 +269,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascad
 
 		for(unsigned int i = 0; i < graphVect.size(); i++){
 			if(it = GraphMap.find(graphVect[i]), it != GraphMap.end())
-				rslt &= removeObjectFromMap(it->second, true);		
+				rslt &= removeObjectFromMap(it->second, true);
 		}
 	}
 
@@ -292,7 +289,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool casca
 
 		for(unsigned int i = 0; i < graphVect.size(); i++){
 			if(it = GraphMap.find(graphVect[i]), it != GraphMap.end())
-				rslt &= removeObjectFromMap(it->second, true);		
+				rslt &= removeObjectFromMap(it->second, true);
 		}
 	}
 

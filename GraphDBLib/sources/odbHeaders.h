@@ -38,7 +38,6 @@
 	#include <boost/thread/mutex.hpp>
 	#include <boost/smart_ptr.hpp>
 
-	#include "constants.h"
 	#include "StandardException.h"
 	
 	#include <odb/core.hxx>

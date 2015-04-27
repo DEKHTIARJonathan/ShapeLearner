@@ -45,17 +45,17 @@ namespace odb
   // Edge
   //
   template <>
-  struct class_traits< ::Edge >
+  struct class_traits< ::graphDBLib::Edge >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::Edge >
+  class access::object_traits< ::graphDBLib::Edge >
   {
     public:
-    typedef ::Edge object_type;
-    typedef ::Edge* pointer_type;
+    typedef ::graphDBLib::Edge object_type;
+    typedef ::graphDBLib::Edge* pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -87,17 +87,17 @@ namespace odb
   // EdgeIdViewBySource
   //
   template <>
-  struct class_traits< ::EdgeIdViewBySource >
+  struct class_traits< ::graphDBLib::EdgeIdViewBySource >
   {
     static const class_kind kind = class_view;
   };
 
   template <>
-  class access::view_traits< ::EdgeIdViewBySource >
+  class access::view_traits< ::graphDBLib::EdgeIdViewBySource >
   {
     public:
-    typedef ::EdgeIdViewBySource view_type;
-    typedef ::EdgeIdViewBySource* pointer_type;
+    typedef ::graphDBLib::EdgeIdViewBySource view_type;
+    typedef ::graphDBLib::EdgeIdViewBySource* pointer_type;
 
     static void
     callback (database&, view_type&, callback_event);
@@ -106,17 +106,17 @@ namespace odb
   // EdgeIdViewByTarget
   //
   template <>
-  struct class_traits< ::EdgeIdViewByTarget >
+  struct class_traits< ::graphDBLib::EdgeIdViewByTarget >
   {
     static const class_kind kind = class_view;
   };
 
   template <>
-  class access::view_traits< ::EdgeIdViewByTarget >
+  class access::view_traits< ::graphDBLib::EdgeIdViewByTarget >
   {
     public:
-    typedef ::EdgeIdViewByTarget view_type;
-    typedef ::EdgeIdViewByTarget* pointer_type;
+    typedef ::graphDBLib::EdgeIdViewByTarget view_type;
+    typedef ::graphDBLib::EdgeIdViewByTarget* pointer_type;
 
     static void
     callback (database&, view_type&, callback_event);
@@ -125,17 +125,17 @@ namespace odb
   // EdgeIdViewByGraph
   //
   template <>
-  struct class_traits< ::EdgeIdViewByGraph >
+  struct class_traits< ::graphDBLib::EdgeIdViewByGraph >
   {
     static const class_kind kind = class_view;
   };
 
   template <>
-  class access::view_traits< ::EdgeIdViewByGraph >
+  class access::view_traits< ::graphDBLib::EdgeIdViewByGraph >
   {
     public:
-    typedef ::EdgeIdViewByGraph view_type;
-    typedef ::EdgeIdViewByGraph* pointer_type;
+    typedef ::graphDBLib::EdgeIdViewByGraph view_type;
+    typedef ::graphDBLib::EdgeIdViewByGraph* pointer_type;
 
     static void
     callback (database&, view_type&, callback_event);
@@ -155,7 +155,7 @@ namespace odb
   // Edge
   //
   template <typename A>
-  struct pointer_query_columns< ::Edge, id_pgsql, A >
+  struct pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >
   {
     // idEdge
     //
@@ -219,33 +219,33 @@ namespace odb
   };
 
   template <typename A>
-  const typename pointer_query_columns< ::Edge, id_pgsql, A >::idEdge_type_
-  pointer_query_columns< ::Edge, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::idEdge_type_
+  pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   idEdge (A::table_name, "\"idEdge\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Edge, id_pgsql, A >::weight_type_
-  pointer_query_columns< ::Edge, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::weight_type_
+  pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   weight (A::table_name, "\"weight\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Edge, id_pgsql, A >::source_type_
-  pointer_query_columns< ::Edge, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::source_type_
+  pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   source (A::table_name, "\"source\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Edge, id_pgsql, A >::target_type_
-  pointer_query_columns< ::Edge, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::target_type_
+  pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   target (A::table_name, "\"target\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Edge, id_pgsql, A >::refGraph_type_
-  pointer_query_columns< ::Edge, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::refGraph_type_
+  pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
 
   template <>
-  class access::object_traits_impl< ::Edge, id_pgsql >:
-    public access::object_traits< ::Edge >
+  class access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >:
+    public access::object_traits< ::graphDBLib::Edge >
   {
     public:
     struct id_image_type
@@ -405,16 +405,16 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::Edge, id_common >:
-    public access::object_traits_impl< ::Edge, id_pgsql >
+  class access::object_traits_impl< ::graphDBLib::Edge, id_common >:
+    public access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >
   {
   };
 
   // EdgeIdViewBySource
   //
   template <>
-  class access::view_traits_impl< ::EdgeIdViewBySource, id_pgsql >:
-    public access::view_traits< ::EdgeIdViewBySource >
+  class access::view_traits_impl< ::graphDBLib::EdgeIdViewBySource, id_pgsql >:
+    public access::view_traits< ::graphDBLib::EdgeIdViewBySource >
   {
     public:
     struct image_type
@@ -465,16 +465,16 @@ namespace odb
   };
 
   template <>
-  class access::view_traits_impl< ::EdgeIdViewBySource, id_common >:
-    public access::view_traits_impl< ::EdgeIdViewBySource, id_pgsql >
+  class access::view_traits_impl< ::graphDBLib::EdgeIdViewBySource, id_common >:
+    public access::view_traits_impl< ::graphDBLib::EdgeIdViewBySource, id_pgsql >
   {
   };
 
   // EdgeIdViewByTarget
   //
   template <>
-  class access::view_traits_impl< ::EdgeIdViewByTarget, id_pgsql >:
-    public access::view_traits< ::EdgeIdViewByTarget >
+  class access::view_traits_impl< ::graphDBLib::EdgeIdViewByTarget, id_pgsql >:
+    public access::view_traits< ::graphDBLib::EdgeIdViewByTarget >
   {
     public:
     struct image_type
@@ -525,16 +525,16 @@ namespace odb
   };
 
   template <>
-  class access::view_traits_impl< ::EdgeIdViewByTarget, id_common >:
-    public access::view_traits_impl< ::EdgeIdViewByTarget, id_pgsql >
+  class access::view_traits_impl< ::graphDBLib::EdgeIdViewByTarget, id_common >:
+    public access::view_traits_impl< ::graphDBLib::EdgeIdViewByTarget, id_pgsql >
   {
   };
 
   // EdgeIdViewByGraph
   //
   template <>
-  class access::view_traits_impl< ::EdgeIdViewByGraph, id_pgsql >:
-    public access::view_traits< ::EdgeIdViewByGraph >
+  class access::view_traits_impl< ::graphDBLib::EdgeIdViewByGraph, id_pgsql >:
+    public access::view_traits< ::graphDBLib::EdgeIdViewByGraph >
   {
     public:
     struct image_type
@@ -585,8 +585,8 @@ namespace odb
   };
 
   template <>
-  class access::view_traits_impl< ::EdgeIdViewByGraph, id_common >:
-    public access::view_traits_impl< ::EdgeIdViewByGraph, id_pgsql >
+  class access::view_traits_impl< ::graphDBLib::EdgeIdViewByGraph, id_common >:
+    public access::view_traits_impl< ::graphDBLib::EdgeIdViewByGraph, id_pgsql >
   {
   };
 
@@ -594,65 +594,65 @@ namespace odb
   //
   template <>
   struct alias_traits<
-    ::Node,
+    ::graphDBLib::Node,
     id_pgsql,
-    access::object_traits_impl< ::Edge, id_pgsql >::source_tag>
+    access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::source_tag>
   {
     static const char table_name[];
   };
 
   template <>
   struct alias_traits<
-    ::Node,
+    ::graphDBLib::Node,
     id_pgsql,
-    access::object_traits_impl< ::Edge, id_pgsql >::target_tag>
+    access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::target_tag>
   {
     static const char table_name[];
   };
 
   template <>
   struct alias_traits<
-    ::Graph,
+    ::graphDBLib::Graph,
     id_pgsql,
-    access::object_traits_impl< ::Edge, id_pgsql >::refGraph_tag>
+    access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::refGraph_tag>
   {
     static const char table_name[];
   };
 
   template <>
-  struct query_columns_base< ::Edge, id_pgsql >
+  struct query_columns_base< ::graphDBLib::Edge, id_pgsql >
   {
     // source
     //
     typedef
     odb::alias_traits<
-      ::Node,
+      ::graphDBLib::Node,
       id_pgsql,
-      access::object_traits_impl< ::Edge, id_pgsql >::source_tag>
+      access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::source_tag>
     source_alias_;
 
     // target
     //
     typedef
     odb::alias_traits<
-      ::Node,
+      ::graphDBLib::Node,
       id_pgsql,
-      access::object_traits_impl< ::Edge, id_pgsql >::target_tag>
+      access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::target_tag>
     target_alias_;
 
     // refGraph
     //
     typedef
     odb::alias_traits<
-      ::Graph,
+      ::graphDBLib::Graph,
       id_pgsql,
-      access::object_traits_impl< ::Edge, id_pgsql >::refGraph_tag>
+      access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::refGraph_tag>
     refGraph_alias_;
   };
 
   template <typename A>
-  struct query_columns< ::Edge, id_pgsql, A >:
-    query_columns_base< ::Edge, id_pgsql >
+  struct query_columns< ::graphDBLib::Edge, id_pgsql, A >:
+    query_columns_base< ::graphDBLib::Edge, id_pgsql >
   {
     // idEdge
     //
@@ -691,7 +691,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::Node,
+        ::graphDBLib::Node,
         id_pgsql,
         source_alias_ > >
     source_pointer_type_;
@@ -719,7 +719,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::Node,
+        ::graphDBLib::Node,
         id_pgsql,
         target_alias_ > >
     target_pointer_type_;
@@ -747,7 +747,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::Graph,
+        ::graphDBLib::Graph,
         id_pgsql,
         refGraph_alias_ > >
     refGraph_pointer_type_;
@@ -764,57 +764,57 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::Edge, id_pgsql, A >::idEdge_type_
-  query_columns< ::Edge, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::idEdge_type_
+  query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   idEdge (A::table_name, "\"idEdge\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Edge, id_pgsql, A >::weight_type_
-  query_columns< ::Edge, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::weight_type_
+  query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   weight (A::table_name, "\"weight\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Edge, id_pgsql, A >::source_type_
-  query_columns< ::Edge, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::source_type_
+  query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   source (A::table_name, "\"source\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Edge, id_pgsql, A >::target_type_
-  query_columns< ::Edge, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::target_type_
+  query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   target (A::table_name, "\"target\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Edge, id_pgsql, A >::refGraph_type_
-  query_columns< ::Edge, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::refGraph_type_
+  query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
 
   // EdgeIdViewBySource
   //
-  struct access::view_traits_impl< ::EdgeIdViewBySource, id_pgsql >::query_columns:
+  struct access::view_traits_impl< ::graphDBLib::EdgeIdViewBySource, id_pgsql >::query_columns:
     odb::pointer_query_columns<
-      ::Edge,
+      ::graphDBLib::Edge,
       id_pgsql,
-      odb::access::object_traits_impl< ::Edge, id_pgsql > >
+      odb::access::object_traits_impl< ::graphDBLib::Edge, id_pgsql > >
   {
   };
 
   // EdgeIdViewByTarget
   //
-  struct access::view_traits_impl< ::EdgeIdViewByTarget, id_pgsql >::query_columns:
+  struct access::view_traits_impl< ::graphDBLib::EdgeIdViewByTarget, id_pgsql >::query_columns:
     odb::pointer_query_columns<
-      ::Edge,
+      ::graphDBLib::Edge,
       id_pgsql,
-      odb::access::object_traits_impl< ::Edge, id_pgsql > >
+      odb::access::object_traits_impl< ::graphDBLib::Edge, id_pgsql > >
   {
   };
 
   // EdgeIdViewByGraph
   //
-  struct access::view_traits_impl< ::EdgeIdViewByGraph, id_pgsql >::query_columns:
+  struct access::view_traits_impl< ::graphDBLib::EdgeIdViewByGraph, id_pgsql >::query_columns:
     odb::pointer_query_columns<
-      ::Edge,
+      ::graphDBLib::Edge,
       id_pgsql,
-      odb::access::object_traits_impl< ::Edge, id_pgsql > >
+      odb::access::object_traits_impl< ::graphDBLib::Edge, id_pgsql > >
   {
   };
 }

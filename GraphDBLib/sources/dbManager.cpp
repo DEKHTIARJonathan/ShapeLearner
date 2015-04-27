@@ -23,6 +23,7 @@
 
 using namespace std;
 using namespace odb::core;
+using namespace graphDBLib;
 
 /* *******************************************************************
 *                            DB Requests                             *
@@ -125,7 +126,7 @@ void DatabaseManager::Interface::openDatabase(const string &dbUser, const string
 		Logger::Log("Opening Connection to the Database.", constants::LogDB);
 		database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
 		database->tracer(appliTracer);
-		
+
 		if (dbInit.compare("") && !initDB(dbInit))
 			throw StandardExcept((string)__FUNCTION__,"Erreur lors de l'initialisation de la BDD");
 	}

@@ -21,6 +21,7 @@
 #include "allHeaders.h"
 
 using namespace std;
+using namespace graphDBLib;
 
 ObjectClass::ObjectClass(string name) : objectClassName(name) {
 	GraphDB::ObjectInterface::saveObject(*this);

@@ -21,6 +21,7 @@
 #include "allHeaders.h"
 
 using namespace std;
+using namespace graphDBLib;
 
 Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index, unsigned long _level, unsigned long _mass, unsigned long _type, string _label) :
 	refGraph(_refGraph),
@@ -34,7 +35,6 @@ Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index, unsigned long
 		idNode = saveInDB();
 		Logger::Log("New Object Instanciated : Node("+ to_string((_ULonglong)getKey())+")");
 	}
-
 
 void Node::setIndex(const unsigned long _index) {
 	index = _index;
@@ -80,7 +80,7 @@ unsigned long Node::saveInDB(){
 boost::weak_ptr<Graph> Node::getParentGraph(){
 	if(refGraph.expired())
 		refGraph.swap(odb::boost::lazy_weak_ptr<Graph>(GraphDB::CommonInterface::getGraph(refGraph.object_id<Graph>())));
-	return refGraph.get_eager();	
+	return refGraph.get_eager();
 }
 
 vector<unsigned long> Node::getEdgesBySource(){
@@ -98,7 +98,7 @@ vector<unsigned long> Node::getEdges(){
 	rslt.reserve( rslt1.size() + rslt2.size() );
 	rslt.insert( rslt.end(), rslt1.begin(), rslt1.end() );
 	rslt.insert( rslt.end(), rslt2.begin(), rslt2.end() );
-	
+
 	return rslt;
 }
 

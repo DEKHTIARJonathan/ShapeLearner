@@ -45,17 +45,17 @@ namespace odb
   // Node
   //
   template <>
-  struct class_traits< ::Node >
+  struct class_traits< ::graphDBLib::Node >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::Node >
+  class access::object_traits< ::graphDBLib::Node >
   {
     public:
-    typedef ::Node object_type;
-    typedef ::Node* pointer_type;
+    typedef ::graphDBLib::Node object_type;
+    typedef ::graphDBLib::Node* pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -87,17 +87,17 @@ namespace odb
   // NodeIdViewByGraph
   //
   template <>
-  struct class_traits< ::NodeIdViewByGraph >
+  struct class_traits< ::graphDBLib::NodeIdViewByGraph >
   {
     static const class_kind kind = class_view;
   };
 
   template <>
-  class access::view_traits< ::NodeIdViewByGraph >
+  class access::view_traits< ::graphDBLib::NodeIdViewByGraph >
   {
     public:
-    typedef ::NodeIdViewByGraph view_type;
-    typedef ::NodeIdViewByGraph* pointer_type;
+    typedef ::graphDBLib::NodeIdViewByGraph view_type;
+    typedef ::graphDBLib::NodeIdViewByGraph* pointer_type;
 
     static void
     callback (database&, view_type&, callback_event);
@@ -117,7 +117,7 @@ namespace odb
   // Node
   //
   template <typename A>
-  struct pointer_query_columns< ::Node, id_pgsql, A >
+  struct pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >
   {
     // idNode
     //
@@ -205,43 +205,43 @@ namespace odb
   };
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::idNode_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::idNode_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   idNode (A::table_name, "\"idNode\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::index_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::index_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   index (A::table_name, "\"index\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::level_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::level_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   level (A::table_name, "\"level\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::mass_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::mass_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   mass (A::table_name, "\"mass\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::type_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::type_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   type (A::table_name, "\"type\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::label_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::label_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   label (A::table_name, "\"label\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::Node, id_pgsql, A >::refGraph_type_
-  pointer_query_columns< ::Node, id_pgsql, A >::
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::refGraph_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
 
   template <>
-  class access::object_traits_impl< ::Node, id_pgsql >:
-    public access::object_traits< ::Node >
+  class access::object_traits_impl< ::graphDBLib::Node, id_pgsql >:
+    public access::object_traits< ::graphDBLib::Node >
   {
     public:
     struct id_image_type
@@ -410,16 +410,16 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::Node, id_common >:
-    public access::object_traits_impl< ::Node, id_pgsql >
+  class access::object_traits_impl< ::graphDBLib::Node, id_common >:
+    public access::object_traits_impl< ::graphDBLib::Node, id_pgsql >
   {
   };
 
   // NodeIdViewByGraph
   //
   template <>
-  class access::view_traits_impl< ::NodeIdViewByGraph, id_pgsql >:
-    public access::view_traits< ::NodeIdViewByGraph >
+  class access::view_traits_impl< ::graphDBLib::NodeIdViewByGraph, id_pgsql >:
+    public access::view_traits< ::graphDBLib::NodeIdViewByGraph >
   {
     public:
     struct image_type
@@ -470,8 +470,8 @@ namespace odb
   };
 
   template <>
-  class access::view_traits_impl< ::NodeIdViewByGraph, id_common >:
-    public access::view_traits_impl< ::NodeIdViewByGraph, id_pgsql >
+  class access::view_traits_impl< ::graphDBLib::NodeIdViewByGraph, id_common >:
+    public access::view_traits_impl< ::graphDBLib::NodeIdViewByGraph, id_pgsql >
   {
   };
 
@@ -479,29 +479,29 @@ namespace odb
   //
   template <>
   struct alias_traits<
-    ::Graph,
+    ::graphDBLib::Graph,
     id_pgsql,
-    access::object_traits_impl< ::Node, id_pgsql >::refGraph_tag>
+    access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::refGraph_tag>
   {
     static const char table_name[];
   };
 
   template <>
-  struct query_columns_base< ::Node, id_pgsql >
+  struct query_columns_base< ::graphDBLib::Node, id_pgsql >
   {
     // refGraph
     //
     typedef
     odb::alias_traits<
-      ::Graph,
+      ::graphDBLib::Graph,
       id_pgsql,
-      access::object_traits_impl< ::Node, id_pgsql >::refGraph_tag>
+      access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::refGraph_tag>
     refGraph_alias_;
   };
 
   template <typename A>
-  struct query_columns< ::Node, id_pgsql, A >:
-    query_columns_base< ::Node, id_pgsql >
+  struct query_columns< ::graphDBLib::Node, id_pgsql, A >:
+    query_columns_base< ::graphDBLib::Node, id_pgsql >
   {
     // idNode
     //
@@ -588,7 +588,7 @@ namespace odb
     typedef
     odb::query_pointer<
       odb::pointer_query_columns<
-        ::Graph,
+        ::graphDBLib::Graph,
         id_pgsql,
         refGraph_alias_ > >
     refGraph_pointer_type_;
@@ -605,47 +605,47 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::idNode_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::idNode_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
   idNode (A::table_name, "\"idNode\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::index_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::index_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
   index (A::table_name, "\"index\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::level_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::level_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
   level (A::table_name, "\"level\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::mass_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::mass_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
   mass (A::table_name, "\"mass\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::type_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::type_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
   type (A::table_name, "\"type\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::label_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::label_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
   label (A::table_name, "\"label\"", 0);
 
   template <typename A>
-  const typename query_columns< ::Node, id_pgsql, A >::refGraph_type_
-  query_columns< ::Node, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::refGraph_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
 
   // NodeIdViewByGraph
   //
-  struct access::view_traits_impl< ::NodeIdViewByGraph, id_pgsql >::query_columns:
+  struct access::view_traits_impl< ::graphDBLib::NodeIdViewByGraph, id_pgsql >::query_columns:
     odb::pointer_query_columns<
-      ::Node,
+      ::graphDBLib::Node,
       id_pgsql,
-      odb::access::object_traits_impl< ::Node, id_pgsql > >
+      odb::access::object_traits_impl< ::graphDBLib::Node, id_pgsql > >
   {
   };
 }
