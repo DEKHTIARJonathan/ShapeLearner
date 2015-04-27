@@ -21,6 +21,7 @@
 #include "allHeaders.h"
 
 using namespace std;
+using namespace graphDBLib;
 
 Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight) :
 	source(_source),

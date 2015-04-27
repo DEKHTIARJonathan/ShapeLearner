@@ -43,17 +43,17 @@ namespace odb
   // ObjectClass
   //
   template <>
-  struct class_traits< ::ObjectClass >
+  struct class_traits< ::graphDBLib::ObjectClass >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::ObjectClass >
+  class access::object_traits< ::graphDBLib::ObjectClass >
   {
     public:
-    typedef ::ObjectClass object_type;
-    typedef ::ObjectClass* pointer_type;
+    typedef ::graphDBLib::ObjectClass object_type;
+    typedef ::graphDBLib::ObjectClass* pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -96,7 +96,7 @@ namespace odb
   // ObjectClass
   //
   template <typename A>
-  struct query_columns< ::ObjectClass, id_pgsql, A >
+  struct query_columns< ::graphDBLib::ObjectClass, id_pgsql, A >
   {
     // objectClassName
     //
@@ -112,19 +112,19 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::ObjectClass, id_pgsql, A >::objectClassName_type_
-  query_columns< ::ObjectClass, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::ObjectClass, id_pgsql, A >::objectClassName_type_
+  query_columns< ::graphDBLib::ObjectClass, id_pgsql, A >::
   objectClassName (A::table_name, "\"objectClassName\"", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::ObjectClass, id_pgsql, A >:
-    query_columns< ::ObjectClass, id_pgsql, A >
+  struct pointer_query_columns< ::graphDBLib::ObjectClass, id_pgsql, A >:
+    query_columns< ::graphDBLib::ObjectClass, id_pgsql, A >
   {
   };
 
   template <>
-  class access::object_traits_impl< ::ObjectClass, id_pgsql >:
-    public access::object_traits< ::ObjectClass >
+  class access::object_traits_impl< ::graphDBLib::ObjectClass, id_pgsql >:
+    public access::object_traits< ::graphDBLib::ObjectClass >
   {
     public:
     struct id_image_type
@@ -256,8 +256,8 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::ObjectClass, id_common >:
-    public access::object_traits_impl< ::ObjectClass, id_pgsql >
+  class access::object_traits_impl< ::graphDBLib::ObjectClass, id_common >:
+    public access::object_traits_impl< ::graphDBLib::ObjectClass, id_pgsql >
   {
   };
 

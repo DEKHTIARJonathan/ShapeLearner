@@ -43,17 +43,17 @@ namespace odb
   // GraphClass
   //
   template <>
-  struct class_traits< ::GraphClass >
+  struct class_traits< ::graphDBLib::GraphClass >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::GraphClass >
+  class access::object_traits< ::graphDBLib::GraphClass >
   {
     public:
-    typedef ::GraphClass object_type;
-    typedef ::GraphClass* pointer_type;
+    typedef ::graphDBLib::GraphClass object_type;
+    typedef ::graphDBLib::GraphClass* pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -96,7 +96,7 @@ namespace odb
   // GraphClass
   //
   template <typename A>
-  struct query_columns< ::GraphClass, id_pgsql, A >
+  struct query_columns< ::graphDBLib::GraphClass, id_pgsql, A >
   {
     // graphClassName
     //
@@ -136,29 +136,29 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::GraphClass, id_pgsql, A >::graphClassName_type_
-  query_columns< ::GraphClass, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::GraphClass, id_pgsql, A >::graphClassName_type_
+  query_columns< ::graphDBLib::GraphClass, id_pgsql, A >::
   graphClassName (A::table_name, "\"graphClassName\"", 0);
 
   template <typename A>
-  const typename query_columns< ::GraphClass, id_pgsql, A >::directGraph_type_
-  query_columns< ::GraphClass, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::GraphClass, id_pgsql, A >::directGraph_type_
+  query_columns< ::graphDBLib::GraphClass, id_pgsql, A >::
   directGraph (A::table_name, "\"directGraph\"", 0);
 
   template <typename A>
-  const typename query_columns< ::GraphClass, id_pgsql, A >::acyclicGraph_type_
-  query_columns< ::GraphClass, id_pgsql, A >::
+  const typename query_columns< ::graphDBLib::GraphClass, id_pgsql, A >::acyclicGraph_type_
+  query_columns< ::graphDBLib::GraphClass, id_pgsql, A >::
   acyclicGraph (A::table_name, "\"acyclicGraph\"", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::GraphClass, id_pgsql, A >:
-    query_columns< ::GraphClass, id_pgsql, A >
+  struct pointer_query_columns< ::graphDBLib::GraphClass, id_pgsql, A >:
+    query_columns< ::graphDBLib::GraphClass, id_pgsql, A >
   {
   };
 
   template <>
-  class access::object_traits_impl< ::GraphClass, id_pgsql >:
-    public access::object_traits< ::GraphClass >
+  class access::object_traits_impl< ::graphDBLib::GraphClass, id_pgsql >:
+    public access::object_traits< ::graphDBLib::GraphClass >
   {
     public:
     struct id_image_type
@@ -303,8 +303,8 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::GraphClass, id_common >:
-    public access::object_traits_impl< ::GraphClass, id_pgsql >
+  class access::object_traits_impl< ::graphDBLib::GraphClass, id_common >:
+    public access::object_traits_impl< ::graphDBLib::GraphClass, id_pgsql >
   {
   };
 

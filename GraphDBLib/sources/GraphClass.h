@@ -29,75 +29,77 @@
 #endif
 
 using namespace std;
-
-class GraphDB; // Forward Declaration of the class contained in graphDB.h
 class StandardExcept;
 
-/*!	
-*	\class GraphClass
-*	\brief Part of the Graph Data Model. A GraphClass represents the type of graph being used : ShockGraph, Precedance Graph, Topological Graph.
-*/
-class GraphClass
-{
-public:
-	/*!	
-	*	\class GraphClass::Access
-	*	\brief Limit instantiation only to GraphDB. Static subclass which role is only to execute its unique static method.
+namespace graphDBLib{
+	class GraphDB; // Forward Declaration of the class contained in graphDB.h
+
+	/*!
+	*	\class GraphClass
+	*	\brief Part of the Graph Data Model. A GraphClass represents the type of graph being used : ShockGraph, Precedance Graph, Topological Graph.
 	*/
-	class Access {
-		friend class GraphDB;
-		static  boost::shared_ptr<GraphClass> createGraphClass(string name, bool isDirect = false, bool isAcyclic = false){
-			return  boost::shared_ptr<GraphClass>(new GraphClass(name, isDirect, isAcyclic));
-		}
+	class GraphClass
+	{
+	public:
+		/*!
+		*	\class GraphClass::Access
+		*	\brief Limit instantiation only to GraphDB. Static subclass which role is only to execute its unique static method.
+		*/
+		class Access {
+			friend class GraphDB;
+			static  boost::shared_ptr<GraphClass> createGraphClass(string name, bool isDirect = false, bool isAcyclic = false){
+				return  boost::shared_ptr<GraphClass>(new GraphClass(name, isDirect, isAcyclic));
+			}
+		};
+
+		string getKey() const {return graphClassName;}
+
+		bool getIsDirect() const {return directGraph;}
+		void setIsDirect(const bool _directGraph);
+
+		bool getIsAcyclicGraph() const {return acyclicGraph;}
+		void setIsAcyclicGraph(const bool _acyclicGraph);
+
+		vector<unsigned long> getGraphs();
+
+		/* =========== Template function =========== */
+		string getClassName() const { return "GraphClass"; }
+		/* =========== Template function =========== */
+
+	private:
+		string graphClassName;
+		bool directGraph;
+		bool acyclicGraph;
+
+		/*!
+		*	\brief  Classical constructor needed to let ODB load objects from DB.
+		*/
+		GraphClass() {}
+		GraphClass(string name, bool isDirect = false, bool isAcyclic = false);
+
+		/*!
+		*	\fn void updateInDB();
+		*	\brief Update the object in the database.
+		*/
+		void updateInDB();
+
+		/*!
+		*	\fn string saveInDB();
+		*	\brief Persist the object in the database.
+		*/
+		string saveInDB();
+
+		/*!
+		*	\brief Friendship required in order to let ODB manage the object.
+		*/
+		friend class odb::access;
 	};
 
-	string getKey() const {return graphClassName;}
-
-	bool getIsDirect() const {return directGraph;}
-	void setIsDirect(const bool _directGraph);
-
-	bool getIsAcyclicGraph() const {return acyclicGraph;}
-	void setIsAcyclicGraph(const bool _acyclicGraph);
-
-	vector<unsigned long> getGraphs();
-
-	/* =========== Template function =========== */
-	string getClassName() const { return "GraphClass"; }
-	/* =========== Template function =========== */
-
-private:
-	string graphClassName;
-	bool directGraph;
-	bool acyclicGraph;
-	
-	/*!
-	*	\brief  Classical constructor needed to let ODB load objects from DB.
-	*/
-	GraphClass() {}
-	GraphClass(string name, bool isDirect = false, bool isAcyclic = false);
-
-	/*!
-	*	\fn void updateInDB();
-	*	\brief Update the object in the database.
-	*/
-	void updateInDB();
-
-	/*!
-	*	\fn string saveInDB();
-	*	\brief Persist the object in the database.
-	*/
-	string saveInDB();
-
-	/*!
-	*	\brief Friendship required in order to let ODB manage the object.
-	*/
-	friend class odb::access;
-};
-
-#pragma db value(std::string) type("VARCHAR(255)")
-#pragma db object(GraphClass)
-#pragma db member(GraphClass::graphClassName) id
-#pragma db member(GraphClass::directGraph) default("0")
-#pragma db member(GraphClass::acyclicGraph) default("0")
+	#pragma db value(std::string) type("VARCHAR(255)")
+	#pragma db object(GraphClass)
+	#pragma db member(GraphClass::graphClassName) id
+	#pragma db member(GraphClass::directGraph) default("0")
+	#pragma db member(GraphClass::acyclicGraph) default("0")
+}
 
 #endif //_GRAPH_CLASS_

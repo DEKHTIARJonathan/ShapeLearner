@@ -8,40 +8,40 @@ namespace odb
   //
 
   inline
-  access::object_traits< ::Edge >::id_type
-  access::object_traits< ::Edge >::
+  access::object_traits< ::graphDBLib::Edge >::id_type
+  access::object_traits< ::graphDBLib::Edge >::
   id (const object_type& o)
   {
     return o.idEdge;
   }
 
   inline
-  void access::object_traits< ::Edge >::
+  void access::object_traits< ::graphDBLib::Edge >::
   callback (database& db, object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
 
-    static_cast< ::Edge&> (x).checkCorrectness (e, db);
+    static_cast< ::graphDBLib::Edge&> (x).checkCorrectness (e, db);
   }
 
   inline
-  void access::object_traits< ::Edge >::
+  void access::object_traits< ::graphDBLib::Edge >::
   callback (database& db, const object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
 
-    static_cast<const ::Edge&> (x).checkCorrectness (e, db);
+    static_cast<const ::graphDBLib::Edge&> (x).checkCorrectness (e, db);
   }
 
   // EdgeIdViewBySource
   //
 
   inline
-  void access::view_traits< ::EdgeIdViewBySource >::
+  void access::view_traits< ::graphDBLib::EdgeIdViewBySource >::
   callback (database& db, view_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -53,7 +53,7 @@ namespace odb
   //
 
   inline
-  void access::view_traits< ::EdgeIdViewByTarget >::
+  void access::view_traits< ::graphDBLib::EdgeIdViewByTarget >::
   callback (database& db, view_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -65,7 +65,7 @@ namespace odb
   //
 
   inline
-  void access::view_traits< ::EdgeIdViewByGraph >::
+  void access::view_traits< ::graphDBLib::EdgeIdViewByGraph >::
   callback (database& db, view_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -80,7 +80,7 @@ namespace odb
   //
 
   inline
-  void access::object_traits_impl< ::Edge, id_pgsql >::
+  void access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::
   erase (database& db, const object_type& obj)
   {
     callback (db, obj, callback_event::pre_erase);
@@ -89,7 +89,7 @@ namespace odb
   }
 
   inline
-  void access::object_traits_impl< ::Edge, id_pgsql >::
+  void access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::
   load_ (statements_type& sts,
          object_type& obj,
          bool)

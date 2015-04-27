@@ -21,6 +21,7 @@
 #include "allHeaders.h"
 
 using namespace std;
+using namespace graphDBLib;
 
 Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectClass> _refObjectClass, string const _objectName, unsigned long const _viewNumber) :
 	refGraphClass(_refGraphClass),
@@ -58,13 +59,13 @@ unsigned long Graph::saveInDB(){
 boost::weak_ptr<GraphClass> Graph::getParentGraphClass(){
 	if(refGraphClass.expired())
 		refGraphClass.swap(odb::boost::lazy_weak_ptr<GraphClass>(GraphDB::CommonInterface::getGraphClass(refGraphClass.object_id<GraphClass>())));
-	return refGraphClass.get_eager();	
+	return refGraphClass.get_eager();
 }
 
 boost::weak_ptr<ObjectClass> Graph::getParentObjectClass(){
 	if(refObjectClass.expired())
 		refObjectClass.swap(odb::boost::lazy_weak_ptr<ObjectClass>(GraphDB::CommonInterface::getObjectClass((string)refObjectClass.object_id<ObjectClass>())));
-	return refObjectClass.get_eager();	
+	return refObjectClass.get_eager();
 }
 
 vector<unsigned long> Graph::getNodes(){

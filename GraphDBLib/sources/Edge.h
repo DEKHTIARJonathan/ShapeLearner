@@ -30,107 +30,108 @@
 
 using namespace std;
 
-class Graph; //Forward Declaration of the class contained in Graph.h
-class Node; //Forward Declaration of the class contained in Node.h
-class GraphDB; // Forward Declaration of the class contained in graphDB.h
-
-/*!	
-*	\class GraphClass
-*	\brief Part of the Graph Data Model. One of the main components of the model, it links 2 nodes in the same graph.
-*/
-class Edge
-{
-public:
-	/*!	
-	*	\class Edge::Access
-	*	\brief Limit instantiation only to GraphDB. Static subclass which role is only to execute its unique static method.
-	*/
-	class Access {
-		friend class GraphDB;
-		static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1){
-			return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph, _weight));
-		}
-	};		
-
-	unsigned long getKey() const {return idEdge;}
-
-	unsigned long getWeight() const {return weight;}
-	void setWeight(const unsigned long _weight);
-
-	/* =========== Template function =========== */
-	string getClassName() const { return "Edge"; }
-	/* =========== Template function =========== */
-
-private:
-	unsigned long idEdge;
-	unsigned long weight;
-
-	odb::boost::lazy_weak_ptr<Node> source;
-	odb::boost::lazy_weak_ptr<Node> target;
-	odb::boost::lazy_weak_ptr<Graph> refGraph;
-	
-	/*!
-	*	\brief  Classical constructor needed to let ODB load objects from DB.
-	*/
-	Edge() {}
-	Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1);
+namespace graphDBLib{
+	class Graph; //Forward Declaration of the class contained in Graph.h
+	class Node; //Forward Declaration of the class contained in Node.h
+	class GraphDB; // Forward Declaration of the class contained in graphDB.h
 
 	/*!
-	*	\fn void updateInDB();
-	*	\brief Update the object in the database.
+	*	\class GraphClass
+	*	\brief Part of the Graph Data Model. One of the main components of the model, it links 2 nodes in the same graph.
 	*/
-	void updateInDB();
+	class Edge
+	{
+	public:
+		/*!
+		*	\class Edge::Access
+		*	\brief Limit instantiation only to GraphDB. Static subclass which role is only to execute its unique static method.
+		*/
+		class Access {
+			friend class GraphDB;
+			static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1){
+				return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph, _weight));
+			}
+		};
 
-	/*!
-	*	\fn unsigned long saveInDB();
-	*	\brief Persist the object in the database.
-	*/
-	unsigned long saveInDB();
+		unsigned long getKey() const {return idEdge;}
 
+		unsigned long getWeight() const {return weight;}
+		void setWeight(const unsigned long _weight);
 
-	/*!
-	*	\fn void checkCorrectness(odb::callback_event e, odb::database&) const throw(StandardExcept);
-	*	\brief C++ Trigger Launched on each DB Operation on this object.
-	*/
-	void checkCorrectness(odb::callback_event e, odb::database&) const throw(StandardExcept);
+		/* =========== Template function =========== */
+		string getClassName() const { return "Edge"; }
+		/* =========== Template function =========== */
 
-	/*!
-	*	\brief Friendship required in order to let ODB manage the object.
-	*/
-	friend class odb::access;
-};
+	private:
+		unsigned long idEdge;
+		unsigned long weight;
 
-#pragma db value(std::string) type("VARCHAR(255)")
-#pragma db object(Edge) callback(checkCorrectness)
-#pragma db member(Edge::idEdge) id auto
-#pragma db member(Edge::refGraph) not_null on_delete(cascade)
-#pragma db member(Edge::source) not_null on_delete(cascade)
-#pragma db member(Edge::target) not_null on_delete(cascade)
-#pragma db member(Edge::weight) default("1") not_null
-#pragma db index(Edge::"index_Edge_source") method("BTREE") member(source)
-#pragma db index(Edge::"index_Edge_target") method("BTREE") member(target)
-#pragma db index(Edge::"index_Edge_link") unique method("BTREE") members(source, target)
-#pragma db index(Edge::"index_Edge_refGraph") method("BTREE") member(refGraph)
+		odb::boost::lazy_weak_ptr<Node> source;
+		odb::boost::lazy_weak_ptr<Node> target;
+		odb::boost::lazy_weak_ptr<Graph> refGraph;
 
-#pragma db view object(Edge) query("\"source\" = ")
-struct EdgeIdViewBySource
-{
-  #pragma db column("idEdge")
-  unsigned long id;
-};
+		/*!
+		*	\brief  Classical constructor needed to let ODB load objects from DB.
+		*/
+		Edge() {}
+		Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1);
 
-#pragma db view object(Edge) query("\"target\" = ")
-struct EdgeIdViewByTarget
-{
-  #pragma db column("idEdge")
-  unsigned long id;
-};
+		/*!
+		*	\fn void updateInDB();
+		*	\brief Update the object in the database.
+		*/
+		void updateInDB();
 
-#pragma db view object(Edge) query("\"refGraph\" = ")
-struct EdgeIdViewByGraph
-{
-  #pragma db column("idEdge")
-  unsigned long id;
-};
+		/*!
+		*	\fn unsigned long saveInDB();
+		*	\brief Persist the object in the database.
+		*/
+		unsigned long saveInDB();
+
+		/*!
+		*	\fn void checkCorrectness(odb::callback_event e, odb::database&) const throw(StandardExcept);
+		*	\brief C++ Trigger Launched on each DB Operation on this object.
+		*/
+		void checkCorrectness(odb::callback_event e, odb::database&) const throw(StandardExcept);
+
+		/*!
+		*	\brief Friendship required in order to let ODB manage the object.
+		*/
+		friend class odb::access;
+	};
+
+	#pragma db value(std::string) type("VARCHAR(255)")
+	#pragma db object(Edge) callback(checkCorrectness)
+	#pragma db member(Edge::idEdge) id auto
+	#pragma db member(Edge::refGraph) not_null on_delete(cascade)
+	#pragma db member(Edge::source) not_null on_delete(cascade)
+	#pragma db member(Edge::target) not_null on_delete(cascade)
+	#pragma db member(Edge::weight) default("1") not_null
+	#pragma db index(Edge::"index_Edge_source") method("BTREE") member(source)
+	#pragma db index(Edge::"index_Edge_target") method("BTREE") member(target)
+	#pragma db index(Edge::"index_Edge_link") unique method("BTREE") members(source, target)
+	#pragma db index(Edge::"index_Edge_refGraph") method("BTREE") member(refGraph)
+
+	#pragma db view object(Edge) query("\"source\" = ")
+	struct EdgeIdViewBySource
+	{
+	  #pragma db column("idEdge")
+	  unsigned long id;
+	};
+
+	#pragma db view object(Edge) query("\"target\" = ")
+	struct EdgeIdViewByTarget
+	{
+	  #pragma db column("idEdge")
+	  unsigned long id;
+	};
+
+	#pragma db view object(Edge) query("\"refGraph\" = ")
+	struct EdgeIdViewByGraph
+	{
+	  #pragma db column("idEdge")
+	  unsigned long id;
+	};
+}
 
 #endif // _EDGE_

@@ -12,7 +12,7 @@
 
 /**
 *	\file main.cpp
-*	\brief Program calling the GraphDBLib 
+*	\brief Program calling the GraphDBLib
 *	\version 1.0
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
@@ -26,6 +26,7 @@
 #include "ShapeLearner.h"
 
 using namespace std;
+using namespace graphDBLib;
 
 int main(int argc, char **argv)
 {
@@ -49,7 +50,6 @@ int main(int argc, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 
-		
 		if (cmdLine.HasSwitch("--init")){
 			#ifdef _CITUS_
 				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
 			#endif
 		}
-			
+
 		if (cmdLine.HasSwitch("--generate")){
 			vector<const string> imgVect;
 
@@ -96,7 +96,6 @@ int main(int argc, char **argv)
 			Logger::Log("No action specified", constants::LogError);
 
 		GraphDB::closeDatabase(); // We disconnect to the DB
-		
 	}
 	catch (const std::exception& e)
 	{
