@@ -90,45 +90,6 @@
     <ClInclude Include="sources\Point.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\future.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\future.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\locking_ptr.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\pool_adaptors.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\pool.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\pool_core.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\scheduling_policies.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\scope_guard.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\worker_thread.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\task_adaptors.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\size_policies.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\threadpool\boost\threadpool\shutdown_policies.hpp">
-      <Filter>Threadpool</Filter>
-    </ClInclude>
     <ClInclude Include="sources\odbHeaders.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -195,9 +156,6 @@
     </Filter>
     <Filter Include="SQL">
       <UniqueIdentifier>{d0e493d2-f533-45a6-a09b-5478aed5fdd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Threadpool">
-      <UniqueIdentifier>{de37598a-78cc-468a-9c08-ea5930563143}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{57d2e3e3-556d-42dc-a221-e52351cee9ea}</UniqueIdentifier>

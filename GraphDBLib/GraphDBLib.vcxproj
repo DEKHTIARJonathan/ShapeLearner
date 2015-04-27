@@ -11,19 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\threadpool\boost\threadpool.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\future.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\locking_ptr.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\pool_core.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\scope_guard.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\detail\worker_thread.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\future.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\pool.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\pool_adaptors.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\scheduling_policies.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\shutdown_policies.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\size_policies.hpp" />
-    <ClInclude Include="..\threadpool\boost\threadpool\task_adaptors.hpp" />
     <ClInclude Include="sources\allHeaders.h" />
     <ClInclude Include="sources\dbManager.h" />
     <ClInclude Include="sources\Edge-odb.hxx" />

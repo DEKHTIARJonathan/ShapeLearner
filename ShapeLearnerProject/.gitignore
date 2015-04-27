@@ -1,0 +1,23 @@
+# Ignore everything
+*
+
+# But not these files...
+!dist
+!*.doxproj
+
+#Visual Studio Files 
+!.gitignore
+!*.sln
+!*.vcxproj
+!*.filters
+!*.vcxproj.filters
+!*.vcxproj.user
+!*.suo
+!*.user
+!*.h
+!*.cpp
+!*.lib
+!*.dll
+
+# ...even if they are in subdirectories
+!*/
