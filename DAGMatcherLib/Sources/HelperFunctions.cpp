@@ -411,11 +411,11 @@ double dml::LinearTotalLeastSquares(const POINT* vertices, int n,
 	It is assumed that (a, b) is a UNIT vector normal to the line. That is,
 			a * a + b * b == 1.
 */
-POINT dml::GetClosestPointOnLine(const double& a, const double& b, const double& c, const POINT& p)
+dml::POINT dml::GetClosestPointOnLine(const double& a, const double& b, const double& c, const dml::POINT& p)
 {
 	ASSERT((a * a + b * b) > 0.99 && (a * a + b * b) < 1.01);
 
-	POINT p0;
+	dml::POINT p0;
 
 	// Choose a valid point in the line (use the least "non-zero" coeff)
 	if (fabs(a) > fabs(b))
@@ -429,11 +429,11 @@ POINT dml::GetClosestPointOnLine(const double& a, const double& b, const double&
 
 	double u = fabs(h * cos(asin(d / h))); // distance from p0 to the projection of p onto the line
 
-	POINT L(b, -a); // get a unit vector in the direction of the line
+	dml::POINT L(b, -a); // get a unit vector in the direction of the line
 
 	// L may be pointing towars the wrong direction, so we either scale by u or -u
-	POINT p1 = p0 + L * u;
-	POINT p2 = p0 + L * -u;
+	dml::POINT p1 = p0 + L * u;
+	dml::POINT p2 = p0 + L * -u;
 
 	return (p1.SqDist(p) < p2.SqDist(p)) ? p1 : p2;
 }

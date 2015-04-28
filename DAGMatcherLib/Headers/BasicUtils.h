@@ -10,7 +10,6 @@
 #define strcasecmp(A, B) _stricmp(A, B)
 #define FILE_SEP '\\'
 
-
 #ifndef INFINITY
 #define INFINITY	1000000
 #endif
@@ -18,7 +17,6 @@
 #define ShowStatus(M) Logger::Log(std::string(M), constants::LogCore);
 
 #define ShowStatus1(M,A) Logger::Log(std::string(M) + " " + std::string(A), constants::LogCore);
-
 
 #define ShowStatus2(M,N,S) Logger::Log(std::string(M) + " " + to_string((long double) N) + " " + std::string(S), constants::LogCore);
 
@@ -127,16 +125,7 @@
 #define DBG_LINE  { std::cerr << std::endl << "DBG_LINE " << __LINE__ \
 	<< " at " << __FILE__ << std::endl; }
 
-#ifdef WIN32
 #define ASSERT(X) if (!(X)) {_ASSERTE(X); throw 1;}
-#else
-#define ASSERT(X) \
-	if(!(X)) { \
-		std::cerr << "ERROR: Assertion failed \"" << #X << "\" in " __FILE__ \
-			<< ':' << __LINE__ << std::endl; \
-		assert(false); \
-	}
-#endif
 
 #define WARNING(X, M) \
 	if(X) { \
@@ -162,11 +151,9 @@
 #define ASSERT_VALID_POINT(P) ASSERT(!isnan(P.x) && finite(P.x) && !isnan(P.y) && finite(P.y))
 #define ASSERT_UNIT_INTERVAL(A) ASSERT(A >= 0 && A <= 1)
 
-#ifdef WIN32
-	#ifdef _CRTDBG_MAP_ALLOC
-			#define MYDEBUG_NEW   new(_NORMAL_BLOCK, __FILE__, __LINE__)
-			#define new MYDEBUG_NEW
-	#endif
+#ifdef _CRTDBG_MAP_ALLOC
+		#define MYDEBUG_NEW   new(_NORMAL_BLOCK, __FILE__, __LINE__)
+		#define new MYDEBUG_NEW
 #endif
 
 #else

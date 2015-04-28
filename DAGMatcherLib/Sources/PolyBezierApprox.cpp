@@ -33,7 +33,6 @@
 
 #include "stdafx.h"
 
-
 using namespace dml;
 
 //////////////////////////////////////////////////////////////////////
@@ -65,7 +64,7 @@ void CubicBezierParams::GetCurvePoint(const double& u, double* pX, double* pY) c
 	*pY = b0 + u * (b1 + u *(b2 + u * b3));
 }
 
-POINT CubicBezierParams::GetTangent(const double& u) const
+dml::POINT CubicBezierParams::GetTangent(const double& u) const
 {
 	double dx = a1 + u * (2 * a2 + u * 3 * a3);
 	double dy = b1 + u * (2 * b2 + u * 3 * b3);
@@ -73,7 +72,7 @@ POINT CubicBezierParams::GetTangent(const double& u) const
 	return POINT(dx, dy);
 }
 
-POINT CubicBezierParams::SecondDerivative(const double& u) const
+dml::POINT CubicBezierParams::SecondDerivative(const double& u) const
 {
 	double dx = 2 * a2 + u * 6 * a3;
 	double dy = 2 * b2 + u * 6 * b3;
@@ -142,12 +141,12 @@ PolyBezierApprox::PolyBezierApprox(double dMinError, int nMaxSegments, int nMaxR
 /*!
 	@brief Fits a piecewise cubic Bezier curve to the datapoints.
 */
-void PolyBezierApprox::Fit(const POINTS vertices)
+void PolyBezierApprox::Fit(const dml::POINTS vertices)
 {
 	PiecewiseApprox<CubicBezier>::Fit(vertices);
 
 	// Finally, we must update the m_curvePoints array
-	const POINT* pts = vertices;
+	const dml::POINT* pts = vertices;
 
 	delete[] m_curvePoints;
 	m_curvePoints = new double[vertices.GetSize()];
@@ -163,7 +162,7 @@ void PolyBezierApprox::Fit(const POINTS vertices)
 	@brief Computes the distance from point 'pt' to the point 'u' in the
 	cubic bezier segment with parameters 'cbp'.
 */
-void PolyBezierApprox::GetDistanceFromPointToCurvePoint(const POINT& pt, const double& u,
+void PolyBezierApprox::GetDistanceFromPointToCurvePoint(const dml::POINT& pt, const double& u,
 														const CubicBezierParams& cbp,
 														double* s, double* z)
 {
@@ -189,7 +188,7 @@ void PolyBezierApprox::GetDistanceFromPointToCurvePoint(const POINT& pt, const d
 	This function also updates the m_curvePoints array with the corresponding
 	curve parameter 'u' for each datapoint in 'vertices'.
 */
-double PolyBezierApprox::GetTotalDistance(const POINT* vertices, int n, const CubicBezier& cbs,
+double PolyBezierApprox::GetTotalDistance(const dml::POINT* vertices, int n, const CubicBezier& cbs,
 										  double* curvePoints /*=NULL*/)
 {
 	CubicBezierParams cbp(cbs);
@@ -204,7 +203,7 @@ double PolyBezierApprox::GetTotalDistance(const POINT* vertices, int n, const Cu
 	// First and last point are assumed to have zero distance
 	for (int i = 1; i < n - 1; i++)
 	{
-		const POINT& pt = vertices[i];
+		const dml::POINT& pt = vertices[i];
 
 		stepsize = 2.0 / (n/* + 1*/); // remember, we go from -1 to 1 => length 2
 
@@ -283,7 +282,7 @@ double PolyBezierApprox::GetTotalDistance(const POINT* vertices, int n, const Cu
 	@brief Computes least squares fit to the given datapoints. The best fit cubic Bezier
 	curve is returnd in 'cb0'.
 */
-double PolyBezierApprox::LeastSquares(const POINT* vertices, int n, CubicBezier& cb0)
+double PolyBezierApprox::LeastSquares(const dml::POINT* vertices, int n, CubicBezier& cb0)
 {
 	if (n < 2)
 		return -1; // real fit error will never be negative.
@@ -428,10 +427,10 @@ double PolyBezierApprox::LeastSquares(const POINT* vertices, int n, CubicBezier&
 	then the curve parameter 'u' correspoinding to each rasterized point 'i'
 	is assigned to position 'i' in the map.
 */
-POINTS CubicBezierParams::Rasterize(int nApproxNumPts, SmartArray<double>* pParamMap /*=NULL*/,
+dml::POINTS CubicBezierParams::Rasterize(int nApproxNumPts, SmartArray<double>* pParamMap /*=NULL*/,
 									double u0 /*=-1*/, double u1 /*=1*/)
 {
-	POINTS pts(0, nApproxNumPts);
+	dml::POINTS pts(0, nApproxNumPts);
 
 	if (pParamMap)
 	{
@@ -445,7 +444,7 @@ POINTS CubicBezierParams::Rasterize(int nApproxNumPts, SmartArray<double>* pPara
 
 	ASSERT(stepsize > 0 && stepsize <= 2);
 
-	POINT endPt;
+	dml::POINT endPt;
 
 	GetCurvePoint(1, &endPt.x, &endPt.y);
 	//endPt.Round(); // point must be rounded (uncomment to get integer coordinates)
@@ -474,10 +473,10 @@ POINTS CubicBezierParams::Rasterize(int nApproxNumPts, SmartArray<double>* pPara
 
 	The points in the array are one-pixel thin and connected.
 */
-void CubicBezierParams::Rasterize(double u, const POINT& endPt, double stepsize,
-							      POINTS& pts, SmartArray<double>* pParamMap)
+void CubicBezierParams::Rasterize(double u, const dml::POINT& endPt, double stepsize,
+							      dml::POINTS& pts, SmartArray<double>* pParamMap)
 {
-	POINT pt;
+	dml::POINT pt;
 
 	int sz = pts.Size();
 

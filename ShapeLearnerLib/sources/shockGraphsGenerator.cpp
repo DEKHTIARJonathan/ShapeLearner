@@ -17,7 +17,6 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
- 
 #include "stdafx.h"
 #include "allHeaders.h"
 
@@ -37,7 +36,7 @@ _Longlong fact(_Longlong nbr){
 }
 */
 
-string genFileName(const unsigned int len = 10) 
+string genFileName(const unsigned int len = 10)
 {
     const string alphanum = "0123456789"
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -51,12 +50,11 @@ string genFileName(const unsigned int len = 10)
     return rslt+".ppm";
 }
 
- shockGraphsGenerator::shockGraphsGenerator(const string& _imgPath) : imgPath(_imgPath){
+shockGraphsGenerator::shockGraphsGenerator(const string& _filepath, const string& _objClass) : filepath(_filepath), objClass(_objClass) {
 	parametersInit();
 }
 
 void shockGraphsGenerator::parametersInit(){
-	
 	// =========== Parameters for Experiment =================== //
 
 	m_experimentId = -1; // Performs experiment with given ID
@@ -74,7 +72,7 @@ void shockGraphsGenerator::parametersInit(){
 	m_nNumSplitParts = 3; // Incremental split of database in N subdatabase with decreasing number of views per object [N] {-iterations}
 	m_dNeigRange = 180; // List the neighbours withing a given range in deg.
 	m_sourceDB = 0; // Sets the soure DB for viewing operations
-	m_nVerbose = 0; // Execute in verbose mode	
+	m_nVerbose = 0; // Execute in verbose mode
 
 	// ================  ADD DAG MATCHING PARAMETERS ============== //
 	m_matchParams.nExtreme = 0;  //!< Load all DAGs to memory before matching
@@ -124,7 +122,7 @@ void shockGraphsGenerator::parametersInit(){
 	// =========== ADD MATCHING PROCESS INFORMATION ================= //
 
 	m_matchInfo.modelSimWeight = 0.5; // Model similarity weight
-	
+
 	m_matchInfo.idxrange = 0.4; // Index range
 	m_matchInfo.idxKBest = DEFAULT_INDEXING_K_BEST; // Match only k best from index
 	m_matchInfo.idxtau = DEFAULT_INDEXING_SIM_TAU; // Index similarity threshold
@@ -132,16 +130,16 @@ void shockGraphsGenerator::parametersInit(){
 
 	m_matchInfo.computeStats = DEFAULT_COMPUTE_STATS; // Compute view statistics
 	m_matchInfo.statsOutDir = "."; // Output directory for the stats files
-	 
+
 	m_matchInfo.asyncCompu = 0; // Compute SG's in async mode (see timeout)
-	
+
 	m_matchInfo.showResults = DEFAULT_SHOW_RESULTS; // Show matching results
 	m_matchInfo.saveResults = DEFAULT_SAVE_RESULTS; // Save matching results
-	m_matchInfo.saveNodeSim = DEFAULT_SAVE_NODE_SIM; // Save node similarity values	
-	
+	m_matchInfo.saveNodeSim = DEFAULT_SAVE_NODE_SIM; // Save node similarity values
+
 	m_matchInfo.firstModelId = -1; // ID of the first model shape to evaluate
 	m_matchInfo.lastModelId = -1; // ID of the last model shape to evaluate
-	
+
 	m_matchInfo.selectionMethod = 0; // Match all query and model DB Parsingss
 
 	// =========== ADD EXPERIMENT PARAMETERS =================== //
@@ -165,7 +163,7 @@ void shockGraphsGenerator::parametersInit(){
 	m_shapeInfo.outDir = "./NoisyImgs/"; // Sets the output directory for noisy images
 
 	// ===================  Display parameters =================== //
-	
+
 	m_xpos = 0; // Window x-coord position
 	m_ypos = 0; // Window y-coord position
 
@@ -185,7 +183,7 @@ void shockGraphsGenerator::parametersInit(){
 	m_shapeInfo.sgparams.dMinError = 2.0; // #Pts/'value' defines least-square error tolerated
 	m_shapeInfo.sgparams.dMaxYDiff = 0.1; // Maximum difference in y-coord discontinuity
 	m_shapeInfo.sgparams.dMaxAccelChg = 0.5; // Max acceleration change tolerated
-		
+
 	// ================= Bone Graph parameters  ==================== //
 
 	m_shapeInfo.bgparams.nMaxNumSegments = 8; // Max number of segments in piecewise function
@@ -220,7 +218,6 @@ void shockGraphsGenerator::parametersInit(){
 	m_shapeInfo.skelparams.fluxTau = 2.5; // Flux branch threshold for minimum angle angle
 	m_shapeInfo.skelparams.fluxResolution = 16; // Flux value resolution
 
-
 	// ================= AFMM Skeleton params ==================== //
 
 	m_shapeInfo.skelparams.afmmTau1 = 0; // AFMM skeleton threshold 1 (deprecated)
@@ -233,16 +230,15 @@ void shockGraphsGenerator::parametersInit(){
 	m_shapeInfo.skelparams.nSimplifyExternal = 1; // Perform the external branch simplification on the skeleton
 	m_shapeInfo.skelparams.nSimplifyInternal = 0; // Perform the internal branch simplification on the skeleton
 	m_shapeInfo.skelparams.nSimplifyComplete = 0; // Perform the external and internal branch simplification
-	
 }
 
 bool shockGraphsGenerator::taskExecute()
 {
-	Logger::Log("Adding object ("+imgPath+")to database...", constants::LogCore);
+	Logger::Log("Adding object ("+filepath+")to database...", constants::LogCore);
 
 	processFile(m_matchInfo.asyncCompu != 0);
 
-	Logger::Log("Object ("+imgPath+") has been added to database...", constants::LogCore);
+	Logger::Log("Object ("+filepath+") has been added to database...", constants::LogCore);
 
 	return true;
 }
@@ -253,13 +249,13 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 	bool bIsRead;
 	const char* szFileExt;
 
-	szFileExt = DirWalker::FindFileExtension(imgPath.c_str());
+	szFileExt = DirWalker::FindFileExtension(filepath.c_str());
 
 	if (!strcmp(szFileExt, "ppm") || !strcmp(szFileExt, "pgm") ||
 		!strcmp(szFileExt, "bmp") || !strcmp(szFileExt, "tif") ||
 		!strcmp(szFileExt, "jpg") || !strcmp(szFileExt, "png"))
 	{
-		ImageInfo imgInfo(imgPath.c_str());
+		ImageInfo imgInfo(filepath.c_str());
 
 		// Add artificial noise if requested
 		if (m_shapeInfo.nBumpSize > 0 || m_shapeInfo.nNotchSize > 0)
@@ -275,6 +271,7 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 			pDag = pSG;
 
 			bIsRead = pSG->Create(imgInfo, m_shapeInfo.sgparams, m_shapeInfo.skelparams);
+			saveInDB(*pSG);
 		}
 		else if (m_shapeInfo.shapeRepType == BGShapeRep) // == 2
 		{
@@ -294,7 +291,7 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 		GestureGraph* pGG = new GestureGraph;
 		pDag = pGG;
 
-		bIsRead = pGG->Read(imgPath.c_str());
+		bIsRead = pGG->Read(filepath.c_str());
 	}
 	else
 	{
@@ -310,4 +307,53 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 	}
 	else
 		Logger::Log("ERROR: Can't read dag.", constants::LogCore);
+}
+
+void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
+	boost::weak_ptr<graphDBLib::Graph> graphPtr = graphDBLib::GraphDB::CommonInterface::getGraph( \
+		graphDBLib::GraphDB::CommonInterface::getGraphClass((string)graph.ClassName()), \
+		graphDBLib::GraphDB::CommonInterface::getObjectClass(objClass), \
+		(string) graph.GetDAGLbl());
+
+	graphPtr.lock()->setView(graph.GetViewNumber());
+	graphPtr.lock()->setCumulativeMass(graph.GetCumulativeMass());
+	graphPtr.lock()->setDAGCost(graph.GetDAGCost());
+	graphPtr.lock()->setFileOffset(graph.GetFileOffset());
+	graphPtr.lock()->setMaxTSVDimension(graph.GetMaxTSVDimension());
+	graphPtr.lock()->setTotalTSVSum(graph.GetTotalTSVSum());
+
+	ShapeDims sh = graph.GetDims();
+	graphPtr.lock()->setShapeDimensions(sh.xmin, sh.xmax, sh.ymin, sh.ymax);
+
+	graphPtr.lock()->setNodeCount(graph.GetEdgeCount());
+	graphPtr.lock()->setEdgeCount(graph.GetNodeCount());
+
+	std::stringstream testStream;
+	graph.Print(testStream, true);
+	graphPtr.lock()->setXMLSignature(testStream.str());
+
+	/*
+	graph.Print(std::cout);
+	std::ofstream txtfile ("output.txt",std::ios::binary);
+	graph.Print(txtfile, false);
+
+	graph.PrintTSVs();
+	std::ofstream txtfile2 ("output2.txt",std::ios::binary);
+	graph.PrintTSVs(txtfile2);
+
+	*/
+
+	/*
+	cout <<"Category : " << graph.category;
+cout <<"Category : " << graph.category;
+	cout <<"Category : " << graph.category;
+	*/
+}
+
+void shockGraphsGenerator::saveInDB(const BoneGraph& graph){
+	cout <<"Classname : " << graph.ClassName() <<endl;
+}
+
+void shockGraphsGenerator::saveInDB(const GestureGraph& graph){
+	cout <<"Classname : " << graph.ClassName() <<endl;
 }

@@ -90,10 +90,10 @@ void BranchSegment::SubtractLigatureInterval(const LigatureSegment& ls)
 	@brief Computes the tangent of the axis function at either the first or
 	the last point of the segment using a linear total least squares approach.
 */
-void BranchSegment::ComputeEndpointTangent(bool bFirstPt, POINT* p0, POINT* p1) const
+void BranchSegment::ComputeEndpointTangent(bool bFirstPt, dml::POINT* p0, dml::POINT* p1) const
 {
 	int nPts = MIN(Size(), 4);
-	POINTS pts(nPts);
+	dml::POINTS pts(nPts);
 
 	SkelPtIndex j = (bFirstPt) ? First() : (Last() + 1 ) - nPts;
 
@@ -117,7 +117,7 @@ void BranchSegment::ComputeEndpointTangent(bool bFirstPt, POINT* p0, POINT* p1) 
 	the immediate neighbours of the point are considered regardless of whether
 	they are inside or outside the segment.
 */
-void BranchSegment::ComputeTangent(SkelPtIndex ptIdx, POINT* p0, POINT* p1) const
+void BranchSegment::ComputeTangent(SkelPtIndex ptIdx, dml::POINT* p0, dml::POINT* p1) const
 {
 	ASSERT(ptIdx >= BranchFirst() && ptIdx <= BranchLast());
 	ASSERT(BranchSize() >= 2);

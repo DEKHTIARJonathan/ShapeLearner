@@ -24,6 +24,7 @@
 #include "graphDB.h"
 #include "StandardException.h"
 #include "ShapeLearner.h"
+#include "DAGMatcherLib.h"
 
 using namespace std;
 using namespace graphDBLib;
@@ -56,6 +57,8 @@ int main(int argc, char **argv)
 			#else
 				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024, "sources/structure.sql");
 			#endif
+
+			dml::DAGMatcherLib::InitDAGMatcherLib();
 		}
 		else
 		{
@@ -67,29 +70,29 @@ int main(int argc, char **argv)
 		}
 
 		if (cmdLine.HasSwitch("--generate")){
-			vector<const string> imgVect;
+			vector<const img2Parse> imgVect;
+			imgVect.push_back(img2Parse("img/rod1.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod2.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod3.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod4.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod5.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod6.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod7.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod8.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod9.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod10.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod11.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod12.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod13.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod13.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod14.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod15.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod16.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod17.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod18.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod19.ppm", "Rod"));
+			imgVect.push_back(img2Parse("img/rod20.ppm", "Rod"));
 
-			imgVect.push_back("img/rod1.ppm");
-			imgVect.push_back("img/rod2.ppm");
-			imgVect.push_back("img/rod3.ppm");
-			imgVect.push_back("img/rod4.ppm");
-			imgVect.push_back("img/rod5.ppm");
-			imgVect.push_back("img/rod6.ppm");
-			imgVect.push_back("img/rod7.ppm");
-			imgVect.push_back("img/rod8.ppm");
-			imgVect.push_back("img/rod9.ppm");
-			imgVect.push_back("img/rod10.ppm");
-			imgVect.push_back("img/rod11.ppm");
-			imgVect.push_back("img/rod12.ppm");
-			imgVect.push_back("img/rod13.ppm");
-			imgVect.push_back("img/rod13.ppm");
-			imgVect.push_back("img/rod14.ppm");
-			imgVect.push_back("img/rod15.ppm");
-			imgVect.push_back("img/rod16.ppm");
-			imgVect.push_back("img/rod17.ppm");
-			imgVect.push_back("img/rod18.ppm");
-			imgVect.push_back("img/rod19.ppm");
-			imgVect.push_back("img/rod20.ppm");
 			ShapeLearner::createShockGraph(imgVect);
 		}
 		else

@@ -136,8 +136,8 @@ boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const unsigned long ke
 		return boost::weak_ptr<Graph>(tmp);
 	}
 }
-boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned long _viewNumber){
-	boost::shared_ptr<Graph> tmp (Graph::Access::createGraph(_graphClass, _objectClass, _objectName, _viewNumber));
+boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName){
+	boost::shared_ptr<Graph> tmp (Graph::Access::createGraph(_graphClass, _objectClass, _objectName));
 	GraphMap.insert(pair<unsigned long, boost::shared_ptr<Graph>>(tmp->getKey(), tmp));
 	return boost::weak_ptr<Graph>(tmp);
 }

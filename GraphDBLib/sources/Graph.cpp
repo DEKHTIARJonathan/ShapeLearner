@@ -23,26 +23,30 @@
 using namespace std;
 using namespace graphDBLib;
 
-Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectClass> _refObjectClass, string const _objectName, unsigned long const _viewNumber) :
+Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectClass> _refObjectClass, string const _objectName) :
 	refGraphClass(_refGraphClass),
 	refObjectClass(_refObjectClass),
-	viewNumber(_viewNumber),
 	objectName(_objectName),
-	idGraph(0)
+	idGraph(0),
+	viewNumber(0),
+	nodeCount(0),
+	edgeCount(0),
+	cumulativeMass(0),
+	DAGCost(0),
+	fileOffset(0),
+	MaxTSVDimension(0),
+	totalTSVSum(0),
+	shape_xMax(0),
+	shape_xMin(0),
+	shape_yMax(0),
+	shape_yMin(0),
+	shape_Height(0),
+	shape_Width(0),
+	XMLSignature("")
 	{
 		idGraph = saveInDB();
 		Logger::Log("New Object Instanciated : Graph key("+ to_string((_ULonglong)getKey())+")");
 	}
-
-void Graph::setObjectName(const string& _objectName) {
-	objectName = _objectName;
-	updateInDB();
-}
-
-void Graph::setView(const unsigned long _viewNumber) {
-	viewNumber = _viewNumber;
-	updateInDB();
-}
 
 void Graph::updateInDB(){
 	#ifdef _MSC_VER
@@ -78,4 +82,117 @@ vector<unsigned long> Graph::getEdges(){
 
 vector<unsigned long> Graph::getPoints(){
 	return GraphDB::ObjectInterface::getForeignRelations<PointIdViewByGraph>(idGraph);
+}
+
+unsigned long Graph::getKey() const {
+	return idGraph;
+}
+
+string Graph::getClassName() const {
+	return "Graph";
+}
+
+unsigned long Graph::getView() const {
+	return viewNumber;
+}
+
+void Graph::setView(const unsigned long _viewNumber) {
+	viewNumber = _viewNumber;
+	updateInDB();
+}
+
+unsigned int Graph::getNodeCount() const{
+	return nodeCount;
+}
+
+void Graph::setNodeCount(const unsigned int _nodeCount){
+	nodeCount = _nodeCount;
+	updateInDB();
+}
+
+unsigned int Graph::getEdgeCount() const{
+	return edgeCount;
+}
+
+void Graph::setEdgeCount(const unsigned int _edgeCount){
+	edgeCount = _edgeCount;
+	updateInDB();
+}
+
+string Graph::getObjectName() const {
+	return objectName;
+}
+
+ShapeDims Graph::getShapeDimensions() const{
+	ShapeDims rslt;
+	rslt.xmin = shape_xMin;
+	rslt.xmax = shape_xMax;
+	rslt.ymin = shape_yMin;
+	rslt.ymax = shape_yMax;
+
+	return rslt;
+}
+
+void Graph::setShapeDimensions(const double _xmin, const double _xmax, const double _ymin, const double _ymax){
+	shape_xMin = _xmin;
+	shape_xMax = _xmax;
+	shape_yMax = _ymax;
+	shape_yMin = _ymin;
+	shape_Height = _ymax - _ymin;
+	shape_Width = _xmax - _xmin;
+	updateInDB();
+}
+
+int Graph::getCumulativeMass() const{
+	return cumulativeMass;
+}
+
+void Graph::setCumulativeMass(const int _cumulativeMass){
+	cumulativeMass = _cumulativeMass;
+	updateInDB();
+}
+
+double Graph::getFileOffset() const{
+	return fileOffset;
+}
+
+void Graph::setFileOffset(const int _fileOffset){
+	fileOffset = _fileOffset;
+	updateInDB();
+}
+
+int Graph::getDAGCost() const{
+	return DAGCost;
+}
+
+void Graph::setDAGCost(const int _DAGCost){
+	DAGCost = _DAGCost;
+	updateInDB();
+}
+
+int Graph::getMaxTSVDimension() const{
+	return MaxTSVDimension;
+}
+
+void Graph::setMaxTSVDimension(const int _MaxTSVDimension){
+	MaxTSVDimension = _MaxTSVDimension;
+	updateInDB();
+}
+
+double Graph::getTotalTSVSum() const{
+	return totalTSVSum;
+}
+
+void Graph::setTotalTSVSum(const double _totalTSVSum){
+	totalTSVSum = _totalTSVSum;
+	updateInDB();
+}
+
+string Graph::getXMLSignature() const{
+	return XMLSignature;
+}
+
+void Graph::setXMLSignature(const string& str){
+	XMLSignature = str;
+	updateInDB();
 }

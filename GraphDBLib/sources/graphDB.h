@@ -222,14 +222,13 @@ namespace graphDBLib {
 				static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight = 1);
 
 				/*!
-				*	\fn static boost::weak_ptr<Graph> getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned long _viewNumber = 1);
+				*	\fn static boost::weak_ptr<Graph> getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName);
 				*	\brief Static method returning a weak_ptr<Graph>. Instanciantes a new Object of type Graph and persists it in the DB. The members values are set by the different arguments.
 				*	\param _graphClass : What is the "GraphClass" of the Graph ?
 				*	\param _objectClass : What is the "ObjectClass" of the Graph ?
 				*	\param _objectName : What is the "objectName" of the Graph ?
-				*	\param _viewNumber : What is the "viewNumber" of the Graph ?
 				*/
-				static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned long _viewNumber = 1);
+				static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName);
 
 				/* ************** Deleters ********************/
 				/*!

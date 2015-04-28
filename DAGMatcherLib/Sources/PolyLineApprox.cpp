@@ -44,7 +44,7 @@ using namespace dml;
 
 	 we could also find it by the projecton matrix: P = A (A^t A)^-1 A^t
 */
-double PolyLineApprox::LeastSquares(const POINT* vertices, int n, LineSegment& s)
+double PolyLineApprox::LeastSquares(const dml::POINT* vertices, int n, LineSegment& s)
 {
 	int i;
 	double x, y, sumx = 0, sumy = 0, sumx2 = 0, sumxy = 0, sum2x = 0;

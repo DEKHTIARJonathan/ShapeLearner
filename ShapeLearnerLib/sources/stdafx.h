@@ -22,6 +22,8 @@
 
 #ifdef _MSC_VER
 	#pragma message("Compiling ShapeLearnerLib::stdafx.h  - this should happen just once per project.\n")
+	#pragma warning(disable : 4068)
+	#pragma warning(disable : 4290)
 #endif
 
 //For /Wall
@@ -80,7 +82,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/smart_ptr.hpp>
-#include <boost/threadpool.hpp>	
+#include <boost/threadpool.hpp>
 #include <boost/thread.hpp>
 #include <stdio.h>
 #include <stdlib.h>
@@ -116,15 +118,18 @@
 //LEDA
 #include <LEDA/core/p_queue.h>
 
-
-
-
 //ShapeLearner Specific Files
 
 #include "constants.h"
-#include "StandardException.h"	
+#include "StandardException.h"
 #include "CLogger.h"
-#include "graphDB.h"
+#include "SDK/graphDB.h"
+#include "SDK\GraphClass.h"
+#include "SDK\ObjectClass.h"
+#include "SDK\Graph.h"
+#include "SDK\Node.h"
+#include "SDK\Edge.h"
+#include "SDK/Point.h"
 #include "infoStructures.h"
 
 // ============================= STOP ADDING LIBS ==============================

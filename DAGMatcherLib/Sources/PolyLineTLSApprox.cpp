@@ -41,7 +41,7 @@ using namespace dml;
 	of the solution of the related eigenvalue problem.
 	See details in Forsyth & Ponce book (p. 334)
 */
-double PolyLineTLSApprox::LeastSquares(const POINT* vertices, int n, EuclideanLineSegment& s)
+double PolyLineTLSApprox::LeastSquares(const dml::POINT* vertices, int n, EuclideanLineSegment& s)
 {
 	int i, j;
 	double x, y, sumx = 0, sumy = 0, sumx2 = 0, sumy2 = 0, sumxy = 0;

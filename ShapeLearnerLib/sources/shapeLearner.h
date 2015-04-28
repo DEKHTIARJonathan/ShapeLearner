@@ -23,16 +23,22 @@
 #ifdef _MSC_VER
 	#pragma message("Compiling ShapeLearnerLib::ShapeLearner.h  - this should happen just once per project.\n")
 #endif
- 
+
 #include "stdafx.h"
 #include "allHeaders.h"
 
 using namespace std;
 using namespace boost::threadpool;
 
-class StandardExcept; //Forward Declaration of the class contained in StandardException.h
+class StandardExcept; //Forward Declaration of the class contained in StandardException.h*
 
-/*!	
+struct img2Parse{
+	const string filepath;
+	const string objClass;
+	img2Parse(const string _filepath, const string _objClass);
+};
+
+/*!
 *	\class ShapeLearner
 *	\brief Static class, the central point of the whole architecture. It redistributes actions to the different actors.
 *	The different actors doesn't need to know about each others. That way, a new handler can be added without any change whatsoever.
@@ -42,17 +48,16 @@ class ShapeLearner
 {
 	public:
 
-		static void createShockGraph (const vector<const string> &imgVect) throw(StandardExcept);
+		static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
 
 	private:
 
 		static boost::threadpool::pool	Pool;
 
-
 		/* ************** Multi Threading Workers ***************/
 
-		static bool createShockGraphWorker (const string& imgPath) throw(StandardExcept);
-		
+		static bool createShockGraphWorker (const img2Parse& imgInfo) throw(StandardExcept);
+
 		/* **************  No instanciation *********************/
 
 		/*!

@@ -12,6 +12,9 @@
     <Filter Include="Precompiled Headers">
       <UniqueIdentifier>{4cb93c9e-96e4-40a0-a5a5-1128fc2e9342}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DAGMatcherLib">
+      <UniqueIdentifier>{a7eb1b28-92db-4bb8-b877-993bc65974b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DAGMatcherLib\Headers\BasicTypedefs.h">
@@ -272,6 +275,9 @@
     <ClInclude Include="Headers\stdafx.h">
       <Filter>Precompiled Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\DAGMatcherLib.h">
+      <Filter>DAGMatcherLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DAGMatcherLib\Sources\BasicTypes.cpp">
@@ -450,6 +456,9 @@
     </ClCompile>
     <ClCompile Include="Sources\stdafx.cpp">
       <Filter>Precompiled Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\DAGMatcherLib.cpp">
+      <Filter>DAGMatcherLib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -53,6 +53,20 @@ namespace odb
   {
     pgsql::text_oid,
     pgsql::int8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid
   };
@@ -68,6 +82,20 @@ namespace odb
   {
     pgsql::text_oid,
     pgsql::int8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::int8_oid
@@ -162,9 +190,69 @@ namespace odb
     //
     t[2UL] = 0;
 
+    // nodeCount
+    //
+    t[3UL] = 0;
+
+    // edgeCount
+    //
+    t[4UL] = 0;
+
+    // cumulativeMass
+    //
+    t[5UL] = 0;
+
+    // DAGCost
+    //
+    t[6UL] = 0;
+
+    // fileOffset
+    //
+    t[7UL] = 0;
+
+    // MaxTSVDimension
+    //
+    t[8UL] = 0;
+
+    // totalTSVSum
+    //
+    t[9UL] = 0;
+
+    // shape_xMax
+    //
+    t[10UL] = 0;
+
+    // shape_xMin
+    //
+    t[11UL] = 0;
+
+    // shape_yMax
+    //
+    t[12UL] = 0;
+
+    // shape_yMin
+    //
+    t[13UL] = 0;
+
+    // shape_Height
+    //
+    t[14UL] = 0;
+
+    // shape_Width
+    //
+    t[15UL] = 0;
+
+    // XMLSignature
+    //
+    if (t[16UL])
+    {
+      i.XMLSignature_value.capacity (i.XMLSignature_size);
+      grew = true;
+    }
+
     // refGraphClass
     //
-    if (t[3UL])
+    if (t[17UL])
     {
       i.refGraphClass_value.capacity (i.refGraphClass_size);
       grew = true;
@@ -172,7 +260,7 @@ namespace odb
 
     // refObjectClass
     //
-    if (t[4UL])
+    if (t[18UL])
     {
       i.refObjectClass_value.capacity (i.refObjectClass_size);
       grew = true;
@@ -216,6 +304,106 @@ namespace odb
     b[n].type = pgsql::bind::bigint;
     b[n].buffer = &i.viewNumber_value;
     b[n].is_null = &i.viewNumber_null;
+    n++;
+
+    // nodeCount
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.nodeCount_value;
+    b[n].is_null = &i.nodeCount_null;
+    n++;
+
+    // edgeCount
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.edgeCount_value;
+    b[n].is_null = &i.edgeCount_null;
+    n++;
+
+    // cumulativeMass
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.cumulativeMass_value;
+    b[n].is_null = &i.cumulativeMass_null;
+    n++;
+
+    // DAGCost
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.DAGCost_value;
+    b[n].is_null = &i.DAGCost_null;
+    n++;
+
+    // fileOffset
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.fileOffset_value;
+    b[n].is_null = &i.fileOffset_null;
+    n++;
+
+    // MaxTSVDimension
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.MaxTSVDimension_value;
+    b[n].is_null = &i.MaxTSVDimension_null;
+    n++;
+
+    // totalTSVSum
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.totalTSVSum_value;
+    b[n].is_null = &i.totalTSVSum_null;
+    n++;
+
+    // shape_xMax
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.shape_xMax_value;
+    b[n].is_null = &i.shape_xMax_null;
+    n++;
+
+    // shape_xMin
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.shape_xMin_value;
+    b[n].is_null = &i.shape_xMin_null;
+    n++;
+
+    // shape_yMax
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.shape_yMax_value;
+    b[n].is_null = &i.shape_yMax_null;
+    n++;
+
+    // shape_yMin
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.shape_yMin_value;
+    b[n].is_null = &i.shape_yMin_null;
+    n++;
+
+    // shape_Height
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.shape_Height_value;
+    b[n].is_null = &i.shape_Height_null;
+    n++;
+
+    // shape_Width
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.shape_Width_value;
+    b[n].is_null = &i.shape_Width_null;
+    n++;
+
+    // XMLSignature
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.XMLSignature_value.data ();
+    b[n].capacity = i.XMLSignature_value.capacity ();
+    b[n].size = &i.XMLSignature_size;
+    b[n].is_null = &i.XMLSignature_null;
     n++;
 
     // refGraphClass
@@ -292,6 +480,209 @@ namespace odb
           pgsql::id_bigint >::set_image (
         i.viewNumber_value, is_null, v);
       i.viewNumber_null = is_null;
+    }
+
+    // nodeCount
+    //
+    {
+      unsigned int const& v =
+        o.nodeCount;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_image (
+        i.nodeCount_value, is_null, v);
+      i.nodeCount_null = is_null;
+    }
+
+    // edgeCount
+    //
+    {
+      unsigned int const& v =
+        o.edgeCount;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_image (
+        i.edgeCount_value, is_null, v);
+      i.edgeCount_null = is_null;
+    }
+
+    // cumulativeMass
+    //
+    {
+      int const& v =
+        o.cumulativeMass;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.cumulativeMass_value, is_null, v);
+      i.cumulativeMass_null = is_null;
+    }
+
+    // DAGCost
+    //
+    {
+      double const& v =
+        o.DAGCost;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.DAGCost_value, is_null, v);
+      i.DAGCost_null = is_null;
+    }
+
+    // fileOffset
+    //
+    {
+      int const& v =
+        o.fileOffset;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.fileOffset_value, is_null, v);
+      i.fileOffset_null = is_null;
+    }
+
+    // MaxTSVDimension
+    //
+    {
+      int const& v =
+        o.MaxTSVDimension;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.MaxTSVDimension_value, is_null, v);
+      i.MaxTSVDimension_null = is_null;
+    }
+
+    // totalTSVSum
+    //
+    {
+      double const& v =
+        o.totalTSVSum;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.totalTSVSum_value, is_null, v);
+      i.totalTSVSum_null = is_null;
+    }
+
+    // shape_xMax
+    //
+    {
+      double const& v =
+        o.shape_xMax;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.shape_xMax_value, is_null, v);
+      i.shape_xMax_null = is_null;
+    }
+
+    // shape_xMin
+    //
+    {
+      double const& v =
+        o.shape_xMin;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.shape_xMin_value, is_null, v);
+      i.shape_xMin_null = is_null;
+    }
+
+    // shape_yMax
+    //
+    {
+      double const& v =
+        o.shape_yMax;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.shape_yMax_value, is_null, v);
+      i.shape_yMax_null = is_null;
+    }
+
+    // shape_yMin
+    //
+    {
+      double const& v =
+        o.shape_yMin;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.shape_yMin_value, is_null, v);
+      i.shape_yMin_null = is_null;
+    }
+
+    // shape_Height
+    //
+    {
+      double const& v =
+        o.shape_Height;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.shape_Height_value, is_null, v);
+      i.shape_Height_null = is_null;
+    }
+
+    // shape_Width
+    //
+    {
+      double const& v =
+        o.shape_Width;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.shape_Width_value, is_null, v);
+      i.shape_Width_null = is_null;
+    }
+
+    // XMLSignature
+    //
+    {
+      ::std::string const& v =
+        o.XMLSignature;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.XMLSignature_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.XMLSignature_value,
+        size,
+        is_null,
+        v);
+      i.XMLSignature_null = is_null;
+      i.XMLSignature_size = size;
+      grew = grew || (cap != i.XMLSignature_value.capacity ());
     }
 
     // refGraphClass
@@ -417,6 +808,203 @@ namespace odb
         i.viewNumber_null);
     }
 
+    // nodeCount
+    //
+    {
+      unsigned int& v =
+        o.nodeCount;
+
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.nodeCount_value,
+        i.nodeCount_null);
+    }
+
+    // edgeCount
+    //
+    {
+      unsigned int& v =
+        o.edgeCount;
+
+      pgsql::value_traits<
+          unsigned int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.edgeCount_value,
+        i.edgeCount_null);
+    }
+
+    // cumulativeMass
+    //
+    {
+      int& v =
+        o.cumulativeMass;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.cumulativeMass_value,
+        i.cumulativeMass_null);
+    }
+
+    // DAGCost
+    //
+    {
+      double& v =
+        o.DAGCost;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.DAGCost_value,
+        i.DAGCost_null);
+    }
+
+    // fileOffset
+    //
+    {
+      int& v =
+        o.fileOffset;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.fileOffset_value,
+        i.fileOffset_null);
+    }
+
+    // MaxTSVDimension
+    //
+    {
+      int& v =
+        o.MaxTSVDimension;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.MaxTSVDimension_value,
+        i.MaxTSVDimension_null);
+    }
+
+    // totalTSVSum
+    //
+    {
+      double& v =
+        o.totalTSVSum;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.totalTSVSum_value,
+        i.totalTSVSum_null);
+    }
+
+    // shape_xMax
+    //
+    {
+      double& v =
+        o.shape_xMax;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.shape_xMax_value,
+        i.shape_xMax_null);
+    }
+
+    // shape_xMin
+    //
+    {
+      double& v =
+        o.shape_xMin;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.shape_xMin_value,
+        i.shape_xMin_null);
+    }
+
+    // shape_yMax
+    //
+    {
+      double& v =
+        o.shape_yMax;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.shape_yMax_value,
+        i.shape_yMax_null);
+    }
+
+    // shape_yMin
+    //
+    {
+      double& v =
+        o.shape_yMin;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.shape_yMin_value,
+        i.shape_yMin_null);
+    }
+
+    // shape_Height
+    //
+    {
+      double& v =
+        o.shape_Height;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.shape_Height_value,
+        i.shape_Height_null);
+    }
+
+    // shape_Width
+    //
+    {
+      double& v =
+        o.shape_Width;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.shape_Width_value,
+        i.shape_Width_null);
+    }
+
+    // XMLSignature
+    //
+    {
+      ::std::string& v =
+        o.XMLSignature;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.XMLSignature_value,
+        i.XMLSignature_size,
+        i.XMLSignature_null);
+    }
+
     // refGraphClass
     //
     {
@@ -490,10 +1078,24 @@ namespace odb
   "(\"idGraph\", "
   "\"objectName\", "
   "\"viewNumber\", "
+  "\"nodeCount\", "
+  "\"edgeCount\", "
+  "\"cumulativeMass\", "
+  "\"DAGCost\", "
+  "\"fileOffset\", "
+  "\"MaxTSVDimension\", "
+  "\"totalTSVSum\", "
+  "\"shape_xMax\", "
+  "\"shape_xMin\", "
+  "\"shape_yMax\", "
+  "\"shape_yMin\", "
+  "\"shape_Height\", "
+  "\"shape_Width\", "
+  "\"XMLSignature\", "
   "\"refGraphClass\", "
   "\"refObjectClass\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) "
   "RETURNING \"idGraph\"";
 
   const char access::object_traits_impl< ::graphDBLib::Graph, id_pgsql >::find_statement[] =
@@ -501,6 +1103,20 @@ namespace odb
   "\"Graph\".\"idGraph\", "
   "\"Graph\".\"objectName\", "
   "\"Graph\".\"viewNumber\", "
+  "\"Graph\".\"nodeCount\", "
+  "\"Graph\".\"edgeCount\", "
+  "\"Graph\".\"cumulativeMass\", "
+  "\"Graph\".\"DAGCost\", "
+  "\"Graph\".\"fileOffset\", "
+  "\"Graph\".\"MaxTSVDimension\", "
+  "\"Graph\".\"totalTSVSum\", "
+  "\"Graph\".\"shape_xMax\", "
+  "\"Graph\".\"shape_xMin\", "
+  "\"Graph\".\"shape_yMax\", "
+  "\"Graph\".\"shape_yMin\", "
+  "\"Graph\".\"shape_Height\", "
+  "\"Graph\".\"shape_Width\", "
+  "\"Graph\".\"XMLSignature\", "
   "\"Graph\".\"refGraphClass\", "
   "\"Graph\".\"refObjectClass\" "
   "FROM \"Graph\" "
@@ -511,9 +1127,23 @@ namespace odb
   "SET "
   "\"objectName\"=$1, "
   "\"viewNumber\"=$2, "
-  "\"refGraphClass\"=$3, "
-  "\"refObjectClass\"=$4 "
-  "WHERE \"idGraph\"=$5";
+  "\"nodeCount\"=$3, "
+  "\"edgeCount\"=$4, "
+  "\"cumulativeMass\"=$5, "
+  "\"DAGCost\"=$6, "
+  "\"fileOffset\"=$7, "
+  "\"MaxTSVDimension\"=$8, "
+  "\"totalTSVSum\"=$9, "
+  "\"shape_xMax\"=$10, "
+  "\"shape_xMin\"=$11, "
+  "\"shape_yMax\"=$12, "
+  "\"shape_yMin\"=$13, "
+  "\"shape_Height\"=$14, "
+  "\"shape_Width\"=$15, "
+  "\"XMLSignature\"=$16, "
+  "\"refGraphClass\"=$17, "
+  "\"refObjectClass\"=$18 "
+  "WHERE \"idGraph\"=$19";
 
   const char access::object_traits_impl< ::graphDBLib::Graph, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Graph\" "
@@ -524,6 +1154,20 @@ namespace odb
   "\"Graph\".\"idGraph\",\n"
   "\"Graph\".\"objectName\",\n"
   "\"Graph\".\"viewNumber\",\n"
+  "\"Graph\".\"nodeCount\",\n"
+  "\"Graph\".\"edgeCount\",\n"
+  "\"Graph\".\"cumulativeMass\",\n"
+  "\"Graph\".\"DAGCost\",\n"
+  "\"Graph\".\"fileOffset\",\n"
+  "\"Graph\".\"MaxTSVDimension\",\n"
+  "\"Graph\".\"totalTSVSum\",\n"
+  "\"Graph\".\"shape_xMax\",\n"
+  "\"Graph\".\"shape_xMin\",\n"
+  "\"Graph\".\"shape_yMax\",\n"
+  "\"Graph\".\"shape_yMin\",\n"
+  "\"Graph\".\"shape_Height\",\n"
+  "\"Graph\".\"shape_Width\",\n"
+  "\"Graph\".\"XMLSignature\",\n"
   "\"Graph\".\"refGraphClass\",\n"
   "\"Graph\".\"refObjectClass\"\n"
   "FROM \"Graph\"\n"

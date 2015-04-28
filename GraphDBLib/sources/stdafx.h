@@ -54,6 +54,7 @@
 #include <memory>
 #include <random>
 #include <stack>
+#include <algorithm>
 #include <functional>
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>

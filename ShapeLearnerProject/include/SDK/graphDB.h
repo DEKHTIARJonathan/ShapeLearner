@@ -31,15 +31,6 @@
 #include "SDK/Point.h"
 #include "SDK/Edge.h"
 
-// ODB Classes
-#include <odb/core.hxx>
-#include <odb/callback.hxx>
-#include <odb/boost/lazy-ptr.hxx>
-#include <odb/database.hxx>
-#include <odb/transaction.hxx>
-#include <odb/pgsql/database.hxx>
-#include <odb/schema-catalog.hxx>
-
 using namespace std;
 
 class StandardExcept; //Forward Declaration of the class contained in StandardException.h
@@ -180,7 +171,7 @@ namespace graphDBLib{
 				*	\param _objectName : What is the "objectName" of the Graph ?
 				*	\param _viewNumber : What is the "viewNumber" of the Graph ?
 				*/
-				static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned long _viewNumber = 1);
+				static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName);
 
 			};
 		

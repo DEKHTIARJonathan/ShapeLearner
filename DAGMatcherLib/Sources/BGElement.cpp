@@ -109,10 +109,10 @@ void BGElement::Print(std::ostream& os, bool bXMLFormat) const
 }
 
 //! Returns an ordered array of velocity-radius values
-POINTS BGElement::GetVelocityRadiusArray(bool bReverseOrder /*=false*/) const
+dml::POINTS BGElement::GetVelocityRadiusArray(bool bReverseOrder /*=false*/) const
 {
 	int nSize = m_shocks.GetSize();
-	POINTS data(nSize);
+	dml::POINTS data(nSize);
 
 	if (!bReverseOrder)
 	{
@@ -131,7 +131,7 @@ POINTS BGElement::GetVelocityRadiusArray(bool bReverseOrder /*=false*/) const
 }
 
 //! Returns the distance and point on the bonepoint array closest to 'pt'
-double BGElement::FindClosestPoint(const POINT& pt, ShockPoint* bp) const
+double BGElement::FindClosestPoint(const dml::POINT& pt, ShockPoint* bp) const
 {
 	ASSERT(!m_shocks.IsEmpty());
 
@@ -364,7 +364,7 @@ void BGElement::ComputeDerivedValues()
 	The tangent is directed from the point ptIndex + 1 to the point
 	ptIdx - 1.
 */
-POINT BGElement::ComputeTangent(int ptIdx) const
+dml::POINT BGElement::ComputeTangent(int ptIdx) const
 {
 	ASSERT(ptIdx >= 0 && ptIdx < m_shocks.Size());
 	ASSERT(m_shocks.Size() >= 2);
@@ -410,7 +410,7 @@ POINT BGElement::ComputeTangent(int ptIdx) const
 	return tangentVector;
 }
 
-const ShockPoint& BGElement::FindClosestPoint(const POINT& pt, bool bStartFromFirst,
+const ShockPoint& BGElement::FindClosestPoint(const dml::POINT& pt, bool bStartFromFirst,
 								  const double& minSqDist) const
 {
 	if (bStartFromFirst)

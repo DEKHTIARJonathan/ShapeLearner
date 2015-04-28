@@ -36,7 +36,7 @@
 
 using namespace dml;
 
-double ModelFit::Fit(const POINTS& vertices, const LineSegmentArray& segs)
+double ModelFit::Fit(const dml::POINTS& vertices, const LineSegmentArray& segs)
 {
 	ASSERT(segs.GetSize() >= 1);
 	ASSERT(vertices.GetSize() > 1);
@@ -213,7 +213,7 @@ void ModelFit::GetSegmentError(int s, double* error, double* scaleFactor) const
 	*scaleFactor = m_segments[s].GetLen() / (oldLen * m_minLenCoeff);*/
 }
 
-void ModelFit::Plot(std::ostream& os, const POINTS& points2, const LineSegmentArray& segments2) const
+void ModelFit::Plot(std::ostream& os, const dml::POINTS& points2, const LineSegmentArray& segments2) const
 {
 	if (m_points.GetSize() > 0)
 	{

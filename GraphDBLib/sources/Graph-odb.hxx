@@ -174,6 +174,174 @@ namespace odb
 
     static const viewNumber_type_ viewNumber;
 
+    // nodeCount
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        unsigned int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    nodeCount_type_;
+
+    static const nodeCount_type_ nodeCount;
+
+    // edgeCount
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        unsigned int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    edgeCount_type_;
+
+    static const edgeCount_type_ edgeCount;
+
+    // cumulativeMass
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    cumulativeMass_type_;
+
+    static const cumulativeMass_type_ cumulativeMass;
+
+    // DAGCost
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    DAGCost_type_;
+
+    static const DAGCost_type_ DAGCost;
+
+    // fileOffset
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    fileOffset_type_;
+
+    static const fileOffset_type_ fileOffset;
+
+    // MaxTSVDimension
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    MaxTSVDimension_type_;
+
+    static const MaxTSVDimension_type_ MaxTSVDimension;
+
+    // totalTSVSum
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    totalTSVSum_type_;
+
+    static const totalTSVSum_type_ totalTSVSum;
+
+    // shape_xMax
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_xMax_type_;
+
+    static const shape_xMax_type_ shape_xMax;
+
+    // shape_xMin
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_xMin_type_;
+
+    static const shape_xMin_type_ shape_xMin;
+
+    // shape_yMax
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_yMax_type_;
+
+    static const shape_yMax_type_ shape_yMax;
+
+    // shape_yMin
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_yMin_type_;
+
+    static const shape_yMin_type_ shape_yMin;
+
+    // shape_Height
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_Height_type_;
+
+    static const shape_Height_type_ shape_Height;
+
+    // shape_Width
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_Width_type_;
+
+    static const shape_Width_type_ shape_Width;
+
+    // XMLSignature
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    XMLSignature_type_;
+
+    static const XMLSignature_type_ XMLSignature;
+
     // refGraphClass
     //
     typedef
@@ -215,6 +383,76 @@ namespace odb
   viewNumber (A::table_name, "\"viewNumber\"", 0);
 
   template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::nodeCount_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  nodeCount (A::table_name, "\"nodeCount\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::edgeCount_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  edgeCount (A::table_name, "\"edgeCount\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::cumulativeMass_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  cumulativeMass (A::table_name, "\"cumulativeMass\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::DAGCost_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  DAGCost (A::table_name, "\"DAGCost\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::fileOffset_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  fileOffset (A::table_name, "\"fileOffset\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::MaxTSVDimension_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  MaxTSVDimension (A::table_name, "\"MaxTSVDimension\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::totalTSVSum_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  totalTSVSum (A::table_name, "\"totalTSVSum\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_xMax_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_xMax (A::table_name, "\"shape_xMax\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_xMin_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_xMin (A::table_name, "\"shape_xMin\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_yMax_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_yMax (A::table_name, "\"shape_yMax\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_yMin_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_yMin (A::table_name, "\"shape_yMin\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_Height_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_Height (A::table_name, "\"shape_Height\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_Width_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_Width (A::table_name, "\"shape_Width\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::XMLSignature_type_
+  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  XMLSignature (A::table_name, "\"XMLSignature\"", 0);
+
+  template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::refGraphClass_type_
   pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
   refGraphClass (A::table_name, "\"refGraphClass\"", 0);
@@ -254,6 +492,77 @@ namespace odb
       //
       long long viewNumber_value;
       bool viewNumber_null;
+
+      // nodeCount
+      //
+      int nodeCount_value;
+      bool nodeCount_null;
+
+      // edgeCount
+      //
+      int edgeCount_value;
+      bool edgeCount_null;
+
+      // cumulativeMass
+      //
+      int cumulativeMass_value;
+      bool cumulativeMass_null;
+
+      // DAGCost
+      //
+      double DAGCost_value;
+      bool DAGCost_null;
+
+      // fileOffset
+      //
+      int fileOffset_value;
+      bool fileOffset_null;
+
+      // MaxTSVDimension
+      //
+      int MaxTSVDimension_value;
+      bool MaxTSVDimension_null;
+
+      // totalTSVSum
+      //
+      double totalTSVSum_value;
+      bool totalTSVSum_null;
+
+      // shape_xMax
+      //
+      double shape_xMax_value;
+      bool shape_xMax_null;
+
+      // shape_xMin
+      //
+      double shape_xMin_value;
+      bool shape_xMin_null;
+
+      // shape_yMax
+      //
+      double shape_yMax_value;
+      bool shape_yMax_null;
+
+      // shape_yMin
+      //
+      double shape_yMin_value;
+      bool shape_yMin_null;
+
+      // shape_Height
+      //
+      double shape_Height_value;
+      bool shape_Height_null;
+
+      // shape_Width
+      //
+      double shape_Width_value;
+      bool shape_Width_null;
+
+      // XMLSignature
+      //
+      details::buffer XMLSignature_value;
+      std::size_t XMLSignature_size;
+      bool XMLSignature_null;
 
       // refGraphClass
       //
@@ -312,7 +621,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 5UL;
+    static const std::size_t column_count = 19UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -595,6 +904,174 @@ namespace odb
 
     static const viewNumber_type_ viewNumber;
 
+    // nodeCount
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        unsigned int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    nodeCount_type_;
+
+    static const nodeCount_type_ nodeCount;
+
+    // edgeCount
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        unsigned int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    edgeCount_type_;
+
+    static const edgeCount_type_ edgeCount;
+
+    // cumulativeMass
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    cumulativeMass_type_;
+
+    static const cumulativeMass_type_ cumulativeMass;
+
+    // DAGCost
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    DAGCost_type_;
+
+    static const DAGCost_type_ DAGCost;
+
+    // fileOffset
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    fileOffset_type_;
+
+    static const fileOffset_type_ fileOffset;
+
+    // MaxTSVDimension
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    MaxTSVDimension_type_;
+
+    static const MaxTSVDimension_type_ MaxTSVDimension;
+
+    // totalTSVSum
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    totalTSVSum_type_;
+
+    static const totalTSVSum_type_ totalTSVSum;
+
+    // shape_xMax
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_xMax_type_;
+
+    static const shape_xMax_type_ shape_xMax;
+
+    // shape_xMin
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_xMin_type_;
+
+    static const shape_xMin_type_ shape_xMin;
+
+    // shape_yMax
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_yMax_type_;
+
+    static const shape_yMax_type_ shape_yMax;
+
+    // shape_yMin
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_yMin_type_;
+
+    static const shape_yMin_type_ shape_yMin;
+
+    // shape_Height
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_Height_type_;
+
+    static const shape_Height_type_ shape_Height;
+
+    // shape_Width
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    shape_Width_type_;
+
+    static const shape_Width_type_ shape_Width;
+
+    // XMLSignature
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    XMLSignature_type_;
+
+    static const XMLSignature_type_ XMLSignature;
+
     // refGraphClass
     //
     typedef
@@ -666,6 +1143,76 @@ namespace odb
   const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::viewNumber_type_
   query_columns< ::graphDBLib::Graph, id_pgsql, A >::
   viewNumber (A::table_name, "\"viewNumber\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::nodeCount_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  nodeCount (A::table_name, "\"nodeCount\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::edgeCount_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  edgeCount (A::table_name, "\"edgeCount\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::cumulativeMass_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  cumulativeMass (A::table_name, "\"cumulativeMass\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::DAGCost_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  DAGCost (A::table_name, "\"DAGCost\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::fileOffset_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  fileOffset (A::table_name, "\"fileOffset\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::MaxTSVDimension_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  MaxTSVDimension (A::table_name, "\"MaxTSVDimension\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::totalTSVSum_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  totalTSVSum (A::table_name, "\"totalTSVSum\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_xMax_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_xMax (A::table_name, "\"shape_xMax\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_xMin_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_xMin (A::table_name, "\"shape_xMin\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_yMax_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_yMax (A::table_name, "\"shape_yMax\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_yMin_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_yMin (A::table_name, "\"shape_yMin\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_Height_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_Height (A::table_name, "\"shape_Height\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::shape_Width_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  shape_Width (A::table_name, "\"shape_Width\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::XMLSignature_type_
+  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
+  XMLSignature (A::table_name, "\"XMLSignature\"", 0);
 
   template <typename A>
   const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::refGraphClass_type_

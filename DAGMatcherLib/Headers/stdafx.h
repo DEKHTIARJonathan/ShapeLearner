@@ -22,6 +22,8 @@
 
 #ifdef _MSC_VER
 	#pragma message("Compiling GraphDBLib::stdafx.h  - this should happen just once per project.\n")
+	#pragma warning(disable : 4068)
+	#pragma warning(disable : 4290)
 #endif
 
 //For /Wall
@@ -78,7 +80,7 @@
 
 #include <LEDA/internal/PREAMBLE.h>
 #include <LEDA/core/list.h>
-#include <LEDA/core/string.h> 
+#include <LEDA/core/string.h>
 #include <LEDA/numbers/integer.h>
 #include <LEDA/graph/graph.h>
 #include <LEDA/graph/graph_alg.h>
@@ -95,6 +97,18 @@
 #include "LEDA_issues.h"
 #include "LEDA_utils.h"
 #include "LEDA_window_utils.h"
+
+/* ================ GraphDBLIB ================ */
+
+#include "constants.h"
+#include "StandardException.h"
+#include "SDK\graphDB.h"
+#include "SDK\ObjectClass.h"
+#include "SDK\GraphClass.h"
+#include "SDK\Graph.h"
+#include "SDK\Node.h"
+#include "SDK\Edge.h"
+#include "SDK\Point.h"
 
 /* ================ EXTERNAL LIBS ================ */
 
@@ -121,6 +135,8 @@
 
 /* ================ DAG Matcher ================ */
 
+#include "DAGMatcherLib.h"
+
 #include "BasicUtils.h"
 #include "BasicTypes.h"
 #include "DirWalker.h"
@@ -137,7 +153,7 @@
 #include "DDSGraphUtils.h"
 #include "EuclideanLineSegment.h"
 #include "TSV.h"
-#include "DMLString.h" 
+#include "DMLString.h"
 
 #include "LineSegment.h"
 #include "PiecewiseApprox.h"
@@ -150,7 +166,7 @@
 
 #include "SkeletalGraph.h"
 
-#include "KDTree.h" 
+#include "KDTree.h"
 
 #include "BipartiteGraph.h"
 #include "BipartiteNodeGraph.h"
@@ -177,7 +193,7 @@
 
 #include "GeneralizedSkeletalGraph.h"
 
-#include "DAGNode.h" 
+#include "DAGNode.h"
 #include "DAGEdge.h"
 #include "DAGView.h"
 #include "VisualDAG.h"
@@ -187,7 +203,7 @@
 
 #include "ShockPoint.h"
 #include "SGNode.h"
-#include "ShockGraph.h" 
+#include "ShockGraph.h"
 #include "ShockGraphView.h"
 
 #include "BGElement.h"
@@ -207,7 +223,7 @@
 #include "DAGDatabase.h"
 #include "DAGMatcher.h"
 
-#include "DAG.h" 
+#include "DAG.h"
 #include "NodePairInfo.h" // needed by FillNodeMap
 #include "NodeMatchInfo.h"
 

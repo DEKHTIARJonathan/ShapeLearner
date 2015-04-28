@@ -17,12 +17,10 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
- 
 #include "stdafx.h"
 #include "allHeaders.h"
 
 using namespace std;
-
 
 /* *******************************************************************
 *                             Multi Threading                        *
@@ -34,24 +32,22 @@ boost::threadpool::pool ShapeLearner::Pool (constants::nbMaxThread);
 *	\Brief Local Function used to get the ThreadID.
 */
 
-
-void ShapeLearner::createShockGraph (const vector<const string> &imgVect) throw(StandardExcept){	
+void ShapeLearner::createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept){
 	//Random Init
 	std::srand(std::time(0));
-	
+
 	// Create fifo thread pool container with two threads.
-	for (vector<const string>::const_iterator it = imgVect.begin(); it != imgVect.end(); it++){
+	for (vector<const img2Parse>::const_iterator it = imgVect.begin(); it != imgVect.end(); it++){
 		Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, *it));
-	} 
+	}
 	//  Wait until all tasks are finished
 	Pool.wait();
 }
 
-bool ShapeLearner::createShockGraphWorker (const string& imgPath) throw(StandardExcept){
-	shockGraphsGenerator worker(imgPath);
+bool ShapeLearner::createShockGraphWorker (const img2Parse& imgInfo) throw(StandardExcept){
+	shockGraphsGenerator worker(imgInfo.filepath, imgInfo.objClass);
 	worker.taskExecute();
 	return true;
 }
 
-
-
+img2Parse::img2Parse(const string _filepath, const string _objClass) : filepath(_filepath), objClass(_objClass) {}
