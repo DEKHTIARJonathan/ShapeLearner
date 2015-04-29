@@ -51,11 +51,17 @@ namespace odb
   const unsigned int access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::
   persist_statement_types[] =
   {
-    pgsql::int8_oid,
-    pgsql::int8_oid,
-    pgsql::int8_oid,
-    pgsql::int8_oid,
+    pgsql::int4_oid,
     pgsql::text_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
     pgsql::int8_oid
   };
 
@@ -68,11 +74,17 @@ namespace odb
   const unsigned int access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::
   update_statement_types[] =
   {
-    pgsql::int8_oid,
-    pgsql::int8_oid,
-    pgsql::int8_oid,
-    pgsql::int8_oid,
+    pgsql::int4_oid,
     pgsql::text_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
     pgsql::int8_oid,
     pgsql::int8_oid
   };
@@ -153,29 +165,53 @@ namespace odb
     //
     t[1UL] = 0;
 
-    // level
-    //
-    t[2UL] = 0;
-
-    // mass
-    //
-    t[3UL] = 0;
-
-    // type
-    //
-    t[4UL] = 0;
-
     // label
     //
-    if (t[5UL])
+    if (t[2UL])
     {
       i.label_value.capacity (i.label_size);
       grew = true;
     }
 
-    // refGraph
+    // level
+    //
+    t[3UL] = 0;
+
+    // mass
+    //
+    t[4UL] = 0;
+
+    // type
+    //
+    t[5UL] = 0;
+
+    // role
     //
     t[6UL] = 0;
+
+    // pointCount
+    //
+    t[7UL] = 0;
+
+    // contourLength1
+    //
+    t[8UL] = 0;
+
+    // contourLength2
+    //
+    t[9UL] = 0;
+
+    // subtreeCost
+    //
+    t[10UL] = 0;
+
+    // tsvNorm
+    //
+    t[11UL] = 0;
+
+    // refGraph
+    //
+    t[12UL] = 0;
 
     return grew;
   }
@@ -203,30 +239,9 @@ namespace odb
 
     // index
     //
-    b[n].type = pgsql::bind::bigint;
+    b[n].type = pgsql::bind::integer;
     b[n].buffer = &i.index_value;
     b[n].is_null = &i.index_null;
-    n++;
-
-    // level
-    //
-    b[n].type = pgsql::bind::bigint;
-    b[n].buffer = &i.level_value;
-    b[n].is_null = &i.level_null;
-    n++;
-
-    // mass
-    //
-    b[n].type = pgsql::bind::bigint;
-    b[n].buffer = &i.mass_value;
-    b[n].is_null = &i.mass_null;
-    n++;
-
-    // type
-    //
-    b[n].type = pgsql::bind::bigint;
-    b[n].buffer = &i.type_value;
-    b[n].is_null = &i.type_null;
     n++;
 
     // label
@@ -236,6 +251,69 @@ namespace odb
     b[n].capacity = i.label_value.capacity ();
     b[n].size = &i.label_size;
     b[n].is_null = &i.label_null;
+    n++;
+
+    // level
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.level_value;
+    b[n].is_null = &i.level_null;
+    n++;
+
+    // mass
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.mass_value;
+    b[n].is_null = &i.mass_null;
+    n++;
+
+    // type
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.type_value;
+    b[n].is_null = &i.type_null;
+    n++;
+
+    // role
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.role_value;
+    b[n].is_null = &i.role_null;
+    n++;
+
+    // pointCount
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.pointCount_value;
+    b[n].is_null = &i.pointCount_null;
+    n++;
+
+    // contourLength1
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.contourLength1_value;
+    b[n].is_null = &i.contourLength1_null;
+    n++;
+
+    // contourLength2
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.contourLength2_value;
+    b[n].is_null = &i.contourLength2_null;
+    n++;
+
+    // subtreeCost
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.subtreeCost_value;
+    b[n].is_null = &i.subtreeCost_null;
+    n++;
+
+    // tsvNorm
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.tsvNorm_value;
+    b[n].is_null = &i.tsvNorm_null;
     n++;
 
     // refGraph
@@ -271,57 +349,15 @@ namespace odb
     // index
     //
     {
-      long unsigned int const& v =
+      int const& v =
         o.index;
 
       bool is_null (false);
       pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
+          int,
+          pgsql::id_integer >::set_image (
         i.index_value, is_null, v);
       i.index_null = is_null;
-    }
-
-    // level
-    //
-    {
-      long unsigned int const& v =
-        o.level;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
-        i.level_value, is_null, v);
-      i.level_null = is_null;
-    }
-
-    // mass
-    //
-    {
-      long unsigned int const& v =
-        o.mass;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
-        i.mass_value, is_null, v);
-      i.mass_null = is_null;
-    }
-
-    // type
-    //
-    {
-      long unsigned int const& v =
-        o.type;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
-        i.type_value, is_null, v);
-      i.type_null = is_null;
     }
 
     // label
@@ -343,6 +379,132 @@ namespace odb
       i.label_null = is_null;
       i.label_size = size;
       grew = grew || (cap != i.label_value.capacity ());
+    }
+
+    // level
+    //
+    {
+      int const& v =
+        o.level;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.level_value, is_null, v);
+      i.level_null = is_null;
+    }
+
+    // mass
+    //
+    {
+      int const& v =
+        o.mass;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.mass_value, is_null, v);
+      i.mass_null = is_null;
+    }
+
+    // type
+    //
+    {
+      int const& v =
+        o.type;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.type_value, is_null, v);
+      i.type_null = is_null;
+    }
+
+    // role
+    //
+    {
+      ::graphDBLib::NODE_ROLE const& v =
+        o.role;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          ::graphDBLib::NODE_ROLE,
+          pgsql::id_integer >::set_image (
+        i.role_value, is_null, v);
+      i.role_null = is_null;
+    }
+
+    // pointCount
+    //
+    {
+      int const& v =
+        o.pointCount;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.pointCount_value, is_null, v);
+      i.pointCount_null = is_null;
+    }
+
+    // contourLength1
+    //
+    {
+      double const& v =
+        o.contourLength1;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.contourLength1_value, is_null, v);
+      i.contourLength1_null = is_null;
+    }
+
+    // contourLength2
+    //
+    {
+      double const& v =
+        o.contourLength2;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.contourLength2_value, is_null, v);
+      i.contourLength2_null = is_null;
+    }
+
+    // subtreeCost
+    //
+    {
+      double const& v =
+        o.subtreeCost;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.subtreeCost_value, is_null, v);
+      i.subtreeCost_null = is_null;
+    }
+
+    // tsvNorm
+    //
+    {
+      double const& v =
+        o.tsvNorm;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.tsvNorm_value, is_null, v);
+      i.tsvNorm_null = is_null;
     }
 
     // refGraph
@@ -401,57 +563,15 @@ namespace odb
     // index
     //
     {
-      long unsigned int& v =
+      int& v =
         o.index;
 
       pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
+          int,
+          pgsql::id_integer >::set_value (
         v,
         i.index_value,
         i.index_null);
-    }
-
-    // level
-    //
-    {
-      long unsigned int& v =
-        o.level;
-
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
-        v,
-        i.level_value,
-        i.level_null);
-    }
-
-    // mass
-    //
-    {
-      long unsigned int& v =
-        o.mass;
-
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
-        v,
-        i.mass_value,
-        i.mass_null);
-    }
-
-    // type
-    //
-    {
-      long unsigned int& v =
-        o.type;
-
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
-        v,
-        i.type_value,
-        i.type_null);
     }
 
     // label
@@ -467,6 +587,132 @@ namespace odb
         i.label_value,
         i.label_size,
         i.label_null);
+    }
+
+    // level
+    //
+    {
+      int& v =
+        o.level;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.level_value,
+        i.level_null);
+    }
+
+    // mass
+    //
+    {
+      int& v =
+        o.mass;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.mass_value,
+        i.mass_null);
+    }
+
+    // type
+    //
+    {
+      int& v =
+        o.type;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.type_value,
+        i.type_null);
+    }
+
+    // role
+    //
+    {
+      ::graphDBLib::NODE_ROLE& v =
+        o.role;
+
+      pgsql::value_traits<
+          ::graphDBLib::NODE_ROLE,
+          pgsql::id_integer >::set_value (
+        v,
+        i.role_value,
+        i.role_null);
+    }
+
+    // pointCount
+    //
+    {
+      int& v =
+        o.pointCount;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.pointCount_value,
+        i.pointCount_null);
+    }
+
+    // contourLength1
+    //
+    {
+      double& v =
+        o.contourLength1;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.contourLength1_value,
+        i.contourLength1_null);
+    }
+
+    // contourLength2
+    //
+    {
+      double& v =
+        o.contourLength2;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.contourLength2_value,
+        i.contourLength2_null);
+    }
+
+    // subtreeCost
+    //
+    {
+      double& v =
+        o.subtreeCost;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.subtreeCost_value,
+        i.subtreeCost_null);
+    }
+
+    // tsvNorm
+    //
+    {
+      double& v =
+        o.tsvNorm;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.tsvNorm_value,
+        i.tsvNorm_null);
     }
 
     // refGraph
@@ -513,23 +759,35 @@ namespace odb
   "INSERT INTO \"Node\" "
   "(\"idNode\", "
   "\"index\", "
+  "\"label\", "
   "\"level\", "
   "\"mass\", "
   "\"type\", "
-  "\"label\", "
+  "\"role\", "
+  "\"pointCount\", "
+  "\"contourLength1\", "
+  "\"contourLength2\", "
+  "\"subtreeCost\", "
+  "\"tsvNorm\", "
   "\"refGraph\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) "
   "RETURNING \"idNode\"";
 
   const char access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::find_statement[] =
   "SELECT "
   "\"Node\".\"idNode\", "
   "\"Node\".\"index\", "
+  "\"Node\".\"label\", "
   "\"Node\".\"level\", "
   "\"Node\".\"mass\", "
   "\"Node\".\"type\", "
-  "\"Node\".\"label\", "
+  "\"Node\".\"role\", "
+  "\"Node\".\"pointCount\", "
+  "\"Node\".\"contourLength1\", "
+  "\"Node\".\"contourLength2\", "
+  "\"Node\".\"subtreeCost\", "
+  "\"Node\".\"tsvNorm\", "
   "\"Node\".\"refGraph\" "
   "FROM \"Node\" "
   "WHERE \"Node\".\"idNode\"=$1";
@@ -538,12 +796,18 @@ namespace odb
   "UPDATE \"Node\" "
   "SET "
   "\"index\"=$1, "
-  "\"level\"=$2, "
-  "\"mass\"=$3, "
-  "\"type\"=$4, "
-  "\"label\"=$5, "
-  "\"refGraph\"=$6 "
-  "WHERE \"idNode\"=$7";
+  "\"label\"=$2, "
+  "\"level\"=$3, "
+  "\"mass\"=$4, "
+  "\"type\"=$5, "
+  "\"role\"=$6, "
+  "\"pointCount\"=$7, "
+  "\"contourLength1\"=$8, "
+  "\"contourLength2\"=$9, "
+  "\"subtreeCost\"=$10, "
+  "\"tsvNorm\"=$11, "
+  "\"refGraph\"=$12 "
+  "WHERE \"idNode\"=$13";
 
   const char access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Node\" "
@@ -553,10 +817,16 @@ namespace odb
   "SELECT\n"
   "\"Node\".\"idNode\",\n"
   "\"Node\".\"index\",\n"
+  "\"Node\".\"label\",\n"
   "\"Node\".\"level\",\n"
   "\"Node\".\"mass\",\n"
   "\"Node\".\"type\",\n"
-  "\"Node\".\"label\",\n"
+  "\"Node\".\"role\",\n"
+  "\"Node\".\"pointCount\",\n"
+  "\"Node\".\"contourLength1\",\n"
+  "\"Node\".\"contourLength2\",\n"
+  "\"Node\".\"subtreeCost\",\n"
+  "\"Node\".\"tsvNorm\",\n"
   "\"Node\".\"refGraph\"\n"
   "FROM \"Node\"\n"
   "LEFT JOIN \"Graph\" AS \"refGraph\" ON \"refGraph\".\"idGraph\"=\"Node\".\"refGraph\"";

@@ -23,58 +23,121 @@
 using namespace std;
 using namespace graphDBLib;
 
-Node::Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index, unsigned long _level, unsigned long _mass, unsigned long _type, string _label) :
-	refGraph(_refGraph),
-	index(_index),
-	level(_level),
-	mass(_mass),
-	type(_type),
-	label(_label),
-	idNode(0)
-	{
-		idNode = saveInDB();
-		Logger::Log("New Object Instanciated : Node("+ to_string((_ULonglong)getKey())+")");
-	}
+Node::Node(boost::weak_ptr<Graph> _refGraph) : refGraph(_refGraph),	idNode(0) {
+	index = -1;
+	label = "";
+	level = -1;
+	mass = -1;
+	type = -1;
+	role = UNK_ROLE;
+	pointCount = -1;
+	contourLength1 = -1;
+	contourLength2 = -1;
+	subtreeCost = -1;
+	tsvNorm = -1;
+	idNode = saveInDB();
+	Logger::Log("New Object Instanciated : Node("+ to_string((_ULonglong)getKey())+")");
+}
 
-void Node::setIndex(const unsigned long _index) {
+unsigned long Node::getKey() const {return idNode;}
+
+int Node::getIndex() const {
+	return index;
+}
+void Node::setIndex(const int _index) {
 	index = _index;
 	updateInDB();
 }
 
-void Node::setLevel(const unsigned long _level) {
+int Node::getLevel() const {
+	return level;
+}
+void Node::setLevel(const int _level) {
 	level = _level;
 	updateInDB();
 }
 
-void Node::setMass(const unsigned long _mass) {
+int Node::getMass() const {
+	return mass;
+}
+void Node::setMass(const int _mass) {
 	mass = _mass;
 	updateInDB();
 }
 
-void Node::setType(const unsigned long _type) {
+int Node::getType() const {
+	return type;
+}
+void Node::setType(const int _type) {
 	type = _type;
 	updateInDB();
 }
 
+string Node::getLabel() const {
+	return label;
+}
 void Node::setLabel(const string& _label) {
 	label = _label;
 	updateInDB();
 }
 
-unsigned long Node::getPointCount() const {
+NODE_ROLE Node::getRole() const{
+	return role;
+}
+void Node::setRole(const NODE_ROLE _role){
+	role = _role;
+	updateInDB();
+}
+
+double Node::getContourLength1() const{
+	return contourLength1;
+}
+void Node::setContourLength1(const double _contourLength1){
+	contourLength1 = _contourLength1;
+	updateInDB();
+}
+
+double Node::getContourLength2() const{
+	return contourLength2;
+}
+void Node::setContourLength2(const double _contourLength2){
+	contourLength2 = _contourLength2;
+	updateInDB();
+}
+
+double Node::getSubtreeCost() const{
+	return subtreeCost;
+}
+void Node::setSubtreeCost(const double _subtreeCost){
+	subtreeCost = _subtreeCost;
+	updateInDB();
+}
+
+double Node::getTSVNorm() const{
+	return tsvNorm;
+}
+void Node::setTSVNorm(const double _tsvNorm){
+	tsvNorm = _tsvNorm;
+	updateInDB();
+}
+
+int Node::getPointCount() const{
+	return pointCount;
+}
+void Node::setPointCount(const int _pointCount){
+	pointCount = _pointCount;
+	updateInDB();
+}
+int Node::getPointCountFromDB() const {
 	return GraphDB::ObjectInterface::getPointCountInNode(idNode);
 }
 
 void Node::updateInDB(){
-	#ifdef _MSC_VER
-		GraphDB::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	GraphDB::ObjectInterface::updateObject(*this);
 }
 
-unsigned long Node::saveInDB(){
-	#ifdef _MSC_VER
-		return GraphDB::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
+int Node::saveInDB(){
+	return GraphDB::ObjectInterface::saveObject(*this);
 }
 
 boost::weak_ptr<Graph> Node::getParentGraph(){

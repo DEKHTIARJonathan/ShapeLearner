@@ -54,6 +54,12 @@ namespace odb
     pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::text_oid,
+    pgsql::float8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
     pgsql::int8_oid,
     pgsql::int8_oid
   };
@@ -70,6 +76,12 @@ namespace odb
     pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::float8_oid,
+    pgsql::text_oid,
+    pgsql::float8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
     pgsql::int8_oid,
     pgsql::int8_oid,
     pgsql::int8_oid
@@ -164,13 +176,41 @@ namespace odb
     //
     t[3UL] = 0;
 
-    // refGraph
+    // speed
     //
     t[4UL] = 0;
 
-    // refNode
+    // dr_ds
     //
     t[5UL] = 0;
+
+    // color
+    //
+    if (t[6UL])
+    {
+      i.color_value.capacity (i.color_size);
+      grew = true;
+    }
+
+    // dr
+    //
+    t[7UL] = 0;
+
+    // type
+    //
+    t[8UL] = 0;
+
+    // direction
+    //
+    t[9UL] = 0;
+
+    // refGraph
+    //
+    t[10UL] = 0;
+
+    // refNode
+    //
+    t[11UL] = 0;
 
     return grew;
   }
@@ -215,6 +255,50 @@ namespace odb
     b[n].type = pgsql::bind::double_;
     b[n].buffer = &i.radius_value;
     b[n].is_null = &i.radius_null;
+    n++;
+
+    // speed
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.speed_value;
+    b[n].is_null = &i.speed_null;
+    n++;
+
+    // dr_ds
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.dr_ds_value;
+    b[n].is_null = &i.dr_ds_null;
+    n++;
+
+    // color
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.color_value.data ();
+    b[n].capacity = i.color_value.capacity ();
+    b[n].size = &i.color_size;
+    b[n].is_null = &i.color_null;
+    n++;
+
+    // dr
+    //
+    b[n].type = pgsql::bind::double_;
+    b[n].buffer = &i.dr_value;
+    b[n].is_null = &i.dr_null;
+    n++;
+
+    // type
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.type_value;
+    b[n].is_null = &i.type_null;
+    n++;
+
+    // direction
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.direction_value;
+    b[n].is_null = &i.direction_null;
     n++;
 
     // refGraph
@@ -294,6 +378,97 @@ namespace odb
           pgsql::id_double >::set_image (
         i.radius_value, is_null, v);
       i.radius_null = is_null;
+    }
+
+    // speed
+    //
+    {
+      double const& v =
+        o.speed;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.speed_value, is_null, v);
+      i.speed_null = is_null;
+    }
+
+    // dr_ds
+    //
+    {
+      double const& v =
+        o.dr_ds;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.dr_ds_value, is_null, v);
+      i.dr_ds_null = is_null;
+    }
+
+    // color
+    //
+    {
+      char const& v =
+        o.color;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.color_value.capacity ());
+      pgsql::value_traits<
+          char,
+          pgsql::id_string >::set_image (
+        i.color_value,
+        size,
+        is_null,
+        v);
+      i.color_null = is_null;
+      i.color_size = size;
+      grew = grew || (cap != i.color_value.capacity ());
+    }
+
+    // dr
+    //
+    {
+      double const& v =
+        o.dr;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_image (
+        i.dr_value, is_null, v);
+      i.dr_null = is_null;
+    }
+
+    // type
+    //
+    {
+      int const& v =
+        o.type;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.type_value, is_null, v);
+      i.type_null = is_null;
+    }
+
+    // direction
+    //
+    {
+      ::graphDBLib::BRANCH_DIR const& v =
+        o.direction;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          ::graphDBLib::BRANCH_DIR,
+          pgsql::id_integer >::set_image (
+        i.direction_value, is_null, v);
+      i.direction_null = is_null;
     }
 
     // refGraph
@@ -418,6 +593,91 @@ namespace odb
         i.radius_null);
     }
 
+    // speed
+    //
+    {
+      double& v =
+        o.speed;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.speed_value,
+        i.speed_null);
+    }
+
+    // dr_ds
+    //
+    {
+      double& v =
+        o.dr_ds;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.dr_ds_value,
+        i.dr_ds_null);
+    }
+
+    // color
+    //
+    {
+      char& v =
+        o.color;
+
+      pgsql::value_traits<
+          char,
+          pgsql::id_string >::set_value (
+        v,
+        i.color_value,
+        i.color_size,
+        i.color_null);
+    }
+
+    // dr
+    //
+    {
+      double& v =
+        o.dr;
+
+      pgsql::value_traits<
+          double,
+          pgsql::id_double >::set_value (
+        v,
+        i.dr_value,
+        i.dr_null);
+    }
+
+    // type
+    //
+    {
+      int& v =
+        o.type;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.type_value,
+        i.type_null);
+    }
+
+    // direction
+    //
+    {
+      ::graphDBLib::BRANCH_DIR& v =
+        o.direction;
+
+      pgsql::value_traits<
+          ::graphDBLib::BRANCH_DIR,
+          pgsql::id_integer >::set_value (
+        v,
+        i.direction_value,
+        i.direction_null);
+    }
+
     // refGraph
     //
     {
@@ -490,10 +750,16 @@ namespace odb
   "\"xCoord\", "
   "\"yCoord\", "
   "\"radius\", "
+  "\"speed\", "
+  "\"dr_ds\", "
+  "\"color\", "
+  "\"dr\", "
+  "\"type\", "
+  "\"direction\", "
   "\"refGraph\", "
   "\"refNode\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) "
   "RETURNING \"idPoint\"";
 
   const char access::object_traits_impl< ::graphDBLib::Point, id_pgsql >::find_statement[] =
@@ -502,6 +768,12 @@ namespace odb
   "\"Point\".\"xCoord\", "
   "\"Point\".\"yCoord\", "
   "\"Point\".\"radius\", "
+  "\"Point\".\"speed\", "
+  "\"Point\".\"dr_ds\", "
+  "\"Point\".\"color\", "
+  "\"Point\".\"dr\", "
+  "\"Point\".\"type\", "
+  "\"Point\".\"direction\", "
   "\"Point\".\"refGraph\", "
   "\"Point\".\"refNode\" "
   "FROM \"Point\" "
@@ -513,9 +785,15 @@ namespace odb
   "\"xCoord\"=$1, "
   "\"yCoord\"=$2, "
   "\"radius\"=$3, "
-  "\"refGraph\"=$4, "
-  "\"refNode\"=$5 "
-  "WHERE \"idPoint\"=$6";
+  "\"speed\"=$4, "
+  "\"dr_ds\"=$5, "
+  "\"color\"=$6, "
+  "\"dr\"=$7, "
+  "\"type\"=$8, "
+  "\"direction\"=$9, "
+  "\"refGraph\"=$10, "
+  "\"refNode\"=$11 "
+  "WHERE \"idPoint\"=$12";
 
   const char access::object_traits_impl< ::graphDBLib::Point, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Point\" "
@@ -527,6 +805,12 @@ namespace odb
   "\"Point\".\"xCoord\",\n"
   "\"Point\".\"yCoord\",\n"
   "\"Point\".\"radius\",\n"
+  "\"Point\".\"speed\",\n"
+  "\"Point\".\"dr_ds\",\n"
+  "\"Point\".\"color\",\n"
+  "\"Point\".\"dr\",\n"
+  "\"Point\".\"type\",\n"
+  "\"Point\".\"direction\",\n"
   "\"Point\".\"refGraph\",\n"
   "\"Point\".\"refNode\"\n"
   "FROM \"Point\"\n"
@@ -833,6 +1117,20 @@ namespace odb
     st.execute ();
     auto_result ar (st);
     select_statement::result r (st.fetch ());
+
+    if (r == select_statement::truncated)
+    {
+      if (grow (im, sts.select_image_truncated ()))
+        im.version++;
+
+      if (im.version != sts.select_image_version ())
+      {
+        bind (imb.bind, im, statement_select);
+        sts.select_image_version (im.version);
+        imb.version++;
+        st.refetch ();
+      }
+    }
 
     return r != select_statement::no_data;
   }

@@ -84,7 +84,6 @@ int main(int argc, char **argv)
 			imgVect.push_back(img2Parse("img/rod11.ppm", "Rod"));
 			imgVect.push_back(img2Parse("img/rod12.ppm", "Rod"));
 			imgVect.push_back(img2Parse("img/rod13.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod13.ppm", "Rod"));
 			imgVect.push_back(img2Parse("img/rod14.ppm", "Rod"));
 			imgVect.push_back(img2Parse("img/rod15.ppm", "Rod"));
 			imgVect.push_back(img2Parse("img/rod16.ppm", "Rod"));

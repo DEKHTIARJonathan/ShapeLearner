@@ -205,6 +205,78 @@ namespace odb
 
     static const radius_type_ radius;
 
+    // speed
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    speed_type_;
+
+    static const speed_type_ speed;
+
+    // dr_ds
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    dr_ds_type_;
+
+    static const dr_ds_type_ dr_ds;
+
+    // color
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        char,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    color_type_;
+
+    static const color_type_ color;
+
+    // dr
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    dr_type_;
+
+    static const dr_type_ dr;
+
+    // type
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    type_type_;
+
+    static const type_type_ type;
+
+    // direction
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::graphDBLib::BRANCH_DIR,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    direction_type_;
+
+    static const direction_type_ direction;
+
     // refGraph
     //
     typedef
@@ -251,6 +323,36 @@ namespace odb
   radius (A::table_name, "\"radius\"", 0);
 
   template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::speed_type_
+  pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  speed (A::table_name, "\"speed\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::dr_ds_type_
+  pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  dr_ds (A::table_name, "\"dr_ds\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::color_type_
+  pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  color (A::table_name, "\"color\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::dr_type_
+  pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  dr (A::table_name, "\"dr\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::type_type_
+  pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  type (A::table_name, "\"type\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::direction_type_
+  pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  direction (A::table_name, "\"direction\"", 0);
+
+  template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::refGraph_type_
   pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
   refGraph (A::table_name, "\"refGraph\"", 0);
@@ -294,6 +396,37 @@ namespace odb
       //
       double radius_value;
       bool radius_null;
+
+      // speed
+      //
+      double speed_value;
+      bool speed_null;
+
+      // dr_ds
+      //
+      double dr_ds_value;
+      bool dr_ds_null;
+
+      // color
+      //
+      details::buffer color_value;
+      std::size_t color_size;
+      bool color_null;
+
+      // dr
+      //
+      double dr_value;
+      bool dr_null;
+
+      // type
+      //
+      int type_value;
+      bool type_null;
+
+      // direction
+      //
+      int direction_value;
+      bool direction_null;
 
       // refGraph
       //
@@ -350,7 +483,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 6UL;
+    static const std::size_t column_count = 12UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -705,6 +838,78 @@ namespace odb
 
     static const radius_type_ radius;
 
+    // speed
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    speed_type_;
+
+    static const speed_type_ speed;
+
+    // dr_ds
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    dr_ds_type_;
+
+    static const dr_ds_type_ dr_ds;
+
+    // color
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        char,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    color_type_;
+
+    static const color_type_ color;
+
+    // dr
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    dr_type_;
+
+    static const dr_type_ dr;
+
+    // type
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    type_type_;
+
+    static const type_type_ type;
+
+    // direction
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::graphDBLib::BRANCH_DIR,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    direction_type_;
+
+    static const direction_type_ direction;
+
     // refGraph
     //
     typedef
@@ -781,6 +986,36 @@ namespace odb
   const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::radius_type_
   query_columns< ::graphDBLib::Point, id_pgsql, A >::
   radius (A::table_name, "\"radius\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::speed_type_
+  query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  speed (A::table_name, "\"speed\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::dr_ds_type_
+  query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  dr_ds (A::table_name, "\"dr_ds\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::color_type_
+  query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  color (A::table_name, "\"color\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::dr_type_
+  query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  dr (A::table_name, "\"dr\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::type_type_
+  query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  type (A::table_name, "\"type\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::direction_type_
+  query_columns< ::graphDBLib::Point, id_pgsql, A >::
+  direction (A::table_name, "\"direction\"", 0);
 
   template <typename A>
   const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::refGraph_type_

@@ -35,6 +35,8 @@ namespace graphDBLib{
 	class GraphDB; // Forward Declaration of the class contained in graphDB.h
 	class Point; //Forward Declaration of the class contained in Point.h
 
+	enum NODE_ROLE {UNK_ROLE = 0, BIRTH, PROTRUSION, UNION, DEATH, DUMMY};
+
 	/*!
 	*	\class Node
 	*	\brief Part of the Graph Data Model. A Node is composed of many Points and can be link to many Edges. It is one of the key components of a Graph.
@@ -48,29 +50,46 @@ namespace graphDBLib{
 		*/
 		class Access {
 			friend class GraphDB;
-			static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph, unsigned long _index = 1, unsigned long _level = 1, unsigned long _mass = 1, unsigned long _type = 1, string _label = "1"){
-				return boost::shared_ptr<Node>(new Node(_refGraph, _index, _level, _mass, _type, _label));
+			static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph){
+				return boost::shared_ptr<Node>(new Node(_refGraph));
 			}
 		};
 
-		unsigned long getKey() const {return idNode;}
+		unsigned long getKey() const;
 
-		unsigned long getIndex() const {return index;}
-		void setIndex(const unsigned long _index);
+		int getIndex() const;
+		void setIndex(const int _index);
 
-		unsigned long getLevel() const {return level;}
-		void setLevel(const unsigned long _level);
-
-		unsigned long getMass() const {return mass;}
-		void setMass(const unsigned long _mass);
-
-		unsigned long getType() const {return type;}
-		void setType(const unsigned long _type);
-
-		string getLabel() const {return label;}
+		string getLabel() const;
 		void setLabel(const string& _label);
 
-		unsigned long getPointCount() const;
+		int getLevel() const;
+		void setLevel(const int _level);
+
+		int getMass() const;
+		void setMass(const int _mass);
+
+		int getType() const;
+		void setType(const int _type);
+
+		NODE_ROLE getRole() const;
+		void setRole(const NODE_ROLE _role);
+
+		int getPointCount() const;
+		void setPointCount(const int _pointCount);
+		int getPointCountFromDB() const;
+
+		double getContourLength1() const;
+		void setContourLength1(const double _contourLength1);
+
+		double getContourLength2() const;
+		void setContourLength2(const double _contourLength2);
+
+		double getSubtreeCost() const;
+		void setSubtreeCost(const double _subtreeCost);
+
+		double getTSVNorm() const;
+		void setTSVNorm(const double _tsvNorm);
 
 		boost::weak_ptr<Graph> getParentGraph();
 
@@ -84,19 +103,26 @@ namespace graphDBLib{
 		/* =========== Template function =========== */
 
 	private:
-		unsigned long						idNode;
-		unsigned long						index;
-		unsigned long						level;
-		unsigned long						mass;
-		unsigned long						type;
-		string								label;
+		unsigned long	idNode;
+		int				index; //!< Index relative to a depth-first search : nDFSIndex
+		string			label; //!< Node's label : nodeLbl
+		int				level; //!< Node level in the hierarchical structure : nLevel
+		int				mass; //!< Node mass : nMass
+		int				type; //!< Shock branch type (1, 2, 3, 4) : m_nType
+		NODE_ROLE		role;
+		int				pointCount;
+		double			contourLength1; //!< Contour segment's lengths
+		double			contourLength2; //!< Contour segment's lengths
+		double			subtreeCost; //!< Cost of the subtree rooted at the node
+		double			tsvNorm; //!< Node TSV's norm
+
 		odb::boost::lazy_weak_ptr<Graph>	refGraph;
 
 		/*!
 		*	\brief  Classical constructor needed to let ODB load objects from DB.
 		*/
 		Node() {}
-		Node(boost::weak_ptr<Graph> _refGraph, unsigned long _index = 1, unsigned long _level = 1, unsigned long _mass = 1, unsigned long _type = 1, string _label = "1");
+		Node(boost::weak_ptr<Graph> _refGraph);
 
 		/*!
 		*	\fn void updateInDB();
@@ -105,10 +131,10 @@ namespace graphDBLib{
 		void updateInDB();
 
 		/*!
-		*	\fn unsigned long saveInDB();
+		*	\fn int saveInDB();
 		*	\brief Persist the object in the database.
 		*/
-		unsigned long saveInDB();
+		int saveInDB();
 
 		/*!
 		*	\brief Friendship required in order to let ODB manage the object.
@@ -119,11 +145,18 @@ namespace graphDBLib{
 	#pragma db value(std::string) type("VARCHAR(255)")
 	#pragma db object(Node)
 	#pragma db member(Node::idNode) id auto
-	#pragma db member(Node::index) not_null default("1")
-	#pragma db member(Node::level) not_null default("1")
-	#pragma db member(Node::mass) not_null default("1")
-	#pragma db member(Node::type) not_null default("1")
-	#pragma db member(Node::label) not_null default("1")
+	#pragma db member(Node::index) default("-1")
+	#pragma db member(Node::level) default("-1")
+	#pragma db member(Node::mass) default("-1")
+	#pragma db member(Node::type) default("-1")
+	#pragma db member(Node::label) default("-1")
+	#pragma db member(Node::pointCount) default("-1")
+	#pragma db member(Node::contourLength1) default("-1")
+	#pragma db member(Node::contourLength2) default("-1")
+	#pragma db member(Node::subtreeCost) default("-1")
+	#pragma db member(Node::tsvNorm) default("-1")
+	#pragma db member(Node::role) default(UNK_ROLE)
+
 	#pragma db member(Node::refGraph) not_null on_delete(cascade)
 	#pragma db index(Node::"Node_RefGraph") method("BTREE") member(refGraph)
 

@@ -88,21 +88,21 @@ namespace graphDBLib{
 				*	\param keyDB : The object's key we want to load from application memory/DB.
 				*/
 				static boost::weak_ptr<Point>			getPoint(const unsigned long keyDB) throw(StandardExcept);
-				
+
 				/*!
 				*	\fn static boost::weak_ptr<Node> getNode(const unsigned long keyDB) throw(StandardExcept);
 				*	\brief Static method returning a weak_ptr<Node>, if the object isn't instanciated yet in the application memory, it loads it from the DB. If the keyDB doesn't exist an exception is raised.
 				*	\param keyDB : The object's key we want to load from application memory/DB.
 				*/
 				static boost::weak_ptr<Node>			getNode(const unsigned long keyDB) throw(StandardExcept);
-				
+
 				/*!
 				*	\fn static boost::weak_ptr<Edge> getEdge(const unsigned long keyDB) throw(StandardExcept);
 				*	\brief Static method returning a weak_ptr<Edge>, if the object isn't instanciated yet in the application memory, it loads it from the DB. If the keyDB doesn't exist an exception is raised.
 				*	\param keyDB : The object's key we want to load from application memory/DB.
 				*/
 				static boost::weak_ptr<Edge>			getEdge(const unsigned long keyDB) throw(StandardExcept);
-				
+
 				/*!
 				*	\fn static boost::weak_ptr<Graph> getGraph(const unsigned long keyDB) throw(StandardExcept);
 				*	\brief Static method returning a weak_ptr<Graph>, if the object isn't instanciated yet in the application memory, it loads it from the DB. If the keyDB doesn't exist an exception is raised.
@@ -113,17 +113,17 @@ namespace graphDBLib{
 				/* ************** Getters & Setters ***********/
 				/*!
 				*	\fn static boost::weak_ptr<GraphClass> getGraphClass(const string& name, const bool isDirect = false, const bool isAcyclic = false) throw(StandardExcept);
-				*	\brief Static method returning a weak_ptr<GraphClass>, if the object isn't instanciated yet in the application memory, it loads it from the DB. 
+				*	\brief Static method returning a weak_ptr<GraphClass>, if the object isn't instanciated yet in the application memory, it loads it from the DB.
 				*	If the key "name" doesn't exist, the object is created in the DB with the optional parameters as member values and then returned as a weak_ptr<GraphClass>.
 				*	\param name : The object's key we want to load from application memory/DB. If the object doesn't exist yet, it will be the new object key.
 				*	\param isDirect: Only usefull if the objet doesn't exist in the DB yet. Is the graph type a direct graph : true / false.
 				*	\param isAcyclic: Only useful if the objet doesn't exist in the DB yet. Is the graph type an acyclic graph : true / false.
 				*/
 				static boost::weak_ptr<GraphClass>		getGraphClass(const string& name, const bool isDirect = false, const bool isAcyclic = false) throw(StandardExcept);
-				
+
 				/*!
 				*	\fn static boost::weak_ptr<ObjectClass> getObjectClass(const string& name) throw(StandardExcept);
-				*	\brief Static method returning a weak_ptr<ObjectClass>, if the object isn't instanciated yet in the application memory, it loads it from the DB. 
+				*	\brief Static method returning a weak_ptr<ObjectClass>, if the object isn't instanciated yet in the application memory, it loads it from the DB.
 				*	If the key "name" doesn't exist, the object is created in the DB and then returned as a weak_ptr<ObjectClass>.
 				*	\param name : The object's key we want to load from application memory/DB. If the object doesn't exist yet, it will be the new object key.
 				*/
@@ -135,41 +135,31 @@ namespace graphDBLib{
 				*	\brief Static method returning a weak_ptr<Point>. Instanciantes a new Object of type Point and persists it in the DB. The members values are set by the different arguments.
 				*	\param _refNode : What Node is the new Point linked to ?
 				*	\param _refGraph : What Graph is the new Point linked to ?
-				*	\param _xCoord : What is the "x" Coordinate of the Point ?
-				*	\param _yCoord : What is the "y" Coordinate of the Point ?
-				*	\param _radius : What is the "radius" of the Point ?
 				*/
-				static boost::weak_ptr<Point>			getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph, const double _xCoord = 0, const double _yCoord = 0, const double _radius = 1);
-				
+				static boost::weak_ptr<Point>			getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph);
+
 				/*!
-				*	\fn static boost::weak_ptr<Node> getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned long _index = 1, const unsigned long _level = 1, const unsigned long _mass = 1, const unsigned long _type = 1, const string _label = "1");
+				*	\fn static boost::weak_ptr<Node> getNode(const boost::weak_ptr<Graph> _refGraph);
 				*	\brief Static method returning a weak_ptr<Node>. Instanciantes a new Object of type Node and persists it in the DB. The members values are set by the different arguments.
 				*	\param _refGraph : What Graph is the new Node linked to ?
-				*	\param _index : What is the "index" of the Node ?
-				*	\param _level : What is the "level" of the Node ?
-				*	\param _mass : What is the "mass"  of the Node ?
-				*	\param _type : What is the "type"  of the Node ?
-				*	\param _label : What is the "label"  of the Node ?
 				*/
-				static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned long _index = 1, const unsigned long _level = 1, const unsigned long _mass = 1, const unsigned long _type = 1, const string _label = "1");
-				
+				static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph);
+
 				/*!
 				*	\fn static boost::weak_ptr<Edge> getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight = 1);
 				*	\brief Static method returning a weak_ptr<Edge>. Instanciantes a new Object of type Edge and persists it in the DB. The members values are set by the different arguments.
 				*	\param _source : What is the "source Node" of the Edge ?
 				*	\param _target : What is the "target Node" of the Edge ?
 				*	\param _refGraph : What Graph is the new Edge linked to ?
-				*	\param _weight : What is the "weight" of the Edge ?
 				*/
-				static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight = 1);
-				
+				static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph);
+
 				/*!
-				*	\fn static boost::weak_ptr<Graph> getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName, const unsigned long _viewNumber = 1);
+				*	\fn static boost::weak_ptr<Graph> getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName);
 				*	\brief Static method returning a weak_ptr<Graph>. Instanciantes a new Object of type Graph and persists it in the DB. The members values are set by the different arguments.
 				*	\param _graphClass : What is the "GraphClass" of the Graph ?
 				*	\param _objectClass : What is the "ObjectClass" of the Graph ?
 				*	\param _objectName : What is the "objectName" of the Graph ?
-				*	\param _viewNumber : What is the "viewNumber" of the Graph ?
 				*/
 				static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName);
 

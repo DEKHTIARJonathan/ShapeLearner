@@ -48,8 +48,8 @@ namespace graphDBLib{
 		*/
 		class Access {
 			friend class GraphDB;
-			static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1){
-				return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph, _weight));
+			static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph){
+				return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph));
 			}
 		};
 
@@ -74,7 +74,7 @@ namespace graphDBLib{
 		*	\brief  Classical constructor needed to let ODB load objects from DB.
 		*/
 		Edge() {}
-		Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight = 1);
+		Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph);
 
 		/*!
 		*	\fn void updateInDB();

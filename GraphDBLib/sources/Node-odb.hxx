@@ -136,48 +136,12 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
     index_type_;
 
     static const index_type_ index;
-
-    // level
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    level_type_;
-
-    static const level_type_ level;
-
-    // mass
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    mass_type_;
-
-    static const mass_type_ mass;
-
-    // type
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    type_type_;
-
-    static const type_type_ type;
 
     // label
     //
@@ -190,6 +154,114 @@ namespace odb
     label_type_;
 
     static const label_type_ label;
+
+    // level
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    level_type_;
+
+    static const level_type_ level;
+
+    // mass
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    mass_type_;
+
+    static const mass_type_ mass;
+
+    // type
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    type_type_;
+
+    static const type_type_ type;
+
+    // role
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::graphDBLib::NODE_ROLE,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    role_type_;
+
+    static const role_type_ role;
+
+    // pointCount
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    pointCount_type_;
+
+    static const pointCount_type_ pointCount;
+
+    // contourLength1
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    contourLength1_type_;
+
+    static const contourLength1_type_ contourLength1;
+
+    // contourLength2
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    contourLength2_type_;
+
+    static const contourLength2_type_ contourLength2;
+
+    // subtreeCost
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    subtreeCost_type_;
+
+    static const subtreeCost_type_ subtreeCost;
+
+    // tsvNorm
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    tsvNorm_type_;
+
+    static const tsvNorm_type_ tsvNorm;
 
     // refGraph
     //
@@ -215,6 +287,11 @@ namespace odb
   index (A::table_name, "\"index\"", 0);
 
   template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::label_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  label (A::table_name, "\"label\"", 0);
+
+  template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::level_type_
   pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   level (A::table_name, "\"level\"", 0);
@@ -230,9 +307,34 @@ namespace odb
   type (A::table_name, "\"type\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::label_type_
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::role_type_
   pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
-  label (A::table_name, "\"label\"", 0);
+  role (A::table_name, "\"role\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::pointCount_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  pointCount (A::table_name, "\"pointCount\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength1_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  contourLength1 (A::table_name, "\"contourLength1\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength2_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  contourLength2 (A::table_name, "\"contourLength2\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::subtreeCost_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  subtreeCost (A::table_name, "\"subtreeCost\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::tsvNorm_type_
+  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  tsvNorm (A::table_name, "\"tsvNorm\"", 0);
 
   template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::refGraph_type_
@@ -261,29 +363,59 @@ namespace odb
 
       // index
       //
-      long long index_value;
+      int index_value;
       bool index_null;
-
-      // level
-      //
-      long long level_value;
-      bool level_null;
-
-      // mass
-      //
-      long long mass_value;
-      bool mass_null;
-
-      // type
-      //
-      long long type_value;
-      bool type_null;
 
       // label
       //
       details::buffer label_value;
       std::size_t label_size;
       bool label_null;
+
+      // level
+      //
+      int level_value;
+      bool level_null;
+
+      // mass
+      //
+      int mass_value;
+      bool mass_null;
+
+      // type
+      //
+      int type_value;
+      bool type_null;
+
+      // role
+      //
+      int role_value;
+      bool role_null;
+
+      // pointCount
+      //
+      int pointCount_value;
+      bool pointCount_null;
+
+      // contourLength1
+      //
+      double contourLength1_value;
+      bool contourLength1_null;
+
+      // contourLength2
+      //
+      double contourLength2_value;
+      bool contourLength2_null;
+
+      // subtreeCost
+      //
+      double subtreeCost_value;
+      bool subtreeCost_null;
+
+      // tsvNorm
+      //
+      double tsvNorm_value;
+      bool tsvNorm_null;
 
       // refGraph
       //
@@ -334,7 +466,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 7UL;
+    static const std::size_t column_count = 13UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -520,48 +652,12 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
     index_type_;
 
     static const index_type_ index;
-
-    // level
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    level_type_;
-
-    static const level_type_ level;
-
-    // mass
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    mass_type_;
-
-    static const mass_type_ mass;
-
-    // type
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    type_type_;
-
-    static const type_type_ type;
 
     // label
     //
@@ -574,6 +670,114 @@ namespace odb
     label_type_;
 
     static const label_type_ label;
+
+    // level
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    level_type_;
+
+    static const level_type_ level;
+
+    // mass
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    mass_type_;
+
+    static const mass_type_ mass;
+
+    // type
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    type_type_;
+
+    static const type_type_ type;
+
+    // role
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::graphDBLib::NODE_ROLE,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    role_type_;
+
+    static const role_type_ role;
+
+    // pointCount
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    pointCount_type_;
+
+    static const pointCount_type_ pointCount;
+
+    // contourLength1
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    contourLength1_type_;
+
+    static const contourLength1_type_ contourLength1;
+
+    // contourLength2
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    contourLength2_type_;
+
+    static const contourLength2_type_ contourLength2;
+
+    // subtreeCost
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    subtreeCost_type_;
+
+    static const subtreeCost_type_ subtreeCost;
+
+    // tsvNorm
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        double,
+        pgsql::id_double >::query_type,
+      pgsql::id_double >
+    tsvNorm_type_;
+
+    static const tsvNorm_type_ tsvNorm;
 
     // refGraph
     //
@@ -615,6 +819,11 @@ namespace odb
   index (A::table_name, "\"index\"", 0);
 
   template <typename A>
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::label_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  label (A::table_name, "\"label\"", 0);
+
+  template <typename A>
   const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::level_type_
   query_columns< ::graphDBLib::Node, id_pgsql, A >::
   level (A::table_name, "\"level\"", 0);
@@ -630,9 +839,34 @@ namespace odb
   type (A::table_name, "\"type\"", 0);
 
   template <typename A>
-  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::label_type_
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::role_type_
   query_columns< ::graphDBLib::Node, id_pgsql, A >::
-  label (A::table_name, "\"label\"", 0);
+  role (A::table_name, "\"role\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::pointCount_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  pointCount (A::table_name, "\"pointCount\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength1_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  contourLength1 (A::table_name, "\"contourLength1\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength2_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  contourLength2 (A::table_name, "\"contourLength2\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::subtreeCost_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  subtreeCost (A::table_name, "\"subtreeCost\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::tsvNorm_type_
+  query_columns< ::graphDBLib::Node, id_pgsql, A >::
+  tsvNorm (A::table_name, "\"tsvNorm\"", 0);
 
   template <typename A>
   const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::refGraph_type_

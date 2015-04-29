@@ -92,6 +92,13 @@ private:
 	void saveInDB(const ShockGraph& graph);
 	void saveInDB(const BoneGraph& graph);
 	void saveInDB(const GestureGraph& graph);
+
+	dml::NODE_ROLE NodeRoleConverter2DML(graphDBLib::NODE_ROLE tmp) const;
+	graphDBLib::NODE_ROLE NodeRoleConverter2GraphDBLib(dml::NODE_ROLE tmp) const;
+
+	dml::ShockBranch::BRANCH_DIR BranchDirConverter2DML(graphDBLib::BRANCH_DIR tmp) const;
+	graphDBLib::BRANCH_DIR BranchDirConverter2GraphDBLib(dml::ShockBranch::BRANCH_DIR tmp) const;
+	graphDBLib::BRANCH_DIR BranchDirConverter2GraphDBLib(int tmp) const;
 };
 
 #endif //_Shock_Graphs_Generator_

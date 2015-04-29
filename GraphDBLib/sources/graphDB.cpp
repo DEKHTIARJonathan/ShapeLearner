@@ -34,20 +34,12 @@ map<unsigned long, boost::shared_ptr<Graph>>	GraphDB::GraphMap;
 map<string, boost::shared_ptr<ObjectClass>>		GraphDB::ObjectClassMap;
 map<string, boost::shared_ptr<GraphClass>>		GraphDB::GraphClassMap;
 
-/* *******************************************************************
-*                             Multi Threading                        *
- ********************************************************************
-
-/*!
-*	\Brief Local Function used to get the ThreadID.
-*/
-
-const unsigned long getThreadId(){
-    std::string threadId = boost::lexical_cast<std::string>(boost::this_thread::get_id());
-    unsigned long threadNumber = 0;
-    sscanf(threadId.c_str(), "%lx", &threadNumber);
-    return threadNumber;
-}
+boost::mutex									GraphDB::mtxNode;
+boost::mutex									GraphDB::mtxPoint;
+boost::mutex									GraphDB::mtxEdge;
+boost::mutex									GraphDB::mtxGraph;
+boost::mutex									GraphDB::mtxObjectClass;
+boost::mutex									GraphDB::mtxGraphClass;
 
 /* *******************************************************************
 *                           USER INTERFACE                           *
@@ -71,99 +63,137 @@ void GraphDB::openDatabase(const string& _dbUser, const string& _dbPass, const s
  ********************************************************************/
 
 boost::weak_ptr<Point> GraphDB::CommonInterface::getPoint(const unsigned long keyDB) throw(StandardExcept){
+	_Lock_Point_
 	map<unsigned long, boost::shared_ptr<Point>>::const_iterator it = PointMap.find(keyDB);
-	if(it != PointMap.end())
+	map<unsigned long, boost::shared_ptr<Point>>::const_iterator endIT = PointMap.end();
+	_Unlock_Point_
+	if(it != endIT)
 		return  boost::weak_ptr<Point>(it->second);
 	else{
 		boost::shared_ptr<Point> tmp (loadObject<Point> (keyDB));
 		if (!tmp)
 			throw StandardExcept((string)__FUNCTION__+"(const unsigned long  keyDB)", "Error : The Point referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+		_Lock_Point_
 		PointMap.insert(pair<unsigned long, boost::shared_ptr<Point>>(keyDB,tmp));
+		_Unlock_Point_
 		return boost::weak_ptr<Point>(tmp);
 	}
 }
-boost::weak_ptr<Point> GraphDB::CommonInterface::getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph, const double _xCoord, const double _yCoord, const double _radius){
-	boost::shared_ptr<Point> tmp (Point::Access::createPoint(_refNode, _refGraph, _xCoord, _yCoord, _radius));
+boost::weak_ptr<Point> GraphDB::CommonInterface::getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph){
+	boost::shared_ptr<Point> tmp (Point::Access::createPoint(_refNode, _refGraph));
+	_Lock_Point_
 	PointMap.insert(pair<unsigned long, boost::shared_ptr<Point>>(tmp->getKey(), tmp));
+	_Unlock_Point_
 	return boost::weak_ptr<Point>(tmp);
 }
 
 boost::weak_ptr<Node> GraphDB::CommonInterface::getNode(const unsigned long keyDB) throw(StandardExcept){
+	_Lock_Node_
 	map<unsigned long, boost::shared_ptr<Node>>::const_iterator it = NodeMap.find(keyDB);
-	if(it != NodeMap.end())
+	map<unsigned long, boost::shared_ptr<Node>>::const_iterator endIT = NodeMap.end();
+	_Unlock_Node_
+	if(it != endIT)
 		return  boost::weak_ptr<Node>(it->second);
 	else{
 		boost::shared_ptr<Node> tmp (loadObject<Node> (keyDB));
 		if (!tmp)
 			throw StandardExcept((string)__FUNCTION__+"(const unsigned long keyDB)", "Error : The Node referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+		_Lock_Node_
 		NodeMap.insert(pair<unsigned long , boost::shared_ptr<Node>>(keyDB,tmp));
+		_Unlock_Node_
 		return boost::weak_ptr<Node>(tmp);
 	}
 }
-boost::weak_ptr<Node> GraphDB::CommonInterface::getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned long _index, const unsigned long _level, const unsigned long _mass, const unsigned long _type, const string _label){
-	boost::shared_ptr<Node> tmp (Node::Access::createNode(_refGraph, _index, _level, _mass, _type, _label));
+boost::weak_ptr<Node> GraphDB::CommonInterface::getNode(const boost::weak_ptr<Graph> _refGraph){
+	boost::shared_ptr<Node> tmp (Node::Access::createNode(_refGraph));
+	_Lock_Node_
 	NodeMap.insert(pair<unsigned long, boost::shared_ptr<Node>>(tmp->getKey(), tmp));
+	_Unlock_Node_
 	return boost::weak_ptr<Node>(tmp);
 }
 
 boost::weak_ptr<Edge> GraphDB::CommonInterface::getEdge(const unsigned long keyDB) throw(StandardExcept){
+	_Lock_Edge_
 	map<unsigned long, boost::shared_ptr<Edge>>::const_iterator it = EdgeMap.find(keyDB);
-	if(it != EdgeMap.end())
+	map<unsigned long, boost::shared_ptr<Edge>>::const_iterator endIT = EdgeMap.end();
+	_Unlock_Edge_
+	if(it != endIT)
 		return  boost::weak_ptr<Edge>(it->second);
 	else{
 		boost::shared_ptr<Edge> tmp (loadObject<Edge> (keyDB));
 		if (!tmp)
 			throw StandardExcept((string)__FUNCTION__+"(const unsigned long keyDB)", "Error : The Edge referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+		_Lock_Edge_
 		EdgeMap.insert(pair<unsigned long, boost::shared_ptr<Edge>>(keyDB,tmp));
+		_Unlock_Edge_
 		return boost::weak_ptr<Edge>(tmp);
 	}
 }
-boost::weak_ptr<Edge> GraphDB::CommonInterface::getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight){
-	boost::shared_ptr<Edge> tmp (Edge::Access::createEdge(_source, _target, _refGraph, _weight));
+boost::weak_ptr<Edge> GraphDB::CommonInterface::getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph){
+	boost::shared_ptr<Edge> tmp (Edge::Access::createEdge(_source, _target, _refGraph));
+	_Lock_Edge_
 	EdgeMap.insert(pair<unsigned long, boost::shared_ptr<Edge>>(tmp->getKey(), tmp));
+	_Unlock_Edge_
 	return boost::weak_ptr<Edge>(tmp);
 }
 
 boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const unsigned long keyDB) throw(StandardExcept){
+	_Lock_Graph_
 	map<unsigned long, boost::shared_ptr<Graph>>::const_iterator it = GraphMap.find(keyDB);
-	if(it != GraphMap.end())
+	map<unsigned long, boost::shared_ptr<Graph>>::const_iterator endIT = GraphMap.end();
+	_Unlock_Graph_
+	if(it != endIT)
 		return boost::weak_ptr<Graph>(it->second);
 	else{
 		boost::shared_ptr<Graph> tmp (loadObject<Graph> (keyDB));
 		if (!tmp)
 			throw StandardExcept((string)__FUNCTION__+"(const unsigned long keyDB)", "Error : The Graph referenced by the id : "+ to_string((_ULonglong)keyDB) +" doesn't exist in the DB.");
+		_Lock_Graph_
 		GraphMap.insert(pair<unsigned long, boost::shared_ptr<Graph>>(keyDB,tmp));
+		_Unlock_Graph_
 		return boost::weak_ptr<Graph>(tmp);
 	}
 }
 boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName){
 	boost::shared_ptr<Graph> tmp (Graph::Access::createGraph(_graphClass, _objectClass, _objectName));
+	_Lock_Graph_
 	GraphMap.insert(pair<unsigned long, boost::shared_ptr<Graph>>(tmp->getKey(), tmp));
+	_Unlock_Graph_
 	return boost::weak_ptr<Graph>(tmp);
 }
 
 boost::weak_ptr<GraphClass> GraphDB::CommonInterface::getGraphClass(const string& name, const bool isDirect, const bool isAcyclic) throw(StandardExcept){
+	_Lock_GraphClass_
 	map<string, boost::shared_ptr<GraphClass>>::const_iterator it = GraphClassMap.find(name);
-	if(it != GraphClassMap.end())
+	map<string, boost::shared_ptr<GraphClass>>::const_iterator endIT = GraphClassMap.end();
+	_Unlock_GraphClass_
+	if(it != endIT)
 		return  boost::weak_ptr<GraphClass>(it->second);
 	else{
 		boost::shared_ptr<GraphClass> tmp (loadObject<GraphClass>(name));
 		if (!tmp)
 			tmp.swap(boost::shared_ptr<GraphClass> (GraphClass::Access::createGraphClass(name, isDirect, isAcyclic)));
+		_Lock_GraphClass_
 		GraphClassMap.insert(pair<string, boost::shared_ptr<GraphClass>>(name,tmp));
+		_Unlock_GraphClass_
 		return boost::weak_ptr<GraphClass>(tmp);
 	}
 }
 
 boost::weak_ptr<ObjectClass> GraphDB::CommonInterface::getObjectClass(const string& name) throw(StandardExcept){
+	_Lock_ObjectClass_
 	map<string, boost::shared_ptr<ObjectClass>>::const_iterator it = ObjectClassMap.find(name);
+	map<string, boost::shared_ptr<ObjectClass>>::const_iterator endIT = ObjectClassMap.end();
+	_Unlock_ObjectClass_
 	if(it != ObjectClassMap.end())
 		return  boost::weak_ptr<ObjectClass>(it->second);
 	else{
 		boost::shared_ptr<ObjectClass> tmp (loadObject<ObjectClass>(name));
 		if (!tmp)
 			tmp.swap(boost::shared_ptr<ObjectClass> (ObjectClass::Access::createObjectClass(name)));
+		_Lock_ObjectClass_
 		ObjectClassMap.insert(pair<string, boost::shared_ptr<ObjectClass>>(name, tmp));
+		_Unlock_ObjectClass_
 		return boost::weak_ptr<ObjectClass>(tmp);
 	}
 }
@@ -175,8 +205,10 @@ boost::weak_ptr<ObjectClass> GraphDB::CommonInterface::getObjectClass(const stri
 bool GraphDB::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade) throw (StandardExcept){
 	bool rslt = true;
 
+	_Lock_Point_
 	if(rslt &= !!PointMap.erase(obj->getKey()), !rslt)
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<Point> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+	_Unlock_Point_
 
 	return rslt;
 }
@@ -184,8 +216,10 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade) th
 bool GraphDB::removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade) throw (StandardExcept){
 	bool rslt = true;
 
+	_Lock_Edge_
 	if(rslt &= !!EdgeMap.erase(obj->getKey()), !rslt)
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<Edge> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+	_Unlock_Edge_
 
 	return rslt;
 }
@@ -193,25 +227,37 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade) thr
 bool GraphDB::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade) throw (StandardExcept){
 	bool rslt = true;
 
+	_Lock_Node_
 	if(rslt &= !!NodeMap.erase(obj->getKey()), !rslt)
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<Node> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+	_Unlock_Node_
 
 	if(cascade){
 		/**************** Edge Cascade Deleting ****************/
 		vector <unsigned long> edgeVect = obj->getEdges();
 		map<unsigned long, boost::shared_ptr<Edge>>::iterator it1;
+		map<unsigned long, boost::shared_ptr<Edge>>::iterator it1End;
 
 		for(unsigned int i = 0; i < edgeVect.size(); i++){
-			if(it1 = EdgeMap.find(edgeVect[i]), it1 != EdgeMap.end())
+			_Lock_Edge_
+			it1 = EdgeMap.find(edgeVect[i]);
+			it1End = EdgeMap.end();
+			_Unlock_Edge_
+			if(it1 != it1End)
 				rslt &= removeObjectFromMap(it1->second);	// The cascade parameter is useless for this class
 		}
 
 		/**************** Point Cascade Deleting ****************/
 		vector <unsigned long> pointVect = obj->getPoints();
 		map<unsigned long, boost::shared_ptr<Point>>::iterator it2;
+		map<unsigned long, boost::shared_ptr<Point>>::iterator it2End;
 
 		for(unsigned int i = 0; i < pointVect.size(); i++){
-			if(it2 = PointMap.find(pointVect[i]), it2 != PointMap.end())
+			_Lock_Point_
+			it2 = PointMap.find(pointVect[i]);
+			it2End = PointMap.end();
+			_Unlock_Point_
+			if(it2 != it2End)
 				rslt &= removeObjectFromMap(it2->second);		// The cascade parameter is useless for this class
 		}
 	}
@@ -222,34 +268,51 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade) thr
 bool GraphDB::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade) throw (StandardExcept){
 	bool rslt = true;
 
+	_Lock_Graph_
 	if(rslt &= !!GraphMap.erase(obj->getKey()), !rslt)
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<Graph> obj, bool cascade)", "Error : The object's key ("+to_string((_ULonglong)obj->getKey())+") can't be found");
+	_Unlock_Graph_
 
 	if(cascade){
 		/**************** Node Cascade Deleting ****************/
 		vector <unsigned long> nodeVect = obj->getNodes();
 		map<unsigned long, boost::shared_ptr<Node>>::iterator it1;
+		map<unsigned long, boost::shared_ptr<Node>>::iterator it1End;
 
 		for(unsigned int i = 0; i < nodeVect.size(); i++){
-			if(it1 = NodeMap.find(nodeVect[i]), it1 != NodeMap.end())
+			_Lock_Node_
+			it1 = NodeMap.find(nodeVect[i]);
+			it1End = NodeMap.end();
+			_Unlock_Node_
+			if(it1 != it1End)
 				rslt &= removeObjectFromMap(it1->second, false); // No need to act on cascade, we will manage it at this level.
 		}
 
 		/**************** Edge Cascade Deleting ****************/
 		vector <unsigned long> edgeVect = obj->getEdges();
 		map<unsigned long, boost::shared_ptr<Edge>>::iterator it2;
+		map<unsigned long, boost::shared_ptr<Edge>>::iterator it2End;
 
 		for(unsigned int i = 0; i < edgeVect.size(); i++){
-			if(it2 = EdgeMap.find(edgeVect[i]), it2 != EdgeMap.end())
+			_Lock_Edge_
+			it2 = EdgeMap.find(edgeVect[i]);
+			it2End = EdgeMap.end();
+			_Unlock_Edge_
+			if(it2 != it2End)
 				rslt &= removeObjectFromMap(it2->second);	// The cascade parameter is useless for this class
 		}
 
 		/**************** Point Cascade Deleting ****************/
 		vector <unsigned long> pointVect = obj->getPoints();
 		map<unsigned long, boost::shared_ptr<Point>>::iterator it3;
+		map<unsigned long, boost::shared_ptr<Point>>::iterator it3End;
 
 		for(unsigned int i = 0; i < pointVect.size(); i++){
-			if(it3 = PointMap.find(pointVect[i]), it3 != PointMap.end())
+			_Lock_Point_
+			it3 = PointMap.find(pointVect[i]);
+			it3End = PointMap.end();
+			_Unlock_Point_
+			if(it3 != it3End)
 				rslt &= removeObjectFromMap(it3->second);		// The cascade parameter is useless for this class
 		}
 	}
@@ -259,16 +322,23 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade) th
 bool GraphDB::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascade) throw (StandardExcept){
 	bool rslt = true;
 
+	_Lock_GraphClass_
 	if(rslt &= !!GraphClassMap.erase(obj->getKey()), !rslt)
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<GraphClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
+	_Unlock_GraphClass_
 
 	if(cascade){
 		/**************** Graph Cascade Deleting ****************/
 		vector <unsigned long> graphVect = obj->getGraphs();
 		map<unsigned long, boost::shared_ptr<Graph>>::iterator it;
+		map<unsigned long, boost::shared_ptr<Graph>>::iterator endIT;
 
 		for(unsigned int i = 0; i < graphVect.size(); i++){
-			if(it = GraphMap.find(graphVect[i]), it != GraphMap.end())
+			_Lock_Graph_
+			it = GraphMap.find(graphVect[i]);
+			endIT = GraphMap.end();
+			_Unlock_Graph_
+			if(it != endIT)
 				rslt &= removeObjectFromMap(it->second, true);
 		}
 	}
@@ -279,16 +349,23 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascad
 bool GraphDB::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool cascade) throw (StandardExcept){
 	bool rslt = true;
 
+	_Lock_ObjectClass_
 	if(rslt &= !!ObjectClassMap.erase(obj->getKey()), !rslt)
 		throw StandardExcept((string)__FUNCTION__+"(boost::shared_ptr<ObjectClass> obj, bool cascade)", "Error : The object's key ("+obj->getKey()+") can't be found");
+	_Unlock_ObjectClass_
 
 	if(cascade){
 		/**************** Graph Cascade Deleting ****************/
 		vector <unsigned long> graphVect = obj->getGraphs();
 		map<unsigned long, boost::shared_ptr<Graph>>::iterator it;
+		map<unsigned long, boost::shared_ptr<Graph>>::iterator endIT;
 
 		for(unsigned int i = 0; i < graphVect.size(); i++){
-			if(it = GraphMap.find(graphVect[i]), it != GraphMap.end())
+			_Lock_Graph_
+			it = GraphMap.find(graphVect[i]);
+			endIT = GraphMap.end();
+			_Unlock_Graph_
+			if( it != endIT)
 				rslt &= removeObjectFromMap(it->second, true);
 		}
 	}

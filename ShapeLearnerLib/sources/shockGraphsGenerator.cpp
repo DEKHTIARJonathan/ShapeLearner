@@ -310,6 +310,8 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 }
 
 void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
+	/* ===================== GRAPH SAVING ====================== */
+
 	boost::weak_ptr<graphDBLib::Graph> graphPtr = graphDBLib::GraphDB::CommonInterface::getGraph( \
 		graphDBLib::GraphDB::CommonInterface::getGraphClass((string)graph.ClassName()), \
 		graphDBLib::GraphDB::CommonInterface::getObjectClass(objClass), \
@@ -332,22 +334,76 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 	graph.Print(testStream, true);
 	graphPtr.lock()->setXMLSignature(testStream.str());
 
-	/*
-	graph.Print(std::cout);
-	std::ofstream txtfile ("output.txt",std::ios::binary);
-	graph.Print(txtfile, false);
+	leda::list<leda::graph::node> nodeList (graph.all_nodes());
+	leda::list<leda::graph::edge> edgeList (graph.all_edges());
 
-	graph.PrintTSVs();
-	std::ofstream txtfile2 ("output2.txt",std::ios::binary);
-	graph.PrintTSVs(txtfile2);
+	map<int, boost::weak_ptr<graphDBLib::Node>> NodeMap;
 
-	*/
+	for(leda::list<leda::graph::node>::iterator it = nodeList.begin(); it != nodeList.end(); it++){
+		/* ===================== Node SAVING ====================== */
+		boost::weak_ptr<graphDBLib::Node> NodePtr = graphDBLib::GraphDB::CommonInterface::getNode(graphPtr);
 
-	/*
-	cout <<"Category : " << graph.category;
-cout <<"Category : " << graph.category;
-	cout <<"Category : " << graph.category;
-	*/
+		leda::graph::node ledaNode = *it;
+		const SGNode* curNode = graph.GetSGNode(ledaNode);
+
+		NodeMap.insert(pair<int, boost::weak_ptr<graphDBLib::Node>>((*it)->id(), NodePtr));
+
+		NodePtr.lock()->setIndex(curNode->GetDFSIndex());
+		NodePtr.lock()->setLabel(curNode->GetNodeLbl().c_str());
+		NodePtr.lock()->setLevel(curNode->GetLevel());
+		NodePtr.lock()->setMass(curNode->GetMass());
+		NodePtr.lock()->setType(curNode->GetType());
+		NodePtr.lock()->setRole(NodeRoleConverter2GraphDBLib(curNode->GetNodeRole()));
+		NodePtr.lock()->setPointCount(curNode->GetShockCount());
+
+		double contourLength1 = -1, contourLength2 = -1;
+		curNode->GetContourLength(contourLength1, contourLength2);
+		NodePtr.lock()->setContourLength1(contourLength1);
+		NodePtr.lock()->setContourLength2(contourLength2);
+
+		NodePtr.lock()->setSubtreeCost(curNode->GetSubtreeCost());
+		NodePtr.lock()->setTSVNorm(curNode->GetTSVNorm());
+
+		/* ===================== Point SAVING ====================== */
+
+		ShockBranch branch = curNode->m_shocks;
+
+		for (int i = 0; i < branch.GetSize(); i++){
+			boost::weak_ptr<graphDBLib::Point> PointPtr = graphDBLib::GraphDB::CommonInterface::getPoint(NodePtr, graphPtr);
+
+			PointPtr.lock()->setColor(branch[i].color);
+			PointPtr.lock()->setDirection(BranchDirConverter2GraphDBLib(branch[i].dir));
+			PointPtr.lock()->setDr(branch[i].dr);
+			PointPtr.lock()->setDr_Ds(branch[i].dr_ds);
+			PointPtr.lock()->setRadius(branch[i].radius);
+			PointPtr.lock()->setSpeed(branch[i].speed);
+			PointPtr.lock()->setType(branch[i].type);
+			PointPtr.lock()->setxCoord(branch[i].xcoord);
+			PointPtr.lock()->setyCoord(branch[i].ycoord);
+		}
+	}
+	/* ===================== Edge SAVING ====================== */
+	for(leda::list<leda::graph::edge>::iterator itEdge = edgeList.begin(); itEdge != edgeList.end(); itEdge++){
+		leda::graph::edge ledaEdge = *itEdge;
+		leda::graph::node source = ledaEdge->terminal(0); // term[0] = source and term[1] = target
+		leda::graph::node target = ledaEdge->terminal(1); // term[0] = source and term[1] = target
+
+		int idSource = source->id();
+		int idTarget = target->id();
+
+		map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeSource = NodeMap.find(idSource);
+		map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeTarget = NodeMap.find(idSource);
+
+		if(itNodeSource == NodeMap.end() || itNodeTarget == NodeMap.end())
+			throw StandardExcept((string)__FUNCTION__,"Error while fetching the Nodes (Source: "+ to_string((_Longlong)idSource) +", Target: "+ to_string((_Longlong)idSource) +") Connected to the Edge: "+ to_string((_Longlong)ledaEdge->id()) +".");
+
+		boost::weak_ptr<graphDBLib::Node> NodeSource = itNodeSource->second;
+		boost::weak_ptr<graphDBLib::Node> NodeTarget = itNodeTarget->second;
+
+		boost::weak_ptr<graphDBLib::Edge> EdgePtr = graphDBLib::GraphDB::CommonInterface::getEdge(NodeSource, NodeTarget, graphPtr);
+
+		EdgePtr.lock()->setWeight(graph.GetEdgeWeight(ledaEdge));
+	}
 }
 
 void shockGraphsGenerator::saveInDB(const BoneGraph& graph){
@@ -356,4 +412,24 @@ void shockGraphsGenerator::saveInDB(const BoneGraph& graph){
 
 void shockGraphsGenerator::saveInDB(const GestureGraph& graph){
 	cout <<"Classname : " << graph.ClassName() <<endl;
+}
+
+dml::NODE_ROLE shockGraphsGenerator::NodeRoleConverter2DML(graphDBLib::NODE_ROLE tmp) const{
+	return (dml::NODE_ROLE) tmp;
+}
+
+graphDBLib::NODE_ROLE shockGraphsGenerator::NodeRoleConverter2GraphDBLib(dml::NODE_ROLE tmp) const{
+	return (graphDBLib::NODE_ROLE) tmp;
+}
+
+dml::ShockBranch::BRANCH_DIR shockGraphsGenerator::BranchDirConverter2DML(graphDBLib::BRANCH_DIR tmp) const{
+	return (dml::ShockBranch::BRANCH_DIR) tmp;
+}
+
+graphDBLib::BRANCH_DIR shockGraphsGenerator::BranchDirConverter2GraphDBLib(dml::ShockBranch::BRANCH_DIR tmp) const{
+	return (graphDBLib::BRANCH_DIR) tmp;
+}
+
+graphDBLib::BRANCH_DIR shockGraphsGenerator::BranchDirConverter2GraphDBLib(int tmp) const{
+	return (graphDBLib::BRANCH_DIR) tmp;
 }

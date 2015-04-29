@@ -23,11 +23,10 @@
 using namespace std;
 using namespace graphDBLib;
 
-Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph, unsigned long _weight) :
+Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph) :
 	source(_source),
 	target(_target),
 	refGraph(_refGraph),
-	weight(_weight),
 	idEdge(0)
 	{
 		idEdge = saveInDB();

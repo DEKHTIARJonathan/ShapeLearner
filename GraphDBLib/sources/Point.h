@@ -35,6 +35,8 @@ namespace graphDBLib{
 	class Node; //Forward Declaration of the class contained in Node.h
 	class GraphDB; // Forward Declaration of the class contained in graphDB.h
 
+	enum BRANCH_DIR {UNK_DIR = -1 ,FORWARD, BACKWARD};
+
 	/*!
 	*	\class Point
 	*	\brief Part of the Graph Data Model. A Node is composed of many Points. Only useful in case of using shockGraph, it draws the shape of the Node.
@@ -49,29 +51,44 @@ namespace graphDBLib{
 		class Access {
 			friend class GraphDB;
 			/*!
-			*	\fn static boost::shared_ptr<Point> createPoint(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
+			*	\fn static boost::shared_ptr<Point> createPoint(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph);
 			*	\brief Return a boost::shared_ptr<Point> on a newly created Point.
 			*	\param _refNode : The Node which contains the new Point.
 			*	\param _refGraph : The Graph which contains the new Point.
-			*	\param _xCoord : The "X" Coordinate of the Point.
-			*	\param _yCoord : The "Y" Coordinate of the Point.
-			*	\param _radius : The "Radius" of the Point.
 			*/
-			static boost::shared_ptr<Point> createPoint(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1){
-				return boost::shared_ptr<Point>(new Point(_refNode, _refGraph, _xCoord, _yCoord , _radius));
+			static boost::shared_ptr<Point> createPoint(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph){
+				return boost::shared_ptr<Point>(new Point(_refNode, _refGraph));
 			}
 		};
 
-		unsigned long getKey() const {return idPoint;}
+		unsigned long getKey() const;
 
-		double getxCoord() const {return xCoord;}
+		double getxCoord() const;
 		void setxCoord(const double _xCoord);
 
-		double getyCoord() const {return yCoord;}
+		double getyCoord() const;
 		void setyCoord(const double _yCoord);
 
-		double getRadius() const {return radius;}
+		double getRadius() const;
 		void setRadius(const double _radius);
+
+		double getSpeed() const;
+		void setSpeed(const double _speed);
+
+		double getDr_Ds() const;
+		void setDr_Ds(const double _dr_ds);
+
+		char getColor() const;
+		void setColor(const char _color);
+
+		double getDr() const;
+		void setDr(const double _dr);
+
+		int getType() const;
+		void setType(const int _type);
+
+		BRANCH_DIR getDirection() const;
+		void setDirection(BRANCH_DIR _direction);
 
 		boost::weak_ptr<Node> getParentNode();
 		boost::weak_ptr<Graph> getParentGraph();
@@ -82,9 +99,15 @@ namespace graphDBLib{
 
 	protected:
 		unsigned long idPoint;
-		double xCoord;
-		double yCoord;
-		double radius;
+		double		xCoord; //!< X coordinate of branch points.
+		double		yCoord; //!< Y coordinate of branch points.
+		double		radius; //!< Radii at the branch points.
+		double		speed;	//!< Velocities at the branch points.
+		double		dr_ds;
+		char		color;
+		double		dr;		//!< Delta radius. Diff in radius with that of the previous point
+		int			type;
+		BRANCH_DIR	direction;		//!< Direction: increasing=1, decreasing=-1, constant=0
 
 		odb::boost::lazy_weak_ptr<Graph> refGraph;
 		odb::boost::lazy_weak_ptr<Node> refNode;
@@ -93,7 +116,7 @@ namespace graphDBLib{
 		*	\brief  Classical constructor needed to let ODB load objects from DB.
 		*/
 		Point() {}
-		Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord = 0, double _yCoord = 0, double _radius = 1);
+		Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph);
 
 		/*!
 		*	\fn void updateInDB();
@@ -124,9 +147,15 @@ namespace graphDBLib{
 	#pragma db member(Point::idPoint) id auto
 	#pragma db member(Point::refGraph) not_null on_delete(cascade)
 	#pragma db member(Point::refNode) not_null on_delete(cascade)
-	#pragma db member(Point::xCoord) default("0") not_null
-	#pragma db member(Point::yCoord) default("0") not_null
-	#pragma db member(Point::radius) default("1") not_null
+	#pragma db member(Point::xCoord) default("-1")
+	#pragma db member(Point::yCoord) default("-1")
+	#pragma db member(Point::radius) default("-1")
+	#pragma db member(Point::speed) default("-1")
+	#pragma db member(Point::dr_ds) default("-1")
+	#pragma db member(Point::color) default("-1")
+	#pragma db member(Point::dr) default("-1")
+	#pragma db member(Point::type) default("-1")
+	#pragma db member(Point::direction) default(UNK_DIR)
 	#pragma db index(Point::"index_Point_refNode") method("BTREE") member(refNode)
 	#pragma db index(Point::"index_Point_refGraph") method("BTREE") member(refGraph)
 	#pragma db index(Point::"index_Point_region2D") method("BTREE") members(xCoord, yCoord)

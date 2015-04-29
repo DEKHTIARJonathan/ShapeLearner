@@ -23,43 +23,95 @@
 using namespace std;
 using namespace graphDBLib;
 
-Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph, double _xCoord, double _yCoord, double _radius) :
-xCoord(_xCoord),
-yCoord(_yCoord),
-radius(_radius),
-refGraph(_refGraph),
-refNode(_refNode),
-idPoint(0)
-{
+Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph) :refGraph(_refGraph), refNode(_refNode), idPoint(0){
+	xCoord = -1;
+	yCoord = -1;
+	radius = -1;
+	direction = UNK_DIR;
+	speed = -1;
+	dr_ds = -1;
+	color = char("");
+	dr = -1;
+	type = -1;
+
 	idPoint = saveInDB();
 	Logger::Log("New Object Instanciated : Point("+ to_string((_ULonglong)getKey())+")");
 }
 
+unsigned long Point::getKey() const {return idPoint;}
+
+double Point::getxCoord() const {return xCoord;}
 void Point::setxCoord(const double _xCoord){
 	xCoord = _xCoord;
 	updateInDB();
 }
 
+double Point::getyCoord() const {return yCoord;}
 void Point::setyCoord(const double _yCoord){
 	yCoord = _yCoord;
 	updateInDB();
 }
 
+double Point::getRadius() const {return radius;}
 void Point::setRadius(const double _radius){
 	radius = _radius;
 	updateInDB();
 }
 
+double Point::getSpeed() const{
+	return speed;
+}
+void Point::setSpeed(const double _speed){
+	speed = _speed;
+	updateInDB();
+}
+
+double Point::getDr_Ds() const{
+	return dr_ds;
+}
+void Point::setDr_Ds(const double _dr_ds){
+	dr_ds = _dr_ds;
+	updateInDB();
+}
+
+char Point::getColor() const{
+	return color;
+}
+void Point::setColor(const char _color){
+	color = _color;
+	updateInDB();
+}
+
+double Point::getDr() const{
+	return dr;
+}
+void Point::setDr(const double _dr){
+	dr = _dr;
+	updateInDB();
+}
+
+int Point::getType() const{
+	return type;
+}
+void Point::setType(const int _type){
+	type = _type;
+	updateInDB();
+}
+
+BRANCH_DIR Point::getDirection() const{
+	return direction;
+}
+void Point::setDirection(BRANCH_DIR _direction){
+	direction = _direction;
+	updateInDB();
+}
+
 void Point::updateInDB(){
-	#ifdef _MSC_VER
 		GraphDB::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
 }
 
 unsigned long Point::saveInDB(){
-	#ifdef _MSC_VER
 		return GraphDB::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
 }
 
 boost::weak_ptr<Node> Point::getParentNode(){

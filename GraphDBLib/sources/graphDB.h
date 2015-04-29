@@ -30,6 +30,19 @@
 using namespace std;
 class StandardExcept; //Forward Declaration of the class contained in StandardException.h
 
+#define _Lock_Node_ graphDBLib::GraphDB::mtxNode.lock();
+#define _Unlock_Node_ graphDBLib::GraphDB::mtxNode.unlock();
+#define _Lock_Point_ graphDBLib::GraphDB::mtxPoint.lock();
+#define _Unlock_Point_ graphDBLib::GraphDB::mtxPoint.unlock();
+#define _Lock_Edge_ graphDBLib::GraphDB::mtxEdge.lock();
+#define _Unlock_Edge_ graphDBLib::GraphDB::mtxEdge.unlock();
+#define _Lock_Graph_ graphDBLib::GraphDB::mtxGraph.lock();
+#define _Unlock_Graph_ graphDBLib::GraphDB::mtxGraph.unlock();
+#define _Lock_GraphClass_ graphDBLib::GraphDB::mtxGraphClass.lock();
+#define _Unlock_GraphClass_ graphDBLib::GraphDB::mtxGraphClass.unlock();
+#define _Lock_ObjectClass_ graphDBLib::GraphDB::mtxObjectClass.lock();
+#define _Unlock_ObjectClass_ graphDBLib::GraphDB::mtxObjectClass.unlock();
+
 namespace graphDBLib {
 	class DatabaseManager; //Forward Declaration of the class contained in StandardException.h
 	class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
@@ -193,23 +206,15 @@ namespace graphDBLib {
 				*	\brief Static method returning a weak_ptr<Point>. Instanciantes a new Object of type Point and persists it in the DB. The members values are set by the different arguments.
 				*	\param _refNode : What Node is the new Point linked to ?
 				*	\param _refGraph : What Graph is the new Point linked to ?
-				*	\param _xCoord : What is the "x" Coordinate of the Point ?
-				*	\param _yCoord : What is the "y" Coordinate of the Point ?
-				*	\param _radius : What is the "radius" of the Point ?
 				*/
-				static boost::weak_ptr<Point>			getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph, const double _xCoord = 0, const double _yCoord = 0, const double _radius = 1);
+				static boost::weak_ptr<Point>			getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph);
 
 				/*!
-				*	\fn static boost::weak_ptr<Node> getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned long _index = 1, const unsigned long _level = 1, const unsigned long _mass = 1, const unsigned long _type = 1, const string _label = "1");
+				*	\fn static boost::weak_ptr<Node> getNode(const boost::weak_ptr<Graph> _refGraph);
 				*	\brief Static method returning a weak_ptr<Node>. Instanciantes a new Object of type Node and persists it in the DB. The members values are set by the different arguments.
 				*	\param _refGraph : What Graph is the new Node linked to ?
-				*	\param _index : What is the "index" of the Node ?
-				*	\param _level : What is the "level" of the Node ?
-				*	\param _mass : What is the "mass"  of the Node ?
-				*	\param _type : What is the "type"  of the Node ?
-				*	\param _label : What is the "label"  of the Node ?
 				*/
-				static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph, const unsigned long _index = 1, const unsigned long _level = 1, const unsigned long _mass = 1, const unsigned long _type = 1, const string _label = "1");
+				static boost::weak_ptr<Node>			getNode(const boost::weak_ptr<Graph> _refGraph);
 
 				/*!
 				*	\fn static boost::weak_ptr<Edge> getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight = 1);
@@ -217,9 +222,8 @@ namespace graphDBLib {
 				*	\param _source : What is the "source Node" of the Edge ?
 				*	\param _target : What is the "target Node" of the Edge ?
 				*	\param _refGraph : What Graph is the new Edge linked to ?
-				*	\param _weight : What is the "weight" of the Edge ?
 				*/
-				static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph, const unsigned long _weight = 1);
+				static boost::weak_ptr<Edge>			getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph);
 
 				/*!
 				*	\fn static boost::weak_ptr<Graph> getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName);
@@ -261,36 +265,42 @@ namespace graphDBLib {
 			*	The MAP's key is the Key of the object in the DB.
 			*/
 			static map<unsigned long, boost::shared_ptr<Node>>		NodeMap;
+			static boost::mutex										mtxNode;
 
 			/*!
 			*	\brief PointMap : A MAP containing every Points in the application using shared_ptr<Point>.
 			*	The MAP's key is the Key of the object in the DB.
 			*/
 			static map<unsigned long, boost::shared_ptr<Point>>		PointMap;
+			static boost::mutex										mtxPoint;
 
 			/*!
 			*	\brief EdgeMap : A MAP containing every Edges in the application using shared_ptr<Edge>.
 			*	The MAP's key is the Key of the object in the DB.
 			*/
 			static map<unsigned long, boost::shared_ptr<Edge>>		EdgeMap;
+			static boost::mutex										mtxEdge;
 
 			/*!
 			*	\brief GraphMap : A MAP containing every Graphs in the application using shared_ptr<Graph>.
 			*	The MAP's key is the Key of the object in the DB.
 			*/
 			static map<unsigned long, boost::shared_ptr<Graph>>		GraphMap;
+			static boost::mutex										mtxGraph;
 
 			/*!
 			*	\brief ObjectClassMap : A MAP containing every ObjectClass in the application using shared_ptr<ObjectClass>.
 			*	The MAP's key is the Key of the object in the DB.
 			*/
 			static map<string, boost::shared_ptr<ObjectClass>>		ObjectClassMap;
+			static boost::mutex										mtxObjectClass;
 
 			/*!
 			*	\brief GraphClassMap : A MAP containing every GraphClass in the application using shared_ptr<GraphClass>.
 			*	The MAP's key is the Key of the object in the DB.
 			*/
 			static map<string, boost::shared_ptr<GraphClass>>		GraphClassMap;
+			static boost::mutex										mtxGraphClass;
 
 			/* ************** DB I/O Ops *********************/
 			/*!
