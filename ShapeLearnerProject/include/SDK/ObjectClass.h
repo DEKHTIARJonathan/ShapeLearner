@@ -23,6 +23,7 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/smart_ptr.hpp>
+#include "StandardException.h"
 #include "SDK/GraphClass.h"
 #include "SDK/ObjectClass.h"
 #include "SDK/Graph.h"
@@ -30,7 +31,6 @@
 #include "SDK/Point.h"
 #include "SDK/Edge.h"
 
-// ODB Classes
 #include <odb/core.hxx>
 #include <odb/callback.hxx>
 #include <odb/boost/lazy-ptr.hxx>
@@ -43,33 +43,24 @@ using namespace std;
 
 namespace graphDBLib{
 
-	class GraphDB; // Forward Declaration of the class contained in graphDB.h
+	class GraphDB;
 
-	/*!	
-	*	\class ObjectClass
-	*	\brief Part of the Graph Data Model. An ObjectClass is for instance : "Rod" / "Piston" / "Wheel" / ...
-	*/
 	class ObjectClass
 	{
 	public:
-		/*!	
-		*	\class ObjectClass::Access
-		*	\brief Limit instantiation only to GraphDB. Static subclass which role is only to execute its unique static method.
-		*/
 		class Access {
-			friend class GraphDB;
-			static boost::shared_ptr<ObjectClass> createObjectClass(string name){
-				return boost::shared_ptr<ObjectClass> (new ObjectClass(name));
-			}
+			static boost::shared_ptr<ObjectClass> createObjectClass(string name);
 		};
 
-		string getKey() const {return objectClassName;}
+		string getKey() const;
 
 		vector<unsigned long> getGraphs();
 
 		/* =========== Template function =========== */
-		string getClassName() const { return "ObjectClass"; }
+		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	private:
 		string objectClassName;
@@ -79,29 +70,7 @@ namespace graphDBLib{
 		*/
 		ObjectClass() {}
 		ObjectClass(string name);
-
-		/*!
-		*	\fn void updateInDB();
-		*	\brief Update the object in the database.
-		*/
-		void updateInDB();
-
-		/*!
-		*	\fn string saveInDB();
-		*	\brief Persist the object in the database.
-		*/
-		string saveInDB();
-
-		/*!
-		*	\brief Friendship required in order to let ODB manage the object.
-		*/
-		friend class odb::access;
 	};
-
-	#pragma db value(std::string) type("VARCHAR(255)")
-	#pragma db object(ObjectClass)
-	#pragma db member(ObjectClass::objectClassName) id
-	
 }
 
 #endif // _OBJECT_CLASS_

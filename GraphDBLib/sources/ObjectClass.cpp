@@ -28,6 +28,14 @@ ObjectClass::ObjectClass(string name) : objectClassName(name) {
 	Logger::Log("New Object Instanciated : ObjectClass("+ getKey()+")");
 }
 
+boost::shared_ptr<ObjectClass> ObjectClass::Access::createObjectClass(string name){
+	return boost::shared_ptr<ObjectClass> (new ObjectClass(name));
+}
+
+string ObjectClass::getKey() const {return objectClassName;}
+
+string ObjectClass::getClassName() const {return "ObjectClass";}
+
 void ObjectClass::updateInDB(){
 	#ifdef _MSC_VER
 		GraphDB::ObjectInterface::updateObject(*this);
@@ -42,4 +50,8 @@ string ObjectClass::saveInDB(){
 
 vector<unsigned long> ObjectClass::getGraphs(){
 	return GraphDB::ObjectInterface::getForeignRelations<GraphIdViewByObjectClass>(objectClassName);
+}
+
+void ObjectClass::resynchronize(){
+	updateInDB();
 }

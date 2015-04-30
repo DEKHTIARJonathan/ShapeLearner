@@ -174,12 +174,36 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
     weight_type_;
 
     static const weight_type_ weight;
+
+    // sourceDFSIndex
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    sourceDFSIndex_type_;
+
+    static const sourceDFSIndex_type_ sourceDFSIndex;
+
+    // targetDFSIndex
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    targetDFSIndex_type_;
+
+    static const targetDFSIndex_type_ targetDFSIndex;
 
     // source
     //
@@ -229,6 +253,16 @@ namespace odb
   weight (A::table_name, "\"weight\"", 0);
 
   template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::sourceDFSIndex_type_
+  pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
+  sourceDFSIndex (A::table_name, "\"sourceDFSIndex\"", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::targetDFSIndex_type_
+  pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
+  targetDFSIndex (A::table_name, "\"targetDFSIndex\"", 0);
+
+  template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::source_type_
   pointer_query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   source (A::table_name, "\"source\"", 0);
@@ -265,8 +299,18 @@ namespace odb
 
       // weight
       //
-      long long weight_value;
+      int weight_value;
       bool weight_null;
+
+      // sourceDFSIndex
+      //
+      int sourceDFSIndex_value;
+      bool sourceDFSIndex_null;
+
+      // targetDFSIndex
+      //
+      int targetDFSIndex_value;
+      bool targetDFSIndex_null;
 
       // source
       //
@@ -329,7 +373,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 5UL;
+    static const std::size_t column_count = 7UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -671,12 +715,36 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
     weight_type_;
 
     static const weight_type_ weight;
+
+    // sourceDFSIndex
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    sourceDFSIndex_type_;
+
+    static const sourceDFSIndex_type_ sourceDFSIndex;
+
+    // targetDFSIndex
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    targetDFSIndex_type_;
+
+    static const targetDFSIndex_type_ targetDFSIndex;
 
     // source
     //
@@ -772,6 +840,16 @@ namespace odb
   const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::weight_type_
   query_columns< ::graphDBLib::Edge, id_pgsql, A >::
   weight (A::table_name, "\"weight\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::sourceDFSIndex_type_
+  query_columns< ::graphDBLib::Edge, id_pgsql, A >::
+  sourceDFSIndex (A::table_name, "\"sourceDFSIndex\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::targetDFSIndex_type_
+  query_columns< ::graphDBLib::Edge, id_pgsql, A >::
+  targetDFSIndex (A::table_name, "\"targetDFSIndex\"", 0);
 
   template <typename A>
   const typename query_columns< ::graphDBLib::Edge, id_pgsql, A >::source_type_

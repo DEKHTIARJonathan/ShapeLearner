@@ -71,26 +71,58 @@ int main(int argc, char **argv)
 
 		if (cmdLine.HasSwitch("--generate")){
 			vector<const img2Parse> imgVect;
-			imgVect.push_back(img2Parse("img/rod1.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod2.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod3.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod4.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod5.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod6.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod7.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod8.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod9.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod10.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod11.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod12.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod13.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod14.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod15.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod16.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod17.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod18.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod19.ppm", "Rod"));
-			imgVect.push_back(img2Parse("img/rod20.ppm", "Rod"));
+
+			#ifdef _DEBUG
+				imgVect.push_back(img2Parse("img/rod.ppm", "Rod"));
+			#else
+				for (int i = 1; i <= 82; i++){
+					string seq = "";
+					if (i < 10)
+						seq = "00"+ to_string((_Longlong)i);
+					else if (i <100)
+						seq = "0"+to_string((_Longlong)i);
+					else
+						seq = to_string((_Longlong)i);
+					string imgPath = "img/PPM/LearningSet/GEAR/gear" + seq + ".ppm";
+					imgVect.push_back(img2Parse(imgPath, "Gear"));
+				}
+
+				for (int i = 1; i <= 68; i++){
+					string seq = "";
+					if (i < 10)
+						seq = "00"+ to_string((_Longlong)i);
+					else if (i <100)
+						seq = "0"+to_string((_Longlong)i);
+					else
+						seq = to_string((_Longlong)i);
+					string imgPath = "img/PPM/LearningSet/PISTON/piston" + seq + ".ppm";
+					imgVect.push_back(img2Parse(imgPath, "Piston"));
+				}
+
+				for (int i = 1; i <= 82; i++){
+					string seq = "";
+					if (i < 10)
+						seq = "00"+ to_string((_Longlong)i);
+					else if (i <100)
+						seq = "0"+to_string((_Longlong)i);
+					else
+						seq = to_string((_Longlong)i);
+					string imgPath = "img/PPM/LearningSet/PistonAssembly/PistonAssembly" + seq + ".ppm";
+					imgVect.push_back(img2Parse(imgPath, "PistonAssembly"));
+				}
+
+				for (int i = 1; i <= 65; i++){
+					string seq = "";
+					if (i < 10)
+						seq = "00"+ to_string((_Longlong)i);
+					else if (i <100)
+						seq = "0"+to_string((_Longlong)i);
+					else
+						seq = to_string((_Longlong)i);
+					string imgPath = "img/PPM/LearningSet/ROD/rod" + seq + ".ppm";
+					imgVect.push_back(img2Parse(imgPath, "Rod"));
+				}
+			#endif
 
 			ShapeLearner::createShockGraph(imgVect);
 		}

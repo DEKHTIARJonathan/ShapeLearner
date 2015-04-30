@@ -31,7 +31,6 @@
 #include "SDK/Point.h"
 #include "SDK/Edge.h"
 
-// ODB Classes
 #include <odb/core.hxx>
 #include <odb/callback.hxx>
 #include <odb/boost/lazy-ptr.hxx>
@@ -43,65 +42,54 @@
 using namespace std;
 
 namespace graphDBLib{
-	class Graph; //Forward Declaration of the class contained in Graph.h
-	class GraphDB; // Forward Declaration of the class contained in graphDB.h
-	class Point; //Forward Declaration of the class contained in Point.h
+	class Graph;
+	class GraphDB;
+	class Point;
 
 	enum NODE_ROLE {UNK_ROLE = 0, BIRTH, PROTRUSION, UNION, DEATH, DUMMY};
 
-	/*!
-	*	\class Node
-	*	\brief Part of the Graph Data Model. A Node is composed of many Points and can be link to many Edges. It is one of the key components of a Graph.
-	*/
 	class Node
 	{
 	public:
-		/*!
-		*	\class Node::Access
-		*	\brief Limit instantiation only to GraphDB. Static subclass which role is only to execute its unique static method.
-		*/
 		class Access {
-			friend class GraphDB;
-			static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph){
-				return boost::shared_ptr<Node>(new Node(_refGraph));
-			}
+			static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph);
 		};
 
 		unsigned long getKey() const;
 
 		int getIndex() const;
-		void setIndex(const int _index);
+		void setIndex(const int _index, bool asynchronous = false);
 
 		string getLabel() const;
-		void setLabel(const string& _label);
+		void setLabel(const string& _label, bool asynchronous = false);
 
 		int getLevel() const;
-		void setLevel(const int _level);
+		void setLevel(const int _level, bool asynchronous = false);
 
 		int getMass() const;
-		void setMass(const int _mass);
+		void setMass(const int _mass, bool asynchronous = false);
 
 		int getType() const;
-		void setType(const int _type);
+		void setType(const int _type, bool asynchronous = false);
 
 		NODE_ROLE getRole() const;
-		void setRole(const NODE_ROLE _role);
+		void setRole(const NODE_ROLE _role, bool asynchronous = false);
 
 		int getPointCount() const;
-		void setPointCount(const int _pointCount);
+		void setPointCount(const int _pointCount, bool asynchronous = false);
 		int getPointCountFromDB() const;
 
 		double getContourLength1() const;
-		void setContourLength1(const double _contourLength1);
+		void setContourLength1(const double _contourLength1, bool asynchronous = false);
 
 		double getContourLength2() const;
-		void setContourLength2(const double _contourLength2);
+		void setContourLength2(const double _contourLength2, bool asynchronous = false);
 
 		double getSubtreeCost() const;
-		void setSubtreeCost(const double _subtreeCost);
+		void setSubtreeCost(const double _subtreeCost, bool asynchronous = false);
 
 		double getTSVNorm() const;
-		void setTSVNorm(const double _tsvNorm);
+		void setTSVNorm(const double _tsvNorm, bool asynchronous = false);
 
 		boost::weak_ptr<Graph> getParentGraph();
 
@@ -111,28 +99,27 @@ namespace graphDBLib{
 		vector<unsigned long> getPoints();
 
 		/* =========== Template function =========== */
-		string getClassName() const { return "Node"; }
+		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	private:
 		unsigned long	idNode;
-		int				index; //!< Index relative to a depth-first search : nDFSIndex
-		string			label; //!< Node's label : nodeLbl
-		int				level; //!< Node level in the hierarchical structure : nLevel
-		int				mass; //!< Node mass : nMass
-		int				type; //!< Shock branch type (1, 2, 3, 4) : m_nType
+		int				index;
+		string			label;
+		int				level;
+		int				mass;
+		int				type;
 		NODE_ROLE		role;
 		int				pointCount;
-		double			contourLength1; //!< Contour segment's lengths
-		double			contourLength2; //!< Contour segment's lengths
-		double			subtreeCost; //!< Cost of the subtree rooted at the node
-		double			tsvNorm; //!< Node TSV's norm
+		double			contourLength1;
+		double			contourLength2;
+		double			subtreeCost;
+		double			tsvNorm;
 
 		odb::boost::lazy_weak_ptr<Graph>	refGraph;
 
-		/*!
-		*	\brief  Classical constructor needed to let ODB load objects from DB.
-		*/
 		Node() {}
 		Node(boost::weak_ptr<Graph> _refGraph);
 	};

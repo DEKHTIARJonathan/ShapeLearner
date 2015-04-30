@@ -51,7 +51,9 @@ namespace odb
   const unsigned int access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::
   persist_statement_types[] =
   {
-    pgsql::int8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
     pgsql::int8_oid,
     pgsql::int8_oid,
     pgsql::int8_oid
@@ -66,7 +68,9 @@ namespace odb
   const unsigned int access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::
   update_statement_types[] =
   {
-    pgsql::int8_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
     pgsql::int8_oid,
     pgsql::int8_oid,
     pgsql::int8_oid,
@@ -159,17 +163,25 @@ namespace odb
     //
     t[1UL] = 0;
 
-    // source
+    // sourceDFSIndex
     //
     t[2UL] = 0;
 
-    // target
+    // targetDFSIndex
     //
     t[3UL] = 0;
 
-    // refGraph
+    // source
     //
     t[4UL] = 0;
+
+    // target
+    //
+    t[5UL] = 0;
+
+    // refGraph
+    //
+    t[6UL] = 0;
 
     return grew;
   }
@@ -197,9 +209,23 @@ namespace odb
 
     // weight
     //
-    b[n].type = pgsql::bind::bigint;
+    b[n].type = pgsql::bind::integer;
     b[n].buffer = &i.weight_value;
     b[n].is_null = &i.weight_null;
+    n++;
+
+    // sourceDFSIndex
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.sourceDFSIndex_value;
+    b[n].is_null = &i.sourceDFSIndex_null;
+    n++;
+
+    // targetDFSIndex
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.targetDFSIndex_value;
+    b[n].is_null = &i.targetDFSIndex_null;
     n++;
 
     // source
@@ -249,15 +275,43 @@ namespace odb
     // weight
     //
     {
-      long unsigned int const& v =
+      int const& v =
         o.weight;
 
       bool is_null (false);
       pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
+          int,
+          pgsql::id_integer >::set_image (
         i.weight_value, is_null, v);
       i.weight_null = is_null;
+    }
+
+    // sourceDFSIndex
+    //
+    {
+      int const& v =
+        o.sourceDFSIndex;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.sourceDFSIndex_value, is_null, v);
+      i.sourceDFSIndex_null = is_null;
+    }
+
+    // targetDFSIndex
+    //
+    {
+      int const& v =
+        o.targetDFSIndex;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.targetDFSIndex_value, is_null, v);
+      i.targetDFSIndex_null = is_null;
     }
 
     // source
@@ -370,15 +424,43 @@ namespace odb
     // weight
     //
     {
-      long unsigned int& v =
+      int& v =
         o.weight;
 
       pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
+          int,
+          pgsql::id_integer >::set_value (
         v,
         i.weight_value,
         i.weight_null);
+    }
+
+    // sourceDFSIndex
+    //
+    {
+      int& v =
+        o.sourceDFSIndex;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.sourceDFSIndex_value,
+        i.sourceDFSIndex_null);
+    }
+
+    // targetDFSIndex
+    //
+    {
+      int& v =
+        o.targetDFSIndex;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.targetDFSIndex_value,
+        i.targetDFSIndex_null);
     }
 
     // source
@@ -477,17 +559,21 @@ namespace odb
   "INSERT INTO \"Edge\" "
   "(\"idEdge\", "
   "\"weight\", "
+  "\"sourceDFSIndex\", "
+  "\"targetDFSIndex\", "
   "\"source\", "
   "\"target\", "
   "\"refGraph\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6) "
   "RETURNING \"idEdge\"";
 
   const char access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::find_statement[] =
   "SELECT "
   "\"Edge\".\"idEdge\", "
   "\"Edge\".\"weight\", "
+  "\"Edge\".\"sourceDFSIndex\", "
+  "\"Edge\".\"targetDFSIndex\", "
   "\"Edge\".\"source\", "
   "\"Edge\".\"target\", "
   "\"Edge\".\"refGraph\" "
@@ -498,10 +584,12 @@ namespace odb
   "UPDATE \"Edge\" "
   "SET "
   "\"weight\"=$1, "
-  "\"source\"=$2, "
-  "\"target\"=$3, "
-  "\"refGraph\"=$4 "
-  "WHERE \"idEdge\"=$5";
+  "\"sourceDFSIndex\"=$2, "
+  "\"targetDFSIndex\"=$3, "
+  "\"source\"=$4, "
+  "\"target\"=$5, "
+  "\"refGraph\"=$6 "
+  "WHERE \"idEdge\"=$7";
 
   const char access::object_traits_impl< ::graphDBLib::Edge, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Edge\" "
@@ -511,6 +599,8 @@ namespace odb
   "SELECT\n"
   "\"Edge\".\"idEdge\",\n"
   "\"Edge\".\"weight\",\n"
+  "\"Edge\".\"sourceDFSIndex\",\n"
+  "\"Edge\".\"targetDFSIndex\",\n"
   "\"Edge\".\"source\",\n"
   "\"Edge\".\"target\",\n"
   "\"Edge\".\"refGraph\"\n"

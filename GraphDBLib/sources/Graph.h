@@ -53,9 +53,7 @@ namespace graphDBLib{
 		*/
 		class Access {
 			friend class GraphDB;
-			static boost::shared_ptr<Graph> createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName){
-				return boost::shared_ptr<Graph>(new Graph(_graphClass, _objectClass, _objectName));
-			}
+			static boost::shared_ptr<Graph> createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName);
 		};
 
 		unsigned long getKey() const;
@@ -63,34 +61,34 @@ namespace graphDBLib{
 		string getObjectName() const;
 
 		unsigned long getView() const;
-		void setView(const unsigned long _viewNumber);
+		void setView(const unsigned long _viewNumber, bool asynchronous = false);
 
 		unsigned int getNodeCount() const;
-		void setNodeCount(const unsigned int _nodeCount);
+		void setNodeCount(const unsigned int _nodeCount, bool asynchronous = false);
 
 		unsigned int getEdgeCount() const;
-		void setEdgeCount(const unsigned int _edgeCount);
+		void setEdgeCount(const unsigned int _edgeCount, bool asynchronous = false);
 
 		int getCumulativeMass() const;
-		void setCumulativeMass(const int _cumulativeMass);
+		void setCumulativeMass(const int _cumulativeMass, bool asynchronous = false);
 
 		double getFileOffset() const;
-		void setFileOffset(const int _fileOffset);
+		void setFileOffset(const int _fileOffset, bool asynchronous = false);
 
 		int getDAGCost() const;
-		void setDAGCost(const int _DAGCost);
+		void setDAGCost(const int _DAGCost, bool asynchronous = false);
 
 		int getMaxTSVDimension() const;
-		void setMaxTSVDimension(const int _MaxTSVDimension);
+		void setMaxTSVDimension(const int _MaxTSVDimension, bool asynchronous = false);
 
 		double getTotalTSVSum() const;
-		void setTotalTSVSum(const double _totalTSVSum);
+		void setTotalTSVSum(const double _totalTSVSum, bool asynchronous = false);
 
 		ShapeDims  getShapeDimensions() const;
-		void setShapeDimensions(const double _xmin, const double _xmax, const double _ymin, const double _ymax);
+		void setShapeDimensions(const double _xmin, const double _xmax, const double _ymin, const double _ymax, bool asynchronous = false);
 
 		string getXMLSignature() const;
-		void setXMLSignature(const string& str);
+		void setXMLSignature(const string& str, bool asynchronous = false);
 
 		boost::weak_ptr<GraphClass> getParentGraphClass();
 		boost::weak_ptr<ObjectClass> getParentObjectClass();
@@ -102,6 +100,8 @@ namespace graphDBLib{
 		/* =========== Template function =========== */
 		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	private:
 		unsigned long idGraph;

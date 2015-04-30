@@ -119,27 +119,6 @@
     <None Include="sources\Point-odb.ixx">
       <Filter>ODB</Filter>
     </None>
-    <None Include="sources\Point.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\ObjectClass.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\Node.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\GraphClass.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\Graph.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\functions.sql">
-      <Filter>SQL</Filter>
-    </None>
-    <None Include="sources\Edge.sql">
-      <Filter>SQL</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -153,9 +132,6 @@
     </Filter>
     <Filter Include="Objects">
       <UniqueIdentifier>{50ddcf30-6ec6-4748-83f3-35a79d3ff2c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SQL">
-      <UniqueIdentifier>{d0e493d2-f533-45a6-a09b-5478aed5fdd3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{57d2e3e3-556d-42dc-a221-e52351cee9ea}</UniqueIdentifier>

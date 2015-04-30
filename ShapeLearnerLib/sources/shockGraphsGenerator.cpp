@@ -317,22 +317,24 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 		graphDBLib::GraphDB::CommonInterface::getObjectClass(objClass), \
 		(string) graph.GetDAGLbl());
 
-	graphPtr.lock()->setView(graph.GetViewNumber());
-	graphPtr.lock()->setCumulativeMass(graph.GetCumulativeMass());
-	graphPtr.lock()->setDAGCost(graph.GetDAGCost());
-	graphPtr.lock()->setFileOffset(graph.GetFileOffset());
-	graphPtr.lock()->setMaxTSVDimension(graph.GetMaxTSVDimension());
-	graphPtr.lock()->setTotalTSVSum(graph.GetTotalTSVSum());
+	graphPtr.lock()->setView(graph.GetViewNumber(), true);
+	graphPtr.lock()->setCumulativeMass(graph.GetCumulativeMass(), true);
+	graphPtr.lock()->setDAGCost(graph.GetDAGCost(), true);
+	graphPtr.lock()->setFileOffset(graph.GetFileOffset(), true);
+	graphPtr.lock()->setMaxTSVDimension(graph.GetMaxTSVDimension(), true);
+	graphPtr.lock()->setTotalTSVSum(graph.GetTotalTSVSum(), true);
 
 	ShapeDims sh = graph.GetDims();
 	graphPtr.lock()->setShapeDimensions(sh.xmin, sh.xmax, sh.ymin, sh.ymax);
 
-	graphPtr.lock()->setNodeCount(graph.GetEdgeCount());
-	graphPtr.lock()->setEdgeCount(graph.GetNodeCount());
+	graphPtr.lock()->setNodeCount(graph.GetEdgeCount(), true);
+	graphPtr.lock()->setEdgeCount(graph.GetNodeCount(), true);
 
 	std::stringstream testStream;
 	graph.Print(testStream, true);
-	graphPtr.lock()->setXMLSignature(testStream.str());
+	graphPtr.lock()->setXMLSignature(testStream.str(), true);
+
+	graphPtr.lock()->resynchronize();
 
 	leda::list<leda::graph::node> nodeList (graph.all_nodes());
 	leda::list<leda::graph::edge> edgeList (graph.all_edges());
@@ -348,21 +350,23 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 
 		NodeMap.insert(pair<int, boost::weak_ptr<graphDBLib::Node>>((*it)->id(), NodePtr));
 
-		NodePtr.lock()->setIndex(curNode->GetDFSIndex());
-		NodePtr.lock()->setLabel(curNode->GetNodeLbl().c_str());
-		NodePtr.lock()->setLevel(curNode->GetLevel());
-		NodePtr.lock()->setMass(curNode->GetMass());
-		NodePtr.lock()->setType(curNode->GetType());
-		NodePtr.lock()->setRole(NodeRoleConverter2GraphDBLib(curNode->GetNodeRole()));
-		NodePtr.lock()->setPointCount(curNode->GetShockCount());
+		NodePtr.lock()->setIndex(curNode->GetDFSIndex(), true);
+		NodePtr.lock()->setLabel(curNode->GetNodeLbl().c_str(), true);
+		NodePtr.lock()->setLevel(curNode->GetLevel(), true);
+		NodePtr.lock()->setMass(curNode->GetMass(), true);
+		NodePtr.lock()->setType(curNode->GetType(), true);
+		NodePtr.lock()->setRole(NodeRoleConverter2GraphDBLib(curNode->GetNodeRole()), true);
+		NodePtr.lock()->setPointCount(curNode->GetShockCount(), true);
 
 		double contourLength1 = -1, contourLength2 = -1;
 		curNode->GetContourLength(contourLength1, contourLength2);
-		NodePtr.lock()->setContourLength1(contourLength1);
-		NodePtr.lock()->setContourLength2(contourLength2);
+		NodePtr.lock()->setContourLength1(contourLength1, true);
+		NodePtr.lock()->setContourLength2(contourLength2, true);
 
-		NodePtr.lock()->setSubtreeCost(curNode->GetSubtreeCost());
-		NodePtr.lock()->setTSVNorm(curNode->GetTSVNorm());
+		NodePtr.lock()->setSubtreeCost(curNode->GetSubtreeCost(), true);
+		NodePtr.lock()->setTSVNorm(curNode->GetTSVNorm(), true);
+
+		NodePtr.lock()->resynchronize();
 
 		/* ===================== Point SAVING ====================== */
 
@@ -371,15 +375,16 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 		for (int i = 0; i < branch.GetSize(); i++){
 			boost::weak_ptr<graphDBLib::Point> PointPtr = graphDBLib::GraphDB::CommonInterface::getPoint(NodePtr, graphPtr);
 
-			PointPtr.lock()->setColor(branch[i].color);
-			PointPtr.lock()->setDirection(BranchDirConverter2GraphDBLib(branch[i].dir));
-			PointPtr.lock()->setDr(branch[i].dr);
-			PointPtr.lock()->setDr_Ds(branch[i].dr_ds);
-			PointPtr.lock()->setRadius(branch[i].radius);
-			PointPtr.lock()->setSpeed(branch[i].speed);
-			PointPtr.lock()->setType(branch[i].type);
-			PointPtr.lock()->setxCoord(branch[i].xcoord);
-			PointPtr.lock()->setyCoord(branch[i].ycoord);
+			PointPtr.lock()->setDirection(BranchDirConverter2GraphDBLib(branch[i].dir), true);
+			PointPtr.lock()->setDr(branch[i].dr, true);
+			PointPtr.lock()->setDr_Ds(branch[i].dr_ds, true);
+			PointPtr.lock()->setRadius(branch[i].radius, true);
+			PointPtr.lock()->setSpeed(branch[i].speed, true);
+			PointPtr.lock()->setType(branch[i].type, true);
+			PointPtr.lock()->setxCoord(branch[i].xcoord, true);
+			PointPtr.lock()->setyCoord(branch[i].ycoord, true);
+
+			PointPtr.lock()->resynchronize();
 		}
 	}
 	/* ===================== Edge SAVING ====================== */
@@ -392,17 +397,21 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 		int idTarget = target->id();
 
 		map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeSource = NodeMap.find(idSource);
-		map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeTarget = NodeMap.find(idSource);
+		map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeTarget = NodeMap.find(idTarget);
 
 		if(itNodeSource == NodeMap.end() || itNodeTarget == NodeMap.end())
-			throw StandardExcept((string)__FUNCTION__,"Error while fetching the Nodes (Source: "+ to_string((_Longlong)idSource) +", Target: "+ to_string((_Longlong)idSource) +") Connected to the Edge: "+ to_string((_Longlong)ledaEdge->id()) +".");
+			throw StandardExcept((string)__FUNCTION__,"Error while fetching the Nodes (Source: "+ to_string((_Longlong)idSource) +", Target: "+ to_string((_Longlong)idTarget) +") Connected to the Edge: "+ to_string((_Longlong)ledaEdge->id()) +".");
 
 		boost::weak_ptr<graphDBLib::Node> NodeSource = itNodeSource->second;
 		boost::weak_ptr<graphDBLib::Node> NodeTarget = itNodeTarget->second;
 
 		boost::weak_ptr<graphDBLib::Edge> EdgePtr = graphDBLib::GraphDB::CommonInterface::getEdge(NodeSource, NodeTarget, graphPtr);
 
-		EdgePtr.lock()->setWeight(graph.GetEdgeWeight(ledaEdge));
+		EdgePtr.lock()->setWeight(graph.GetEdgeWeight(ledaEdge), true);
+		EdgePtr.lock()->setSourceDFSIndex(graph.GetNodeDFSIndex(source), true);
+		EdgePtr.lock()->setTargetDFSIndex(graph.GetNodeDFSIndex(target), true);
+
+		EdgePtr.lock()->resynchronize();
 	}
 }
 

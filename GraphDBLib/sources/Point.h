@@ -64,50 +64,48 @@ namespace graphDBLib{
 		unsigned long getKey() const;
 
 		double getxCoord() const;
-		void setxCoord(const double _xCoord);
+		void setxCoord(const double _xCoord, bool asynchronous = false);
 
 		double getyCoord() const;
-		void setyCoord(const double _yCoord);
+		void setyCoord(const double _yCoord, bool asynchronous = false);
 
 		double getRadius() const;
-		void setRadius(const double _radius);
+		void setRadius(const double _radius, bool asynchronous = false);
 
 		double getSpeed() const;
-		void setSpeed(const double _speed);
+		void setSpeed(const double _speed, bool asynchronous = false);
 
 		double getDr_Ds() const;
-		void setDr_Ds(const double _dr_ds);
-
-		char getColor() const;
-		void setColor(const char _color);
+		void setDr_Ds(const double _dr_ds, bool asynchronous = false);
 
 		double getDr() const;
-		void setDr(const double _dr);
+		void setDr(const double _dr, bool asynchronous = false);
 
 		int getType() const;
-		void setType(const int _type);
+		void setType(const int _type, bool asynchronous = false);
 
 		BRANCH_DIR getDirection() const;
-		void setDirection(BRANCH_DIR _direction);
+		void setDirection(BRANCH_DIR _direction, bool asynchronous = false);
 
 		boost::weak_ptr<Node> getParentNode();
 		boost::weak_ptr<Graph> getParentGraph();
 
 		/* =========== Template function =========== */
-		string getClassName() const { return "Point"; }
+		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	protected:
 		unsigned long idPoint;
-		double		xCoord; //!< X coordinate of branch points.
-		double		yCoord; //!< Y coordinate of branch points.
-		double		radius; //!< Radii at the branch points.
-		double		speed;	//!< Velocities at the branch points.
+		double		xCoord;		//!< X coordinate of branch points.
+		double		yCoord;		//!< Y coordinate of branch points.
+		double		radius;		//!< Radii at the branch points.
+		double		speed;		//!< Velocities at the branch points.
 		double		dr_ds;
-		char		color;
-		double		dr;		//!< Delta radius. Diff in radius with that of the previous point
+		double		dr;			//!< Delta radius. Diff in radius with that of the previous point
 		int			type;
-		BRANCH_DIR	direction;		//!< Direction: increasing=1, decreasing=-1, constant=0
+		BRANCH_DIR	direction;	//!< Direction: increasing=1, decreasing=-1, constant=0
 
 		odb::boost::lazy_weak_ptr<Graph> refGraph;
 		odb::boost::lazy_weak_ptr<Node> refNode;
@@ -152,7 +150,7 @@ namespace graphDBLib{
 	#pragma db member(Point::radius) default("-1")
 	#pragma db member(Point::speed) default("-1")
 	#pragma db member(Point::dr_ds) default("-1")
-	#pragma db member(Point::color) default("-1")
+	//#pragma db member(Point::color) default("-1")
 	#pragma db member(Point::dr) default("-1")
 	#pragma db member(Point::type) default("-1")
 	#pragma db member(Point::direction) default(UNK_DIR)

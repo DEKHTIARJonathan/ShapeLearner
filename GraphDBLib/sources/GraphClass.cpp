@@ -28,28 +28,40 @@ GraphClass::GraphClass(string name, bool isDirect, bool isAcyclic) : graphClassN
 	Logger::Log("New Object Instanciated : GraphClass("+ getKey()+")");
 }
 
-void GraphClass::setIsDirect(const bool _directGraph){
-	directGraph = _directGraph;
-	updateInDB();
+boost::shared_ptr<GraphClass> GraphClass::Access::createGraphClass(string name, bool isDirect, bool isAcyclic){
+	return  boost::shared_ptr<GraphClass>(new GraphClass(name, isDirect, isAcyclic));
 }
 
-void GraphClass::setIsAcyclicGraph(const bool _acyclicGraph){
-	acyclicGraph = _acyclicGraph;
-	updateInDB();
+string GraphClass::getKey() const {return graphClassName;}
+
+bool GraphClass::getIsDirect() const {return directGraph;}
+void GraphClass::setIsDirect(const bool _directGraph, bool asynchronous){
+	directGraph = _directGraph;
+	if (!asynchronous)
+		updateInDB();
 }
+
+bool GraphClass::getIsAcyclicGraph() const {return acyclicGraph;}
+void GraphClass::setIsAcyclicGraph(const bool _acyclicGraph, bool asynchronous){
+	acyclicGraph = _acyclicGraph;
+	if (!asynchronous)
+		updateInDB();
+}
+
+string GraphClass::getClassName() const { return "GraphClass"; }
 
 void GraphClass::updateInDB(){
-	#ifdef _MSC_VER
-		GraphDB::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	GraphDB::ObjectInterface::updateObject(*this);
 }
 
 string GraphClass::saveInDB(){
-	#ifdef _MSC_VER
-		return GraphDB::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
+	return GraphDB::ObjectInterface::saveObject(*this);
 }
 
 vector<unsigned long> GraphClass::getGraphs(){
 	return GraphDB::ObjectInterface::getForeignRelations<GraphIdViewByGraphClass>(graphClassName);
+}
+
+void GraphClass::resynchronize(){
+	updateInDB();
 }

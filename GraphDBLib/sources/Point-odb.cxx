@@ -56,7 +56,6 @@ namespace odb
     pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
-    pgsql::text_oid,
     pgsql::float8_oid,
     pgsql::int4_oid,
     pgsql::int4_oid,
@@ -78,7 +77,6 @@ namespace odb
     pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
-    pgsql::text_oid,
     pgsql::float8_oid,
     pgsql::int4_oid,
     pgsql::int4_oid,
@@ -184,33 +182,25 @@ namespace odb
     //
     t[5UL] = 0;
 
-    // color
-    //
-    if (t[6UL])
-    {
-      i.color_value.capacity (i.color_size);
-      grew = true;
-    }
-
     // dr
     //
-    t[7UL] = 0;
+    t[6UL] = 0;
 
     // type
     //
-    t[8UL] = 0;
+    t[7UL] = 0;
 
     // direction
     //
-    t[9UL] = 0;
+    t[8UL] = 0;
 
     // refGraph
     //
-    t[10UL] = 0;
+    t[9UL] = 0;
 
     // refNode
     //
-    t[11UL] = 0;
+    t[10UL] = 0;
 
     return grew;
   }
@@ -269,15 +259,6 @@ namespace odb
     b[n].type = pgsql::bind::double_;
     b[n].buffer = &i.dr_ds_value;
     b[n].is_null = &i.dr_ds_null;
-    n++;
-
-    // color
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.color_value.data ();
-    b[n].capacity = i.color_value.capacity ();
-    b[n].size = &i.color_size;
-    b[n].is_null = &i.color_null;
     n++;
 
     // dr
@@ -406,27 +387,6 @@ namespace odb
           pgsql::id_double >::set_image (
         i.dr_ds_value, is_null, v);
       i.dr_ds_null = is_null;
-    }
-
-    // color
-    //
-    {
-      char const& v =
-        o.color;
-
-      bool is_null (false);
-      std::size_t size (0);
-      std::size_t cap (i.color_value.capacity ());
-      pgsql::value_traits<
-          char,
-          pgsql::id_string >::set_image (
-        i.color_value,
-        size,
-        is_null,
-        v);
-      i.color_null = is_null;
-      i.color_size = size;
-      grew = grew || (cap != i.color_value.capacity ());
     }
 
     // dr
@@ -621,21 +581,6 @@ namespace odb
         i.dr_ds_null);
     }
 
-    // color
-    //
-    {
-      char& v =
-        o.color;
-
-      pgsql::value_traits<
-          char,
-          pgsql::id_string >::set_value (
-        v,
-        i.color_value,
-        i.color_size,
-        i.color_null);
-    }
-
     // dr
     //
     {
@@ -752,14 +697,13 @@ namespace odb
   "\"radius\", "
   "\"speed\", "
   "\"dr_ds\", "
-  "\"color\", "
   "\"dr\", "
   "\"type\", "
   "\"direction\", "
   "\"refGraph\", "
   "\"refNode\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) "
   "RETURNING \"idPoint\"";
 
   const char access::object_traits_impl< ::graphDBLib::Point, id_pgsql >::find_statement[] =
@@ -770,7 +714,6 @@ namespace odb
   "\"Point\".\"radius\", "
   "\"Point\".\"speed\", "
   "\"Point\".\"dr_ds\", "
-  "\"Point\".\"color\", "
   "\"Point\".\"dr\", "
   "\"Point\".\"type\", "
   "\"Point\".\"direction\", "
@@ -787,13 +730,12 @@ namespace odb
   "\"radius\"=$3, "
   "\"speed\"=$4, "
   "\"dr_ds\"=$5, "
-  "\"color\"=$6, "
-  "\"dr\"=$7, "
-  "\"type\"=$8, "
-  "\"direction\"=$9, "
-  "\"refGraph\"=$10, "
-  "\"refNode\"=$11 "
-  "WHERE \"idPoint\"=$12";
+  "\"dr\"=$6, "
+  "\"type\"=$7, "
+  "\"direction\"=$8, "
+  "\"refGraph\"=$9, "
+  "\"refNode\"=$10 "
+  "WHERE \"idPoint\"=$11";
 
   const char access::object_traits_impl< ::graphDBLib::Point, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Point\" "
@@ -807,7 +749,6 @@ namespace odb
   "\"Point\".\"radius\",\n"
   "\"Point\".\"speed\",\n"
   "\"Point\".\"dr_ds\",\n"
-  "\"Point\".\"color\",\n"
   "\"Point\".\"dr\",\n"
   "\"Point\".\"type\",\n"
   "\"Point\".\"direction\",\n"
@@ -1117,20 +1058,6 @@ namespace odb
     st.execute ();
     auto_result ar (st);
     select_statement::result r (st.fetch ());
-
-    if (r == select_statement::truncated)
-    {
-      if (grow (im, sts.select_image_truncated ()))
-        im.version++;
-
-      if (im.version != sts.select_image_version ())
-      {
-        bind (imb.bind, im, statement_select);
-        sts.select_image_version (im.version);
-        imb.version++;
-        st.refetch ();
-      }
-    }
 
     return r != select_statement::no_data;
   }

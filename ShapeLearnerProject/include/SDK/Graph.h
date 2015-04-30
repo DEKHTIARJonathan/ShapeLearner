@@ -31,7 +31,6 @@
 #include "SDK/Point.h"
 #include "SDK/Edge.h"
 
-// ODB Classes
 #include <odb/core.hxx>
 #include <odb/callback.hxx>
 #include <odb/boost/lazy-ptr.hxx>
@@ -44,31 +43,20 @@ using namespace std;
 
 namespace graphDBLib{
 
-	class GraphClass; //Forward Declaration of the class contained in GraphClass.h
-	class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
-	class GraphDB; // Forward Declaration of the class contained in graphDB.h
+	class GraphClass;
+	class ObjectClass;
+	class GraphDB;
 
 	struct ShapeDims
 	{
 		double xmin, xmax, ymin, ymax;
 	};
 	
-	/*!	
-	*	\class GraphClass
-	*	\brief Part of the Graph Data Model. It is the center piece of the modeL. It has one ObjectClass and one GraphClass. It is composed of many Nodes, Edges, Points...
-	*/
 	class Graph
 	{
 	public:
-		/*!
-		*	\class GraphClass::Access
-		*	\brief Limit instantiation only to GraphDB. Static subclass which role is only to execute its unique static method.
-		*/
 		class Access {
-			friend class GraphDB;
-			static boost::shared_ptr<Graph> createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName){
-				return boost::shared_ptr<Graph>(new Graph(_graphClass, _objectClass, _objectName));
-			}
+			static boost::shared_ptr<Graph> createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName);
 		};
 
 		unsigned long getKey() const;
@@ -76,34 +64,34 @@ namespace graphDBLib{
 		string getObjectName() const;
 
 		unsigned long getView() const;
-		void setView(const unsigned long _viewNumber);
+		void setView(const unsigned long _viewNumber, bool asynchronous = false);
 
 		unsigned int getNodeCount() const;
-		void setNodeCount(const unsigned int _nodeCount);
+		void setNodeCount(const unsigned int _nodeCount, bool asynchronous = false);
 
 		unsigned int getEdgeCount() const;
-		void setEdgeCount(const unsigned int _edgeCount);
+		void setEdgeCount(const unsigned int _edgeCount, bool asynchronous = false);
 
 		int getCumulativeMass() const;
-		void setCumulativeMass(const int _cumulativeMass);
+		void setCumulativeMass(const int _cumulativeMass, bool asynchronous = false);
 
 		double getFileOffset() const;
-		void setFileOffset(const int _fileOffset);
+		void setFileOffset(const int _fileOffset, bool asynchronous = false);
 
 		int getDAGCost() const;
-		void setDAGCost(const int _DAGCost);
+		void setDAGCost(const int _DAGCost, bool asynchronous = false);
 
 		int getMaxTSVDimension() const;
-		void setMaxTSVDimension(const int _MaxTSVDimension);
+		void setMaxTSVDimension(const int _MaxTSVDimension, bool asynchronous = false);
 
 		double getTotalTSVSum() const;
-		void setTotalTSVSum(const double _totalTSVSum);
+		void setTotalTSVSum(const double _totalTSVSum, bool asynchronous = false);
 
 		ShapeDims  getShapeDimensions() const;
-		void setShapeDimensions(const double _xmin, const double _xmax, const double _ymin, const double _ymax);
+		void setShapeDimensions(const double _xmin, const double _xmax, const double _ymin, const double _ymax, bool asynchronous = false);
 
 		string getXMLSignature() const;
-		void setXMLSignature(const string& str);
+		void setXMLSignature(const string& str, bool asynchronous = false);
 
 		boost::weak_ptr<GraphClass> getParentGraphClass();
 		boost::weak_ptr<ObjectClass> getParentObjectClass();
@@ -116,21 +104,22 @@ namespace graphDBLib{
 		string getClassName() const;
 		/* =========== Template function =========== */
 
+		void resynchronize();
+
 	private:
 		unsigned long idGraph;
-		string objectName;			//!< The name of the Image File.
-		unsigned long viewNumber;	//!< Object View
+		string objectName;
+		unsigned long viewNumber;
 
 		unsigned int nodeCount;
 		unsigned int edgeCount;
 
-		int cumulativeMass;			//!< Sum of all the nodes' masses
-		double DAGCost;				//!< Som of all node and edge costs
-		int fileOffset;				//!< file offset where this DAG is located.
-		int MaxTSVDimension;		//!< Maximum branching factor of the DAG : m_nMaxBFactor + 1;
-		double totalTSVSum;			//!< Sum of all the node's TSV magnitudes.
+		int cumulativeMass;	
+		double DAGCost;
+		int fileOffset;	
+		int MaxTSVDimension;
+		double totalTSVSum;
 
-		/* Shape Infos */
 		double shape_xMax;
 		double shape_xMin;
 		double shape_yMax;
@@ -143,9 +132,6 @@ namespace graphDBLib{
 		odb::boost::lazy_weak_ptr<GraphClass> refGraphClass;
 		odb::boost::lazy_weak_ptr<ObjectClass> refObjectClass;
 
-		/*!
-		*	\brief  Classical constructor needed to let ODB load objects from DB.
-		*/
 		Graph() {}
 		Graph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName);
 	};

@@ -30,7 +30,7 @@ Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph) :
 	direction = UNK_DIR;
 	speed = -1;
 	dr_ds = -1;
-	color = char("");
+	//color = char('');
 	dr = -1;
 	type = -1;
 
@@ -41,70 +41,62 @@ Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph) :
 unsigned long Point::getKey() const {return idPoint;}
 
 double Point::getxCoord() const {return xCoord;}
-void Point::setxCoord(const double _xCoord){
+void Point::setxCoord(const double _xCoord, bool asynchronous){
 	xCoord = _xCoord;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
 double Point::getyCoord() const {return yCoord;}
-void Point::setyCoord(const double _yCoord){
+void Point::setyCoord(const double _yCoord, bool asynchronous){
 	yCoord = _yCoord;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
 double Point::getRadius() const {return radius;}
-void Point::setRadius(const double _radius){
+void Point::setRadius(const double _radius, bool asynchronous){
 	radius = _radius;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-double Point::getSpeed() const{
-	return speed;
-}
-void Point::setSpeed(const double _speed){
+double Point::getSpeed() const{return speed;}
+void Point::setSpeed(const double _speed, bool asynchronous){
 	speed = _speed;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-double Point::getDr_Ds() const{
-	return dr_ds;
-}
-void Point::setDr_Ds(const double _dr_ds){
+double Point::getDr_Ds() const{return dr_ds;}
+void Point::setDr_Ds(const double _dr_ds, bool asynchronous){
 	dr_ds = _dr_ds;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-char Point::getColor() const{
-	return color;
-}
-void Point::setColor(const char _color){
-	color = _color;
-	updateInDB();
-}
-
-double Point::getDr() const{
-	return dr;
-}
-void Point::setDr(const double _dr){
+double Point::getDr() const{return dr;}
+void Point::setDr(const double _dr, bool asynchronous){
 	dr = _dr;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-int Point::getType() const{
-	return type;
-}
-void Point::setType(const int _type){
+int Point::getType() const{return type;}
+void Point::setType(const int _type, bool asynchronous){
 	type = _type;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-BRANCH_DIR Point::getDirection() const{
-	return direction;
-}
-void Point::setDirection(BRANCH_DIR _direction){
+BRANCH_DIR Point::getDirection() const{return direction;}
+void Point::setDirection(BRANCH_DIR _direction, bool asynchronous){
 	direction = _direction;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
+
+string Point::getClassName() const { return "Point"; }
 
 void Point::updateInDB(){
 		GraphDB::ObjectInterface::updateObject(*this);
@@ -146,4 +138,8 @@ void Point::checkCorrectness(odb::callback_event e, odb::database&) const throw(
 				throw StandardExcept((string)__FUNCTION__ ,"Impossible to update this Point. The Point is not in the same Graph as the linked Node.");
 			break;
 	}
+}
+
+void Point::resynchronize(){
+	updateInDB();
 }

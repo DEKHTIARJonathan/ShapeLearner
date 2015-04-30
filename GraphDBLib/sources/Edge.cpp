@@ -23,31 +23,54 @@
 using namespace std;
 using namespace graphDBLib;
 
+boost::shared_ptr<Edge> Edge::Access::createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph){
+	return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph));
+}
+
 Edge::Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph) :
 	source(_source),
 	target(_target),
 	refGraph(_refGraph),
 	idEdge(0)
 	{
+		weight = -1;
+		sourceDFSIndex = -1;
+		targetDFSIndex = -1;
 		idEdge = saveInDB();
 		Logger::Log("New Object Instanciated : Edge("+ to_string((_ULonglong)getKey())+")");
 	}
 
-void Edge::setWeight(const unsigned long _weight) {
+unsigned long Edge::getKey() const {return idEdge;}
+
+int Edge::getWeight() const {return weight;}
+void Edge::setWeight(const int _weight, bool asynchronous) {
 	weight = _weight;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
+int Edge::getSourceDFSIndex() const {return sourceDFSIndex;}
+void Edge::setSourceDFSIndex(const int _sourceDFSIndex, bool asynchronous){
+	sourceDFSIndex = _sourceDFSIndex;
+	if (!asynchronous)
+		updateInDB();
+}
+
+int Edge::getTargetDFSIndex() const {return targetDFSIndex;}
+void Edge::setTargetDFSIndex(const int _targetDFSIndex, bool asynchronous){
+	targetDFSIndex = _targetDFSIndex;
+	if (!asynchronous)
+		updateInDB();
+}
+
+string Edge::getClassName() const {return "Edge";}
+
 void Edge::updateInDB(){
-	#ifdef _MSC_VER
 		GraphDB::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
 }
 
 unsigned long Edge::saveInDB(){
-	#ifdef _MSC_VER
-		return GraphDB::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
+	return GraphDB::ObjectInterface::saveObject(*this);
 }
 
 void Edge::checkCorrectness(odb::callback_event e, odb::database&) const throw(StandardExcept) {
@@ -72,4 +95,8 @@ void Edge::checkCorrectness(odb::callback_event e, odb::database&) const throw(S
 				throw StandardExcept((string)__FUNCTION__ ,"Impossible to update this edge. The Nodes connected are not in the same graph or/and is different from Edge's Graph.");
 			break;
 	}
+}
+
+void Edge::resynchronize(){
+	updateInDB();
 }

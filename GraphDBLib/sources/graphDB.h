@@ -115,7 +115,16 @@ namespace graphDBLib {
 				*	\param obj : The Object we want to persist in DB.
 				*/
 				template<class T> static unsigned long saveObject(T& obj) throw(StandardExcept){
-					unsigned long rslt = DatabaseManager::Interface::saveObject(obj);
+					unsigned long rslt = 0;
+					try{
+						rslt = DatabaseManager::Interface::saveObject(obj);
+					}
+					catch (const std::exception& e){
+						Logger::Log(e.what (), constants::LogError);
+						#ifdef _DEBUG
+							system ("PAUSE");
+						#endif
+					}
 					if (rslt != 0)
 						return rslt;
 					else

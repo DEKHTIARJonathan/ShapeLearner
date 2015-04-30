@@ -48,23 +48,31 @@ namespace graphDBLib{
 		*/
 		class Access {
 			friend class GraphDB;
-			static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph){
-				return boost::shared_ptr<Edge>(new Edge(_source, _target, _refGraph));
-			}
+			static boost::shared_ptr<Edge> createEdge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph);
 		};
 
-		unsigned long getKey() const {return idEdge;}
+		unsigned long getKey() const;
 
-		unsigned long getWeight() const {return weight;}
-		void setWeight(const unsigned long _weight);
+		int getWeight() const;
+		void setWeight(const int _weight, bool asynchronous = false);
+
+		int getSourceDFSIndex() const;
+		void setSourceDFSIndex(const int _sourceDFSIndex, bool asynchronous = false);
+
+		int getTargetDFSIndex() const;
+		void setTargetDFSIndex(const int _targetDFSIndex, bool asynchronous = false);
 
 		/* =========== Template function =========== */
-		string getClassName() const { return "Edge"; }
+		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	private:
-		unsigned long idEdge;
-		unsigned long weight;
+		unsigned long	idEdge;
+		int				weight;
+		int				sourceDFSIndex;
+		int				targetDFSIndex;
 
 		odb::boost::lazy_weak_ptr<Node> source;
 		odb::boost::lazy_weak_ptr<Node> target;
@@ -106,7 +114,9 @@ namespace graphDBLib{
 	#pragma db member(Edge::refGraph) not_null on_delete(cascade)
 	#pragma db member(Edge::source) not_null on_delete(cascade)
 	#pragma db member(Edge::target) not_null on_delete(cascade)
-	#pragma db member(Edge::weight) default("1") not_null
+	#pragma db member(Edge::weight) default("-1")
+	#pragma db member(Edge::sourceDFSIndex) default("-1")
+	#pragma db member(Edge::targetDFSIndex) default("-1")
 	#pragma db index(Edge::"index_Edge_source") method("BTREE") member(source)
 	#pragma db index(Edge::"index_Edge_target") method("BTREE") member(target)
 	#pragma db index(Edge::"index_Edge_link") unique method("BTREE") members(source, target)

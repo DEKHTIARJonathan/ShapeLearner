@@ -50,46 +50,44 @@ namespace graphDBLib{
 		*/
 		class Access {
 			friend class GraphDB;
-			static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph){
-				return boost::shared_ptr<Node>(new Node(_refGraph));
-			}
+			static boost::shared_ptr<Node> createNode(boost::weak_ptr<Graph> _refGraph);
 		};
 
 		unsigned long getKey() const;
 
 		int getIndex() const;
-		void setIndex(const int _index);
+		void setIndex(const int _index, bool asynchronous = false);
 
 		string getLabel() const;
-		void setLabel(const string& _label);
+		void setLabel(const string& _label, bool asynchronous = false);
 
 		int getLevel() const;
-		void setLevel(const int _level);
+		void setLevel(const int _level, bool asynchronous = false);
 
 		int getMass() const;
-		void setMass(const int _mass);
+		void setMass(const int _mass, bool asynchronous = false);
 
 		int getType() const;
-		void setType(const int _type);
+		void setType(const int _type, bool asynchronous = false);
 
 		NODE_ROLE getRole() const;
-		void setRole(const NODE_ROLE _role);
+		void setRole(const NODE_ROLE _role, bool asynchronous = false);
 
 		int getPointCount() const;
-		void setPointCount(const int _pointCount);
+		void setPointCount(const int _pointCount, bool asynchronous = false);
 		int getPointCountFromDB() const;
 
 		double getContourLength1() const;
-		void setContourLength1(const double _contourLength1);
+		void setContourLength1(const double _contourLength1, bool asynchronous = false);
 
 		double getContourLength2() const;
-		void setContourLength2(const double _contourLength2);
+		void setContourLength2(const double _contourLength2, bool asynchronous = false);
 
 		double getSubtreeCost() const;
-		void setSubtreeCost(const double _subtreeCost);
+		void setSubtreeCost(const double _subtreeCost, bool asynchronous = false);
 
 		double getTSVNorm() const;
-		void setTSVNorm(const double _tsvNorm);
+		void setTSVNorm(const double _tsvNorm, bool asynchronous = false);
 
 		boost::weak_ptr<Graph> getParentGraph();
 
@@ -99,8 +97,10 @@ namespace graphDBLib{
 		vector<unsigned long> getPoints();
 
 		/* =========== Template function =========== */
-		string getClassName() const { return "Node"; }
+		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	private:
 		unsigned long	idNode;

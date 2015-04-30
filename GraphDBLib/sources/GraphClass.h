@@ -47,24 +47,24 @@ namespace graphDBLib{
 		*/
 		class Access {
 			friend class GraphDB;
-			static  boost::shared_ptr<GraphClass> createGraphClass(string name, bool isDirect = false, bool isAcyclic = false){
-				return  boost::shared_ptr<GraphClass>(new GraphClass(name, isDirect, isAcyclic));
-			}
+			static  boost::shared_ptr<GraphClass> createGraphClass(string name, bool isDirect = false, bool isAcyclic = false);
 		};
 
-		string getKey() const {return graphClassName;}
+		string getKey() const;
 
-		bool getIsDirect() const {return directGraph;}
-		void setIsDirect(const bool _directGraph);
+		bool getIsDirect() const;
+		void setIsDirect(const bool _directGraph, bool asynchronous = false);
 
-		bool getIsAcyclicGraph() const {return acyclicGraph;}
-		void setIsAcyclicGraph(const bool _acyclicGraph);
+		bool getIsAcyclicGraph() const;
+		void setIsAcyclicGraph(const bool _acyclicGraph, bool asynchronous = false);
 
 		vector<unsigned long> getGraphs();
 
 		/* =========== Template function =========== */
-		string getClassName() const { return "GraphClass"; }
+		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	private:
 		string graphClassName;

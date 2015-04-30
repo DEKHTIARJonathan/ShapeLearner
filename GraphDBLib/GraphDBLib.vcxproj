@@ -51,18 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="sources\Edge-odb.ixx" />
-    <None Include="sources\Edge.sql" />
-    <None Include="sources\functions.sql" />
     <None Include="sources\Graph-odb.ixx" />
-    <None Include="sources\Graph.sql" />
     <None Include="sources\GraphClass-odb.ixx" />
-    <None Include="sources\GraphClass.sql" />
     <None Include="sources\Node-odb.ixx" />
-    <None Include="sources\Node.sql" />
     <None Include="sources\ObjectClass-odb.ixx" />
-    <None Include="sources\ObjectClass.sql" />
     <None Include="sources\Point-odb.ixx" />
-    <None Include="sources\Point.sql" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AEEB1341-A0D6-4B46-A0D5-41B861095A6C}</ProjectGuid>

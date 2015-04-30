@@ -19,6 +19,9 @@
     <Filter Include="ShockGraphsGenerator">
       <UniqueIdentifier>{3a53e98c-7ae1-4f70-b401-4f25b1ed22e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShapeLearner\SQL">
+      <UniqueIdentifier>{e6f84afb-c20c-42ea-8d9b-730bda341bcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\infoStructures.h">
@@ -47,5 +50,28 @@
     <ClCompile Include="sources\ShapeLearner.cpp">
       <Filter>ShapeLearner</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\GraphDBLib\sources\Edge.sql">
+      <Filter>ShapeLearner\SQL</Filter>
+    </None>
+    <None Include="..\GraphDBLib\sources\functions.sql">
+      <Filter>ShapeLearner\SQL</Filter>
+    </None>
+    <None Include="..\GraphDBLib\sources\Graph.sql">
+      <Filter>ShapeLearner\SQL</Filter>
+    </None>
+    <None Include="..\GraphDBLib\sources\GraphClass.sql">
+      <Filter>ShapeLearner\SQL</Filter>
+    </None>
+    <None Include="..\GraphDBLib\sources\Node.sql">
+      <Filter>ShapeLearner\SQL</Filter>
+    </None>
+    <None Include="..\GraphDBLib\sources\ObjectClass.sql">
+      <Filter>ShapeLearner\SQL</Filter>
+    </None>
+    <None Include="..\GraphDBLib\sources\Point.sql">
+      <Filter>ShapeLearner\SQL</Filter>
+    </None>
   </ItemGroup>
 </Project>

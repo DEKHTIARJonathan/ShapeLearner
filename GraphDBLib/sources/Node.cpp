@@ -39,98 +39,93 @@ Node::Node(boost::weak_ptr<Graph> _refGraph) : refGraph(_refGraph),	idNode(0) {
 	Logger::Log("New Object Instanciated : Node("+ to_string((_ULonglong)getKey())+")");
 }
 
+boost::shared_ptr<Node> Node::Access::createNode(boost::weak_ptr<Graph> _refGraph){
+	return boost::shared_ptr<Node>(new Node(_refGraph));
+}
+
 unsigned long Node::getKey() const {return idNode;}
 
-int Node::getIndex() const {
-	return index;
-}
-void Node::setIndex(const int _index) {
+int Node::getIndex() const {return index;}
+void Node::setIndex(const int _index, bool asynchronous) {
 	index = _index;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-int Node::getLevel() const {
-	return level;
-}
-void Node::setLevel(const int _level) {
+int Node::getLevel() const {return level;}
+void Node::setLevel(const int _level, bool asynchronous) {
 	level = _level;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-int Node::getMass() const {
-	return mass;
-}
-void Node::setMass(const int _mass) {
+int Node::getMass() const {return mass;}
+void Node::setMass(const int _mass, bool asynchronous) {
 	mass = _mass;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-int Node::getType() const {
-	return type;
-}
-void Node::setType(const int _type) {
+int Node::getType() const {return type;}
+void Node::setType(const int _type, bool asynchronous) {
 	type = _type;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-string Node::getLabel() const {
-	return label;
-}
-void Node::setLabel(const string& _label) {
+string Node::getLabel() const {return label;}
+void Node::setLabel(const string& _label, bool asynchronous) {
 	label = _label;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-NODE_ROLE Node::getRole() const{
-	return role;
-}
-void Node::setRole(const NODE_ROLE _role){
+NODE_ROLE Node::getRole() const{return role;}
+void Node::setRole(const NODE_ROLE _role, bool asynchronous){
 	role = _role;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-double Node::getContourLength1() const{
-	return contourLength1;
-}
-void Node::setContourLength1(const double _contourLength1){
+double Node::getContourLength1() const{return contourLength1;}
+void Node::setContourLength1(const double _contourLength1, bool asynchronous){
 	contourLength1 = _contourLength1;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-double Node::getContourLength2() const{
-	return contourLength2;
-}
-void Node::setContourLength2(const double _contourLength2){
+double Node::getContourLength2() const{return contourLength2;}
+void Node::setContourLength2(const double _contourLength2, bool asynchronous){
 	contourLength2 = _contourLength2;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-double Node::getSubtreeCost() const{
-	return subtreeCost;
-}
-void Node::setSubtreeCost(const double _subtreeCost){
+double Node::getSubtreeCost() const{return subtreeCost;}
+void Node::setSubtreeCost(const double _subtreeCost, bool asynchronous){
 	subtreeCost = _subtreeCost;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-double Node::getTSVNorm() const{
-	return tsvNorm;
-}
-void Node::setTSVNorm(const double _tsvNorm){
+double Node::getTSVNorm() const{return tsvNorm;}
+void Node::setTSVNorm(const double _tsvNorm, bool asynchronous){
 	tsvNorm = _tsvNorm;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 
-int Node::getPointCount() const{
-	return pointCount;
-}
-void Node::setPointCount(const int _pointCount){
+int Node::getPointCount() const{return pointCount;}
+void Node::setPointCount(const int _pointCount, bool asynchronous){
 	pointCount = _pointCount;
-	updateInDB();
+	if (!asynchronous)
+		updateInDB();
 }
 int Node::getPointCountFromDB() const {
 	return GraphDB::ObjectInterface::getPointCountInNode(idNode);
 }
+
+string Node::getClassName() const {return "Node";}
 
 void Node::updateInDB(){
 	GraphDB::ObjectInterface::updateObject(*this);
@@ -167,4 +162,8 @@ vector<unsigned long> Node::getEdges(){
 
 vector<unsigned long> Node::getPoints(){
 	return GraphDB::ObjectInterface::getForeignRelations<PointIdViewByNode>(idNode);
+}
+
+void Node::resynchronize(){
+	updateInDB();
 }

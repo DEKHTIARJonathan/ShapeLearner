@@ -48,16 +48,105 @@ Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectCl
 		Logger::Log("New Object Instanciated : Graph key("+ to_string((_ULonglong)getKey())+")");
 	}
 
+boost::shared_ptr<Graph> Graph::Access::createGraph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName){
+	return boost::shared_ptr<Graph>(new Graph(_graphClass, _objectClass, _objectName));
+}
+
+unsigned long Graph::getKey() const {return idGraph;}
+
+unsigned long Graph::getView() const {return viewNumber;}
+void Graph::setView(const unsigned long _viewNumber, bool asynchronous) {
+	viewNumber = _viewNumber;
+	updateInDB();
+}
+
+unsigned int Graph::getNodeCount() const{return nodeCount;}
+void Graph::setNodeCount(const unsigned int _nodeCount, bool asynchronous){
+	nodeCount = _nodeCount;
+	if (!asynchronous)
+		updateInDB();
+}
+
+unsigned int Graph::getEdgeCount() const{return edgeCount;}
+void Graph::setEdgeCount(const unsigned int _edgeCount, bool asynchronous){
+	edgeCount = _edgeCount;
+	if (!asynchronous)
+		updateInDB();
+}
+
+string Graph::getObjectName() const {return objectName;}
+
+ShapeDims Graph::getShapeDimensions() const{
+	ShapeDims rslt;
+	rslt.xmin = shape_xMin;
+	rslt.xmax = shape_xMax;
+	rslt.ymin = shape_yMin;
+	rslt.ymax = shape_yMax;
+
+	return rslt;
+}
+void Graph::setShapeDimensions(const double _xmin, const double _xmax, const double _ymin, const double _ymax, bool asynchronous){
+	shape_xMin = _xmin;
+	shape_xMax = _xmax;
+	shape_yMax = _ymax;
+	shape_yMin = _ymin;
+	shape_Height = _ymax - _ymin;
+	shape_Width = _xmax - _xmin;
+	if (!asynchronous)
+		updateInDB();
+}
+
+int Graph::getCumulativeMass() const{return cumulativeMass;}
+void Graph::setCumulativeMass(const int _cumulativeMass, bool asynchronous){
+	cumulativeMass = _cumulativeMass;
+	if (!asynchronous)
+		updateInDB();
+}
+
+double Graph::getFileOffset() const{return fileOffset;}
+void Graph::setFileOffset(const int _fileOffset, bool asynchronous){
+	fileOffset = _fileOffset;
+	if (!asynchronous)
+		updateInDB();
+}
+
+int Graph::getDAGCost() const{return DAGCost;}
+
+void Graph::setDAGCost(const int _DAGCost, bool asynchronous){
+	DAGCost = _DAGCost;
+	if (!asynchronous)
+		updateInDB();
+}
+
+int Graph::getMaxTSVDimension() const{return MaxTSVDimension;}
+void Graph::setMaxTSVDimension(const int _MaxTSVDimension, bool asynchronous){
+	MaxTSVDimension = _MaxTSVDimension;
+	if (!asynchronous)
+		updateInDB();
+}
+
+double Graph::getTotalTSVSum() const{return totalTSVSum;}
+void Graph::setTotalTSVSum(const double _totalTSVSum, bool asynchronous){
+	totalTSVSum = _totalTSVSum;
+	if (!asynchronous)
+		updateInDB();
+}
+
+string Graph::getXMLSignature() const{return XMLSignature;}
+void Graph::setXMLSignature(const string& str, bool asynchronous){
+	XMLSignature = str;
+	if (!asynchronous)
+		updateInDB();
+}
+
+string Graph::getClassName() const {return "Graph";}
+
 void Graph::updateInDB(){
-	#ifdef _MSC_VER
-		GraphDB::ObjectInterface::updateObject(*this);
-	#endif //_MSC_VER
+	GraphDB::ObjectInterface::updateObject(*this);
 }
 
 unsigned long Graph::saveInDB(){
-	#ifdef _MSC_VER
-		return GraphDB::ObjectInterface::saveObject(*this);
-	#endif //_MSC_VER
+	return GraphDB::ObjectInterface::saveObject(*this);
 }
 
 boost::weak_ptr<GraphClass> Graph::getParentGraphClass(){
@@ -84,115 +173,6 @@ vector<unsigned long> Graph::getPoints(){
 	return GraphDB::ObjectInterface::getForeignRelations<PointIdViewByGraph>(idGraph);
 }
 
-unsigned long Graph::getKey() const {
-	return idGraph;
-}
-
-string Graph::getClassName() const {
-	return "Graph";
-}
-
-unsigned long Graph::getView() const {
-	return viewNumber;
-}
-
-void Graph::setView(const unsigned long _viewNumber) {
-	viewNumber = _viewNumber;
-	updateInDB();
-}
-
-unsigned int Graph::getNodeCount() const{
-	return nodeCount;
-}
-
-void Graph::setNodeCount(const unsigned int _nodeCount){
-	nodeCount = _nodeCount;
-	updateInDB();
-}
-
-unsigned int Graph::getEdgeCount() const{
-	return edgeCount;
-}
-
-void Graph::setEdgeCount(const unsigned int _edgeCount){
-	edgeCount = _edgeCount;
-	updateInDB();
-}
-
-string Graph::getObjectName() const {
-	return objectName;
-}
-
-ShapeDims Graph::getShapeDimensions() const{
-	ShapeDims rslt;
-	rslt.xmin = shape_xMin;
-	rslt.xmax = shape_xMax;
-	rslt.ymin = shape_yMin;
-	rslt.ymax = shape_yMax;
-
-	return rslt;
-}
-
-void Graph::setShapeDimensions(const double _xmin, const double _xmax, const double _ymin, const double _ymax){
-	shape_xMin = _xmin;
-	shape_xMax = _xmax;
-	shape_yMax = _ymax;
-	shape_yMin = _ymin;
-	shape_Height = _ymax - _ymin;
-	shape_Width = _xmax - _xmin;
-	updateInDB();
-}
-
-int Graph::getCumulativeMass() const{
-	return cumulativeMass;
-}
-
-void Graph::setCumulativeMass(const int _cumulativeMass){
-	cumulativeMass = _cumulativeMass;
-	updateInDB();
-}
-
-double Graph::getFileOffset() const{
-	return fileOffset;
-}
-
-void Graph::setFileOffset(const int _fileOffset){
-	fileOffset = _fileOffset;
-	updateInDB();
-}
-
-int Graph::getDAGCost() const{
-	return DAGCost;
-}
-
-void Graph::setDAGCost(const int _DAGCost){
-	DAGCost = _DAGCost;
-	updateInDB();
-}
-
-int Graph::getMaxTSVDimension() const{
-	return MaxTSVDimension;
-}
-
-void Graph::setMaxTSVDimension(const int _MaxTSVDimension){
-	MaxTSVDimension = _MaxTSVDimension;
-	updateInDB();
-}
-
-double Graph::getTotalTSVSum() const{
-	return totalTSVSum;
-}
-
-void Graph::setTotalTSVSum(const double _totalTSVSum){
-	totalTSVSum = _totalTSVSum;
-	updateInDB();
-}
-
-string Graph::getXMLSignature() const{
-	return XMLSignature;
-}
-
-void Graph::setXMLSignature(const string& str){
-	XMLSignature = str;
+void Graph::resynchronize(){
 	updateInDB();
 }

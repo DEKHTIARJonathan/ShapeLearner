@@ -90,6 +90,29 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\GraphDBLib\sources\Edge.sql">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\GraphDBLib\sources\functions.sql">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\GraphDBLib\sources\Graph.sql">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\GraphDBLib\sources\GraphClass.sql">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\GraphDBLib\sources\Node.sql">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\GraphDBLib\sources\ObjectClass.sql">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\GraphDBLib\sources\Point.sql">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

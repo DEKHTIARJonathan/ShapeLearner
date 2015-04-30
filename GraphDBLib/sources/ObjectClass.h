@@ -45,18 +45,18 @@ namespace graphDBLib{
 		*/
 		class Access {
 			friend class GraphDB;
-			static boost::shared_ptr<ObjectClass> createObjectClass(string name){
-				return boost::shared_ptr<ObjectClass> (new ObjectClass(name));
-			}
+			static boost::shared_ptr<ObjectClass> createObjectClass(string name);
 		};
 
-		string getKey() const {return objectClassName;}
+		string getKey() const;
 
 		vector<unsigned long> getGraphs();
 
 		/* =========== Template function =========== */
-		string getClassName() const { return "ObjectClass"; }
+		string getClassName() const;
 		/* =========== Template function =========== */
+
+		void resynchronize();
 
 	private:
 		string objectClassName;
