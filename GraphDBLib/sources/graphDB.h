@@ -119,16 +119,14 @@ namespace graphDBLib {
 					try{
 						rslt = DatabaseManager::Interface::saveObject(obj);
 					}
-					catch (const std::exception& e){
+					catch (const std::exception& e)
+					{
 						Logger::Log(e.what (), constants::LogError);
-						#ifdef _DEBUG
-							system ("PAUSE");
-						#endif
+						
+						return EXIT_FAILURE;
 					}
-					if (rslt != 0)
-						return rslt;
-					else
-						throw StandardExcept((string)__FUNCTION__ +" // Key : Unsigned Long", "Error : Saving operation Failed.");
+
+					return rslt;
 				}
 
 				/*!
@@ -254,7 +252,9 @@ namespace graphDBLib {
 					bool rslt = true;
 					boost::shared_ptr<T> keepAlive;
 					if(obj.expired())
-						throw StandardExcept((string)__FUNCTION__, "Error : The object doesn't exist anymore.");
+						Logger::Log((string)__FUNCTION__, "Error : The object doesn't exist anymore.", constants::LogError);
+						
+						return EXIT_FAILURE;
 					else
 						keepAlive.swap(obj.lock()); // We ensure that we keep an alive version of the object.
 
@@ -318,12 +318,15 @@ namespace graphDBLib {
 			*	\param obj : The object we want to insert in the DB.
 			*/
 			template<class T> static string saveObjectString(T& obj) throw(StandardExcept) {
-				string rslt = DatabaseManager::Interface::saveObject(obj);
-				if(!rslt.compare("")){ // Is Equal
-					throw StandardExcept((string)__FUNCTION__, "Error : Saving operation Failed.");
-				}
-				else
+				try{
+					string rslt = DatabaseManager::Interface::saveObject(obj);
 					return rslt;
+				}
+				catch (const std::exception& e)
+				{
+					Logger::Log(e.what (), constants::LogError);
+					
+				}
 			}
 
 			/*!

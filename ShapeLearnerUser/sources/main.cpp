@@ -18,6 +18,7 @@
 */
 
 //#define _CITUS_
+//#define _AWS_ // Amazon Web Service BDD
 
 #include <iostream>
 #include "CmdLine.h"
@@ -39,7 +40,7 @@ int main(int argc, char **argv)
 		if (cmdLine.SplitLine(argc,argv) < 1){ // If not enough arguments are given, we show the help.
 			#ifndef _DEBUG
 				cmdLine.ShowHelp("help.txt");
-				system ("PAUSE");
+
 				exit(EXIT_FAILURE);
 			#endif
 		}
@@ -47,7 +48,7 @@ int main(int argc, char **argv)
 		// Did the user request any 'help' ?
 		if (cmdLine.HasSwitch("-h")|| cmdLine.HasSwitch("-help") || cmdLine.HasSwitch("--help")){
 			cmdLine.ShowHelp("help.txt");
-			system ("PAUSE");
+
 			exit(EXIT_SUCCESS);
 		}
 
@@ -55,7 +56,11 @@ int main(int argc, char **argv)
 			#ifdef _CITUS_
 				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
 			#else
-				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024, "sources/structure.sql");
+				#ifdef _AWS_
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "52.17.230.141", 10003, "sources/structure.sql");
+				#else
+					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024, "sources/structure.sql");
+				#endif
 			#endif
 
 			dml::DAGMatcherLib::InitDAGMatcherLib();
@@ -65,7 +70,11 @@ int main(int argc, char **argv)
 			#ifdef _CITUS_
 				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026);
 			#else
-				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
+				#ifdef _AWS_
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "52.17.230.141", 10003);
+				#else
+					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10024);
+				#endif
 			#endif
 		}
 
@@ -134,11 +143,12 @@ int main(int argc, char **argv)
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		system ("PAUSE");
 		return EXIT_FAILURE;
 	}
 
 	cout<<endl<<endl;
-	system ("PAUSE");
+	#ifdef _DEBUG
+		system("PAUSE");
+	#endif
 	return EXIT_SUCCESS;
 }

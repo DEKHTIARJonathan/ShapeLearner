@@ -95,21 +95,64 @@ namespace graphDBLib {
 					*/
 					template <class T>
 					static bool updateObject(T& obj) throw (StandardExcept){
-						transaction t1 (database->begin ());
-						try
+						for (unsigned short retry_count (0); ; retry_count++)
 						{
-							database->update (obj);
-							t1.commit ();
-							return true;
-						}
-						catch (const std::exception& e)
-						{
-							t1.rollback();
-							transaction t2 (database->begin ());
-							database->load (obj.getKey(), obj);
-							t2.commit ();
-							throw StandardExcept ((string)__FUNCTION__, "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = " + e.what());
-							return false;
+							transaction t1 (dbPool->connect()->begin());
+							try
+							{
+								dbPool->connect()->update(obj);
+								t1.commit ();
+								return true;
+							}
+							catch (const odb::connection_lost& e)
+							{
+								t1.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + (string)e.what());
+									return EXIT_FAILURE;
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t1.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const odb::timeout& e){
+								t1.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + (string)e.what());
+									return EXIT_FAILURE;
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t1.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const std::exception& e)
+							{
+								try{
+									t1.rollback();
+									transaction t2 (dbPool->connect()->begin());
+									dbPool->connect()->load (obj.getKey(), obj);
+									t2.commit ();
+									throw StandardExcept ((string)__FUNCTION__, "Unable to update object of class : "+ obj.getClassName() +". Restoring last saved state. // Error = " + (string)e.what());
+									return EXIT_FAILURE;
+								}
+								catch(const std::exception& e)
+								{
+									throw StandardExcept ((string)__FUNCTION__, "Unable to update object of class : "+ obj.getClassName() +". Unable to restore last saved state. // Error = " + (string)e.what());
+									return EXIT_FAILURE;
+								}
+							}
 						}
 					}
 
@@ -120,16 +163,53 @@ namespace graphDBLib {
 					*/
 					template <class T, class Y>
 					static boost::shared_ptr<T> loadObject(Y keyDB) throw (StandardExcept){
-						transaction t (database->begin ());
-						try{
-							boost::shared_ptr<T> rslt (database->load<T>(keyDB));
-							t.commit ();
-
-							return rslt;
-						}
-						catch(...){
-							t.rollback();
-							return boost::shared_ptr<T>();
+						for (unsigned short retry_count (0); ; retry_count++)
+						{
+							transaction t (dbPool->connect()->begin());
+							try
+							{
+								boost::shared_ptr<T> rslt (dbPool->connect()->load<T>(keyDB));
+								t.commit ();
+								return rslt;
+							}
+							catch (const odb::connection_lost& e)
+							{
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + (string)e.what());
+									return boost::shared_ptr<T>();
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const odb::timeout& e){
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + (string)e.what());
+									return boost::shared_ptr<T>();
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const std::exception&)
+							{
+								t.rollback();
+								return boost::shared_ptr<T>();
+							}
 						}
 					}
 
@@ -141,26 +221,62 @@ namespace graphDBLib {
 					*/
 					template <class T, class Y>
 					static vector<unsigned long> getForeignRelations(Y foreignKey) throw (StandardExcept){
-						transaction t (database->begin());
-						try {
-							typedef odb::query<T> query;
-							typedef odb::result<T> result;
+						for (unsigned short retry_count (0); ; retry_count++)
+						{
+							transaction t (dbPool->connect()->begin());
+							try {
+								typedef odb::query<T> query;
+								typedef odb::result<T> result;
 
-							result r (database->query<T> ("'"+boost::lexical_cast<std::string>(foreignKey)+"'"));
+								result r (dbPool->connect()->query<T> ("'"+boost::lexical_cast<std::string>(foreignKey)+"'"));
 
-							vector<unsigned long> rslt;
+								vector<unsigned long> rslt;
 
-							for (result::iterator i (r.begin ()); i != r.end (); ++i)
-								rslt.push_back(i->id);
+								for (result::iterator i (r.begin ()); i != r.end (); ++i)
+									rslt.push_back(i->id);
 
-							t.commit ();
+								t.commit ();
 
-							return rslt;
-						}
-						catch(const std::exception& e){
-							t.rollback();
-							throw StandardExcept((string)__FUNCTION__, "Unable to perform operation // Error = "+ boost::lexical_cast<std::string>(e.what()));
-							return vector<unsigned long> ();
+								return rslt;
+							}
+							catch (const odb::connection_lost& e)
+							{
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + (string)e.what());
+									return vector<unsigned long> ();
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const odb::timeout& e){
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + (string)e.what());
+									return vector<unsigned long> ();
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch(const std::exception& e){
+								t.rollback();
+								throw StandardExcept((string)__FUNCTION__, "Unable to perform operation // Error = "+ (string)e.what());
+								return vector<unsigned long> ();
+							}
 						}
 					}
 
@@ -173,18 +289,55 @@ namespace graphDBLib {
 					*/
 					template<class T>
 					static unsigned long saveObject(T& obj) throw(StandardExcept){
-						transaction t (database->begin());
-						try{
-							unsigned long rslt = database->persist (obj);
+						for (unsigned short retry_count (0); ; retry_count++)
+						{
+							transaction t (dbPool->connect()->begin());
+							try{
+								unsigned long rslt = dbPool->connect()->persist (obj);
 
-							t.commit ();
+								t.commit ();
 
-							return rslt;
-						}
-						catch (const std::exception& e){
-							t.rollback();
-							throw StandardExcept((string)__FUNCTION__ + " // Key : unsigned Long", "Unable to save object of class : "+obj.getClassName() + " // Error : "+ e.what());
-							return 0;
+								return rslt;
+							}
+							catch (const odb::connection_lost& e)
+							{
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + (string)e.what());
+									return EXIT_FAILURE;
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const odb::timeout& e){
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + (string)e.what());
+									return EXIT_FAILURE;
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const std::exception& e)
+							{
+								t.rollback();
+								throw StandardExcept((string)__FUNCTION__ + " // Key : unsigned Long", "Unable to save object of class : "+obj.getClassName() + " // Error : "+ (string)e.what());
+								return 0;
+							}
 						}
 					}
 
@@ -211,19 +364,55 @@ namespace graphDBLib {
 					*/
 					template <class T>
 					static bool deleteObject(boost::shared_ptr<T> obj) throw (StandardExcept){
-						transaction t (database->begin ());
-						try
+						for (unsigned short retry_count (0); ; retry_count++)
 						{
-							T* ptr = obj.get();
-							database->erase (ptr);
-							t.commit ();
-							return true;
-						}
-						catch (const std::exception& e)
-						{
-							t.rollback();
-							throw StandardExcept ((string)__FUNCTION__, "Unable to delete object of class : "+ obj->getClassName() +". // Error = "+ e.what());
-							return false;
+							transaction t (dbPool->connect()->begin());
+							try
+							{
+								T* ptr = obj.get();
+								dbPool->connect()->erase (ptr);
+								t.commit ();
+								return true;
+							}
+							catch (const odb::connection_lost& e)
+							{
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + e.what());
+									return EXIT_FAILURE;
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const odb::timeout& e){
+								t.rollback();
+								if (retry_count > constants::MAX_DB_RETRY){
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + e.what());
+									return EXIT_FAILURE;
+								}
+								else{
+									Sleep(500);
+									if(!dbPool->reconnect())
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + e.what());
+									else{
+										t.reset(dbPool->connect()->begin());
+										continue;
+									}
+								}
+							}
+							catch (const std::exception& e)
+							{
+								t.rollback();
+								throw StandardExcept ((string)__FUNCTION__, "Unable to delete object of class : "+ obj->getClassName() +". // Error = "+ e.what());
+								return false;
+							}
 						}
 					}
 
@@ -242,22 +431,7 @@ namespace graphDBLib {
 			/*!
 			*	Pointer to the PostgreSQL database.
 			*/
-			static odb::pgsql::database* database;
-
-			/*!
-			*	Tracer for the Database. Only working with postgreSQL databases. If you want to use it for MySQL / Oracle / ..., you need to create a similar class for this specific DB System.
-			*/
-			static AppTracer appliTracer;
-
-			/* **************** DB Requests ********************/
-
-			/*!
-			*	\fn static bool query(const string& query) throw(StandardExcept);
-			*	\brief Static Method executing a query given in argument.
-			*	\return A boolean on the success of the query's execution.
-			*	\param query : The query we want to execute.
-			*/
-			static bool query(const string& query) throw(StandardExcept);
+			static graphDBLib::DBPool* dbPool;
 
 			/* ******************** Escaper ********************/
 			/*!
@@ -274,15 +448,6 @@ namespace graphDBLib {
 			*/
 			static void capitalize(string& str);
 
-			/* **************** DB Handlers ***********************/
-
-			/*!
-			*	\fn static bool initDB(const string& filename);
-			*	\brief  Static method to initialize the database structures and create the functions we need. If the tables already exists, the scripts deleting them first.
-			*	\param filename : Relative path to the SQL file to initialize the DB.
-			*/
-			static bool initDB(const string& filename);
-
 			/* **************** Savers *************************/
 
 			/*!
@@ -292,28 +457,55 @@ namespace graphDBLib {
 			*/
 			template<class T>
 			static string saveObjectString(T& obj) throw(StandardExcept){
-				transaction t (database->begin());
-				try{
-					string rslt = database->persist(obj);
-					t.commit ();
+				for (unsigned short retry_count (0); ; retry_count++)
+				{
+					transaction t (dbPool->connect()->begin());
+					try{
+						string rslt = dbPool->connect()->persist(obj);
+						t.commit ();
 
-					return rslt;
-				}
-				catch (const std::exception& e){
-					t.rollback();
-					throw StandardExcept((string)__FUNCTION__, "Unable to save object : "+obj.getKey()+" // Class : "+obj.getClassName() + "// Error : "+ e.what());
-					return "";
+						return rslt;
+					}
+					catch (const odb::connection_lost& e)
+					{
+						t.rollback();
+						if (retry_count > constants::MAX_DB_RETRY){
+							throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + (string)e.what());
+							return "";
+						}
+						else{
+							Sleep(500);
+							if(!dbPool->reconnect())
+								throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+							else{
+								t.reset(dbPool->connect()->begin());
+								continue;
+							}
+						}
+					}
+					catch (const odb::timeout& e){
+						t.rollback();
+						if (retry_count > constants::MAX_DB_RETRY){
+							throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + (string)e.what());
+							return "";
+						}
+						else{
+							Sleep(500);
+							if(!dbPool->reconnect())
+								throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+							else{
+								t.reset(dbPool->connect()->begin());
+								continue;
+							}
+						}
+					}
+					catch (const std::exception& e){
+						t.rollback();
+						throw StandardExcept((string)__FUNCTION__, "Unable to save object : "+obj.getKey()+" // Class : "+obj.getClassName() + "// Error : "+ (string)e.what());
+						return "";
+					}
 				}
 			}
-
-			/* ****************** Readers **********************/
-
-			/*!
-			*	\fn static string get_file_contents(const string& filename) throw(StandardExcept);
-			*	\brief Static method to read a file and returns its content as a string.
-			*	\param filename : The file we want to read.
-			*/
-			static string get_file_contents(const string& filename) throw(StandardExcept);
 
 			/* **************  No instanciation *********************/
 

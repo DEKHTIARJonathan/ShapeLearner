@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="sources\allHeaders.h" />
     <ClInclude Include="sources\dbManager.h" />
+    <ClInclude Include="sources\DBPool.h" />
     <ClInclude Include="sources\Edge-odb.hxx" />
     <ClInclude Include="sources\Edge.h" />
     <ClInclude Include="sources\Graph-odb.hxx" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\dbManager.cpp" />
+    <ClCompile Include="sources\DBPool.cpp" />
     <ClCompile Include="sources\Edge-odb.cxx" />
     <ClCompile Include="sources\Edge.cpp" />
     <ClCompile Include="sources\Graph-odb.cxx" />

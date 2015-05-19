@@ -46,6 +46,9 @@
     <ClCompile Include="sources\graphDB.cpp">
       <Filter>GraphDB</Filter>
     </ClCompile>
+    <ClCompile Include="sources\DBPool.cpp">
+      <Filter>dbManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\allHeaders.h">
@@ -98,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="sources\graphDB.h">
       <Filter>GraphDB</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\DBPool.h">
+      <Filter>dbManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

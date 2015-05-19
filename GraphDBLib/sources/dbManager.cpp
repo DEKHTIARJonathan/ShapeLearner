@@ -20,54 +20,11 @@
 
 #include "stdafx.h"
 #include "allHeaders.h"
+#include "DBPool.h"
 
 using namespace std;
 using namespace odb::core;
 using namespace graphDBLib;
-
-/* *******************************************************************
-*                            DB Requests                             *
- ********************************************************************/
-
-bool DatabaseManager::query(const string &query) throw(StandardExcept)
-{
-	bool rslt = false;
-	for (unsigned short retry_count (0); ; retry_count++)
-	{
-		transaction t (database->begin ());
-		try
-		{
-			if (database->execute(query) != 0 ) // == 0 Successful.
-			{
-				t.rollback();
-				throw StandardExcept((string)__FUNCTION__, query);
-				break;
-			}
-			else
-			{
-				t.commit();
-				rslt = true;
-				break;
-			}
-		}
-		catch (const odb::recoverable& e)
-		{
-			if (retry_count > constants::MAX_DB_RETRY){
-				t.rollback();
-				throw StandardExcept((string)__FUNCTION__, "Retry Limit exceeded" + (string)e.what());
-			}
-			else
-				continue;
-		}
-	}
-	return rslt; // Execution successful.
-}
-
-bool DatabaseManager::initDB(const string& filename)
-{
-	string script = get_file_contents(filename);
-	return query(script);
-}
 
 /* *******************************************************************
 *                     Escapers / Capitalizers                        *
@@ -91,44 +48,16 @@ void DatabaseManager::capitalize(string& str)
 }
 
 /* *******************************************************************
-*                             Readers                                *
- ********************************************************************/
-
-string DatabaseManager::get_file_contents(const string& filename) throw(StandardExcept){
-	std::ifstream in(filename, std::ios::in | std::ios::binary);
-	if (in)
-	{
-		string contents;
-		in.seekg(0, std::ios::end);
-		contents.resize(in.tellg());
-		in.seekg(0, std::ios::beg);
-		in.read(&contents[0], contents.size());
-		in.close();
-		return(contents);
-	}
-	else{
-		unsigned int maxSizeError = 1500;
-		char error[1500];
-		strerror_s(error, maxSizeError, errno);
-		throw StandardExcept((string)__FUNCTION__, error);
-	}
-}
-
-/* *******************************************************************
 *                         Database Handling                          *
  ********************************************************************/
 
-odb::pgsql::database* DatabaseManager::database = NULL;
-AppTracer DatabaseManager::appliTracer;
+DBPool* DatabaseManager::dbPool (NULL);
 
 void DatabaseManager::Interface::openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort, const string& dbInit) throw(StandardExcept){
-	if( database == NULL ){
+	if( dbPool == NULL ){
 		Logger::Log("Opening Connection to the Database.", constants::LogDB);
-		database = new odb::pgsql::database (dbUser, dbPass, dbName, dbHost, dbPort);
-		database->tracer(appliTracer);
 
-		if (dbInit.compare("") && !initDB(dbInit))
-			throw StandardExcept((string)__FUNCTION__,"Erreur lors de l'initialisation de la BDD");
+		dbPool = DBPool::accessor::getPool(dbUser, dbPass, dbName, dbHost, dbPort, dbInit);
 	}
 	else
 		throw StandardExcept((string)__FUNCTION__, "Database already opened");
@@ -136,36 +65,69 @@ void DatabaseManager::Interface::openDatabase(const string &dbUser, const string
 
 void DatabaseManager::Interface::closeDatabase() throw(StandardExcept){
 	Logger::Log("Closing Connection to the Database.", constants::LogDB);
-	if( database != NULL ){
-		delete database;
-		database = NULL;
+	if( dbPool != NULL ){
+		int a = 1;
 	}
 	else
 		throw StandardExcept((string)__FUNCTION__, "Database already closed");
 }
 
 bool DatabaseManager::Interface::isDbOpen() {
-	if(database == NULL)
+	if(dbPool == NULL)
 		return false;
 	else
 		return true;
 }
 
 unsigned long DatabaseManager::Interface::getPointCountInNode (const unsigned long idNode) throw (StandardExcept){
-	transaction t (database->begin());
-	try{
-		typedef odb::query<pointsInNode> query;
-
-		pointsInNode rslt (database->query_value<pointsInNode> (query::refNode == idNode));
-
-		t.commit ();
-
-		return rslt.value;
-	}
-	catch (const std::exception& e)
+	for (unsigned short retry_count (0); ; retry_count++)
 	{
-		t.rollback();
-		throw StandardExcept ((string)__FUNCTION__, "Unable to count Points in Node // Error = "+ boost::lexical_cast<std::string>(e.what()));
-		return 0;
+		transaction t (dbPool->connect()->begin());
+		try{
+			typedef odb::query<pointsInNode> query;
+			pointsInNode rslt (dbPool->connect()->query_value<pointsInNode> (query::refNode == idNode));
+			t.commit ();
+
+			return rslt.value;
+		}
+		catch (const odb::connection_lost& e)
+		{
+			t.rollback();
+			if (retry_count > constants::MAX_DB_RETRY){
+				throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + (string)e.what());
+				return EXIT_FAILURE;
+			}
+			else{
+				Sleep(500);
+				if(!dbPool->reconnect())
+					throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+				else{
+					t.reset(dbPool->connect()->begin());
+					continue;
+				}
+			}
+		}
+		catch (const odb::timeout& e){
+			t.rollback();
+			if (retry_count > constants::MAX_DB_RETRY){
+				throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + (string)e.what());
+				return EXIT_FAILURE;
+			}
+			else{
+				Sleep(500);
+				if(!dbPool->reconnect())
+					throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
+				else{
+					t.reset(dbPool->connect()->begin());
+					continue;
+				}
+			}
+		}
+		catch (const std::exception& e)
+		{
+			t.rollback();
+			throw StandardExcept ((string)__FUNCTION__, "Unable to count Points in Node // Error = "+ (string)e.what());
+			return 0;
+		}
 	}
 }

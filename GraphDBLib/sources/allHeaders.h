@@ -19,7 +19,7 @@
 
 #ifndef _ALL_HEADERS_GRAPH_DB_
 #define _ALL_HEADERS_GRAPH_DB_
- 
+
 #ifdef _MSC_VER
 	#pragma message("Compiling GraphDBLib::allHeaders.h  - this should happen just once per project.\n")
 	#pragma warning(disable : 4290)
@@ -27,17 +27,16 @@
 	#pragma warning(disable : 4068)
 
 	#include "stdafx.h"
-	
+
 	// Software's Common Files
 
-	// Database Objects 
+	// Database Objects
 	#include "GraphClass.h"
 	#include "ObjectClass.h"
 	#include "Graph.h"
 	#include "Node.h"
 	#include "Point.h"
 	#include "Edge.h"
-
 
 	/* Class for ODB */
 	#include "GraphClass-odb.hxx"
@@ -49,6 +48,7 @@
 	/* Class for ODB */
 
 	// Software's Core Files
+	#include "DBPool.h"
 	#include "dbManager.h"
 	#include "graphDB.h"
 #endif //_MSC_VER
