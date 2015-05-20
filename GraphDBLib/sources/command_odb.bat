@@ -20,7 +20,7 @@ call:insertPrecompiledHeaders Point-odb.cxx
 
 
 del "../../ShapeLearnerUser/sources/structure.sql"
-copy /b GraphClass.sql+ObjectClass.sql+Graph.sql+Node.sql+Edge.sql+Point.sql+functions.sql "../../ShapeLearnerUser/sources/structure.sql"
+copy /b GraphClass.sql+ObjectClass.sql+Graph.sql+Node.sql+Edge.sql+Point.sql+functions.sql+viewFilteringModel.sql "../../ShapeLearnerUser/sources/structure.sql"
 
 set /p DUMMY=Hit ENTER to continue...
 

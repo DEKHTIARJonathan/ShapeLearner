@@ -18,7 +18,7 @@
 */
 
 //#define _CITUS_
-//#define _AWS_ // Amazon Web Service BDD
+#define _AWS_ // Amazon Web Service BDD
 #define _TESTDATA_
 
 #include <iostream>
@@ -58,7 +58,11 @@ int main(int argc, char **argv)
 				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
 			#else
 				#ifdef _AWS_
-				GraphDB::openDatabase("postgres", "postgres", "postgres", "52.17.230.141", 10003, "sources/structure.sql");
+					#ifndef _TESTDATA_
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10000);
+					#else
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10001);
+					#endif
 				#else
 					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10023, "sources/structure.sql");
 				#endif
@@ -72,7 +76,11 @@ int main(int argc, char **argv)
 				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026);
 			#else
 				#ifdef _AWS_
-				GraphDB::openDatabase("postgres", "postgres", "postgres", "52.17.230.141", 10003);
+					#ifndef _TESTDATA_
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10000);
+					#else
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10001);
+					#endif
 				#else
 					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10023);
 				#endif
