@@ -2,13 +2,11 @@
  * Created by Jonathan DEKHTIAR
  */
 
-CREATE VIEW "viewFilteringModel" AS
+CREATE VIEW "learning_data" AS
   SELECT
 	g."refObjectClass", 
-	g."viewNumber", 
 	g."cumulativeMass", 
-	g."DAGCost", 
-	g."fileOffset", 
+	g."DAGCost",
 	g."MaxTSVDimension", 
 	g."totalTSVSum", 
 	g."shape_xMax", 
@@ -20,11 +18,11 @@ CREATE VIEW "viewFilteringModel" AS
 	n."nodeCount",
 	e."edgeCount",
 	p."pointCount",
+	n."avg_pointCount" as "avg_pointPerNode", 
 	n."avg_level", 
 	n."avg_mass", 
 	n."avg_type" as "avg_NodeType", 
 	n."avg_role", 
-	n."avg_pointCount", 
 	n."avg_contourLength1", 
 	n."avg_contourLength2", 
 	n."avg_subtreeCost", 
