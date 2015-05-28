@@ -4,6 +4,7 @@
 
 CREATE VIEW "learning_data" AS
   SELECT
+	g."idGraph",
 	g."refObjectClass", 
 	g."cumulativeMass", 
 	g."DAGCost",
