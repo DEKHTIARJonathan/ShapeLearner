@@ -10,7 +10,6 @@
 !*.vcxproj.user
 !*.suo
 !*.user
-!*.ppm
 !*.txt
 
 # ...even if they are in subdirectories

@@ -19,9 +19,10 @@
 
 //#define _CITUS_
 #define _AWS_ // Amazon Web Service BDD
-#define _TESTDATA_
+//#define _TESTDATA_
 
 #include <iostream>
+#include "boost/filesystem.hpp"
 #include "CmdLine.h"
 #include "graphDB.h"
 #include "StandardException.h"
@@ -29,6 +30,7 @@
 #include "DAGMatcherLib.h"
 
 using namespace std;
+using namespace boost::filesystem;
 using namespace graphDBLib;
 
 int main(int argc, char **argv)
@@ -59,9 +61,9 @@ int main(int argc, char **argv)
 			#else
 				#ifdef _AWS_
 					#ifndef _TESTDATA_
-						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10000);
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10000, "sources/structure.sql");
 					#else
-						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10001);
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10001, "sources/structure.sql");
 					#endif
 				#else
 					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10023, "sources/structure.sql");
@@ -88,96 +90,50 @@ int main(int argc, char **argv)
 		}
 
 		if (cmdLine.HasSwitch("--generate")){
+			#ifndef _TESTDATA_
+				string rootFolder  = "Data\\Training\\Ultimate";
+			#else
+				string rootFolder  = "Data\\Testing\\Ultimate";
+			#endif
+
+			vector <string> dirVect;
 			vector<const img2Parse> imgVect;
 
 			#ifdef _DEBUG
-				imgVect.push_back(img2Parse("img/rod.ppm", "Rod"));
+				imgVect.push_back(img2Parse("Data/rod.ppm", "Rod"));
 			#else
-				#ifndef _TESTDATA_
-					for (int i = 1; i <= 82; i++){
-						string seq = "";
-						if (i < 10)
-							seq = "00"+ to_string((_Longlong)i);
-						else if (i <100)
-							seq = "0"+to_string((_Longlong)i);
-						else
-							seq = to_string((_Longlong)i);
-						string imgPath = "img/PPM/LearningSet/GEAR/gear" + seq + ".ppm";
-						imgVect.push_back(img2Parse(imgPath, "Gear"));
-					}
+				// ================== Listing all the subdirectories
+				path p (rootFolder);
+				directory_iterator end_itr;
 
-					for (int i = 1; i <= 68; i++){
-						string seq = "";
-						if (i < 10)
-							seq = "00"+ to_string((_Longlong)i);
-						else if (i <100)
-							seq = "0"+to_string((_Longlong)i);
-						else
-							seq = to_string((_Longlong)i);
-						string imgPath = "img/PPM/LearningSet/PISTON/piston" + seq + ".ppm";
-						imgVect.push_back(img2Parse(imgPath, "Piston"));
-					}
+				for (directory_iterator itr(p); itr != end_itr; ++itr)
+				{
+					if (is_directory(itr->path()))
+						dirVect.push_back(itr->path().string());
+				}
 
-					for (int i = 1; i <= 82; i++){
-						string seq = "";
-						if (i < 10)
-							seq = "00"+ to_string((_Longlong)i);
-						else if (i <100)
-							seq = "0"+to_string((_Longlong)i);
-						else
-							seq = to_string((_Longlong)i);
-						string imgPath = "img/PPM/LearningSet/PistonAssembly/PistonAssembly" + seq + ".ppm";
-						imgVect.push_back(img2Parse(imgPath, "PistonAssembly"));
-					}
+				// ================= Iterate over all subdirectories.
 
-					for (int i = 1; i <= 65; i++){
-						string seq = "";
-						if (i < 10)
-							seq = "00"+ to_string((_Longlong)i);
-						else if (i <100)
-							seq = "0"+to_string((_Longlong)i);
-						else
-							seq = to_string((_Longlong)i);
-						string imgPath = "img/PPM/LearningSet/ROD/rod" + seq + ".ppm";
-						imgVect.push_back(img2Parse(imgPath, "Rod"));
-					}
-				#else
-					for (int i = 1; i <= 6; i++){
-						string seq = "";
-						if (i < 10)
-							seq = "00"+ to_string((_Longlong)i);
-						else if (i <100)
-							seq = "0"+to_string((_Longlong)i);
-						else
-							seq = to_string((_Longlong)i);
-						string imgPath = "img/PPM/TestSet/PISTON/test" + seq + ".ppm";
-						imgVect.push_back(img2Parse(imgPath, "Piston"));
-					}
+				for (vector <string>::iterator it = dirVect.begin(); it != dirVect.end(); it++){
+					// ==============   Getting className
+					string className = *it;
+					string str2remove = rootFolder + "\\";
 
-					for (int i = 1; i <= 8; i++){
-						string seq = "";
-						if (i < 10)
-							seq = "00"+ to_string((_Longlong)i);
-						else if (i <100)
-							seq = "0"+to_string((_Longlong)i);
-						else
-							seq = to_string((_Longlong)i);
-						string imgPath = "img/PPM/TestSet/PistonAssembly/test" + seq + ".ppm";
-						imgVect.push_back(img2Parse(imgPath, "PistonAssembly"));
-					}
+					string::size_type i = className.find(str2remove);
 
-					for (int i = 1; i <= 3; i++){
-						string seq = "";
-						if (i < 10)
-							seq = "00"+ to_string((_Longlong)i);
-						else if (i <100)
-							seq = "0"+to_string((_Longlong)i);
-						else
-							seq = to_string((_Longlong)i);
-						string imgPath = "img/PPM/TestSet/ROD/test" + seq + ".ppm";
-						imgVect.push_back(img2Parse(imgPath, "Rod"));
+					if (i != std::string::npos)
+					   className.erase(i, str2remove.length());
+
+					// ==============   cycle all files in the class : className
+					path p (*it);
+					directory_iterator end_itr;
+
+					for (directory_iterator itr(p); itr != end_itr; ++itr)
+					{
+						if (is_regular_file(itr->path()))
+							imgVect.push_back(img2Parse(itr->path().string(), className));
 					}
-				#endif
+				}
 			#endif
 
 			ShapeLearner::createShockGraph(imgVect);
@@ -197,5 +153,6 @@ int main(int argc, char **argv)
 	#ifdef _DEBUG
 		system("PAUSE");
 	#endif
+	system("PAUSE");
 	return EXIT_SUCCESS;
 }

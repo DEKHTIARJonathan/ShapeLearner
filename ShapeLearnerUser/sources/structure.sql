@@ -223,10 +223,8 @@ $BODY$
   ROWS 1000;
 ALTER FUNCTION public.gettablestate()
   OWNER TO postgres;
-  
-  
-  
-﻿/* This view is used to perform the Machine Learning approach.
+ 
+/* This view is used to perform the Machine Learning approach.
  * Created by Jonathan DEKHTIAR
  */
 
