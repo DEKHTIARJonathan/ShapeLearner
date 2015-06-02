@@ -32,7 +32,6 @@ Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph) :
 	dr_ds = -1;
 	//color = char('');
 	dr = -1;
-	type = -1;
 
 	idPoint = saveInDB();
 	Logger::Log("New Object Instanciated : Point("+ to_string((_ULonglong)getKey())+")");
@@ -78,13 +77,6 @@ void Point::setDr_Ds(const double _dr_ds, bool asynchronous){
 double Point::getDr() const{return dr;}
 void Point::setDr(const double _dr, bool asynchronous){
 	dr = _dr;
-	if (!asynchronous)
-		updateInDB();
-}
-
-int Point::getType() const{return type;}
-void Point::setType(const int _type, bool asynchronous){
-	type = _type;
 	if (!asynchronous)
 		updateInDB();
 }

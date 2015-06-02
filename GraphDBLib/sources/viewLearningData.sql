@@ -23,9 +23,7 @@ CREATE VIEW "learning_data" AS
 	n."avg_level", 
 	n."avg_mass", 
 	n."avg_type" as "avg_NodeType", 
-	n."avg_role", 
-	n."avg_contourLength1", 
-	n."avg_contourLength2", 
+	n."avg_role",
 	n."avg_subtreeCost", 
 	n."avg_tsvNorm",
 	p."avg_xCoord", 
@@ -34,7 +32,6 @@ CREATE VIEW "learning_data" AS
 	p."avg_speed", 
 	p."avg_dr_ds", 
 	p."avg_dr", 
-	p."avg_type" as "avg_PointType", 
 	p."avg_direction"
 FROM 
 	"Graph" as g
@@ -46,8 +43,6 @@ LEFT JOIN
 		avg("type") as "avg_type", 
 		avg("role") as "avg_role", 
 		avg("pointCount") as "avg_pointCount", 
-		avg("contourLength1") as "avg_contourLength1", 
-		avg("contourLength2") as "avg_contourLength2", 
 		avg("subtreeCost") as "avg_subtreeCost", 
 		avg("tsvNorm") as "avg_tsvNorm",
 		"refGraph"
@@ -72,7 +67,6 @@ LEFT JOIN
 		avg("speed") as "avg_speed", 
 		avg("dr_ds") as "avg_dr_ds", 
 		avg("dr")as "avg_dr", 
-		avg("type") as "avg_type", 
 		avg("direction") as "avg_direction", 
 		"refGraph" 
 	FROM "Point" 
@@ -80,4 +74,3 @@ LEFT JOIN
 ON g."idGraph" = p."refGraph"
 
 ORDER BY "idGraph";
-

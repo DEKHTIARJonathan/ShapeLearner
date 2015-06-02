@@ -69,10 +69,7 @@ namespace graphDBLib{
 		void resynchronize();
 
 	private:
-		string graphClassName;
-		bool directGraph;
-		bool acyclicGraph;
-		
+
 		/*!
 		*	\brief  Classical constructor needed to let ODB load objects from DB.
 		*/

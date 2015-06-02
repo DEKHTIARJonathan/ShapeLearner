@@ -215,30 +215,6 @@ namespace odb
 
     static const pointCount_type_ pointCount;
 
-    // contourLength1
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        double,
-        pgsql::id_double >::query_type,
-      pgsql::id_double >
-    contourLength1_type_;
-
-    static const contourLength1_type_ contourLength1;
-
-    // contourLength2
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        double,
-        pgsql::id_double >::query_type,
-      pgsql::id_double >
-    contourLength2_type_;
-
-    static const contourLength2_type_ contourLength2;
-
     // subtreeCost
     //
     typedef
@@ -317,16 +293,6 @@ namespace odb
   pointCount (A::table_name, "\"pointCount\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength1_type_
-  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
-  contourLength1 (A::table_name, "\"contourLength1\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength2_type_
-  pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
-  contourLength2 (A::table_name, "\"contourLength2\"", 0);
-
-  template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::subtreeCost_type_
   pointer_query_columns< ::graphDBLib::Node, id_pgsql, A >::
   subtreeCost (A::table_name, "\"subtreeCost\"", 0);
@@ -397,16 +363,6 @@ namespace odb
       int pointCount_value;
       bool pointCount_null;
 
-      // contourLength1
-      //
-      double contourLength1_value;
-      bool contourLength1_null;
-
-      // contourLength2
-      //
-      double contourLength2_value;
-      bool contourLength2_null;
-
       // subtreeCost
       //
       double subtreeCost_value;
@@ -466,7 +422,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 13UL;
+    static const std::size_t column_count = 11UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -731,30 +687,6 @@ namespace odb
 
     static const pointCount_type_ pointCount;
 
-    // contourLength1
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        double,
-        pgsql::id_double >::query_type,
-      pgsql::id_double >
-    contourLength1_type_;
-
-    static const contourLength1_type_ contourLength1;
-
-    // contourLength2
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        double,
-        pgsql::id_double >::query_type,
-      pgsql::id_double >
-    contourLength2_type_;
-
-    static const contourLength2_type_ contourLength2;
-
     // subtreeCost
     //
     typedef
@@ -847,16 +779,6 @@ namespace odb
   const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::pointCount_type_
   query_columns< ::graphDBLib::Node, id_pgsql, A >::
   pointCount (A::table_name, "\"pointCount\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength1_type_
-  query_columns< ::graphDBLib::Node, id_pgsql, A >::
-  contourLength1 (A::table_name, "\"contourLength1\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::contourLength2_type_
-  query_columns< ::graphDBLib::Node, id_pgsql, A >::
-  contourLength2 (A::table_name, "\"contourLength2\"", 0);
 
   template <typename A>
   const typename query_columns< ::graphDBLib::Node, id_pgsql, A >::subtreeCost_type_

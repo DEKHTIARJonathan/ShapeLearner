@@ -63,7 +63,6 @@ namespace graphDBLib{
 		void resynchronize();
 
 	private:
-		string objectClassName;
 		
 		/*!
 		*	\brief  Classical constructor needed to let ODB load objects from DB.

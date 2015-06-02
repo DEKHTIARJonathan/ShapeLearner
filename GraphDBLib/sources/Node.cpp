@@ -31,8 +31,6 @@ Node::Node(boost::weak_ptr<Graph> _refGraph) : refGraph(_refGraph),	idNode(0) {
 	type = -1;
 	role = UNK_ROLE;
 	pointCount = -1;
-	contourLength1 = -1;
-	contourLength2 = -1;
 	subtreeCost = -1;
 	tsvNorm = -1;
 	idNode = saveInDB();
@@ -68,9 +66,9 @@ void Node::setMass(const int _mass, bool asynchronous) {
 
 int Node::getType() const {return type;}
 void Node::setType(const int _type, bool asynchronous) {
-	type = _type;
-	if (!asynchronous)
-		updateInDB();
+    type = _type;
+    if (!asynchronous)
+        updateInDB();
 }
 
 string Node::getLabel() const {return label;}
@@ -86,21 +84,6 @@ void Node::setRole(const NODE_ROLE _role, bool asynchronous){
 	if (!asynchronous)
 		updateInDB();
 }
-
-double Node::getContourLength1() const{return contourLength1;}
-void Node::setContourLength1(const double _contourLength1, bool asynchronous){
-	contourLength1 = _contourLength1;
-	if (!asynchronous)
-		updateInDB();
-}
-
-double Node::getContourLength2() const{return contourLength2;}
-void Node::setContourLength2(const double _contourLength2, bool asynchronous){
-	contourLength2 = _contourLength2;
-	if (!asynchronous)
-		updateInDB();
-}
-
 double Node::getSubtreeCost() const{return subtreeCost;}
 void Node::setSubtreeCost(const double _subtreeCost, bool asynchronous){
 	subtreeCost = _subtreeCost;
@@ -117,9 +100,9 @@ void Node::setTSVNorm(const double _tsvNorm, bool asynchronous){
 
 int Node::getPointCount() const{return pointCount;}
 void Node::setPointCount(const int _pointCount, bool asynchronous){
-	pointCount = _pointCount;
-	if (!asynchronous)
-		updateInDB();
+    pointCount = _pointCount;
+    if (!asynchronous)
+        updateInDB();
 }
 int Node::getPointCountFromDB() const {
 	return GraphDB::ObjectInterface::getPointCountInNode(idNode);

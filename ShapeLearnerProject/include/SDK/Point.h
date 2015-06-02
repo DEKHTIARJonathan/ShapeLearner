@@ -75,9 +75,6 @@ namespace graphDBLib{
 		double getDr() const;
 		void setDr(const double _dr, bool asynchronous = false);
 
-		int getType() const;
-		void setType(const int _type, bool asynchronous = false);
-
 		BRANCH_DIR getDirection() const;
 		void setDirection(BRANCH_DIR _direction, bool asynchronous = false);
 
@@ -91,19 +88,6 @@ namespace graphDBLib{
 		void resynchronize();
 
 	protected:
-		unsigned long idPoint;
-		double		xCoord;
-		double		yCoord;
-		double		radius;
-		double		speed;
-		double		dr_ds;
-		double		dr;
-		int			type;
-		BRANCH_DIR	direction;
-
-		odb::boost::lazy_weak_ptr<Graph> refGraph;
-		odb::boost::lazy_weak_ptr<Node> refNode;
-
 		Point() {}
 		Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph);
 

@@ -162,42 +162,6 @@ namespace odb
 
     static const objectName_type_ objectName;
 
-    // viewNumber
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    viewNumber_type_;
-
-    static const viewNumber_type_ viewNumber;
-
-    // nodeCount
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    nodeCount_type_;
-
-    static const nodeCount_type_ nodeCount;
-
-    // edgeCount
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    edgeCount_type_;
-
-    static const edgeCount_type_ edgeCount;
-
     // cumulativeMass
     //
     typedef
@@ -221,18 +185,6 @@ namespace odb
     DAGCost_type_;
 
     static const DAGCost_type_ DAGCost;
-
-    // fileOffset
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    fileOffset_type_;
-
-    static const fileOffset_type_ fileOffset;
 
     // MaxTSVDimension
     //
@@ -378,21 +330,6 @@ namespace odb
   objectName (A::table_name, "\"objectName\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::viewNumber_type_
-  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  viewNumber (A::table_name, "\"viewNumber\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::nodeCount_type_
-  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  nodeCount (A::table_name, "\"nodeCount\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::edgeCount_type_
-  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  edgeCount (A::table_name, "\"edgeCount\"", 0);
-
-  template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::cumulativeMass_type_
   pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
   cumulativeMass (A::table_name, "\"cumulativeMass\"", 0);
@@ -401,11 +338,6 @@ namespace odb
   const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::DAGCost_type_
   pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
   DAGCost (A::table_name, "\"DAGCost\"", 0);
-
-  template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::fileOffset_type_
-  pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  fileOffset (A::table_name, "\"fileOffset\"", 0);
 
   template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Graph, id_pgsql, A >::MaxTSVDimension_type_
@@ -488,21 +420,6 @@ namespace odb
       std::size_t objectName_size;
       bool objectName_null;
 
-      // viewNumber
-      //
-      long long viewNumber_value;
-      bool viewNumber_null;
-
-      // nodeCount
-      //
-      int nodeCount_value;
-      bool nodeCount_null;
-
-      // edgeCount
-      //
-      int edgeCount_value;
-      bool edgeCount_null;
-
       // cumulativeMass
       //
       int cumulativeMass_value;
@@ -512,11 +429,6 @@ namespace odb
       //
       double DAGCost_value;
       bool DAGCost_null;
-
-      // fileOffset
-      //
-      int fileOffset_value;
-      bool fileOffset_null;
 
       // MaxTSVDimension
       //
@@ -621,7 +533,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 19UL;
+    static const std::size_t column_count = 15UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -892,42 +804,6 @@ namespace odb
 
     static const objectName_type_ objectName;
 
-    // viewNumber
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        long unsigned int,
-        pgsql::id_bigint >::query_type,
-      pgsql::id_bigint >
-    viewNumber_type_;
-
-    static const viewNumber_type_ viewNumber;
-
-    // nodeCount
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    nodeCount_type_;
-
-    static const nodeCount_type_ nodeCount;
-
-    // edgeCount
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        unsigned int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    edgeCount_type_;
-
-    static const edgeCount_type_ edgeCount;
-
     // cumulativeMass
     //
     typedef
@@ -951,18 +827,6 @@ namespace odb
     DAGCost_type_;
 
     static const DAGCost_type_ DAGCost;
-
-    // fileOffset
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    fileOffset_type_;
-
-    static const fileOffset_type_ fileOffset;
 
     // MaxTSVDimension
     //
@@ -1140,21 +1004,6 @@ namespace odb
   objectName (A::table_name, "\"objectName\"", 0);
 
   template <typename A>
-  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::viewNumber_type_
-  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  viewNumber (A::table_name, "\"viewNumber\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::nodeCount_type_
-  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  nodeCount (A::table_name, "\"nodeCount\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::edgeCount_type_
-  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  edgeCount (A::table_name, "\"edgeCount\"", 0);
-
-  template <typename A>
   const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::cumulativeMass_type_
   query_columns< ::graphDBLib::Graph, id_pgsql, A >::
   cumulativeMass (A::table_name, "\"cumulativeMass\"", 0);
@@ -1163,11 +1012,6 @@ namespace odb
   const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::DAGCost_type_
   query_columns< ::graphDBLib::Graph, id_pgsql, A >::
   DAGCost (A::table_name, "\"DAGCost\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::fileOffset_type_
-  query_columns< ::graphDBLib::Graph, id_pgsql, A >::
-  fileOffset (A::table_name, "\"fileOffset\"", 0);
 
   template <typename A>
   const typename query_columns< ::graphDBLib::Graph, id_pgsql, A >::MaxTSVDimension_type_

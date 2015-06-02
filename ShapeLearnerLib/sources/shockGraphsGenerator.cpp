@@ -52,6 +52,7 @@ string genFileName(const unsigned int len = 10)
 
 shockGraphsGenerator::shockGraphsGenerator(const string& _filepath, const string& _objClass) : filepath(_filepath), objClass(_objClass) {
 	parametersInit();
+	Logger::Log("Start file : " + filepath, constants::LogCore);
 }
 
 void shockGraphsGenerator::parametersInit(){
@@ -317,18 +318,13 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 		graphDBLib::GraphDB::CommonInterface::getObjectClass(objClass), \
 		(string) graph.GetDAGLbl());
 
-	graphPtr.lock()->setView(graph.GetViewNumber(), true);
 	graphPtr.lock()->setCumulativeMass(graph.GetCumulativeMass(), true);
 	graphPtr.lock()->setDAGCost(graph.GetDAGCost(), true);
-	graphPtr.lock()->setFileOffset(graph.GetFileOffset(), true);
 	graphPtr.lock()->setMaxTSVDimension(graph.GetMaxTSVDimension(), true);
 	graphPtr.lock()->setTotalTSVSum(graph.GetTotalTSVSum(), true);
 
 	ShapeDims sh = graph.GetDims();
 	graphPtr.lock()->setShapeDimensions(sh.xmin, sh.xmax, sh.ymin, sh.ymax);
-
-	graphPtr.lock()->setNodeCount(graph.GetEdgeCount(), true);
-	graphPtr.lock()->setEdgeCount(graph.GetNodeCount(), true);
 
 	std::stringstream testStream;
 	graph.Print(testStream, true);
@@ -360,8 +356,6 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 
 		double contourLength1 = -1, contourLength2 = -1;
 		curNode->GetContourLength(contourLength1, contourLength2);
-		NodePtr.lock()->setContourLength1(contourLength1, true);
-		NodePtr.lock()->setContourLength2(contourLength2, true);
 
 		NodePtr.lock()->setSubtreeCost(curNode->GetSubtreeCost(), true);
 		NodePtr.lock()->setTSVNorm(curNode->GetTSVNorm(), true);
@@ -380,7 +374,6 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 			PointPtr.lock()->setDr_Ds(branch[i].dr_ds, true);
 			PointPtr.lock()->setRadius(branch[i].radius, true);
 			PointPtr.lock()->setSpeed(branch[i].speed, true);
-			PointPtr.lock()->setType(branch[i].type, true);
 			PointPtr.lock()->setxCoord(branch[i].xcoord, true);
 			PointPtr.lock()->setyCoord(branch[i].ycoord, true);
 

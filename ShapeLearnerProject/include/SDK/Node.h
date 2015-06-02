@@ -68,22 +68,16 @@ namespace graphDBLib{
 
 		int getMass() const;
 		void setMass(const int _mass, bool asynchronous = false);
-
-		int getType() const;
-		void setType(const int _type, bool asynchronous = false);
+		
+        int getType() const;
+        void setType(const int _type, bool asynchronous = false);
 
 		NODE_ROLE getRole() const;
 		void setRole(const NODE_ROLE _role, bool asynchronous = false);
 
-		int getPointCount() const;
-		void setPointCount(const int _pointCount, bool asynchronous = false);
+        int getPointCount() const;
+        void setPointCount(const int _pointCount, bool asynchronous = false);
 		int getPointCountFromDB() const;
-
-		double getContourLength1() const;
-		void setContourLength1(const double _contourLength1, bool asynchronous = false);
-
-		double getContourLength2() const;
-		void setContourLength2(const double _contourLength2, bool asynchronous = false);
 
 		double getSubtreeCost() const;
 		void setSubtreeCost(const double _subtreeCost, bool asynchronous = false);
@@ -105,21 +99,6 @@ namespace graphDBLib{
 		void resynchronize();
 
 	private:
-		unsigned long	idNode;
-		int				index;
-		string			label;
-		int				level;
-		int				mass;
-		int				type;
-		NODE_ROLE		role;
-		int				pointCount;
-		double			contourLength1;
-		double			contourLength2;
-		double			subtreeCost;
-		double			tsvNorm;
-
-		odb::boost::lazy_weak_ptr<Graph>	refGraph;
-
 		Node() {}
 		Node(boost::weak_ptr<Graph> _refGraph);
 	};

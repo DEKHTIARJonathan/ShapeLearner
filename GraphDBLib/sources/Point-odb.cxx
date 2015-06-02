@@ -58,7 +58,6 @@ namespace odb
     pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::int4_oid,
-    pgsql::int4_oid,
     pgsql::int8_oid,
     pgsql::int8_oid
   };
@@ -78,7 +77,6 @@ namespace odb
     pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
-    pgsql::int4_oid,
     pgsql::int4_oid,
     pgsql::int8_oid,
     pgsql::int8_oid,
@@ -186,21 +184,17 @@ namespace odb
     //
     t[6UL] = 0;
 
-    // type
+    // direction
     //
     t[7UL] = 0;
 
-    // direction
+    // refGraph
     //
     t[8UL] = 0;
 
-    // refGraph
-    //
-    t[9UL] = 0;
-
     // refNode
     //
-    t[10UL] = 0;
+    t[9UL] = 0;
 
     return grew;
   }
@@ -266,13 +260,6 @@ namespace odb
     b[n].type = pgsql::bind::double_;
     b[n].buffer = &i.dr_value;
     b[n].is_null = &i.dr_null;
-    n++;
-
-    // type
-    //
-    b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.type_value;
-    b[n].is_null = &i.type_null;
     n++;
 
     // direction
@@ -401,20 +388,6 @@ namespace odb
           pgsql::id_double >::set_image (
         i.dr_value, is_null, v);
       i.dr_null = is_null;
-    }
-
-    // type
-    //
-    {
-      int const& v =
-        o.type;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          int,
-          pgsql::id_integer >::set_image (
-        i.type_value, is_null, v);
-      i.type_null = is_null;
     }
 
     // direction
@@ -595,20 +568,6 @@ namespace odb
         i.dr_null);
     }
 
-    // type
-    //
-    {
-      int& v =
-        o.type;
-
-      pgsql::value_traits<
-          int,
-          pgsql::id_integer >::set_value (
-        v,
-        i.type_value,
-        i.type_null);
-    }
-
     // direction
     //
     {
@@ -698,12 +657,11 @@ namespace odb
   "\"speed\", "
   "\"dr_ds\", "
   "\"dr\", "
-  "\"type\", "
   "\"direction\", "
   "\"refGraph\", "
   "\"refNode\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9) "
   "RETURNING \"idPoint\"";
 
   const char access::object_traits_impl< ::graphDBLib::Point, id_pgsql >::find_statement[] =
@@ -715,7 +673,6 @@ namespace odb
   "\"Point\".\"speed\", "
   "\"Point\".\"dr_ds\", "
   "\"Point\".\"dr\", "
-  "\"Point\".\"type\", "
   "\"Point\".\"direction\", "
   "\"Point\".\"refGraph\", "
   "\"Point\".\"refNode\" "
@@ -731,11 +688,10 @@ namespace odb
   "\"speed\"=$4, "
   "\"dr_ds\"=$5, "
   "\"dr\"=$6, "
-  "\"type\"=$7, "
-  "\"direction\"=$8, "
-  "\"refGraph\"=$9, "
-  "\"refNode\"=$10 "
-  "WHERE \"idPoint\"=$11";
+  "\"direction\"=$7, "
+  "\"refGraph\"=$8, "
+  "\"refNode\"=$9 "
+  "WHERE \"idPoint\"=$10";
 
   const char access::object_traits_impl< ::graphDBLib::Point, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Point\" "
@@ -750,7 +706,6 @@ namespace odb
   "\"Point\".\"speed\",\n"
   "\"Point\".\"dr_ds\",\n"
   "\"Point\".\"dr\",\n"
-  "\"Point\".\"type\",\n"
   "\"Point\".\"direction\",\n"
   "\"Point\".\"refGraph\",\n"
   "\"Point\".\"refNode\"\n"

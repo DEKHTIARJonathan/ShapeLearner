@@ -60,8 +60,6 @@ namespace odb
     pgsql::int4_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
-    pgsql::float8_oid,
-    pgsql::float8_oid,
     pgsql::int8_oid
   };
 
@@ -81,8 +79,6 @@ namespace odb
     pgsql::int4_oid,
     pgsql::int4_oid,
     pgsql::int4_oid,
-    pgsql::float8_oid,
-    pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
     pgsql::int8_oid,
@@ -193,25 +189,17 @@ namespace odb
     //
     t[7UL] = 0;
 
-    // contourLength1
+    // subtreeCost
     //
     t[8UL] = 0;
 
-    // contourLength2
+    // tsvNorm
     //
     t[9UL] = 0;
 
-    // subtreeCost
-    //
-    t[10UL] = 0;
-
-    // tsvNorm
-    //
-    t[11UL] = 0;
-
     // refGraph
     //
-    t[12UL] = 0;
+    t[10UL] = 0;
 
     return grew;
   }
@@ -286,20 +274,6 @@ namespace odb
     b[n].type = pgsql::bind::integer;
     b[n].buffer = &i.pointCount_value;
     b[n].is_null = &i.pointCount_null;
-    n++;
-
-    // contourLength1
-    //
-    b[n].type = pgsql::bind::double_;
-    b[n].buffer = &i.contourLength1_value;
-    b[n].is_null = &i.contourLength1_null;
-    n++;
-
-    // contourLength2
-    //
-    b[n].type = pgsql::bind::double_;
-    b[n].buffer = &i.contourLength2_value;
-    b[n].is_null = &i.contourLength2_null;
     n++;
 
     // subtreeCost
@@ -449,34 +423,6 @@ namespace odb
           pgsql::id_integer >::set_image (
         i.pointCount_value, is_null, v);
       i.pointCount_null = is_null;
-    }
-
-    // contourLength1
-    //
-    {
-      double const& v =
-        o.contourLength1;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          double,
-          pgsql::id_double >::set_image (
-        i.contourLength1_value, is_null, v);
-      i.contourLength1_null = is_null;
-    }
-
-    // contourLength2
-    //
-    {
-      double const& v =
-        o.contourLength2;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          double,
-          pgsql::id_double >::set_image (
-        i.contourLength2_value, is_null, v);
-      i.contourLength2_null = is_null;
     }
 
     // subtreeCost
@@ -659,34 +605,6 @@ namespace odb
         i.pointCount_null);
     }
 
-    // contourLength1
-    //
-    {
-      double& v =
-        o.contourLength1;
-
-      pgsql::value_traits<
-          double,
-          pgsql::id_double >::set_value (
-        v,
-        i.contourLength1_value,
-        i.contourLength1_null);
-    }
-
-    // contourLength2
-    //
-    {
-      double& v =
-        o.contourLength2;
-
-      pgsql::value_traits<
-          double,
-          pgsql::id_double >::set_value (
-        v,
-        i.contourLength2_value,
-        i.contourLength2_null);
-    }
-
     // subtreeCost
     //
     {
@@ -765,13 +683,11 @@ namespace odb
   "\"type\", "
   "\"role\", "
   "\"pointCount\", "
-  "\"contourLength1\", "
-  "\"contourLength2\", "
   "\"subtreeCost\", "
   "\"tsvNorm\", "
   "\"refGraph\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) "
   "RETURNING \"idNode\"";
 
   const char access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::find_statement[] =
@@ -784,8 +700,6 @@ namespace odb
   "\"Node\".\"type\", "
   "\"Node\".\"role\", "
   "\"Node\".\"pointCount\", "
-  "\"Node\".\"contourLength1\", "
-  "\"Node\".\"contourLength2\", "
   "\"Node\".\"subtreeCost\", "
   "\"Node\".\"tsvNorm\", "
   "\"Node\".\"refGraph\" "
@@ -802,12 +716,10 @@ namespace odb
   "\"type\"=$5, "
   "\"role\"=$6, "
   "\"pointCount\"=$7, "
-  "\"contourLength1\"=$8, "
-  "\"contourLength2\"=$9, "
-  "\"subtreeCost\"=$10, "
-  "\"tsvNorm\"=$11, "
-  "\"refGraph\"=$12 "
-  "WHERE \"idNode\"=$13";
+  "\"subtreeCost\"=$8, "
+  "\"tsvNorm\"=$9, "
+  "\"refGraph\"=$10 "
+  "WHERE \"idNode\"=$11";
 
   const char access::object_traits_impl< ::graphDBLib::Node, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Node\" "
@@ -823,8 +735,6 @@ namespace odb
   "\"Node\".\"type\",\n"
   "\"Node\".\"role\",\n"
   "\"Node\".\"pointCount\",\n"
-  "\"Node\".\"contourLength1\",\n"
-  "\"Node\".\"contourLength2\",\n"
   "\"Node\".\"subtreeCost\",\n"
   "\"Node\".\"tsvNorm\",\n"
   "\"Node\".\"refGraph\"\n"

@@ -71,16 +71,7 @@ namespace graphDBLib{
 
 		void resynchronize();
 
-	private:
-		unsigned long	idEdge;
-		int				weight;
-		int				sourceDFSIndex;
-		int				targetDFSIndex;
-
-		odb::boost::lazy_weak_ptr<Node> source;
-		odb::boost::lazy_weak_ptr<Node> target;
-		odb::boost::lazy_weak_ptr<Graph> refGraph;
-		
+	private:		
 		Edge() {}
 		Edge(boost::weak_ptr<Node> _source, boost::weak_ptr<Node> _target, boost::weak_ptr<Graph> _refGraph);
 

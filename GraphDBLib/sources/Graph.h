@@ -60,20 +60,8 @@ namespace graphDBLib{
 
 		string getObjectName() const;
 
-		unsigned long getView() const;
-		void setView(const unsigned long _viewNumber, bool asynchronous = false);
-
-		unsigned int getNodeCount() const;
-		void setNodeCount(const unsigned int _nodeCount, bool asynchronous = false);
-
-		unsigned int getEdgeCount() const;
-		void setEdgeCount(const unsigned int _edgeCount, bool asynchronous = false);
-
 		int getCumulativeMass() const;
 		void setCumulativeMass(const int _cumulativeMass, bool asynchronous = false);
-
-		double getFileOffset() const;
-		void setFileOffset(const int _fileOffset, bool asynchronous = false);
 
 		int getDAGCost() const;
 		void setDAGCost(const int _DAGCost, bool asynchronous = false);
@@ -106,14 +94,9 @@ namespace graphDBLib{
 	private:
 		unsigned long idGraph;
 		string objectName;			//!< The name of the Image File.
-		unsigned long viewNumber;	//!< Object View
-
-		unsigned int nodeCount;
-		unsigned int edgeCount;
 
 		int cumulativeMass;			//!< Sum of all the nodes' masses
 		double DAGCost;				//!< Som of all node and edge costs
-		int fileOffset;				//!< file offset where this DAG is located.
 		int MaxTSVDimension;		//!< Maximum branching factor of the DAG : m_nMaxBFactor + 1;
 		double totalTSVSum;			//!< Sum of all the node's TSV magnitudes.
 
@@ -160,14 +143,10 @@ namespace graphDBLib{
 	#pragma db member(Graph::refGraphClass) not_null on_delete(cascade)
 	#pragma db member(Graph::refObjectClass) not_null on_delete(cascade)
 	#pragma db member(Graph::objectName) not_null
-	#pragma db member(Graph::nodeCount)
-	#pragma db member(Graph::edgeCount)
 	#pragma db member(Graph::cumulativeMass)
-	#pragma db member(Graph::fileOffset)
 	#pragma db member(Graph::DAGCost)
 	#pragma db member(Graph::MaxTSVDimension)
 	#pragma db member(Graph::totalTSVSum)
-	#pragma db member(Graph::viewNumber)
 	#pragma db member(Graph::shape_xMax)
 	#pragma db member(Graph::shape_xMin)
 	#pragma db member(Graph::shape_yMax)

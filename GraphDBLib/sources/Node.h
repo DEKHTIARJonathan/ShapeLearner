@@ -74,14 +74,9 @@ namespace graphDBLib{
 		void setRole(const NODE_ROLE _role, bool asynchronous = false);
 
 		int getPointCount() const;
-		void setPointCount(const int _pointCount, bool asynchronous = false);
+        void setPointCount(const int _pointCount, bool asynchronous = false);
+
 		int getPointCountFromDB() const;
-
-		double getContourLength1() const;
-		void setContourLength1(const double _contourLength1, bool asynchronous = false);
-
-		double getContourLength2() const;
-		void setContourLength2(const double _contourLength2, bool asynchronous = false);
 
 		double getSubtreeCost() const;
 		void setSubtreeCost(const double _subtreeCost, bool asynchronous = false);
@@ -108,11 +103,9 @@ namespace graphDBLib{
 		string			label; //!< Node's label : nodeLbl
 		int				level; //!< Node level in the hierarchical structure : nLevel
 		int				mass; //!< Node mass : nMass
-		int				type; //!< Shock branch type (1, 2, 3, 4) : m_nType
+		int             type; //!< Shock branch type (1, 2, 3, 4) : m_nType
 		NODE_ROLE		role;
-		int				pointCount;
-		double			contourLength1; //!< Contour segment's lengths
-		double			contourLength2; //!< Contour segment's lengths
+		int             pointCount;
 		double			subtreeCost; //!< Cost of the subtree rooted at the node
 		double			tsvNorm; //!< Node TSV's norm
 
@@ -148,11 +141,9 @@ namespace graphDBLib{
 	#pragma db member(Node::index) default("-1")
 	#pragma db member(Node::level) default("-1")
 	#pragma db member(Node::mass) default("-1")
-	#pragma db member(Node::type) default("-1")
+    #pragma db member(Node::type) default("-1")
 	#pragma db member(Node::label) default("-1")
-	#pragma db member(Node::pointCount) default("-1")
-	#pragma db member(Node::contourLength1) default("-1")
-	#pragma db member(Node::contourLength2) default("-1")
+    #pragma db member(Node::pointCount) default("-1")
 	#pragma db member(Node::subtreeCost) default("-1")
 	#pragma db member(Node::tsvNorm) default("-1")
 	#pragma db member(Node::role) default(UNK_ROLE)

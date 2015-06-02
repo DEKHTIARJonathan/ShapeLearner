@@ -241,18 +241,6 @@ namespace odb
 
     static const dr_type_ dr;
 
-    // type
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    type_type_;
-
-    static const type_type_ type;
-
     // direction
     //
     typedef
@@ -326,11 +314,6 @@ namespace odb
   dr (A::table_name, "\"dr\"", 0);
 
   template <typename A>
-  const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::type_type_
-  pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
-  type (A::table_name, "\"type\"", 0);
-
-  template <typename A>
   const typename pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::direction_type_
   pointer_query_columns< ::graphDBLib::Point, id_pgsql, A >::
   direction (A::table_name, "\"direction\"", 0);
@@ -395,11 +378,6 @@ namespace odb
       double dr_value;
       bool dr_null;
 
-      // type
-      //
-      int type_value;
-      bool type_null;
-
       // direction
       //
       int direction_value;
@@ -460,7 +438,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 11UL;
+    static const std::size_t column_count = 10UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -851,18 +829,6 @@ namespace odb
 
     static const dr_type_ dr;
 
-    // type
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        int,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
-    type_type_;
-
-    static const type_type_ type;
-
     // direction
     //
     typedef
@@ -966,11 +932,6 @@ namespace odb
   const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::dr_type_
   query_columns< ::graphDBLib::Point, id_pgsql, A >::
   dr (A::table_name, "\"dr\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::type_type_
-  query_columns< ::graphDBLib::Point, id_pgsql, A >::
-  type (A::table_name, "\"type\"", 0);
 
   template <typename A>
   const typename query_columns< ::graphDBLib::Point, id_pgsql, A >::direction_type_

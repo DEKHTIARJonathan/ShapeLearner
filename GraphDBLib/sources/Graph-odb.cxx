@@ -52,12 +52,8 @@ namespace odb
   persist_statement_types[] =
   {
     pgsql::text_oid,
-    pgsql::int8_oid,
-    pgsql::int4_oid,
-    pgsql::int4_oid,
     pgsql::int4_oid,
     pgsql::float8_oid,
-    pgsql::int4_oid,
     pgsql::int4_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
@@ -81,12 +77,8 @@ namespace odb
   update_statement_types[] =
   {
     pgsql::text_oid,
-    pgsql::int8_oid,
-    pgsql::int4_oid,
-    pgsql::int4_oid,
     pgsql::int4_oid,
     pgsql::float8_oid,
-    pgsql::int4_oid,
     pgsql::int4_oid,
     pgsql::float8_oid,
     pgsql::float8_oid,
@@ -186,65 +178,49 @@ namespace odb
       grew = true;
     }
 
-    // viewNumber
+    // cumulativeMass
     //
     t[2UL] = 0;
 
-    // nodeCount
+    // DAGCost
     //
     t[3UL] = 0;
 
-    // edgeCount
+    // MaxTSVDimension
     //
     t[4UL] = 0;
 
-    // cumulativeMass
+    // totalTSVSum
     //
     t[5UL] = 0;
 
-    // DAGCost
+    // shape_xMax
     //
     t[6UL] = 0;
 
-    // fileOffset
+    // shape_xMin
     //
     t[7UL] = 0;
 
-    // MaxTSVDimension
+    // shape_yMax
     //
     t[8UL] = 0;
 
-    // totalTSVSum
+    // shape_yMin
     //
     t[9UL] = 0;
 
-    // shape_xMax
+    // shape_Height
     //
     t[10UL] = 0;
 
-    // shape_xMin
+    // shape_Width
     //
     t[11UL] = 0;
 
-    // shape_yMax
-    //
-    t[12UL] = 0;
-
-    // shape_yMin
-    //
-    t[13UL] = 0;
-
-    // shape_Height
-    //
-    t[14UL] = 0;
-
-    // shape_Width
-    //
-    t[15UL] = 0;
-
     // XMLSignature
     //
-    if (t[16UL])
+    if (t[12UL])
     {
       i.XMLSignature_value.capacity (i.XMLSignature_size);
       grew = true;
@@ -252,7 +228,7 @@ namespace odb
 
     // refGraphClass
     //
-    if (t[17UL])
+    if (t[13UL])
     {
       i.refGraphClass_value.capacity (i.refGraphClass_size);
       grew = true;
@@ -260,7 +236,7 @@ namespace odb
 
     // refObjectClass
     //
-    if (t[18UL])
+    if (t[14UL])
     {
       i.refObjectClass_value.capacity (i.refObjectClass_size);
       grew = true;
@@ -299,27 +275,6 @@ namespace odb
     b[n].is_null = &i.objectName_null;
     n++;
 
-    // viewNumber
-    //
-    b[n].type = pgsql::bind::bigint;
-    b[n].buffer = &i.viewNumber_value;
-    b[n].is_null = &i.viewNumber_null;
-    n++;
-
-    // nodeCount
-    //
-    b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.nodeCount_value;
-    b[n].is_null = &i.nodeCount_null;
-    n++;
-
-    // edgeCount
-    //
-    b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.edgeCount_value;
-    b[n].is_null = &i.edgeCount_null;
-    n++;
-
     // cumulativeMass
     //
     b[n].type = pgsql::bind::integer;
@@ -332,13 +287,6 @@ namespace odb
     b[n].type = pgsql::bind::double_;
     b[n].buffer = &i.DAGCost_value;
     b[n].is_null = &i.DAGCost_null;
-    n++;
-
-    // fileOffset
-    //
-    b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.fileOffset_value;
-    b[n].is_null = &i.fileOffset_null;
     n++;
 
     // MaxTSVDimension
@@ -468,48 +416,6 @@ namespace odb
       grew = grew || (cap != i.objectName_value.capacity ());
     }
 
-    // viewNumber
-    //
-    {
-      long unsigned int const& v =
-        o.viewNumber;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_image (
-        i.viewNumber_value, is_null, v);
-      i.viewNumber_null = is_null;
-    }
-
-    // nodeCount
-    //
-    {
-      unsigned int const& v =
-        o.nodeCount;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
-        i.nodeCount_value, is_null, v);
-      i.nodeCount_null = is_null;
-    }
-
-    // edgeCount
-    //
-    {
-      unsigned int const& v =
-        o.edgeCount;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_image (
-        i.edgeCount_value, is_null, v);
-      i.edgeCount_null = is_null;
-    }
-
     // cumulativeMass
     //
     {
@@ -536,20 +442,6 @@ namespace odb
           pgsql::id_double >::set_image (
         i.DAGCost_value, is_null, v);
       i.DAGCost_null = is_null;
-    }
-
-    // fileOffset
-    //
-    {
-      int const& v =
-        o.fileOffset;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          int,
-          pgsql::id_integer >::set_image (
-        i.fileOffset_value, is_null, v);
-      i.fileOffset_null = is_null;
     }
 
     // MaxTSVDimension
@@ -794,48 +686,6 @@ namespace odb
         i.objectName_null);
     }
 
-    // viewNumber
-    //
-    {
-      long unsigned int& v =
-        o.viewNumber;
-
-      pgsql::value_traits<
-          long unsigned int,
-          pgsql::id_bigint >::set_value (
-        v,
-        i.viewNumber_value,
-        i.viewNumber_null);
-    }
-
-    // nodeCount
-    //
-    {
-      unsigned int& v =
-        o.nodeCount;
-
-      pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
-        v,
-        i.nodeCount_value,
-        i.nodeCount_null);
-    }
-
-    // edgeCount
-    //
-    {
-      unsigned int& v =
-        o.edgeCount;
-
-      pgsql::value_traits<
-          unsigned int,
-          pgsql::id_integer >::set_value (
-        v,
-        i.edgeCount_value,
-        i.edgeCount_null);
-    }
-
     // cumulativeMass
     //
     {
@@ -862,20 +712,6 @@ namespace odb
         v,
         i.DAGCost_value,
         i.DAGCost_null);
-    }
-
-    // fileOffset
-    //
-    {
-      int& v =
-        o.fileOffset;
-
-      pgsql::value_traits<
-          int,
-          pgsql::id_integer >::set_value (
-        v,
-        i.fileOffset_value,
-        i.fileOffset_null);
     }
 
     // MaxTSVDimension
@@ -1077,12 +913,8 @@ namespace odb
   "INSERT INTO \"Graph\" "
   "(\"idGraph\", "
   "\"objectName\", "
-  "\"viewNumber\", "
-  "\"nodeCount\", "
-  "\"edgeCount\", "
   "\"cumulativeMass\", "
   "\"DAGCost\", "
-  "\"fileOffset\", "
   "\"MaxTSVDimension\", "
   "\"totalTSVSum\", "
   "\"shape_xMax\", "
@@ -1095,19 +927,15 @@ namespace odb
   "\"refGraphClass\", "
   "\"refObjectClass\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) "
   "RETURNING \"idGraph\"";
 
   const char access::object_traits_impl< ::graphDBLib::Graph, id_pgsql >::find_statement[] =
   "SELECT "
   "\"Graph\".\"idGraph\", "
   "\"Graph\".\"objectName\", "
-  "\"Graph\".\"viewNumber\", "
-  "\"Graph\".\"nodeCount\", "
-  "\"Graph\".\"edgeCount\", "
   "\"Graph\".\"cumulativeMass\", "
   "\"Graph\".\"DAGCost\", "
-  "\"Graph\".\"fileOffset\", "
   "\"Graph\".\"MaxTSVDimension\", "
   "\"Graph\".\"totalTSVSum\", "
   "\"Graph\".\"shape_xMax\", "
@@ -1126,24 +954,20 @@ namespace odb
   "UPDATE \"Graph\" "
   "SET "
   "\"objectName\"=$1, "
-  "\"viewNumber\"=$2, "
-  "\"nodeCount\"=$3, "
-  "\"edgeCount\"=$4, "
-  "\"cumulativeMass\"=$5, "
-  "\"DAGCost\"=$6, "
-  "\"fileOffset\"=$7, "
-  "\"MaxTSVDimension\"=$8, "
-  "\"totalTSVSum\"=$9, "
-  "\"shape_xMax\"=$10, "
-  "\"shape_xMin\"=$11, "
-  "\"shape_yMax\"=$12, "
-  "\"shape_yMin\"=$13, "
-  "\"shape_Height\"=$14, "
-  "\"shape_Width\"=$15, "
-  "\"XMLSignature\"=$16, "
-  "\"refGraphClass\"=$17, "
-  "\"refObjectClass\"=$18 "
-  "WHERE \"idGraph\"=$19";
+  "\"cumulativeMass\"=$2, "
+  "\"DAGCost\"=$3, "
+  "\"MaxTSVDimension\"=$4, "
+  "\"totalTSVSum\"=$5, "
+  "\"shape_xMax\"=$6, "
+  "\"shape_xMin\"=$7, "
+  "\"shape_yMax\"=$8, "
+  "\"shape_yMin\"=$9, "
+  "\"shape_Height\"=$10, "
+  "\"shape_Width\"=$11, "
+  "\"XMLSignature\"=$12, "
+  "\"refGraphClass\"=$13, "
+  "\"refObjectClass\"=$14 "
+  "WHERE \"idGraph\"=$15";
 
   const char access::object_traits_impl< ::graphDBLib::Graph, id_pgsql >::erase_statement[] =
   "DELETE FROM \"Graph\" "
@@ -1153,12 +977,8 @@ namespace odb
   "SELECT\n"
   "\"Graph\".\"idGraph\",\n"
   "\"Graph\".\"objectName\",\n"
-  "\"Graph\".\"viewNumber\",\n"
-  "\"Graph\".\"nodeCount\",\n"
-  "\"Graph\".\"edgeCount\",\n"
   "\"Graph\".\"cumulativeMass\",\n"
   "\"Graph\".\"DAGCost\",\n"
-  "\"Graph\".\"fileOffset\",\n"
   "\"Graph\".\"MaxTSVDimension\",\n"
   "\"Graph\".\"totalTSVSum\",\n"
   "\"Graph\".\"shape_xMax\",\n"

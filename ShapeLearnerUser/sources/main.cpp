@@ -21,6 +21,12 @@
 #define _AWS_ // Amazon Web Service BDD
 //#define _TESTDATA_
 
+//#define _LOW_
+//#define _MEDIUM_
+//#define _HIGH_
+//#define _EXTREME_
+#define _ULTIMATE_
+
 #include <iostream>
 #include "boost/filesystem.hpp"
 #include "CmdLine.h"
@@ -61,9 +67,45 @@ int main(int argc, char **argv)
 			#else
 				#ifdef _AWS_
 					#ifndef _TESTDATA_
-						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10000, "sources/structure.sql");
+						#ifdef _LOW_
+							GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10100, "sources/structure.sql");
+						#else
+							#ifdef _MEDIUM_
+								GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10101, "sources/structure.sql");
+							#else
+								#ifdef _HIGH_
+									GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10102, "sources/structure.sql");
+								#else
+									#ifdef _EXTREME_
+										GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10103, "sources/structure.sql");
+									#else
+										#ifdef _ULTIMATE_
+											GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10104, "sources/structure.sql");
+										#endif
+									#endif
+								#endif
+							#endif
+						#endif
 					#else
-						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10001, "sources/structure.sql");
+						#ifdef _LOW_
+							GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10200, "sources/structure.sql");
+						#else
+							#ifdef _MEDIUM_
+								GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10201, "sources/structure.sql");
+							#else
+								#ifdef _HIGH_
+									GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10202, "sources/structure.sql");
+								#else
+									#ifdef _EXTREME_
+										GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10203, "sources/structure.sql");
+									#else
+										#ifdef _ULTIMATE_
+											GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10204, "sources/structure.sql");
+										#endif
+									#endif
+								#endif
+							#endif
+						#endif
 					#endif
 				#else
 					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10023, "sources/structure.sql");
@@ -91,9 +133,45 @@ int main(int argc, char **argv)
 
 		if (cmdLine.HasSwitch("--generate")){
 			#ifndef _TESTDATA_
-				string rootFolder  = "Data\\Training\\Ultimate";
+				#ifdef _LOW_
+					string rootFolder  = ".\\Data\\Training\\Low";
+				#else
+					#ifdef _MEDIUM_
+						string rootFolder  = ".\\Data\\Training\\Medium";
+					#else
+						#ifdef _HIGH_
+							string rootFolder  = ".\\Data\\Training\\High";
+						#else
+							#ifdef _EXTREME_
+								string rootFolder  = ".\\Data\\Training\\Extreme";
+							#else
+								#ifdef _ULTIMATE_
+									string rootFolder  = ".\\Data\\Training\\Ultimate";
+								#endif
+							#endif
+						#endif
+					#endif
+				#endif
 			#else
-				string rootFolder  = "Data\\Testing\\Ultimate";
+				#ifdef _LOW_
+					string rootFolder  = ".\\Data\\Testing\\Low";
+				#else
+					#ifdef _MEDIUM_
+						string rootFolder  = ".\\Data\\Testing\\Medium";
+					#else
+						#ifdef _HIGH_
+							string rootFolder  = ".\\Data\\Testing\\High";
+						#else
+							#ifdef _EXTREME_
+								string rootFolder  = ".\\Data\\Testing\\Extreme";
+							#else
+								#ifdef _ULTIMATE_
+									string rootFolder  = ".\\Data\\Testing\\Ultimate";
+								#endif
+							#endif
+						#endif
+					#endif
+				#endif
 			#endif
 
 			vector <string> dirVect;

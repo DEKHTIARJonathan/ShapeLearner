@@ -81,9 +81,6 @@ namespace graphDBLib{
 		double getDr() const;
 		void setDr(const double _dr, bool asynchronous = false);
 
-		int getType() const;
-		void setType(const int _type, bool asynchronous = false);
-
 		BRANCH_DIR getDirection() const;
 		void setDirection(BRANCH_DIR _direction, bool asynchronous = false);
 
@@ -104,7 +101,6 @@ namespace graphDBLib{
 		double		speed;		//!< Velocities at the branch points.
 		double		dr_ds;
 		double		dr;			//!< Delta radius. Diff in radius with that of the previous point
-		int			type;
 		BRANCH_DIR	direction;	//!< Direction: increasing=1, decreasing=-1, constant=0
 
 		odb::boost::lazy_weak_ptr<Graph> refGraph;
@@ -150,9 +146,7 @@ namespace graphDBLib{
 	#pragma db member(Point::radius) default("-1")
 	#pragma db member(Point::speed) default("-1")
 	#pragma db member(Point::dr_ds) default("-1")
-	//#pragma db member(Point::color) default("-1")
 	#pragma db member(Point::dr) default("-1")
-	#pragma db member(Point::type) default("-1")
 	#pragma db member(Point::direction) default(UNK_DIR)
 	#pragma db index(Point::"index_Point_refNode") method("BTREE") member(refNode)
 	#pragma db index(Point::"index_Point_refGraph") method("BTREE") member(refGraph)

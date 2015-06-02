@@ -27,12 +27,8 @@ DROP TABLE IF EXISTS "Graph" CASCADE;
 CREATE TABLE "Graph" (
   "idGraph" BIGSERIAL NOT NULL PRIMARY KEY,
   "objectName" VARCHAR(255) NOT NULL,
-  "viewNumber" BIGINT NOT NULL,
-  "nodeCount" INTEGER NOT NULL,
-  "edgeCount" INTEGER NOT NULL,
   "cumulativeMass" INTEGER NOT NULL,
   "DAGCost" DOUBLE PRECISION NOT NULL,
-  "fileOffset" INTEGER NOT NULL,
   "MaxTSVDimension" INTEGER NOT NULL,
   "totalTSVSum" DOUBLE PRECISION NOT NULL,
   "shape_xMax" DOUBLE PRECISION NOT NULL,
@@ -81,8 +77,6 @@ CREATE TABLE "Node" (
   "type" INTEGER NOT NULL DEFAULT '-1',
   "role" INTEGER NOT NULL DEFAULT 0,
   "pointCount" INTEGER NOT NULL DEFAULT '-1',
-  "contourLength1" DOUBLE PRECISION NOT NULL DEFAULT '-1',
-  "contourLength2" DOUBLE PRECISION NOT NULL DEFAULT '-1',
   "subtreeCost" DOUBLE PRECISION NOT NULL DEFAULT '-1',
   "tsvNorm" DOUBLE PRECISION NOT NULL DEFAULT '-1',
   "refGraph" BIGINT NOT NULL);
@@ -157,7 +151,6 @@ CREATE TABLE "Point" (
   "speed" DOUBLE PRECISION NOT NULL DEFAULT '-1',
   "dr_ds" DOUBLE PRECISION NOT NULL DEFAULT '-1',
   "dr" DOUBLE PRECISION NOT NULL DEFAULT '-1',
-  "type" INTEGER NOT NULL DEFAULT '-1',
   "direction" INTEGER NOT NULL DEFAULT -1,
   "refGraph" BIGINT NOT NULL,
   "refNode" BIGINT NOT NULL);
@@ -223,7 +216,8 @@ $BODY$
   ROWS 1000;
 ALTER FUNCTION public.gettablestate()
   OWNER TO postgres;
- 
+
+
 /* This view is used to perform the Machine Learning approach.
  * Created by Jonathan DEKHTIAR
  */
@@ -249,9 +243,7 @@ CREATE VIEW "learning_data" AS
 	n."avg_level", 
 	n."avg_mass", 
 	n."avg_type" as "avg_NodeType", 
-	n."avg_role", 
-	n."avg_contourLength1", 
-	n."avg_contourLength2", 
+	n."avg_role",
 	n."avg_subtreeCost", 
 	n."avg_tsvNorm",
 	p."avg_xCoord", 
@@ -260,7 +252,6 @@ CREATE VIEW "learning_data" AS
 	p."avg_speed", 
 	p."avg_dr_ds", 
 	p."avg_dr", 
-	p."avg_type" as "avg_PointType", 
 	p."avg_direction"
 FROM 
 	"Graph" as g
@@ -272,8 +263,6 @@ LEFT JOIN
 		avg("type") as "avg_type", 
 		avg("role") as "avg_role", 
 		avg("pointCount") as "avg_pointCount", 
-		avg("contourLength1") as "avg_contourLength1", 
-		avg("contourLength2") as "avg_contourLength2", 
 		avg("subtreeCost") as "avg_subtreeCost", 
 		avg("tsvNorm") as "avg_tsvNorm",
 		"refGraph"
@@ -298,7 +287,6 @@ LEFT JOIN
 		avg("speed") as "avg_speed", 
 		avg("dr_ds") as "avg_dr_ds", 
 		avg("dr")as "avg_dr", 
-		avg("type") as "avg_type", 
 		avg("direction") as "avg_direction", 
 		"refGraph" 
 	FROM "Point" 
@@ -306,4 +294,3 @@ LEFT JOIN
 ON g."idGraph" = p."refGraph"
 
 ORDER BY "idGraph";
-

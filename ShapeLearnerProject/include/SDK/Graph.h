@@ -63,20 +63,8 @@ namespace graphDBLib{
 
 		string getObjectName() const;
 
-		unsigned long getView() const;
-		void setView(const unsigned long _viewNumber, bool asynchronous = false);
-
-		unsigned int getNodeCount() const;
-		void setNodeCount(const unsigned int _nodeCount, bool asynchronous = false);
-
-		unsigned int getEdgeCount() const;
-		void setEdgeCount(const unsigned int _edgeCount, bool asynchronous = false);
-
 		int getCumulativeMass() const;
 		void setCumulativeMass(const int _cumulativeMass, bool asynchronous = false);
-
-		double getFileOffset() const;
-		void setFileOffset(const int _fileOffset, bool asynchronous = false);
 
 		int getDAGCost() const;
 		void setDAGCost(const int _DAGCost, bool asynchronous = false);
@@ -107,31 +95,6 @@ namespace graphDBLib{
 		void resynchronize();
 
 	private:
-		unsigned long idGraph;
-		string objectName;
-		unsigned long viewNumber;
-
-		unsigned int nodeCount;
-		unsigned int edgeCount;
-
-		int cumulativeMass;	
-		double DAGCost;
-		int fileOffset;	
-		int MaxTSVDimension;
-		double totalTSVSum;
-
-		double shape_xMax;
-		double shape_xMin;
-		double shape_yMax;
-		double shape_yMin;
-		double shape_Height;
-		double shape_Width;
-
-		string XMLSignature;
-
-		odb::boost::lazy_weak_ptr<GraphClass> refGraphClass;
-		odb::boost::lazy_weak_ptr<ObjectClass> refObjectClass;
-
 		Graph() {}
 		Graph(boost::weak_ptr<GraphClass> _graphClass, boost::weak_ptr<ObjectClass> _objectClass, string const _objectName);
 	};

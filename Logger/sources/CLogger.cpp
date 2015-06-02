@@ -33,7 +33,6 @@ volatile void Logger::Log(string text, unsigned int logFile, const unsigned long
 
 	string output;
 
-
 	Logger* Log = const_cast<Logger*>(&_inst);
 
 	mutexLogger.lock();
@@ -57,7 +56,6 @@ volatile void Logger::Log(string text, unsigned int logFile, const unsigned long
 			Log->writeError(output);
 			break;
 		}
-		
 	}
     mutexLogger.unlock();
 }
@@ -84,9 +82,9 @@ void Logger::writeDB (string text){
 void Logger::writeCore (string text){
 	string localTime = getTime();
 	outstreamCore << localTime<< " # " << text << endl;
-	#ifdef _DEBUG
+	//#ifdef _DEBUG
 		cout << text << endl;
-	#endif
+//	#endif
 }
 void Logger::writeExec (string text){
 	string localTime = getTime();
@@ -134,4 +132,3 @@ const unsigned long Logger::getThreadId(){
     sscanf(threadId.c_str(), "%lx", &threadNumber);
     return threadNumber;
 }
-

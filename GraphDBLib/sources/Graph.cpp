@@ -28,12 +28,8 @@ Graph::Graph(boost::weak_ptr<GraphClass> _refGraphClass,boost::weak_ptr<ObjectCl
 	refObjectClass(_refObjectClass),
 	objectName(_objectName),
 	idGraph(0),
-	viewNumber(0),
-	nodeCount(0),
-	edgeCount(0),
 	cumulativeMass(0),
 	DAGCost(0),
-	fileOffset(0),
 	MaxTSVDimension(0),
 	totalTSVSum(0),
 	shape_xMax(0),
@@ -53,26 +49,6 @@ boost::shared_ptr<Graph> Graph::Access::createGraph(boost::weak_ptr<GraphClass> 
 }
 
 unsigned long Graph::getKey() const {return idGraph;}
-
-unsigned long Graph::getView() const {return viewNumber;}
-void Graph::setView(const unsigned long _viewNumber, bool asynchronous) {
-	viewNumber = _viewNumber;
-	updateInDB();
-}
-
-unsigned int Graph::getNodeCount() const{return nodeCount;}
-void Graph::setNodeCount(const unsigned int _nodeCount, bool asynchronous){
-	nodeCount = _nodeCount;
-	if (!asynchronous)
-		updateInDB();
-}
-
-unsigned int Graph::getEdgeCount() const{return edgeCount;}
-void Graph::setEdgeCount(const unsigned int _edgeCount, bool asynchronous){
-	edgeCount = _edgeCount;
-	if (!asynchronous)
-		updateInDB();
-}
 
 string Graph::getObjectName() const {return objectName;}
 
@@ -99,13 +75,6 @@ void Graph::setShapeDimensions(const double _xmin, const double _xmax, const dou
 int Graph::getCumulativeMass() const{return cumulativeMass;}
 void Graph::setCumulativeMass(const int _cumulativeMass, bool asynchronous){
 	cumulativeMass = _cumulativeMass;
-	if (!asynchronous)
-		updateInDB();
-}
-
-double Graph::getFileOffset() const{return fileOffset;}
-void Graph::setFileOffset(const int _fileOffset, bool asynchronous){
-	fileOffset = _fileOffset;
 	if (!asynchronous)
 		updateInDB();
 }
