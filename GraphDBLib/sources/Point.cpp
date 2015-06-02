@@ -30,7 +30,6 @@ Point::Point(boost::weak_ptr<Node> _refNode, boost::weak_ptr<Graph> _refGraph) :
 	direction = UNK_DIR;
 	speed = -1;
 	dr_ds = -1;
-	//color = char('');
 	dr = -1;
 
 	idPoint = saveInDB();

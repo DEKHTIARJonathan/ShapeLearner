@@ -354,9 +354,6 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 		NodePtr.lock()->setRole(NodeRoleConverter2GraphDBLib(curNode->GetNodeRole()), true);
 		NodePtr.lock()->setPointCount(curNode->GetShockCount(), true);
 
-		double contourLength1 = -1, contourLength2 = -1;
-		curNode->GetContourLength(contourLength1, contourLength2);
-
 		NodePtr.lock()->setSubtreeCost(curNode->GetSubtreeCost(), true);
 		NodePtr.lock()->setTSVNorm(curNode->GetTSVNorm(), true);
 

@@ -260,14 +260,14 @@ boost::weak_ptr<ObjectClass> GraphDB::CommonInterface::getObjectClass(const stri
 		_Lock_ObjectClass_
 		map<string, boost::shared_ptr<ObjectClass>>::const_iterator it = ObjectClassMap.find(name);
 		map<string, boost::shared_ptr<ObjectClass>>::const_iterator endIT = ObjectClassMap.end();
-		_Unlock_ObjectClass_
-		if(it != ObjectClassMap.end())
+		if(it != ObjectClassMap.end()){
+			_Unlock_ObjectClass_
 			return  boost::weak_ptr<ObjectClass>(it->second);
+		}
 		else{
 			boost::shared_ptr<ObjectClass> tmp (loadObject<ObjectClass>(name));
 			if (!tmp)
 				tmp.swap(boost::shared_ptr<ObjectClass> (ObjectClass::Access::createObjectClass(name)));
-			_Lock_ObjectClass_
 			ObjectClassMap.insert(pair<string, boost::shared_ptr<ObjectClass>>(name, tmp));
 			_Unlock_ObjectClass_
 			return boost::weak_ptr<ObjectClass>(tmp);
@@ -275,6 +275,7 @@ boost::weak_ptr<ObjectClass> GraphDB::CommonInterface::getObjectClass(const stri
 	}
 	catch (const std::exception& e)
 	{
+		_Unlock_ObjectClass_
 		Logger::Log(e.what (), constants::LogError);
 		
 	}

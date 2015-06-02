@@ -178,8 +178,12 @@ int main(int argc, char **argv)
 			vector<const img2Parse> imgVect;
 
 			#ifdef _DEBUG
-				imgVect.push_back(img2Parse("Data/rod.ppm", "Rod"));
+				imgVect.push_back(img2Parse("Data/Training/Ultimate/Amortisseur/AmortisseurA52.ppm", "Amortisseur"));
+				imgVect.push_back(img2Parse("Data/Training/Ultimate/Amortisseur/AmortisseurA56.ppm", "Amortisseur"));
 			#else
+				imgVect.push_back(img2Parse("Data/Training/Ultimate/Amortisseur/AmortisseurA52.ppm", "Amortisseur"));
+				imgVect.push_back(img2Parse("Data/Training/Ultimate/Amortisseur/AmortisseurA56.ppm", "Amortisseur"));
+				/*
 				// ================== Listing all the subdirectories
 				path p (rootFolder);
 				directory_iterator end_itr;
@@ -212,6 +216,7 @@ int main(int argc, char **argv)
 							imgVect.push_back(img2Parse(itr->path().string(), className));
 					}
 				}
+				*/
 			#endif
 
 			ShapeLearner::createShockGraph(imgVect);
