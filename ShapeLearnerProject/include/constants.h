@@ -62,7 +62,7 @@ namespace constants{
 	*	Constant referencing to the number of threads used by the GraphDB Library.
 	*/
 	#ifdef _DEBUG
-		const int		nbMaxThread = 2;
+		const int		nbMaxThread = 80;
 	#else
 		const int		nbMaxThread = 80;
 	#endif

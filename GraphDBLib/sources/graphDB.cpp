@@ -48,7 +48,6 @@ boost::mutex									GraphDB::mtxGraphClass;
 void GraphDB::closeDatabase() throw(StandardExcept) {
 	if (!DatabaseManager::Interface::isDbOpen()){
 		Logger::Log((string)__FUNCTION__ + "\nError : The database is not opened yet. Impossible to close it.", constants::LogError);
-		
 	}
 	else{
 		try{
@@ -57,7 +56,6 @@ void GraphDB::closeDatabase() throw(StandardExcept) {
 		catch (const std::exception& e)
 		{
 			Logger::Log(e.what (), constants::LogError);
-			
 		}
 	}
 }
@@ -66,7 +64,6 @@ void GraphDB::openDatabase(const string& _dbUser, const string& _dbPass, const s
 	try{
 		if (DatabaseManager::Interface::isDbOpen()){
 			Logger::Log((string)__FUNCTION__ + "\n Error : The Database has already been instantiated. It's impossible to modify the Database's parameters", constants::LogError);
-			
 		}
 		else
 			DatabaseManager::Interface::openDatabase(_dbUser, _dbPass, _dbName, _dbHost, _dbPort, _dbInit);
@@ -74,7 +71,6 @@ void GraphDB::openDatabase(const string& _dbUser, const string& _dbPass, const s
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 
@@ -103,7 +99,6 @@ boost::weak_ptr<Point> GraphDB::CommonInterface::getPoint(const unsigned long ke
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 boost::weak_ptr<Point> GraphDB::CommonInterface::getPoint(const boost::weak_ptr<Node> _refNode, const boost::weak_ptr<Graph> _refGraph){
@@ -141,7 +136,6 @@ boost::weak_ptr<Node> GraphDB::CommonInterface::getNode(const unsigned long keyD
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 boost::weak_ptr<Node> GraphDB::CommonInterface::getNode(const boost::weak_ptr<Graph> _refGraph){
@@ -155,7 +149,6 @@ boost::weak_ptr<Node> GraphDB::CommonInterface::getNode(const boost::weak_ptr<Gr
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 
@@ -180,7 +173,6 @@ boost::weak_ptr<Edge> GraphDB::CommonInterface::getEdge(const unsigned long keyD
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 boost::weak_ptr<Edge> GraphDB::CommonInterface::getEdge(const boost::weak_ptr<Node> _source, const boost::weak_ptr<Node> _target, const boost::weak_ptr<Graph> _refGraph){
@@ -194,7 +186,6 @@ boost::weak_ptr<Edge> GraphDB::CommonInterface::getEdge(const boost::weak_ptr<No
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 
@@ -219,7 +210,6 @@ boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const unsigned long ke
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName){
@@ -233,7 +223,6 @@ boost::weak_ptr<Graph> GraphDB::CommonInterface::getGraph(const boost::weak_ptr<
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
 
@@ -277,9 +266,21 @@ boost::weak_ptr<ObjectClass> GraphDB::CommonInterface::getObjectClass(const stri
 	{
 		_Unlock_ObjectClass_
 		Logger::Log(e.what (), constants::LogError);
-		
 	}
 }
+
+/* ************** Deleters ********************/
+/*!
+*	\brief Reflect action to the correct template.
+*	\param obj : The object we want to delete from the memory.
+*	\param deleteOnDB : A boolean to indicate if we want to delete the object also in the Database.
+*/
+bool GraphDB::CommonInterface::delObj(boost::weak_ptr<GraphClass> obj, bool deleteOnDB) throw (StandardExcept) { return deleteObject(obj, deleteOnDB); }
+bool GraphDB::CommonInterface::delObj(boost::weak_ptr<ObjectClass> obj, bool deleteOnDB) throw (StandardExcept) { return deleteObject(obj, deleteOnDB); }
+bool GraphDB::CommonInterface::delObj(boost::weak_ptr<Graph> obj, bool deleteOnDB) throw (StandardExcept) { return deleteObject(obj, deleteOnDB); }
+bool GraphDB::CommonInterface::delObj(boost::weak_ptr<Node> obj, bool deleteOnDB) throw (StandardExcept) { return deleteObject(obj, deleteOnDB); }
+bool GraphDB::CommonInterface::delObj(boost::weak_ptr<Edge> obj, bool deleteOnDB) throw (StandardExcept) { return deleteObject(obj, deleteOnDB); }
+bool GraphDB::CommonInterface::delObj(boost::weak_ptr<Point> obj, bool deleteOnDB) throw (StandardExcept) { return deleteObject(obj, deleteOnDB); }
 
 /* *******************************************************************
 *                          Private FUNCTIONS                         *
@@ -299,7 +300,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Point> obj, bool cascade) th
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
+
 		return false;
 	}
 }
@@ -318,7 +319,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Edge> obj, bool cascade) thr
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
+
 		return false;
 	}
 }
@@ -367,7 +368,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Node> obj, bool cascade) thr
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
+
 		return false;
 	}
 }
@@ -429,7 +430,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<Graph> obj, bool cascade) th
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
+
 		return EXIT_FAILURE;
 	}
 }
@@ -464,7 +465,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<GraphClass> obj, bool cascad
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
+
 		return EXIT_FAILURE;
 	}
 }
@@ -499,7 +500,7 @@ bool GraphDB::removeObjectFromMap(boost::shared_ptr<ObjectClass> obj, bool casca
 	catch (const std::exception& e)
 	{
 		Logger::Log(e.what (), constants::LogError);
-		
+
 		return EXIT_FAILURE;
 	}
 }

@@ -62,72 +62,56 @@ int main(int argc, char **argv)
 		}
 
 		if (cmdLine.HasSwitch("--init")){
-			#ifdef _CITUS_
-				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026, "sources/structure.sql");
-			#else
-				#ifdef _AWS_
-					#ifndef _TESTDATA_
-						#ifdef _LOW_
-							GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10100, "sources/structure.sql");
-						#else
-							#ifdef _MEDIUM_
-								GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10101, "sources/structure.sql");
-							#else
-								#ifdef _HIGH_
-									GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10102, "sources/structure.sql");
-								#else
-									#ifdef _EXTREME_
-										GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10103, "sources/structure.sql");
-									#else
-										#ifdef _ULTIMATE_
-											GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10104, "sources/structure.sql");
-										#endif
-									#endif
-								#endif
-							#endif
-						#endif
+			#ifndef _TESTDATA_
+				#ifdef _LOW_
+					GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10100, "sources/structure.sql");
+				#else
+					#ifdef _MEDIUM_
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10101, "sources/structure.sql");
 					#else
-						#ifdef _LOW_
-							GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10200, "sources/structure.sql");
+						#ifdef _HIGH_
+							GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10102, "sources/structure.sql");
 						#else
-							#ifdef _MEDIUM_
-								GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10201, "sources/structure.sql");
+							#ifdef _EXTREME_
+								GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10103, "sources/structure.sql");
 							#else
-								#ifdef _HIGH_
-									GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10202, "sources/structure.sql");
-								#else
-									#ifdef _EXTREME_
-										GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10203, "sources/structure.sql");
-									#else
-										#ifdef _ULTIMATE_
-											GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10204, "sources/structure.sql");
-										#endif
-									#endif
+								#ifdef _ULTIMATE_
+									GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10104, "sources/structure.sql");
 								#endif
 							#endif
 						#endif
 					#endif
-				#else
-					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10023, "sources/structure.sql");
 				#endif
+			#else
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10200, "sources/structure.sql");
 			#endif
 
 			dml::DAGMatcherLib::InitDAGMatcherLib();
 		}
 		else
 		{
-			#ifdef _CITUS_
-				GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10026);
-			#else
-				#ifdef _AWS_
-					#ifndef _TESTDATA_
-						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10000);
-					#else
-						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10001);
-					#endif
+			#ifndef _TESTDATA_
+				#ifdef _LOW_
+					GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10100);
 				#else
-					GraphDB::openDatabase("postgres", "postgres", "postgres", "localhost", 10023);
+					#ifdef _MEDIUM_
+						GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10101);
+					#else
+						#ifdef _HIGH_
+							GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10102);
+						#else
+							#ifdef _EXTREME_
+								GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10103);
+							#else
+								#ifdef _ULTIMATE_
+									GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10104);
+								#endif
+							#endif
+						#endif
+					#endif
 				#endif
+			#else
+				GraphDB::openDatabase("postgres", "postgres", "postgres", "54.77.188.25", 10200);
 			#endif
 		}
 
@@ -177,10 +161,12 @@ int main(int argc, char **argv)
 			vector <string> dirVect;
 			vector<const img2Parse> imgVect;
 
+			/*
 			#ifdef _DEBUG
-				imgVect.push_back(img2Parse("Data/Training/Ultimate/Amortisseur/AmortisseurA52.ppm", "Amortisseur"));
-				imgVect.push_back(img2Parse("Data/Training/Ultimate/Amortisseur/AmortisseurA56.ppm", "Amortisseur"));
+				imgVect.push_back(img2Parse("Data/Training/Ultimate/Transmission/TransmissionChaine00.ppm", "Amortisseur"));
+				imgVect.push_back(img2Parse("Data/Training/Ultimate/Transmission/TransmissionChaine10.ppm", "Amortisseur"));
 			#else
+			*/
 				// ================== Listing all the subdirectories
 				path p (rootFolder);
 				directory_iterator end_itr;
@@ -213,7 +199,7 @@ int main(int argc, char **argv)
 							imgVect.push_back(img2Parse(itr->path().string(), className));
 					}
 				}
-			#endif
+			//#endif
 
 			ShapeLearner::createShockGraph(imgVect);
 		}

@@ -378,13 +378,13 @@ namespace graphDBLib {
 							{
 								t.rollback();
 								if (retry_count > constants::MAX_DB_RETRY){
-									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + e.what());
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : ConnectionLost, " + to_string((_Longlong)retry_count) + " reconnection attempts realized.\n" + (string)e.what());
 									return EXIT_FAILURE;
 								}
 								else{
 									Sleep(500);
 									if(!dbPool->reconnect())
-										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + e.what());
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
 									else{
 										t.reset(dbPool->connect()->begin());
 										continue;
@@ -394,13 +394,13 @@ namespace graphDBLib {
 							catch (const odb::timeout& e){
 								t.rollback();
 								if (retry_count > constants::MAX_DB_RETRY){
-									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + e.what());
+									throw StandardExcept ((string)__FUNCTION__, "DB Connection Failure : TimeOut, " + to_string((_Longlong)retry_count) + " attempts realized.\n" + (string)e.what());
 									return EXIT_FAILURE;
 								}
 								else{
 									Sleep(500);
 									if(!dbPool->reconnect())
-										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + e.what());
+										throw StandardExcept ((string)__FUNCTION__, "Unable to reconnect to the DB" + (string)e.what());
 									else{
 										t.reset(dbPool->connect()->begin());
 										continue;
@@ -410,7 +410,7 @@ namespace graphDBLib {
 							catch (const std::exception& e)
 							{
 								t.rollback();
-								throw StandardExcept ((string)__FUNCTION__, "Unable to delete object of class : "+ obj->getClassName() +". // Error = "+ e.what());
+								throw StandardExcept ((string)__FUNCTION__, "Unable to delete object of class : "+ obj->getClassName() +". // Error = "+ (string)e.what());
 								return false;
 							}
 						}

@@ -311,97 +311,105 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 }
 
 void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
-	/* ===================== GRAPH SAVING ====================== */
+	try{
+	
+		/* ===================== GRAPH SAVING ====================== */
 
-	boost::weak_ptr<graphDBLib::Graph> graphPtr = graphDBLib::GraphDB::CommonInterface::getGraph( \
-		graphDBLib::GraphDB::CommonInterface::getGraphClass((string)graph.ClassName()), \
-		graphDBLib::GraphDB::CommonInterface::getObjectClass(objClass), \
-		(string) graph.GetDAGLbl());
+		boost::weak_ptr<graphDBLib::Graph> graphPtr = graphDBLib::GraphDB::CommonInterface::getGraph( \
+			graphDBLib::GraphDB::CommonInterface::getGraphClass((string)graph.ClassName()), \
+			graphDBLib::GraphDB::CommonInterface::getObjectClass(objClass), \
+			(string) graph.GetDAGLbl());
 
-	graphPtr.lock()->setCumulativeMass(graph.GetCumulativeMass(), true);
-	graphPtr.lock()->setDAGCost(graph.GetDAGCost(), true);
-	graphPtr.lock()->setMaxTSVDimension(graph.GetMaxTSVDimension(), true);
-	graphPtr.lock()->setTotalTSVSum(graph.GetTotalTSVSum(), true);
+		graphPtr.lock()->setCumulativeMass(graph.GetCumulativeMass(), true);
+		graphPtr.lock()->setDAGCost(graph.GetDAGCost(), true);
+		graphPtr.lock()->setMaxTSVDimension(graph.GetMaxTSVDimension(), true);
+		graphPtr.lock()->setTotalTSVSum(graph.GetTotalTSVSum(), true);
 
-	ShapeDims sh = graph.GetDims();
-	graphPtr.lock()->setShapeDimensions(sh.xmin, sh.xmax, sh.ymin, sh.ymax);
+		ShapeDims sh = graph.GetDims();
+		graphPtr.lock()->setShapeDimensions(sh.xmin, sh.xmax, sh.ymin, sh.ymax);
 
-	std::stringstream testStream;
-	graph.Print(testStream, true);
-	graphPtr.lock()->setXMLSignature(testStream.str(), true);
+		std::stringstream testStream;
+		graph.Print(testStream, true);
+		graphPtr.lock()->setXMLSignature(testStream.str(), true);
 
-	graphPtr.lock()->resynchronize();
+		graphPtr.lock()->resynchronize();
 
-	leda::list<leda::graph::node> nodeList (graph.all_nodes());
-	leda::list<leda::graph::edge> edgeList (graph.all_edges());
+		leda::list<leda::graph::node> nodeList (graph.all_nodes());
+		leda::list<leda::graph::edge> edgeList (graph.all_edges());
 
-	map<int, boost::weak_ptr<graphDBLib::Node>> NodeMap;
+		map<int, boost::weak_ptr<graphDBLib::Node>> NodeMap;
 
-	for(leda::list<leda::graph::node>::iterator it = nodeList.begin(); it != nodeList.end(); it++){
-		/* ===================== Node SAVING ====================== */
-		boost::weak_ptr<graphDBLib::Node> NodePtr = graphDBLib::GraphDB::CommonInterface::getNode(graphPtr);
+		for(leda::list<leda::graph::node>::iterator it = nodeList.begin(); it != nodeList.end(); it++){
+			/* ===================== Node SAVING ====================== */
+			boost::weak_ptr<graphDBLib::Node> NodePtr = graphDBLib::GraphDB::CommonInterface::getNode(graphPtr);
 
-		leda::graph::node ledaNode = *it;
-		const SGNode* curNode = graph.GetSGNode(ledaNode);
+			leda::graph::node ledaNode = *it;
+			const SGNode* curNode = graph.GetSGNode(ledaNode);
 
-		NodeMap.insert(pair<int, boost::weak_ptr<graphDBLib::Node>>((*it)->id(), NodePtr));
+			NodeMap.insert(pair<int, boost::weak_ptr<graphDBLib::Node>>((*it)->id(), NodePtr));
 
-		NodePtr.lock()->setIndex(curNode->GetDFSIndex(), true);
-		NodePtr.lock()->setLabel(curNode->GetNodeLbl().c_str(), true);
-		NodePtr.lock()->setLevel(curNode->GetLevel(), true);
-		NodePtr.lock()->setMass(curNode->GetMass(), true);
-		NodePtr.lock()->setType(curNode->GetType(), true);
-		NodePtr.lock()->setRole(NodeRoleConverter2GraphDBLib(curNode->GetNodeRole()), true);
-		NodePtr.lock()->setPointCount(curNode->GetShockCount(), true);
+			NodePtr.lock()->setIndex(curNode->GetDFSIndex(), true);
+			NodePtr.lock()->setLabel(curNode->GetNodeLbl().c_str(), true);
+			NodePtr.lock()->setLevel(curNode->GetLevel(), true);
+			NodePtr.lock()->setMass(curNode->GetMass(), true);
+			NodePtr.lock()->setType(curNode->GetType(), true);
+			NodePtr.lock()->setRole(NodeRoleConverter2GraphDBLib(curNode->GetNodeRole()), true);
+			NodePtr.lock()->setPointCount(curNode->GetShockCount(), true);
 
-		NodePtr.lock()->setSubtreeCost(curNode->GetSubtreeCost(), true);
-		NodePtr.lock()->setTSVNorm(curNode->GetTSVNorm(), true);
+			NodePtr.lock()->setSubtreeCost(curNode->GetSubtreeCost(), true);
+			NodePtr.lock()->setTSVNorm(curNode->GetTSVNorm(), true);
 
-		NodePtr.lock()->resynchronize();
+			NodePtr.lock()->resynchronize();
 
-		/* ===================== Point SAVING ====================== */
+			/* ===================== Point SAVING ====================== */
 
-		ShockBranch branch = curNode->m_shocks;
+			ShockBranch branch = curNode->m_shocks;
 
-		for (int i = 0; i < branch.GetSize(); i++){
-			boost::weak_ptr<graphDBLib::Point> PointPtr = graphDBLib::GraphDB::CommonInterface::getPoint(NodePtr, graphPtr);
+			for (int i = 0; i < branch.GetSize(); i++){
+				boost::weak_ptr<graphDBLib::Point> PointPtr = graphDBLib::GraphDB::CommonInterface::getPoint(NodePtr, graphPtr);
 
-			PointPtr.lock()->setDirection(BranchDirConverter2GraphDBLib(branch[i].dir), true);
-			PointPtr.lock()->setDr(branch[i].dr, true);
-			PointPtr.lock()->setDr_Ds(branch[i].dr_ds, true);
-			PointPtr.lock()->setRadius(branch[i].radius, true);
-			PointPtr.lock()->setSpeed(branch[i].speed, true);
-			PointPtr.lock()->setxCoord(branch[i].xcoord, true);
-			PointPtr.lock()->setyCoord(branch[i].ycoord, true);
+				PointPtr.lock()->setDirection(BranchDirConverter2GraphDBLib(branch[i].dir), true);
+				PointPtr.lock()->setDr(branch[i].dr, true);
+				PointPtr.lock()->setDr_Ds(branch[i].dr_ds, true);
+				PointPtr.lock()->setRadius(branch[i].radius, true);
+				PointPtr.lock()->setSpeed(branch[i].speed, true);
+				PointPtr.lock()->setxCoord(branch[i].xcoord, true);
+				PointPtr.lock()->setyCoord(branch[i].ycoord, true);
 
-			PointPtr.lock()->resynchronize();
+				PointPtr.lock()->resynchronize();
+			}
 		}
+		/* ===================== Edge SAVING ====================== */
+		for(leda::list<leda::graph::edge>::iterator itEdge = edgeList.begin(); itEdge != edgeList.end(); itEdge++){
+			leda::graph::edge ledaEdge = *itEdge;
+			leda::graph::node source = ledaEdge->terminal(0); // term[0] = source and term[1] = target
+			leda::graph::node target = ledaEdge->terminal(1); // term[0] = source and term[1] = target
+
+			int idSource = source->id();
+			int idTarget = target->id();
+
+			map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeSource = NodeMap.find(idSource);
+			map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeTarget = NodeMap.find(idTarget);
+
+			if(itNodeSource == NodeMap.end() || itNodeTarget == NodeMap.end())
+				throw StandardExcept((string)__FUNCTION__,"Error while fetching the Nodes (Source: "+ to_string((_Longlong)idSource) +", Target: "+ to_string((_Longlong)idTarget) +") Connected to the Edge: "+ to_string((_Longlong)ledaEdge->id()) +".");
+
+			boost::weak_ptr<graphDBLib::Node> NodeSource = itNodeSource->second;
+			boost::weak_ptr<graphDBLib::Node> NodeTarget = itNodeTarget->second;
+
+			boost::weak_ptr<graphDBLib::Edge> EdgePtr = graphDBLib::GraphDB::CommonInterface::getEdge(NodeSource, NodeTarget, graphPtr);
+
+			EdgePtr.lock()->setWeight(graph.GetEdgeWeight(ledaEdge), true);
+			EdgePtr.lock()->setSourceDFSIndex(graph.GetNodeDFSIndex(source), true);
+			EdgePtr.lock()->setTargetDFSIndex(graph.GetNodeDFSIndex(target), true);
+
+			EdgePtr.lock()->resynchronize();
+		}
+
+		//graphDBLib::GraphDB::CommonInterface::delObj(graphPtr, false);
 	}
-	/* ===================== Edge SAVING ====================== */
-	for(leda::list<leda::graph::edge>::iterator itEdge = edgeList.begin(); itEdge != edgeList.end(); itEdge++){
-		leda::graph::edge ledaEdge = *itEdge;
-		leda::graph::node source = ledaEdge->terminal(0); // term[0] = source and term[1] = target
-		leda::graph::node target = ledaEdge->terminal(1); // term[0] = source and term[1] = target
-
-		int idSource = source->id();
-		int idTarget = target->id();
-
-		map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeSource = NodeMap.find(idSource);
-		map<int, boost::weak_ptr<graphDBLib::Node>>::iterator itNodeTarget = NodeMap.find(idTarget);
-
-		if(itNodeSource == NodeMap.end() || itNodeTarget == NodeMap.end())
-			throw StandardExcept((string)__FUNCTION__,"Error while fetching the Nodes (Source: "+ to_string((_Longlong)idSource) +", Target: "+ to_string((_Longlong)idTarget) +") Connected to the Edge: "+ to_string((_Longlong)ledaEdge->id()) +".");
-
-		boost::weak_ptr<graphDBLib::Node> NodeSource = itNodeSource->second;
-		boost::weak_ptr<graphDBLib::Node> NodeTarget = itNodeTarget->second;
-
-		boost::weak_ptr<graphDBLib::Edge> EdgePtr = graphDBLib::GraphDB::CommonInterface::getEdge(NodeSource, NodeTarget, graphPtr);
-
-		EdgePtr.lock()->setWeight(graph.GetEdgeWeight(ledaEdge), true);
-		EdgePtr.lock()->setSourceDFSIndex(graph.GetNodeDFSIndex(source), true);
-		EdgePtr.lock()->setTargetDFSIndex(graph.GetNodeDFSIndex(target), true);
-
-		EdgePtr.lock()->resynchronize();
+	catch(std::exception e){
+		Logger::Log((string)__FUNCTION__ + " // Error while saving: " + (string)e.what(), constants::LogError);
 	}
 }
 

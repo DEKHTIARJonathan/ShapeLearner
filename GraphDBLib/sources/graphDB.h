@@ -122,7 +122,7 @@ namespace graphDBLib {
 					catch (const std::exception& e)
 					{
 						Logger::Log(e.what (), constants::LogError);
-						
+
 						return EXIT_FAILURE;
 					}
 
@@ -243,28 +243,16 @@ namespace graphDBLib {
 
 				/* ************** Deleters ********************/
 				/*!
-				*	\fn template <class T> static bool deleteObject(boost::weak_ptr<T> obj, bool deleteOnDB);
-				*	\brief Template static method returning a boolean on the success of the suppression operation. The object is removed from the application's memory and optionally also from the database.
+				*	\brief Reflect action to the correct template.
 				*	\param obj : The object we want to delete from the memory.
 				*	\param deleteOnDB : A boolean to indicate if we want to delete the object also in the Database.
 				*/
-				template <class T> static bool deleteObject(boost::weak_ptr<T> obj, bool deleteOnDB) throw (StandardExcept){
-					bool rslt = true;
-					boost::shared_ptr<T> keepAlive;
-					if(obj.expired())
-						Logger::Log((string)__FUNCTION__, "Error : The object doesn't exist anymore.", constants::LogError);
-						
-						return EXIT_FAILURE;
-					else
-						keepAlive.swap(obj.lock()); // We ensure that we keep an alive version of the object.
-
-					if(deleteOnDB)
-						rslt &= DatabaseManager::Interface::deleteObject(keepAlive);
-
-					rslt &= removeObjectFromMap(keepAlive, deleteOnDB); // If deletonOnDB == false => Desinstanciate, keep in DBn, no cascade delete // deletonOnDB == true => Delete from DB & Central Memory
-
-					return rslt;
-				}
+				static bool delObj(boost::weak_ptr<GraphClass> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<ObjectClass> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Graph> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Node> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Edge> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Point> obj, bool deleteOnDB) throw (StandardExcept);
 			};
 
 		private:
@@ -325,9 +313,34 @@ namespace graphDBLib {
 				catch (const std::exception& e)
 				{
 					Logger::Log(e.what (), constants::LogError);
-					
 				}
 			}
+
+			/* ************** Deleters ********************/
+				/*!
+				*	\fn template <class T> static bool deleteObject(boost::weak_ptr<T> obj, bool deleteOnDB);
+				*	\brief Template static method returning a boolean on the success of the suppression operation. The object is removed from the application's memory and optionally also from the database.
+				*	\param obj : The object we want to delete from the memory.
+				*	\param deleteOnDB : A boolean to indicate if we want to delete the object also in the Database.
+				*/
+				template <class T> static bool deleteObject(boost::weak_ptr<T> obj, bool deleteOnDB) throw (StandardExcept){
+					bool rslt = true;
+					boost::shared_ptr<T> keepAlive;
+					if(obj.expired()){
+						Logger::Log((string)__FUNCTION__ + " // Error : The object doesn't exist anymore.", constants::LogError);
+						return EXIT_FAILURE;
+					}
+					else
+						keepAlive.swap(obj.lock()); // We ensure that we keep an alive version of the object.
+
+					if(deleteOnDB)
+						rslt &= DatabaseManager::Interface::deleteObject(keepAlive);
+
+					if (rslt)
+						rslt &= removeObjectFromMap(keepAlive, deleteOnDB); // If deletonOnDB == false => Desinstanciate, keep in DBn, no cascade delete // deletonOnDB == true => Delete from DB & Central Memory
+
+					return rslt;
+				}
 
 			/*!
 			*	\fn template <class T, class Y> static boost::shared_ptr<T> loadObject(Y keyDB) throw (StandardExcept);

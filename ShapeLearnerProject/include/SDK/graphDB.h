@@ -36,7 +36,6 @@ using namespace std;
 class StandardExcept; //Forward Declaration of the class contained in StandardException.h
 
 namespace graphDBLib{
-	
 	class ObjectClass; //Forward Declaration of the class contained in ObjectClass.h
 	class GraphClass; //Forward Declaration of the class contained in GraphClass.h
 	class Graph; //Forward Declaration of the class contained in Graph.h
@@ -44,7 +43,7 @@ namespace graphDBLib{
 	class Point; //Forward Declaration of the class contained in Point.h
 	class Edge; //Forward Declaration of the class contained in Edge.h
 
-	/*!	
+	/*!
 	*	\class GraphDB
 	*	\brief Static class, the central point of the whole architecture. It redistributes actions to the different actors.
 	*	The different actors doesn't need to know about each others. That way, a new handler can be added without any change whatsoever.
@@ -65,15 +64,14 @@ namespace graphDBLib{
 			*	\param _dbInit : A relative path to the DB Init File, this field is not necessary. If empty => DB not initialized and assume it has been already created.
 			*/
 			static void openDatabase(const string& _dbUser, const string& _dbPass, const string& _dbName, const string& _dbHost, const unsigned int& _dbPort, const string& _dbInit = "") throw(StandardExcept);
-			
+
 			/*!
 			*	\fn static void closeDatabase() throw(StandardExcept);
 			*	\brief Close the connection to the PostgreSQL database.
 			*/
 			static void closeDatabase() throw(StandardExcept);
 
-
-			/*!	
+			/*!
 			*	\class GraphDB::CommonInterface
 			*	\brief Static subclass, communication interface for all Objects inside the library.
 			*	The implemented methods inside this interface are susceptible to be used by all the objects.
@@ -163,10 +161,20 @@ namespace graphDBLib{
 				*/
 				static boost::weak_ptr<Graph>			getGraph(const boost::weak_ptr<GraphClass> _graphClass, const boost::weak_ptr<ObjectClass> _objectClass, const string _objectName);
 
+				/* ************** Deleters ********************/
+				/*!
+				*	\brief Reflect action to the correct template.
+				*	\param obj : The object we want to delete from the memory.
+				*	\param deleteOnDB : A boolean to indicate if we want to delete the object also in the Database.
+				*/
+				static bool delObj(boost::weak_ptr<GraphClass> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<ObjectClass> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Graph> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Node> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Edge> obj, bool deleteOnDB) throw (StandardExcept);
+				static bool delObj(boost::weak_ptr<Point> obj, bool deleteOnDB) throw (StandardExcept);
 			};
-		
 	};
-	
 }
 
 #endif //_GRAPH_DATABASE_H_
