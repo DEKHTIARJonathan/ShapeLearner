@@ -1,85 +1,3 @@
-/*
-
-#include <Windows.h>
-#include <iostream>
-#include <Shellapi.h>
-
-#define _DEV_ 
-
-using namespace std;
-
-
-
-class spwan{
-public:
-    //char szPath[] = "";
-    void run(char path[], char args[]);
-};
-
-void spwan::run(char szPath[], char args[]){
-	HINSTANCE retval = ShellExecute(0, NULL, szPath, args, NULL, SW_SHOW);  
-}
-
-BOOL CtrlHandler( DWORD fdwCtrlType ) 
-{ 
-	if (fdwCtrlType == CTRL_C_EVENT) // Handle the CTRL-C signal. 
-	{
-		std::cout << "Stop Sleeping, reseting time." << endl;
-		SetLocalTime(&save);
-		return true;
-	}
-	else
-		return false;
-} 
- 
-
-int main()
-{
-    
-#ifdef _DEV_
-	if( SetConsoleCtrlHandler( (PHANDLER_ROUTINE) CtrlHandler, TRUE ) ) 
-	{ 
-		cout << "\nThe Control Handler is installed."<<endl<<endl; 
- 
-		while (true){
-			
-		}
-	} 
-	else 
-	{
-		cout << "ERROR: Could not set control handler" << endl; 
-		return 1;
-	}
-	
-
-
-#else
-	SYSTEMTIME st, save;
-    
-    GetLocalTime(&st);
-	GetLocalTime(&save);
-	st.wYear = 2015;
-	st.wMonth = 02;
-	st.wDay = 24;
-
-	SetLocalTime(&st);
-
-	spwan s;
-	s.run("..\\ShapeLearnerUser\\Release\\ShapeLearnerUser.exe", "--init");
-
-	Sleep(2000);
-	SetLocalTime(&save);
-#endif
-
-
-	system("pause");
-	return 0;
-}
-
-*/
-
-//#define WIN32_LEAN_AND_MEAN   
-//#include <tchar.h>
 #include <Windows.h>
 #include <iostream>
 #include <signal.h>
@@ -99,7 +17,7 @@ int main(int argc, char *argv[])
 {
     if (SetConsoleCtrlHandler( (PHANDLER_ROUTINE)ConsoleHandler,TRUE)==FALSE)
     {
-        // unable to install handler... 
+        // unable to install handler...
         // display message to the user
         cout << "Unable to install handler!" << endl;
         return -1;
@@ -110,9 +28,9 @@ int main(int argc, char *argv[])
     {
 		cout << "Ready to launch the execution ?"<<endl;
 		system("pause");
-		
+
 		GetSystemTime(&save);
-		
+
 		// Change local time
 		GetSystemTime(&st);
 		st.wYear = 2015;
@@ -123,7 +41,7 @@ int main(int argc, char *argv[])
 
 		cout << "Time Changed for 60secs, launch now the LEDA-Based program" << endl;
 		cout << "Enter CTRL+C to reset time before the end of the timer." << endl;
-		
+
 		int i = 1;
 		while (i < 60 && running)
 		{
