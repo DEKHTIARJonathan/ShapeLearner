@@ -17,6 +17,9 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
+#ifndef _DAG_MATCHER_LIB_H_
+#define _DAG_MATCHER_LIB_H_
+
 #include "stdafx.h"
 
 namespace dml {
@@ -27,3 +30,5 @@ namespace dml {
 		DAGMatcherLib();
 	};
 }
+
+#endif //_DAG_MATCHER_LIB_H_

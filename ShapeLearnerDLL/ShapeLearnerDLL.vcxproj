@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E8403F32-FB49-46B4-A2B8-1C02A15D7C05}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ShapeLearnerDLL</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNING;_DEBUG;_WINDOWS;_USRDLL;SHAPELEARNERDLL_EXPORTS;_CONSOLE;DLL_EXPORTS;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\ShapeLearnerLib\include;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <FavorSizeOrSpeed>
+      </FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <AdditionalOptions>/MP7 %(AdditionalOptions)</AdditionalOptions>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DAGMatcherLib-d.lib;GraphDBLib-d.lib;odb-d.lib;odb-pgsql-d.lib;odb-boost-d.lib;CLogger-d.lib;HnSRTree-d.lib;FluxSkeleton-d.lib;ann_1.1-d.lib;Newmat-d.lib;glut32.lib;leda_mtd.lib;AFMMSkeleton-d.lib;StandardException-d.lib;ShapeLearnerLib-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton\Debug;$(ProjectDir)..\ShapeLearnerProject\Dependencies\LEDA;$(ProjectDir)..\StandardException\Debug;$(ProjectDir)..\Newmat\Debug;$(ProjectDir)..\ann_1.1\Debug;$(ProjectDir)..\FluxSkeleton\Debug;$(ProjectDir)..\HnSRTree-2.0beta5a\Debug;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\ShapeLearnerLib\Debug;$(ProjectDir)..\GraphDBLib\Debug;$(ProjectDir)..\Logger\Debug;$(ProjectDir)..\DAGMatcherLib\Debug;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\debug\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\debug\link-static\threading-multi</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)\..\Server\$(ConfigurationName)\$(TargetName)-d$(TargetExt)</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGNDEBUG;_WINDOWS;_USRDLL;SHAPELEARNERDLL_EXPORTS;NDEBUG;_CONSOLE;DLL_EXPORTS;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\ShapeLearnerLib\include;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <FavorSizeOrSpeed>
+      </FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalOptions>/MP7 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>DAGMatcherLib.lib;GraphDBLib.lib;odb.lib;odb-pgsql.lib;odb-boost.lib;CLogger.lib;HnSRTree.lib;FluxSkeleton.lib;ann_1.1.lib;Newmat.lib;glut32.lib;leda_mt.lib;AFMMSkeleton.lib;StandardException.lib;ShapeLearnerLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\AFMMSkeleton\Release;$(ProjectDir)..\ShapeLearnerProject\Dependencies\LEDA;$(ProjectDir)..\StandardException\Release;$(ProjectDir)..\Newmat\Release;$(ProjectDir)..\ann_1.1\Release;$(ProjectDir)..\FluxSkeleton\Release;$(ProjectDir)..\HnSRTree-2.0beta5a\Release;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\GraphDBLib\Release;$(ProjectDir)..\Logger\Release;$(ProjectDir)..\DAGMatcherLib\Release;$(ProjectDir)..\ShapeLearnerLib\Release;$(ProjectDir)..\ODB\libodb-2.4.0\lib;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0\lib;$(ProjectDir)..\ODB\libodb-boost-2.4.0\lib;C:\boost_1_57_0\bin.v2\libs\filesystem\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\system\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\thread\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\date_time\build\msvc-10.0\release\link-static\threading-multi;C:\boost_1_57_0\bin.v2\libs\chrono\build\msvc-10.0\release\link-static\threading-multi</AdditionalLibraryDirectories>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)\..\Server\$(ConfigurationName)\$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="dllexport.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -63,6 +63,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

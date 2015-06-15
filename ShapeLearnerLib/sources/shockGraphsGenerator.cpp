@@ -326,7 +326,7 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 		graphPtr.lock()->setTotalTSVSum(graph.GetTotalTSVSum(), true);
 
 		ShapeDims sh = graph.GetDims();
-		graphPtr.lock()->setShapeDimensions(sh.xmin, sh.xmax, sh.ymin, sh.ymax);
+		graphPtr.lock()->setShapeDimensions(sh.xmin, sh.xmax, sh.ymin, sh.ymax, true);
 
 		std::stringstream testStream;
 		graph.Print(testStream, true);

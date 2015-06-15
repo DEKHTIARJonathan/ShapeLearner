@@ -17,6 +17,8 @@
 *	\author Jonathan DEKHTIAR - contact@jonathandekhtiar.eu - @born2data - http://www.jonathandekhtiar.eu
 */
 
+#ifndef _DAG_MATCHER_LIB_H_
+#define _DAG_MATCHER_LIB_H_
 
 namespace dml {
 	class DAGMatcherLib{
@@ -24,3 +26,5 @@ namespace dml {
 		static void InitDAGMatcherLib() throw(StandardExcept);
 	};
 }
+
+#endif //_DAG_MATCHER_LIB_H_

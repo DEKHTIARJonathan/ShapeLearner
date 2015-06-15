@@ -49,6 +49,8 @@ class ShapeLearner
 	public:
 
 		static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
+		static void createShockGraph (const img2Parse &imgVect) throw(StandardExcept);
+		static void waitForComputation () throw(StandardExcept);
 
 	private:
 

@@ -82,9 +82,9 @@ void Logger::writeDB (string text){
 void Logger::writeCore (string text){
 	string localTime = getTime();
 	outstreamCore << localTime<< " # " << text << endl;
-	//#ifdef _DEBUG
+	#ifdef _DEBUG
 		cout << text << endl;
-//	#endif
+	#endif
 }
 void Logger::writeExec (string text){
 	string localTime = getTime();
@@ -96,7 +96,9 @@ void Logger::writeExec (string text){
 void Logger::writeError (string text){
 	string localTime = getTime();
 	outstreamError << localTime<< " # " << text << endl;
-	cout << text << endl;
+	#ifdef _DEBUG
+		cout << text << endl;
+	#endif
 }
 
 string Logger::getTime() const{

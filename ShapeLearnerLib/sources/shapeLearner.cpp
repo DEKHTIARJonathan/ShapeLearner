@@ -44,6 +44,17 @@ void ShapeLearner::createShockGraph (const vector<const img2Parse> &imgVect) thr
 	Pool.wait();
 }
 
+void ShapeLearner::createShockGraph (const img2Parse &imgVect) throw(StandardExcept){
+	//Random Init
+	std::srand(std::time(0));
+	Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, imgVect));
+}
+
+void ShapeLearner:: waitForComputation () throw(StandardExcept){
+	//  Wait until all tasks are finished
+	Pool.wait();
+}
+
 bool ShapeLearner::createShockGraphWorker (const img2Parse& imgInfo) throw(StandardExcept){
 	shockGraphsGenerator worker(imgInfo.filepath, imgInfo.objClass);
 	worker.taskExecute();

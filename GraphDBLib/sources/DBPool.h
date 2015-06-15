@@ -68,7 +68,7 @@ namespace graphDBLib {
 		const string dbPass;
 		const string dbName;
 		const string dbHost;
-		const unsigned int &dbPort;
+		const unsigned int dbPort;
 		static boost::mutex mtxPool;
 		static DBPool* _inst;
 
