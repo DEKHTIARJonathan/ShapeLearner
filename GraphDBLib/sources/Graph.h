@@ -156,7 +156,7 @@ namespace graphDBLib{
 	#pragma db member(Graph::XMLSignature) type("TEXT")
 	#pragma db index(Graph::"index_Graph_graphClass") method("BTREE") member(refGraphClass)
 	#pragma db index(Graph::"index_Graph_objectClass") method("BTREE") member(refObjectClass)
-	#pragma db index(Graph::"index_Graph_objectName") unique method("BTREE") member(objectName)
+	#pragma db index(Graph::"index_Graph_objectName") method("BTREE") member(objectName)
 
 	#pragma db view object(Graph) query("\"refGraphClass\" = ")
 	struct GraphIdViewByGraphClass

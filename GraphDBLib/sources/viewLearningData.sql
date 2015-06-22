@@ -1,7 +1,9 @@
-﻿/* This view is used to perform the Machine Learning approach.
+/* This view is used to perform the Machine Learning approach.
  * Created by Jonathan DEKHTIAR
  */
 
+DROP VIEW IF EXISTS "learning_data";
+ 
 CREATE VIEW "learning_data" AS
   SELECT
 	g."idGraph",
@@ -74,3 +76,6 @@ LEFT JOIN
 ON g."idGraph" = p."refGraph"
 
 ORDER BY "idGraph";
+
+/* ################################################## */
+

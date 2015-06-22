@@ -19,8 +19,15 @@ call:insertPrecompiledHeaders ObjectClass-odb.cxx
 call:insertPrecompiledHeaders Point-odb.cxx
 
 
-del "../../ShapeLearnerUser/sources/structure.sql"
-copy /b GraphClass.sql+ObjectClass.sql+Graph.sql+Node.sql+Edge.sql+Point.sql+functions.sql+viewLearningData.sql "../../ShapeLearnerUser/sources/structure.sql"
+
+IF EXIST "..\..\ShapeLearnerUser\sources\structure.sql" (
+	del "..\..\ShapeLearnerUser\sources\structure.sql"
+)
+copy GraphClass.sql /b + ObjectClass.sql /b + Graph.sql /b + Node.sql /b + Edge.sql /b + Point.sql /b + functions.sql /b + viewLearningData.sql /b + foreignTables.sql /b "..\..\ShapeLearnerUser\sources\structure.sql" /b
+
+
+copy "..\..\ShapeLearnerUser\sources\structure.sql" "..\..\ShapeLearnerDLL\Server\Release\structure.sql"
+copy "..\..\ShapeLearnerUser\sources\structure.sql" "..\..\ShapeLearnerDLL\Server\Debug\structure.sql"
 
 set /p DUMMY=Hit ENTER to continue...
 

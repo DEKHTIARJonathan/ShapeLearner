@@ -27,7 +27,7 @@ CREATE INDEX "index_Graph_graphClass"
 CREATE INDEX "index_Graph_objectClass"
   ON "Graph" USING BTREE ("refObjectClass");
 
-CREATE UNIQUE INDEX "index_Graph_objectName"
+CREATE INDEX "index_Graph_objectName"
   ON "Graph" USING BTREE ("objectName");
 
 ALTER TABLE "Graph"
