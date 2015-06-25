@@ -42,6 +42,8 @@ namespace graphDBLib {
 		class accessor{
 			friend DatabaseManager;
 			static DBPool* getPool(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort, const string& dbInit = "");
+			static DBPool* getPool();
+			static bool delPool() throw(StandardExcept);
 		};
 
 	/*!
@@ -52,6 +54,8 @@ namespace graphDBLib {
 
 	bool reconnect() throw(StandardExcept);
 
+	bool threadDisconnect() throw(StandardExcept);
+
 	/*!
 	*	\fn static bool query(const string& query) throw(StandardExcept);
 	*	\brief Static Method executing a query given in argument.
@@ -59,8 +63,6 @@ namespace graphDBLib {
 	*	\param query : The query we want to execute.
 	*/
 	bool query(const string& query) throw(StandardExcept);
-
-	bool closeConnections() {return true;}
 
 	private:
 		AppTracer appliTracer;
@@ -117,7 +119,7 @@ namespace graphDBLib {
 		DBPool& operator=(const DBPool&);
 
 		/*!
-		*	\fn ~DBConneDBPoolction();
+		*	\fn ~DBPool();
 		*	\brief Private Destructor, forbid destruction.
 		*/
 		~DBPool();

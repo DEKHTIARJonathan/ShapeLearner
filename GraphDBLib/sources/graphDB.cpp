@@ -45,17 +45,34 @@ boost::mutex									GraphDB::mtxGraphClass;
 *                           USER INTERFACE                           *
 ******************************************************************* */
 
-void GraphDB::closeDatabase() throw(StandardExcept) {
+bool GraphDB::closeDatabase() throw(StandardExcept) {
 	if (!DatabaseManager::Interface::isDbOpen()){
 		Logger::Log((string)__FUNCTION__ + "\nError : The database is not opened yet. Impossible to close it.", constants::LogError);
 	}
 	else{
 		try{
-			DatabaseManager::Interface::closeDatabase();
+			return DatabaseManager::Interface::closeDatabase();
 		}
 		catch (const std::exception& e)
 		{
 			Logger::Log(e.what (), constants::LogError);
+			return false;
+		}
+	}
+}
+
+bool GraphDB::closeThreadConnection() throw(StandardExcept) {
+	if (!DatabaseManager::Interface::isDbOpen()){
+		Logger::Log((string)__FUNCTION__ + "\nError : The database is not opened yet. Impossible to close it.", constants::LogError);
+	}
+	else{
+		try{
+			return DatabaseManager::Interface::closeThreadConnection();
+		}
+		catch (const std::exception& e)
+		{
+			Logger::Log(e.what (), constants::LogError);
+			return false;
 		}
 	}
 }

@@ -63,13 +63,15 @@ namespace graphDBLib{
 			*	\param _dbPort : The DB's server's listening port.
 			*	\param _dbInit : A relative path to the DB Init File, this field is not necessary. If empty => DB not initialized and assume it has been already created.
 			*/
-			static void openDatabase(const string& _dbUser, const string& _dbPass, const string& _dbName, const string& _dbHost, const unsigned int& _dbPort, const string& _dbInit = "") throw(StandardExcept);
+			static void openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int& dbPort, const string& dbInit = "") throw(StandardExcept);
 
 			/*!
 			*	\fn static void closeDatabase() throw(StandardExcept);
 			*	\brief Close the connection to the PostgreSQL database.
 			*/
-			static void closeDatabase() throw(StandardExcept);
+			static bool closeDatabase() throw(StandardExcept);
+
+			static bool closeThreadConnection() throw(StandardExcept);
 
 			/*!
 			*	\class GraphDB::CommonInterface

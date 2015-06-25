@@ -78,7 +78,9 @@ namespace graphDBLib {
 			*	\fn static void closeDatabase() throw(StandardExcept);
 			*	\brief Close the connection to the PostgreSQL database.
 			*/
-			static void closeDatabase() throw(StandardExcept);
+			static bool closeDatabase() throw(StandardExcept);
+
+			static bool closeThreadConnection() throw(StandardExcept);
 
 			/*!
 			*	\class GraphDB::ObjectInterface

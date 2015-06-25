@@ -80,7 +80,9 @@ namespace graphDBLib {
 					*	\fn static void	closeDatabase() throw(StandardExcept);
 					*	\brief Static Method closing the connection to the DB and deleting the pointer to the DB.
 					*/
-					static void	closeDatabase() throw(StandardExcept);
+					static bool	closeDatabase() throw(StandardExcept);
+
+					static bool closeThreadConnection() throw(StandardExcept);
 
 					/*!
 					*	\fn static bool isDbOpen();

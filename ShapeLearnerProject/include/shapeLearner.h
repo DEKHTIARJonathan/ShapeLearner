@@ -47,7 +47,7 @@ class StandardExcept; //Forward Declaration of the class contained in StandardEx
 class ShapeLearner
 {
 	public:
-
+		static unsigned int getActiveThread () throw(StandardExcept);
 		static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
 		static void createShockGraph (const img2Parse &imgVect) throw(StandardExcept);
 		static void waitForComputation () throw(StandardExcept);

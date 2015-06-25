@@ -63,13 +63,29 @@ void DatabaseManager::Interface::openDatabase(const string &dbUser, const string
 		throw StandardExcept((string)__FUNCTION__, "Database already opened");
 }
 
-void DatabaseManager::Interface::closeDatabase() throw(StandardExcept){
+bool DatabaseManager::Interface::closeDatabase() throw(StandardExcept){
 	Logger::Log("Closing Connection to the Database.", constants::LogDB);
 	if( dbPool != NULL ){
-		int a = 1;
+		try{
+			DBPool::accessor::delPool();
+			return true;
+		}
+		catch (const std::exception& e)
+		{
+			Logger::Log("Database is not opened: " + string(e.what()), constants::LogError);
+			return false;
+		}
 	}
 	else
 		throw StandardExcept((string)__FUNCTION__, "Database already closed");
+}
+
+bool DatabaseManager::Interface::closeThreadConnection() throw(StandardExcept){
+	if( dbPool != NULL ){
+		return dbPool->threadDisconnect();
+	}
+	else
+		throw StandardExcept((string)__FUNCTION__, "Database not opened");
 }
 
 bool DatabaseManager::Interface::isDbOpen() {

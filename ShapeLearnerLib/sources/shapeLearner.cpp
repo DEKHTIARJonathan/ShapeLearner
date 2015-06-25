@@ -44,6 +44,10 @@ void ShapeLearner::createShockGraph (const vector<const img2Parse> &imgVect) thr
 	Pool.wait();
 }
 
+unsigned int ShapeLearner::getActiveThread () throw(StandardExcept){
+	return Pool.active();
+}
+
 void ShapeLearner::createShockGraph (const img2Parse &imgVect) throw(StandardExcept){
 	//Random Init
 	std::srand(std::time(0));
@@ -58,6 +62,7 @@ void ShapeLearner:: waitForComputation () throw(StandardExcept){
 bool ShapeLearner::createShockGraphWorker (const img2Parse& imgInfo) throw(StandardExcept){
 	shockGraphsGenerator worker(imgInfo.filepath, imgInfo.objClass);
 	worker.taskExecute();
+	graphDBLib::GraphDB::closeThreadConnection();
 	return true;
 }
 

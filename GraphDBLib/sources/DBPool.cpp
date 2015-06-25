@@ -42,6 +42,29 @@ DBPool* DBPool::accessor::getPool(const string &dbUser, const string &dbPass, co
 	}
 }
 
+DBPool* DBPool::accessor::getPool(){
+	_Lock_Pool_
+	if (_inst != NULL){
+		_Unlock_Pool_
+		return _inst;
+	}
+	else{
+		throw StandardExcept((string)__FUNCTION__,"Connection Parameters not given.");
+		return NULL;
+	}
+}
+
+bool DBPool::accessor::delPool(){
+	if (_inst != NULL){
+		delete _inst;
+		_inst = NULL;
+		return true;
+	}else{
+		throw StandardExcept((string)__FUNCTION__, "Database already closed");
+		return false;
+	}
+}
+
 DBPool::DBPool(const string &_dbUser, const string &_dbPass, const string &_dbName, const string &_dbHost, const unsigned int &_dbPort) :
 dbUser(_dbUser),
 dbPass(_dbPass),
@@ -125,6 +148,31 @@ odb::pgsql::database* DBPool::connect() throw(StandardExcept){
 		}
 }
 
+bool DBPool::threadDisconnect() throw(StandardExcept){
+	_Lock_Pool_
+		if (_inst == NULL){
+			_Unlock_Pool_
+			throw StandardExcept((string)__FUNCTION__, "Connection not initiated");
+		}
+		else{
+			unsigned long idThread = getThreadId();
+			Logger::Log("Closing Connection to the Database for the thread : " + to_string((_ULonglong)idThread), constants::LogDB);
+			bool rslt;
+
+			map<unsigned long, odb::pgsql::database*>::iterator it = connectionMAP.find(idThread);
+			if (it != connectionMAP.end()){
+				odb::pgsql::database* db = it->second;
+				delete db;
+				connectionMAP.erase(it);
+				rslt = true;
+			}
+			else
+				rslt = false;
+			_Unlock_Pool_
+			return rslt;
+		}
+}
+
 bool DBPool::reconnect() throw(StandardExcept){
 	_Lock_Pool_
 		if (_inst == NULL){
@@ -182,4 +230,15 @@ const unsigned long DBPool::getThreadId(){
     unsigned long threadNumber = 0;
     sscanf(threadId.c_str(), "%lx", &threadNumber);
     return threadNumber;
+}
+
+DBPool::~DBPool(){
+	for (map<unsigned long, odb::pgsql::database*>::iterator it = connectionMAP.begin(); it != connectionMAP.end();){
+		_Lock_Pool_
+			odb::pgsql::database* db = it->second;
+			db->connection().release();
+			delete db;
+			connectionMAP.erase(it);
+		_Unlock_Pool_
+	}
 }

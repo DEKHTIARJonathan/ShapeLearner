@@ -34,6 +34,17 @@ __declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass)
 	}
 }
 
+__declspec(dllexport) unsigned int getActiveThread()
+{
+	try {
+		return ShapeLearner::getActiveThread();
+	}
+	catch (const std::exception& e)
+	{
+		Logger::Log(e.what (), constants::LogError);
+	}
+}
+
 __declspec(dllexport) void waitBeforeClosing()
 {
 	try {

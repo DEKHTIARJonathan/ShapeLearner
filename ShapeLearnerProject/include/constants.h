@@ -64,7 +64,7 @@ namespace constants{
 	#ifdef _DEBUG
 		const int		nbMaxThread = 80;
 	#else
-		const int		nbMaxThread = 80;
+		const int		nbMaxThread = 200;
 	#endif
 }
 
