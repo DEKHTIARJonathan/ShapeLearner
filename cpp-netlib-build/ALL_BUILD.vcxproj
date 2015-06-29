@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{5B75AF52-3EE4-45DA-B824-75B06676AF31}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OpenSSL-Win32\include;C:\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OpenSSL-Win32\include;C:\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OpenSSL-Win32\include;C:\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OpenSSL-Win32\include;C:\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\cpp-netlib\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/dekhtiar/Downloads/cpp-netlib -BC:/Users/dekhtiar/Downloads/cpp-netlib-build --check-stamp-file C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCCompiler.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindBoost.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindOpenSSL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\SelectLibraryConfigurations.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindThreads.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckIncludeFiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckLibraryExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckSymbolExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfigVersion.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/dekhtiar/Downloads/cpp-netlib -BC:/Users/dekhtiar/Downloads/cpp-netlib-build --check-stamp-file C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCCompiler.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindBoost.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindOpenSSL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\SelectLibraryConfigurations.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindThreads.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckIncludeFiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckLibraryExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckSymbolExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfigVersion.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/dekhtiar/Downloads/cpp-netlib -BC:/Users/dekhtiar/Downloads/cpp-netlib-build --check-stamp-file C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCCompiler.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindBoost.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindOpenSSL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\SelectLibraryConfigurations.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindThreads.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckIncludeFiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckLibraryExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckSymbolExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfigVersion.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/dekhtiar/Downloads/cpp-netlib -BC:/Users/dekhtiar/Downloads/cpp-netlib-build --check-stamp-file C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/dekhtiar/Downloads/cpp-netlib/CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCCompiler.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\3.2.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\GNUInstallDirs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindBoost.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindOpenSSL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\SelectLibraryConfigurations.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindThreads.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckIncludeFiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckLibraryExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CheckSymbolExists.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.2\Modules\CMakeParseArguments.cmake;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfig.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\cppnetlibConfigVersion.cmake.in;C:\Users\dekhtiar\Downloads\cpp-netlib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\dekhtiar\Downloads\cpp-netlib-build\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/ZERO_CHECK.vcxproj">
+      <Project>29787EC6-83A6-49E3-8664-B86AC69EEAF5</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/atom_reader.vcxproj">
+      <Project>A7335C38-E164-43F2-BEE8-8C6993E5495D</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-client_constructor_test.vcxproj">
+      <Project>C6A93A60-629C-4BF0-B5D3-912B066606B0</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-client_get_different_port_test.vcxproj">
+      <Project>8364B92B-B987-41CB-9E67-482AE2A1C2AD</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-client_get_streaming_test.vcxproj">
+      <Project>C68389BE-B841-4BDA-B5FE-927953C52F5E</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-client_get_test.vcxproj">
+      <Project>181E88E9-876B-4678-8F72-046B3D2BD777</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-client_get_timeout_test.vcxproj">
+      <Project>F3F7BCEA-1D74-4D74-B45D-E609ADC57F66</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-request_incremental_parser_test.vcxproj">
+      <Project>EDB0696C-EADA-43BB-AC5A-0E5C608093DA</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-request_linearize_test.vcxproj">
+      <Project>320952F1-92B6-4A2D-BB3A-F59BA8DD93F1</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-response_incremental_parser_test.vcxproj">
+      <Project>5DD53A9A-0EB8-40B4-A79E-56C47D24B1C5</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-server_async_run_stop_concurrency.vcxproj">
+      <Project>DE32A3DE-A85C-45E6-A9ED-D19329891CEC</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-server_constructor_test.vcxproj">
+      <Project>B50B6781-2E27-4298-AFA2-88BD1164185A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/http/cpp-netlib-http-server_header_parser_test.vcxproj">
+      <Project>212975A8-3541-4517-95EC-C20E1A61D62B</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/cpp-netlib-message_test.vcxproj">
+      <Project>21269B1E-3B4E-41C1-A672-0085DB553BAF</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/cpp-netlib-message_transform_test.vcxproj">
+      <Project>6C2EEF82-C7FA-4209-AD34-2DDDF35357E3</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/uri/cpp-netlib-relative_uri_test.vcxproj">
+      <Project>C4A2CDA8-0DE6-4F1A-AA49-C2EE68B37877</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/uri/cpp-netlib-uri_builder_stream_test.vcxproj">
+      <Project>F0230DEF-3D16-4BA8-9DF2-E6D5600557A4</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/uri/cpp-netlib-uri_builder_test.vcxproj">
+      <Project>A3A14151-2D7F-4A71-BAE0-44F0C75A34CE</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/uri/cpp-netlib-uri_encoding_test.vcxproj">
+      <Project>FD7F0625-0F7F-42A4-8FFF-08FBF9F16DE9</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/uri/cpp-netlib-uri_test.vcxproj">
+      <Project>A5A366D0-A11F-4970-94DF-CEBB0FFEAF04</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/test/cpp-netlib-utils_thread_pool.vcxproj">
+      <Project>E9F2C0E2-910C-458F-AB7B-139B64DD84D7</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/src/cppnetlib-client-connections.vcxproj">
+      <Project>F2F8B8DC-45E6-4E0E-A9A3-6A9AB6A893D3</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/src/cppnetlib-server-parsers.vcxproj">
+      <Project>205A4AB9-445F-4D51-844A-36F8A660338C</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/src/cppnetlib-uri.vcxproj">
+      <Project>4A860585-9568-422B-A44F-7D05436CB2BC</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/hello_world_async_server_with_work_queue.vcxproj">
+      <Project>F4041C2D-FB39-4329-9DC8-ED25C758B749</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/hello_world_client.vcxproj">
+      <Project>0BB5E551-459A-4A93-8CFB-33BCAF79F217</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/hello_world_server.vcxproj">
+      <Project>12BC3A86-7393-4E68-A7A8-6317FE1F9CFD</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/http_client.vcxproj">
+      <Project>DAA9C631-DF65-4F5D-B798-FFABB890AAA6</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/rss_reader.vcxproj">
+      <Project>7EAE0A2D-42D8-48BE-AE22-A8261E8ADA88</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/simple_wget.vcxproj">
+      <Project>0CA964AC-85D2-4D57-91A7-167302BA3855</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/trivial_google.vcxproj">
+      <Project>83613AED-D247-4012-9FCC-73E478F3A92A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/dekhtiar/Downloads/cpp-netlib-build/libs/network/example/twitter_search.vcxproj">
+      <Project>52A7424C-5A83-4248-AC6D-8B0704216794</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

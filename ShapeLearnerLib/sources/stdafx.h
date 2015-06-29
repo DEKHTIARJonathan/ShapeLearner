@@ -84,6 +84,7 @@
 #include <boost/smart_ptr.hpp>
 #include <boost/threadpool.hpp>
 #include <boost/thread.hpp>
+#include <boost/network/include/http/client.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -98,6 +99,7 @@
 #include <tools/connected.h>
 #include <CImg/CImg.h>
 #include <FHImgSegment/segment-graph.h>
+#include "rapidjson/document.h"
 
 // DAG Matcher Lib
 #include <BasicTypedefs.h>

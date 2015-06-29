@@ -310,9 +310,41 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 		Logger::Log("ERROR: Can't read dag.", constants::LogCore);
 }
 
+void shockGraphsGenerator::updateTaskServer(unsigned int serverPort, unsigned long jobID){
+	using namespace boost::network;
+
+    std::string url("http://127.0.0.1:"+ to_string((_ULonglong) serverPort) + "/updateTask");
+	std::map<std::string,std::string> resultat;
+	resultat["glossary"] = "test";
+	resultat["name"] = "testing";
+	std::string str_rslt = serializeMap(resultat);
+	std::string json_body(str_rslt);
+	cout << endl << endl << str_rslt << endl << endl;
+    std::string json_content_type("application/json");
+
+    http::client client;
+    http::client::request request(url);
+    request << header("Connection", "close");
+    http::client::response response = client.post(request, json_body, json_content_type);
+    std::cout << body(response) << std::endl;
+}
+
+string shockGraphsGenerator::serializeMap(const map<string,string>& val){
+	string rslt = "";
+	for(map<string,string>::const_iterator it = val.begin(); it != val.end(); it++){
+		if (rslt == "")
+			rslt.append("{");
+		else
+			rslt.append(",");
+		rslt.append("\"" + it->first + "\":\"" + it->second + "\"");
+	}
+	rslt.append("}");
+	return rslt;
+}
+
 void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 	try{
-	
+		updateTaskServer(8888,1111);
 		/* ===================== GRAPH SAVING ====================== */
 
 		boost::weak_ptr<graphDBLib::Graph> graphPtr = graphDBLib::GraphDB::CommonInterface::getGraph( \
@@ -405,7 +437,7 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 
 			EdgePtr.lock()->resynchronize();
 		}
-
+		updateTaskServer(8888,1111);
 		//graphDBLib::GraphDB::CommonInterface::delObj(graphPtr, false);
 	}
 	catch(std::exception e){
