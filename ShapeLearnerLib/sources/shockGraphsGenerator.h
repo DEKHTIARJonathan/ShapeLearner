@@ -54,12 +54,14 @@ public:
 
 	DAGMatcher::MatchParams m_matchParams;
 
-	shockGraphsGenerator(const string& _filepath, const string& _objClass);
+	shockGraphsGenerator(const string& _filepath, const string& _objClass, const unsigned int& _jobID);
 	bool taskExecute();
 
 private:
 	const string filepath;
 	const string objClass;
+	const unsigned int jobID;
+
 	ShapeMatchingParams m_matchInfo;
 	ShapeRepresentationParams m_shapeInfo;
 
@@ -93,9 +95,6 @@ private:
 	void saveInDB(const BoneGraph& graph);
 	void saveInDB(const GestureGraph& graph);
 
-	string serializeMap(const map<string,string>& val);
-
-	void updateTaskServer(unsigned int serverPort, unsigned long jobID);
 	dml::NODE_ROLE NodeRoleConverter2DML(graphDBLib::NODE_ROLE tmp) const;
 	graphDBLib::NODE_ROLE NodeRoleConverter2GraphDBLib(dml::NODE_ROLE tmp) const;
 

@@ -79,12 +79,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="sources\allHeaders.h" />
+    <ClInclude Include="sources\jobManager.h" />
     <ClInclude Include="sources\ShapeLearner.h" />
     <ClInclude Include="sources\infoStructures.h" />
     <ClInclude Include="sources\shockGraphsGenerator.h" />
     <ClInclude Include="sources\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\jobManager.cpp" />
     <ClCompile Include="sources\ShapeLearner.cpp" />
     <ClCompile Include="sources\shockGraphsGenerator.cpp" />
     <ClCompile Include="sources\stdafx.cpp">

@@ -52,10 +52,15 @@ void DatabaseManager::capitalize(string& str)
  ********************************************************************/
 
 DBPool* DatabaseManager::dbPool (NULL);
+string DatabaseManager::dbServerIP = "";
+string DatabaseManager::dbServerPort = "";
 
 void DatabaseManager::Interface::openDatabase(const string &dbUser, const string &dbPass, const string &dbName, const string &dbHost, const unsigned int &dbPort, const string& dbInit) throw(StandardExcept){
 	if( dbPool == NULL ){
 		Logger::Log("Opening Connection to the Database.", constants::LogDB);
+
+		dbServerIP = dbHost;
+		dbServerPort = to_string((_ULonglong)dbPort);
 
 		dbPool = DBPool::accessor::getPool(dbUser, dbPass, dbName, dbHost, dbPort, dbInit);
 	}
@@ -93,6 +98,10 @@ bool DatabaseManager::Interface::isDbOpen() {
 		return false;
 	else
 		return true;
+}
+
+pair<string,string> DatabaseManager::Interface::getServerInfos() throw(StandardExcept){
+	return std::make_pair<string,string>(dbServerIP, dbServerPort);
 }
 
 unsigned long DatabaseManager::Interface::getPointCountInNode (const unsigned long idNode) throw (StandardExcept){

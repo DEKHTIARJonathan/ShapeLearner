@@ -33,7 +33,8 @@ using namespace std;
 struct img2Parse{
 	const string filepath;
 	const string objClass;
-	img2Parse(const string _filepath, const string _objClass);
+	const unsigned int jobID;
+	img2Parse(const string _filepath, const string _objClass, const unsigned int _jobID);
 };
 
 class StandardExcept; //Forward Declaration of the class contained in StandardException.h

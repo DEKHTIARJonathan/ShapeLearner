@@ -3,6 +3,7 @@
 #include "graphDB.h"
 #include "StandardException.h"
 #include "ShapeLearner.h"
+#include "jobManager.h"
 #include "DAGMatcherLib.h"
 #include "CLogger.h"
 
@@ -21,12 +22,13 @@ __declspec(dllexport) void openDataBase(char* _dbUser, char* _dbPass, char* _dbN
 	if (_dbInit != "") {
 		dml::DAGMatcherLib::InitDAGMatcherLib();
 	}
+	JobManager::initJobManager();
 }
 
-__declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass)
+__declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass, unsigned int _jobID)
 {
 	try {
-		ShapeLearner::createShockGraph(img2Parse(_imgPath, _imgClass));
+		ShapeLearner::createShockGraph(img2Parse(_imgPath, _imgClass, _jobID));
 	}
 	catch (const std::exception& e)
 	{

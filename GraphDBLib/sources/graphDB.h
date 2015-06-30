@@ -82,6 +82,8 @@ namespace graphDBLib {
 
 			static bool closeThreadConnection() throw(StandardExcept);
 
+			static pair<string,string> getServerInfos() throw(StandardExcept);
+
 			/*!
 			*	\class GraphDB::ObjectInterface
 			*	\brief Static subclass, communication interface for all the DBObjects.

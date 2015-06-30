@@ -19,7 +19,7 @@
 
 #ifndef _ALL_HEADERS_SHAPE_LEARNER_
 #define _ALL_HEADERS_SHAPE_LEARNER_
- 
+
 #ifdef _MSC_VER
 	#pragma message("Compiling ShapeLearnerLib::allHeaders.h  - this should happen just once per project.\n")
 	#pragma warning(disable : 4290)
@@ -27,10 +27,11 @@
 	#pragma warning(disable : 4068)
 
 	#include "stdafx.h"
-	
+
 	// Software's Core Files
 	#include "ShapeLearner.h"
 	#include "shockGraphsGenerator.h"
+	#include "jobManager.h"
 #endif //_MSC_VER
 
 #endif //_ALL_HEADERS_SHAPE_LEARNER_

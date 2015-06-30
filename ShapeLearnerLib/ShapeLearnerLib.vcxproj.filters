@@ -22,6 +22,9 @@
     <Filter Include="ShapeLearner\SQL">
       <UniqueIdentifier>{e6f84afb-c20c-42ea-8d9b-730bda341bcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JobManager">
+      <UniqueIdentifier>{84ad23af-a895-464d-9e8e-18f6ff048018}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\infoStructures.h">
@@ -39,6 +42,9 @@
     <ClInclude Include="sources\ShapeLearner.h">
       <Filter>ShapeLearner</Filter>
     </ClInclude>
+    <ClInclude Include="sources\jobManager.h">
+      <Filter>JobManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\stdafx.cpp">
@@ -49,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="sources\ShapeLearner.cpp">
       <Filter>ShapeLearner</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\jobManager.cpp">
+      <Filter>JobManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

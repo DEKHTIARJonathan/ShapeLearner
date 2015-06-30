@@ -35,7 +35,8 @@ class StandardExcept; //Forward Declaration of the class contained in StandardEx
 struct img2Parse{
 	const string filepath;
 	const string objClass;
-	img2Parse(const string _filepath, const string _objClass);
+	const unsigned int jobID;
+	img2Parse(const string _filepath, const string _objClass, const unsigned int _jobID);
 };
 
 /*!
@@ -49,7 +50,7 @@ class ShapeLearner
 	public:
 
 		static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
-		static void createShockGraph (const img2Parse &imgVect) throw(StandardExcept);
+		static void createShockGraph (const img2Parse &img) throw(StandardExcept);
 		static void waitForComputation () throw(StandardExcept);
 		static unsigned int getActiveThread () throw(StandardExcept);
 

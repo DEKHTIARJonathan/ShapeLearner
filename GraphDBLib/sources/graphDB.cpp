@@ -91,6 +91,10 @@ void GraphDB::openDatabase(const string& _dbUser, const string& _dbPass, const s
 	}
 }
 
+pair<string,string> GraphDB::getServerInfos() throw(StandardExcept){
+	return DatabaseManager::Interface::getServerInfos();
+}
+
 /* *******************************************************************
 *                          COMMON INTERFACE                          *
  ********************************************************************/

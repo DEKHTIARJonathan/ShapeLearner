@@ -84,6 +84,8 @@ namespace graphDBLib {
 
 					static bool closeThreadConnection() throw(StandardExcept);
 
+					static pair<string,string> getServerInfos() throw(StandardExcept);
+
 					/*!
 					*	\fn static bool isDbOpen();
 					*	\brief Static Method returning true if the DatabaseConnection is opened and false if it's not.
@@ -428,6 +430,9 @@ namespace graphDBLib {
 			};
 
 		private:
+
+			static string dbServerIP;
+			static string dbServerPort;
 
 			/* ****************** Attributs ********************/
 			/*!
