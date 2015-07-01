@@ -270,7 +270,7 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 		{
 			ShockGraph* pSG = new ShockGraph;
 			pDag = pSG;
-			JobManager::Log(jobID,Ongoing,"26",StartGen, filepath);
+			JobManager::Log(jobID,Ongoing,0,StartGen, filepath);
 			bIsRead = pSG->Create(imgInfo, m_shapeInfo.sgparams, m_shapeInfo.skelparams);
 			saveInDB(*pSG);
 		}
@@ -312,13 +312,14 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 
 void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 	try{
-		JobManager::Log(jobID,Ongoing,"27",StartSaving, filepath);
+		JobManager::Log(jobID,Ongoing,0,StartSaving, filepath);
 		/* ===================== GRAPH SAVING ====================== */
 
 		boost::weak_ptr<graphDBLib::Graph> graphPtr = graphDBLib::GraphDB::CommonInterface::getGraph( \
 			graphDBLib::GraphDB::CommonInterface::getGraphClass((string)graph.ClassName()), \
 			graphDBLib::GraphDB::CommonInterface::getObjectClass(objClass), \
 			(string) graph.GetDAGLbl());
+		JobManager::Log(jobID,Ongoing,graphPtr.lock()->getKey(),StartSaving, filepath); // Update the job with the PartID.
 
 		graphPtr.lock()->setCumulativeMass(graph.GetCumulativeMass(), true);
 		graphPtr.lock()->setDAGCost(graph.GetDAGCost(), true);
@@ -405,7 +406,7 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 
 			EdgePtr.lock()->resynchronize();
 		}
-		JobManager::Log(558,Finished,"28",EndSaving, filepath);
+		JobManager::Log(jobID,Finished,graphPtr.lock()->getKey(),EndSaving, filepath);
 
 		//graphDBLib::GraphDB::CommonInterface::delObj(graphPtr, false);
 	}

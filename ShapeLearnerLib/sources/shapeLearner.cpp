@@ -39,7 +39,7 @@ void ShapeLearner::createShockGraph (const vector<const img2Parse> &imgVect) thr
 	// Create fifo thread pool container with two threads.
 	for (vector<const img2Parse>::const_iterator it = imgVect.begin(); it != imgVect.end(); it++){
 		Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, *it));
-		JobManager::Log(it->jobID,Waiting,"24",WaitingGen,it->filepath);
+		JobManager::Log(it->jobID,Waiting,0,WaitingGen,it->filepath);
 	}
 	//  Wait until all tasks are finished
 	Pool.wait();
@@ -52,7 +52,7 @@ unsigned int ShapeLearner::getActiveThread () throw(StandardExcept){
 void ShapeLearner::createShockGraph (const img2Parse &img) throw(StandardExcept){
 	//Random Init
 	std::srand(std::time(0));
-	JobManager::Log(img.jobID,Waiting,"25",WaitingGen, img.filepath);
+	JobManager::Log(img.jobID,Waiting,0,WaitingGen, img.filepath);
 	Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, img));
 }
 

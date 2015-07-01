@@ -62,7 +62,7 @@ public:
 	*	\param text : What do we want to log.
 	*	\param logFile : What log file do you aim ? See constants.h for values
 	*/
-	static bool Log (unsigned long jobID, JobStatus jobStatus, std::string partID, StepName stepName, std::string filepath,
+	static bool Log (unsigned long jobID, JobStatus jobStatus, unsigned long partID, StepName stepName, std::string filepath,
 								std::string jobServerIP = "http://127.0.0.1:", unsigned int jobServerPort = 8888);
 	static void initJobManager();
 private:

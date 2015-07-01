@@ -48,7 +48,7 @@ std::string JobStatus::getStatus(){
     }
 }
 
-bool JobManager::Log(unsigned long jobID, JobStatus jobStatus, std::string partID, StepName stepName, std::string filepath, std::string jobServerIP, unsigned int jobServerPort){
+bool JobManager::Log(unsigned long jobID, JobStatus jobStatus, unsigned long partID, StepName stepName, std::string filepath, std::string jobServerIP, unsigned int jobServerPort){
 	using namespace boost::network;
 
     std::string url(jobServerIP+ to_string((_ULonglong) jobServerPort) + "/updateJob");
@@ -56,7 +56,7 @@ bool JobManager::Log(unsigned long jobID, JobStatus jobStatus, std::string partI
 
 	resultat["jobID"] = to_string((_ULonglong)jobID);
 	resultat["jobStatus"] = jobStatus.getStatus();
-	resultat["partID"] = partID;
+	resultat["partID"] = to_string((_ULonglong)partID);
 	resultat["partName"] = filepath;
 	resultat["serverIP"] = dbServerIP;
 	resultat["serverPort"] = dbServerPort;
@@ -64,7 +64,6 @@ bool JobManager::Log(unsigned long jobID, JobStatus jobStatus, std::string partI
 
 	std::string str_rslt = serializeMap(resultat);
 	std::string json_body(str_rslt);
-	cout << endl << endl << str_rslt << endl << endl;
     std::string json_content_type("application/json");
 
 	std::string rslt;

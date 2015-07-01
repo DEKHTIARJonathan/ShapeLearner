@@ -25,6 +25,11 @@ __declspec(dllexport) void openDataBase(char* _dbUser, char* _dbPass, char* _dbN
 	JobManager::initJobManager();
 }
 
+__declspec(dllexport) void initMatcher()
+{
+	JobManager::initJobManager();
+}
+
 __declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass, unsigned int _jobID)
 {
 	try {
