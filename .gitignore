@@ -4,6 +4,11 @@
 *.o
 *.obj
 
+*.lib
+*.exp
+*.lastbuildstate
+*.dll
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -46,7 +51,4 @@
 *.eap
 *.xmi
 BDD/TestData2.sql
-*.lib
-*.exp
-*.lastbuildstate
-*.dll
+
