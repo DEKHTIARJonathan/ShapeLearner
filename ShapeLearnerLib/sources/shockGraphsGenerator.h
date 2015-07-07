@@ -21,7 +21,7 @@
 #define _Shock_Graphs_Generator_
 
 #ifdef _MSC_VER
-	#pragma message("Compiling ShapeLearnerLib::shockGraphGenerator.h  - this should happen just once per project.\n")
+	#pragma message("Compiling ShapeLearnerLib::shockGraphsGenerator.h  - this should happen just once per project.\n")
 #endif
 
 #include "stdafx.h"

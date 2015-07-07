@@ -48,7 +48,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\cpp-netlib;C:\boost_1_57_0;$(ProjectDir)..\threadpool;$(LEDAROOT)\incl;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\DagMatcherHeaders_For_External_LIBS_Only;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include\;$(ProjectDir)..\AFMMSkeleton\include\;$(ProjectDir)..\FluxSkeleton\include\;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\rapidjson-1.0.2\include;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\cpp-netlib;C:\boost_1_57_0;$(ProjectDir)..\threadpool;$(LEDAROOT)\incl;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\DagMatcherHeaders_For_External_LIBS_Only;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include\;$(ProjectDir)..\AFMMSkeleton\include\;$(ProjectDir)..\FluxSkeleton\include\;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\rapidjson-1.0.2\include;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalOptions>-Zm400   /MDd %(AdditionalOptions)</AdditionalOptions>
@@ -66,7 +66,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\dekhtiar\Desktop\Git Projects\ShapeLearner\cpp-netlib;C:\boost_1_57_0;$(ProjectDir)..\threadpool;$(LEDAROOT)\incl;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\DagMatcherHeaders_For_External_LIBS_Only;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include\;$(ProjectDir)..\AFMMSkeleton\include\;$(ProjectDir)..\FluxSkeleton\include\;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\rapidjson-1.0.2\include;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\cpp-netlib;C:\boost_1_57_0;$(ProjectDir)..\threadpool;$(LEDAROOT)\incl;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\DagMatcherHeaders_For_External_LIBS_Only;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include\;$(ProjectDir)..\AFMMSkeleton\include\;$(ProjectDir)..\FluxSkeleton\include\;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\rapidjson-1.0.2\include;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <AdditionalOptions>-Zm400  /MD %(AdditionalOptions)</AdditionalOptions>
@@ -83,12 +83,14 @@
     <ClInclude Include="sources\ShapeLearner.h" />
     <ClInclude Include="sources\infoStructures.h" />
     <ClInclude Include="sources\shockGraphsGenerator.h" />
+    <ClInclude Include="sources\shockGraphsReader.h" />
     <ClInclude Include="sources\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\jobManager.cpp" />
     <ClCompile Include="sources\ShapeLearner.cpp" />
     <ClCompile Include="sources\shockGraphsGenerator.cpp" />
+    <ClCompile Include="sources\shockGraphsReader.cpp" />
     <ClCompile Include="sources\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

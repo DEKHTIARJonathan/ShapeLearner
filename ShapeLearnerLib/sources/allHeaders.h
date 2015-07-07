@@ -31,6 +31,7 @@
 	// Software's Core Files
 	#include "ShapeLearner.h"
 	#include "shockGraphsGenerator.h"
+	#include "shockGraphsReader.h"
 	#include "jobManager.h"
 #endif //_MSC_VER
 

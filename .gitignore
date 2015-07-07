@@ -46,3 +46,7 @@
 *.eap
 *.xmi
 BDD/TestData2.sql
+*.lib
+*.exp
+*.lastbuildstate
+*.dll

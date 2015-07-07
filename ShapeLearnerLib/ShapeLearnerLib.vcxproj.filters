@@ -25,6 +25,9 @@
     <Filter Include="JobManager">
       <UniqueIdentifier>{84ad23af-a895-464d-9e8e-18f6ff048018}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShockGraphReader">
+      <UniqueIdentifier>{d8522e29-f1c0-4f03-86e9-3e3ebfe8298e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\infoStructures.h">
@@ -45,6 +48,9 @@
     <ClInclude Include="sources\jobManager.h">
       <Filter>JobManager</Filter>
     </ClInclude>
+    <ClInclude Include="sources\shockGraphsReader.h">
+      <Filter>ShockGraphReader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\stdafx.cpp">
@@ -58,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="sources\jobManager.cpp">
       <Filter>JobManager</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\shockGraphsReader.cpp">
+      <Filter>ShockGraphReader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
