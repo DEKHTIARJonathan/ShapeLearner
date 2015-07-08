@@ -54,3 +54,4 @@ BDD/TestData2.sql
 
 ShapeLearnerProject/SLE/
 *.ilk
+*.pyc

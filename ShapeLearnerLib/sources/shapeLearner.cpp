@@ -46,14 +46,8 @@ void ShapeLearner::createShockGraph (const vector<const img2Parse> &imgVect) thr
 }
 
 unsigned int ShapeLearner::getActiveThread () throw(StandardExcept){
-   _ASSERT(false) ;
-   return 1 ;
-   //return Pool.active();
+   return Pool.active();
 }
-//int ShapeLearner::hu()
-//{
-//   return 1 ; 
-//}
 
 void ShapeLearner::createShockGraph (const img2Parse &img) throw(StandardExcept){
    //Random Init
