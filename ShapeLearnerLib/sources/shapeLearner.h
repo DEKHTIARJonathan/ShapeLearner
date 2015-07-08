@@ -21,7 +21,7 @@
 #define _SHAPE_LEARNER_H_
 
 #ifdef _MSC_VER
-	#pragma message("Compiling ShapeLearnerLib::ShapeLearner.h  - this should happen just once per project.\n")
+   #pragma message("Compiling ShapeLearnerLib::ShapeLearner.h  - this should happen just once per project.\n")
 #endif
 
 #include "stdafx.h"
@@ -33,10 +33,10 @@ using namespace boost::threadpool;
 class StandardExcept; //Forward Declaration of the class contained in StandardException.h*
 
 struct img2Parse{
-	const string filepath;
-	const string objClass;
-	const unsigned int jobID;
-	img2Parse(const string _filepath, const string _objClass, const unsigned int _jobID);
+   const string filepath;
+   const string objClass;
+   const unsigned int jobID;
+   img2Parse(const string _filepath, const string _objClass, const unsigned int _jobID);
 };
 
 /*!
@@ -47,43 +47,43 @@ struct img2Parse{
 */
 class ShapeLearner
 {
-	public:
+   public:
+      //static int hu() ;
+      static unsigned int getActiveThread () throw(StandardExcept);
+      static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
+      static void createShockGraph (const img2Parse &img) throw(StandardExcept);
+      static void readShockGraph (const img2Parse &img)  throw(StandardExcept);
+      static void waitForComputation () throw(StandardExcept);
 
-		static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
-		static void createShockGraph (const img2Parse &img) throw(StandardExcept);
-		static void readShockGraph (const img2Parse &img)  throw(StandardExcept);
-		static void waitForComputation () throw(StandardExcept);
-		static unsigned int getActiveThread () throw(StandardExcept);
+   private:
 
-	private:
+      static boost::threadpool::pool	Pool;
 
-		static boost::threadpool::pool	Pool;
+      /* ************** Multi Threading Workers ***************/
 
-		/* ************** Multi Threading Workers ***************/
+      static bool createShockGraphWorker (const img2Parse& imgInfo) throw(StandardExcept);
 
-		static bool createShockGraphWorker (const img2Parse& imgInfo) throw(StandardExcept);
+      /* **************  No instanciation *********************/
 
-		/* **************  No instanciation *********************/
+      /*!
+      *	\brief Constructeur de le class ShapeLearner.  Il instancie également la classe DatabaseManager.
+      */
+      ShapeLearner() throw(StandardExcept);
 
-		/*!
-		*	\brief Constructeur de le class ShapeLearner.  Il instancie également la classe DatabaseManager.
-		*/
-		ShapeLearner() throw(StandardExcept);
+      /*!
+      *	\brief Constructeur de recopie => La recopie est interdite
+      */
+      ShapeLearner(const ShapeLearner&);
 
-		/*!
-		*	\brief Constructeur de recopie => La recopie est interdite
-		*/
-		ShapeLearner(const ShapeLearner&);
+      /*!
+      *	\brief Opérateur =  =>> La recopie est interdite
+      */
+      ShapeLearner& operator=(const ShapeLearner&);
 
-		/*!
-		*	\brief Opérateur =  =>> La recopie est interdite
-		*/
-		ShapeLearner& operator=(const ShapeLearner&);
-
-		/*!
-		*	\brief La destruction est interdite
-		*/
-		~ShapeLearner();
+      /*!
+      *	\brief La destruction est interdite
+      */
+      ~ShapeLearner();
 };
 
 #endif //_SHAPE_LEARNER_H_

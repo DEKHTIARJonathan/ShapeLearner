@@ -15,12 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\shapeLearnerDll.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="shapeLearnerDll.cpp">
+    <ClCompile Include="SLE.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

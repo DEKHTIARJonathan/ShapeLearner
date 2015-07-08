@@ -3,8 +3,7 @@
 
 # But not these files...
 !.gitignore
-!*.dll
-!*.exe
+#!*.lib
 
 # ...even if they are in subdirectories
 !*/

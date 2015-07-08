@@ -34,7 +34,7 @@ namespace graphDBLib{
 	/*!	
 	*	\class GraphDB
 	*	\brief Static class, the central point of the whole architecture. It redistributes actions to the different actors.
-	*	The different actors doesn't need to know about each others. That way, a new handler can be added without any change whatsoever.
+	*	The different actors don't need to know about each others. That way, a new handler can be added without any change whatsoever.
 	*	It implements different interfaces to input some actions. It allows to control the granularity access of "Who can access what".
 	*/
 	class GraphDB

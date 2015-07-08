@@ -18,14 +18,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="sources\CmdLine.cpp">
       <Filter>CommandLine</Filter>
     </ClCompile>
     <ClCompile Include="sources\CmdLineException.cpp">
       <Filter>CommandLine</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\mainDeprecated.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\main.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
