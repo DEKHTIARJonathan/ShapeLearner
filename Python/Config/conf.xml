@@ -1,6 +1,0 @@
-<config>
-
-	<DBserver serverName="jobDB" ip="54.77.188.25" port="11112" dbUser="postgres" dbPass="postgres" dbName="postgres"/>
-	<APIserver serverName="jobServer" local="false"  ip="127.0.0.1" port="8888"/>
-	
-</config>

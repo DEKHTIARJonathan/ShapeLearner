@@ -12,6 +12,7 @@
 //using namespace std;
 //using namespace boost::filesystem;
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -24,18 +25,18 @@ __declspec(dllexport) void openDataBase(char* _dbUser, char* _dbPass, char* _dbN
    if (_dbInit != "") {
       dml::DAGMatcherLib::InitDAGMatcherLib();
    }
-   //JobManager::initJobManager();
+   JobManager::initJobManager();
 }
 
-__declspec(dllexport) void initMatcher()
-{
-	JobManager::initJobManager();
-}
+//__declspec(dllexport) void initMatcher()
+//{
+//   JobManager::initJobManager();
+//}
 
 __declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass, unsigned int _jobID)
 {
    try {
-      ShapeLearner::createShockGraph(img2Parse(_imgPath, _imgClass, _jobID));
+      //ShapeLearner::createShockGraph(img2Parse(_imgPath, _imgClass, _jobID));
    }
    catch (const std::exception& e)
    {

@@ -48,6 +48,7 @@ struct img2Parse{
 class ShapeLearner
 {
    public:
+      //static int hu() ;
       static unsigned int getActiveThread () throw(StandardExcept);
       static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
       static void createShockGraph (const img2Parse &img) throw(StandardExcept);

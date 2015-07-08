@@ -54,7 +54,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNING;_DEBUG;_WINDOWS;_USRDLL;SHAPELEARNERDLL_EXPORTS;_CONSOLE;DLL_EXPORTS;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\ShapeLearnerLib\include;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\ShapeLearnerLib\include;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
@@ -79,7 +79,7 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutDir)..\Server\$(ConfigurationName)\ShapeLearnerDLL-d.dll" "$(ProjectDir)..\Launcher\ShockGraphAPI\dlls"</Command>
+      <Command>copy $(OutDir)\..\Server\$(ConfigurationName)\*.dll $(ProjectDir)..\ShapeLearnerUser\Debug</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,7 +91,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNING;NDEBUG;_WINDOWS;_USRDLL;SHAPELEARNERDLL_EXPORTS;_CONSOLE;DLL_EXPORTS;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\ShapeLearnerLib\include;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;$(ProjectDir)..\ShapeLearnerLib\include;$(ProjectDir)..\ODB\libodb-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;C:\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
@@ -111,14 +111,14 @@
       <OutputFile>$(OutDir)\..\Server\$(ConfigurationName)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutDir)..\Server\$(ConfigurationName)\ShapeLearnerDLL.dll" "$(ProjectDir)..\Launcher\ShockGraphAPI\dlls"</Command>
+      <Command>copy $(OutDir)\..\Server\$(ConfigurationName)\*.dll $(ProjectDir)..\ShapeLearnerUser\Release</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="shapeLearnerDll.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ShapeLearnerProject\include\shapeLearnerDll.h" />
+    <ClInclude Include="include\shapeLearnerDll.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

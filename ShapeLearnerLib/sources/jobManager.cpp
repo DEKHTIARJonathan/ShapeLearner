@@ -26,13 +26,13 @@ StepName::StepName(StepName_e _step): step(_step){}
 std::string StepName::getStep(){
 	switch (step)
     {
-		case WaitingGen:	return "WaitingGen";
-        case StartGen:		return "StartGen";
-        case StartSaving:	return "StartSaving";
-		case EndSaving:		return "EndSaving";
-		case ErrorGen:		return "ErrorGen";
-		case ErrorSaving:	return "ErrorSaving";
-        default:			return "";
+		case WaitingGen:   return "WaitingGen";
+        case StartGen:   return "StartGen";
+        case StartSaving: return "StartSaving";
+		case EndSaving: return "EndSaving";
+		case ErrorGen: return "ErrorGen";
+		case ErrorSaving: return "ErrorSaving";
+        default:      return "";
     }
 }
 
@@ -42,9 +42,9 @@ std::string JobStatus::getStatus(){
     {
         case Waiting:   return "Waiting";
         case Ongoing:   return "Ongoing";
-        case Error:		return "Error";
-		case Finished:	return "Finished";
-        default:		return "";
+        case Error: return "Error";
+		case Finished: return "Finished";
+        default:      return "";
     }
 }
 
