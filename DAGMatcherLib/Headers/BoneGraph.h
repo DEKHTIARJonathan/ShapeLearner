@@ -38,99 +38,100 @@
 
 namespace dml {
 /*!
-	\brief Represents a gesture graph consisting of <BGNode *>'s.
+   \brief Represents a gesture graph consisting of <BGNode *>'s.
 
-	\see DAG, DAGNode, BGNode.
+   \see DAG, DAGNode, BGNode.
 */
 class BoneGraph : public DAG
 {
 protected:
-	SkeletalGraph* m_pSkeleton;
+   SkeletalGraph* m_pSkeleton;
 
-	static DAGMatcher* s_pDAGMatcher; //!< Matching algorithm for bone graphs
-
-public:
-	// Member variables for displaying and debugging the representation
-	BezierSegmentArray m_skeletalGaps;
-	SmartArray<POINTS> m_boundaryGaps;
+   static DAGMatcher* s_pDAGMatcher; //!< Matching algorithm for bone graphs
 
 public:
-	BoneGraph();
-	~BoneGraph();
+   // Member variables for displaying and debugging the representation
+   BezierSegmentArray m_skeletalGaps;
+   SmartArray<POINTS> m_boundaryGaps;
 
-	bool Create(const ImageInfo& imgInfo, const BoneGraphParams& bgparams,
-		const SkeletalGraphParams& skelparams);
+public:
+   BoneGraph();
+   ~BoneGraph();
 
-	bool Create(SkeletalGraph* pSkeleton, const ShapeDims& dims, String strLbl,
-		const BoneGraphParams& bgparams);
+   bool Create(const ImageInfo& imgInfo, const BoneGraphParams& bgparams,
+      const SkeletalGraphParams& skelparams);
 
-	int GetSlopeDir(leda::node u, leda::node wrtV) const;
+   bool Create(SkeletalGraph* pSkeleton, const ShapeDims& dims, String strLbl,
+      const BoneGraphParams& bgparams);
 
-	// DAG virtual functions
-	virtual DAG& operator=(const DAG& rhs);
-	virtual BoneGraph& operator=(const BoneGraph& rhs);
+   int GetSlopeDir(leda::node u, leda::node wrtV) const;
 
-	virtual void Clear();
+   // DAG virtual functions
+   virtual DAG& operator=(const DAG& rhs);
+   virtual BoneGraph& operator=(const BoneGraph& rhs);
 
-	virtual void ComputeDerivedValues();
+   virtual void Clear();
 
-	virtual DAGEdgePtr ReadEdge(std::istream& is);
+   virtual void ComputeDerivedValues();
 
-	virtual double ComputeTSVs(leda::node root);
+   virtual DAGEdgePtr ReadEdge(std::istream& is);
 
-	// DAG pure virtual functions
-	virtual DAGMatcher* GetMatchingAlgorithm() const { return s_pDAGMatcher; }
+   virtual double ComputeTSVs(leda::node root);
 
-	virtual void SetMatchingAlgorithm();
-	virtual bool AreNodesRelated(leda_node g1Node, const DAG& g2, leda_node g2Node) const;
-	virtual DAG* CreateObject() const;
-	virtual DAGNodePtr CreateNodeObject(NODE_LABEL lbl) const;
-	virtual DAGNodePtr ReadNode(std::istream& is) const;
-	virtual String ClassName() const;
-	virtual int NodeType(leda_node v) const { return GetBGNode(v)->Type(); }
+   // DAG pure virtual functions
+   virtual DAGMatcher* GetMatchingAlgorithm() const { return s_pDAGMatcher; }
 
-	//! Returns the stroed skeletal graph or NULL if it does not exist
-	virtual const SkeletalGraph* GetSkeleton() const { return m_pSkeleton; }
+   virtual void SetMatchingAlgorithm();
+   virtual bool AreNodesRelated(leda_node g1Node, const DAG& g2, leda_node g2Node) const;
+   virtual DAG* CreateObject() const;
+   virtual DAGNodePtr CreateNodeObject(NODE_LABEL lbl) const;
+   virtual DAGNodePtr ReadNode(std::istream& is) const;
+   virtual String ClassName() const;
+   virtual int NodeType(leda_node v) const { return GetBGNode(v)->Type(); }
 
-	//! Releases the ownership of the stored skeletal graph (if it exists)
-	virtual SkeletalGraph* ReleaseSkeleton()
-	{
-		SkeletalGraph* pSkel = m_pSkeleton;
-		m_pSkeleton = NULL;
-		return pSkel;
-	}
+   //! Returns the stroed skeletal graph or NULL if it does not exist
+   virtual const SkeletalGraph* GetSkeleton() const { return m_pSkeleton; }
 
-	virtual std::istream& Read(std::istream& is, bool bOnlyDataForMatching = false);
-	virtual std::ostream& Write(std::ostream& os) const;
-	virtual void Print(std::ostream& os = std::cout, bool bXMLFormat = false) const;
+   //! Releases the ownership of the stored skeletal graph (if it exists)
+   virtual SkeletalGraph* ReleaseSkeleton()
+   {
+      SkeletalGraph* pSkel = m_pSkeleton;
+      m_pSkeleton = NULL;
+      return pSkel;
+   }
 
-	const BGNode* GetBGNode(leda::node v) const { return (const BGNode*)(const DAGNode*)GetNode(v); }
-	BGNode* UnsafeGetBGNode(leda::node v) { return (BGNode*)GetBGNode(v); }
+   virtual std::istream& Read(std::istream& is, bool bOnlyDataForMatching = false);
+   virtual std::ostream& Write(std::ostream& os) const;
+   virtual void Print(std::ostream& os = std::cout, bool bXMLFormat = false) const;
 
-	const BGEdge* GetBGEdge(leda::edge e) const { return (const BGEdge*)(const DAGEdge*)GetEdge(e); }
-	BGEdge* UnsafeGetBGEdge(leda::edge e) { return (BGEdge*)GetBGEdge(e); }
 
-	double GetInwardEdgeSaliency(leda::node v) const
-	{
-		leda::edge e;
-		double sal = 0;
+   const BGNode* GetBGNode(leda::node v) const { return (const BGNode*)(const DAGNode*)GetNode(v); }
+   BGNode* UnsafeGetBGNode(leda::node v) { return (BGNode*)GetBGNode(v); }
 
-		forall_in_edges(e, v)
-			sal += GetBGEdge(e)->Saliency();
+   const BGEdge* GetBGEdge(leda::edge e) const { return (const BGEdge*)(const DAGEdge*)GetEdge(e); }
+   BGEdge* UnsafeGetBGEdge(leda::edge e) { return (BGEdge*)GetBGEdge(e); }
 
-		return sal;
-	}
+   double GetInwardEdgeSaliency(leda::node v) const
+   {
+      leda::edge e;
+      double sal = 0;
 
-	double GetOutwardEdgeSaliency(leda::node v) const
-	{
-		leda::edge e;
-		double sal = 0;
+      forall_in_edges(e, v)
+         sal += GetBGEdge(e)->Saliency();
 
-		forall_out_edges(e, v)
-			sal += GetBGEdge(e)->Saliency();
+      return sal;
+   }
 
-		return sal;
-	}
+   double GetOutwardEdgeSaliency(leda::node v) const
+   {
+      leda::edge e;
+      double sal = 0;
+
+      forall_out_edges(e, v)
+         sal += GetBGEdge(e)->Saliency();
+
+      return sal;
+   }
 };
 } //namespace dml
 

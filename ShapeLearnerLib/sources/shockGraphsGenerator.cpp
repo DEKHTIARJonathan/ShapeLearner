@@ -246,7 +246,7 @@ bool shockGraphsGenerator::taskExecute()
 
 void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 {
-	DAGPtr pDag;
+	DAGPtr pDag;//ne semble jamais libéré ?
 	bool bIsRead;
 	const char* szFileExt;
 
@@ -308,6 +308,9 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 	}
 	else
 		Logger::Log("ERROR: Can't read dag.", constants::LogCore);
+
+
+   // pDag ne semble jamais libéré ?
 }
 
 void shockGraphsGenerator::saveInDB(const dml::ShockGraph& graph){
@@ -332,6 +335,7 @@ void shockGraphsGenerator::saveInDB(const dml::ShockGraph& graph){
 		std::stringstream testStream;
 		graph.Print(testStream, true);
 		graphPtr.lock()->setXMLSignature(testStream.str(), true);
+      
 
 		graphPtr.lock()->resynchronize();
 

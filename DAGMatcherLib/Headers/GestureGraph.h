@@ -44,54 +44,54 @@
 
 namespace dml {
 /*!
-	\brief Represents a gesture graph consisting of <GGNode *>'s.
+   \brief Represents a gesture graph consisting of <GGNode *>'s.
 
-	\see DAG, DAGNode, GGNode.
+   \see DAG, DAGNode, GGNode.
 */
 class GestureGraph : public DAG
 {
-	SmartArray<int> hierarchyLevels; 	 			//!< Vector of hierarchy levels for the vertices
-	SmartMatrix<int> hierarchicalMatrix; 			//!< Matrix of the hierarchy of the graph
-	SmartMatrix<GGRelation> relationMatrix;			//!< Matrix of the relations
-	int m_nRootNodeCount;			                //!< Number of roots in the graph
+   SmartArray<int> hierarchyLevels; 	 			//!< Vector of hierarchy levels for the vertices
+   SmartMatrix<int> hierarchicalMatrix; 			//!< Matrix of the hierarchy of the graph
+   SmartMatrix<GGRelation> relationMatrix;			//!< Matrix of the relations
+   int m_nRootNodeCount;			                //!< Number of roots in the graph
 
-	static DAGMatcher* s_pDAGMatcher;               //!< Matching algorithm for gesture graphs
+   static DAGMatcher* s_pDAGMatcher;               //!< Matching algorithm for gesture graphs
 
 public:
-	GestureGraph() { m_nRootNodeCount = 0; }
+   GestureGraph() { m_nRootNodeCount = 0; }
 
-	const GGRelation& GetRelation(int v1, int v2) const
-	{
-		return relationMatrix[v1 - 2][v2 - 1];
-	}
+   const GGRelation& GetRelation(int v1, int v2) const
+   {
+      return relationMatrix[v1 - 2][v2 - 1];
+   }
 
-	void BuildMatrices(Matrix& euclideanDistance, Matrix& bearing);
-	void BuildNodeHistograms(const Matrix& euclideanDistance, const Matrix& bearing);
-	bool Read(String strFileName);
+   void BuildMatrices(Matrix& euclideanDistance, Matrix& bearing);
+   void BuildNodeHistograms(const Matrix& euclideanDistance, const Matrix& bearing);
+   bool Read(String strFileName);
 
-	// DAG virtual functions
-	virtual DAG& operator=(const DAG& rhs);
-	virtual void Clear();
+   // DAG virtual functions
+   virtual DAG& operator=(const DAG& rhs);
+   virtual void Clear();
 
-	// DAG pure virtual functions
-	virtual DAGMatcher* GetMatchingAlgorithm() const { return s_pDAGMatcher; }
+   // DAG pure virtual functions
+   virtual DAGMatcher* GetMatchingAlgorithm() const { return s_pDAGMatcher; }
 
-	virtual void SetMatchingAlgorithm();
-	virtual bool AreNodesRelated(leda_node g1Node, const DAG& g2, leda_node g2Node) const;
-	virtual DAG* CreateObject() const;
-	virtual DAGNodePtr CreateNodeObject(NODE_LABEL lbl) const;
-	virtual DAGNodePtr ReadNode(std::istream& is) const;
-	virtual String ClassName() const;
-	virtual int NodeType(leda_node v) const { return 0; }
+   virtual void SetMatchingAlgorithm();
+   virtual bool AreNodesRelated(leda_node g1Node, const DAG& g2, leda_node g2Node) const;
+   virtual DAG* CreateObject() const;
+   virtual DAGNodePtr CreateNodeObject(NODE_LABEL lbl) const;
+   virtual DAGNodePtr ReadNode(std::istream& is) const;
+   virtual String ClassName() const;
+   virtual int NodeType(leda_node v) const { return 0; }
 
-	virtual const SkeletalGraph* GetSkeleton() const { return NULL; }
+   virtual const SkeletalGraph* GetSkeleton() const { return NULL; }
 
-	virtual std::istream& Read(std::istream& is, bool bOnlyDataForMatching = false);
-	virtual std::ostream& Write(std::ostream& os) const;
-	virtual void Print(std::ostream& os = std::cout, bool bXMLFormat = false) const;
+   virtual std::istream& Read(std::istream& is, bool bOnlyDataForMatching = false);
+   virtual std::ostream& Write(std::ostream& os) const;
+   virtual void Print(std::ostream& os = std::cout, bool bXMLFormat = false) const;
 
-	const GGNode* GetGGNode(leda_node v) const { return (const GGNode*)(const DAGNode*)GetNode(v); }
-	GGNode* UnsafeGetGGNode(leda_node v) { return (GGNode*)GetGGNode(v); }
+   const GGNode* GetGGNode(leda_node v) const { return (const GGNode*)(const DAGNode*)GetNode(v); }
+   GGNode* UnsafeGetGGNode(leda_node v) { return (GGNode*)GetGGNode(v); }
 };
 } //namespace dml
 

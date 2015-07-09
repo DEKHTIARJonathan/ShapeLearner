@@ -138,6 +138,7 @@ public:
 	virtual std::istream& Read(std::istream& is, bool bOnlyDataForMatching = false);
 	virtual std::ostream& Write(std::ostream& os) const;
 	virtual void Print(std::ostream& os = std::cout, bool bXMLFormat = false) const;
+   virtual bool ReadFromXML( const char* xmlContent, bool bOnlyDataForMatching= false ) ;
 
 	//! Returns the stroed skeletal graph or NULL if it does not exist
 	virtual const SkeletalGraph* GetSkeleton() const { return m_pSkeleton; }

@@ -142,9 +142,11 @@ public:
 	*/
 	virtual DAG* CreateObject() const = 0;
 
+
 #ifdef XML_READING
 	virtual bool ReadFromXMLFile(const char* szFileName, bool bCompEigenLbl = true) = 0;
 #endif //XML_READING
+   virtual bool ReadFromXML( const char* xmlContent, bool bOnlyDataForMatching= false ) { return false ;}
 
 // Simple inline functions:
 	DAG()

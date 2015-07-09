@@ -52,13 +52,13 @@
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)..\;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
@@ -82,7 +82,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;LEDA_DLL;WIN32_LEAN_AND_MEAN;_HNSRTIMP=;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\ODB\libodb-pgsql-2.4.0;$(ProjectDir)..\ODB\libodb-boost-2.4.0;$(ProjectDir)..\ODB\libodb-2.4.0;C:\boost_1_57_0;$(ProjectDir)..\ShapeLearnerProject\include;C:\Algorithmic Solutions\LEDA-6.4-win32-msc10-eval-std-multithread\incl;$(ProjectDir)..\FluxSkeleton;$(ProjectDir)..\FluxSkeleton\include;$(LEDAROOT)\incl;$(ProjectDir)..\;$(ProjectDir)..\glut-3.7.6-bin;$(ProjectDir)..\AFMMSkeleton\include;$(ProjectDir)..\ann_1.1\include;$(ProjectDir)..\Newmat;$(ProjectDir)..\HnSRTree-2.0beta5a\include;$(ProjectDir)..\DAGMatcherLib\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
@@ -191,6 +191,7 @@
     <ClInclude Include="..\DAGMatcherLib\Headers\VisualDAG.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\VoteCounter.h" />
     <ClInclude Include="..\DAGMatcherLib\Headers\XORIntegral.h" />
+    <ClInclude Include="Headers\base64.h" />
     <ClInclude Include="Headers\DAGMatcherLib.h" />
     <ClInclude Include="Headers\PiecewiseApprox.hxx" />
     <ClInclude Include="Headers\stdafx.h" />
@@ -254,6 +255,7 @@
     <ClCompile Include="..\DAGMatcherLib\Sources\VisualDAG.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\VoteCounter.cpp" />
     <ClCompile Include="..\DAGMatcherLib\Sources\XORIntegral.cpp" />
+    <ClCompile Include="Sources\base64.cpp" />
     <ClCompile Include="Sources\DAGMatcherLib.cpp" />
     <ClCompile Include="Sources\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -15,6 +15,9 @@
     <Filter Include="DAGMatcherLib">
       <UniqueIdentifier>{a7eb1b28-92db-4bb8-b877-993bc65974b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base64">
+      <UniqueIdentifier>{4a6a21e2-61f0-48da-95ba-4ad39fcf5a1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DAGMatcherLib\Headers\BasicTypedefs.h">
@@ -278,6 +281,9 @@
     <ClInclude Include="Headers\DAGMatcherLib.h">
       <Filter>DAGMatcherLib</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\base64.h">
+      <Filter>base64</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DAGMatcherLib\Sources\BasicTypes.cpp">
@@ -459,6 +465,9 @@
     </ClCompile>
     <ClCompile Include="Sources\DAGMatcherLib.cpp">
       <Filter>DAGMatcherLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\base64.cpp">
+      <Filter>base64</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
