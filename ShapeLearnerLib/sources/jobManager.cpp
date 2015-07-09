@@ -20,21 +20,19 @@
 #include "stdafx.h"
 #include "allHeaders.h"
 
-
-
 using namespace std;
 
 StepName::StepName(StepName_e _step): step(_step){}
 std::string StepName::getStep(){
    switch (step)
     {
-      case WaitingGen:   return "WaitingGen";
-        case StartGen:   return "StartGen";
-        case StartSaving: return "StartSaving";
-      case EndSaving: return "EndSaving";
-      case ErrorGen: return "ErrorGen";
-      case ErrorSaving: return "ErrorSaving";
-        default:      return "";
+		case WaitingGen:	return "WaitingGen";
+		case StartGen:		return "StartGen";
+		case StartSaving:	return "StartSaving";
+		case EndSaving:		return "EndSaving";
+		case ErrorGen:		return "ErrorGen";
+		case ErrorSaving:	return "ErrorSaving";
+		default:			return "";
     }
 }
 
@@ -42,23 +40,20 @@ JobStatus::JobStatus(JobStatus_e _status): status(_status){}
 std::string JobStatus::getStatus(){
    switch (status)
     {
-        case Waiting:   return "Waiting";
-        case Ongoing:   return "Ongoing";
-        case Error: return "Error";
-      case Finished: return "Finished";
-        default:      return "";
+		case Waiting:		return "Waiting";
+		case Ongoing:		return "Ongoing";
+		case Error:			return "Error";
+		case Finished:		return "Finished";
+		default:			return "";
     }
 }
-
-
 
 //std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 //std::string narrow = converter.to_bytes(wide_utf16_source_string);
 //std::wstring wide = converter.from_bytes(narrow_utf8_source_string);
 
 bool JobManager::Log(unsigned long jobID, JobStatus jobStatus, unsigned long partID, StepName stepName, std::string filepath, std::string jobServerIP, unsigned int jobServerPort){
-
-    std::string url(jobServerIP+ to_string((_ULonglong) jobServerPort) + "/updateJob");
+   std::string url(jobServerIP+ to_string((_ULonglong) jobServerPort) + "/updateJob");
    std::map<std::string,std::string> resultat;
 
    resultat["jobID"] = to_string((_ULonglong)jobID);
@@ -69,54 +64,29 @@ bool JobManager::Log(unsigned long jobID, JobStatus jobStatus, unsigned long par
    resultat["serverPort"] = dbServerPort;
    resultat["message"] = messagesMap[stepName.getStep()];
 
-
    std::string json_body(serializeMap(resultat)) ;
    std::wstring json_content_type(L"application/json");
 
-   
    mutexJob.lock();
    {
-      //using namespace boost::network;
-      //http::client client;
-      //http::client::request request(url);
-      //request << header("Connection", "close");
-      //rslt = body(client.post(request, json_body, json_content_type));
-
-
-      
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
       std::wstring wURL = converter.from_bytes(url);
       WinHttpClient client(wURL) ;
- 
+
       // Set post data.
       client.SetAdditionalDataToSend((BYTE *)json_body.c_str(), json_body.size());
- 
+
       // Set request headers.
-      //wchar_t szSize[50] = L"";
-      //swprintf_s(szSize, L"%d", json_body.size());
       wstring headers = L"Content-Length: ";
       headers += std::to_wstring((_ULonglong) json_body.size()) ;//szSize;
       headers += L"\r\nContent-Type: "+json_content_type+L"\r\n";
       client.SetAdditionalRequestHeaders(headers);
- 
+
       // Send HTTP post request.
       client.SendHttpRequest(L"POST");
- 
+
       wstring httpResponseHeader = client.GetResponseHeader();
       wstring httpResponseContent = client.GetResponseContent();
-
-
-          // Set URL.
-    //WinHttpClient client(L"http://www.codeproject.com/");
-
-    //// Send http request, a GET request by default.
-    //client.SendHttpRequest();
-
-    //// The response header.
-    //wstring httpResponseHeader = client.GetResponseHeader();
-
-    //// The response content.
-    //wstring httpResponseContent = client.GetResponseContent();
    }
     mutexJob.unlock();
 
