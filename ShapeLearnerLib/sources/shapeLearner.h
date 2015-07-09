@@ -48,11 +48,16 @@ struct img2Parse{
 class ShapeLearner
 {
    public:
-      static unsigned int getActiveThread () throw(StandardExcept);
       static void createShockGraph (const vector<const img2Parse> &imgVect) throw(StandardExcept);
-      static void createShockGraph (const img2Parse &img) throw(StandardExcept);
-      static void readShockGraph (const img2Parse &img)  throw(StandardExcept);
+      static void createShockGraph (const img2Parse &imgVect) throw(StandardExcept);
+
+      static void loadShockGraph (/*const img2Parse &imgVect*/) throw(StandardExcept);
+
+      static unsigned int getActiveThread () throw(StandardExcept);
       static void waitForComputation () throw(StandardExcept);
+
+
+
 
    private:
 
@@ -61,6 +66,7 @@ class ShapeLearner
       /* ************** Multi Threading Workers ***************/
 
       static bool createShockGraphWorker (const img2Parse& imgInfo) throw(StandardExcept);
+      static bool loadShockGraphWorker (/*const img2Parse& imgInfo*/) throw(StandardExcept) ;
 
       /* **************  No instanciation *********************/
 

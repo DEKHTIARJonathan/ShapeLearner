@@ -28,10 +28,17 @@ __declspec(dllexport) void openDataBase(char* _dbUser, char* _dbPass, char* _dbN
    JobManager::initJobManager();
 }
 
+
+
 __declspec(dllexport) void initMatcher()
 {
    JobManager::initJobManager();
 }
+
+
+
+
+
 
 __declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass, unsigned int _jobID)
 {
@@ -44,6 +51,19 @@ __declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass, unsi
    }
 }
 
+
+
+__declspec(dllexport) void loadShockGraph (/*char* _imgPath, char* _imgClass, unsigned int _jobID*/)
+{
+   try {
+      ShapeLearner::loadShockGraph(/*img2Parse(_imgPath, _imgClass, _jobID)*/) ;
+   }
+   catch (const std::exception& e) {
+      Logger::Log(e.what (), constants::LogError);
+   }
+}
+
+
 __declspec(dllexport) unsigned int getActiveThread()
 {
    try {
@@ -55,6 +75,10 @@ __declspec(dllexport) unsigned int getActiveThread()
    }
    return -1 ;
 }
+
+
+
+
 
 __declspec(dllexport) void waitBeforeClosing()
 {

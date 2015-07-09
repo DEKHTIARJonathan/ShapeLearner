@@ -56,13 +56,15 @@ void ShapeLearner::createShockGraph (const img2Parse &img) throw(StandardExcept)
    Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, img));
 }
 
-void ShapeLearner::readShockGraph (const img2Parse &img)  throw(StandardExcept){
+
+void ShapeLearner::loadShockGraph (/*const img2Parse &img*/) throw(StandardExcept){
    //Random Init
    std::srand(std::time(0));
    JobManager::Log(img.jobID,Waiting,0,WaitingGen, img.filepath);
-   Pool.schedule(boost::bind(&ShapeLearner::createShockGraphWorker, img));
-   //ReadFromXMLFile
+   Pool.schedule(boost::bind(&ShapeLearner::loadShockGraphWorker, img));
 }
+
+
 
 void ShapeLearner::waitForComputation () throw(StandardExcept){
    //  Wait until all tasks are finished
@@ -75,6 +77,16 @@ bool ShapeLearner::createShockGraphWorker (const img2Parse& imgInfo) throw(Stand
    graphDBLib::GraphDB::closeThreadConnection();
    return true;
 }
+
+bool ShapeLearner::loadShockGraphWorker (/*const img2Parse& imgInfo*/) throw(StandardExcept){
+   shockGraphsGenerator worker(imgInfo.filepath, imgInfo.objClass, imgInfo.jobID);
+   worker.taskExecute();
+   graphDBLib::GraphDB::closeThreadConnection();
+   return true;
+}
+
+
+
 
    img2Parse::
 img2Parse( const string _filepath, 
