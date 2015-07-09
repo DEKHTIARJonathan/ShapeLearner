@@ -1,2 +1,2 @@
-"C:\Anaconda32\python.exe" "server.py"
+"C:\Anaconda\python.exe" "server.py"
 pause;

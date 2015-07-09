@@ -9,14 +9,15 @@
 
 #include "shapeLearnerDll.h"
 
-//using namespace std;
-//using namespace boost::filesystem;
+using namespace std;
+using namespace boost::filesystem;
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-//__declspec(dllexport) bool openDataBase(string initFile = "")
+
 __declspec(dllexport) void openDataBase(char* _dbUser, char* _dbPass, char* _dbName, char* _dbHost, unsigned int _dbPort, char* _dbInit /*= ""*/)
 {
    using namespace graphDBLib ;
@@ -24,12 +25,12 @@ __declspec(dllexport) void openDataBase(char* _dbUser, char* _dbPass, char* _dbN
    if (_dbInit != "") {
       dml::DAGMatcherLib::InitDAGMatcherLib();
    }
-   //JobManager::initJobManager();
+   JobManager::initJobManager();
 }
 
 __declspec(dllexport) void initMatcher()
 {
-	JobManager::initJobManager();
+   JobManager::initJobManager();
 }
 
 __declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass, unsigned int _jobID)
@@ -46,8 +47,7 @@ __declspec(dllexport) void signBinaryImage(char* _imgPath, char* _imgClass, unsi
 __declspec(dllexport) unsigned int getActiveThread()
 {
    try {
-      //return ShapeLearner::getActiveThread();
-      //return ShapeLearner::hu() ;
+      return ShapeLearner::getActiveThread();
    }
    catch (const std::exception& e)
    {
@@ -59,7 +59,7 @@ __declspec(dllexport) unsigned int getActiveThread()
 __declspec(dllexport) void waitBeforeClosing()
 {
    try {
-      //ShapeLearner::waitForComputation();
+      ShapeLearner::waitForComputation();
    }
    catch (const std::exception& e)
    {

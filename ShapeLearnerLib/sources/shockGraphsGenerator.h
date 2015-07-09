@@ -21,7 +21,7 @@
 #define _Shock_Graphs_Generator_
 
 #ifdef _MSC_VER
-	#pragma message("Compiling ShapeLearnerLib::shockGraphsGenerator.h  - this should happen just once per project.\n")
+   #pragma message("Compiling ShapeLearnerLib::shockGraphsGenerator.h  - this should happen just once per project.\n")
 #endif
 
 #include "stdafx.h"
@@ -38,7 +38,7 @@ class Node; //Forward Declaration of the class contained in Node.h
 class Point; //Forward Declaration of the class contained in Point.h
 class Edge; //Forward Declaration of the class contained in Edge.h
 
-using namespace dml;
+
 
 /*!
 *	\class shockGraphsGenerator
@@ -47,60 +47,61 @@ using namespace dml;
 *	In RELEASE : Everything is redirected to the 4 log files + Errors only to the standard output.
 */
 class shockGraphsGenerator{
+
 public:
-	//typedef bool (ShapeMatcher::*DAG_ACTION)();
-	typedef std::map<std::string, int> StrIntMap;
-	typedef const char* LPCSTR;
+   //typedef bool (ShapeMatcher::*DAG_ACTION)();
+   typedef std::map<std::string, int> StrIntMap;
+   typedef const char* LPCSTR;
 
-	DAGMatcher::MatchParams m_matchParams;
+   dml::DAGMatcher::MatchParams m_matchParams;
 
-	shockGraphsGenerator(const string& _filepath, const string& _objClass, const unsigned int& _jobID);
-	bool taskExecute();
+   shockGraphsGenerator(const string& _filepath, const string& _objClass, const unsigned int& _jobID);
+   bool taskExecute();
 
 private:
-	const string filepath;
-	const string objClass;
-	const unsigned int jobID;
+   const string filepath;
+   const string objClass;
+   const unsigned int jobID;
 
-	ShapeMatchingParams m_matchInfo;
-	ShapeRepresentationParams m_shapeInfo;
+   ShapeMatchingParams m_matchInfo;
+   ShapeRepresentationParams m_shapeInfo;
 
-	double m_maxOcclusionRate, m_dNeigRange;
-	int m_iterations, m_maxdags, m_imgstep, m_from, m_to, m_nNumSplitParts;
-	int m_nVerbose, m_saveSubsamplingInfo, m_nSplitProportion, m_nSplitByObject;
-	int m_xpos, m_ypos, m_sourceDB;
+   double m_maxOcclusionRate, m_dNeigRange;
+   int m_iterations, m_maxdags, m_imgstep, m_from, m_to, m_nNumSplitParts;
+   int m_nVerbose, m_saveSubsamplingInfo, m_nSplitProportion, m_nSplitByObject;
+   int m_xpos, m_ypos, m_sourceDB;
 
-	int m_firstDBId, m_lastDBId;
+   int m_firstDBId, m_lastDBId;
 
-	int m_experimentId, m_experimentStep, m_experimentFirstParam, m_experimentLastParam;
-	LPCSTR m_szExperimentName;
+   int m_experimentId, m_experimentStep, m_experimentFirstParam, m_experimentLastParam;
+   LPCSTR m_szExperimentName;
 
-	LPCSTR m_target, m_objName, m_delobj, m_createObj, m_viewDag, m_szMatrixFileName;
+   LPCSTR m_target, m_objName, m_delobj, m_createObj, m_viewDag, m_szMatrixFileName;
 
-	void parametersInit ();
+   void parametersInit ();
 
-	/*!
-	*	\brief Computes a shock graph from the given ppm file.
-	*	\param szFileName : PPM file name
-	*	\param info : Parameters for the SG computation code
-	*	\param bAsyncProcessing : Whether a TIME OUT must be used to control the SG computation
-	*
-	*	Since the SG computation used to fail, the async processing was necessary to
-	*	avoid a batch processing of files getting stuck in a particular file.
-	*/
-	void processFile(bool bAsyncProcessing);
-	bool AddBumpsAndNotches(dml::ImageInfo* pImgInfo);
+   /*!
+   *	\brief Computes a shock graph from the given ppm file.
+   *	\param szFileName : PPM file name
+   *	\param info : Parameters for the SG computation code
+   *	\param bAsyncProcessing : Whether a TIME OUT must be used to control the SG computation
+   *
+   *	Since the SG computation used to fail, the async processing was necessary to
+   *	avoid a batch processing of files getting stuck in a particular file.
+   */
+   void processFile(bool bAsyncProcessing);
+   bool AddBumpsAndNotches(dml::ImageInfo* pImgInfo);
 
-	void saveInDB(const ShockGraph& graph);
-	void saveInDB(const BoneGraph& graph);
-	void saveInDB(const GestureGraph& graph);
+   void saveInDB(const dml::ShockGraph& graph);
+   void saveInDB(const dml::BoneGraph& graph);
+   void saveInDB(const dml::GestureGraph& graph);
 
-	dml::NODE_ROLE NodeRoleConverter2DML(graphDBLib::NODE_ROLE tmp) const;
-	graphDBLib::NODE_ROLE NodeRoleConverter2GraphDBLib(dml::NODE_ROLE tmp) const;
+   dml::NODE_ROLE NodeRoleConverter2DML(graphDBLib::NODE_ROLE tmp) const;
+   graphDBLib::NODE_ROLE NodeRoleConverter2GraphDBLib(dml::NODE_ROLE tmp) const;
 
-	dml::ShockBranch::BRANCH_DIR BranchDirConverter2DML(graphDBLib::BRANCH_DIR tmp) const;
-	graphDBLib::BRANCH_DIR BranchDirConverter2GraphDBLib(dml::ShockBranch::BRANCH_DIR tmp) const;
-	graphDBLib::BRANCH_DIR BranchDirConverter2GraphDBLib(int tmp) const;
+   dml::ShockBranch::BRANCH_DIR BranchDirConverter2DML(graphDBLib::BRANCH_DIR tmp) const;
+   graphDBLib::BRANCH_DIR BranchDirConverter2GraphDBLib(dml::ShockBranch::BRANCH_DIR tmp) const;
+   graphDBLib::BRANCH_DIR BranchDirConverter2GraphDBLib(int tmp) const;
 };
 
 #endif //_Shock_Graphs_Generator_
