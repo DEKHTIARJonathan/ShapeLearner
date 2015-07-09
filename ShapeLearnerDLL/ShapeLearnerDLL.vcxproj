@@ -79,7 +79,7 @@
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutDir)..\Server\$(ConfigurationName)\ShapeLearnerDLL-d.dll" "$(ProjectDir)..\ShapeLearnerUser\Release"</Command>
+      <Command>copy "$(OutDir)..\Server\$(ConfigurationName)\*.dll" "$(ProjectDir)..\ShapeLearnerUser\Debug"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -111,7 +111,7 @@
       <OutputFile>$(OutDir)\..\Server\$(ConfigurationName)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutDir)..\Server\$(ConfigurationName)\ShapeLearnerDLL.dll" "$(ProjectDir)..\ShapeLearnerUser\Release"</Command>
+      <Command>copy "$(OutDir)..\Server\$(ConfigurationName)\*.dll" "$(ProjectDir)..\ShapeLearnerUser\Release"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

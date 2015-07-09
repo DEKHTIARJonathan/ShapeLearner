@@ -76,4 +76,13 @@ bool ShapeLearner::createShockGraphWorker (const img2Parse& imgInfo) throw(Stand
    return true;
 }
 
-img2Parse::img2Parse(const string _filepath, const string _objClass, const unsigned int _jobID) : filepath(_filepath), objClass(_objClass), jobID(_jobID) {}
+   img2Parse::
+img2Parse( const string _filepath, 
+           const string _objClass, 
+           const unsigned int _jobID )
+   : filepath(_filepath), 
+     objClass(_objClass), 
+     jobID(_jobID) 
+{
+}
+

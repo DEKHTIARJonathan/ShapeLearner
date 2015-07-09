@@ -56,3 +56,6 @@ ShapeLearnerProject/SLE/
 *.ilk
 *.pyc
 *.manifest
+ShapeLearnerUser/Debug/
+ShapeLearnerUser/Release/
+*.user
