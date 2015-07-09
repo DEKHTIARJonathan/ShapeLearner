@@ -92,10 +92,10 @@ bool JobManager::Log(unsigned long jobID, JobStatus jobStatus, unsigned long par
       client.SetAdditionalDataToSend((BYTE *)json_body.c_str(), json_body.size());
  
       // Set request headers.
-      wchar_t szSize[50] = L"";
-      swprintf_s(szSize, L"%d", json_body.size());
+      //wchar_t szSize[50] = L"";
+      //swprintf_s(szSize, L"%d", json_body.size());
       wstring headers = L"Content-Length: ";
-      headers += szSize;
+      headers += std::to_wstring((_ULonglong) json_body.size()) ;//szSize;
       headers += L"\r\nContent-Type: "+json_content_type+L"\r\n";
       client.SetAdditionalRequestHeaders(headers);
  
