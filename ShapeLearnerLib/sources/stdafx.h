@@ -84,7 +84,6 @@
 #include <boost/smart_ptr.hpp>
 #include <boost/threadpool.hpp>
 #include <boost/thread.hpp>
-#include <boost/network/include/http/client.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -92,6 +91,14 @@
 #include <math.h>
 #include <fcntl.h> // for open()
 #include <cstdio> // for perror()
+
+// HTTP request 
+#include "WinHttpClient.h"
+#include <locale>
+#include <codecvt>
+//#include <tchar.h>
+
+
 
 // External Libs
 #include <newmatap.h>

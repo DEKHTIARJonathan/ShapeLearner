@@ -21,7 +21,7 @@
 #include "allHeaders.h"
 
 using namespace std;
-using namespace dml;
+
 
 /*
 _Longlong fact(_Longlong nbr){
@@ -310,7 +310,7 @@ void shockGraphsGenerator::processFile(bool bAsyncProcessing)
 		Logger::Log("ERROR: Can't read dag.", constants::LogCore);
 }
 
-void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
+void shockGraphsGenerator::saveInDB(const dml::ShockGraph& graph){
 	try{
 		JobManager::Log(jobID,Ongoing,0,StartSaving, filepath);
 		/* ===================== GRAPH SAVING ====================== */
@@ -415,11 +415,11 @@ void shockGraphsGenerator::saveInDB(const ShockGraph& graph){
 	}
 }
 
-void shockGraphsGenerator::saveInDB(const BoneGraph& graph){
+void shockGraphsGenerator::saveInDB(const dml::BoneGraph& graph){
 	cout <<"Classname : " << graph.ClassName() <<endl;
 }
 
-void shockGraphsGenerator::saveInDB(const GestureGraph& graph){
+void shockGraphsGenerator::saveInDB(const dml::GestureGraph& graph){
 	cout <<"Classname : " << graph.ClassName() <<endl;
 }
 
