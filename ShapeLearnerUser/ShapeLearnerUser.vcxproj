@@ -11,14 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\CmdLine.cpp" />
-    <ClCompile Include="sources\CmdLineException.cpp" />
     <ClCompile Include="sources\main.cpp" />
-    <ClCompile Include="sources\mainDeprecated.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="sources\CmdLine.h" />
-    <ClInclude Include="sources\CmdLineException.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7AA676E5-64C1-4F14-A979-B11B986CCEA7}</ProjectGuid>

@@ -1,12 +1,7 @@
 
-
-
-
 #include <stdlib.h>
 
 #include "shapeLearnerDll.h"
-
-
 
 
 int main( int argc, char* argv[] )
